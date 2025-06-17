@@ -26,6 +26,8 @@ public class Main {
                     counter++;
 
                     System.out.println("Step:" + counter);
+                } else {
+                    System.out.println("Please provide a valid input");
                 }
             }
         } catch (IOException exception) {
