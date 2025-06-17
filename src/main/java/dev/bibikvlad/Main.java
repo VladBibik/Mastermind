@@ -11,6 +11,7 @@ public class Main {
             Pattern pattern = Pattern.compile("[rgybmw]{4}");
 
             boolean close = false;
+            int counter = 0;
 
             while (!close) {
                 String line = bufferedReader.readLine();
@@ -21,7 +22,11 @@ public class Main {
                     continue;
                 }
 
-                System.out.println(line.matches(String.valueOf(pattern)));
+                if (line.matches(pattern.pattern())) {
+                    counter++;
+
+                    System.out.println("Step:" + counter);
+                }
             }
         } catch (IOException exception) {
             System.out.println(exception.getMessage());
