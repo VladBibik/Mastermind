@@ -17,6 +17,8 @@ public class Main {
 
                 if (line.equals("close")) {
                     close = true;
+
+                    continue;
                 }
 
                 System.out.println(line.matches(String.valueOf(pattern)));
