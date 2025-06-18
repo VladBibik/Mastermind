@@ -6,10 +6,10 @@ import java.io.InputStreamReader;
 import java.util.regex.Pattern;
 
 public class Main {
+    private static final Pattern pattern = Pattern.compile("[rgybpw]{4}");
+
     public static void main(String[] args) {
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
-            Pattern pattern = Pattern.compile("[rgybpw]{4}");
-
             boolean close = false;
             int counter = 0;
             String answer = RandomAnswerGenerator.generate();
