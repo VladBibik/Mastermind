@@ -23,6 +23,8 @@ public class Main {
                     continue;
                 }
 
+                System.out.println("Turn:" + (turnCounter + 1));
+
                 String line = bufferedReader.readLine();
 
                 if (line.equals("close")) {
@@ -38,11 +40,7 @@ public class Main {
                         System.out.println("You Won!");
 
                         close = true;
-
-                        continue;
                     }
-
-                    System.out.println("Step:" + turnCounter);
                 } else {
                     System.out.println("Please provide a valid input");
                 }
