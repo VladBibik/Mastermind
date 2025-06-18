@@ -19,12 +19,7 @@ public class Main {
             System.out.println(answer);
 
             while (!close) {
-                if (turnCounter == 10) {
-                    System.out.println(answer);
-                    System.out.println("You lose");
-
-                    close = true;
-
+                if (isGameOver(answer)) {
                     continue;
                 }
 
@@ -57,5 +52,16 @@ public class Main {
         }
     }
 
-    private static void check() {}
+    private static boolean isGameOver(String answer) {
+        if (turnCounter == 10) {
+            System.out.println(answer);
+            System.out.println("You lose");
+
+            close = true;
+
+            return true;
+        }
+
+        return false;
+    }
 }
