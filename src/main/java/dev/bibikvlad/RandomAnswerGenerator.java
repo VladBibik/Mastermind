@@ -14,21 +14,21 @@ public class RandomAnswerGenerator {
         char[] chars = new char[NUMBER_OF_COLORS];
 
         for (int i = 0; i < chars.length; i++) {
-            chars[i] = generateRandomChar(random.nextInt(NUMBER_OF_COLORS));
+            chars[i] = generateRandomChar(
+                    MastermindColors.fromColorIndex(random.nextInt(NUMBER_OF_COLORS)));
         }
 
         return String.valueOf(chars);
     }
 
-    private static char generateRandomChar(int charIndex) {
-        return switch (charIndex) {
-            case 0 -> 'r';
-            case 1 -> 'g';
-            case 2 -> 'y';
-            case 3 -> 'b';
-            case 4 -> 'm';
-            case 5 -> 'w';
-            default -> throw new IllegalArgumentException("Invalid character index");
+    private static char generateRandomChar(MastermindColors mastermindColor) {
+        return switch (mastermindColor) {
+            case RED -> 'r';
+            case GREEN -> 'g';
+            case YELLOW -> 'y';
+            case BLUE -> 'b';
+            case PURPLE -> 'p';
+            case WHITE -> 'w';
         };
     }
 }
