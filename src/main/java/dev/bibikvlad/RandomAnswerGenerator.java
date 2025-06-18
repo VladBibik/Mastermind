@@ -3,6 +3,7 @@ package dev.bibikvlad;
 import java.util.Random;
 
 public class RandomAnswerGenerator {
+    private static final int ANSWER_LENGTH = 4;
     private static final int NUMBER_OF_COLORS = 6;
     private static final Random random = new Random();
 
@@ -11,9 +12,9 @@ public class RandomAnswerGenerator {
     }
 
     private static String answerGeneratorLoop() {
-        char[] chars = new char[NUMBER_OF_COLORS];
+        char[] chars = new char[ANSWER_LENGTH];
 
-        for (int i = 0; i < chars.length; i++) {
+        for (int i = 0; i < ANSWER_LENGTH; i++) {
             chars[i] = generateRandomChar(
                     MastermindColors.fromColorIndex(random.nextInt(NUMBER_OF_COLORS)));
         }
