@@ -23,4 +23,14 @@ public enum MastermindColors {
     public String getColorName() {
         return colorName;
     }
+
+    public static MastermindColors fromColorIndex(int colorIndex) {
+        for (MastermindColors mastermindColor : MastermindColors.values()) {
+            if (mastermindColor.colorIndex == colorIndex) {
+                return mastermindColor;
+            }
+        }
+
+        throw new IllegalArgumentException("Invalid color index");
+    }
 }
