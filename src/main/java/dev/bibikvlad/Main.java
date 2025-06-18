@@ -8,16 +8,18 @@ import java.util.regex.Pattern;
 public class Main {
     private static final Pattern pattern = Pattern.compile("[rgybpw]{4}");
 
+    private static boolean close = false;
+    private static int turnCounter = 0;
+
     public static void main(String[] args) {
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
-            boolean close = false;
-            int counter = 0;
+
             String answer = RandomAnswerGenerator.generate();
 
             System.out.println(answer);
 
             while (!close) {
-                if (counter == 10) {
+                if (turnCounter == 10) {
                     System.out.println(answer);
                     System.out.println("You lose");
 
@@ -35,7 +37,7 @@ public class Main {
                 }
 
                 if (line.matches(pattern.pattern())) {
-                    counter++;
+                    turnCounter++;
 
                     if (line.equals(answer)) {
                         System.out.println("You Won!");
@@ -45,7 +47,7 @@ public class Main {
                         continue;
                     }
 
-                    System.out.println("Step:" + counter);
+                    System.out.println("Step:" + turnCounter);
                 } else {
                     System.out.println("Please provide a valid input");
                 }
@@ -54,4 +56,6 @@ public class Main {
             System.out.println(exception.getMessage());
         }
     }
+
+    private static void check() {}
 }
