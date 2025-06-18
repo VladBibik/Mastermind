@@ -6,7 +6,7 @@ public class RandomAnswerGenerator {
     private static final int NUMBER_OF_COLORS = 6;
     private static final Random random = new Random();
 
-    public static String generateRandomAnswer() {
+    public static String generate() {
         return answerGeneratorLoop();
     }
 
