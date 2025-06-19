@@ -31,6 +31,10 @@ public class Main {
                     continue;
                 }
 
+                if (!isInputValid(userInput)) {
+                    continue;
+                }
+
                 checkIfAnswerIsCorrect(userInput);
             }
         } catch (IOException exception) {
@@ -65,17 +69,23 @@ public class Main {
         return false;
     }
 
-    private static void checkIfAnswerIsCorrect(String userInput) {
+    private static boolean isInputValid(String userInput) {
         if (userInput.matches(validInputPattern.pattern())) {
             turnCounter++;
 
-            if (userInput.equals(answer)) {
-                System.out.println("You Won!");
-
-                close = true;
-            }
+            return true;
         } else {
             System.out.println("Please provide a valid input");
+
+            return false;
+        }
+    }
+
+    private static void checkIfAnswerIsCorrect(String userInput) {
+        if (userInput.equals(answer)) {
+            System.out.println("You Won!");
+
+            close = true;
         }
     }
 }
