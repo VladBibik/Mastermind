@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.regex.Pattern;
 
 public class Main {
-    private static final Pattern pattern = Pattern.compile("[rgybpw]{4}");
+    private static final Pattern validInputPattern = Pattern.compile("[rgybpw]{4}");
 
     private static boolean close = false;
     private static int turnCounter = 0;
@@ -66,7 +66,7 @@ public class Main {
     }
 
     private static void checkIfAnswerIsCorrect(String userInput) {
-        if (userInput.matches(pattern.pattern())) {
+        if (userInput.matches(validInputPattern.pattern())) {
             turnCounter++;
 
             if (userInput.equals(answer)) {
