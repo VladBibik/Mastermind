@@ -25,25 +25,13 @@ public class Main {
 
                 System.out.println("Turn:" + (turnCounter + 1));
 
-                String line = bufferedReader.readLine();
+                String userInput = bufferedReader.readLine();
 
-                if (line.equals("close")) {
-                    close = true;
-
+                if (isGameClosed(userInput)) {
                     continue;
                 }
 
-                if (line.matches(pattern.pattern())) {
-                    turnCounter++;
-
-                    if (line.equals(answer)) {
-                        System.out.println("You Won!");
-
-                        close = true;
-                    }
-                } else {
-                    System.out.println("Please provide a valid input");
-                }
+                checkIfAnswerIsCorrect(userInput);
             }
         } catch (IOException exception) {
             System.out.println(exception.getMessage());
@@ -65,5 +53,29 @@ public class Main {
         }
 
         return false;
+    }
+
+    private static boolean isGameClosed(String userInput) {
+        if (userInput.equals("close")) {
+            close = true;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    private static void checkIfAnswerIsCorrect(String userInput) {
+        if (userInput.matches(pattern.pattern())) {
+            turnCounter++;
+
+            if (userInput.equals(answer)) {
+                System.out.println("You Won!");
+
+                close = true;
+            }
+        } else {
+            System.out.println("Please provide a valid input");
+        }
     }
 }
