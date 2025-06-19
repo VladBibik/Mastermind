@@ -10,16 +10,16 @@ public class Main {
 
     private static boolean close = false;
     private static int turnCounter = 0;
+    private static String answer = "";
 
     public static void main(String[] args) {
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
-
-            String answer = RandomAnswerGenerator.generate();
+            answer = generateAnswerForCurrentSession();
 
             System.out.println(answer);
 
             while (!close) {
-                if (isGameOver(answer)) {
+                if (isGameOver()) {
                     continue;
                 }
 
@@ -50,7 +50,11 @@ public class Main {
         }
     }
 
-    private static boolean isGameOver(String answer) {
+    private static String generateAnswerForCurrentSession() {
+        return RandomAnswerGenerator.generate();
+    }
+
+    private static boolean isGameOver() {
         if (turnCounter == 10) {
             System.out.println(answer);
             System.out.println("You lose");
