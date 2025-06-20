@@ -1,6 +1,6 @@
 package dev.bibikvlad.utils;
 
-public class TextAndBackgroundCodes {
+public class TextAndBackgroundColorCodes {
     public static final String BLACK_TEXT_COLOR = "\u001B[30m";
     public static final String RED_TEXT_COLOR = "\u001B[31m";
     public static final String GREEN_TEXT_COLOR = "\u001B[32m";
