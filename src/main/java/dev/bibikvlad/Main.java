@@ -16,8 +16,6 @@ public class Main {
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
             answer = generateAnswerForCurrentSession();
 
-            System.out.println(answer);
-
             while (!close) {
                 if (isGameOver()) {
                     continue;
