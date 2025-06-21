@@ -85,7 +85,7 @@ public class Main {
 
             close = true;
         } else {
-            System.out.println(GuessEvaluator.evaluate(answer, userInput));
+            System.out.println(ClueGenerator.evaluate(answer, userInput));
         }
     }
 }
