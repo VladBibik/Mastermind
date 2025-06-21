@@ -17,15 +17,15 @@ public class GuessEvaluator {
         return sortAndGenerateClue(evaluationCharArray);
     }
 
-    private static char addClue(char partOfTheAnswer, int index, String guess) {
+    private static char addClue(char currentChar, int charIndex, String guess) {
         char clue = ' ';
 
         for (int i = 0; i < guess.length(); i++) {
-            if (guess.charAt(i) == partOfTheAnswer && i == index) {
+            if (guess.charAt(i) == currentChar && i == charIndex) {
                 clue = CIRCLE_SHADED;
 
                 break;
-            } else if (guess.charAt(i) == partOfTheAnswer) {
+            } else if (guess.charAt(i) == currentChar) {
                 clue = CIRCLE_EMPTY;
             } else {
                 if (clue != CIRCLE_EMPTY)
