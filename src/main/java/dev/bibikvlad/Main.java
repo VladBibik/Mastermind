@@ -86,6 +86,8 @@ public class Main {
             System.out.println("You Won!");
 
             close = true;
+        } else {
+            System.out.println(GuessEvaluator.evaluate(answer, userInput));
         }
     }
 }
