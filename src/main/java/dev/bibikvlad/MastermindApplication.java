@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.regex.Pattern;
 
-public class Main {
+public class MastermindApplication {
     private static final Pattern validInputPattern = Pattern.compile("[rgybpw]{4}");
 
     private static boolean close = false;
