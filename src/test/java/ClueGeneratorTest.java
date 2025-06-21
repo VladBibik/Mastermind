@@ -25,7 +25,7 @@ public class ClueGeneratorTest {
     }
 
     @Test
-    @DisplayName("Two shaded, one empty, one wrong")
+    @DisplayName("Two correct, one correct but wrong place, one wrong")
     void testMixedClues() {
         assertEquals("◍◍○_", ClueGenerator.evaluate("rgby", "rgpb"));
     }
