@@ -1,6 +1,7 @@
 package dev.bibikvlad;
 
-import java.util.Comparator;
+import dev.bibikvlad.utils.ClueComparator;
+
 import java.util.stream.Collectors;
 
 import static dev.bibikvlad.utils.GameCluesConstants.*;
@@ -36,23 +37,9 @@ public class GuessEvaluator {
     }
 
     private static String sortAndGenerateClue(char[] clueArray) {
-        Comparator<Character> characterComparator = (first, second) -> {
-            if (first == second) {
-                return 0;
-            } else if (first == CIRCLE_SHADED && (second == UNDERSCORE || second == CIRCLE_EMPTY)) {
-                return -1;
-            } else if (first == CIRCLE_EMPTY && second == CIRCLE_SHADED) {
-                return 1;
-            } else if (first == CIRCLE_EMPTY && second == UNDERSCORE) {
-                return -1;
-            } else {
-                return 1;
-            }
-        };
-
         return new String(clueArray).chars()
                 .mapToObj(c -> (char) c)
-                .sorted(characterComparator)
+                .sorted(ClueComparator.getComparator(clueArray))
                 .map(String::valueOf)
                 .collect(Collectors.joining());
     }
