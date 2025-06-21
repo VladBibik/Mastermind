@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import static dev.bibikvlad.utils.GameCluesConstants.*;
 
-public class GuessEvaluator {
+public class ClueGenerator {
     public static String evaluate(String answer, String guess) {
         char[] evaluationCharArray = new char[answer.length()];
 
