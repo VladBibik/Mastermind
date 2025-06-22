@@ -1,16 +1,13 @@
 package dev.bibikvlad.mastermind.game;
 
-import dev.bibikvlad.mastermind.clues.ClueGenerator;
 import dev.bibikvlad.mastermind.clues.ClueGeneratorTwo;
+import dev.bibikvlad.utils.validators.UserGameInputValidator;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.regex.Pattern;
 
 public class MastermindGameChat {
-    private static final Pattern validInputPattern = Pattern.compile("[rgybpw]{4}");
-
     private boolean close = false;
     private int turnCounter = 0;
     private final String answer;
@@ -69,7 +66,7 @@ public class MastermindGameChat {
     }
 
     private boolean isInputValid(String userInput) {
-        if (userInput.matches(validInputPattern.pattern())) {
+        if (UserGameInputValidator.isInputValid(userInput)) {
             turnCounter++;
 
             return true;
