@@ -1,6 +1,6 @@
 package dev.bibikvlad;
 
-import dev.bibikvlad.utils.ClueComparator;
+import dev.bibikvlad.utils.CluePriorityComparator;
 
 import java.util.stream.Collectors;
 
@@ -39,7 +39,7 @@ public class ClueGenerator {
     private static String sortAndGenerateClue(char[] clueArray) {
         return new String(clueArray).chars()
                 .mapToObj(c -> (char) c)
-                .sorted(ClueComparator.getComparator())
+                .sorted(CluePriorityComparator.getComparator())
                 .map(String::valueOf)
                 .collect(Collectors.joining());
     }
