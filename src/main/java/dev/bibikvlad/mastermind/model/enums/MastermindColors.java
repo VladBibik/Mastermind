@@ -1,4 +1,4 @@
-package dev.bibikvlad;
+package dev.bibikvlad.mastermind.model.enums;
 
 public enum MastermindColors {
     RED(0, "Red"),

@@ -1,4 +1,6 @@
-package dev.bibikvlad;
+package dev.bibikvlad.mastermind.game;
+
+import dev.bibikvlad.mastermind.model.enums.MastermindColors;
 
 import java.util.Random;
 

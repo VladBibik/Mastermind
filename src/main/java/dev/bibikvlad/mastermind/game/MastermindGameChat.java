@@ -1,6 +1,7 @@
-package dev.bibikvlad;
+package dev.bibikvlad.mastermind.game;
 
 import dev.bibikvlad.mastermind.clues.ClueGenerator;
+import dev.bibikvlad.mastermind.clues.ClueGeneratorTwo;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -85,7 +86,7 @@ public class MastermindGameChat {
 
             close = true;
         } else {
-            System.out.println(ClueGenerator.evaluate(answer, userInput));
+            System.out.println(ClueGeneratorTwo.evaluate(answer, userInput));
         }
     }
 }
