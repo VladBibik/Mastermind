@@ -37,7 +37,7 @@ public class MastermindConsoleGame {
                     continue;
                 }
 
-                checkIfAnswerIsCorrect(userInput);
+                handleUserGuess(userInput);
             }
         } catch (IOException exception) {
             System.out.println(exception.getMessage());
@@ -79,7 +79,7 @@ public class MastermindConsoleGame {
         }
     }
 
-    private void checkIfAnswerIsCorrect(String userInput) {
+    private void handleUserGuess(String userInput) {
         if (userInput.equals(answer)) {
             System.out.println("You Won!");
 
