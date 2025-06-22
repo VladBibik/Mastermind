@@ -1,4 +1,4 @@
-package dev.bibikvlad;
+package dev.bibikvlad.mastermind.clues;
 
 import java.util.stream.Collectors;
 
