@@ -33,7 +33,7 @@ public class MastermindConsoleGame {
                     continue;
                 }
 
-                if (!isInputValid(userInput)) {
+                if (!processUserInput(userInput)) {
                     continue;
                 }
 
@@ -58,7 +58,7 @@ public class MastermindConsoleGame {
     }
 
     private boolean isGameClosed(String userInput) {
-        if (userInput.equals("close")) {
+        if ("close".equalsIgnoreCase(userInput)) {
             close = true;
 
             return true;
