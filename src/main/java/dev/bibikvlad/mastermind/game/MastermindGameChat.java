@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class MastermindGameChat {
+    private static final int MAX_TURNS = 10;
+
     private boolean close = false;
     private int turnCounter = 0;
     private final String answer;
@@ -43,7 +45,7 @@ public class MastermindGameChat {
     }
 
     private boolean isGameOver() {
-        if (turnCounter == 10) {
+        if (turnCounter == MAX_TURNS) {
             System.out.println(answer);
             System.out.println("You lose");
 
