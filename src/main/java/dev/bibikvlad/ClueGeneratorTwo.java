@@ -42,7 +42,7 @@ public class ClueGeneratorTwo {
 
         return new String(clueArray).chars()
                 .mapToObj(c -> (char) c)
-                .sorted(ClueComparator.getComparator(clueArray))
+                .sorted(ClueComparator.getComparator())
                 .map(String::valueOf)
                 .collect(Collectors.joining());
     }

@@ -7,7 +7,7 @@ import static dev.bibikvlad.utils.GameCluesConstants.CIRCLE_SHADED;
 import static dev.bibikvlad.utils.GameCluesConstants.UNDERSCORE;
 
 public class ClueComparator {
-    public static Comparator<Character> getComparator(char[] clueArray) {
+    public static Comparator<Character> getComparator() {
         return (first, second) -> {
             if (first == second) {
                 return 0;

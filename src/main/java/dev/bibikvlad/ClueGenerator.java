@@ -39,7 +39,7 @@ public class ClueGenerator {
     private static String sortAndGenerateClue(char[] clueArray) {
         return new String(clueArray).chars()
                 .mapToObj(c -> (char) c)
-                .sorted(ClueComparator.getComparator(clueArray))
+                .sorted(ClueComparator.getComparator())
                 .map(String::valueOf)
                 .collect(Collectors.joining());
     }
