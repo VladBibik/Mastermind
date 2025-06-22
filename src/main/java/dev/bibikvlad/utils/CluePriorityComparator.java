@@ -7,9 +7,8 @@ import static dev.bibikvlad.utils.GameCluesConstants.CIRCLE_SHADED;
 import static dev.bibikvlad.utils.GameCluesConstants.UNDERSCORE;
 
 public class CluePriorityComparator {
-    public static Comparator<Character> getComparator() {
-        return Comparator.comparingInt(CluePriorityComparator::getCluePriority);
-    }
+    public static final Comparator<Character> CLUE_COMPARATOR =
+            Comparator.comparingInt(CluePriorityComparator::getCluePriority);
 
     private static int getCluePriority(char clue) {
         return switch (clue) {
