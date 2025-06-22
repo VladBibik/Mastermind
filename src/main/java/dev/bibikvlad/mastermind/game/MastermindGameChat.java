@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.game;
 
 import dev.bibikvlad.mastermind.clues.ClueGeneratorTwo;
-import dev.bibikvlad.utils.validators.GameInputValidator;
+import dev.bibikvlad.mastermind.validators.GameInputValidator;
 
 import java.io.BufferedReader;
 import java.io.IOException;
