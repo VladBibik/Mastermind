@@ -8,18 +8,15 @@ import static dev.bibikvlad.utils.GameCluesConstants.UNDERSCORE;
 
 public class ClueComparator {
     public static Comparator<Character> getComparator() {
-        return (first, second) -> {
-            if (first == second) {
-                return 0;
-            } else if (first == CIRCLE_SHADED && (second == UNDERSCORE || second == CIRCLE_EMPTY)) {
-                return -1;
-            } else if (first == CIRCLE_EMPTY && second == CIRCLE_SHADED) {
-                return 1;
-            } else if (first == CIRCLE_EMPTY && second == UNDERSCORE) {
-                return -1;
-            } else {
-                return 1;
-            }
+        return Comparator.comparingInt(ClueComparator::getCluePriority);
+    }
+
+    private static int getCluePriority(char clue) {
+        return switch (clue) {
+            case CIRCLE_SHADED -> 0;
+            case CIRCLE_EMPTY -> 1;
+            case UNDERSCORE -> 2;
+            default -> 3;
         };
     }
 }
