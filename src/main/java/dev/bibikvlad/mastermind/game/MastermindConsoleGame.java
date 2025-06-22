@@ -14,8 +14,8 @@ public class MastermindConsoleGame {
     private int turnCounter = 0;
     private final String answer;
 
-    public MastermindConsoleGame() {
-        answer = RandomAnswerGenerator.generate();
+    public MastermindConsoleGame(String answer) {
+        this.answer = answer;
     }
 
     public void play() {
