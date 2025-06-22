@@ -67,7 +67,7 @@ public class MastermindConsoleGame {
         return false;
     }
 
-    private boolean isInputValid(String userInput) {
+    private boolean processUserInput(String userInput) {
         if (GameInputValidator.isInputValid(userInput)) {
             turnCounter++;
 
