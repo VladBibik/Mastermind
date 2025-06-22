@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.game;
 
 import dev.bibikvlad.mastermind.clues.ClueGeneratorTwo;
-import dev.bibikvlad.utils.validators.UserGameInputValidator;
+import dev.bibikvlad.utils.validators.GameInputValidator;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -68,7 +68,7 @@ public class MastermindGameChat {
     }
 
     private boolean isInputValid(String userInput) {
-        if (UserGameInputValidator.isInputValid(userInput)) {
+        if (GameInputValidator.isInputValid(userInput)) {
             turnCounter++;
 
             return true;
