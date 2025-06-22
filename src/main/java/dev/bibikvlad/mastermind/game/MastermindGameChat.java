@@ -13,7 +13,7 @@ public class MastermindGameChat {
 
     private boolean close = false;
     private int turnCounter = 0;
-    private String answer = "";
+    private final String answer;
 
     public MastermindGameChat() {
         answer = RandomAnswerGenerator.generate();
