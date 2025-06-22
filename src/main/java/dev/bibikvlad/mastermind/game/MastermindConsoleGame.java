@@ -7,14 +7,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class MastermindGameChat {
+public class MastermindConsoleGame {
     private static final int MAX_TURNS = 10;
 
     private boolean close = false;
     private int turnCounter = 0;
     private final String answer;
 
-    public MastermindGameChat() {
+    public MastermindConsoleGame() {
         answer = RandomAnswerGenerator.generate();
     }
 

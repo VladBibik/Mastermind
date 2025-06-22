@@ -1,10 +1,10 @@
 package dev.bibikvlad.mastermind.app;
 
-import dev.bibikvlad.mastermind.game.MastermindGameChat;
+import dev.bibikvlad.mastermind.game.MastermindConsoleGame;
 
 public class MastermindApplication {
     public static void main(String[] args) {
-        MastermindGameChat game = new MastermindGameChat();
+        MastermindConsoleGame game = new MastermindConsoleGame();
 
         game.play();
     }
