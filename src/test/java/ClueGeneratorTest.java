@@ -1,4 +1,3 @@
-import dev.bibikvlad.mastermind.clues.ClueGenerator;
 import dev.bibikvlad.mastermind.clues.ClueGeneratorTwo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,6 +15,12 @@ public class ClueGeneratorTest {
     @DisplayName("Correct colors but all wrong positions")
     void testAllCorrectColorsWrongPositions() {
         assertEquals("○○○○", ClueGeneratorTwo.evaluate("rgby", "ybrg"));
+    }
+
+    @Test
+    @DisplayName("Three correct colors but all wrong positions")
+    void testThreeCorrectColorsWrongPositions() {
+        assertEquals("○○○_", ClueGeneratorTwo.evaluate("rgby", "ybrw"));
     }
 
     @Test
