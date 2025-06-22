@@ -11,9 +11,9 @@ import java.util.regex.Pattern;
 public class MastermindGameChat {
     private static final Pattern validInputPattern = Pattern.compile("[rgybpw]{4}");
 
-    private static boolean close = false;
-    private static int turnCounter = 0;
-    private static String answer = "";
+    private boolean close = false;
+    private int turnCounter = 0;
+    private String answer = "";
 
     public MastermindGameChat() {
         answer = RandomAnswerGenerator.generate();
