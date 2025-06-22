@@ -3,9 +3,9 @@ package dev.bibikvlad.mastermind.validators;
 import java.util.regex.Pattern;
 
 public class GameInputValidator {
-    private static final Pattern validInputPattern = Pattern.compile("[rgybpw]{4}");
+    private static final Pattern VALID_INPUT_PATTERN = Pattern.compile("[rgybpw]{4}");
 
     public static boolean isInputValid(String userInput) {
-        return validInputPattern.matcher(userInput).matches();
+        return VALID_INPUT_PATTERN.matcher(userInput).matches();
     }
 }
