@@ -41,6 +41,10 @@ public class ClueGenerator {
                 clueArray[i] = GameCluesConstants.UNDERSCORE;
         }
 
+        return sortAndBuildClue(clueArray);
+    }
+
+    private static String sortAndBuildClue(char[] clueArray) {
         return new String(clueArray).chars()
                 .mapToObj(c -> (char) c)
                 .sorted(CLUE_COMPARATOR)
