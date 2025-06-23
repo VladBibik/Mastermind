@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.game;
 
-import dev.bibikvlad.mastermind.clues.ClueGeneratorTwo;
+import dev.bibikvlad.mastermind.clues.ClueGenerator;
 import dev.bibikvlad.mastermind.validators.GameInputValidator;
 
 import java.io.BufferedReader;
@@ -85,7 +85,7 @@ public class MastermindConsoleGame {
 
             close = true;
         } else {
-            System.out.println(ClueGeneratorTwo.evaluate(answer, userInput));
+            System.out.println(ClueGenerator.evaluate(answer, userInput));
         }
     }
 }
