@@ -1,41 +1,46 @@
 package dev.bibikvlad.mastermind.clues;
 
+import dev.bibikvlad.utils.GameCluesConstants;
+
 import java.util.stream.Collectors;
 
 import static dev.bibikvlad.utils.CluePriorityComparator.CLUE_COMPARATOR;
-import static dev.bibikvlad.utils.GameCluesConstants.*;
 
 public class ClueGenerator {
     public static String evaluate(String answer, String guess) {
-        char[] evaluationCharArray = new char[answer.length()];
+        char[] clueArray = new char[answer.length()];
+        boolean[] answerUsed = new boolean[answer.length()];
+        boolean[] guessUsed = new boolean[answer.length()];
 
         for (int i = 0; i < answer.length(); i++) {
-            evaluationCharArray[i] = addClue(answer.charAt(i), i, guess);
-        }
+            if (guess.charAt(i) == answer.charAt(i)) {
+                answerUsed[i] = true;
+                guessUsed[i] = true;
 
-        return sortAndGenerateClue(evaluationCharArray);
-    }
-
-    private static char addClue(char currentChar, int charIndex, String guess) {
-        char clue = ' ';
-
-        for (int i = 0; i < guess.length(); i++) {
-            if (guess.charAt(i) == currentChar && i == charIndex) {
-                clue = CIRCLE_SHADED;
-
-                break;
-            } else if (guess.charAt(i) == currentChar) {
-                clue = CIRCLE_EMPTY;
-            } else {
-                if (clue != CIRCLE_EMPTY)
-                    clue = UNDERSCORE;
+                clueArray[i] = GameCluesConstants.CIRCLE_SHADED;
             }
         }
 
-        return clue;
-    }
+        for (int i = 0; i < guess.length(); i++) {
+            if (guessUsed[i])
+                continue;
 
-    private static String sortAndGenerateClue(char[] clueArray) {
+            for (int j = 0; j < answer.length(); j++) {
+                if (!answerUsed[j] && guess.charAt(i) == answer.charAt(j)) {
+                    answerUsed[j] = true;
+                    guessUsed[i] = true;
+
+                    clueArray[i] = GameCluesConstants.CIRCLE_EMPTY;
+                    break;
+                }
+            }
+        }
+
+        for (int i = 0; i < answer.length(); i++) {
+            if (clueArray[i] == 0)
+                clueArray[i] = GameCluesConstants.UNDERSCORE;
+        }
+
         return new String(clueArray).chars()
                 .mapToObj(c -> (char) c)
                 .sorted(CLUE_COMPARATOR)
