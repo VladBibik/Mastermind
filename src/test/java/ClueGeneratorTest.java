@@ -12,6 +12,12 @@ public class ClueGeneratorTest {
     }
 
     @Test
+    @DisplayName("All correct positions and colors (full match)")
+    void testThreeCorrectAndCorrectPositionOneWrong() {
+        assertEquals("◍◍◍_", ClueGenerator.evaluate("rgby", "rgbb"));
+    }
+
+    @Test
     @DisplayName("Correct colors but all wrong positions")
     void testAllCorrectColorsWrongPositions() {
         assertEquals("○○○○", ClueGenerator.evaluate("rgby", "ybrg"));
