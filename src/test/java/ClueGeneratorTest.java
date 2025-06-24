@@ -18,6 +18,12 @@ public class ClueGeneratorTest {
     }
 
     @Test
+    @DisplayName("Duplicate colors in guess exceeding answer")
+    void testTooManySameColorInGuess() {
+        assertEquals("◍◍__", ClueGenerator.evaluate("rrgb", "rrrr"));
+    }
+
+    @Test
     @DisplayName("Correct colors but all wrong positions")
     void testAllCorrectColorsWrongPositions() {
         assertEquals("○○○○", ClueGenerator.evaluate("rgby", "ybrg"));
@@ -39,12 +45,6 @@ public class ClueGeneratorTest {
     @DisplayName("Two correct, one correct but wrong place, one wrong")
     void testMixedClues() {
         assertEquals("◍◍○_", ClueGenerator.evaluate("rgby", "rgpb"));
-    }
-
-    @Test
-    @DisplayName("Duplicate colors in guess exceeding answer")
-    void testTooManySameColorInGuess() {
-        assertEquals("◍◍__", ClueGenerator.evaluate("rrgb", "rrrr"));
     }
 
     @Test
