@@ -24,6 +24,12 @@ public class ClueGeneratorTest {
     }
 
     @Test
+    @DisplayName("One correct and in correct position, three wrong")
+    void testOneCorrectAndInCorrectPositionThreeWrong() {
+        assertEquals("◍___", ClueGenerator.evaluate("rpgb", "ypwp"));
+    }
+
+    @Test
     @DisplayName("Correct colors but all wrong positions")
     void testAllCorrectColorsWrongPositions() {
         assertEquals("○○○○", ClueGenerator.evaluate("rgby", "ybrg"));
