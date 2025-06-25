@@ -19,7 +19,6 @@ public class MastermindConsoleGameTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(outputStream);
 
-
         MastermindConsoleGame game = new MastermindConsoleGame(answer, bufferedReader, printStream);
 
         game.play();
@@ -40,7 +39,6 @@ public class MastermindConsoleGameTest {
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(outputStream);
-
 
         MastermindConsoleGame game = new MastermindConsoleGame(answer, bufferedReader, printStream);
 
