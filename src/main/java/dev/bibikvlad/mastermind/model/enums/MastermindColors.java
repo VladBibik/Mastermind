@@ -1,19 +1,21 @@
 package dev.bibikvlad.mastermind.model.enums;
 
 public enum MastermindColors {
-    RED(0, "Red"),
-    GREEN(1, "Green"),
-    YELLOW(2, "Yellow"),
-    BLUE(3, "Blue"),
-    PURPLE(4, "Purple"),
-    WHITE(5, "White");
+    RED(0, "Red", 'r'),
+    GREEN(1, "Green", 'g'),
+    YELLOW(2, "Yellow", 'y'),
+    BLUE(3, "Blue", 'b'),
+    PURPLE(4, "Purple", 'p'),
+    WHITE(5, "White", 'p');
 
     private final int colorIndex;
     private final String colorName;
+    private final char symbol;
 
-    MastermindColors(int colorIndex, String colorName) {
+    MastermindColors(int colorIndex, String colorName, char symbol) {
         this.colorIndex = colorIndex;
         this.colorName = colorName;
+        this.symbol = symbol;
     }
 
     public int getColorIndex() {
@@ -22,6 +24,10 @@ public enum MastermindColors {
 
     public String getColorName() {
         return colorName;
+    }
+
+    public char getSymbol() {
+        return symbol;
     }
 
     public static MastermindColors fromColorIndex(int colorIndex) {
