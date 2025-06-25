@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import static dev.bibikvlad.utils.CluePriorityComparator.CLUE_COMPARATOR;
 
 public class ClueGenerator {
-    public static String evaluate(String answer, String guess) {
+    public static String generateClue(String answer, String guess) {
         char[] clueArray = new char[answer.length()];
         boolean[] answerUsed = new boolean[answer.length()];
         boolean[] guessUsed = new boolean[answer.length()];

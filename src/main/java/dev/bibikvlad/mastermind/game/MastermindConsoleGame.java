@@ -85,7 +85,7 @@ public class MastermindConsoleGame {
 
             close = true;
         } else {
-            System.out.println(ClueGenerator.evaluate(answer, userInput));
+            System.out.println(ClueGenerator.generateClue(answer, userInput));
         }
     }
 }
