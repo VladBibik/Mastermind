@@ -17,21 +17,11 @@ public class RandomAnswerGenerator {
         char[] chars = new char[ANSWER_LENGTH];
 
         for (int i = 0; i < ANSWER_LENGTH; i++) {
-            chars[i] = generateRandomChar(
-                    MastermindColors.fromColorIndex(random.nextInt(NUMBER_OF_COLORS)));
+            MastermindColors randomColor = MastermindColors.fromColorIndex(random.nextInt(NUMBER_OF_COLORS));
+
+            chars[i] = randomColor.getSymbol();
         }
 
         return String.valueOf(chars);
-    }
-
-    private static char generateRandomChar(MastermindColors mastermindColor) {
-        return switch (mastermindColor) {
-            case RED -> 'r';
-            case GREEN -> 'g';
-            case YELLOW -> 'y';
-            case BLUE -> 'b';
-            case PURPLE -> 'p';
-            case WHITE -> 'w';
-        };
     }
 }
