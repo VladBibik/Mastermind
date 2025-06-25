@@ -6,28 +6,40 @@ import dev.bibikvlad.mastermind.validators.GameInputValidator;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 
 public class MastermindConsoleGame {
     private static final int MAX_TURNS = 10;
 
-    private boolean close = false;
-    private int turnCounter = 0;
+    private final BufferedReader inputReader;
+    private final PrintStream outputWriter;
     private final String answer;
 
+    private boolean close = false;
+    private int turnCounter = 0;
+
     public MastermindConsoleGame(String answer) {
+        this(new BufferedReader(new InputStreamReader(System.in)),
+                System.out,
+                answer);
+    }
+
+    public MastermindConsoleGame(BufferedReader inputReader, PrintStream outputWriter, String answer) {
+        this.inputReader = inputReader;
+        this.outputWriter = outputWriter;
         this.answer = answer;
     }
 
     public void play() {
-        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
+        try {
             while (!close) {
                 if (isGameOver()) {
                     continue;
                 }
 
-                System.out.println("Turn:" + (turnCounter + 1));
+                outputWriter.println("Turn:" + (turnCounter + 1));
 
-                String userInput = bufferedReader.readLine();
+                String userInput = inputReader.readLine();
 
                 if (isGameClosed(userInput)) {
                     continue;
@@ -40,14 +52,14 @@ public class MastermindConsoleGame {
                 handleUserGuess(userInput);
             }
         } catch (IOException exception) {
-            System.out.println(exception.getMessage());
+            outputWriter.println(exception.getMessage());
         }
     }
 
     private boolean isGameOver() {
         if (turnCounter == MAX_TURNS) {
-            System.out.println(answer);
-            System.out.println("You lose");
+            outputWriter.println(answer);
+            outputWriter.println("You lose");
 
             close = true;
 
@@ -73,7 +85,7 @@ public class MastermindConsoleGame {
 
             return true;
         } else {
-            System.out.println("Please provide a valid input");
+            outputWriter.println("Please provide a valid input");
 
             return false;
         }
@@ -81,11 +93,11 @@ public class MastermindConsoleGame {
 
     private void handleUserGuess(String userInput) {
         if (userInput.equals(answer)) {
-            System.out.println("You Won!");
+            outputWriter.println("You Won!");
 
             close = true;
         } else {
-            System.out.println(ClueGenerator.generate(answer, userInput));
+            outputWriter.println(ClueGenerator.generate(answer, userInput));
         }
     }
 }
