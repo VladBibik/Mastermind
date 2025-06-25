@@ -15,7 +15,7 @@ public class CluePriorityComparator {
             case CIRCLE_SHADED -> 0;
             case CIRCLE_EMPTY -> 1;
             case UNDERSCORE -> 2;
-            default -> 3;
+            default -> throw new IllegalArgumentException("Unexpected clue character: " + clue);
         };
     }
 }
