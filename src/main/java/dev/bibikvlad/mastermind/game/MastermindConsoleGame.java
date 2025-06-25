@@ -11,23 +11,23 @@ import java.io.PrintStream;
 public class MastermindConsoleGame {
     private static final int MAX_TURNS = 10;
 
+    private final String answer;
     private final BufferedReader inputReader;
     private final PrintStream outputWriter;
-    private final String answer;
 
     private boolean close = false;
     private int turnCounter = 0;
 
     public MastermindConsoleGame(String answer) {
-        this(new BufferedReader(new InputStreamReader(System.in)),
-                System.out,
-                answer);
+        this(answer,
+                new BufferedReader(new InputStreamReader(System.in)),
+                System.out);
     }
 
-    public MastermindConsoleGame(BufferedReader inputReader, PrintStream outputWriter, String answer) {
+    public MastermindConsoleGame(String answer, BufferedReader inputReader, PrintStream outputWriter) {
+        this.answer = answer;
         this.inputReader = inputReader;
         this.outputWriter = outputWriter;
-        this.answer = answer;
     }
 
     public void play() {
