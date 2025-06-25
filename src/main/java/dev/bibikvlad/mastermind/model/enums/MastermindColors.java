@@ -6,7 +6,7 @@ public enum MastermindColors {
     YELLOW(2, "Yellow", 'y'),
     BLUE(3, "Blue", 'b'),
     PURPLE(4, "Purple", 'p'),
-    WHITE(5, "White", 'p');
+    WHITE(5, "White", 'w');
 
     private final int colorIndex;
     private final String colorName;
