@@ -53,6 +53,8 @@ public class MastermindConsoleGame {
             }
         } catch (IOException exception) {
             outputWriter.println(exception.getMessage());
+        } finally {
+            outputWriter.flush();
         }
     }
 
