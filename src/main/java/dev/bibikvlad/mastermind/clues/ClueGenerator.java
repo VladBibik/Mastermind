@@ -12,6 +12,7 @@ public class ClueGenerator {
         boolean[] answerUsed = new boolean[answer.length()];
         boolean[] guessUsed = new boolean[answer.length()];
 
+        // Step 1: Exact matches (◍)
         for (int i = 0; i < answer.length(); i++) {
             if (guess.charAt(i) == answer.charAt(i)) {
                 answerUsed[i] = true;
@@ -21,6 +22,7 @@ public class ClueGenerator {
             }
         }
 
+        // Step 2: Partial matches (◯)
         for (int i = 0; i < guess.length(); i++) {
             if (guessUsed[i])
                 continue;
@@ -36,6 +38,7 @@ public class ClueGenerator {
             }
         }
 
+        // Step 3: Fill the rest with underscores (_)
         for (int i = 0; i < answer.length(); i++) {
             if (clueChars[i] == 0)
                 clueChars[i] = GameCluesConstants.UNDERSCORE;
