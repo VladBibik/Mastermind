@@ -8,7 +8,7 @@ import static dev.bibikvlad.utils.CluePriorityComparator.CLUE_COMPARATOR;
 
 public class ClueGenerator {
     public static String generate(String answer, String guess) {
-        char[] clueArray = new char[answer.length()];
+        char[] clueChars = new char[answer.length()];
         boolean[] answerUsed = new boolean[answer.length()];
         boolean[] guessUsed = new boolean[answer.length()];
 
@@ -17,7 +17,7 @@ public class ClueGenerator {
                 answerUsed[i] = true;
                 guessUsed[i] = true;
 
-                clueArray[i] = GameCluesConstants.CIRCLE_SHADED;
+                clueChars[i] = GameCluesConstants.CIRCLE_SHADED;
             }
         }
 
@@ -30,18 +30,18 @@ public class ClueGenerator {
                     answerUsed[j] = true;
                     guessUsed[i] = true;
 
-                    clueArray[i] = GameCluesConstants.CIRCLE_EMPTY;
+                    clueChars[i] = GameCluesConstants.CIRCLE_EMPTY;
                     break;
                 }
             }
         }
 
         for (int i = 0; i < answer.length(); i++) {
-            if (clueArray[i] == 0)
-                clueArray[i] = GameCluesConstants.UNDERSCORE;
+            if (clueChars[i] == 0)
+                clueChars[i] = GameCluesConstants.UNDERSCORE;
         }
 
-        return sortAndBuildClue(clueArray);
+        return sortAndBuildClue(clueChars);
     }
 
     private static String sortAndBuildClue(char[] clueArray) {
