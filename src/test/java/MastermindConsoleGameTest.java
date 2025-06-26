@@ -36,7 +36,7 @@ public class MastermindConsoleGameTest {
     }
 
     @Test
-    @DisplayName("Invalid input test")
+    @DisplayName("Correct answer on the first attempt")
     public void firstAttemptCorrectAnswerTest() {
         String answer = "rrrr";
         String input = "rrrr";
