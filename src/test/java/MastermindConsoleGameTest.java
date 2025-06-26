@@ -41,6 +41,14 @@ public class MastermindConsoleGameTest {
         assertTrue(output.contains("You lose"));
     }
 
+    @Test
+    @DisplayName("Correct answer after several incorrect attempts")
+    public void correctAnswerAfterSeveralIncorrectAttemptsTest() {
+        String output = runGame("bgpw", "yypw\nrrbb\npwbg\nbgpw");
+
+        assertTrue(output.contains("You Won!"));
+    }
+
     private String runGame(String answer, String input) {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
