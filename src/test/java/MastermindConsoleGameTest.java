@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.*;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MastermindConsoleGameTest {
@@ -47,6 +48,12 @@ public class MastermindConsoleGameTest {
         String output = runGame("bgpw", "yypw\nrrbb\npwbg\nbgpw");
 
         assertTrue(output.contains("You Won!"));
+    }
+
+    @Test
+    @DisplayName("Close on first attempt")
+    public void firstAttemptCloseTest() {
+        assertDoesNotThrow(() -> runGame("yrgw", "close"));
     }
 
     private String runGame(String answer, String input) {
