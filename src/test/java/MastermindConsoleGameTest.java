@@ -20,17 +20,7 @@ public class MastermindConsoleGameTest {
     @Test
     @DisplayName("Invalid input test")
     public void invalidInputTest() {
-        String answer = "rrrr";
-        String input = "abcd\nclose\n";
-
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-
-        MastermindConsoleGame game = new MastermindConsoleGame(answer, bufferedReader, printStream);
-
-        game.play();
-
-        String output = outputStream.toString();
+        String output = runGame("rrrr", "abcd\nclose\n");
 
         assertTrue(output.contains("Please provide a valid input"));
     }
@@ -38,18 +28,18 @@ public class MastermindConsoleGameTest {
     @Test
     @DisplayName("Correct answer on the first attempt")
     public void firstAttemptCorrectAnswerTest() {
-        String answer = "rrrr";
-        String input = "rrrr";
+        String output = runGame("rrrr", "rrrr");
 
+        assertTrue(output.contains("You Won!"));
+    }
+
+    private String runGame(String answer, String input) {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
         MastermindConsoleGame game = new MastermindConsoleGame(answer, bufferedReader, printStream);
-
         game.play();
 
-        String output = outputStream.toString();
-
-        assertTrue(output.contains("You Won!"));
+        return outputStream.toString();
     }
 }
