@@ -1,4 +1,5 @@
 import dev.bibikvlad.mastermind.game.MastermindConsoleGame;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -7,6 +8,15 @@ import java.io.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MastermindConsoleGameTest {
+    private ByteArrayOutputStream outputStream;
+    private PrintStream printStream;
+
+    @BeforeEach
+    void setUp() {
+        outputStream = new ByteArrayOutputStream();
+        printStream = new PrintStream(outputStream);
+    }
+
     @Test
     @DisplayName("Invalid input test")
     public void invalidInputTest() {
@@ -15,9 +25,6 @@ public class MastermindConsoleGameTest {
 
         ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        PrintStream printStream = new PrintStream(outputStream);
 
         MastermindConsoleGame game = new MastermindConsoleGame(answer, bufferedReader, printStream);
 
@@ -36,9 +43,6 @@ public class MastermindConsoleGameTest {
 
         ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        PrintStream printStream = new PrintStream(outputStream);
 
         MastermindConsoleGame game = new MastermindConsoleGame(answer, bufferedReader, printStream);
 
