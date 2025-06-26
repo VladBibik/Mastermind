@@ -1,4 +1,5 @@
-import dev.bibikvlad.mastermind.game.MastermindConsoleGame;
+package dev.bibikvlad.mastermind.game;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
