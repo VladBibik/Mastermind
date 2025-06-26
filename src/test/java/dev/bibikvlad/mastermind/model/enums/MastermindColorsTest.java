@@ -3,6 +3,7 @@ package dev.bibikvlad.mastermind.model.enums;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MastermindColorsTest {
     @Test
@@ -13,5 +14,11 @@ public class MastermindColorsTest {
         assertEquals(MastermindColors.BLUE, MastermindColors.fromColorIndex(3));
         assertEquals(MastermindColors.PURPLE, MastermindColors.fromColorIndex(4));
         assertEquals(MastermindColors.WHITE, MastermindColors.fromColorIndex(5));
+    }
+
+    @Test
+    public void invalidIndexThrowsException() {
+        assertThrows(IllegalArgumentException.class, () -> MastermindColors.fromColorIndex(-1));
+        assertThrows(IllegalArgumentException.class, () -> MastermindColors.fromColorIndex(6));
     }
 }
