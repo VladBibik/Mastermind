@@ -1,4 +1,5 @@
-import dev.bibikvlad.mastermind.clues.ClueGenerator;
+package dev.bibikvlad.mastermind.clues;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
