@@ -9,8 +9,9 @@ public class RandomAnswerGeneratorTest {
     @Test
     @DisplayName("Correct answer length test")
     void correctAnswerLengthTest() {
+        int correctAnswerLength = 4;
         String answer = RandomAnswerGenerator.generate();
 
-        assertEquals(4, answer.length());
+        assertEquals(correctAnswerLength, answer.length());
     }
 }
