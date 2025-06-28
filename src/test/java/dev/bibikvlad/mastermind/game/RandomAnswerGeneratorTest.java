@@ -13,17 +13,19 @@ public class RandomAnswerGeneratorTest {
     @DisplayName("Correct answer length test")
     void correctAnswerLengthTest() {
         int correctAnswerLength = 4;
-        String answer = RandomAnswerGenerator.generate();
 
-        assertEquals(correctAnswerLength, answer.length());
+        assertEquals(correctAnswerLength, getRandomAnswer().length());
     }
 
     @Test
     @DisplayName("The class generates string that matches correct pattern")
     void correctAnswerPatternTest() {
-        String answer = RandomAnswerGenerator.generate();
         Pattern correctPattern = Pattern.compile("[rgybpw]{4}");
 
-        assertTrue(correctPattern.matcher(answer).matches());
+        assertTrue(correctPattern.matcher(getRandomAnswer()).matches());
+    }
+
+    private String getRandomAnswer() {
+        return RandomAnswerGenerator.generate();
     }
 }
