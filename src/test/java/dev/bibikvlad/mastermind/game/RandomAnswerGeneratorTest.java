@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.game;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.regex.Pattern;
@@ -17,7 +18,7 @@ public class RandomAnswerGeneratorTest {
         assertEquals(ANSWER_LENGTH, getRandomAnswer().length());
     }
 
-    @Test
+    @RepeatedTest(100)
     @DisplayName("The class generates string that matches correct pattern")
     void correctAnswerPatternTest() {
         Pattern correctPattern = Pattern.compile("[rgybpw]{4}");
