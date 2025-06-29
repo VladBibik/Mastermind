@@ -14,7 +14,7 @@ public class RandomAnswerGeneratorTest {
 
     @Test
     @DisplayName("Correct answer length test")
-    void correctAnswerLengthTest() {
+    void generatedAnswerHasCorrectLength() {
         assertEquals(ANSWER_LENGTH, getRandomAnswer().length());
     }
 
