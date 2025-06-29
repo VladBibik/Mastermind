@@ -20,7 +20,7 @@ public class RandomAnswerGeneratorTest {
 
     @RepeatedTest(100)
     @DisplayName("The class generates string that matches correct pattern")
-    void correctAnswerPatternTest() {
+    void generatedAnswerIsValidAcrossRuns() {
         Pattern correctPattern = Pattern.compile("[rgybpw]{4}");
 
         assertTrue(correctPattern.matcher(getRandomAnswer()).matches());
