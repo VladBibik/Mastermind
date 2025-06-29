@@ -9,12 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class RandomAnswerGeneratorTest {
+    private static final int ANSWER_LENGTH = 4;
+
     @Test
     @DisplayName("Correct answer length test")
     void correctAnswerLengthTest() {
-        int correctAnswerLength = 4;
-
-        assertEquals(correctAnswerLength, getRandomAnswer().length());
+        assertEquals(ANSWER_LENGTH, getRandomAnswer().length());
     }
 
     @Test
