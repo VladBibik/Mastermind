@@ -2,9 +2,9 @@ package dev.bibikvlad.utils;
 
 import java.util.Comparator;
 
-import static dev.bibikvlad.utils.GameCluesConstants.CIRCLE_EMPTY;
-import static dev.bibikvlad.utils.GameCluesConstants.CIRCLE_SHADED;
-import static dev.bibikvlad.utils.GameCluesConstants.UNDERSCORE;
+import static dev.bibikvlad.utils.StringConstants.GameCluesConstants.CIRCLE_EMPTY;
+import static dev.bibikvlad.utils.StringConstants.GameCluesConstants.CIRCLE_SHADED;
+import static dev.bibikvlad.utils.StringConstants.GameCluesConstants.UNDERSCORE;
 
 public class CluePriorityComparator {
     public static final Comparator<Character> BY_PRIORITY =
