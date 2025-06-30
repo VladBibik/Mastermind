@@ -1,0 +1,44 @@
+package dev.bibikvlad.mastermind.validators;
+
+import dev.bibikvlad.mastermind.model.enums.MastermindColors;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class GameInputValidatorTest {
+    private int counter = 0;
+
+    @Test
+    @DisplayName("Testing all possible correct inputs")
+    void testAllPossibleCorrectInputs() {
+        char[] correctInputs = new char[MastermindColors.values().length];
+        for (int i = 0; i < correctInputs.length; i++) {
+            correctInputs[i] = MastermindColors.fromColorIndex(i).getSymbol();
+        }
+
+        char[] input = new char[4];
+
+        generate(0, correctInputs, input);
+
+        System.out.println(counter);
+    }
+
+    private void generate(int index, char[] correctInputs, char[] input) {
+        if (index >= input.length) {
+            counter++;
+
+            System.out.println(input);
+
+            assertTrue(GameInputValidator.isInputValid(String.valueOf(input)));
+
+            return;
+        }
+
+        for (char colorSymbol : correctInputs) {
+            input[index] = colorSymbol;
+
+            generate(index + 1, correctInputs, input);
+        }
+    }
+}
