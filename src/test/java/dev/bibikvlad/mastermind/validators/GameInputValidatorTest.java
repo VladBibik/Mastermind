@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GameInputValidatorTest {
     @Test
-    @DisplayName("Testing all possible correct inputs")
+    @DisplayName("Accepts all 1296 valid 4-symbol combinations")
     void testAllPossibleCorrectInputs() {
         char[] correctInputs = new char[MastermindColors.values().length];
         for (int i = 0; i < correctInputs.length; i++) {
