@@ -22,7 +22,8 @@ public class GameInputValidatorTest {
 
     private void validateAllCombinations(int index, char[] correctInputs, char[] input) {
         if (index >= input.length) {
-            assertTrue(GameInputValidator.isInputValid(String.valueOf(input)));
+            assertTrue(GameInputValidator.isInputValid(String.valueOf(input)),
+                    "Invalid input: " + String.valueOf(input));
 
             return;
         }
