@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GameInputValidatorTest {
-    private int counter = 0;
-
     @Test
     @DisplayName("Testing all possible correct inputs")
     void testAllPossibleCorrectInputs() {
@@ -20,16 +18,10 @@ public class GameInputValidatorTest {
         char[] input = new char[4];
 
         generate(0, correctInputs, input);
-
-        System.out.println(counter);
     }
 
     private void generate(int index, char[] correctInputs, char[] input) {
         if (index >= input.length) {
-            counter++;
-
-            System.out.println(input);
-
             assertTrue(GameInputValidator.isInputValid(String.valueOf(input)));
 
             return;
