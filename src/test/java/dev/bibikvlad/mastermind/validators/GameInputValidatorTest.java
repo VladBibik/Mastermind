@@ -17,10 +17,10 @@ public class GameInputValidatorTest {
 
         char[] input = new char[4];
 
-        generate(0, correctInputs, input);
+        validateAllCombinations(0, correctInputs, input);
     }
 
-    private void generate(int index, char[] correctInputs, char[] input) {
+    private void validateAllCombinations(int index, char[] correctInputs, char[] input) {
         if (index >= input.length) {
             assertTrue(GameInputValidator.isInputValid(String.valueOf(input)));
 
@@ -30,7 +30,7 @@ public class GameInputValidatorTest {
         for (char colorSymbol : correctInputs) {
             input[index] = colorSymbol;
 
-            generate(index + 1, correctInputs, input);
+            validateAllCombinations(index + 1, correctInputs, input);
         }
     }
 }
