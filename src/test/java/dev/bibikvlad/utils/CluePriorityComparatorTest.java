@@ -1,0 +1,24 @@
+package dev.bibikvlad.utils;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+public class CluePriorityComparatorTest {
+    @Test
+    @DisplayName("Throws illegal argument exception")
+    void throwIllegalArgumentException() {
+        Comparator<Character> cluePriorityComparator = CluePriorityComparator.BY_PRIORITY;
+
+        List<Character> clueInputs = Arrays.asList('a', 'b');
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            clueInputs.stream().sorted(cluePriorityComparator).toList();
+        });
+    }
+}
