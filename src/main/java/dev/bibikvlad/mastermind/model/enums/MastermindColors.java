@@ -39,4 +39,14 @@ public enum MastermindColors {
 
         throw new IllegalArgumentException("Invalid color index");
     }
+
+    public static MastermindColors fromColorSymbol(char symbol) {
+        for (MastermindColors mastermindColor : MastermindColors.values()) {
+            if (mastermindColor.symbol == symbol) {
+                return mastermindColor;
+            }
+        }
+
+        throw new IllegalArgumentException("Invalid color symbol");
+    }
 }
