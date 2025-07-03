@@ -27,8 +27,8 @@ public class CluePriorityComparatorTest {
     void sortedArrayDemonstratesCorrectPriority() {
         Comparator<Character> cluePriorityComparator = CluePriorityComparator.BY_PRIORITY;
 
-        List<Character> expectedSorted = Arrays.asList('◍', '○', '_', '_');
-        List<Character> unsortedInput = Arrays.asList('_', '_', '◍', '○');
+        List<Character> expectedSorted = List.of('◍', '○', '_', '_');
+        List<Character> unsortedInput = List.of('_', '_', '◍', '○');
 
         assertEquals(expectedSorted, unsortedInput.stream().sorted(cluePriorityComparator).toList());
     }
