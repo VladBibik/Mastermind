@@ -5,10 +5,10 @@ import dev.bibikvlad.utils.StringConstants.ConsoleColors;
 public enum MastermindColors {
     RED(0, "Red", 'r', ConsoleColors.Foreground.RED),
     GREEN(1, "Green", 'g', ConsoleColors.Foreground.GREEN),
-    YELLOW(2, "Yellow", 'y', ConsoleColors.Foreground.YELLOW),
+    YELLOW(2, "Yellow", 'y', ConsoleColors.Foreground.BRIGHT_YELLOW),
     BLUE(3, "Blue", 'b', ConsoleColors.Foreground.BLUE),
     PURPLE(4, "Purple", 'p', ConsoleColors.Foreground.PURPLE),
-    WHITE(5, "White", 'w', ConsoleColors.Foreground.WHITE);
+    WHITE(5, "White", 'w', ConsoleColors.Foreground.BRIGHT_WHITE);
 
     private final int colorIndex;
     private final String colorName;
