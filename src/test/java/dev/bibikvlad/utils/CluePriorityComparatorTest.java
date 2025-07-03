@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CluePriorityComparatorTest {
     @Test
@@ -20,5 +20,16 @@ public class CluePriorityComparatorTest {
         assertThrows(IllegalArgumentException.class, () -> {
             clueInputs.stream().sorted(cluePriorityComparator).toList();
         });
+    }
+
+    @Test
+    @DisplayName("Sorted array demonstrates correct priority of the elements")
+    void sortedArrayDemonstratesCorrectPriority() {
+        Comparator<Character> cluePriorityComparator = CluePriorityComparator.BY_PRIORITY;
+
+        List<Character> providedList = Arrays.asList('◍', '○', '_', '_');
+        List<Character> testList = Arrays.asList('_', '_', '◍', '○');
+
+        assertEquals(providedList, testList.stream().sorted(cluePriorityComparator).toList());
     }
 }
