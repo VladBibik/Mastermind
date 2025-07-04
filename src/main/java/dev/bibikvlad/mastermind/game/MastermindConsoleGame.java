@@ -37,13 +37,14 @@ public class MastermindConsoleGame {
                     continue;
                 }
 
-                outputWriter.println("Turn:" + (turnCounter + 1));
-
                 String userInput = inputReader.readLine();
 
                 if (isGameClosed(userInput)) {
                     continue;
                 }
+
+                outputWriter.println("Turn " + (turnCounter + 1) + " out of " + MAX_TURNS
+                        + ". Your guess: " + userInput);
 
                 if (!processUserInput(userInput)) {
                     continue;
