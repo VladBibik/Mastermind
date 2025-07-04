@@ -94,12 +94,7 @@ public class MastermindConsoleGame {
     }
 
     private void handleUserGuess(String userInput) {
-        if (userInput.equals(answer)) {
-            outputWriter.println("You Won!");
-
+        if (UserGuessHandler.handle(answer, userInput))
             close = true;
-        } else {
-            outputWriter.println(ClueGenerator.generate(answer, userInput));
-        }
     }
 }
