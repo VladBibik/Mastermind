@@ -14,7 +14,13 @@ public class ConsoleColorFormatter {
             'w', ConsoleColors.BrightForeground.WHITE
     );
 
-    public static String getColorCode(char input) {
-        return COLOR_CODE_MAP.get(input);
+    public static String getColorCode(char symbol) {
+        String colorCode = COLOR_CODE_MAP.get(symbol);
+
+        if (colorCode == null) {
+            throw new IllegalArgumentException("Unsupported color symbol: " + symbol);
+        }
+
+        return colorCode;
     }
 }
