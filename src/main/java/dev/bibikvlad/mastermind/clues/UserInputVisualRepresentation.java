@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.clues;
 
 import dev.bibikvlad.utils.Formatters.ConsoleColorFormatter;
+import dev.bibikvlad.utils.StringConstants.ConsoleColors;
 import dev.bibikvlad.utils.StringConstants.GameCluesConstants;
 
 public class UserInputVisualRepresentation {
@@ -12,6 +13,8 @@ public class UserInputVisualRepresentation {
                     .append(ConsoleColorFormatter.getColorCode(input.charAt(i)))
                     .append(GameCluesConstants.CIRCLE_SOLID);
         }
+
+        visualRepresentation.append(ConsoleColors.RESET);
 
         return visualRepresentation.toString();
     }
