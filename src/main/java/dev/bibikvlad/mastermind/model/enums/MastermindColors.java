@@ -1,7 +1,5 @@
 package dev.bibikvlad.mastermind.model.enums;
 
-import dev.bibikvlad.utils.StringConstants.ConsoleColors;
-
 public enum MastermindColors {
     RED(0, "Red", 'r'),
     GREEN(1, "Green", 'g'),
