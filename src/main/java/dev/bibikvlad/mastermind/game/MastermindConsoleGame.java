@@ -91,7 +91,7 @@ public class MastermindConsoleGame {
 
             return true;
         } else {
-            outputWriter.println("Please provide a valid input");
+            outputWriter.println(language.getInvalidInputMessage());
 
             return false;
         }
