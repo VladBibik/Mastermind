@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.game;
 
 import dev.bibikvlad.mastermind.clues.ClueGenerator;
-import dev.bibikvlad.mastermind.clues.UserInputVisualRepresentation;
+import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 
 public class UserGuessHandler {
     public static boolean handle(String answer, String userInput) {
@@ -10,7 +10,7 @@ public class UserGuessHandler {
 
             return true;
         } else {
-            System.out.println(UserInputVisualRepresentation.getVisualRepresentation(userInput)
+            System.out.println(InputVisualRepresentation.getVisualRepresentation(userInput)
                     + "        "
                     + ClueGenerator.generate(answer, userInput));
 

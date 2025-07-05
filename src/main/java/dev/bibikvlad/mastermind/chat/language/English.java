@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.chat.language;
 
-import dev.bibikvlad.mastermind.clues.UserInputVisualRepresentation;
+import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.utils.StringConstants.ConsoleColors;
 
 public class English extends Language {
@@ -24,6 +24,6 @@ public class English extends Language {
 
     @Override
     public String getGameOverMessage(String answer) {
-        return "Game Over! The solution is: " + UserInputVisualRepresentation.getVisualRepresentation(answer);
+        return "Game Over! The solution is: " + InputVisualRepresentation.getVisualRepresentation(answer);
     }
 }
