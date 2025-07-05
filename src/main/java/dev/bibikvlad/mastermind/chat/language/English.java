@@ -24,6 +24,13 @@ public class English extends Language {
 
     @Override
     public String getGameOverMessage(String answer) {
-        return "Game Over! The solution is: " + InputVisualRepresentation.getVisualRepresentation(answer);
+        return "Game Over! The solution is: "
+                + InputVisualRepresentation.getVisualRepresentation(answer);
+    }
+
+    @Override
+    public String getWinMessage(String answer) {
+        return "You Won! You are the Mastermind!" + "\nSolution was: "
+                + InputVisualRepresentation.getVisualRepresentation(answer);
     }
 }
