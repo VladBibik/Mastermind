@@ -97,7 +97,7 @@ public class MastermindConsoleGame {
 
     private void handleUserGuess(String userInput) {
         if (userInput.equals(answer)) {
-            System.out.println(language.getWinMessage(answer));
+            outputWriter.println(language.getWinMessage(answer));
 
             close = true;
         } else {
