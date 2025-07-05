@@ -96,7 +96,12 @@ public class MastermindConsoleGame {
     }
 
     private void handleUserGuess(String userInput) {
-        if (IncorrectUserGuessHandler.handle(answer, userInput))
+        if (userInput.equals(answer)) {
+            System.out.println(language.getWinMessage(answer));
+
             close = true;
+        } else {
+            IncorrectUserGuessHandler.handle(answer, userInput);
+        }
     }
 }
