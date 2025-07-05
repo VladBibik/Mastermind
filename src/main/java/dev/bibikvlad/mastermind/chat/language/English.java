@@ -25,7 +25,7 @@ public class English extends Language {
 
     @Override
     public String getGameOverMessage(String answer) {
-        return "Game Over! The solution is: "
+        return "Game Over! The solution was: "
                 + InputVisualRepresentation.getVisualRepresentation(answer);
     }
 
