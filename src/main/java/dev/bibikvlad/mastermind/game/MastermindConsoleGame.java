@@ -101,7 +101,7 @@ public class MastermindConsoleGame {
 
             close = true;
         } else {
-            IncorrectUserGuessHandler.handle(answer, userInput);
+            outputWriter.println(language.getIncorrectGuessMessage(answer, userInput));
         }
     }
 }
