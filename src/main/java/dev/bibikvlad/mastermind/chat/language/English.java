@@ -14,4 +14,10 @@ public class English extends Language {
                 + ConsoleColors.BrightForeground.WHITE + "w"
                 + ConsoleColors.RESET;
     }
+
+    @Override
+    public String getTurnCounterAndUserGuess(int maxTurns, int currentTurn, String userInput) {
+        return "Turn " + (currentTurn + 1) + " out of " + maxTurns
+                + ". Your guess: " + userInput;
+    }
 }
