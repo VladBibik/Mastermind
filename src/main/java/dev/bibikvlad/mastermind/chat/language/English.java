@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.chat.language;
 
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.utils.StringConstants.ConsoleColors;
+import dev.bibikvlad.utils.StringConstants.Emojis;
 
 public class English extends Language {
     @Override
@@ -30,7 +31,7 @@ public class English extends Language {
 
     @Override
     public String getWinMessage(String answer) {
-        return "You Won! You are the Mastermind!" + "\nSolution was: "
+        return "You Won! " + Emojis.CELEBRATION_TADA + " You are the Mastermind!" + "\nSolution was: "
                 + InputVisualRepresentation.getVisualRepresentation(answer);
     }
 }
