@@ -96,7 +96,7 @@ public class MastermindConsoleGame {
     }
 
     private void handleUserGuess(String userInput) {
-        if (UserGuessHandler.handle(answer, userInput))
+        if (IncorrectUserGuessHandler.handle(answer, userInput))
             close = true;
     }
 }
