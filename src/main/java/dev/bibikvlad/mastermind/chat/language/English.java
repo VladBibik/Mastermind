@@ -31,7 +31,8 @@ public class English extends Language {
 
     @Override
     public String getWinMessage(String answer) {
-        return "You Won! " + Emojis.CELEBRATION_TADA + " You are the Mastermind!" + "\nSolution was: "
-                + InputVisualRepresentation.getVisualRepresentation(answer);
+        return "You Won! " + Emojis.CELEBRATION_TADA
+                + "\nYou are the Mastermind!"
+                + "\nSolution was: " + InputVisualRepresentation.getVisualRepresentation(answer);
     }
 }
