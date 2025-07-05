@@ -4,7 +4,7 @@ import dev.bibikvlad.utils.Formatters.ConsoleColorFormatter;
 import dev.bibikvlad.utils.StringConstants.ConsoleColors;
 import dev.bibikvlad.utils.StringConstants.GameCluesConstants;
 
-public class UserInputVisualRepresentation {
+public class InputVisualRepresentation {
     public static String getVisualRepresentation(String input) {
         StringBuilder visualRepresentation = new StringBuilder();
 
