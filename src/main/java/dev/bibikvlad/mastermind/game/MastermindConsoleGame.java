@@ -93,8 +93,7 @@ public class MastermindConsoleGame {
 
             close = true;
         } else {
-            outputWriter.println(language.getTurnCounterAndUserGuess(MAX_TURNS, turnCounter, userInput));
-            outputWriter.println(language.getIncorrectGuessMessage(answer, userInput));
+            outputWriter.println(language.getIncorrectGuessMessage(MAX_TURNS, turnCounter, answer, userInput));
         }
     }
 }
