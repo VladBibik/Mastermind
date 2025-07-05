@@ -18,9 +18,10 @@ public class English extends Language {
     }
 
     @Override
-    public String getTurnCounterAndUserGuess(int maxTurns, int currentTurn, String userInput) {
+    public String getIncorrectGuessMessage(int maxTurns, int currentTurn, String answer, String userInput) {
         return "Turn " + (currentTurn + 1) + " out of " + maxTurns
-                + ". Your guess: " + userInput;
+                + ". Your guess: " + userInput
+                + "\n" + getGuessVisualRepresentation(answer, userInput);
     }
 
     @Override
