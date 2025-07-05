@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.game;
 
-import dev.bibikvlad.mastermind.clues.ClueGenerator;
+import dev.bibikvlad.mastermind.chat.language.Language;
 import dev.bibikvlad.mastermind.validators.GameInputValidator;
 
 import java.io.BufferedReader;
@@ -11,6 +11,7 @@ import java.io.PrintStream;
 public class MastermindConsoleGame {
     private static final int MAX_TURNS = 10;
 
+    private final Language language;
     private final String answer;
     private final BufferedReader inputReader;
     private final PrintStream outputWriter;
@@ -18,13 +19,15 @@ public class MastermindConsoleGame {
     private boolean close = false;
     private int turnCounter = 0;
 
-    public MastermindConsoleGame(String answer) {
-        this(answer,
+    public MastermindConsoleGame(Language language, String answer) {
+        this(language, answer,
                 new BufferedReader(new InputStreamReader(System.in)),
                 System.out);
     }
 
-    public MastermindConsoleGame(String answer, BufferedReader inputReader, PrintStream outputWriter) {
+    public MastermindConsoleGame(Language language, String answer,
+                                 BufferedReader inputReader, PrintStream outputWriter) {
+        this.language = language;
         this.answer = answer;
         this.inputReader = inputReader;
         this.outputWriter = outputWriter;
