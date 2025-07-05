@@ -46,13 +46,7 @@ public class MastermindConsoleGame {
                     continue;
                 }
 
-                outputWriter.println(language.getTurnCounterAndUserGuess(MAX_TURNS, turnCounter, userInput));
-
-                if (!processUserInput(userInput)) {
-                    continue;
-                }
-
-                handleUserGuess(userInput);
+                processUserInput(userInput);
             }
         } catch (IOException exception) {
             outputWriter.println(exception.getMessage());
@@ -83,15 +77,13 @@ public class MastermindConsoleGame {
         return false;
     }
 
-    private boolean processUserInput(String userInput) {
+    private void processUserInput(String userInput) {
         if (GameInputValidator.isInputValid(userInput)) {
-            turnCounter++;
+            handleUserGuess(userInput);
 
-            return true;
+            turnCounter++;
         } else {
             outputWriter.println(language.getInvalidInputMessage());
-
-            return false;
         }
     }
 
@@ -101,6 +93,7 @@ public class MastermindConsoleGame {
 
             close = true;
         } else {
+            outputWriter.println(language.getTurnCounterAndUserGuess(MAX_TURNS, turnCounter, userInput));
             outputWriter.println(language.getIncorrectGuessMessage(answer, userInput));
         }
     }
