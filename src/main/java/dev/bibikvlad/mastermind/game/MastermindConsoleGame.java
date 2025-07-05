@@ -63,8 +63,7 @@ public class MastermindConsoleGame {
 
     private boolean isGameOver() {
         if (turnCounter == MAX_TURNS) {
-            outputWriter.println(answer);
-            outputWriter.println("You lose");
+            outputWriter.println(language.getGameOverMessage(answer));
 
             close = true;
 
