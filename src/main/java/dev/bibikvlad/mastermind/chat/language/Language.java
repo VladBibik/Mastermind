@@ -4,4 +4,6 @@ public abstract class Language {
     public abstract String getInvalidInputMessage();
 
     public abstract String getTurnCounterAndUserGuess(int maxTurns, int currentTurn, String userInput);
+
+    public abstract String getGameOverMessage(String answer);
 }
