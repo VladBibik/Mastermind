@@ -13,6 +13,8 @@ public abstract class Language {
 
     public abstract String getWinMessage(String answer);
 
+    public abstract String getRulesMessage();
+
     protected String getGuessVisualRepresentation(String answer, String userInput) {
         return InputVisualRepresentation.getVisualRepresentation(userInput)
                 + "        "
