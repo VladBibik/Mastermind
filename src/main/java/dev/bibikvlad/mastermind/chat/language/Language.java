@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.chat.language;
 
 import dev.bibikvlad.mastermind.clues.ClueGenerator;
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
+import dev.bibikvlad.utils.StringConstants.ConsoleColors;
 
 public abstract class Language {
     public abstract String getInvalidInputMessage();
