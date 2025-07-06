@@ -1,20 +1,12 @@
 package dev.bibikvlad.mastermind.chat.language;
 
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
-import dev.bibikvlad.utils.StringConstants.ConsoleColors;
 import dev.bibikvlad.utils.StringConstants.Emojis;
 
 public class English extends Language {
     @Override
     public String getInvalidInputMessage() {
-        return "Invalid guess. Must include only letters: "
-                + ConsoleColors.BrightForeground.RED + "r "
-                + ConsoleColors.BrightForeground.GREEN + "g "
-                + ConsoleColors.BrightForeground.YELLOW + "y "
-                + ConsoleColors.BrightForeground.BLUE + "b "
-                + ConsoleColors.BrightForeground.PURPLE + "p "
-                + ConsoleColors.BrightForeground.WHITE + "w"
-                + ConsoleColors.RESET;
+        return "Invalid guess. Must include only letters: " + getColorChoices();
     }
 
     @Override
@@ -35,5 +27,10 @@ public class English extends Language {
         return "You Won! " + Emojis.CELEBRATION_TADA
                 + "\nYou are the Mastermind!"
                 + "\nSolution was: " + InputVisualRepresentation.getVisualRepresentation(answer);
+    }
+
+    @Override
+    public String getRulesMessage() {
+        return "";
     }
 }
