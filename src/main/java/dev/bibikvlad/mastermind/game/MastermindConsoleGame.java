@@ -34,6 +34,8 @@ public class MastermindConsoleGame {
     }
 
     public void play() {
+        outputWriter.println(language.getRulesMessage());
+
         try {
             while (!close) {
                 if (isGameOver()) {
