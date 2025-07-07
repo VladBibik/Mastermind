@@ -37,9 +37,9 @@ public class English extends Language {
                 Color choices: %s
                 Example turn: ybgr
                 Response:
-                %s : correct color in correct position
-                %s : correct color in incorrect position
-                %s : incorrect color
+                %s\tcorrect color in correct position
+                %s\tcorrect color in incorrect position
+                %s\tincorrect color
                 
                 The order of the response tiles does not necessarily match the colored characters.
                 Type 'help', or 'rules' to read these instructions again
