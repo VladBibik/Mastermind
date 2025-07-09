@@ -47,6 +47,7 @@ public class ConsoleColors {
         public static final String MAGENTA = "\u001B[38;5;201m";
         public static final String PURPLE = "\u001B[38;5;93m";
         public static final String VIOLET = "\u001B[38;5;129m";
+        public static final String ORCHID = "\u001B[38;5;170m";
 
         public static final String BROWN = "\u001B[38;5;94m";
         public static final String GREY = "\u001B[38;5;244m";
