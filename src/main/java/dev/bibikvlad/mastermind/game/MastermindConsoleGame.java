@@ -31,11 +31,11 @@ public class MastermindConsoleGame {
         this.answer = answer;
         this.inputReader = inputReader;
         this.outputWriter = outputWriter;
+
+        printLogoAndRules();
     }
 
     public void play() {
-        outputWriter.println(language.getRulesMessage());
-
         try {
             while (!close) {
                 if (isGameOver()) {
@@ -55,6 +55,11 @@ public class MastermindConsoleGame {
         } finally {
             outputWriter.flush();
         }
+    }
+
+    private void printLogoAndRules() {
+        outputWriter.println(language.getAsciiLogo());
+        outputWriter.println(language.getRulesMessage());
     }
 
     private boolean isGameOver() {
