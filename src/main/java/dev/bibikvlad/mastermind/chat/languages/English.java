@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.chat.language;
+package dev.bibikvlad.mastermind.chat.languages;
 
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.utils.StringConstants.Emojis;

@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.game;
 
-import dev.bibikvlad.mastermind.chat.language.Language;
+import dev.bibikvlad.mastermind.chat.languages.Language;
 import dev.bibikvlad.mastermind.validators.GameInputValidator;
 
 import java.io.BufferedReader;
