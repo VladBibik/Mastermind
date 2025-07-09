@@ -16,6 +16,10 @@ public abstract class Language {
 
     public abstract String getRulesMessage();
 
+    public String getAsciiLogo() {
+        return ColoredAsciiLogo.getLogo();
+    }
+
     protected String getGuessVisualRepresentation(String answer, String userInput) {
         return InputVisualRepresentation.getVisualRepresentation(userInput)
                 + "        "
@@ -30,9 +34,5 @@ public abstract class Language {
                 + ConsoleColors.BrightForeground.PURPLE + "p "
                 + ConsoleColors.BrightForeground.WHITE + "w"
                 + ConsoleColors.RESET;
-    }
-
-    public String getAsciiLogo() {
-        return ColoredAsciiLogo.getLogo();
     }
 }
