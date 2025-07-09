@@ -16,7 +16,7 @@ public class ColoredAsciiLogo {
                 <background><borderColor>█▌<accentColor>░░░░░     ░░░░░░░░░░   ░░░░░  ░░░░░░░░░     ░░░░░    ░░░░░░░░░░ ░░░░░   ░░░░░░░░░░     ░░░░░░░░░░░░░░░    ░░░░░░░░░░░░░░░   <borderColor>▐█<reset>
                 <background><borderColor>████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████<reset>
                 """
-                .replace("<borderColor>", ConsoleColors.BrightForeground.BLUE)
+                .replace("<borderColor>", ConsoleColors.ExtendedAnsiForeground.ORCHID)
                 .replace("<mainColor>",  ConsoleColors.ExtendedAnsiForeground.ORANGE)
                 .replace("<accentColor>", ConsoleColors.BrightForeground.RED)
                 .replace("<background>", ConsoleColors.Background.BLACK)
