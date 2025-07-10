@@ -1,10 +1,10 @@
-package dev.bibikvlad.mastermind.chat.languages;
+package dev.bibikvlad.mastermind.chat.GameMessages;
 
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.utils.StringConstants.Emojis;
 import dev.bibikvlad.utils.StringConstants.GameCluesConstants;
 
-public class English extends Language {
+public class EnglishGameLocale extends GameMessagesLocale {
     @Override
     public String getInvalidInputMessage() {
         return "Invalid guess. Must include only letters: " + getColorChoices();

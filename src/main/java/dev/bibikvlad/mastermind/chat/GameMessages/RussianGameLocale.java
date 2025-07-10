@@ -1,10 +1,10 @@
-package dev.bibikvlad.mastermind.chat.languages;
+package dev.bibikvlad.mastermind.chat.GameMessages;
 
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.utils.StringConstants.Emojis;
 import dev.bibikvlad.utils.StringConstants.GameCluesConstants;
 
-public class Russian extends Language {
+public class RussianGameLocale extends GameMessagesLocale {
 
     @Override
     public String getInvalidInputMessage() {

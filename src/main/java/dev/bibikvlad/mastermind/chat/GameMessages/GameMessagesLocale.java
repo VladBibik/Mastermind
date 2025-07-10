@@ -1,11 +1,11 @@
-package dev.bibikvlad.mastermind.chat.languages;
+package dev.bibikvlad.mastermind.chat.GameMessages;
 
 import dev.bibikvlad.mastermind.clues.ClueGenerator;
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.utils.StringConstants.AsciiLogo.ColoredAsciiLogo;
 import dev.bibikvlad.utils.StringConstants.ConsoleColors;
 
-public abstract class Language {
+public abstract class GameMessagesLocale {
     public abstract String getInvalidInputMessage();
 
     public abstract String getIncorrectGuessMessage(int maxTurns, int currentTurn, String answer, String userInput);
