@@ -17,9 +17,7 @@ public class CluePriorityComparatorTest {
 
         List<Character> clueInputs = Arrays.asList('a', 'b');
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            clueInputs.stream().sorted(cluePriorityComparator).toList();
-        });
+        assertThrows(IllegalArgumentException.class, () -> clueInputs.stream().sorted(cluePriorityComparator).toList());
     }
 
     @Test
