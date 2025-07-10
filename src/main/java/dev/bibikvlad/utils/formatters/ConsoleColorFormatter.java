@@ -1,6 +1,6 @@
 package dev.bibikvlad.utils.formatters;
 
-import dev.bibikvlad.utils.StringConstants.ConsoleColors;
+import dev.bibikvlad.utils.strings.ConsoleColors;
 
 import java.util.Map;
 

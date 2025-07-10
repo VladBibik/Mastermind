@@ -1,4 +1,4 @@
-package dev.bibikvlad.utils.StringConstants;
+package dev.bibikvlad.utils.strings;
 
 public class ConsoleColors {
     public static final class Foreground {

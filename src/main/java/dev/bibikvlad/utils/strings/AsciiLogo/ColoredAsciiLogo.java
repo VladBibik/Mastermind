@@ -1,6 +1,6 @@
-package dev.bibikvlad.utils.StringConstants.AsciiLogo;
+package dev.bibikvlad.utils.strings.AsciiLogo;
 
-import dev.bibikvlad.utils.StringConstants.ConsoleColors;
+import dev.bibikvlad.utils.strings.ConsoleColors;
 
 public class ColoredAsciiLogo {
     public static String getLogo() {

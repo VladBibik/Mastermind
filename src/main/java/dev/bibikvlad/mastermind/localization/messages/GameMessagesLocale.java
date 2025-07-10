@@ -2,8 +2,8 @@ package dev.bibikvlad.mastermind.localization.messages;
 
 import dev.bibikvlad.mastermind.clues.ClueGenerator;
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
-import dev.bibikvlad.utils.StringConstants.AsciiLogo.ColoredAsciiLogo;
-import dev.bibikvlad.utils.StringConstants.ConsoleColors;
+import dev.bibikvlad.utils.strings.AsciiLogo.ColoredAsciiLogo;
+import dev.bibikvlad.utils.strings.ConsoleColors;
 
 public abstract class GameMessagesLocale {
     public abstract String getInvalidInputMessage();

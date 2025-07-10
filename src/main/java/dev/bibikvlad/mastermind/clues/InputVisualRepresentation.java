@@ -1,8 +1,8 @@
 package dev.bibikvlad.mastermind.clues;
 
 import dev.bibikvlad.utils.formatters.ConsoleColorFormatter;
-import dev.bibikvlad.utils.StringConstants.ConsoleColors;
-import dev.bibikvlad.utils.StringConstants.GameCluesConstants;
+import dev.bibikvlad.utils.strings.ConsoleColors;
+import dev.bibikvlad.utils.strings.GameCluesConstants;
 
 public class InputVisualRepresentation {
     public static String getVisualRepresentation(String input) {
