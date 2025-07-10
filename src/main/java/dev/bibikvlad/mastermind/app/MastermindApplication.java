@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.app;
 
-import dev.bibikvlad.mastermind.localization.messages.EnglishGameLocale;
+import dev.bibikvlad.mastermind.localization.messages.english.EnglishGameLocale;
 import dev.bibikvlad.mastermind.localization.messages.GameMessagesLocale;
 import dev.bibikvlad.mastermind.game.MastermindConsoleGame;
 import dev.bibikvlad.mastermind.game.RandomAnswerGenerator;

@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.localization.factory;
 
 import dev.bibikvlad.mastermind.localization.messages.GameMessagesLocale;
-import dev.bibikvlad.mastermind.localization.messages.RussianGameLocale;
+import dev.bibikvlad.mastermind.localization.messages.russian.RussianGameLocale;
 
 public class RussianLocaleFactory extends LocaleAbstractFactory {
 

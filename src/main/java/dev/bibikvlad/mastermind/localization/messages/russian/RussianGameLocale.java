@@ -1,6 +1,7 @@
-package dev.bibikvlad.mastermind.localization.messages;
+package dev.bibikvlad.mastermind.localization.messages.russian;
 
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
+import dev.bibikvlad.mastermind.localization.messages.GameMessagesLocale;
 import dev.bibikvlad.utils.StringConstants.Emojis;
 import dev.bibikvlad.utils.StringConstants.GameCluesConstants;
 
