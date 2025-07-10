@@ -1,7 +1,7 @@
-package dev.bibikvlad.mastermind.chat.LocaleFabrics;
+package dev.bibikvlad.mastermind.localization.LocaleFabrics;
 
-import dev.bibikvlad.mastermind.chat.GameMessages.EnglishGameLocale;
-import dev.bibikvlad.mastermind.chat.GameMessages.GameMessagesLocale;
+import dev.bibikvlad.mastermind.localization.GameMessages.EnglishGameLocale;
+import dev.bibikvlad.mastermind.localization.GameMessages.GameMessagesLocale;
 
 public class EnglishLocaleFactory extends LocaleAbstractFactory {
 

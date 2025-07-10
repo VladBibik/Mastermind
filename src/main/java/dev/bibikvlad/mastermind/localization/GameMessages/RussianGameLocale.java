@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.chat.GameMessages;
+package dev.bibikvlad.mastermind.localization.GameMessages;
 
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.utils.StringConstants.Emojis;

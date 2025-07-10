@@ -1,6 +1,6 @@
-package dev.bibikvlad.mastermind.chat.LocaleFabrics;
+package dev.bibikvlad.mastermind.localization.LocaleFabrics;
 
-import dev.bibikvlad.mastermind.chat.GameMessages.GameMessagesLocale;
+import dev.bibikvlad.mastermind.localization.GameMessages.GameMessagesLocale;
 
 public abstract class LocaleAbstractFactory {
     protected GameMessagesLocale gameMessagesLocale;
