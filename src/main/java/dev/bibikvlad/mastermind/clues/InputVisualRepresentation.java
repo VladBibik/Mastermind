@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.clues;
 
-import dev.bibikvlad.utils.Formatters.ConsoleColorFormatter;
+import dev.bibikvlad.utils.formatters.ConsoleColorFormatter;
 import dev.bibikvlad.utils.StringConstants.ConsoleColors;
 import dev.bibikvlad.utils.StringConstants.GameCluesConstants;
 

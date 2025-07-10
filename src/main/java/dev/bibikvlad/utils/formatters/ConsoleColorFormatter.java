@@ -1,4 +1,4 @@
-package dev.bibikvlad.utils.Formatters;
+package dev.bibikvlad.utils.formatters;
 
 import dev.bibikvlad.utils.StringConstants.ConsoleColors;
 
