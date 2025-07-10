@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.game;
 
-import dev.bibikvlad.mastermind.localization.GameMessages.GameMessagesLocale;
+import dev.bibikvlad.mastermind.localization.messages.GameMessagesLocale;
 import dev.bibikvlad.mastermind.validators.GameInputValidator;
 
 import java.io.BufferedReader;
