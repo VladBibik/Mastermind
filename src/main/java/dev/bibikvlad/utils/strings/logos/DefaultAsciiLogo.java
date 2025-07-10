@@ -1,4 +1,4 @@
-package dev.bibikvlad.utils.strings.AsciiLogo;
+package dev.bibikvlad.utils.strings.logos;
 
 public class DefaultAsciiLogo {
     public static String getLogo() {
