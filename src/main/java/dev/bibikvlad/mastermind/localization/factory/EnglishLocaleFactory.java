@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.localization.LocaleFabrics;
+package dev.bibikvlad.mastermind.localization.factory;
 
 import dev.bibikvlad.mastermind.localization.GameMessages.EnglishGameLocale;
 import dev.bibikvlad.mastermind.localization.GameMessages.GameMessagesLocale;
