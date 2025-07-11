@@ -53,9 +53,10 @@ public class MastermindConsoleGameTest {
     @Test
     @DisplayName("Correct answer after several incorrect attempts")
     public void correctAnswerAfterSeveralIncorrectAttemptsTest() {
-        String output = runGame("bgpw", "yypw\nrrbb\npwbg\nbgpw");
+        String answer = "bgpw";
+        String output = runGame(answer, "yypw\nrrbb\npwbg\nbgpw");
 
-        assertTrue(output.contains("You Won!"));
+        assertTrue(output.contains(gameMessagesLocale.getWinMessage(answer)));
     }
 
     @Test
