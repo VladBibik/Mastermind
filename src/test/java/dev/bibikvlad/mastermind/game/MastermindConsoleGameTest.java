@@ -2,7 +2,6 @@ package dev.bibikvlad.mastermind.game;
 
 import dev.bibikvlad.mastermind.localization.configurations.LocaleType;
 import dev.bibikvlad.mastermind.localization.manager.LocaleManager;
-import dev.bibikvlad.mastermind.localization.messages.english.EnglishGameLocale;
 import dev.bibikvlad.mastermind.localization.messages.GameMessagesLocale;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
