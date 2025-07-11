@@ -67,7 +67,7 @@ public class MastermindConsoleGameTest {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
-        MastermindConsoleGame game = new MastermindConsoleGame(answer, bufferedReader, printStream);
+        MastermindConsoleGame game = new MastermindConsoleGame(gameMessagesLocale, answer, bufferedReader, printStream);
         game.play();
 
         return outputStream.toString();
