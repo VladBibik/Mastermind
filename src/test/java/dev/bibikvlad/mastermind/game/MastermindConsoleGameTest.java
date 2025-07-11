@@ -30,7 +30,7 @@ public class MastermindConsoleGameTest {
     public void invalidInputTest() {
         String output = runGame("rrrr", "abcd\nclose\n");
 
-        assertTrue(output.contains("Please provide a valid input"));
+        assertTrue(output.contains(gameMessagesLocale.getInvalidInputMessage()));
     }
 
     @Test
