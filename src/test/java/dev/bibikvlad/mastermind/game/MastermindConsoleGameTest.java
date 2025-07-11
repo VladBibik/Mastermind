@@ -1,5 +1,9 @@
 package dev.bibikvlad.mastermind.game;
 
+import dev.bibikvlad.mastermind.localization.configurations.LocaleType;
+import dev.bibikvlad.mastermind.localization.manager.LocaleManager;
+import dev.bibikvlad.mastermind.localization.messages.english.EnglishGameLocale;
+import dev.bibikvlad.mastermind.localization.messages.GameMessagesLocale;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,11 +16,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MastermindConsoleGameTest {
     private ByteArrayOutputStream outputStream;
     private PrintStream printStream;
+    private GameMessagesLocale gameMessagesLocale;
 
     @BeforeEach
     void setUp() {
         outputStream = new ByteArrayOutputStream();
         printStream = new PrintStream(outputStream);
+        gameMessagesLocale = new LocaleManager(LocaleType.ENGLISH).getGameMessagesLocale();
     }
 
     @Test
