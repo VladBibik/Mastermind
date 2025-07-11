@@ -44,9 +44,10 @@ public class MastermindConsoleGameTest {
     @Test
     @DisplayName("Correct answer on the first attempt")
     public void tenIncorrectAttemptsInARowTest() {
-        String output = runGame("yypw", "rrrr\n".repeat(10));
+        String answer = "yypw";
+        String output = runGame(answer, "rrrr\n".repeat(10));
 
-        assertTrue(output.contains("You lose"));
+        assertTrue(output.contains(gameMessagesLocale.getGameOverMessage(answer)));
     }
 
     @Test
