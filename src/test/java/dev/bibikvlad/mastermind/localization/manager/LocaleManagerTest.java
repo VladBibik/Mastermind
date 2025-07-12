@@ -14,24 +14,22 @@ public class LocaleManagerTest {
     @Test
     @DisplayName("Returns English locale")
     void testEnglishLocaleType() {
-        LocaleManager localeManager = new LocaleManager(LocaleType.ENGLISH);
-        GameMessagesLocale gameMessagesLocale = localeManager.getGameMessagesLocale();
-        String answer = "rrrr";
-
         assertEquals("Game Over! The solution was: "
-                        + InputVisualRepresentation.getVisualRepresentation(answer),
-                gameMessagesLocale.getGameOverMessage(answer));
+                        + InputVisualRepresentation.getVisualRepresentation(ANSWER),
+                getGameMessagesLocale(LocaleType.ENGLISH).getGameOverMessage(ANSWER));
     }
 
     @Test
     @DisplayName("Returns Russian locale")
     void testRussianLocaleType() {
-        LocaleManager localeManager = new LocaleManager(LocaleType.RUSSIAN);
-        GameMessagesLocale gameMessagesLocale = localeManager.getGameMessagesLocale();
-        String answer = "rrrr";
-
         assertEquals("Game Over! Ответом была комбинация: "
-                        + InputVisualRepresentation.getVisualRepresentation(answer),
-                gameMessagesLocale.getGameOverMessage(answer));
+                        + InputVisualRepresentation.getVisualRepresentation(ANSWER),
+                getGameMessagesLocale(LocaleType.RUSSIAN).getGameOverMessage(ANSWER));
+    }
+
+    private GameMessagesLocale getGameMessagesLocale(LocaleType localeType) {
+        LocaleManager localeManager = new LocaleManager(localeType);
+
+        return localeManager.getGameMessagesLocale();
     }
 }
