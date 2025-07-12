@@ -15,7 +15,7 @@ public class ConsoleColorFormatter {
     );
 
     public static String getColorCode(char symbol) {
-        String colorCode = COLOR_CODE_MAP.get(symbol);
+        String colorCode = COLOR_CODE_MAP.get(Character.toLowerCase(symbol));
 
         if (colorCode == null) {
             throw new IllegalArgumentException("Unsupported color symbol: " + symbol);
