@@ -11,7 +11,7 @@ public class InputVisualRepresentationTest {
     @Test
     @DisplayName("Testing visual representation for the single character")
     void testVisualRepresentationForSingleCharacter() {
-        String expected = "\u001B[91m⬤" + ConsoleColors.RESET;
+        String expected = ConsoleColors.BrightForeground.RED + GameCluesConstants.CIRCLE_SOLID + ConsoleColors.RESET;
         String actual = InputVisualRepresentation.getVisualRepresentation("r");
 
         assertEquals(expected, actual);
