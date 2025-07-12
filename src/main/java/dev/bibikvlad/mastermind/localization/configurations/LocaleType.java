@@ -25,4 +25,34 @@ public enum LocaleType {
     public String getLocale() {
         return locale;
     }
+
+    public static LocaleType fromLocaleIndex(int localeIndex) {
+        for (LocaleType localeType : LocaleType.values()) {
+            if (localeType.localeIndex == localeIndex) {
+                return localeType;
+            }
+        }
+
+        throw new IllegalArgumentException("Invalid locale index");
+    }
+
+    public static LocaleType fromLanguageString(String language) {
+        for (LocaleType localeType : LocaleType.values()) {
+            if (localeType.language.equals(language)) {
+                return localeType;
+            }
+        }
+
+        throw new IllegalArgumentException("Invalid language string");
+    }
+
+    public static LocaleType fromLocaleString(String locale) {
+        for (LocaleType localeType : LocaleType.values()) {
+            if (localeType.locale.equals(locale)) {
+                return localeType;
+            }
+        }
+
+        throw new IllegalArgumentException("Invalid locale string");
+    }
 }
