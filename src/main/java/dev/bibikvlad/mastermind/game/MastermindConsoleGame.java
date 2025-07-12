@@ -42,7 +42,7 @@ public class MastermindConsoleGame {
                     continue;
                 }
 
-                String userInput = inputReader.readLine();
+                String userInput = inputReader.readLine().toLowerCase();
 
                 if (isGameClosed(userInput)) {
                     continue;
