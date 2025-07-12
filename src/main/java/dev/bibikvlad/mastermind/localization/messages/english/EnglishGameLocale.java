@@ -14,7 +14,7 @@ public class EnglishGameLocale extends GameMessagesLocale {
     @Override
     public String getIncorrectGuessMessage(int maxTurns, int currentTurn, String answer, String userInput) {
         return "Turn " + (currentTurn + 1) + " out of " + maxTurns
-                + ". Your guess: " + userInput
+                + ". Your guess: " + userInput.toLowerCase()
                 + "\n" + getGuessVisualRepresentation(answer, userInput);
     }
 
