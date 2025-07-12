@@ -12,7 +12,7 @@ public class InputVisualRepresentationTest {
     @DisplayName("Testing visual representation for the single character")
     void testVisualRepresentationForSingleCharacter() {
         String expected = ConsoleColors.BrightForeground.RED + GameCluesConstants.CIRCLE_SOLID + ConsoleColors.RESET;
-        String actual = InputVisualRepresentation.getVisualRepresentation("r");
+        String actual = InputVisualRepresentation.getVisualRepresentation("R");
 
         assertEquals(expected, actual);
     }
