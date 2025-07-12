@@ -42,6 +42,7 @@ public class MastermindConsoleGame {
                     continue;
                 }
 
+                //TODO: Move user input reader logic to the custom class, or the custom method!
                 String userInput = inputReader.readLine().toLowerCase();
 
                 if (isGameClosed(userInput)) {
