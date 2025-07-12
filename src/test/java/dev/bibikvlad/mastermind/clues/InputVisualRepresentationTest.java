@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.clues;
 
 import dev.bibikvlad.utils.strings.ConsoleColors;
+import dev.bibikvlad.utils.strings.GameCluesConstants;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,5 +15,16 @@ public class InputVisualRepresentationTest {
         String actual = InputVisualRepresentation.getVisualRepresentation("r");
 
         assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("Testing visual representation for multiple characters")
+    void testVisualRepresentationForMultipleCharacters() {
+        String expected = ConsoleColors.BrightForeground.RED + GameCluesConstants.CIRCLE_SOLID
+                + ConsoleColors.BrightForeground.GREEN + GameCluesConstants.CIRCLE_SOLID
+                + ConsoleColors.BrightForeground.BLUE + GameCluesConstants.CIRCLE_SOLID
+                + ConsoleColors.RESET;
+
+        String actual = InputVisualRepresentation.getVisualRepresentation("rgb");
     }
 }
