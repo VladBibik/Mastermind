@@ -25,19 +25,16 @@ public class ConsoleColorFormatterTest {
     }
 
     private void testSymbol(char symbol) {
-        switch(symbol) {
-            case 'r' ->
-                    assertEquals(ConsoleColors.BrightForeground.RED, ConsoleColorFormatter.getColorCode('r'));
-            case 'g' ->
-                    assertEquals(ConsoleColors.BrightForeground.GREEN, ConsoleColorFormatter.getColorCode('g'));
-            case 'y' ->
-                    assertEquals(ConsoleColors.BrightForeground.YELLOW, ConsoleColorFormatter.getColorCode('y'));
-            case 'b' ->
-                    assertEquals(ConsoleColors.BrightForeground.BLUE, ConsoleColorFormatter.getColorCode('b'));
-            case 'p' ->
-                    assertEquals(ConsoleColors.BrightForeground.PURPLE, ConsoleColorFormatter.getColorCode('p'));
-            case 'w' ->
-                    assertEquals(ConsoleColors.BrightForeground.WHITE, ConsoleColorFormatter.getColorCode('w'));
-        }
+        String expected = switch (symbol) {
+            case 'r' -> ConsoleColors.BrightForeground.RED;
+            case 'g' -> ConsoleColors.BrightForeground.GREEN;
+            case 'y' -> ConsoleColors.BrightForeground.YELLOW;
+            case 'b' -> ConsoleColors.BrightForeground.BLUE;
+            case 'p' -> ConsoleColors.BrightForeground.PURPLE;
+            case 'w' -> ConsoleColors.BrightForeground.WHITE;
+            default -> throw new IllegalStateException("Unexpected symbol: " + symbol);
+        };
+
+        assertEquals(expected, ConsoleColorFormatter.getColorCode(symbol));
     }
 }
