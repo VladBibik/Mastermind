@@ -17,19 +17,9 @@ public class ConsoleColorFormatterTest {
     @Test
     @DisplayName("Test all symbols return correct console code")
     public void allSymbolsReturnCorrectConsoleCode() {
-        String allSymbols = "rgybpw";
+        String allSymbols = "rgybpwRGYBPW";
 
         for (char c : allSymbols.toCharArray()) {
-            testSymbol(c);
-        }
-    }
-
-    @Test
-    @DisplayName("Uppercase letters are also supported")
-    public void uppercaseLettersAreSupported() {
-        String allUppercaseSymbols = "RGYBPW";
-
-        for (char c : allUppercaseSymbols.toCharArray()) {
             testSymbol(c);
         }
     }
