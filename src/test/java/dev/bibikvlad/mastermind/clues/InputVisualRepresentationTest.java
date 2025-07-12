@@ -29,4 +29,13 @@ public class InputVisualRepresentationTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("Empty string test")
+    void testVisualRepresentationForEmptyString() {
+        String expected = ConsoleColors.RESET;
+        String actual = InputVisualRepresentation.getVisualRepresentation("");
+
+        assertEquals(expected, actual);
+    }
 }
