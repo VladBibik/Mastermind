@@ -26,5 +26,7 @@ public class InputVisualRepresentationTest {
                 + ConsoleColors.RESET;
 
         String actual = InputVisualRepresentation.getVisualRepresentation("rgb");
+
+        assertEquals(expected, actual);
     }
 }
