@@ -24,8 +24,18 @@ public class ConsoleColorFormatterTest {
         }
     }
 
+    @Test
+    @DisplayName("Uppercase letters are also supported")
+    public void uppercaseLettersAreSupported() {
+        String allUppercaseSymbols = "RGYBPW";
+
+        for (char c : allUppercaseSymbols.toCharArray()) {
+            testSymbol(c);
+        }
+    }
+
     private void testSymbol(char symbol) {
-        String expected = switch (symbol) {
+        String expected = switch (Character.toLowerCase(symbol)) {
             case 'r' -> ConsoleColors.BrightForeground.RED;
             case 'g' -> ConsoleColors.BrightForeground.GREEN;
             case 'y' -> ConsoleColors.BrightForeground.YELLOW;
