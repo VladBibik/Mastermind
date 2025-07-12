@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LocaleManagerTest {
+    private final String ANSWER = "RGBW";
+
     @Test
     @DisplayName("Returns English locale")
     void testEnglishLocaleType() {
