@@ -25,9 +25,9 @@ public class ConsoleGameMessages implements GameMessages {
     public String getIncorrectGuessMessage(int maxTurns, int currentTurn, String answer, String userInput) {
         return resourceBundle.getString("incorrect_guess")
                 .replace("{MAX_TURNS}", String.valueOf(maxTurns))
-                .replace("{CURRENT_TURN}", String.valueOf(currentTurn))
+                .replace("{CURRENT_TURN}", String.valueOf(currentTurn + 1))
                 .replace("{USER_INPUT}", userInput)
-                .replace("{VISUAL_REPRESENTATION", ClueGenerator.generate(answer, userInput));
+                .replace("{VISUAL_REPRESENTATION}", ClueGenerator.generate(answer, userInput));
     }
 
     @Override
