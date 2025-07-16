@@ -1,6 +1,4 @@
-package dev.bibikvlad.mastermind.localization.messages.temp_utils;
-
-import dev.bibikvlad.utils.strings.ConsoleColors;
+package dev.bibikvlad.utils.strings;
 
 public class ConsoleColoredValidSymbols {
     public static String getSymbols() {
