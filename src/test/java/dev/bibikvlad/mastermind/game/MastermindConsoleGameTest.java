@@ -2,7 +2,7 @@ package dev.bibikvlad.mastermind.game;
 
 import dev.bibikvlad.mastermind.localization.configurations.LocaleType;
 import dev.bibikvlad.mastermind.localization.manager.LocaleManager;
-import dev.bibikvlad.mastermind.localization.messages.GameMessagesLocale;
+import dev.bibikvlad.mastermind.localization.messages.GameMessages;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,13 +15,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MastermindConsoleGameTest {
     private ByteArrayOutputStream outputStream;
     private PrintStream printStream;
-    private GameMessagesLocale gameMessagesLocale;
+    private GameMessages gameMessages;
 
     @BeforeEach
     void setUp() {
         outputStream = new ByteArrayOutputStream();
         printStream = new PrintStream(outputStream);
-        gameMessagesLocale = new LocaleManager(LocaleType.ENGLISH).getGameMessagesLocale();
+        gameMessages = new LocaleManager(LocaleType.ENGLISH).getGameMessages();
     }
 
     @Test
@@ -29,7 +29,7 @@ public class MastermindConsoleGameTest {
     public void invalidInputTest() {
         String output = runGame("rrrr", "abcd\nclose\n");
 
-        assertTrue(output.contains(gameMessagesLocale.getInvalidInputMessage()));
+        assertTrue(output.contains(gameMessages.getInvalidInputMessage()));
     }
 
     @Test
@@ -38,7 +38,7 @@ public class MastermindConsoleGameTest {
         String answer = "yypw";
         String output = runGame(answer, "yypw");
 
-        assertTrue(output.contains(gameMessagesLocale.getWinMessage(answer)));
+        assertTrue(output.contains(gameMessages.getWinMessage(answer)));
     }
 
     @Test
@@ -47,7 +47,7 @@ public class MastermindConsoleGameTest {
         String answer = "yypw";
         String output = runGame(answer, "rrrr\n".repeat(10));
 
-        assertTrue(output.contains(gameMessagesLocale.getGameOverMessage(answer)));
+        assertTrue(output.contains(gameMessages.getGameOverMessage(answer)));
     }
 
     @Test
@@ -56,7 +56,7 @@ public class MastermindConsoleGameTest {
         String answer = "bgpw";
         String output = runGame(answer, "yypw\nrrbb\npwbg\nbgpw");
 
-        assertTrue(output.contains(gameMessagesLocale.getWinMessage(answer)));
+        assertTrue(output.contains(gameMessages.getWinMessage(answer)));
     }
 
     @Test
@@ -69,7 +69,7 @@ public class MastermindConsoleGameTest {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
-        MastermindConsoleGame game = new MastermindConsoleGame(gameMessagesLocale, answer, bufferedReader, printStream);
+        MastermindConsoleGame game = new MastermindConsoleGame(gameMessages, answer, bufferedReader, printStream);
         game.play();
 
         return outputStream.toString();
