@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.localization.messages;
+package dev.bibikvlad.mastermind.localization.messages.game;
 
 import dev.bibikvlad.mastermind.clues.ClueGenerator;
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;

@@ -1,8 +1,8 @@
 package dev.bibikvlad.mastermind.localization.manager;
 
 import dev.bibikvlad.mastermind.localization.configurations.LocaleType;
-import dev.bibikvlad.mastermind.localization.messages.ConsoleGameMessages;
-import dev.bibikvlad.mastermind.localization.messages.GameMessages;
+import dev.bibikvlad.mastermind.localization.messages.game.ConsoleGameMessages;
+import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 
 import java.util.ResourceBundle;
 

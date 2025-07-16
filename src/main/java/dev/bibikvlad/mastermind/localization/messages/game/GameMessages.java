@@ -1,6 +1,4 @@
-package dev.bibikvlad.mastermind.localization.messages;
-
-import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
+package dev.bibikvlad.mastermind.localization.messages.game;
 
 public interface GameMessages {
     String getInvalidInputMessage();

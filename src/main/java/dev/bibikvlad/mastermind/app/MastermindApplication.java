@@ -4,7 +4,7 @@ import dev.bibikvlad.mastermind.game.MastermindConsoleGame;
 import dev.bibikvlad.mastermind.game.RandomAnswerGenerator;
 import dev.bibikvlad.mastermind.localization.configurations.LocaleType;
 import dev.bibikvlad.mastermind.localization.manager.LocaleManager;
-import dev.bibikvlad.mastermind.localization.messages.GameMessages;
+import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 
 public class MastermindApplication {
     public static void main(String[] args) {
