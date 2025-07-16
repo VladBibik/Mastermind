@@ -5,6 +5,7 @@ import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.mastermind.localization.messages.temp_utils.ConsoleColoredValidSymbols;
 import dev.bibikvlad.utils.strings.Emojis;
 import dev.bibikvlad.utils.strings.GameCluesConstants;
+import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
 
 import java.util.ResourceBundle;
 
@@ -50,5 +51,10 @@ public class ConsoleGameMessages implements GameMessages {
                 .replace("{CIRCLE_SHADED}", String.valueOf(GameCluesConstants.CIRCLE_SHADED))
                 .replace("{CIRCLE_EMPTY}", String.valueOf(GameCluesConstants.CIRCLE_EMPTY))
                 .replace("{UNDERSCORE}", String.valueOf(GameCluesConstants.UNDERSCORE));
+    }
+
+    @Override
+    public String getAsciiLogo() {
+        return ColoredAsciiLogo.getLogo();
     }
 }

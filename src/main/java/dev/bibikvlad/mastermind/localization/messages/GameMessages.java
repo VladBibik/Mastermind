@@ -13,7 +13,5 @@ public interface GameMessages {
 
     String getRulesMessage();
 
-    default public String getAsciiLogo() {
-        return ColoredAsciiLogo.getLogo();
-    }
+    String getAsciiLogo();
 }
