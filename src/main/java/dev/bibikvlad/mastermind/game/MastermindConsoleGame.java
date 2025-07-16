@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.game;
 
-import dev.bibikvlad.mastermind.localization.messages.GameMessagesLocale;
+import dev.bibikvlad.mastermind.localization.messages.GameMessages;
 import dev.bibikvlad.mastermind.validators.GameInputValidator;
 
 import java.io.BufferedReader;
@@ -11,7 +11,7 @@ import java.io.PrintStream;
 public class MastermindConsoleGame {
     private static final int MAX_TURNS = 10;
 
-    private final GameMessagesLocale language;
+    private final GameMessages gameMessages;
     private final String answer;
     private final BufferedReader inputReader;
     private final PrintStream outputWriter;
@@ -19,15 +19,15 @@ public class MastermindConsoleGame {
     private boolean close = false;
     private int turnCounter = 0;
 
-    public MastermindConsoleGame(GameMessagesLocale language, String answer) {
+    public MastermindConsoleGame(GameMessages language, String answer) {
         this(language, answer,
                 new BufferedReader(new InputStreamReader(System.in)),
                 System.out);
     }
 
-    public MastermindConsoleGame(GameMessagesLocale language, String answer,
+    public MastermindConsoleGame(GameMessages language, String answer,
                                  BufferedReader inputReader, PrintStream outputWriter) {
-        this.language = language;
+        this.gameMessages = language;
         this.answer = answer;
         this.inputReader = inputReader;
         this.outputWriter = outputWriter;
@@ -59,13 +59,13 @@ public class MastermindConsoleGame {
     }
 
     private void printLogoAndRules() {
-        outputWriter.println(language.getAsciiLogo());
-        outputWriter.println(language.getRulesMessage());
+        outputWriter.println(gameMessages.getAsciiLogo());
+        outputWriter.println(gameMessages.getRulesMessage());
     }
 
     private boolean isGameOver() {
         if (turnCounter == MAX_TURNS) {
-            outputWriter.println(language.getGameOverMessage(answer));
+            outputWriter.println(gameMessages.getGameOverMessage(answer));
 
             close = true;
 
@@ -92,17 +92,17 @@ public class MastermindConsoleGame {
 
             turnCounter++;
         } else {
-            outputWriter.println(language.getInvalidInputMessage());
+            outputWriter.println(gameMessages.getInvalidInputMessage());
         }
     }
 
     private void handleUserGuess(String userInput) {
         if (userInput.equals(answer)) {
-            outputWriter.println(language.getWinMessage(answer));
+            outputWriter.println(gameMessages.getWinMessage(answer));
 
             close = true;
         } else {
-            outputWriter.println(language.getIncorrectGuessMessage(MAX_TURNS, turnCounter, answer, userInput));
+            outputWriter.println(gameMessages.getIncorrectGuessMessage(MAX_TURNS, turnCounter, answer, userInput));
         }
     }
 }
