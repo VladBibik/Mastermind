@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.localization.factory;
+package dev.bibikvlad.mastermind.localization.core;
 
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 

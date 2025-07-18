@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.localization.factory;
 
+import dev.bibikvlad.mastermind.localization.core.MessageFactory;
 import dev.bibikvlad.mastermind.localization.messages.game.ConsoleGameMessages;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 

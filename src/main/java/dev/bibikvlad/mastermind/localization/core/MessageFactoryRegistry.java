@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.localization.factory;
+package dev.bibikvlad.mastermind.localization.core;
 
 import java.util.HashMap;
 import java.util.Map;
