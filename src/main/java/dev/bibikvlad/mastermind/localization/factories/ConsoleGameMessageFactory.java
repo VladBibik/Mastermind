@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.localization.factory;
+package dev.bibikvlad.mastermind.localization.factories;
 
 import dev.bibikvlad.mastermind.localization.core.MessageFactory;
 import dev.bibikvlad.mastermind.localization.messages.game.ConsoleGameMessages;

@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.localization.core;
 
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
-import dev.bibikvlad.mastermind.localization.factory.ConsoleGameMessageFactory;
+import dev.bibikvlad.mastermind.localization.factories.ConsoleGameMessageFactory;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 
 public class LocaleManager {
