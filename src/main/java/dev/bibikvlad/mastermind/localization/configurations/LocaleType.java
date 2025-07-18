@@ -48,7 +48,7 @@ public enum LocaleType {
 
     public static LocaleType fromLocaleString(String locale) {
         for (LocaleType localeType : LocaleType.values()) {
-            if (localeType.locale.equals(locale)) {
+            if (localeType.locale.equals(locale.toUpperCase())) {
                 return localeType;
             }
         }
