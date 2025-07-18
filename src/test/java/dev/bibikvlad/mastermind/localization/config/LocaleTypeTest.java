@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.localization.configurations;
+package dev.bibikvlad.mastermind.localization.config;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.localization.configurations;
+package dev.bibikvlad.mastermind.localization.config;
 
 public enum LocaleType {
     ENGLISH(0, "ENGLISH", "EN"),
