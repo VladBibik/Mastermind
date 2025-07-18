@@ -47,12 +47,12 @@ public enum LocaleType {
     }
 
     public static LocaleType fromLanguageString(String languageName) {
-        return Optional.ofNullable(BY_LANGUAGE.get(languageName))
+        return Optional.ofNullable(BY_LANGUAGE.get(languageName.toUpperCase()))
                 .orElseThrow(() -> new IllegalArgumentException("Invalid language name string: " + languageName));
     }
 
     public static LocaleType fromLocaleString(String locale) {
-        return Optional.ofNullable(BY_LOCALE.get(locale))
+        return Optional.ofNullable(BY_LOCALE.get(locale.toUpperCase()))
                 .orElseThrow(() -> new IllegalArgumentException("Invalid locale string: " + locale));
     }
 }

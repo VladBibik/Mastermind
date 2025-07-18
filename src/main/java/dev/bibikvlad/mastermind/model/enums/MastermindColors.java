@@ -49,7 +49,7 @@ public enum MastermindColors {
     }
 
     public static MastermindColors fromColorSymbol(char symbol) {
-        return Optional.ofNullable(BY_SYMBOL.get(symbol))
+        return Optional.ofNullable(BY_SYMBOL.get(Character.toLowerCase(symbol)))
                 .orElseThrow(() -> new IllegalArgumentException("Invalid color symbol: " + symbol));
     }
 }
