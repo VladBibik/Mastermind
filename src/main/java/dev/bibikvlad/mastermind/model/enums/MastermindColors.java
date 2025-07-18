@@ -42,7 +42,7 @@ public enum MastermindColors {
 
     public static MastermindColors fromColorSymbol(char symbol) {
         for (MastermindColors mastermindColor : MastermindColors.values()) {
-            if (mastermindColor.symbol == symbol) {
+            if (mastermindColor.symbol == Character.toLowerCase(symbol)) {
                 return mastermindColor;
             }
         }
