@@ -22,6 +22,16 @@ public class LocaleTypeTest {
     }
 
     @Test
+    @DisplayName("Returns correct locale type from locale string")
+    void fromLocaleStringTest() {
+        assertEquals(LocaleType.ENGLISH, LocaleType.fromLocaleString("en"));
+        assertEquals(LocaleType.RUSSIAN, LocaleType.fromLocaleString("ru"));
+
+        assertEquals(LocaleType.ENGLISH, LocaleType.fromLocaleString("EN"));
+        assertEquals(LocaleType.RUSSIAN, LocaleType.fromLocaleString("RU"));
+    }
+
+    @Test
     @DisplayName("Throws exception on invalid locale index")
     void invalidLocaleIndexThrowsException() {
         assertThrows(IllegalArgumentException.class, () -> LocaleType.fromLocaleIndex(-31));
