@@ -10,14 +10,14 @@ public class LocaleManager {
     private final GameMessages gameMessages;
 
     public LocaleManager(LocaleType localeType) {
-        this.gameMessages = getLocalisedGameMessages(localeType);
+        this.gameMessages = getLocalizedGameMessages(localeType);
     }
 
     public GameMessages getGameMessages() {
         return gameMessages;
     }
 
-    private GameMessages getLocalisedGameMessages(LocaleType localeType) {
+    private GameMessages getLocalizedGameMessages(LocaleType localeType) {
         return switch (localeType) {
             case ENGLISH -> new ConsoleGameMessages(ResourceBundle.getBundle("i18n.game_messages_en"));
             case RUSSIAN -> new ConsoleGameMessages(ResourceBundle.getBundle("i18n.game_messages_ru"));
