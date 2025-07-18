@@ -19,6 +19,24 @@ public class MastermindColorsTest {
     }
 
     @Test
+    @DisplayName("Correctly returns enum from the color symbol")
+    public void validColorSymbolReturnsCorrectColor() {
+        assertEquals(MastermindColors.RED, MastermindColors.fromColorSymbol('r'));
+        assertEquals(MastermindColors.GREEN, MastermindColors.fromColorSymbol('g'));
+        assertEquals(MastermindColors.YELLOW, MastermindColors.fromColorSymbol('y'));
+        assertEquals(MastermindColors.BLUE, MastermindColors.fromColorSymbol('b'));
+        assertEquals(MastermindColors.PURPLE, MastermindColors.fromColorSymbol('p'));
+        assertEquals(MastermindColors.WHITE, MastermindColors.fromColorSymbol('w'));
+
+        assertEquals(MastermindColors.RED, MastermindColors.fromColorSymbol('R'));
+        assertEquals(MastermindColors.GREEN, MastermindColors.fromColorSymbol('G'));
+        assertEquals(MastermindColors.YELLOW, MastermindColors.fromColorSymbol('Y'));
+        assertEquals(MastermindColors.BLUE, MastermindColors.fromColorSymbol('B'));
+        assertEquals(MastermindColors.PURPLE, MastermindColors.fromColorSymbol('P'));
+        assertEquals(MastermindColors.WHITE, MastermindColors.fromColorSymbol('W'));
+    }
+
+    @Test
     @DisplayName("Throws exception on invalid index")
     public void invalidIndexThrowsException() {
         assertThrows(IllegalArgumentException.class, () -> MastermindColors.fromColorIndex(-1));
