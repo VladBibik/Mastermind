@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.model.enums;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 public enum MastermindColors {
     RED(0, "Red", 'r'),
@@ -43,22 +44,12 @@ public enum MastermindColors {
     }
 
     public static MastermindColors fromColorIndex(int colorIndex) {
-        MastermindColors mastermindColors = BY_COLOR_INDEX.get(colorIndex);
-
-        if (mastermindColors == null) {
-            throw new IllegalStateException("MastermindColors not found for color index: " + colorIndex);
-        }
-
-        return mastermindColors;
+        return Optional.ofNullable(BY_COLOR_INDEX.get(colorIndex))
+                .orElseThrow(() -> new IllegalArgumentException("Invalid color index: " + colorIndex));
     }
 
     public static MastermindColors fromColorSymbol(char symbol) {
-        MastermindColors mastermindColors = BY_SYMBOL.get(symbol);
-
-        if (mastermindColors == null) {
-            throw new IllegalStateException("MastermindColors not found for color symbol: " + symbol);
-        }
-
-        return mastermindColors;
+        return Optional.ofNullable(BY_SYMBOL.get(symbol))
+                .orElseThrow(() -> new IllegalArgumentException("Invalid color symbol: " + symbol));
     }
 }
