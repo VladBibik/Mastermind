@@ -11,10 +11,14 @@ public class LocaleManager {
         this.messageFactoryRegistry = new MessageFactoryRegistry();
         this.messageProvider = new MessageProvider(localeType, messageFactoryRegistry);
 
-        this.messageFactoryRegistry.register(GameMessages.class, new ConsoleGameMessageFactory());
+        writeRegistryEntryForEveryMessageType();
     }
 
     public GameMessages getGameMessages() {
         return messageProvider.getMessages(GameMessages.class, "i18n.game_messages");
+    }
+
+    private void writeRegistryEntryForEveryMessageType() {
+        messageFactoryRegistry.register(GameMessages.class, new ConsoleGameMessageFactory());
     }
 }
