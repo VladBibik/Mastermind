@@ -1,8 +1,8 @@
 package dev.bibikvlad.mastermind.localization.configurations;
 
 public enum LocaleType {
-    ENGLISH(1, "English", "EN"),
-    RUSSIAN(2, "Russian", "RU");
+    ENGLISH(0, "English", "EN"),
+    RUSSIAN(1, "Russian", "RU");
 
     private final int localeIndex;
     private final String language;
