@@ -19,6 +19,12 @@ public class LocaleTypeTest {
     void fromLanguageStringTest() {
         assertEquals(LocaleType.ENGLISH, LocaleType.fromLanguageString("English"));
         assertEquals(LocaleType.RUSSIAN, LocaleType.fromLanguageString("Russian"));
+
+        assertEquals(LocaleType.ENGLISH, LocaleType.fromLanguageString("ENGLISH"));
+        assertEquals(LocaleType.RUSSIAN, LocaleType.fromLanguageString("RUSSIAN"));
+
+        assertEquals(LocaleType.ENGLISH, LocaleType.fromLanguageString("EnGlIsH"));
+        assertEquals(LocaleType.RUSSIAN, LocaleType.fromLanguageString("rUssIan"));
     }
 
     @Test
