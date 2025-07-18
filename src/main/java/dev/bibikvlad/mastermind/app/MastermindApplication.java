@@ -8,7 +8,7 @@ import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 
 public class MastermindApplication {
     public static void main(String[] args) {
-        GameMessages gameMessages = new LocaleManager(LocaleType.ENGLISH).getMessageBundle().getGameMessages();
+        GameMessages gameMessages = new LocaleManager(LocaleType.ENGLISH).getGameMessages();
 
         MastermindConsoleGame game = new MastermindConsoleGame(gameMessages, RandomAnswerGenerator.generate());
 

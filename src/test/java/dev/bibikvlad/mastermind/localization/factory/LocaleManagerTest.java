@@ -30,6 +30,6 @@ public class LocaleManagerTest {
     private GameMessages getGameMessages(LocaleType localeType) {
         LocaleManager localeManager = new LocaleManager(localeType);
 
-        return localeManager.getMessageBundle().getGameMessages();
+        return localeManager.getGameMessages();
     }
 }

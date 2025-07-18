@@ -21,7 +21,7 @@ public class MastermindConsoleGameTest {
     void setUp() {
         outputStream = new ByteArrayOutputStream();
         printStream = new PrintStream(outputStream);
-        gameMessages = new LocaleManager(LocaleType.ENGLISH).getMessageBundle().getGameMessages();
+        gameMessages = new LocaleManager(LocaleType.ENGLISH).getGameMessages();
     }
 
     @Test
