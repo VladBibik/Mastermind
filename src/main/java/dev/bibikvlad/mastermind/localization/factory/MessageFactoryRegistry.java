@@ -12,6 +12,11 @@ public class MessageFactoryRegistry {
 
     @SuppressWarnings("unchecked")
     public <T> MessageFactory<T> getMessageFactory(Class<T> messageType) {
+        MessageFactory<T> messageFactory = (MessageFactory<T>) messageFactories.get(messageType);
+
+        if (messageFactory == null) {
+            throw new IllegalStateException("No factory registered for message type " + messageType.getName());
+        }
         return (MessageFactory<T>) messageFactories.get(messageType);
     }
 }
