@@ -1,5 +1,7 @@
 package dev.bibikvlad.mastermind.localization.config;
 
+import java.util.HashMap;
+
 public enum LocaleType {
     ENGLISH(0, "ENGLISH", "EN"),
     RUSSIAN(1, "RUSSIAN", "RU");
@@ -7,6 +9,18 @@ public enum LocaleType {
     private final int localeIndex;
     private final String language;
     private final String locale;
+
+    private static final HashMap<Integer, LocaleType> BY_INDEX = new HashMap<>();
+    private static final HashMap<String, LocaleType> BY_LANGUAGE = new HashMap<>();
+    private static final HashMap<String, LocaleType> BY_LOCALE = new HashMap<>();
+
+    static {
+        for (LocaleType localeType : LocaleType.values()) {
+            BY_INDEX.put(localeType.getLocaleIndex(), localeType);
+            BY_LANGUAGE.put(localeType.getLanguage(), localeType);
+            BY_LOCALE.put(localeType.getLocale(), localeType);
+        }
+    }
 
     LocaleType(int localeIndex, String language, String locale) {
         this.localeIndex = localeIndex;
@@ -27,32 +41,32 @@ public enum LocaleType {
     }
 
     public static LocaleType fromLocaleIndex(int localeIndex) {
-        for (LocaleType localeType : LocaleType.values()) {
-            if (localeType.localeIndex == localeIndex) {
-                return localeType;
-            }
+        LocaleType localeType = BY_INDEX.get(localeIndex);
+
+        if (localeType == null) {
+            throw new IllegalArgumentException("Invalid locale index: " + localeIndex);
         }
 
-        throw new IllegalArgumentException("Invalid locale index");
+        return localeType;
     }
 
     public static LocaleType fromLanguageString(String language) {
-        for (LocaleType localeType : LocaleType.values()) {
-            if (localeType.language.equals(language.toUpperCase())) {
-                return localeType;
-            }
+        LocaleType localeType = BY_LANGUAGE.get(language);
+
+        if (localeType == null) {
+            throw new IllegalArgumentException("Invalid language string: " + language);
         }
 
-        throw new IllegalArgumentException("Invalid language string");
+        return localeType;
     }
 
     public static LocaleType fromLocaleString(String locale) {
-        for (LocaleType localeType : LocaleType.values()) {
-            if (localeType.locale.equals(locale.toUpperCase())) {
-                return localeType;
-            }
+        LocaleType localeType = BY_LOCALE.get(locale);
+
+        if (localeType == null) {
+            throw new IllegalArgumentException("Invalid locale string: " + locale);
         }
 
-        throw new IllegalArgumentException("Invalid locale string");
+        return localeType;
     }
 }
