@@ -1,5 +1,7 @@
 package dev.bibikvlad.mastermind.model.enums;
 
+import java.util.HashMap;
+
 public enum MastermindColors {
     RED(0, "Red", 'r'),
     GREEN(1, "Green", 'g'),
@@ -11,6 +13,16 @@ public enum MastermindColors {
     private final int colorIndex;
     private final String colorName;
     private final char symbol;
+
+    private static final HashMap<Integer, MastermindColors> BY_COLOR_INDEX = new HashMap<Integer, MastermindColors>();
+    private static final HashMap<Character, MastermindColors> BY_SYMBOL = new HashMap<Character, MastermindColors>();
+
+    static {
+        for (MastermindColors mastermindColors : MastermindColors.values()) {
+            BY_COLOR_INDEX.put(mastermindColors.colorIndex, mastermindColors);
+            BY_SYMBOL.put(mastermindColors.symbol, mastermindColors);
+        }
+    }
 
     MastermindColors(int colorIndex, String colorName, char symbol) {
         this.colorIndex = colorIndex;
@@ -31,22 +43,22 @@ public enum MastermindColors {
     }
 
     public static MastermindColors fromColorIndex(int colorIndex) {
-        for (MastermindColors mastermindColor : MastermindColors.values()) {
-            if (mastermindColor.colorIndex == colorIndex) {
-                return mastermindColor;
-            }
+        MastermindColors mastermindColors = BY_COLOR_INDEX.get(colorIndex);
+
+        if (mastermindColors == null) {
+            throw new IllegalStateException("MastermindColors not found for color index: " + colorIndex);
         }
 
-        throw new IllegalArgumentException("Invalid color index");
+        return mastermindColors;
     }
 
     public static MastermindColors fromColorSymbol(char symbol) {
-        for (MastermindColors mastermindColor : MastermindColors.values()) {
-            if (mastermindColor.symbol == Character.toLowerCase(symbol)) {
-                return mastermindColor;
-            }
+        MastermindColors mastermindColors = BY_SYMBOL.get(symbol);
+
+        if (mastermindColors == null) {
+            throw new IllegalStateException("MastermindColors not found for color symbol: " + symbol);
         }
 
-        throw new IllegalArgumentException("Invalid color symbol");
+        return mastermindColors;
     }
 }
