@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.localization.manager;
+package dev.bibikvlad.mastermind.localization.factory;
 
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.messages.game.ConsoleGameMessages;
