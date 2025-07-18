@@ -7,7 +7,7 @@ public enum LocaleType {
     RUSSIAN(1, "RUSSIAN", "RU");
 
     private final int localeIndex;
-    private final String language;
+    private final String languageName;
     private final String locale;
 
     private static final HashMap<Integer, LocaleType> BY_INDEX = new HashMap<>();
@@ -24,7 +24,7 @@ public enum LocaleType {
 
     LocaleType(int localeIndex, String language, String locale) {
         this.localeIndex = localeIndex;
-        this.language = language;
+        this.languageName = language;
         this.locale = locale;
     }
 
@@ -33,7 +33,7 @@ public enum LocaleType {
     }
 
     public String getLanguage() {
-        return language;
+        return languageName;
     }
 
     public String getLocale() {
