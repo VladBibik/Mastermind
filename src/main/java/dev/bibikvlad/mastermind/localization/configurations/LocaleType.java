@@ -1,8 +1,8 @@
 package dev.bibikvlad.mastermind.localization.configurations;
 
 public enum LocaleType {
-    ENGLISH(0, "English", "EN"),
-    RUSSIAN(1, "Russian", "RU");
+    ENGLISH(0, "ENGLISH", "EN"),
+    RUSSIAN(1, "RUSSIAN", "RU");
 
     private final int localeIndex;
     private final String language;
@@ -38,7 +38,7 @@ public enum LocaleType {
 
     public static LocaleType fromLanguageString(String language) {
         for (LocaleType localeType : LocaleType.values()) {
-            if (localeType.language.equals(language)) {
+            if (localeType.language.equals(language.toUpperCase())) {
                 return localeType;
             }
         }
