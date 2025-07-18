@@ -32,10 +32,14 @@ public class LocaleTypeTest {
     }
 
     @Test
+    @DisplayName("Throws exception on negative locale index")
+    void negativeLocaleIndexThrowsException() {
+        assertThrows(IllegalArgumentException.class, () -> LocaleType.fromLocaleIndex(-1));
+    }
+
+    @Test
     @DisplayName("Throws exception on invalid locale index")
     void invalidLocaleIndexThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> LocaleType.fromLocaleIndex(-31));
-
         for (int i = 2; i < 100; i++) {
             int index = i;
 
