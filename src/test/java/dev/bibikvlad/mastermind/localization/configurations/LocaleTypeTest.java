@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LocaleTypeTest {
     @Test
@@ -11,5 +12,12 @@ public class LocaleTypeTest {
     void fromLocaleIndexTest() {
         assertEquals(LocaleType.ENGLISH, LocaleType.fromLocaleIndex(0));
         assertEquals(LocaleType.RUSSIAN, LocaleType.fromLocaleIndex(1));
+    }
+
+    @Test
+    @DisplayName("Throws exception on invalid locale index")
+    void invalidLocaleIndexThrowsException() {
+        assertThrows(IllegalArgumentException.class, () -> LocaleType.fromLocaleIndex(-31));
+        assertThrows(IllegalArgumentException.class, () -> LocaleType.fromLocaleIndex(23));
     }
 }
