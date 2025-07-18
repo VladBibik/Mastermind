@@ -1,26 +1,26 @@
 package dev.bibikvlad.mastermind.localization.factory;
 
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
-import dev.bibikvlad.mastermind.localization.messages.game.ConsoleGameMessages;
-import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
+import dev.bibikvlad.mastermind.localization.manager.ConsoleMessageBundle;
+import dev.bibikvlad.mastermind.localization.manager.MessageBundle;
 
 import java.util.ResourceBundle;
 
 public class LocaleManager {
-    private final GameMessages gameMessages;
+    private final MessageBundle messageBundle;
 
     public LocaleManager(LocaleType localeType) {
-        this.gameMessages = getLocalizedGameMessages(localeType);
+        this.messageBundle = getLocalizedMessageBundle(localeType);
     }
 
-    public GameMessages getGameMessages() {
-        return gameMessages;
+    public MessageBundle getMessageBundle() {
+        return messageBundle;
     }
 
-    private GameMessages getLocalizedGameMessages(LocaleType localeType) {
+    private MessageBundle getLocalizedMessageBundle(LocaleType localeType) {
         return switch (localeType) {
-            case ENGLISH -> new ConsoleGameMessages(ResourceBundle.getBundle("i18n.game_messages_en"));
-            case RUSSIAN -> new ConsoleGameMessages(ResourceBundle.getBundle("i18n.game_messages_ru"));
+            case ENGLISH -> new ConsoleMessageBundle(ResourceBundle.getBundle("i18n.game_messages_en"));
+            case RUSSIAN -> new ConsoleMessageBundle(ResourceBundle.getBundle("i18n.game_messages_ru"));
         };
     }
 }
