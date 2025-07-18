@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.localization.config;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 public enum LocaleType {
     ENGLISH(0, "ENGLISH", "EN"),
@@ -17,7 +18,7 @@ public enum LocaleType {
     static {
         for (LocaleType localeType : LocaleType.values()) {
             BY_INDEX.put(localeType.getLocaleIndex(), localeType);
-            BY_LANGUAGE.put(localeType.getLanguage(), localeType);
+            BY_LANGUAGE.put(localeType.getLanguageName(), localeType);
             BY_LOCALE.put(localeType.getLocale(), localeType);
         }
     }
@@ -32,7 +33,7 @@ public enum LocaleType {
         return localeIndex;
     }
 
-    public String getLanguage() {
+    public String getLanguageName() {
         return languageName;
     }
 
@@ -41,32 +42,17 @@ public enum LocaleType {
     }
 
     public static LocaleType fromLocaleIndex(int localeIndex) {
-        LocaleType localeType = BY_INDEX.get(localeIndex);
-
-        if (localeType == null) {
-            throw new IllegalArgumentException("Invalid locale index: " + localeIndex);
-        }
-
-        return localeType;
+        return Optional.ofNullable(BY_INDEX.get(localeIndex))
+                .orElseThrow(() -> new IllegalArgumentException("Invalid locale index: " + localeIndex));
     }
 
-    public static LocaleType fromLanguageString(String language) {
-        LocaleType localeType = BY_LANGUAGE.get(language);
-
-        if (localeType == null) {
-            throw new IllegalArgumentException("Invalid language string: " + language);
-        }
-
-        return localeType;
+    public static LocaleType fromLanguageString(String languageName) {
+        return Optional.ofNullable(BY_LANGUAGE.get(languageName))
+                .orElseThrow(() -> new IllegalArgumentException("Invalid language name string: " + languageName));
     }
 
     public static LocaleType fromLocaleString(String locale) {
-        LocaleType localeType = BY_LOCALE.get(locale);
-
-        if (localeType == null) {
-            throw new IllegalArgumentException("Invalid locale string: " + locale);
-        }
-
-        return localeType;
+        return Optional.ofNullable(BY_LOCALE.get(locale))
+                .orElseThrow(() -> new IllegalArgumentException("Invalid locale string: " + locale));
     }
 }
