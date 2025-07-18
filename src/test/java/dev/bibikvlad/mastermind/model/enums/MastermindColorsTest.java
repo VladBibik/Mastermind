@@ -3,6 +3,9 @@ package dev.bibikvlad.mastermind.model.enums;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -41,5 +44,26 @@ public class MastermindColorsTest {
     public void invalidIndexThrowsException() {
         assertThrows(IllegalArgumentException.class, () -> MastermindColors.fromColorIndex(-1));
         assertThrows(IllegalArgumentException.class, () -> MastermindColors.fromColorIndex(6));
+    }
+
+    @Test
+    @DisplayName("Throws exception on invalid character symbol")
+    public void invalidCharacterSymbolThrowsException() {
+        List<Character> validCharacters = List.of('r', 'g', 'y', 'b', 'p', 'w', 'R', 'G', 'Y', 'B', 'P', 'W');
+        List<Character> characters = new ArrayList<>();
+
+        for (int i = 'a'; i <= 'z'; i++) {
+            characters.add((char) i);
+        }
+
+        for (int i = 'A'; i <= 'Z'; i++) {
+            characters.add((char) i);
+        }
+
+        characters.removeAll(validCharacters);
+
+        for (Character character : characters) {
+            assertThrows(IllegalArgumentException.class, () -> MastermindColors.fromColorSymbol(character));
+        }
     }
 }
