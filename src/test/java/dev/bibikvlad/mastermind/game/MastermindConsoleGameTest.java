@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.game;
 
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
-import dev.bibikvlad.mastermind.localization.core.LocaleManager;
+import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +21,7 @@ public class MastermindConsoleGameTest {
     void setUp() {
         outputStream = new ByteArrayOutputStream();
         printStream = new PrintStream(outputStream);
-        gameMessages = new LocaleManager(LocaleType.ENGLISH).getGameMessages();
+        gameMessages = new LocalizationContext(LocaleType.ENGLISH).getGameMessages();
     }
 
     @Test

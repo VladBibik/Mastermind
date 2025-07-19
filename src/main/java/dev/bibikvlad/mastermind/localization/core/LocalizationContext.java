@@ -3,10 +3,10 @@ package dev.bibikvlad.mastermind.localization.core;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 
-public class LocaleManager {
+public class LocalizationContext {
     private final MessageProvider messageProvider;
 
-    public LocaleManager(LocaleType localeType) {
+    public LocalizationContext(LocaleType localeType) {
         MessageFactoryRegistry messageFactoryRegistry = new MessageFactoryRegistry();
         this.messageProvider = new MessageProvider(localeType, messageFactoryRegistry);
 

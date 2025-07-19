@@ -2,14 +2,14 @@ package dev.bibikvlad.mastermind.localization.factories;
 
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
-import dev.bibikvlad.mastermind.localization.core.LocaleManager;
+import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LocaleManagerTest {
+public class LocalizationContextTest {
     private final String ANSWER = "RGBW";
 
     @Test
@@ -29,8 +29,8 @@ public class LocaleManagerTest {
     }
 
     private GameMessages getGameMessages(LocaleType localeType) {
-        LocaleManager localeManager = new LocaleManager(localeType);
+        LocalizationContext localizationContext = new LocalizationContext(localeType);
 
-        return localeManager.getGameMessages();
+        return localizationContext.getGameMessages();
     }
 }
