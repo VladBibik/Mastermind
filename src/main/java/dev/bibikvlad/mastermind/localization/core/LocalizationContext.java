@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.localization.core;
 
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 
 public class LocalizationContext {
@@ -17,7 +18,8 @@ public class LocalizationContext {
         return messageProvider.getMessages(GameMessages.class, "i18n.game_messages");
     }
 
-    public <T> T getMessages(Class<T> clazz, String messageType) {
-        return messageProvider.getMessages(clazz, "i18n." + messageType + "_messages");
+    @SuppressWarnings("unchecked")
+    public <T> T getMessages(MessageType messageType) {
+        return (T) messageProvider.getMessages(messageType.getMessageType(), messageType.getResourceBundleName());
     }
 }
