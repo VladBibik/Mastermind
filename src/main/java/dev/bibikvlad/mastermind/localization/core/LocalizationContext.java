@@ -4,6 +4,8 @@ import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 
+import java.util.Optional;
+
 public class LocalizationContext {
     private final MessageProvider messageProvider;
 
@@ -20,6 +22,8 @@ public class LocalizationContext {
 
     @SuppressWarnings("unchecked")
     public <T> T getMessages(MessageType messageType) {
-        return (T) messageProvider.getMessages(messageType.getMessageType(), messageType.getResourceBundleName());
+        return Optional.ofNullable(
+                (T) messageProvider.getMessages(messageType.getMessageType(), messageType.getResourceBundleName()))
+                .orElseThrow(() -> new IllegalArgumentException("No messages found"));
     }
 }
