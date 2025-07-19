@@ -10,7 +10,7 @@ public class LocaleManager {
         MessageFactoryRegistry messageFactoryRegistry = new MessageFactoryRegistry();
         this.messageProvider = new MessageProvider(localeType, messageFactoryRegistry);
 
-        MessageRegistryPopulationManager.populate(messageFactoryRegistry);
+        MessageRegistryInitializer.populate(messageFactoryRegistry);
     }
 
     public GameMessages getGameMessages() {
