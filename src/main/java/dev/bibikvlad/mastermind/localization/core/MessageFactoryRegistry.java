@@ -17,6 +17,7 @@ public class MessageFactoryRegistry {
         if (messageFactory == null) {
             throw new IllegalStateException("No factory registered for message type " + messageType.getName());
         }
+
         return (MessageFactory<T>) messageFactories.get(messageType);
     }
 }
