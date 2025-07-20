@@ -4,7 +4,7 @@ import dev.bibikvlad.mastermind.localization.factories.ConsoleGameMessageFactory
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 
 public class MessageRegistryInitializer {
-    public static MessageFactoryRegistry initialize() {
+    public static MessageFactoryRegistry createAndPopulateRegistry() {
         MessageFactoryRegistry messageFactoryRegistry = new MessageFactoryRegistry();
 
         messageFactoryRegistry.register(GameMessages.class, new ConsoleGameMessageFactory());

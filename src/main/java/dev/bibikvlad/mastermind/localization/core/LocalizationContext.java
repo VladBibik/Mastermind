@@ -8,7 +8,7 @@ public class LocalizationContext {
     private final MessageProvider messageProvider;
 
     public LocalizationContext(LocaleType localeType) {
-        MessageFactoryRegistry messageFactoryRegistry = MessageRegistryInitializer.initialize();
+        MessageFactoryRegistry messageFactoryRegistry = MessageRegistryInitializer.createAndPopulateRegistry();
         this.messageProvider = new MessageProvider(localeType, messageFactoryRegistry);
     }
 
