@@ -42,12 +42,12 @@ public enum MessageType {
         return messageType;
     }
 
-    public static MessageType getByMessageType(Class<?> messageType) {
+    public static MessageType fromMessageType(Class<?> messageType) {
         return Optional.ofNullable(BY_MESSAGE_CLASS.get(messageType)).orElseThrow(
                 () -> new IllegalArgumentException("No corresponding Message Type for provided class: " + messageType));
     }
 
-    public static MessageType getByIndex(int index) {
+    public static MessageType fromIndex(int index) {
         return Optional.ofNullable(BY_INDEX.get(index)).orElseThrow(
                 () -> new IllegalArgumentException("No corresponding Message Type for provided index: " + index));
     }
