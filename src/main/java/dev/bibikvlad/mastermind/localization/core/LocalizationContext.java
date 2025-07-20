@@ -4,16 +4,12 @@ import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 
-import java.util.Optional;
-
 public class LocalizationContext {
     private final MessageProvider messageProvider;
 
     public LocalizationContext(LocaleType localeType) {
-        MessageFactoryRegistry messageFactoryRegistry = new MessageFactoryRegistry();
+        MessageFactoryRegistry messageFactoryRegistry = MessageRegistryInitializer.initialize();
         this.messageProvider = new MessageProvider(localeType, messageFactoryRegistry);
-
-        MessageRegistryInitializer.populate(messageFactoryRegistry);
     }
 
     public GameMessages getGameMessages() {
