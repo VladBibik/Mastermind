@@ -22,8 +22,6 @@ public class LocalizationContext {
 
     @SuppressWarnings("unchecked")
     public <T> T getMessages(MessageType messageType) {
-        return Optional.ofNullable(
-                (T) messageProvider.getMessages(messageType.getMessageType(), messageType.getResourceBundleName()))
-                .orElseThrow(() -> new IllegalArgumentException("No messages found"));
+        return (T) messageProvider.getMessages(messageType.getMessageType(), messageType.getResourceBundleName());
     }
 }
