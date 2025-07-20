@@ -1,8 +1,7 @@
-package dev.bibikvlad.mastermind.localization.factories;
+package dev.bibikvlad.mastermind.localization.core;
 
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
-import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
