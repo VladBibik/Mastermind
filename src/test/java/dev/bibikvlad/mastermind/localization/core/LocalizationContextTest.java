@@ -8,6 +8,8 @@ import dev.bibikvlad.utils.strings.Emojis;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ResourceBundle;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LocalizationContextTest {
@@ -27,11 +29,29 @@ public class LocalizationContextTest {
     @DisplayName("Returns correct message from get game message method")
     void returnsCorrectMessageFromGetGameMessageMethod() {
         LocalizationContext localizationContext = new LocalizationContext(LocaleType.ENGLISH);
-        GameMessages messagesFromGameMethod = localizationContext.getMessages(MessageType.GAME);
+        GameMessages messagesFromGameMethod = localizationContext.getGameMessages();
 
         assertEquals("You Won! " + Emojis.CELEBRATION_TADA + "\n" +
                         "You are the Mastermind!\n" +
                         "Solution was: " + InputVisualRepresentation.getVisualRepresentation(ANSWER),
                 messagesFromGameMethod.getWinMessage(ANSWER));
+    }
+
+    static class FakeMessageProvider extends MessageProvider {
+        Class<?> lastRequestedType;
+        String lastRequestedMessage;
+        Object toReturn;
+
+        public FakeMessageProvider(Object toReturn) {
+            super(null, null);
+            this.toReturn = toReturn;
+        }
+
+        public <T> T getMessages(Class<T> messageType, String resourceBundleName) {
+            this.lastRequestedType = messageType;
+            this.lastRequestedMessage = resourceBundleName;
+
+            return (T) toReturn;
+        }
     }
 }
