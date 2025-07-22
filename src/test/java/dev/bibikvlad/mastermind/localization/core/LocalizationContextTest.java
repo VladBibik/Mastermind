@@ -1,8 +1,10 @@
 package dev.bibikvlad.mastermind.localization.core;
 
+import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
+import dev.bibikvlad.utils.strings.Emojis;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -19,5 +21,17 @@ public class LocalizationContextTest {
 
         assertEquals(localizationContext.getGameMessages().getWinMessage(ANSWER),
                 messagesFromParametrizedMethod.getWinMessage(ANSWER));
+    }
+
+    @Test
+    @DisplayName("Returns correct message from get game message method")
+    void returnsCorrectMessageFromGetGameMessageMethod() {
+        LocalizationContext localizationContext = new LocalizationContext(LocaleType.ENGLISH);
+        GameMessages messagesFromGameMethod = localizationContext.getMessages(MessageType.GAME);
+
+        assertEquals("You Won! " + Emojis.CELEBRATION_TADA + "\n" +
+                        "You are the Mastermind!\n" +
+                        "Solution was: " + InputVisualRepresentation.getVisualRepresentation(ANSWER),
+                messagesFromGameMethod.getWinMessage(ANSWER));
     }
 }
