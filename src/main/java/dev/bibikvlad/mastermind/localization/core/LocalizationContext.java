@@ -12,6 +12,10 @@ public class LocalizationContext {
         this.messageProvider = new MessageProvider(localeType, messageFactoryRegistry);
     }
 
+    public LocalizationContext(MessageProvider messageProvider) {
+        this.messageProvider = messageProvider;
+    }
+
     public GameMessages getGameMessages() {
         return messageProvider.getMessages(GameMessages.class, "i18n.game_messages");
     }
