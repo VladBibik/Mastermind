@@ -4,6 +4,7 @@ import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
+import dev.bibikvlad.mastermind.localization.messages.game.StubGameMessages;
 import dev.bibikvlad.utils.strings.Emojis;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

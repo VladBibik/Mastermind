@@ -1,6 +1,4 @@
-package dev.bibikvlad.mastermind.localization.core;
-
-import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
+package dev.bibikvlad.mastermind.localization.messages.game;
 
 public class StubGameMessages implements GameMessages {
     @Override
