@@ -7,6 +7,9 @@ public class MessageFactoryRegistry {
     private final Map<Class<?>, MessageFactory<?>> messageFactories = new HashMap<>();
 
     public <T> void register(Class<T> messageType, MessageFactory<T> messageFactory) {
+        if (messageType == null || messageFactory == null)
+            throw new IllegalArgumentException("Type and factory cannot be null");
+
         messageFactories.put(messageType, messageFactory);
     }
 
