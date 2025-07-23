@@ -15,8 +15,8 @@ public class LocalizationContextTest {
     private final String ANSWER = "RGBW";
 
     @Test
-    @DisplayName("Returns correct messages from MessageType enum")
-    void returnsLocaleFromMessageTypeEnum() {
+    @DisplayName("getMessages(MessageType.GAME) returns same GameMessages as getGameMessages()")
+    void getMessages_withMessageTypeGAME_returnsSameAsGetGameMessages() {
         LocalizationContext localizationContext = new LocalizationContext(LocaleType.ENGLISH);
         GameMessages messagesFromParametrizedMethod = localizationContext.getMessages(MessageType.GAME);
 
@@ -25,8 +25,8 @@ public class LocalizationContextTest {
     }
 
     @Test
-    @DisplayName("Returns correct message from get game message method")
-    void returnsCorrectMessageFromGetGameMessageMethod() {
+    @DisplayName("getGameMessages() returns expected English win message")
+    void getGameMessages_returnsExpectedWinMessageFromBundle() {
         LocalizationContext localizationContext = new LocalizationContext(LocaleType.ENGLISH);
         GameMessages messagesFromGameMethod = localizationContext.getGameMessages();
 
@@ -37,7 +37,8 @@ public class LocalizationContextTest {
     }
 
     @Test
-    void getGameMessagesPassesCorrectParamsToProvider() {
+    @DisplayName("getGameMessages() delegates with correct type and bundle name")
+    void getGameMessages_delegatesToMessageProviderWithCorrectParams() {
         GameMessages dummy = new StubGameMessages();
         FakeMessageProvider fakeMessageProvider = new FakeMessageProvider(dummy);
 
