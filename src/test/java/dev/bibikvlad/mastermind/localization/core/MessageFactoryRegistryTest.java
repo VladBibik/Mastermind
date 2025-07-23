@@ -24,7 +24,7 @@ public class MessageFactoryRegistryTest {
 
     @Test
     @DisplayName("Throws IllegalStateException on unknown type parameter")
-    public void throwsOnUnknownTypeParameter() {
+    public void getMessageFactory_withUnregisteredType_throwsIllegalStateException() {
         MessageFactory<GameMessages> gameMessagesFactory = ConsoleGameMessages::new;
 
         assertThrows(IllegalStateException.class,
