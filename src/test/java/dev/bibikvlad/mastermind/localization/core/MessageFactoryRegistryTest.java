@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MessageFactoryRegistryTest {
     @Test
@@ -18,5 +19,15 @@ public class MessageFactoryRegistryTest {
 
         MessageFactory<GameMessages> gameMessagesResult = messageFactoryRegistry.getMessageFactory(GameMessages.class);
         assertSame(gameMessagesFactory, gameMessagesResult);
+    }
+
+    @Test
+    @DisplayName("Throws IllegalStateException on unknown type parameter")
+    public void throwsOnUnknownTypeParameter() {
+        MessageFactoryRegistry messageFactoryRegistry = new MessageFactoryRegistry();
+        MessageFactory<GameMessages> gameMessagesFactory = ConsoleGameMessages::new;
+
+        assertThrows(IllegalStateException.class,
+                () -> messageFactoryRegistry.getMessageFactory(MessageFactoryRegistryTest.class));
     }
 }
