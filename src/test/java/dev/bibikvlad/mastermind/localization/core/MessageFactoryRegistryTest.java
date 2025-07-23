@@ -30,4 +30,17 @@ public class MessageFactoryRegistryTest {
         assertThrows(IllegalStateException.class,
                 () -> messageFactoryRegistry.getMessageFactory(MessageFactoryRegistryTest.class));
     }
+
+    @Test
+    @DisplayName("Duplicate registration overwrites enty silently")
+    public void duplicateRegistrationOverwritesEnty() {
+        MessageFactoryRegistry messageFactoryRegistry = new MessageFactoryRegistry();
+        MessageFactory<GameMessages> originalGameMessagesFactory = ConsoleGameMessages::new;
+        MessageFactory<GameMessages> newGameMessagesFactory = ConsoleGameMessages::new;
+
+        messageFactoryRegistry.register(GameMessages.class, originalGameMessagesFactory);
+        messageFactoryRegistry.register(GameMessages.class, newGameMessagesFactory);
+
+        assertSame(newGameMessagesFactory, messageFactoryRegistry.getMessageFactory(GameMessages.class));
+    }
 }
