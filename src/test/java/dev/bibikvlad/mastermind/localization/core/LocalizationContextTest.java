@@ -8,9 +8,8 @@ import dev.bibikvlad.utils.strings.Emojis;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ResourceBundle;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 public class LocalizationContextTest {
     private final String ANSWER = "RGBW";
@@ -35,6 +34,19 @@ public class LocalizationContextTest {
                         "You are the Mastermind!\n" +
                         "Solution was: " + InputVisualRepresentation.getVisualRepresentation(ANSWER),
                 messagesFromGameMethod.getWinMessage(ANSWER));
+    }
+
+    @Test
+    void getGameMessagesPassesCorrectParamsToProvider() {
+        GameMessages dummy = new StubGameMessages();
+        FakeMessageProvider fakeMessageProvider = new FakeMessageProvider(dummy);
+
+        LocalizationContext localizationContext = new LocalizationContext(fakeMessageProvider);
+        GameMessages result = localizationContext.getGameMessages();
+
+        assertSame(dummy, result);
+        assertEquals(GameMessages.class, fakeMessageProvider.lastRequestedType);
+        assertEquals("i18n.game_messages", fakeMessageProvider.lastRequestedMessage);
     }
 
     static class FakeMessageProvider extends MessageProvider {
