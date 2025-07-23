@@ -17,7 +17,7 @@ public class LocalizationContext {
     }
 
     public GameMessages getGameMessages() {
-        return messageProvider.getMessages(GameMessages.class, "i18n.game_messages");
+        return messageProvider.getMessages(GameMessages.class, MessageType.GAME.getResourceBundleName());
     }
 
     @SuppressWarnings("unchecked")
