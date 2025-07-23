@@ -9,10 +9,11 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MessageFactoryRegistryTest {
+    private final MessageFactoryRegistry messageFactoryRegistry = new MessageFactoryRegistry();
+
     @Test
     @DisplayName("Testing correct registration of GameMessages entry")
     public void correctRegistrationOfGameMessages() {
-        MessageFactoryRegistry messageFactoryRegistry = new MessageFactoryRegistry();
         MessageFactory<GameMessages> gameMessagesFactory = ConsoleGameMessages::new;
 
         messageFactoryRegistry.register(GameMessages.class, gameMessagesFactory);
@@ -24,7 +25,6 @@ public class MessageFactoryRegistryTest {
     @Test
     @DisplayName("Throws IllegalStateException on unknown type parameter")
     public void throwsOnUnknownTypeParameter() {
-        MessageFactoryRegistry messageFactoryRegistry = new MessageFactoryRegistry();
         MessageFactory<GameMessages> gameMessagesFactory = ConsoleGameMessages::new;
 
         assertThrows(IllegalStateException.class,
@@ -34,7 +34,6 @@ public class MessageFactoryRegistryTest {
     @Test
     @DisplayName("Duplicate registration overwrites enty silently")
     public void duplicateRegistrationOverwritesEnty() {
-        MessageFactoryRegistry messageFactoryRegistry = new MessageFactoryRegistry();
         MessageFactory<GameMessages> originalGameMessagesFactory = ConsoleGameMessages::new;
         MessageFactory<GameMessages> newGameMessagesFactory = ConsoleGameMessages::new;
 
@@ -42,5 +41,14 @@ public class MessageFactoryRegistryTest {
         messageFactoryRegistry.register(GameMessages.class, newGameMessagesFactory);
 
         assertSame(newGameMessagesFactory, messageFactoryRegistry.getMessageFactory(GameMessages.class));
+    }
+
+    @Test
+    @DisplayName("Throws IllegalArgumentException on null value")
+    public void throwsIllegalArgumentExceptionOnNullValue() {
+        MessageFactory<GameMessages> gameMessagesFactory = ConsoleGameMessages::new;
+
+        assertThrows(IllegalArgumentException.class,
+                () -> messageFactoryRegistry.register(null, gameMessagesFactory));
     }
 }
