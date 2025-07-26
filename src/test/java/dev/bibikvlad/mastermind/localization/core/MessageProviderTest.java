@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class MessageProviderTest {
     @Test
-    @DisplayName("Returns correct Message Type object from the registry")
+    @DisplayName("Returns a message instance when the type is registered")
     public void shouldReturnCorrectMessageTypeWhenRegistered() {
         MessageProvider messageProvider =
                 new MessageProvider(LocaleType.ENGLISH, MessageRegistryInitializer.createAndPopulateRegistry());
@@ -22,7 +22,7 @@ public class MessageProviderTest {
     }
 
     @Test
-    @DisplayName("Throws exception on unregistered message type retrieval")
+    @DisplayName("Throws exception when requesting unregistered message type")
     public void getMessages_failToCreateMessages_throwsIllegalStateException() {
         MessageProvider messageProvider =
                 new MessageProvider(LocaleType.ENGLISH, MessageRegistryInitializer.createAndPopulateRegistry());
