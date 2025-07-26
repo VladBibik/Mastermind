@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.localization.messages.game;
 
 import dev.bibikvlad.mastermind.clues.ClueGenerator;
+import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.utils.strings.ConsoleColoredValidSymbols;
 import org.junit.jupiter.api.DisplayName;
@@ -31,6 +32,16 @@ public class ConsoleGameMessagesRuTest {
         String result = gameMessages.getIncorrectGuessMessage(10, 5, "rgby", "rbww");
         String expected = "Раунд: 6 из 10.\n" +
                 "Ваш ответ: rbww            " + ClueGenerator.generate("rgby", "rbww");
+
+        assertEquals(result, expected);
+    }
+
+    @Test
+    @DisplayName("Returns correct Game Over Message String")
+    void testGameOverMessage() {
+        String result = gameMessages.getGameOverMessage("rgby");
+        String expected = "Game Over! Ответом была комбинация: "
+                + InputVisualRepresentation.getVisualRepresentation("rgby");
 
         assertEquals(result, expected);
     }
