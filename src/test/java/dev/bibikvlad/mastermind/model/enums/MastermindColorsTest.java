@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MastermindColorsTest {
     @Test
@@ -75,5 +76,16 @@ public class MastermindColorsTest {
         assertEquals(3, MastermindColors.BLUE.getColorIndex());
         assertEquals(4, MastermindColors.PURPLE.getColorIndex());
         assertEquals(5, MastermindColors.WHITE.getColorIndex());
+    }
+
+    @Test
+    @DisplayName("Returns correct Color name")
+    public void returnCorrectColorName() {
+        assertEquals("Red", MastermindColors.RED.getColorName());
+        assertEquals("Green", MastermindColors.GREEN.getColorName());
+        assertEquals("Yellow", MastermindColors.YELLOW.getColorName());
+        assertEquals("Blue", MastermindColors.BLUE.getColorName());
+        assertEquals("Purple", MastermindColors.PURPLE.getColorName());
+        assertEquals("White", MastermindColors.WHITE.getColorName());
     }
 }
