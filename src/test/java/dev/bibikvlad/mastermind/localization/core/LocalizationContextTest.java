@@ -61,6 +61,7 @@ public class LocalizationContextTest {
             this.toReturn = toReturn;
         }
 
+        @SuppressWarnings("unchecked")
         public <T> T getMessages(Class<T> messageType, String resourceBundleName) {
             this.lastRequestedType = messageType;
             this.lastRequestedMessage = resourceBundleName;
