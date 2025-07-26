@@ -1,0 +1,24 @@
+package dev.bibikvlad.mastermind.localization.messages.game;
+
+import dev.bibikvlad.mastermind.localization.config.MessageType;
+import dev.bibikvlad.utils.strings.ConsoleColoredValidSymbols;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import java.util.ResourceBundle;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class ConsoleGameMessagesRuTest {
+    private final ResourceBundle resourceBundle = ResourceBundle.getBundle(
+            MessageType.GAME.getResourceBundleName() + "_ru");
+    private final GameMessages gameMessages = new ConsoleGameMessages(resourceBundle);
+
+    @Test
+    @DisplayName("Returns correct Invalid Input Message String")
+    void testInvalidInputMessage() {
+        assertEquals(gameMessages.getInvalidInputMessage(),
+                "Неверный формат ответа. Ответ должен включать только буквы: "
+                        + ConsoleColoredValidSymbols.getSymbols());
+    }
+}
