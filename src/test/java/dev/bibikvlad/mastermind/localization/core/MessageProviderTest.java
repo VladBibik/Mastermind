@@ -33,7 +33,7 @@ public class MessageProviderTest {
 
     @Test
     @DisplayName("Throws NullPointerException when resource bundle name is null")
-    public void getMessages_failToCreateMessages_throwsNullPointerException() {
+    public void shouldThrowNullPointerExceptionWhenMessageTypeIsNull() {
         MessageProvider messageProvider =
                 new MessageProvider(LocaleType.ENGLISH, MessageRegistryInitializer.createAndPopulateRegistry());
 
