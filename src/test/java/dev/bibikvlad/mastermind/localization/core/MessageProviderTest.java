@@ -23,7 +23,7 @@ public class MessageProviderTest {
 
     @Test
     @DisplayName("Throws exception when requesting unregistered message type")
-    public void getMessages_failToCreateMessages_throwsIllegalStateException() {
+    public void shouldThrowIllegalStateExceptionWhenTypeIsNotRegistered() {
         MessageProvider messageProvider =
                 new MessageProvider(LocaleType.ENGLISH, MessageRegistryInitializer.createAndPopulateRegistry());
 
