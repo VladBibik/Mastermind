@@ -45,7 +45,7 @@ public class MessageFactoryRegistryTest {
 
     @Test
     @DisplayName("Throws IllegalArgumentException on null value")
-    public void register_withNullType_throwsIllegalArgumentException() {
+    public void shouldThrowIllegalArgumentExceptionWhenTypeIsNull() {
         MessageFactory<GameMessages> gameMessagesFactory = ConsoleGameMessages::new;
 
         assertThrows(IllegalArgumentException.class,
