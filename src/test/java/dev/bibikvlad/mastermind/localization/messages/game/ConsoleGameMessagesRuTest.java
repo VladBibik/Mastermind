@@ -5,6 +5,7 @@ import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.utils.strings.ConsoleColoredValidSymbols;
 import dev.bibikvlad.utils.strings.Emojis;
+import dev.bibikvlad.utils.strings.GameCluesConstants;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -54,6 +55,25 @@ public class ConsoleGameMessagesRuTest {
         String expected = "Вы Победили! " + Emojis.CELEBRATION_TADA +
                 "\nВы Mastermind!\n" +
                 "Ответом была комбинация: " + InputVisualRepresentation.getVisualRepresentation("rgby");
+
+        assertEquals(result, expected);
+    }
+
+    @Test
+    @DisplayName("Returns correct Rules Message String")
+    void testRulesMessage() {
+        String result = gameMessages.getRulesMessage();
+        String expected = "Пазл состоит из 4 ячеек. Каждый ход Вы выбираете из 6 цветов.\n" +
+                "Варианты цветов: " + ConsoleColoredValidSymbols.getSymbols() + "\n"
+                + "Пример хода: ybgr\n"
+                + "Подсказка:\n"
+                + GameCluesConstants.CIRCLE_SHADED + "   Правильный цвет в правильном положении\n"
+                + GameCluesConstants.CIRCLE_EMPTY + "   Правильный цвет в неправильном положении\n"
+                + GameCluesConstants.UNDERSCORE + "   Неправильный цвет\n"
+                + "\n"
+                + "Порядок символов в подсказке не обязательно совпадает с позицией цвета.\n"
+                + "Введите 'help', или 'rules', чтобы снова увидеть правила.\n"
+                + "Введите 'close', или 'exit', чтобы выйти из игры и увидеть ответ.\n";
 
         assertEquals(result, expected);
     }
