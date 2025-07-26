@@ -35,4 +35,10 @@ public class MessageTypeTest {
             assertThrows(IllegalArgumentException.class, () -> MessageType.fromIndex(index));
         }
     }
+
+    @Test
+    @DisplayName("Returns correct Message Type Index")
+    void returnsCorrectMessageTypeIndex() {
+        assertEquals(0, MessageType.GAME.getIndex());
+    }
 }
