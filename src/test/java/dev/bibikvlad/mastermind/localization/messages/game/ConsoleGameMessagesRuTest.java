@@ -64,8 +64,8 @@ public class ConsoleGameMessagesRuTest {
     @DisplayName("Returns correct Rules Message String")
     void testRulesMessage() {
         String result = gameMessages.getRulesMessage();
-        String expected = "Пазл состоит из 4 ячеек. Каждый ход Вы выбираете из 6 цветов.\n" +
-                "Варианты цветов: " + ConsoleColoredValidSymbols.getSymbols() + "\n"
+        String expected = "Пазл состоит из 4 ячеек. Каждый ход Вы выбираете из 6 цветов.\n"
+                + "Варианты цветов: " + ConsoleColoredValidSymbols.getSymbols() + "\n"
                 + "Пример хода: ybgr\n"
                 + "Подсказка:\n"
                 + GameCluesConstants.CIRCLE_SHADED + "   Правильный цвет в правильном положении\n"
