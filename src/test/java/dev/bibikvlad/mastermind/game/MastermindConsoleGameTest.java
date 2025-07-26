@@ -1,5 +1,8 @@
 package dev.bibikvlad.mastermind.game;
 
+import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
+import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,11 +15,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MastermindConsoleGameTest {
     private ByteArrayOutputStream outputStream;
     private PrintStream printStream;
+    private GameMessages gameMessages;
 
     @BeforeEach
     void setUp() {
         outputStream = new ByteArrayOutputStream();
         printStream = new PrintStream(outputStream);
+        gameMessages = new LocalizationContext(LocaleType.ENGLISH).getGameMessages();
     }
 
     @Test
@@ -24,31 +29,34 @@ public class MastermindConsoleGameTest {
     public void invalidInputTest() {
         String output = runGame("rrrr", "abcd\nclose\n");
 
-        assertTrue(output.contains("Please provide a valid input"));
+        assertTrue(output.contains(gameMessages.getInvalidInputMessage()));
     }
 
     @Test
     @DisplayName("Correct answer on the first attempt")
     public void firstAttemptCorrectAnswerTest() {
-        String output = runGame("yypw", "yypw");
+        String answer = "yypw";
+        String output = runGame(answer, "yypw");
 
-        assertTrue(output.contains("You Won!"));
+        assertTrue(output.contains(gameMessages.getWinMessage(answer)));
     }
 
     @Test
     @DisplayName("Correct answer on the first attempt")
     public void tenIncorrectAttemptsInARowTest() {
-        String output = runGame("yypw", "rrrr\n".repeat(10));
+        String answer = "yypw";
+        String output = runGame(answer, "rrrr\n".repeat(10));
 
-        assertTrue(output.contains("You lose"));
+        assertTrue(output.contains(gameMessages.getGameOverMessage(answer)));
     }
 
     @Test
     @DisplayName("Correct answer after several incorrect attempts")
     public void correctAnswerAfterSeveralIncorrectAttemptsTest() {
-        String output = runGame("bgpw", "yypw\nrrbb\npwbg\nbgpw");
+        String answer = "bgpw";
+        String output = runGame(answer, "yypw\nrrbb\npwbg\nbgpw");
 
-        assertTrue(output.contains("You Won!"));
+        assertTrue(output.contains(gameMessages.getWinMessage(answer)));
     }
 
     @Test
@@ -61,7 +69,7 @@ public class MastermindConsoleGameTest {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
-        MastermindConsoleGame game = new MastermindConsoleGame(answer, bufferedReader, printStream);
+        MastermindConsoleGame game = new MastermindConsoleGame(gameMessages, answer, bufferedReader, printStream);
         game.play();
 
         return outputStream.toString();

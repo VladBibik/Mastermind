@@ -1,4 +1,4 @@
-package dev.bibikvlad.utils.StringConstants;
+package dev.bibikvlad.utils.strings;
 
 public class GameCluesConstants {
     public static final char CIRCLE_SOLID = '⬤';

@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.game;
 
-import dev.bibikvlad.mastermind.clues.ClueGenerator;
+import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import dev.bibikvlad.mastermind.validators.GameInputValidator;
 
 import java.io.BufferedReader;
@@ -11,6 +11,7 @@ import java.io.PrintStream;
 public class MastermindConsoleGame {
     private static final int MAX_TURNS = 10;
 
+    private final GameMessages gameMessages;
     private final String answer;
     private final BufferedReader inputReader;
     private final PrintStream outputWriter;
@@ -18,16 +19,20 @@ public class MastermindConsoleGame {
     private boolean close = false;
     private int turnCounter = 0;
 
-    public MastermindConsoleGame(String answer) {
-        this(answer,
+    public MastermindConsoleGame(GameMessages language, String answer) {
+        this(language, answer,
                 new BufferedReader(new InputStreamReader(System.in)),
                 System.out);
     }
 
-    public MastermindConsoleGame(String answer, BufferedReader inputReader, PrintStream outputWriter) {
+    public MastermindConsoleGame(GameMessages language, String answer,
+                                 BufferedReader inputReader, PrintStream outputWriter) {
+        this.gameMessages = language;
         this.answer = answer;
         this.inputReader = inputReader;
         this.outputWriter = outputWriter;
+
+        printLogoAndRules();
     }
 
     public void play() {
@@ -37,19 +42,14 @@ public class MastermindConsoleGame {
                     continue;
                 }
 
-                outputWriter.println("Turn:" + (turnCounter + 1));
-
-                String userInput = inputReader.readLine();
+                //TODO: Move user input reader logic to the custom class, or the custom method!
+                String userInput = inputReader.readLine().toLowerCase();
 
                 if (isGameClosed(userInput)) {
                     continue;
                 }
 
-                if (!processUserInput(userInput)) {
-                    continue;
-                }
-
-                handleUserGuess(userInput);
+                processUserInput(userInput);
             }
         } catch (IOException exception) {
             outputWriter.println(exception.getMessage());
@@ -58,10 +58,14 @@ public class MastermindConsoleGame {
         }
     }
 
+    private void printLogoAndRules() {
+        outputWriter.println(gameMessages.getAsciiLogo());
+        outputWriter.println(gameMessages.getRulesMessage());
+    }
+
     private boolean isGameOver() {
         if (turnCounter == MAX_TURNS) {
-            outputWriter.println(answer);
-            outputWriter.println("You lose");
+            outputWriter.println(gameMessages.getGameOverMessage(answer));
 
             close = true;
 
@@ -72,6 +76,7 @@ public class MastermindConsoleGame {
     }
 
     private boolean isGameClosed(String userInput) {
+        //TODO: Add other options!
         if ("close".equalsIgnoreCase(userInput)) {
             close = true;
 
@@ -81,25 +86,23 @@ public class MastermindConsoleGame {
         return false;
     }
 
-    private boolean processUserInput(String userInput) {
+    private void processUserInput(String userInput) {
         if (GameInputValidator.isInputValid(userInput)) {
+            handleUserGuess(userInput);
+
             turnCounter++;
-
-            return true;
         } else {
-            outputWriter.println("Please provide a valid input");
-
-            return false;
+            outputWriter.println(gameMessages.getInvalidInputMessage());
         }
     }
 
     private void handleUserGuess(String userInput) {
         if (userInput.equals(answer)) {
-            outputWriter.println("You Won!");
+            outputWriter.println(gameMessages.getWinMessage(answer));
 
             close = true;
         } else {
-            outputWriter.println(ClueGenerator.generate(answer, userInput));
+            outputWriter.println(gameMessages.getIncorrectGuessMessage(MAX_TURNS, turnCounter, answer, userInput));
         }
     }
 }
