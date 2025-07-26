@@ -18,8 +18,6 @@ public class MessageProviderTest {
         GameMessages providedMessages =
                 messageProvider.getMessages(GameMessages.class, MessageType.GAME.getResourceBundleName());
 
-        assertDoesNotThrow(
-                () -> messageProvider.getMessages(GameMessages.class, MessageType.GAME.getResourceBundleName()));
         assertNotNull(providedMessages);
     }
 
