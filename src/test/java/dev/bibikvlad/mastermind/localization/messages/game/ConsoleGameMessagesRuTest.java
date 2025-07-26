@@ -6,6 +6,7 @@ import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.utils.strings.ConsoleColoredValidSymbols;
 import dev.bibikvlad.utils.strings.Emojis;
 import dev.bibikvlad.utils.strings.GameCluesConstants;
+import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -74,6 +75,15 @@ public class ConsoleGameMessagesRuTest {
                 + "Порядок символов в подсказке не обязательно совпадает с позицией цвета.\n"
                 + "Введите 'help', или 'rules', чтобы снова увидеть правила.\n"
                 + "Введите 'close', или 'exit', чтобы выйти из игры и увидеть ответ.\n";
+
+        assertEquals(result, expected);
+    }
+
+    @Test
+    @DisplayName("Returns correct Ascii Logo String")
+    void testAsciiLogoString() {
+        String result = gameMessages.getAsciiLogo();
+        String expected = ColoredAsciiLogo.getLogo();
 
         assertEquals(result, expected);
     }
