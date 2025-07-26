@@ -33,7 +33,7 @@ public class MessageFactoryRegistryTest {
 
     @Test
     @DisplayName("Duplicate registration overwrites enty silently")
-    public void register_withDuplicateType_overwritesPreviousFactory() {
+    public void shouldOverwriteExistingFactoryWhenTypeIsRegisteredTwice() {
         MessageFactory<GameMessages> originalGameMessagesFactory = ConsoleGameMessages::new;
         MessageFactory<GameMessages> newGameMessagesFactory = ConsoleGameMessages::new;
 
