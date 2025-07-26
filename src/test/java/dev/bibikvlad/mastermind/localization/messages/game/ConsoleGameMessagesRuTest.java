@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.localization.messages.game;
 
+import dev.bibikvlad.mastermind.clues.ClueGenerator;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.utils.strings.ConsoleColoredValidSymbols;
 import org.junit.jupiter.api.DisplayName;
@@ -20,5 +21,15 @@ public class ConsoleGameMessagesRuTest {
         assertEquals(gameMessages.getInvalidInputMessage(),
                 "Неверный формат ответа. Ответ должен включать только буквы: "
                         + ConsoleColoredValidSymbols.getSymbols());
+    }
+
+    @Test
+    @DisplayName("Returns correct Incorrect Guess Message String")
+    void testIncorrectGuessMessage() {
+        String result = gameMessages.getIncorrectGuessMessage(10, 5, "rgby", "rbww");
+        String expected = "Раунд: 6 из 10.\n" +
+                "Ваш ответ: rbww            " + ClueGenerator.generate("rgby", "rbww");
+
+        assertEquals(result, expected);
     }
 }
