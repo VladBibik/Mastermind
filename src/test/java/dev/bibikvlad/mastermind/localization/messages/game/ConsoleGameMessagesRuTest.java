@@ -4,6 +4,7 @@ import dev.bibikvlad.mastermind.clues.ClueGenerator;
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.utils.strings.ConsoleColoredValidSymbols;
+import dev.bibikvlad.utils.strings.Emojis;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -42,6 +43,17 @@ public class ConsoleGameMessagesRuTest {
         String result = gameMessages.getGameOverMessage("rgby");
         String expected = "Game Over! Ответом была комбинация: "
                 + InputVisualRepresentation.getVisualRepresentation("rgby");
+
+        assertEquals(result, expected);
+    }
+
+    @Test
+    @DisplayName("Returns correct Win Message String")
+    void testWinMessage() {
+        String result = gameMessages.getWinMessage("rgby");
+        String expected = "Вы Победили! " + Emojis.CELEBRATION_TADA +
+                "\nВы Mastermind!\n" +
+                "Ответом была комбинация: " + InputVisualRepresentation.getVisualRepresentation("rgby");
 
         assertEquals(result, expected);
     }
