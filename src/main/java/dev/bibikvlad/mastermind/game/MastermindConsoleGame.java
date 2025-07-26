@@ -76,8 +76,7 @@ public class MastermindConsoleGame {
     }
 
     private boolean isGameClosed(String userInput) {
-        //TODO: Add other options!
-        if ("close".equalsIgnoreCase(userInput)) {
+        if ("close".equalsIgnoreCase(userInput) || "exit".equalsIgnoreCase(userInput)) {
             close = true;
 
             return true;
