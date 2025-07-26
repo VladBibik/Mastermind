@@ -30,4 +30,14 @@ public class MessageProviderTest {
         assertThrows(IllegalStateException.class,
                 () -> messageProvider.getMessages(ConsoleGameMessages.class, MessageType.GAME.getResourceBundleName()));
     }
+
+    @Test
+    @DisplayName("Throws NullPointerException when resource bundle name is null")
+    public void getMessages_failToCreateMessages_throwsNullPointerException() {
+        MessageProvider messageProvider =
+                new MessageProvider(LocaleType.ENGLISH, MessageRegistryInitializer.createAndPopulateRegistry());
+
+        assertThrows(NullPointerException.class,
+                () -> messageProvider.getMessages(null, MessageType.GAME.getResourceBundleName()));
+    }
 }
