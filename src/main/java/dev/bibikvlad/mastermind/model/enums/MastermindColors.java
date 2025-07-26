@@ -15,8 +15,8 @@ public enum MastermindColors {
     private final String colorName;
     private final char symbol;
 
-    private static final HashMap<Integer, MastermindColors> BY_COLOR_INDEX = new HashMap<Integer, MastermindColors>();
-    private static final HashMap<Character, MastermindColors> BY_SYMBOL = new HashMap<Character, MastermindColors>();
+    private static final HashMap<Integer, MastermindColors> BY_COLOR_INDEX = new HashMap<>();
+    private static final HashMap<Character, MastermindColors> BY_SYMBOL = new HashMap<>();
 
     static {
         for (MastermindColors mastermindColors : MastermindColors.values()) {
