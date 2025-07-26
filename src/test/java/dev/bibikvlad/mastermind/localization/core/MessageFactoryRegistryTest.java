@@ -13,7 +13,7 @@ public class MessageFactoryRegistryTest {
 
     @Test
     @DisplayName("Testing correct registration of GameMessages entry")
-    public void register_andGetFactory_returnsRegisteredFactory() {
+    public void shouldReturnRegisteredFactoryWhenTypeIsRegistered() {
         MessageFactory<GameMessages> gameMessagesFactory = ConsoleGameMessages::new;
 
         messageFactoryRegistry.register(GameMessages.class, gameMessagesFactory);
