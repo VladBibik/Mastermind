@@ -80,6 +80,10 @@ public class MastermindConsoleGame {
             close = true;
 
             return true;
+        } else if ("help".equalsIgnoreCase(userInput) || "rules".equalsIgnoreCase(userInput)) {
+            outputWriter.println(gameMessages.getRulesMessage());
+
+            return false;
         }
 
         return false;
