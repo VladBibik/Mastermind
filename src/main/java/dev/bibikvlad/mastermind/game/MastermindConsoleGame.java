@@ -1,55 +1,42 @@
 package dev.bibikvlad.mastermind.game;
 
+import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.game.printer.MastermindMessagePrinter;
 import dev.bibikvlad.mastermind.validators.GameInputValidator;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class MastermindConsoleGame {
     private static final int MAX_TURNS = 10;
 
     private final String answer;
-    private final BufferedReader inputReader;
     private final MastermindMessagePrinter printer;
+    private final MastermindUserInputParser parser;
 
     private boolean close = false;
     private int turnCounter = 0;
 
-    public MastermindConsoleGame(MastermindMessagePrinter printer, String answer) {
-        this(answer,
-                new BufferedReader(new InputStreamReader(System.in)),
-                printer);
-    }
-
-    public MastermindConsoleGame(String answer,
-                                 BufferedReader inputReader, MastermindMessagePrinter printer) {
-        this.answer = answer;
-        this.inputReader = inputReader;
+    public MastermindConsoleGame(MastermindMessagePrinter printer,
+                                 MastermindUserInputParser inputParser,
+                                 String answer) {
         this.printer = printer;
+        this.parser = inputParser;
+        this.answer = answer;
 
         printLogoAndRules();
     }
 
     public void play() {
-        try {
-            while (!close) {
-                if (isGameOver()) {
-                    continue;
-                }
-
-                //TODO: Move user input reader logic to the custom class, or the custom method!
-                String userInput = inputReader.readLine().toLowerCase();
-
-                if (isGameClosed(userInput)) {
-                    continue;
-                }
-
-                processUserInput(userInput);
+        while (!close) {
+            if (isGameOver()) {
+                continue;
             }
-        } catch (IOException exception) {
-            //TODO: Exception handling will be moved to the custom writer class
+
+            String userInput = parser.parseUserInput();
+
+            if (isGameClosed(userInput)) {
+                continue;
+            }
+
+            processUserInput(userInput);
         }
     }
 
