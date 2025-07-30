@@ -1,5 +1,9 @@
 package dev.bibikvlad.mastermind.game;
 
+import dev.bibikvlad.mastermind.game.parser.BufferedReaderInputParser;
+import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
+import dev.bibikvlad.mastermind.game.printer.MastermindMessagePrinter;
+import dev.bibikvlad.mastermind.game.printer.StreamMessagePrinter;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
@@ -69,7 +73,10 @@ public class MastermindConsoleGameTest {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
-        MastermindConsoleGame game = new MastermindConsoleGame(gameMessages, answer, bufferedReader, printStream);
+        MastermindUserInputParser inputParser = new BufferedReaderInputParser(bufferedReader);
+        MastermindMessagePrinter messagePrinter = new StreamMessagePrinter(gameMessages, printStream);
+
+        MastermindConsoleGame game = new MastermindConsoleGame(messagePrinter, inputParser, answer);
         game.play();
 
         return outputStream.toString();
