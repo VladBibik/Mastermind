@@ -19,10 +19,10 @@ public class MastermindConsoleGame {
     private boolean close = false;
     private int turnCounter = 0;
 
-    public MastermindConsoleGame(String answer) {
+    public MastermindConsoleGame(MastermindMessagePrinter printer, String answer) {
         this(answer,
                 new BufferedReader(new InputStreamReader(System.in)),
-                new ConsoleMastermindMessagePrinter(LocaleType.ENGLISH));
+                printer);
     }
 
     public MastermindConsoleGame(String answer,
