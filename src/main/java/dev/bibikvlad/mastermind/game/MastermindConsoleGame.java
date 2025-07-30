@@ -1,5 +1,8 @@
 package dev.bibikvlad.mastermind.game;
 
+import dev.bibikvlad.mastermind.game.printer.ConsoleMastermindMessagePrinter;
+import dev.bibikvlad.mastermind.game.printer.MastermindMessagePrinter;
+import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import dev.bibikvlad.mastermind.validators.GameInputValidator;
 
@@ -11,26 +14,24 @@ import java.io.PrintStream;
 public class MastermindConsoleGame {
     private static final int MAX_TURNS = 10;
 
-    private final GameMessages gameMessages;
     private final String answer;
     private final BufferedReader inputReader;
-    private final PrintStream outputWriter;
+    private final MastermindMessagePrinter printer;
 
     private boolean close = false;
     private int turnCounter = 0;
 
-    public MastermindConsoleGame(GameMessages language, String answer) {
-        this(language, answer,
+    public MastermindConsoleGame(String answer) {
+        this(answer,
                 new BufferedReader(new InputStreamReader(System.in)),
-                System.out);
+                new ConsoleMastermindMessagePrinter(LocaleType.ENGLISH));
     }
 
-    public MastermindConsoleGame(GameMessages language, String answer,
-                                 BufferedReader inputReader, PrintStream outputWriter) {
-        this.gameMessages = language;
+    public MastermindConsoleGame(String answer,
+                                 BufferedReader inputReader, MastermindMessagePrinter printer) {
         this.answer = answer;
         this.inputReader = inputReader;
-        this.outputWriter = outputWriter;
+        this.printer = printer;
 
         printLogoAndRules();
     }
@@ -52,20 +53,18 @@ public class MastermindConsoleGame {
                 processUserInput(userInput);
             }
         } catch (IOException exception) {
-            outputWriter.println(exception.getMessage());
-        } finally {
-            outputWriter.flush();
+            //TODO: Exception handling will be moved to the custom writer class
         }
     }
 
     private void printLogoAndRules() {
-        outputWriter.println(gameMessages.getAsciiLogo());
-        outputWriter.println(gameMessages.getRulesMessage());
+        printer.printAsciiLogo();
+        printer.printRulesMessage();
     }
 
     private boolean isGameOver() {
         if (turnCounter == MAX_TURNS) {
-            outputWriter.println(gameMessages.getGameOverMessage(answer));
+            printer.printGameOverMessage(answer);
 
             close = true;
 
@@ -81,7 +80,7 @@ public class MastermindConsoleGame {
 
             return true;
         } else if ("help".equalsIgnoreCase(userInput) || "rules".equalsIgnoreCase(userInput)) {
-            outputWriter.println(gameMessages.getRulesMessage());
+            printer.printRulesMessage();
 
             return false;
         }
@@ -95,17 +94,17 @@ public class MastermindConsoleGame {
 
             turnCounter++;
         } else {
-            outputWriter.println(gameMessages.getInvalidInputMessage());
+            printer.printInvalidInputMessage();
         }
     }
 
     private void handleUserGuess(String userInput) {
         if (userInput.equals(answer)) {
-            outputWriter.println(gameMessages.getWinMessage(answer));
+            printer.printWinMessage(answer);
 
             close = true;
         } else {
-            outputWriter.println(gameMessages.getIncorrectGuessMessage(MAX_TURNS, turnCounter, answer, userInput));
+            printer.printIncorrectGuessMessage(MAX_TURNS, turnCounter, answer, userInput);
         }
     }
 }
