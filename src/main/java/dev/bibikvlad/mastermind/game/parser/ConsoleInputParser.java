@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class ConsoleMastermindInputParser implements MastermindUserInputParser {
+public class ConsoleInputParser implements MastermindUserInputParser {
     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
     @Override
