@@ -4,11 +4,11 @@ import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 
 import java.io.PrintStream;
 
-public class CustomMastermindMessagePrinter implements MastermindMessagePrinter {
+public class StreamMessagePrinter implements MastermindMessagePrinter {
     private final GameMessages gameMessages;
     private final PrintStream printStream;
 
-    public CustomMastermindMessagePrinter(GameMessages gameMessages, PrintStream printStream) {
+    public StreamMessagePrinter(GameMessages gameMessages, PrintStream printStream) {
         this.gameMessages = gameMessages;
         this.printStream = printStream;
     }
