@@ -12,14 +12,10 @@ public class CustomMastermindInputParser implements MastermindUserInputParser {
 
     @Override
     public String parseUserInput() {
-        String userInput = "";
-
         try {
-           userInput = bufferedReader.readLine().toLowerCase();
+           return bufferedReader.readLine().toLowerCase();
         } catch (IOException exception) {
-            System.out.println(exception.getMessage());
+            throw new IllegalStateException("Could not read line from input stream", exception);
         }
-
-        return userInput;
     }
 }
