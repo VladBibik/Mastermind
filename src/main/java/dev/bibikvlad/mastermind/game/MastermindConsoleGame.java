@@ -3,13 +3,11 @@ package dev.bibikvlad.mastermind.game;
 import dev.bibikvlad.mastermind.game.printer.ConsoleMastermindMessagePrinter;
 import dev.bibikvlad.mastermind.game.printer.MastermindMessagePrinter;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
-import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import dev.bibikvlad.mastermind.validators.GameInputValidator;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintStream;
 
 public class MastermindConsoleGame {
     private static final int MAX_TURNS = 10;
