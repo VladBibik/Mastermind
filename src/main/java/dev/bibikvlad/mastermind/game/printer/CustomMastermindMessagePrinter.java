@@ -1,7 +1,5 @@
 package dev.bibikvlad.mastermind.game.printer;
 
-import dev.bibikvlad.mastermind.localization.config.LocaleType;
-import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 
 import java.io.PrintStream;
@@ -10,8 +8,8 @@ public class CustomMastermindMessagePrinter implements MastermindMessagePrinter 
     private final GameMessages gameMessages;
     private final PrintStream printStream;
 
-    public CustomMastermindMessagePrinter(LocaleType localeType, PrintStream printStream) {
-        this.gameMessages = new LocalizationContext(localeType).getGameMessages();
+    public CustomMastermindMessagePrinter(GameMessages gameMessages, PrintStream printStream) {
+        this.gameMessages = gameMessages;
         this.printStream = printStream;
     }
 

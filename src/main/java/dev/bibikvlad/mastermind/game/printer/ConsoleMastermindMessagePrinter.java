@@ -1,14 +1,12 @@
 package dev.bibikvlad.mastermind.game.printer;
 
-import dev.bibikvlad.mastermind.localization.config.LocaleType;
-import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 
 public class ConsoleMastermindMessagePrinter implements MastermindMessagePrinter {
     private final GameMessages gameMessages;
 
-    public ConsoleMastermindMessagePrinter(LocaleType localeType) {
-        this.gameMessages = new LocalizationContext(localeType).getGameMessages();
+    public ConsoleMastermindMessagePrinter(GameMessages gameMessages) {
+        this.gameMessages = gameMessages;
     }
 
     @Override
