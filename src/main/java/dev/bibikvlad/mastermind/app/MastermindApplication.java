@@ -2,6 +2,8 @@ package dev.bibikvlad.mastermind.app;
 
 import dev.bibikvlad.mastermind.game.MastermindConsoleGame;
 import dev.bibikvlad.mastermind.game.RandomAnswerGenerator;
+import dev.bibikvlad.mastermind.game.parser.ConsoleMastermindInputParser;
+import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.game.printer.ConsoleMastermindMessagePrinter;
 import dev.bibikvlad.mastermind.game.printer.MastermindMessagePrinter;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
@@ -13,8 +15,9 @@ public class MastermindApplication {
         LocalizationContext localizationContext = new LocalizationContext(LocaleType.ENGLISH);
         GameMessages gameMessages = localizationContext.getGameMessages();
         MastermindMessagePrinter printer = new ConsoleMastermindMessagePrinter(gameMessages);
+        MastermindUserInputParser parser = new ConsoleMastermindInputParser();
 
-        MastermindConsoleGame game = new MastermindConsoleGame(printer, RandomAnswerGenerator.generate());
+        MastermindConsoleGame game = new MastermindConsoleGame(printer, parser, RandomAnswerGenerator.generate());
 
         game.play();
     }
