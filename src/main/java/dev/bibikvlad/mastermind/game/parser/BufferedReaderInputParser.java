@@ -6,7 +6,7 @@ import java.io.IOException;
 public class BufferedReaderInputParser implements MastermindUserInputParser {
     private final BufferedReader bufferedReader;
 
-    protected BufferedReaderInputParser(BufferedReader bufferedReader) {
+    public BufferedReaderInputParser(BufferedReader bufferedReader) {
         this.bufferedReader = bufferedReader;
     }
 
