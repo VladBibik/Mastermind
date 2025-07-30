@@ -3,10 +3,10 @@ package dev.bibikvlad.mastermind.game.parser;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class CustomMastermindInputParser implements MastermindUserInputParser {
+public class BufferedReaderInputParser implements MastermindUserInputParser {
     private final BufferedReader bufferedReader;
 
-    protected CustomMastermindInputParser(BufferedReader bufferedReader) {
+    protected BufferedReaderInputParser(BufferedReader bufferedReader) {
         this.bufferedReader = bufferedReader;
     }
 
