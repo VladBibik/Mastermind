@@ -1,8 +1,6 @@
 package dev.bibikvlad.mastermind.game;
 
-import dev.bibikvlad.mastermind.game.printer.ConsoleMastermindMessagePrinter;
 import dev.bibikvlad.mastermind.game.printer.MastermindMessagePrinter;
-import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.validators.GameInputValidator;
 
 import java.io.BufferedReader;
