@@ -2,10 +2,10 @@ package dev.bibikvlad.mastermind.game.printer;
 
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 
-public class ConsoleMastermindMessagePrinter implements MastermindMessagePrinter {
+public class ConsoleMessagePrinter implements MastermindMessagePrinter {
     private final GameMessages gameMessages;
 
-    public ConsoleMastermindMessagePrinter(GameMessages gameMessages) {
+    public ConsoleMessagePrinter(GameMessages gameMessages) {
         this.gameMessages = gameMessages;
     }
 
