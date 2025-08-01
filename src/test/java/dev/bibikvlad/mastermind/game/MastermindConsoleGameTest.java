@@ -31,7 +31,7 @@ public class MastermindConsoleGameTest {
     @Test
     @DisplayName("Invalid input test")
     public void invalidInputTest() {
-        String output = runGame("rrrr", "abcd\nclose\n");
+        String output = runGameAndGetOutputStreamString("rrrr", "abcd\nclose\n");
 
         assertTrue(output.contains(gameMessages.getInvalidInputMessage()));
     }
@@ -40,7 +40,7 @@ public class MastermindConsoleGameTest {
     @DisplayName("Correct answer on the first attempt")
     public void firstAttemptCorrectAnswerTest() {
         String answer = "yypw";
-        String output = runGame(answer, "yypw");
+        String output = runGameAndGetOutputStreamString(answer, "yypw");
 
         assertTrue(output.contains(gameMessages.getWinMessage(answer)));
     }
@@ -49,7 +49,7 @@ public class MastermindConsoleGameTest {
     @DisplayName("Correct answer on the first attempt")
     public void tenIncorrectAttemptsInARowTest() {
         String answer = "yypw";
-        String output = runGame(answer, "rrrr\n".repeat(10));
+        String output = runGameAndGetOutputStreamString(answer, "rrrr\n".repeat(10));
 
         assertTrue(output.contains(gameMessages.getGameOverMessage(answer)));
     }
@@ -58,7 +58,7 @@ public class MastermindConsoleGameTest {
     @DisplayName("Correct answer after several incorrect attempts")
     public void correctAnswerAfterSeveralIncorrectAttemptsTest() {
         String answer = "bgpw";
-        String output = runGame(answer, "yypw\nrrbb\npwbg\nbgpw");
+        String output = runGameAndGetOutputStreamString(answer, "yypw\nrrbb\npwbg\nbgpw");
 
         assertTrue(output.contains(gameMessages.getWinMessage(answer)));
     }
@@ -66,10 +66,11 @@ public class MastermindConsoleGameTest {
     @Test
     @DisplayName("Close on first attempt")
     public void firstAttemptCloseTest() {
-        assertDoesNotThrow(() -> runGame("yrgw", "close"));
+        assertDoesNotThrow(
+                () -> runGameAndGetOutputStreamString("yrgw", "close"));
     }
 
-    private String runGame(String answer, String input) {
+    private String runGameAndGetOutputStreamString(String answer, String input) {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
