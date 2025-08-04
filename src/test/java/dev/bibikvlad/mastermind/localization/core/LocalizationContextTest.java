@@ -52,9 +52,9 @@ public class LocalizationContextTest {
     }
 
     static class FakeMessageProvider extends MessageProvider {
-        Class<?> lastRequestedType;
-        String lastRequestedMessage;
-        Object toReturn;
+        private final Object toReturn;
+        private Class<?> lastRequestedType;
+        private String lastRequestedMessage;
 
         public FakeMessageProvider(Object toReturn) {
             super(null, null);
