@@ -27,7 +27,7 @@ public class LocalizationContextTest {
 
     @Test
     @DisplayName("getGameMessages() returns expected English win message")
-    void getGameMessages_returnsExpectedWinMessageFromBundle() {
+    void getGameMessagesReturnsExpectedEnglishWinMessage() {
         LocalizationContext localizationContext = new LocalizationContext(LocaleType.ENGLISH);
         GameMessages messagesFromGameMethod = localizationContext.getGameMessages();
 
