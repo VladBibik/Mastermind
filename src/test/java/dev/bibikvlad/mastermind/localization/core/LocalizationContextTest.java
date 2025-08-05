@@ -17,7 +17,7 @@ public class LocalizationContextTest {
 
     @Test
     @DisplayName("getMessages(MessageType.GAME) returns same GameMessages as getGameMessages()")
-    void getMessages_withMessageTypeGAME_returnsSameAsGetGameMessages() {
+    void getMessagesReturnsSameInstanceAsGetGameMessages() {
         LocalizationContext localizationContext = new LocalizationContext(LocaleType.ENGLISH);
         GameMessages messagesFromParametrizedMethod = localizationContext.getMessages(MessageType.GAME);
 
