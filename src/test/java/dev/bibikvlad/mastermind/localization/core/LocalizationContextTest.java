@@ -39,7 +39,7 @@ public class LocalizationContextTest {
 
     @Test
     @DisplayName("getGameMessages() delegates with correct type and bundle name")
-    void getGameMessages_delegatesToMessageProviderWithCorrectParams() {
+    void getGameMessagesDelegatesToProviderWithCorrectParameters() {
         GameMessages dummy = new StubGameMessages();
         FakeMessageProvider fakeMessageProvider = new FakeMessageProvider(dummy);
 
