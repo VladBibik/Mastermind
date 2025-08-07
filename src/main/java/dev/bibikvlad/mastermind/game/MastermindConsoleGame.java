@@ -11,8 +11,7 @@ public class MastermindConsoleGame {
     private final MastermindMessagePrinter printer;
     private final MastermindUserInputParser parser;
 
-    private boolean close = false;
-    private int turnCounter = 0;
+    private final GameStateManager gameStateManager;
 
     public MastermindConsoleGame(MastermindMessagePrinter printer,
                                  MastermindUserInputParser inputParser,
@@ -21,11 +20,13 @@ public class MastermindConsoleGame {
         this.parser = inputParser;
         this.answer = answer;
 
+        gameStateManager = new GameStateManager(MAX_TURNS);
+
         printLogoAndRules();
     }
 
     public void play() {
-        while (!close) {
+        while (!gameStateManager.isGameClosed()) {
             if (isGameOver()) {
                 continue;
             }
@@ -46,10 +47,10 @@ public class MastermindConsoleGame {
     }
 
     private boolean isGameOver() {
-        if (turnCounter == MAX_TURNS) {
+        if (gameStateManager.isOver()) {
             printer.printGameOverMessage(answer);
 
-            close = true;
+            gameStateManager.close();
 
             return true;
         }
@@ -59,7 +60,7 @@ public class MastermindConsoleGame {
 
     private boolean isGameClosed(String userInput) {
         if ("close".equalsIgnoreCase(userInput) || "exit".equalsIgnoreCase(userInput)) {
-            close = true;
+            gameStateManager.close();
 
             return true;
         } else if ("help".equalsIgnoreCase(userInput) || "rules".equalsIgnoreCase(userInput)) {
@@ -75,7 +76,7 @@ public class MastermindConsoleGame {
         if (GameInputValidator.isInputValid(userInput)) {
             handleUserGuess(userInput);
 
-            turnCounter++;
+            gameStateManager.nextTurn();
         } else {
             printer.printInvalidInputMessage();
         }
@@ -85,9 +86,9 @@ public class MastermindConsoleGame {
         if (userInput.equals(answer)) {
             printer.printWinMessage(answer);
 
-            close = true;
+            gameStateManager.close();
         } else {
-            printer.printIncorrectGuessMessage(MAX_TURNS, turnCounter, answer, userInput);
+            printer.printIncorrectGuessMessage(MAX_TURNS, gameStateManager.getCurrentTurn(), answer, userInput);
         }
     }
 }
