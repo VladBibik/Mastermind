@@ -12,6 +12,7 @@ public class MastermindConsoleGame {
     private final MastermindUserInputParser parser;
 
     private final GameStateManager gameStateManager;
+    private final GameCommandHandler gameCommandHandler;
 
     public MastermindConsoleGame(MastermindMessagePrinter printer,
                                  MastermindUserInputParser inputParser,
@@ -21,6 +22,7 @@ public class MastermindConsoleGame {
         this.answer = answer;
 
         gameStateManager = new GameStateManager(MAX_TURNS);
+        gameCommandHandler = new GameCommandHandler(printer);
 
         printLogoAndRules();
     }
@@ -33,7 +35,9 @@ public class MastermindConsoleGame {
 
             String userInput = parser.parseUserInput();
 
-            if (isGameClosed(userInput)) {
+            if (gameCommandHandler.handle(userInput)) {
+                gameStateManager.close();
+
                 continue;
             }
 
@@ -53,20 +57,6 @@ public class MastermindConsoleGame {
             gameStateManager.close();
 
             return true;
-        }
-
-        return false;
-    }
-
-    private boolean isGameClosed(String userInput) {
-        if ("close".equalsIgnoreCase(userInput) || "exit".equalsIgnoreCase(userInput)) {
-            gameStateManager.close();
-
-            return true;
-        } else if ("help".equalsIgnoreCase(userInput) || "rules".equalsIgnoreCase(userInput)) {
-            printer.printRulesMessage();
-
-            return false;
         }
 
         return false;
