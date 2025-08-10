@@ -18,6 +18,7 @@ public class GameStateManager {
         currentTurn++;
     }
 
+    //TODO: Not a huge fan of this name. It feels that this method is closing something, when in reality it just sets a value
     public void close() {
         gameClosed = true;
     }
