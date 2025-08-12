@@ -13,6 +13,7 @@ public class MastermindConsoleGame {
 
     private final GameStateManager gameStateManager;
     private final GameCommandHandler gameCommandHandler;
+    private final GuessEvaluator guessEvaluator;
 
     public MastermindConsoleGame(MastermindMessagePrinter printer,
                                  MastermindUserInputParser inputParser,
@@ -23,13 +24,19 @@ public class MastermindConsoleGame {
 
         gameStateManager = new GameStateManager(MAX_TURNS);
         gameCommandHandler = new GameCommandHandler(printer);
+        guessEvaluator = new GuessEvaluator(answer, printer);
+
 
         printLogoAndRules();
     }
 
     public void play() {
         while (!gameStateManager.isGameClosed()) {
-            if (isGameOver()) {
+            if (gameStateManager.isOver()) {
+                printer.printGameOverMessage(answer);
+
+                gameStateManager.close();
+
                 continue;
             }
 
@@ -41,44 +48,22 @@ public class MastermindConsoleGame {
                 continue;
             }
 
-            processUserInput(userInput);
+            if (GameInputValidator.isInputValid(userInput)) {
+                boolean won = guessEvaluator.evaluate(userInput, gameStateManager.getCurrentTurn(),  MAX_TURNS);
+
+                if (won) {
+                    gameStateManager.close();
+                } else  {
+                    gameStateManager.nextTurn();
+                }
+            } else {
+                printer.printInvalidInputMessage();
+            }
         }
     }
 
     private void printLogoAndRules() {
         printer.printAsciiLogo();
         printer.printRulesMessage();
-    }
-
-    private boolean isGameOver() {
-        if (gameStateManager.isOver()) {
-            printer.printGameOverMessage(answer);
-
-            gameStateManager.close();
-
-            return true;
-        }
-
-        return false;
-    }
-
-    private void processUserInput(String userInput) {
-        if (GameInputValidator.isInputValid(userInput)) {
-            handleUserGuess(userInput);
-
-            gameStateManager.nextTurn();
-        } else {
-            printer.printInvalidInputMessage();
-        }
-    }
-
-    private void handleUserGuess(String userInput) {
-        if (userInput.equals(answer)) {
-            printer.printWinMessage(answer);
-
-            gameStateManager.close();
-        } else {
-            printer.printIncorrectGuessMessage(MAX_TURNS, gameStateManager.getCurrentTurn(), answer, userInput);
-        }
     }
 }
