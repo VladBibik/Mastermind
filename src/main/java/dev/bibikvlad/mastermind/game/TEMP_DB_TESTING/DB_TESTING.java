@@ -8,27 +8,27 @@ public class DB_TESTING {
 
         try (Connection connection = DriverManager.getConnection(url)) {
             if (connection != null) {
-//                String createTable = """
-//                        CREATE TABLE IF NOT EXISTS adventurers (
-//                            id INTEGER PRIMARY KEY,
-//                            name VARCHAR(255),
-//                            class VARCHAR(255)
-//                        )
-//                        """;
-//
-//                try (Statement statement = connection.createStatement()) {
-//                    statement.execute(createTable);
-//                }
-//
-//                String insertAdventurer = "INSERT INTO adventurers (id, name, class) VALUES (?, ?, ?)";
-//
-//                try (PreparedStatement preparedStatement = connection.prepareStatement(insertAdventurer)) {
-//                    preparedStatement.setInt(1, 2);
-//                    preparedStatement.setString(2, "Lina");
-//                    preparedStatement.setString(3, "Mage");
-//
-//                    preparedStatement.executeUpdate();
-//                }
+                String createTable = """
+                        CREATE TABLE IF NOT EXISTS adventurers (
+                            id INTEGER PRIMARY KEY,
+                            name VARCHAR(255),
+                            class VARCHAR(255)
+                        )
+                        """;
+
+                try (Statement statement = connection.createStatement()) {
+                    statement.execute(createTable);
+                }
+
+                String insertAdventurer = "INSERT INTO adventurers (id, name, class) VALUES (?, ?, ?)";
+
+                try (PreparedStatement preparedStatement = connection.prepareStatement(insertAdventurer)) {
+                    preparedStatement.setInt(1, 2);
+                    preparedStatement.setString(2, "Lina");
+                    preparedStatement.setString(3, "Mage");
+
+                    preparedStatement.executeUpdate();
+                }
 
                 String selectAdventurer = "SELECT * FROM adventurers";
 
