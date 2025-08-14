@@ -1,9 +1,6 @@
 package dev.bibikvlad.mastermind.database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class DatabaseContext {
     private static final String DB_URL = "jdbc:sqlite:Mastermind.db";
@@ -38,9 +35,21 @@ public class DatabaseContext {
             }
         }
     }
+}
 
-    class TEST {
-        public static void main(String[] args) {
-            Connection connection = DatabaseContext.getConnection();
+class TEST {
+    public static void main(String[] args) {
+        Connection connection = DatabaseContext.getConnection();
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "INSERT INTO users (username) VALUES (?)");
+
+            preparedStatement.setString(1, "GIGA_USER");
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
+}
