@@ -20,19 +20,35 @@ public class DatabaseContext {
     }
 
     private static void checkIfDBIsCreatedCreateIfNot(Connection connection) {
-        if (connection != null) {
-            String createTable = """
-                    CREATE TABLE IF NOT EXISTS users (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        username TEXT NOT NULL,
-                        creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                    );
-                    """;
-            try (Statement statement = connection.createStatement()) {
-                statement.executeUpdate(createTable);
-            } catch (SQLException exception) {
-                System.out.println(exception.getMessage());
+        try {
+            if (connection != null) {
+                try (Statement statement = connection.createStatement()) {
+                    statement.execute("PRAGMA foreign_keys=ON;");
+                }
+
+                String createUsersTable = """
+                        CREATE TABLE IF NOT EXISTS users (
+                            id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            username TEXT NOT NULL,
+                            creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                        );""";
+                try (Statement statement = connection.createStatement()) {
+                    statement.executeUpdate(createUsersTable);
+                }
+
+                String createUserConfigTable = """
+                            CREATE TABLE IF NOT EXISTS user_configurations (
+                                user_id INTEGER PRIMARY KEY,
+                                language TEXT NOT NULL,
+                                FOREIGN KEY (user_id) REFERENCES users(id)
+                        );""";
+
+                try (Statement statement = connection.createStatement()) {
+                    statement.executeUpdate(createUserConfigTable);
+                }
             }
+        } catch (SQLException exception) {
+            System.out.println(exception.getMessage());
         }
     }
 }
