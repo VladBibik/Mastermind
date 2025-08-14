@@ -23,13 +23,13 @@ public class DatabaseContext {
         try {
             if (connection != null) {
                 try (Statement statement = connection.createStatement()) {
-                    statement.execute("PRAGMA foreign_keys=ON;");
+                    statement.execute("PRAGMA foreign_keys = ON;");
                 }
 
                 String createUsersTable = """
                         CREATE TABLE IF NOT EXISTS users (
                             id INTEGER PRIMARY KEY AUTOINCREMENT,
-                            username TEXT NOT NULL,
+                            username TEXT UNIQUE NOT NULL,
                             creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                         );""";
                 try (Statement statement = connection.createStatement()) {
