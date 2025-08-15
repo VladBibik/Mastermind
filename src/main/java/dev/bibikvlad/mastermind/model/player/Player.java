@@ -29,8 +29,6 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Player:\n"
-                + "username = " + username + "\n"
-                + "locale = " + locale;
+        return "Player: " + "username = " + username + ", locale = " + locale;
     }
 }
