@@ -48,5 +48,15 @@ public class PlayerDAO {
         preparedStatement.setString(1, playerName);
         preparedStatement.executeUpdate();
     }
+
+    public void deletePlayer(String playerName) throws SQLException {
+        String deletePlayerQuery = """
+                        DELETE FROM players
+                        WHERE player_name = ?;
+                """;
+        PreparedStatement preparedStatement = connection.prepareStatement(deletePlayerQuery);
+        preparedStatement.setString(1, playerName);
+        preparedStatement.executeUpdate();
+    }
 }
 
