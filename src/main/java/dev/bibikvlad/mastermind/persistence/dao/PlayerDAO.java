@@ -3,7 +3,10 @@ package dev.bibikvlad.mastermind.persistence.dao;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.player.Player;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,4 +39,14 @@ public class PlayerDAO {
 
         return players;
     }
+
+    public void savePlayer(String playerName) throws SQLException {
+        String addPlayerQuery = """
+                INSERT INTO players (player_name) VALUES (?)
+                """;
+        PreparedStatement preparedStatement = connection.prepareStatement(addPlayerQuery);
+        preparedStatement.setString(1, playerName);
+        preparedStatement.executeUpdate();
+    }
 }
+
