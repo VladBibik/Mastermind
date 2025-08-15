@@ -6,15 +6,15 @@ import java.sql.Statement;
 
 public class SchemaCreator {
     public static void create(Connection connection) throws SQLException {
-        createUsersTable(connection);
-        createUserConfigurationTable(connection);
+        createPlayersTable(connection);
+        createPlayerConfigurationTable(connection);
     }
 
-    private static void createUsersTable(Connection connection) throws SQLException {
+    private static void createPlayersTable(Connection connection) throws SQLException {
         String createUsersTable = """
-                CREATE TABLE IF NOT EXISTS users (
+                CREATE TABLE IF NOT EXISTS players (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    username TEXT UNIQUE NOT NULL,
+                    player_name TEXT UNIQUE NOT NULL,
                     creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 );""";
 
@@ -22,12 +22,12 @@ public class SchemaCreator {
         statement.executeUpdate(createUsersTable);
     }
 
-    private static void createUserConfigurationTable(Connection connection) throws SQLException {
+    private static void createPlayerConfigurationTable(Connection connection) throws SQLException {
         String createUserConfigTable = """
-                    CREATE TABLE IF NOT EXISTS user_configurations (
-                        user_id INTEGER PRIMARY KEY,
+                    CREATE TABLE IF NOT EXISTS player_configurations (
+                        player_id INTEGER PRIMARY KEY,
                         language TEXT NOT NULL,
-                        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+                        FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE
                 );""";
 
         Statement statement = connection.createStatement();
