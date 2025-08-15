@@ -28,20 +28,3 @@ public class DatabaseContext {
         }
     }
 }
-
-class TEST {
-    public static void main(String[] args) {
-        Connection connection = DatabaseContext.getConnection();
-
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO users (username) VALUES (?)");
-
-            preparedStatement.setString(1, "GIGA_USER");
-
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-}
