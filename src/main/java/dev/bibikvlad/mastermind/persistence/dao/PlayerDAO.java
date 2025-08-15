@@ -3,10 +3,7 @@ package dev.bibikvlad.mastermind.persistence.dao;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.player.Player;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,5 +35,25 @@ public class PlayerDAO {
         }
 
         return players;
+    }
+
+    private Statement createStatement() {
+        try {
+            return connection.createStatement();
+        } catch (SQLException e) {
+            System.out.println("SQLException: " + e.getMessage());
+        }
+
+        throw new IllegalStateException("Something went wrong with database connection");
+    }
+
+    private PreparedStatement createPreparedStatement(String query) {
+        try {
+            return connection.prepareStatement(query);
+        } catch (SQLException e) {
+            System.out.println("SQLException: " + e.getMessage());
+        }
+
+        throw new IllegalStateException("Something went wrong with database connection");
     }
 }
