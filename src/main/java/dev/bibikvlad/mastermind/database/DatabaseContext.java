@@ -1,6 +1,9 @@
 package dev.bibikvlad.mastermind.database;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class DatabaseContext {
     private static final String DB_URL = "jdbc:sqlite:Mastermind.db";
@@ -19,36 +22,9 @@ public class DatabaseContext {
         throw new IllegalStateException("Something went wrong");
     }
 
-    private static void checkIfDBIsCreatedCreateIfNot(Connection connection) {
-        try {
-            if (connection != null) {
-                try (Statement statement = connection.createStatement()) {
-                    statement.execute("PRAGMA foreign_keys = ON;");
-                }
-
-                String createUsersTable = """
-                        CREATE TABLE IF NOT EXISTS users (
-                            id INTEGER PRIMARY KEY AUTOINCREMENT,
-                            username TEXT UNIQUE NOT NULL,
-                            creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                        );""";
-                try (Statement statement = connection.createStatement()) {
-                    statement.executeUpdate(createUsersTable);
-                }
-
-                String createUserConfigTable = """
-                            CREATE TABLE IF NOT EXISTS user_configurations (
-                                user_id INTEGER PRIMARY KEY,
-                                language TEXT NOT NULL,
-                                FOREIGN KEY (user_id) REFERENCES users(id)
-                        );""";
-
-                try (Statement statement = connection.createStatement()) {
-                    statement.executeUpdate(createUserConfigTable);
-                }
-            }
-        } catch (SQLException exception) {
-            System.out.println(exception.getMessage());
+    private static void checkIfDBIsCreatedCreateIfNot(Connection connection) throws SQLException {
+        if (connection != null) {
+            SchemaCreator.create(connection);
         }
     }
 }
