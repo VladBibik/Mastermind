@@ -27,7 +27,7 @@ public class SchemaCreator {
                     CREATE TABLE IF NOT EXISTS user_configurations (
                         user_id INTEGER PRIMARY KEY,
                         language TEXT NOT NULL,
-                        FOREIGN KEY (user_id) REFERENCES users(id)
+                        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
                 );""";
 
         Statement statement = connection.createStatement();
