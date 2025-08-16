@@ -107,7 +107,7 @@ public class PlayerDAO {
         preparedStatement.executeUpdate();
     }
 
-    public boolean isPlayerExist(int playerId) throws SQLException {
+    public boolean isPlayerExistByPlayerID(int playerId) throws SQLException {
         String playerQuery = """
                             SELECT player_name FROM players
                             WHERE id = ?;
