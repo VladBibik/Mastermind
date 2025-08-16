@@ -1,6 +1,5 @@
 package dev.bibikvlad.mastermind.persistence.dao;
 
-import dev.bibikvlad.mastermind.database.DatabaseContext;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.player.Player;
 
@@ -44,10 +43,10 @@ public class PlayerDAO {
 
     public Optional<String> getPlayerNameById(int id) throws SQLException {
         String getPlayerNameQuery = """
-                SELECT player_name
-                FROM players p
-                WHERE p.id = ?
-        """;
+                        SELECT player_name
+                        FROM players
+                        WHERE id = ?
+                """;
         Optional<String> playerName = Optional.empty();
 
         PreparedStatement preparedStatement = connection.prepareStatement(getPlayerNameQuery);
@@ -85,10 +84,10 @@ public class PlayerDAO {
     public void updatePlayer(String oldPlayerName, String newPlayerName) throws SQLException {
         //TODO: Add check!
         String updatePlayerQuery = """
-                    UPDATE players
-                    SET player_name = ?
-                    WHERE player_name = ?;
-        """;
+                            UPDATE players
+                            SET player_name = ?
+                            WHERE player_name = ?;
+                """;
 
         PreparedStatement preparedStatement = connection.prepareStatement(updatePlayerQuery);
         preparedStatement.setString(1, oldPlayerName);
@@ -99,8 +98,8 @@ public class PlayerDAO {
     public void addLocale(String playerName) throws SQLException {
         //TODO: UNFINISHED!
         String addLocaleQuery = """
-                    INSERT INTO player_configurations (language)  VALUES (?)
-        """;
+                            INSERT INTO player_configurations (language)  VALUES (?)
+                """;
 
         PreparedStatement preparedStatement = connection.prepareStatement(addLocaleQuery);
         preparedStatement.setString(1, playerName);
@@ -109,9 +108,9 @@ public class PlayerDAO {
 
     public boolean isPlayerExist(int playerId) throws SQLException {
         String playerQuery = """
-                    SELECT player_name FROM players p
-                    WHERE p.id = ?;
-        """;
+                            SELECT player_name FROM players
+                            WHERE id = ?;
+                """;
 
         PreparedStatement preparedStatement = connection.prepareStatement(playerQuery);
         preparedStatement.setInt(1, playerId);
@@ -122,24 +121,14 @@ public class PlayerDAO {
 
     public boolean isPlayerExist(String playerName) throws SQLException {
         String playerQuery = """
-                    SELECT player_name FROM players
-                    WHERE player_name = ?;
-        """;
+                            SELECT player_name FROM players
+                            WHERE player_name = ?;
+                """;
 
         PreparedStatement preparedStatement = connection.prepareStatement(playerQuery);
         preparedStatement.setString(1, playerName);
         ResultSet resultSet = preparedStatement.executeQuery();
 
         return resultSet.next();
-    }
-}
-
-class Test {
-    public static void main(String[] args) throws SQLException {
-        PlayerDAO playerDAO = new PlayerDAO(DatabaseContext.getConnection());
-
-        int playerId = 2;
-        System.out.println(playerDAO.getPlayerNameById(playerId).orElse(
-                "Unfortunately a player with id: "  + playerId + " is not found"));
     }
 }
