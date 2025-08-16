@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class PlayerDAO {
     private final Connection connection;
@@ -41,13 +42,13 @@ public class PlayerDAO {
         return players;
     }
 
-    public String getPlayerNameById(int id) throws SQLException {
+    public Optional<String> getPlayerNameById(int id) throws SQLException {
         String getPlayerNameQuery = """
                 SELECT player_name
                 FROM players p
                 WHERE p.id = ?
         """;
-        String playerName = "";
+        Optional<String> playerName = Optional.empty();
 
         PreparedStatement preparedStatement = connection.prepareStatement(getPlayerNameQuery);
         preparedStatement.setInt(1, id);
@@ -55,12 +56,7 @@ public class PlayerDAO {
         ResultSet resultSet = preparedStatement.executeQuery();
 
         if (resultSet.next()) {
-            playerName = resultSet.getString("player_name");
-        }
-
-        if (playerName.isEmpty()) {
-            //TODO: Add more sophisticated handling for it!
-            System.out.println("Player with id " + id + " not found");
+            playerName = Optional.ofNullable(resultSet.getString("player_name"));
         }
 
         return playerName;
@@ -114,6 +110,8 @@ class Test {
     public static void main(String[] args) throws SQLException {
         PlayerDAO playerDAO = new PlayerDAO(DatabaseContext.getConnection());
 
-        System.out.println(playerDAO.getPlayerNameById(1));
+        int playerId = 2;
+        System.out.println(playerDAO.getPlayerNameById(playerId).orElse(
+                "Unfortunately a player with id: "  + playerId + " is not found"));
     }
 }
