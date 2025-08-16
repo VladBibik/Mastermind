@@ -72,7 +72,9 @@ public class PlayerDAO {
     }
 
     public void deleteByPlayerName(String playerName) throws SQLException {
-        //TODO: Add check!
+        if (!existByPlayerName(playerName))
+            throw new SQLException("Player name: '" + playerName + "' does not exist");
+
         String deletePlayerQuery = """
                         DELETE FROM players
                         WHERE player_name = ?;
@@ -83,7 +85,9 @@ public class PlayerDAO {
     }
 
     public void updateByPlayerName(String oldPlayerName, String newPlayerName) throws SQLException {
-        //TODO: Add check!
+        if (!existByPlayerName(oldPlayerName))
+            throw new SQLException("Player name: '" + oldPlayerName + "' does not exist");
+
         String updatePlayerQuery = """
                             UPDATE players
                             SET player_name = ?
@@ -91,8 +95,8 @@ public class PlayerDAO {
                 """;
 
         PreparedStatement preparedStatement = connection.prepareStatement(updatePlayerQuery);
-        preparedStatement.setString(1, oldPlayerName);
-        preparedStatement.setString(2, newPlayerName);
+        preparedStatement.setString(1, newPlayerName);
+        preparedStatement.setString(2, oldPlayerName);
         preparedStatement.executeUpdate();
     }
 
@@ -138,7 +142,9 @@ class Test {
     public static void main(String[] args) throws SQLException {
         PlayerDAO playerDAO = new PlayerDAO(DatabaseContext.getConnection());
 
-        int playerId = 11;
-        System.out.println(playerDAO.existByPlayerName("Player1"));
+//        int playerId = 11;
+//        System.out.println(playerDAO.existByPlayerName("Player1"));
+
+        playerDAO.deleteByPlayerName("Gem");
     }
 }
