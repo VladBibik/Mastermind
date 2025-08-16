@@ -41,6 +41,31 @@ public class PlayerDAO {
         return players;
     }
 
+    public String getPlayerNameById(int id) throws SQLException {
+        String getPlayerNameQuery = """
+                SELECT player_name
+                FROM players p
+                WHERE p.id = ?
+        """;
+        String playerName = "";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(getPlayerNameQuery);
+        preparedStatement.setInt(1, id);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        if (resultSet.next()) {
+            playerName = resultSet.getString("player_name");
+        }
+
+        if (playerName.isEmpty()) {
+            //TODO: Add more sophisticated handling for it!
+            System.out.println("Player with id " + id + " not found");
+        }
+
+        return playerName;
+    }
+
     public void savePlayer(String playerName) throws SQLException {
         String addPlayerQuery = """
                 INSERT INTO players (player_name) VALUES (?)
@@ -89,6 +114,6 @@ class Test {
     public static void main(String[] args) throws SQLException {
         PlayerDAO playerDAO = new PlayerDAO(DatabaseContext.getConnection());
 
-        playerDAO.updatePlayer("Player1", "Mera");
+        System.out.println(playerDAO.getPlayerNameById(1));
     }
 }
