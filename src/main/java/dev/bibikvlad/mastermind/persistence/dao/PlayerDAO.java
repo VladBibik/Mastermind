@@ -107,7 +107,7 @@ public class PlayerDAO {
         preparedStatement.executeUpdate();
     }
 
-    public boolean isPlayerExistByPlayerID(int playerId) throws SQLException {
+    public boolean existById(int playerId) throws SQLException {
         String playerQuery = """
                             SELECT player_name FROM players
                             WHERE id = ?;
@@ -120,7 +120,7 @@ public class PlayerDAO {
         return resultSet.next();
     }
 
-    public boolean isPlayerExistByPlayerName(String playerName) throws SQLException {
+    public boolean existByPlayerName(String playerName) throws SQLException {
         String playerQuery = """
                             SELECT player_name FROM players
                             WHERE player_name = ?;
@@ -139,6 +139,6 @@ class Test {
         PlayerDAO playerDAO = new PlayerDAO(DatabaseContext.getConnection());
 
         int playerId = 11;
-        System.out.println(playerDAO.isPlayerExistByPlayerName("Player1"));
+        System.out.println(playerDAO.existByPlayerName("Player1"));
     }
 }
