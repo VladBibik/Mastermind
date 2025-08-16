@@ -72,6 +72,7 @@ public class PlayerDAO {
     }
 
     public void deletePlayer(String playerName) throws SQLException {
+        //TODO: Add check!
         String deletePlayerQuery = """
                         DELETE FROM players
                         WHERE player_name = ?;
@@ -82,6 +83,7 @@ public class PlayerDAO {
     }
 
     public void updatePlayer(String oldPlayerName, String newPlayerName) throws SQLException {
+        //TODO: Add check!
         String updatePlayerQuery = """
                     UPDATE players
                     SET player_name = ?
