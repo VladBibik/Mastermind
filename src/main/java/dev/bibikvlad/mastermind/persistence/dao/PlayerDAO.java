@@ -120,7 +120,7 @@ public class PlayerDAO {
         return resultSet.next();
     }
 
-    public boolean isPlayerExist(String playerName) throws SQLException {
+    public boolean isPlayerExistByPlayerName(String playerName) throws SQLException {
         String playerQuery = """
                             SELECT player_name FROM players
                             WHERE player_name = ?;
@@ -139,6 +139,6 @@ class Test {
         PlayerDAO playerDAO = new PlayerDAO(DatabaseContext.getConnection());
 
         int playerId = 11;
-        System.out.println(playerDAO.isPlayerExist("Player1"));
+        System.out.println(playerDAO.isPlayerExistByPlayerName("Player1"));
     }
 }
