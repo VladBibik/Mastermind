@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.persistence.dao;
 
+import dev.bibikvlad.mastermind.database.DatabaseContext;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.player.Player;
 
@@ -70,7 +71,7 @@ public class PlayerDAO {
         preparedStatement.executeUpdate();
     }
 
-    public void deletePlayer(String playerName) throws SQLException {
+    public void deletePlayerByPlayerName(String playerName) throws SQLException {
         //TODO: Add check!
         String deletePlayerQuery = """
                         DELETE FROM players
@@ -81,7 +82,7 @@ public class PlayerDAO {
         preparedStatement.executeUpdate();
     }
 
-    public void updatePlayer(String oldPlayerName, String newPlayerName) throws SQLException {
+    public void updatePlayerByPlayerName(String oldPlayerName, String newPlayerName) throws SQLException {
         //TODO: Add check!
         String updatePlayerQuery = """
                             UPDATE players
@@ -130,5 +131,14 @@ public class PlayerDAO {
         ResultSet resultSet = preparedStatement.executeQuery();
 
         return resultSet.next();
+    }
+}
+
+class Test {
+    public static void main(String[] args) throws SQLException {
+        PlayerDAO playerDAO = new PlayerDAO(DatabaseContext.getConnection());
+
+        int playerId = 11;
+        System.out.println(playerDAO.isPlayerExist("Player1"));
     }
 }
