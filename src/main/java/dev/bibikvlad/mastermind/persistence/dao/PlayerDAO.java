@@ -72,6 +72,17 @@ public class PlayerDAO {
         preparedStatement.setString(2, newPlayerName);
         preparedStatement.executeUpdate();
     }
+
+    public void addLocale(String playerName) throws SQLException {
+        //TODO: UNFINISHED!
+        String addLocaleQuery = """
+                    INSERT INTO player_configurations (language)  VALUES (?)
+        """;
+
+        PreparedStatement preparedStatement = connection.prepareStatement(addLocaleQuery);
+        preparedStatement.setString(1, playerName);
+        preparedStatement.executeUpdate();
+    }
 }
 
 class Test {
