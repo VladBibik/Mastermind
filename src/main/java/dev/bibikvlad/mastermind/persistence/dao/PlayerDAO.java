@@ -4,10 +4,7 @@ import dev.bibikvlad.mastermind.database.DatabaseContext;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.player.Player;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -148,13 +145,16 @@ public class PlayerDAO {
         preparedStatement.executeUpdate();
     }
 
-    public void addLocale(String playerName) throws SQLException {
-        //TODO: UNFINISHED!
-        String addLocaleQuery = """
+    public void setLocale(String playerName) throws SQLException {
+        //TODO: Still unfinished! Needs get player method!
+        if (!existByPlayerName(playerName))
+            throw new SQLException("Player name: '" + playerName + "' does not exist");
+
+        String setLocaleQuery = """
                             INSERT INTO player_configurations (language)  VALUES (?)
                 """;
 
-        PreparedStatement preparedStatement = connection.prepareStatement(addLocaleQuery);
+        PreparedStatement preparedStatement = connection.prepareStatement(setLocaleQuery);
         preparedStatement.setString(1, playerName);
         preparedStatement.executeUpdate();
     }
