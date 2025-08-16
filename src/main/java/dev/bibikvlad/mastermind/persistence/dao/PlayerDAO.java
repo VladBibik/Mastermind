@@ -66,9 +66,28 @@ public class PlayerDAO {
         String addPlayerQuery = """
                 INSERT INTO players (player_name) VALUES (?)
                 """;
-        PreparedStatement preparedStatement = connection.prepareStatement(addPlayerQuery);
-        preparedStatement.setString(1, playerName);
-        preparedStatement.executeUpdate();
+        String addDefaultConfigQuery = """
+                INSERT INTO player_configurations (player_id, language) VALUES (?, ?)
+                """;
+
+        PreparedStatement playerPreparedStatement =
+                connection.prepareStatement(addPlayerQuery, Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement configPreparedStatement = connection.prepareStatement(addDefaultConfigQuery);
+
+        playerPreparedStatement.setString(1, playerName);
+        playerPreparedStatement.executeUpdate();
+
+        try (ResultSet generatedKeys = playerPreparedStatement.getGeneratedKeys()) {
+            if (generatedKeys.next()) {
+                int playerId = generatedKeys.getInt(1);
+
+                configPreparedStatement.setInt(1, playerId);
+                configPreparedStatement.setString(2, LocaleType.ENGLISH.getLanguageName());
+                configPreparedStatement.executeUpdate();
+            } else {
+                throw new SQLException("Creating player failed. No ID obtained.");
+            }
+        }
     }
 
     public void deleteByPlayerName(String playerName) throws SQLException {
