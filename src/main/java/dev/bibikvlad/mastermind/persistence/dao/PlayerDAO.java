@@ -71,7 +71,7 @@ public class PlayerDAO {
         preparedStatement.executeUpdate();
     }
 
-    public void deletePlayerByPlayerName(String playerName) throws SQLException {
+    public void deleteByPlayerName(String playerName) throws SQLException {
         //TODO: Add check!
         String deletePlayerQuery = """
                         DELETE FROM players
@@ -82,7 +82,7 @@ public class PlayerDAO {
         preparedStatement.executeUpdate();
     }
 
-    public void updatePlayerByPlayerName(String oldPlayerName, String newPlayerName) throws SQLException {
+    public void updateByPlayerName(String oldPlayerName, String newPlayerName) throws SQLException {
         //TODO: Add check!
         String updatePlayerQuery = """
                             UPDATE players
