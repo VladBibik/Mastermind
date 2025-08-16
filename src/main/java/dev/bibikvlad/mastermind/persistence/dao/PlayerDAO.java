@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.persistence.dao;
 
+import dev.bibikvlad.mastermind.database.DatabaseContext;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.player.Player;
 
@@ -58,5 +59,25 @@ public class PlayerDAO {
         preparedStatement.setString(1, playerName);
         preparedStatement.executeUpdate();
     }
+
+    public void updatePlayer(String oldPlayerName, String newPlayerName) throws SQLException {
+        String updatePlayerQuery = """
+                    UPDATE players
+                    SET player_name = ?
+                    WHERE player_name = ?;
+        """;
+
+        PreparedStatement preparedStatement = connection.prepareStatement(updatePlayerQuery);
+        preparedStatement.setString(1, oldPlayerName);
+        preparedStatement.setString(2, newPlayerName);
+        preparedStatement.executeUpdate();
+    }
 }
 
+class Test {
+    public static void main(String[] args) throws SQLException {
+        PlayerDAO playerDAO = new PlayerDAO(DatabaseContext.getConnection());
+
+        playerDAO.updatePlayer("Player1", "Mera");
+    }
+}
