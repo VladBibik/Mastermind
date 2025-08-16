@@ -106,6 +106,19 @@ public class PlayerDAO {
         preparedStatement.setString(1, playerName);
         preparedStatement.executeUpdate();
     }
+
+    public boolean isPlayerExist(int playerId) throws SQLException {
+        String playerQuery = """
+                    SELECT player_name FROM players p
+                    WHERE p.id = ?;
+        """;
+
+        PreparedStatement preparedStatement = connection.prepareStatement(playerQuery);
+        preparedStatement.setInt(1, playerId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        return resultSet.next();
+    }
 }
 
 class Test {
