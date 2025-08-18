@@ -39,7 +39,7 @@ public class PlayerDAO {
         return players;
     }
 
-    public Player getPlayer(int playerId) throws SQLException {
+    public Player getPlayerById(int playerId) throws SQLException {
         if (!existById(playerId))
             throw new SQLException("Player with id: '" + playerId + "' does not exist");
 
