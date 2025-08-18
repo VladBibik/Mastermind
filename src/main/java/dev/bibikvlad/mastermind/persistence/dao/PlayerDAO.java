@@ -61,6 +61,28 @@ public class PlayerDAO {
         return new Player(playerName, LocaleType.fromLanguageString(language));
     }
 
+    public Player getPlayerByPlayerName(String playerName) throws SQLException {
+        if (!existByPlayerName(playerName))
+            throw new SQLException("Player with: '" + playerName + "' does not exist");
+
+        String fetchPlayerQuery = """
+                        SELECT p.player_name, conf.language
+                        FROM players p
+                        LEFT JOIN player_configurations conf
+                        ON p.id = conf.player_id
+                        WHERE p.player_name = ?
+                """;
+
+        PreparedStatement preparedStatement = connection.prepareStatement(fetchPlayerQuery);
+        preparedStatement.setString(1, playerName);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        String fetchedPlayerName = resultSet.getString("player_name");
+        String language = resultSet.getString("language");
+
+        return new Player(fetchedPlayerName, LocaleType.fromLanguageString(language));
+    }
+
     public Optional<String> getPlayerNameById(int id) throws SQLException {
         String getPlayerNameQuery = """
                         SELECT player_name
