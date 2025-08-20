@@ -8,11 +8,13 @@ public class Player {
     private String username;
     private LocaleType locale;
     private LocalDateTime creationDate;
+    private PlayerConfig playerConfig;
 
-    public Player(String username, LocaleType locale, LocalDateTime creationDate) {
+    public Player(String username, LocaleType locale, LocalDateTime creationDate, PlayerConfig playerConfig) {
         this.username = username;
         this.locale = locale;
         this.creationDate = creationDate;
+        this.playerConfig = playerConfig;
     }
 
     public String getUsername() {
@@ -29,6 +31,22 @@ public class Player {
 
     public void setLocale(LocaleType locale) {
         this.locale = locale;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public PlayerConfig getPlayerConfig() {
+        return playerConfig;
+    }
+
+    public void setPlayerConfig(PlayerConfig playerConfig) {
+        this.playerConfig = playerConfig;
     }
 
     @Override
