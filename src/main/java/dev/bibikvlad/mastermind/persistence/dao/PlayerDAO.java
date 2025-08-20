@@ -234,7 +234,6 @@ class Test {
     public static void main(String[] args) throws SQLException {
         PlayerDAO playerDAO = new PlayerDAO(DatabaseContext.getConnection());
 
-        int playerId = 11;
-        System.out.println(playerDAO.existByPlayerName("Player1"));
+        System.out.println(playerDAO.getPlayerByPlayerName("Georg"));
     }
 }
