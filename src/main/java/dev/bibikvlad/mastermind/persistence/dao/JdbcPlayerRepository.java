@@ -53,25 +53,34 @@ public class JdbcPlayerRepository implements PlayerRepository {
 
     @Override
     public Optional<Player> findById(int playerId) throws PersistenceException {
-        if (!existById(playerId))
-            throw new SQLException("Player with id: '" + playerId + "' does not exist");
-
         String fetchPlayerQuery = """
-                        SELECT p.player_name, conf.language
+                        SELECT *
                         FROM players p
                         LEFT JOIN player_configurations conf
                         ON p.id = conf.player_id
                         WHERE p.id = ?
                 """;
 
-        PreparedStatement preparedStatement = connection.prepareStatement(fetchPlayerQuery);
-        preparedStatement.setInt(1, playerId);
-        ResultSet resultSet = preparedStatement.executeQuery();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(fetchPlayerQuery)) {
+            preparedStatement.setInt(1, playerId);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-        String playerName = resultSet.getString("player_name");
-        String language = resultSet.getString("language");
+            if (resultSet.next()) {
+                PlayerConfig playerConfig = new PlayerConfig(
+                        resultSet.getInt("id"),
+                        LocaleType.fromLanguageString(resultSet.getString("language")));
+                Player player = new Player(
+                        resultSet.getString("player_name"),
+                        LocalDateTime.parse(resultSet.getString("creation_date")),
+                        playerConfig);
 
-        return new Player(playerName, LocaleType.fromLanguageString(language));
+                return Optional.of(player);
+            } else {
+                return Optional.empty();
+            }
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to fetch player by ID", exception);
+        }
     }
 
     @Override
