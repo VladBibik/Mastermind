@@ -7,6 +7,7 @@ import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;
 import dev.bibikvlad.mastermind.persistence.repository.PlayerRepository;
+import dev.bibikvlad.utils.formatters.SQLiteTimestampFormatter;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -40,7 +41,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
                         LocaleType.fromLanguageString(resultSet.getString("language")));
                 Player player = new Player(
                         resultSet.getString("player_name"),
-                        LocalDateTime.parse(resultSet.getString("creation_date")),
+                        SQLiteTimestampFormatter.format(resultSet.getString("creation_date")),
                         playerConfig);
 
                 players.add(player);
@@ -72,7 +73,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
                         LocaleType.fromLanguageString(resultSet.getString("language")));
                 Player player = new Player(
                         resultSet.getString("player_name"),
-                        LocalDateTime.parse(resultSet.getString("creation_date")),
+                        SQLiteTimestampFormatter.format(resultSet.getString("creation_date")),
                         playerConfig);
 
                 return Optional.of(player);
@@ -104,7 +105,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
                         LocaleType.fromLanguageString(resultSet.getString("language")));
                 Player player = new Player(
                         resultSet.getString("player_name"),
-                        LocalDateTime.parse(resultSet.getString("creation_date")),
+                        SQLiteTimestampFormatter.format(resultSet.getString("creation_date")),
                         playerConfig);
 
                 return Optional.of(player);
