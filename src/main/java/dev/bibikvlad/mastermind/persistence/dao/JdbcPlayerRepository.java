@@ -224,8 +224,43 @@ public class JdbcPlayerRepository implements PlayerRepository {
     }
 
     @Override
-    public void update(Player oldPlayer, Player newPlayer) {
+    public void update(Player oldPlayer, Player newPlayer) throws PersistenceException, PlayerNotFoundException {
+        if (!existByName(oldPlayer.getPlayerName())) {
+            throw new PlayerNotFoundException(
+                    "Player with the name: '" + oldPlayer.getPlayerName() + "' does not exist");
+        }
 
+        String updatePlayerQuery = """
+                        UPDATE players
+                        SET player_name = ?
+                        WHERE player_name = ?;
+                """;
+        String updateConfigQuery = """
+                        UPDATE player_configurations
+                        SET language = ?
+                        WHERE player_id = ?;
+                """;
+
+        try (PreparedStatement preparedStatement =
+                     connection.prepareStatement(updatePlayerQuery, Statement.RETURN_GENERATED_KEYS)) {
+            PreparedStatement configPreparedStatement = connection.prepareStatement(updateConfigQuery);
+
+            preparedStatement.setString(1, newPlayer.getPlayerName());
+            preparedStatement.setString(2, oldPlayer.getPlayerName());
+
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    int playerId = generatedKeys.getInt("id");
+
+                    configPreparedStatement.setString(1,
+                            newPlayer.getPlayerConfig().getLocale().getLanguageName());
+                    configPreparedStatement.setInt(2, playerId);
+                    configPreparedStatement.executeUpdate();
+                }
+            }
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to update a Player: " + oldPlayer, exception);
+        }
     }
 
     public void updateByPlayerName(String oldPlayerName, String newPlayerName) throws PersistenceException {
