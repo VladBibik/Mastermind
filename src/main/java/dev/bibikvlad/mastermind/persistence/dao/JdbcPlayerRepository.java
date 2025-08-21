@@ -79,7 +79,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
                 return Optional.empty();
             }
         } catch (SQLException exception) {
-            throw new PersistenceException("Failed to fetch player by ID", exception);
+            throw new PersistenceException("Failed to fetch player by ID: " + playerId, exception);
         }
     }
 
