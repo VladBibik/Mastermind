@@ -85,25 +85,34 @@ public class JdbcPlayerRepository implements PlayerRepository {
 
     @Override
     public Optional<Player> findByName(String playerName) throws PersistenceException {
-        if (!existByPlayerName(playerName))
-            throw new SQLException("Player with: '" + playerName + "' does not exist");
-
         String fetchPlayerQuery = """
-                        SELECT p.player_name, conf.language
+                        SELECT *
                         FROM players p
                         LEFT JOIN player_configurations conf
                         ON p.id = conf.player_id
                         WHERE p.player_name = ?
                 """;
 
-        PreparedStatement preparedStatement = connection.prepareStatement(fetchPlayerQuery);
-        preparedStatement.setString(1, playerName);
-        ResultSet resultSet = preparedStatement.executeQuery();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(fetchPlayerQuery)) {
+            preparedStatement.setString(1, playerName);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-        String fetchedPlayerName = resultSet.getString("player_name");
-        String language = resultSet.getString("language");
+            if (resultSet.next()) {
+                PlayerConfig playerConfig = new PlayerConfig(
+                        resultSet.getInt("id"),
+                        LocaleType.fromLanguageString(resultSet.getString("language")));
+                Player player = new Player(
+                        resultSet.getString("player_name"),
+                        LocalDateTime.parse(resultSet.getString("creation_date")),
+                        playerConfig);
 
-        return new Player(fetchedPlayerName, LocaleType.fromLanguageString(language));
+                return Optional.of(player);
+            } else {
+                return Optional.empty();
+            }
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to fetch player by Player Name: " + playerName, exception);
+        }
     }
 
 //    public Optional<String> getPlayerNameById(int id) throws PersistenceException {
