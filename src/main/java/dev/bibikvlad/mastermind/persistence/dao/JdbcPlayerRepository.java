@@ -155,9 +155,9 @@ public class JdbcPlayerRepository implements PlayerRepository {
             throw new PlayerNotFoundException("Player with the name: '" + player.getPlayerName() + "' does not exist");
 
         String deletePlayerQuery = """
-                    DELETE FROM players
-                    WHERE player_name = ?;
-        """;
+                            DELETE FROM players
+                            WHERE player_name = ?;
+                """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(deletePlayerQuery)) {
             preparedStatement.setString(1, player.getPlayerName());
@@ -251,10 +251,10 @@ public class JdbcPlayerRepository implements PlayerRepository {
                 """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(playerQuery)) {
-        preparedStatement.setInt(1, playerId);
-        ResultSet resultSet = preparedStatement.executeQuery();
+            preparedStatement.setInt(1, playerId);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-        return resultSet.next();
+            return resultSet.next();
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to check if player with id: " + playerId + " exists", exception);
         }
@@ -267,11 +267,14 @@ public class JdbcPlayerRepository implements PlayerRepository {
                             WHERE player_name = ?;
                 """;
 
-        PreparedStatement preparedStatement = connection.prepareStatement(playerQuery);
-        preparedStatement.setString(1, playerName);
-        ResultSet resultSet = preparedStatement.executeQuery();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(playerQuery)) {
+            preparedStatement.setString(1, playerName);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-        return resultSet.next();
+            return resultSet.next();
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to check if player with name: " + playerName + " exists", exception);
+        }
     }
 }
 
