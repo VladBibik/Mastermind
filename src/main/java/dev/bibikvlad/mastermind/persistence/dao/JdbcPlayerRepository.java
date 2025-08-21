@@ -170,8 +170,21 @@ public class JdbcPlayerRepository implements PlayerRepository {
     }
 
     @Override
-    public void delete(Player player) {
+    public void delete(Player player) throws PersistenceException, PlayerNotFoundException {
+        if (!existByName(player.getPlayerName()))
+            throw new PlayerNotFoundException("Player with the name: '" + player.getPlayerName() + "' does not exist");
 
+        String deletePlayerQuery = """
+                    DELETE FROM players
+                    WHERE player_name = ?;
+        """;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(deletePlayerQuery)) {
+            preparedStatement.setString(1, player.getPlayerName());
+            preparedStatement.executeUpdate();
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to delete a Player", exception);
+        }
     }
 
     @Override
