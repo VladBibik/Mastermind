@@ -3,22 +3,22 @@ package dev.bibikvlad.mastermind.model.player;
 import java.time.LocalDateTime;
 
 public class Player {
-    private String username;
+    private String playerName;
     private LocalDateTime creationDate;
     private PlayerConfig playerConfig;
 
     public Player(String username, LocalDateTime creationDate, PlayerConfig playerConfig) {
-        this.username = username;
+        this.playerName = username;
         this.creationDate = creationDate;
         this.playerConfig = playerConfig;
     }
 
-    public String getUsername() {
-        return username;
+    public String getPlayerName() {
+        return playerName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 
     public LocalDateTime getCreationDate() {
@@ -39,7 +39,7 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Player: " + "username = " + username + ", creationDate = " + creationDate
+        return "Player: " + "Player Name = " + playerName + ", creationDate = " + creationDate
                 + "\n    " + "configurations:"
                 + "\n        " + playerConfig.getPlayerId()
                 + "\n        " + playerConfig.getLocale().getLanguageName();
