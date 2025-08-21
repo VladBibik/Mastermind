@@ -116,26 +116,6 @@ public class JdbcPlayerRepository implements PlayerRepository {
         }
     }
 
-//    public Optional<String> getPlayerNameById(int id) throws PersistenceException {
-//        String getPlayerNameQuery = """
-//                        SELECT player_name
-//                        FROM players
-//                        WHERE id = ?
-//                """;
-//        Optional<String> playerName = Optional.empty();
-//
-//        PreparedStatement preparedStatement = connection.prepareStatement(getPlayerNameQuery);
-//        preparedStatement.setInt(1, id);
-//
-//        ResultSet resultSet = preparedStatement.executeQuery();
-//
-//        if (resultSet.next()) {
-//            playerName = Optional.ofNullable(resultSet.getString("player_name"));
-//        }
-//
-//        return playerName;
-//    }
-
     @Override
     public void save(Player player) throws PersistenceException {
         String addPlayerQuery = """
