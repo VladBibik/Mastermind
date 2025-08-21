@@ -23,4 +23,8 @@ public interface PlayerRepository {
     void deleteByName(String name) throws PersistenceException, PlayerNotFoundException;
 
     void update(Player oldPlayer, Player newPlayer) throws PersistenceException, PlayerNotFoundException;
+
+    boolean existsById(int id) throws PersistenceException;
+
+    boolean existsByName(String name) throws PersistenceException;
 }
