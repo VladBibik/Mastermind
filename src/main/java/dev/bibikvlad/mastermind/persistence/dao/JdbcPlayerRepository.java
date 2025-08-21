@@ -10,7 +10,6 @@ import dev.bibikvlad.mastermind.persistence.repository.PlayerRepository;
 import dev.bibikvlad.utils.formatters.SQLiteTimestampFormatter;
 
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
