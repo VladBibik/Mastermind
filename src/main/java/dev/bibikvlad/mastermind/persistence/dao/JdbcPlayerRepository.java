@@ -193,17 +193,21 @@ public class JdbcPlayerRepository implements PlayerRepository {
     }
 
     @Override
-    public void deleteByName(String playerName) throws PersistenceException {
-        if (!existByPlayerName(playerName))
-            throw new SQLException("Player name: '" + playerName + "' does not exist");
+    public void deleteByName(String playerName) throws PersistenceException, PlayerNotFoundException {
+        if (!existByName(playerName))
+            throw new PlayerNotFoundException("Player with the name: '" + playerName + "' does not exist");
 
         String deletePlayerQuery = """
                         DELETE FROM players
                         WHERE player_name = ?;
                 """;
-        PreparedStatement preparedStatement = connection.prepareStatement(deletePlayerQuery);
-        preparedStatement.setString(1, playerName);
-        preparedStatement.executeUpdate();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(deletePlayerQuery)) {
+            preparedStatement.setString(1, playerName);
+            preparedStatement.executeUpdate();
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to delete player by Name: " + playerName, exception);
+        }
     }
 
     @Override
@@ -212,7 +216,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
     }
 
     public void updateByPlayerName(String oldPlayerName, String newPlayerName) throws PersistenceException {
-        if (!existByPlayerName(oldPlayerName))
+        if (!existByName(oldPlayerName))
             throw new SQLException("Player name: '" + oldPlayerName + "' does not exist");
 
         String updatePlayerQuery = """
@@ -270,7 +274,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
         return resultSet.next();
     }
 
-    public boolean existByPlayerName(String playerName) throws PersistenceException {
+    public boolean existByName(String playerName) throws PersistenceException {
         String playerQuery = """
                             SELECT player_name FROM players
                             WHERE player_name = ?;
