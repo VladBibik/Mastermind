@@ -243,7 +243,8 @@ public class JdbcPlayerRepository implements PlayerRepository {
         }
     }
 
-    public boolean existById(int playerId) throws PersistenceException {
+    @Override
+    public boolean existsById(int playerId) throws PersistenceException {
         String playerQuery = """
                             SELECT player_name FROM players
                             WHERE id = ?;
@@ -256,7 +257,8 @@ public class JdbcPlayerRepository implements PlayerRepository {
         return resultSet.next();
     }
 
-    public boolean existByName(String playerName) throws PersistenceException {
+    @Override
+    public boolean existsByName(String playerName) throws PersistenceException {
         String playerQuery = """
                             SELECT player_name FROM players
                             WHERE player_name = ?;
