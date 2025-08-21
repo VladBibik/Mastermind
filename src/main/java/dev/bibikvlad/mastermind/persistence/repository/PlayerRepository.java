@@ -1,24 +1,25 @@
 package dev.bibikvlad.mastermind.persistence.repository;
 
+import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.model.player.Player;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface PlayerRepository {
-    List<Player>  findAll();
+    List<Player> findAll() throws PersistenceException;
 
-    Optional<Player> findById(int id);
+    Optional<Player> findById(int id) throws PersistenceException;
 
-    Optional<Player> findByName(String name);
+    Optional<Player> findByName(String name) throws PersistenceException;
 
-    void save(Player player);
+    void save(Player player) throws PersistenceException;
 
-    void delete(Player player);
+    void delete(Player player) throws PersistenceException;
 
-    void deleteById(int id);
+    void deleteById(int id) throws PersistenceException;
 
-    void deleteByName(String name);
+    void deleteByName(String name) throws PersistenceException;
 
-    void update(Player oldPlayer, Player newPlayer);
+    void update(Player oldPlayer, Player newPlayer) throws PersistenceException;
 }
