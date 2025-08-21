@@ -263,38 +263,6 @@ public class JdbcPlayerRepository implements PlayerRepository {
         }
     }
 
-    public void updateByPlayerName(String oldPlayerName, String newPlayerName) throws PersistenceException {
-        if (!existByName(oldPlayerName))
-            throw new SQLException("Player name: '" + oldPlayerName + "' does not exist");
-
-        String updatePlayerQuery = """
-                            UPDATE players
-                            SET player_name = ?
-                            WHERE player_name = ?;
-                """;
-
-        PreparedStatement preparedStatement = connection.prepareStatement(updatePlayerQuery);
-        preparedStatement.setString(1, newPlayerName);
-        preparedStatement.setString(2, oldPlayerName);
-        preparedStatement.executeUpdate();
-    }
-
-    public void updateById(int playerId, String newPlayerName) throws PersistenceException {
-        if (!existById(playerId))
-            throw new SQLException("Player with id: '" + playerId + "' does not exist");
-
-        String updatePlayerQuery = """
-                            UPDATE players
-                            SET player_name = ?
-                            WHERE player_name = ?;
-                """;
-
-        PreparedStatement preparedStatement = connection.prepareStatement(updatePlayerQuery);
-        preparedStatement.setString(1, newPlayerName);
-        preparedStatement.setInt(2, playerId);
-        preparedStatement.executeUpdate();
-    }
-
 //    public void setLocale(String playerName) throws PersistenceException {
 //        //TODO: Still unfinished! Needs get player method!
 //        if (!existByPlayerName(playerName))
