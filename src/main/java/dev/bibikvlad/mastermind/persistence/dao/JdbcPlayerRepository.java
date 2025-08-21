@@ -151,7 +151,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
 
     @Override
     public void delete(Player player) throws PersistenceException, PlayerNotFoundException {
-        if (!existByName(player.getPlayerName()))
+        if (!existsByName(player.getPlayerName()))
             throw new PlayerNotFoundException("Player with the name: '" + player.getPlayerName() + "' does not exist");
 
         String deletePlayerQuery = """
@@ -169,7 +169,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
 
     @Override
     public void deleteById(int playerId) throws PersistenceException, PlayerNotFoundException {
-        if (!existById(playerId))
+        if (!existsById(playerId))
             throw new PlayerNotFoundException("Player with id: '" + playerId + "' does not exist");
 
         String deletePlayerQuery = """
@@ -187,7 +187,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
 
     @Override
     public void deleteByName(String playerName) throws PersistenceException, PlayerNotFoundException {
-        if (!existByName(playerName))
+        if (!existsByName(playerName))
             throw new PlayerNotFoundException("Player with the name: '" + playerName + "' does not exist");
 
         String deletePlayerQuery = """
@@ -205,7 +205,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
 
     @Override
     public void update(Player oldPlayer, Player newPlayer) throws PersistenceException, PlayerNotFoundException {
-        if (!existByName(oldPlayer.getPlayerName())) {
+        if (!existsByName(oldPlayer.getPlayerName())) {
             throw new PlayerNotFoundException(
                     "Player with the name: '" + oldPlayer.getPlayerName() + "' does not exist");
         }
