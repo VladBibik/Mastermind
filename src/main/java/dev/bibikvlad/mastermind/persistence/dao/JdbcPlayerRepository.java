@@ -250,11 +250,14 @@ public class JdbcPlayerRepository implements PlayerRepository {
                             WHERE id = ?;
                 """;
 
-        PreparedStatement preparedStatement = connection.prepareStatement(playerQuery);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(playerQuery)) {
         preparedStatement.setInt(1, playerId);
         ResultSet resultSet = preparedStatement.executeQuery();
 
         return resultSet.next();
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to check if player with id: " + playerId + " exists", exception);
+        }
     }
 
     @Override
