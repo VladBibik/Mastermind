@@ -263,20 +263,6 @@ public class JdbcPlayerRepository implements PlayerRepository {
         }
     }
 
-//    public void setLocale(String playerName) throws PersistenceException {
-//        //TODO: Still unfinished! Needs get player method!
-//        if (!existByPlayerName(playerName))
-//            throw new SQLException("Player name: '" + playerName + "' does not exist");
-//
-//        String setLocaleQuery = """
-//                            INSERT INTO player_configurations (language)  VALUES (?)
-//                """;
-//
-//        PreparedStatement preparedStatement = connection.prepareStatement(setLocaleQuery);
-//        preparedStatement.setString(1, playerName);
-//        preparedStatement.executeUpdate();
-//    }
-
     public boolean existById(int playerId) throws PersistenceException {
         String playerQuery = """
                             SELECT player_name FROM players
