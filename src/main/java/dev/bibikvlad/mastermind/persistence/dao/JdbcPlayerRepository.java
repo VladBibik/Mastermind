@@ -1,11 +1,14 @@
 package dev.bibikvlad.mastermind.persistence.dao;
 
 import dev.bibikvlad.mastermind.database.DatabaseContext;
+import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.player.Player;
+import dev.bibikvlad.mastermind.model.player.PlayerConfig;
 import dev.bibikvlad.mastermind.persistence.repository.PlayerRepository;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +21,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
     }
 
     @Override
-    public List<Player> findAll() throws SQLException {
+    public List<Player> findAll() throws PersistenceException {
         List<Player> players = new ArrayList<>();
         String fetchAllPlayersQuery = """
                 SELECT *
@@ -27,22 +30,29 @@ public class JdbcPlayerRepository implements PlayerRepository {
                 ON p.id = conf.player_id
                 """;
 
-        PreparedStatement preparedStatement = connection.prepareStatement(fetchAllPlayersQuery);
-        ResultSet resultSet = preparedStatement.executeQuery();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(fetchAllPlayersQuery)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-        while (resultSet.next()) {
-            Player player = new Player(
-                    resultSet.getString("player_name"),
-                    LocaleType.fromLanguageString(resultSet.getString("language")));
+            while (resultSet.next()) {
+                PlayerConfig playerConfig = new PlayerConfig(
+                        resultSet.getInt("id"),
+                        LocaleType.fromLanguageString(resultSet.getString("language")));
+                Player player = new Player(
+                        resultSet.getString("player_name"),
+                        LocalDateTime.parse(resultSet.getString("creation_date")),
+                        playerConfig);
 
-            players.add(player);
+                players.add(player);
+            }
+
+            return players;
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to fetch all players", exception);
         }
-
-        return players;
     }
 
     @Override
-    public Optional<Player> findById(int playerId) throws SQLException {
+    public Optional<Player> findById(int playerId) throws PersistenceException {
         if (!existById(playerId))
             throw new SQLException("Player with id: '" + playerId + "' does not exist");
 
@@ -65,7 +75,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
     }
 
     @Override
-    public Optional<Player> findByName(String playerName) throws SQLException {
+    public Optional<Player> findByName(String playerName) throws PersistenceException {
         if (!existByPlayerName(playerName))
             throw new SQLException("Player with: '" + playerName + "' does not exist");
 
@@ -87,7 +97,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
         return new Player(fetchedPlayerName, LocaleType.fromLanguageString(language));
     }
 
-//    public Optional<String> getPlayerNameById(int id) throws SQLException {
+//    public Optional<String> getPlayerNameById(int id) throws PersistenceException {
 //        String getPlayerNameQuery = """
 //                        SELECT player_name
 //                        FROM players
@@ -108,7 +118,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
 //    }
 
     @Override
-    public void save(Player player) throws SQLException {
+    public void save(Player player) throws PersistenceException {
         String addPlayerQuery = """
                 INSERT INTO players (player_name) VALUES (?)
                 """;
@@ -142,7 +152,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
     }
 
     @Override
-    public void deleteById(int playerId) throws SQLException {
+    public void deleteById(int playerId) throws PersistenceException {
         if (!existById(playerId))
             throw new SQLException("Player with id: '" + playerId + "' does not exist");
 
@@ -156,7 +166,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
     }
 
     @Override
-    public void deleteByName(String playerName) throws SQLException {
+    public void deleteByName(String playerName) throws PersistenceException {
         if (!existByPlayerName(playerName))
             throw new SQLException("Player name: '" + playerName + "' does not exist");
 
@@ -174,7 +184,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
 
     }
 
-    public void updateByPlayerName(String oldPlayerName, String newPlayerName) throws SQLException {
+    public void updateByPlayerName(String oldPlayerName, String newPlayerName) throws PersistenceException {
         if (!existByPlayerName(oldPlayerName))
             throw new SQLException("Player name: '" + oldPlayerName + "' does not exist");
 
@@ -190,7 +200,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
         preparedStatement.executeUpdate();
     }
 
-    public void updateById(int playerId, String newPlayerName) throws SQLException {
+    public void updateById(int playerId, String newPlayerName) throws PersistenceException {
         if (!existById(playerId))
             throw new SQLException("Player with id: '" + playerId + "' does not exist");
 
@@ -206,7 +216,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
         preparedStatement.executeUpdate();
     }
 
-//    public void setLocale(String playerName) throws SQLException {
+//    public void setLocale(String playerName) throws PersistenceException {
 //        //TODO: Still unfinished! Needs get player method!
 //        if (!existByPlayerName(playerName))
 //            throw new SQLException("Player name: '" + playerName + "' does not exist");
@@ -220,7 +230,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
 //        preparedStatement.executeUpdate();
 //    }
 
-    public boolean existById(int playerId) throws SQLException {
+    public boolean existById(int playerId) throws PersistenceException {
         String playerQuery = """
                             SELECT player_name FROM players
                             WHERE id = ?;
@@ -233,7 +243,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
         return resultSet.next();
     }
 
-    public boolean existByPlayerName(String playerName) throws SQLException {
+    public boolean existByPlayerName(String playerName) throws PersistenceException {
         String playerQuery = """
                             SELECT player_name FROM players
                             WHERE player_name = ?;
@@ -248,9 +258,9 @@ public class JdbcPlayerRepository implements PlayerRepository {
 }
 
 class Test {
-    public static void main(String[] args) throws SQLException {
-        PlayerDAO playerDAO = new PlayerDAO(DatabaseContext.getConnection());
+    public static void main(String[] args) throws PersistenceException {
+        JdbcPlayerRepository jdbcPlayerRepository = new JdbcPlayerRepository(DatabaseContext.getConnection());
 
-        System.out.println(playerDAO.getPlayerByPlayerName("Georg"));
+        System.out.println(jdbcPlayerRepository.findAll());
     }
 }
