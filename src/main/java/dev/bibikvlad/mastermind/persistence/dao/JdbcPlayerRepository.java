@@ -181,7 +181,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
 
         String deletePlayerQuery = """
                         DELETE FROM players
-                        WHERE player_name = ?;
+                        WHERE id = ?;
                 """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(deletePlayerQuery)) {
