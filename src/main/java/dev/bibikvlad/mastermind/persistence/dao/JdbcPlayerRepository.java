@@ -3,20 +3,22 @@ package dev.bibikvlad.mastermind.persistence.dao;
 import dev.bibikvlad.mastermind.database.DatabaseContext;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.player.Player;
+import dev.bibikvlad.mastermind.persistence.repository.PlayerRepository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class PlayerDAO {
+public class JdbcPlayerRepository implements PlayerRepository {
     private final Connection connection;
 
-    public PlayerDAO(Connection connection) {
+    public JdbcPlayerRepository(Connection connection) {
         this.connection = connection;
     }
 
-    public List<Player> getPlayers() throws SQLException {
+    @Override
+    public List<Player> findAll() throws SQLException {
         List<Player> players = new ArrayList<>();
         String fetchAllPlayersQuery = """
                 SELECT *
@@ -39,7 +41,8 @@ public class PlayerDAO {
         return players;
     }
 
-    public Player getPlayerById(int playerId) throws SQLException {
+    @Override
+    public Optional<Player> findById(int playerId) throws SQLException {
         if (!existById(playerId))
             throw new SQLException("Player with id: '" + playerId + "' does not exist");
 
@@ -61,7 +64,8 @@ public class PlayerDAO {
         return new Player(playerName, LocaleType.fromLanguageString(language));
     }
 
-    public Player getPlayerByPlayerName(String playerName) throws SQLException {
+    @Override
+    public Optional<Player> findByName(String playerName) throws SQLException {
         if (!existByPlayerName(playerName))
             throw new SQLException("Player with: '" + playerName + "' does not exist");
 
@@ -83,27 +87,28 @@ public class PlayerDAO {
         return new Player(fetchedPlayerName, LocaleType.fromLanguageString(language));
     }
 
-    public Optional<String> getPlayerNameById(int id) throws SQLException {
-        String getPlayerNameQuery = """
-                        SELECT player_name
-                        FROM players
-                        WHERE id = ?
-                """;
-        Optional<String> playerName = Optional.empty();
+//    public Optional<String> getPlayerNameById(int id) throws SQLException {
+//        String getPlayerNameQuery = """
+//                        SELECT player_name
+//                        FROM players
+//                        WHERE id = ?
+//                """;
+//        Optional<String> playerName = Optional.empty();
+//
+//        PreparedStatement preparedStatement = connection.prepareStatement(getPlayerNameQuery);
+//        preparedStatement.setInt(1, id);
+//
+//        ResultSet resultSet = preparedStatement.executeQuery();
+//
+//        if (resultSet.next()) {
+//            playerName = Optional.ofNullable(resultSet.getString("player_name"));
+//        }
+//
+//        return playerName;
+//    }
 
-        PreparedStatement preparedStatement = connection.prepareStatement(getPlayerNameQuery);
-        preparedStatement.setInt(1, id);
-
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        if (resultSet.next()) {
-            playerName = Optional.ofNullable(resultSet.getString("player_name"));
-        }
-
-        return playerName;
-    }
-
-    public void savePlayer(String playerName) throws SQLException {
+    @Override
+    public void save(Player player) throws SQLException {
         String addPlayerQuery = """
                 INSERT INTO players (player_name) VALUES (?)
                 """;
@@ -131,7 +136,27 @@ public class PlayerDAO {
         }
     }
 
-    public void deleteByPlayerName(String playerName) throws SQLException {
+    @Override
+    public void delete(Player player) {
+
+    }
+
+    @Override
+    public void deleteById(int playerId) throws SQLException {
+        if (!existById(playerId))
+            throw new SQLException("Player with id: '" + playerId + "' does not exist");
+
+        String deletePlayerQuery = """
+                        DELETE FROM players
+                        WHERE player_name = ?;
+                """;
+        PreparedStatement preparedStatement = connection.prepareStatement(deletePlayerQuery);
+        preparedStatement.setInt(1, playerId);
+        preparedStatement.executeUpdate();
+    }
+
+    @Override
+    public void deleteByName(String playerName) throws SQLException {
         if (!existByPlayerName(playerName))
             throw new SQLException("Player name: '" + playerName + "' does not exist");
 
@@ -144,17 +169,9 @@ public class PlayerDAO {
         preparedStatement.executeUpdate();
     }
 
-    public void deleteById(int playerId) throws SQLException {
-        if (!existById(playerId))
-            throw new SQLException("Player with id: '" + playerId + "' does not exist");
+    @Override
+    public void update(Player oldPlayer, Player newPlayer) {
 
-        String deletePlayerQuery = """
-                        DELETE FROM players
-                        WHERE player_name = ?;
-                """;
-        PreparedStatement preparedStatement = connection.prepareStatement(deletePlayerQuery);
-        preparedStatement.setInt(1, playerId);
-        preparedStatement.executeUpdate();
     }
 
     public void updateByPlayerName(String oldPlayerName, String newPlayerName) throws SQLException {
@@ -189,19 +206,19 @@ public class PlayerDAO {
         preparedStatement.executeUpdate();
     }
 
-    public void setLocale(String playerName) throws SQLException {
-        //TODO: Still unfinished! Needs get player method!
-        if (!existByPlayerName(playerName))
-            throw new SQLException("Player name: '" + playerName + "' does not exist");
-
-        String setLocaleQuery = """
-                            INSERT INTO player_configurations (language)  VALUES (?)
-                """;
-
-        PreparedStatement preparedStatement = connection.prepareStatement(setLocaleQuery);
-        preparedStatement.setString(1, playerName);
-        preparedStatement.executeUpdate();
-    }
+//    public void setLocale(String playerName) throws SQLException {
+//        //TODO: Still unfinished! Needs get player method!
+//        if (!existByPlayerName(playerName))
+//            throw new SQLException("Player name: '" + playerName + "' does not exist");
+//
+//        String setLocaleQuery = """
+//                            INSERT INTO player_configurations (language)  VALUES (?)
+//                """;
+//
+//        PreparedStatement preparedStatement = connection.prepareStatement(setLocaleQuery);
+//        preparedStatement.setString(1, playerName);
+//        preparedStatement.executeUpdate();
+//    }
 
     public boolean existById(int playerId) throws SQLException {
         String playerQuery = """
