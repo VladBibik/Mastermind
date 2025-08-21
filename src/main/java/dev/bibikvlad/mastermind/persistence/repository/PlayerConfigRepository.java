@@ -1,14 +1,15 @@
 package dev.bibikvlad.mastermind.persistence.repository;
 
+import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;
 
 import java.util.Optional;
 
 public interface PlayerConfigRepository {
-    Optional<PlayerConfig> findById(int id);
+    Optional<PlayerConfig> findById(int id) throws PersistenceException;
 
-    void save(PlayerConfig playerConfig);
+    void save(PlayerConfig playerConfig) throws PersistenceException;
 
-    void updateLocale(int playerId, LocaleType locale);
+    void updateLocale(int playerId, LocaleType locale) throws PersistenceException;
 }
