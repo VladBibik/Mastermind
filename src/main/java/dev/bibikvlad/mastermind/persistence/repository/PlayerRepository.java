@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.persistence.repository;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
+import dev.bibikvlad.mastermind.exceptions.PlayerNotFoundException;
 import dev.bibikvlad.mastermind.model.player.Player;
 
 import java.util.List;
@@ -15,11 +16,11 @@ public interface PlayerRepository {
 
     void save(Player player) throws PersistenceException;
 
-    void delete(Player player) throws PersistenceException;
+    void delete(Player player) throws PersistenceException, PlayerNotFoundException;
 
-    void deleteById(int id) throws PersistenceException;
+    void deleteById(int id) throws PersistenceException, PlayerNotFoundException;
 
-    void deleteByName(String name) throws PersistenceException;
+    void deleteByName(String name) throws PersistenceException, PlayerNotFoundException;
 
-    void update(Player oldPlayer, Player newPlayer) throws PersistenceException;
+    void update(Player oldPlayer, Player newPlayer) throws PersistenceException, PlayerNotFoundException;
 }
