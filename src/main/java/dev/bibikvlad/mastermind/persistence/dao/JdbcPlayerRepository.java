@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.persistence.dao;
 
 import dev.bibikvlad.mastermind.database.DatabaseContext;
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
+import dev.bibikvlad.mastermind.exceptions.PlayerNotFoundException;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;
@@ -174,17 +175,21 @@ public class JdbcPlayerRepository implements PlayerRepository {
     }
 
     @Override
-    public void deleteById(int playerId) throws PersistenceException {
+    public void deleteById(int playerId) throws PersistenceException, PlayerNotFoundException {
         if (!existById(playerId))
-            throw new SQLException("Player with id: '" + playerId + "' does not exist");
+            throw new PlayerNotFoundException("Player with id: '" + playerId + "' does not exist");
 
         String deletePlayerQuery = """
                         DELETE FROM players
                         WHERE player_name = ?;
                 """;
-        PreparedStatement preparedStatement = connection.prepareStatement(deletePlayerQuery);
-        preparedStatement.setInt(1, playerId);
-        preparedStatement.executeUpdate();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(deletePlayerQuery)) {
+            preparedStatement.setInt(1, playerId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to delete player by ID: " + playerId, exception);
+        }
     }
 
     @Override
