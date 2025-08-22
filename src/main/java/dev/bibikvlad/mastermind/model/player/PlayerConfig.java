@@ -6,6 +6,7 @@ public class PlayerConfig {
     int playerId;
     LocaleType locale;
 
+    //TODO: Analyse if there is better way to fix issue with constructors
     public PlayerConfig(LocaleType locale) {
         this.locale = locale;
     }
