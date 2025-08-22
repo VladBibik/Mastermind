@@ -41,9 +41,9 @@ public class Player {
     public String toString() {
         return "Player: \n"
                 + "Player ID: " + playerConfig.playerId
-                + " Player Name = " + playerName
-                + ", creationDate = " + creationDate
-                + "\n    " + "configurations:"
+                + ", Player Name = " + playerName
+                + ", Creation Date = " + creationDate
+                + "\n    configurations:"
                 + "\n        Selected Language: " + playerConfig.getLocale().getLanguageName();
     }
 }
