@@ -1,5 +1,7 @@
 package dev.bibikvlad.mastermind.model.player;
 
+import dev.bibikvlad.utils.formatters.SQLiteTimestampFormatter;
+
 import java.time.LocalDateTime;
 
 public class Player {
@@ -48,7 +50,7 @@ public class Player {
         return "Player: \n"
                 + "Player ID: " + playerConfig.playerId
                 + ", Player Name = " + playerName
-                + ", Creation Date = " + creationDate
+                + ", Creation Date = " + SQLiteTimestampFormatter.format(creationDate)
                 + "\n    configurations:"
                 + "\n        Selected Language: " + playerConfig.getLocale().getLanguageName()
                 + "\n";
