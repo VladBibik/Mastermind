@@ -6,6 +6,10 @@ public class PlayerConfig {
     int playerId;
     LocaleType locale;
 
+    public PlayerConfig(LocaleType locale) {
+        this.locale = locale;
+    }
+
     public PlayerConfig(int playerId, LocaleType locale) {
         this.playerId = playerId;
         this.locale = locale;
