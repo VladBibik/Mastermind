@@ -64,21 +64,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(fetchPlayerQuery)) {
             preparedStatement.setInt(1, playerId);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) {
-                PlayerConfig playerConfig = new PlayerConfig(
-                        resultSet.getInt("id"),
-                        LocaleType.fromLanguageString(resultSet.getString("language")));
-                Player player = new Player(
-                        resultSet.getString("player_name"),
-                        SQLiteTimestampFormatter.format(resultSet.getString("creation_date")),
-                        playerConfig);
-
-                return Optional.of(player);
-            } else {
-                return Optional.empty();
-            }
+            return getPlayer(preparedStatement);
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to fetch player by ID: " + playerId, exception);
         }
@@ -96,23 +82,27 @@ public class JdbcPlayerRepository implements PlayerRepository {
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(fetchPlayerQuery)) {
             preparedStatement.setString(1, playerName);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) {
-                PlayerConfig playerConfig = new PlayerConfig(
-                        resultSet.getInt("id"),
-                        LocaleType.fromLanguageString(resultSet.getString("language")));
-                Player player = new Player(
-                        resultSet.getString("player_name"),
-                        SQLiteTimestampFormatter.format(resultSet.getString("creation_date")),
-                        playerConfig);
-
-                return Optional.of(player);
-            } else {
-                return Optional.empty();
-            }
+            return getPlayer(preparedStatement);
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to fetch player by Player Name: " + playerName, exception);
+        }
+    }
+
+    private Optional<Player> getPlayer(PreparedStatement preparedStatement) throws SQLException {
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        if (resultSet.next()) {
+            PlayerConfig playerConfig = new PlayerConfig(
+                    resultSet.getInt("id"),
+                    LocaleType.fromLanguageString(resultSet.getString("language")));
+            Player player = new Player(
+                    resultSet.getString("player_name"),
+                    SQLiteTimestampFormatter.format(resultSet.getString("creation_date")),
+                    playerConfig);
+
+            return Optional.of(player);
+        } else {
+            return Optional.empty();
         }
     }
 
@@ -282,6 +272,6 @@ class Test {
     public static void main(String[] args) throws PersistenceException {
         JdbcPlayerRepository jdbcPlayerRepository = new JdbcPlayerRepository(DatabaseContext.getConnection());
 
-        System.out.println(jdbcPlayerRepository.findAll());
+        System.out.println(jdbcPlayerRepository.findById(1));
     }
 }
