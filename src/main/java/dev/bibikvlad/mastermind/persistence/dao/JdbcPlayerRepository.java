@@ -40,7 +40,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
                         LocaleType.fromLanguageString(resultSet.getString("language")));
                 Player player = new Player(
                         resultSet.getString("player_name"),
-                        SQLiteTimestampFormatter.format(resultSet.getString("creation_date")),
+                        SQLiteTimestampFormatter.parse(resultSet.getString("creation_date")),
                         playerConfig);
 
                 players.add(player);
@@ -97,7 +97,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
                     LocaleType.fromLanguageString(resultSet.getString("language")));
             Player player = new Player(
                     resultSet.getString("player_name"),
-                    SQLiteTimestampFormatter.format(resultSet.getString("creation_date")),
+                    SQLiteTimestampFormatter.parse(resultSet.getString("creation_date")),
                     playerConfig);
 
             return Optional.of(player);
@@ -272,6 +272,12 @@ class Test {
     public static void main(String[] args) throws PersistenceException {
         JdbcPlayerRepository jdbcPlayerRepository = new JdbcPlayerRepository(DatabaseContext.getConnection());
 
-        System.out.println(jdbcPlayerRepository.findById(1));
+//        //TODO: Fix issue with exception on same player registration!
+//        PlayerConfig playerConfig = new PlayerConfig(LocaleType.ENGLISH);
+//        Player player = new Player("Maele", playerConfig);
+//
+//        jdbcPlayerRepository.save(player);
+
+        System.out.println(jdbcPlayerRepository.findAll());
     }
 }
