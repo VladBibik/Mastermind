@@ -39,9 +39,11 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Player: " + "Player Name = " + playerName + ", creationDate = " + creationDate
+        return "Player: \n"
+                + "Player ID: " + playerConfig.playerId
+                + " Player Name = " + playerName
+                + ", creationDate = " + creationDate
                 + "\n    " + "configurations:"
-                + "\n        " + playerConfig.getPlayerId()
-                + "\n        " + playerConfig.getLocale().getLanguageName();
+                + "\n        Selected Language: " + playerConfig.getLocale().getLanguageName();
     }
 }
