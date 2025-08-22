@@ -7,8 +7,8 @@ public class Player {
     private LocalDateTime creationDate;
     private PlayerConfig playerConfig;
 
-    public Player(String username, LocalDateTime creationDate, PlayerConfig playerConfig) {
-        this.playerName = username;
+    public Player(String playerName, LocalDateTime creationDate, PlayerConfig playerConfig) {
+        this.playerName = playerName;
         this.creationDate = creationDate;
         this.playerConfig = playerConfig;
     }
