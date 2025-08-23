@@ -199,6 +199,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
         }
     }
 
+    //TODO: This need to be a Transaction!
     @Override
     public void update(Player oldPlayer, Player newPlayer) throws PersistenceException, PlayerNotFoundException {
         if (!existsByName(oldPlayer.getPlayerName())) {
@@ -278,12 +279,12 @@ class Test {
     public static void main(String[] args) throws PersistenceException {
         JdbcPlayerRepository jdbcPlayerRepository = new JdbcPlayerRepository(DatabaseContext.getConnection());
 
-        //TODO: Fix issue with exception on same player registration!
-        PlayerConfig playerConfig = new PlayerConfig(LocaleType.ENGLISH);
-        Player player = new Player("Verso", playerConfig);
+        PlayerConfig playerConfig = new PlayerConfig(LocaleType.RUSSIAN);
+        Player player = new Player("Jeniro", playerConfig);
+        Player updatedPlayer = new Player("Keniro", playerConfig);
 
         try {
-            jdbcPlayerRepository.deleteByName(player.getPlayerName());
+            jdbcPlayerRepository.update(player, updatedPlayer);
         } catch (PlayerNotFoundException exception) {
             System.out.println(exception.getMessage());
         }
