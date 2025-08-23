@@ -121,28 +121,40 @@ public class JdbcPlayerRepository implements PlayerRepository {
                 INSERT INTO player_configurations (player_id, language) VALUES (?, ?)
                 """;
 
-        try (PreparedStatement playerPreparedStatement =
-                     connection.prepareStatement(addPlayerQuery, Statement.RETURN_GENERATED_KEYS)) {
-            PreparedStatement configPreparedStatement = connection.prepareStatement(addPlayerConfigQuery);
+        try {
+            connection.setAutoCommit(false);
 
-            playerPreparedStatement.setString(1, player.getPlayerName());
-            playerPreparedStatement.executeUpdate();
+            try (PreparedStatement playerPreparedStatement =
+                         connection.prepareStatement(addPlayerQuery, Statement.RETURN_GENERATED_KEYS);
+                 PreparedStatement configPreparedStatement = connection.prepareStatement(addPlayerConfigQuery)) {
 
-            try (ResultSet generatedKeys = playerPreparedStatement.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    int playerId = generatedKeys.getInt(1);
 
-                    configPreparedStatement.setInt(1, playerId);
-                    configPreparedStatement.setString(2,
-                            player.getPlayerConfig().getLocale().getLanguageName());
-                    configPreparedStatement.executeUpdate();
-                } else {
-                    throw new PersistenceException("Creating player failed. No ID obtained.");
+                playerPreparedStatement.setString(1, player.getPlayerName());
+                playerPreparedStatement.executeUpdate();
+
+                try (ResultSet generatedKeys = playerPreparedStatement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        int playerId = generatedKeys.getInt(1);
+
+                        configPreparedStatement.setInt(1, playerId);
+                        configPreparedStatement.setString(2,
+                                player.getPlayerConfig().getLocale().getLanguageName());
+                        configPreparedStatement.executeUpdate();
+                    } else {
+                        throw new PersistenceException("Creating player failed. No ID obtained.");
+                    }
                 }
+            } catch (SQLException exception) {
+                connection.rollback();
+
+                throw new PersistenceException("Failed to save a Player", exception);
+            } finally {
+                connection.setAutoCommit(true);
             }
         } catch (SQLException exception) {
-            throw new PersistenceException("Failed to save a Player", exception);
+            throw new PersistenceException("Transaction setup failed", exception);
         }
+
     }
 
     @Override
