@@ -226,14 +226,16 @@ public class JdbcPlayerRepository implements PlayerRepository {
         String updateConfigQuery = """
                         UPDATE player_configurations
                         SET language = ?
-                        WHERE player_id = ?;
+                        WHERE player_id = (
+                            SELECT id
+                            FROM players
+                            WHERE player_name = ?);
                 """;
 
         try {
             connection.setAutoCommit(false);
 
-            try (PreparedStatement preparedStatement =
-                         connection.prepareStatement(updatePlayerQuery, Statement.RETURN_GENERATED_KEYS);
+            try (PreparedStatement preparedStatement = connection.prepareStatement(updatePlayerQuery);
                  PreparedStatement configPreparedStatement = connection.prepareStatement(updateConfigQuery)) {
 
 
@@ -241,16 +243,12 @@ public class JdbcPlayerRepository implements PlayerRepository {
                 preparedStatement.setString(2, oldPlayer.getPlayerName());
                 preparedStatement.executeUpdate();
 
-                try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        int playerId = generatedKeys.getInt("id");
+                configPreparedStatement.setString(1,
+                        newPlayer.getPlayerConfig().getLocale().getLanguageName());
+                configPreparedStatement.setString(2, newPlayer.getPlayerName());
+                configPreparedStatement.executeUpdate();
 
-                        configPreparedStatement.setString(1,
-                                newPlayer.getPlayerConfig().getLocale().getLanguageName());
-                        configPreparedStatement.setInt(2, playerId);
-                        configPreparedStatement.executeUpdate();
-                    }
-                }
+                connection.commit();
             } catch (SQLException exception) {
                 connection.rollback();
 
@@ -258,7 +256,8 @@ public class JdbcPlayerRepository implements PlayerRepository {
             } finally {
                 connection.setAutoCommit(true);
             }
-        } catch (SQLException exception) {
+        } catch (
+                SQLException exception) {
             throw new PersistenceException("Transaction setup failed", exception);
         }
     }
@@ -303,8 +302,8 @@ class Test {
         JdbcPlayerRepository jdbcPlayerRepository = new JdbcPlayerRepository(DatabaseContext.getConnection());
 
         PlayerConfig playerConfig = new PlayerConfig(LocaleType.RUSSIAN);
-        Player player = new Player("Gigenio", playerConfig);
-        Player updatedPlayer = new Player("Number7", playerConfig);
+        Player player = new Player("Gigo", playerConfig);
+        Player updatedPlayer = new Player("Mayega", playerConfig);
 
         try {
             jdbcPlayerRepository.update(player, updatedPlayer);
