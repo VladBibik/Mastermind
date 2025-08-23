@@ -140,6 +140,8 @@ public class JdbcPlayerRepository implements PlayerRepository {
                         configPreparedStatement.setString(2,
                                 player.getPlayerConfig().getLocale().getLanguageName());
                         configPreparedStatement.executeUpdate();
+
+                        connection.commit();
                     } else {
                         throw new PersistenceException("Creating player failed. No ID obtained.");
                     }
