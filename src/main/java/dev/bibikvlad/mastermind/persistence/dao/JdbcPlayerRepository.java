@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.persistence.dao;
 
 import dev.bibikvlad.mastermind.database.DatabaseContext;
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
+import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.exceptions.PlayerNotFoundException;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.player.Player;
@@ -107,7 +108,12 @@ public class JdbcPlayerRepository implements PlayerRepository {
     }
 
     @Override
-    public void save(Player player) throws PersistenceException {
+    public void save(Player player) throws PersistenceException, PlayerAlreadyExistException {
+        if (existsByName(player.getPlayerName())) {
+            throw new PlayerAlreadyExistException("Player with the name: "
+                    + player.getPlayerName() + " already exist!");
+        }
+
         String addPlayerQuery = """
                 INSERT INTO players (player_name) VALUES (?)
                 """;
@@ -272,11 +278,11 @@ class Test {
     public static void main(String[] args) throws PersistenceException {
         JdbcPlayerRepository jdbcPlayerRepository = new JdbcPlayerRepository(DatabaseContext.getConnection());
 
-//        //TODO: Fix issue with exception on same player registration!
-//        PlayerConfig playerConfig = new PlayerConfig(LocaleType.ENGLISH);
-//        Player player = new Player("Maele", playerConfig);
-//
-//        jdbcPlayerRepository.save(player);
+        //TODO: Fix issue with exception on same player registration!
+        PlayerConfig playerConfig = new PlayerConfig(LocaleType.ENGLISH);
+        Player player = new Player("Maele", playerConfig);
+
+        jdbcPlayerRepository.save(player);
 
         System.out.println(jdbcPlayerRepository.findAll());
     }
