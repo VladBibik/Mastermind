@@ -199,7 +199,6 @@ public class JdbcPlayerRepository implements PlayerRepository {
         }
     }
 
-    //TODO: This need to be a Transaction!
     @Override
     public void update(Player oldPlayer, Player newPlayer) throws PersistenceException, PlayerNotFoundException {
         if (!existsByName(oldPlayer.getPlayerName())) {
@@ -218,26 +217,37 @@ public class JdbcPlayerRepository implements PlayerRepository {
                         WHERE player_id = ?;
                 """;
 
-        try (PreparedStatement preparedStatement =
-                     connection.prepareStatement(updatePlayerQuery, Statement.RETURN_GENERATED_KEYS)) {
-            PreparedStatement configPreparedStatement = connection.prepareStatement(updateConfigQuery);
+        try {
+            connection.setAutoCommit(false);
 
-            preparedStatement.setString(1, newPlayer.getPlayerName());
-            preparedStatement.setString(2, oldPlayer.getPlayerName());
-            preparedStatement.executeUpdate();
+            try (PreparedStatement preparedStatement =
+                         connection.prepareStatement(updatePlayerQuery, Statement.RETURN_GENERATED_KEYS);
+                 PreparedStatement configPreparedStatement = connection.prepareStatement(updateConfigQuery)) {
 
-            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    int playerId = generatedKeys.getInt("id");
 
-                    configPreparedStatement.setString(1,
-                            newPlayer.getPlayerConfig().getLocale().getLanguageName());
-                    configPreparedStatement.setInt(2, playerId);
-                    configPreparedStatement.executeUpdate();
+                preparedStatement.setString(1, newPlayer.getPlayerName());
+                preparedStatement.setString(2, oldPlayer.getPlayerName());
+                preparedStatement.executeUpdate();
+
+                try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        int playerId = generatedKeys.getInt("id");
+
+                        configPreparedStatement.setString(1,
+                                newPlayer.getPlayerConfig().getLocale().getLanguageName());
+                        configPreparedStatement.setInt(2, playerId);
+                        configPreparedStatement.executeUpdate();
+                    }
                 }
+            } catch (SQLException exception) {
+                connection.rollback();
+
+                throw new PersistenceException("Failed to update a Player: " + oldPlayer, exception);
+            } finally {
+                connection.setAutoCommit(true);
             }
         } catch (SQLException exception) {
-            throw new PersistenceException("Failed to update a Player: " + oldPlayer, exception);
+            throw new PersistenceException("Transaction setup failed", exception);
         }
     }
 
