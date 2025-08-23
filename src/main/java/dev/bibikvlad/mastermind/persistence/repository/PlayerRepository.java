@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.persistence.repository;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
+import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.exceptions.PlayerNotFoundException;
 import dev.bibikvlad.mastermind.model.player.Player;
 
@@ -14,7 +15,7 @@ public interface PlayerRepository {
 
     Optional<Player> findByName(String name) throws PersistenceException;
 
-    void save(Player player) throws PersistenceException;
+    void save(Player player) throws PersistenceException, PlayerAlreadyExistException;
 
     void delete(Player player) throws PersistenceException, PlayerNotFoundException;
 
