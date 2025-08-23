@@ -224,6 +224,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
 
             preparedStatement.setString(1, newPlayer.getPlayerName());
             preparedStatement.setString(2, oldPlayer.getPlayerName());
+            preparedStatement.executeUpdate();
 
             try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
@@ -280,8 +281,8 @@ class Test {
         JdbcPlayerRepository jdbcPlayerRepository = new JdbcPlayerRepository(DatabaseContext.getConnection());
 
         PlayerConfig playerConfig = new PlayerConfig(LocaleType.RUSSIAN);
-        Player player = new Player("Jeniro", playerConfig);
-        Player updatedPlayer = new Player("Keniro", playerConfig);
+        Player player = new Player("Gigenio", playerConfig);
+        Player updatedPlayer = new Player("Number7", playerConfig);
 
         try {
             jdbcPlayerRepository.update(player, updatedPlayer);
