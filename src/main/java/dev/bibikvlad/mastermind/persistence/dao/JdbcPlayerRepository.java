@@ -110,8 +110,8 @@ public class JdbcPlayerRepository implements PlayerRepository {
     @Override
     public void save(Player player) throws PersistenceException, PlayerAlreadyExistException {
         if (existsByName(player.getPlayerName())) {
-            throw new PlayerAlreadyExistException("Player with the name: "
-                    + player.getPlayerName() + ", already exist!");
+            throw new PlayerAlreadyExistException("Player with the name: '"
+                    + player.getPlayerName() + "' already exist!");
         }
 
         String addPlayerQuery = """
@@ -280,11 +280,11 @@ class Test {
 
         //TODO: Fix issue with exception on same player registration!
         PlayerConfig playerConfig = new PlayerConfig(LocaleType.ENGLISH);
-        Player player = new Player("Maele", playerConfig);
+        Player player = new Player("Verso", playerConfig);
 
         try {
-            jdbcPlayerRepository.save(player);
-        } catch (PlayerAlreadyExistException exception) {
+            jdbcPlayerRepository.deleteByName(player.getPlayerName());
+        } catch (PlayerNotFoundException exception) {
             System.out.println(exception.getMessage());
         }
 
