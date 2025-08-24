@@ -15,10 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class JdbcPlayerRepository implements PlayerDAO {
+public class JdbcPlayerDAO implements PlayerDAO {
     private final Connection connection;
 
-    public JdbcPlayerRepository(Connection connection) {
+    public JdbcPlayerDAO(Connection connection) {
         this.connection = connection;
     }
 
@@ -301,7 +301,7 @@ public class JdbcPlayerRepository implements PlayerDAO {
 
 class Test {
     public static void main(String[] args) throws PersistenceException {
-        JdbcPlayerRepository jdbcPlayerRepository = new JdbcPlayerRepository(DatabaseContext.getConnection());
+        JdbcPlayerDAO jdbcPlayerRepository = new JdbcPlayerDAO(DatabaseContext.getConnection());
 
         PlayerConfig playerConfig = new PlayerConfig(LocaleType.RUSSIAN);
         Player player = new Player("Gigo", playerConfig);
