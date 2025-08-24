@@ -7,7 +7,7 @@ import dev.bibikvlad.mastermind.exceptions.PlayerNotFoundException;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;
-import dev.bibikvlad.mastermind.persistence.repository.PlayerRepository;
+import dev.bibikvlad.mastermind.persistence.repository.PlayerDAO;
 import dev.bibikvlad.utils.formatters.SQLiteTimestampFormatter;
 
 import java.sql.*;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class JdbcPlayerRepository implements PlayerRepository {
+public class JdbcPlayerRepository implements PlayerDAO {
     private final Connection connection;
 
     public JdbcPlayerRepository(Connection connection) {

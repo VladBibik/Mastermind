@@ -8,7 +8,7 @@ import dev.bibikvlad.mastermind.model.player.Player;
 import java.util.List;
 import java.util.Optional;
 
-public interface PlayerRepository {
+public interface PlayerDAO {
     List<Player> findAll() throws PersistenceException;
 
     Optional<Player> findById(int id) throws PersistenceException;
