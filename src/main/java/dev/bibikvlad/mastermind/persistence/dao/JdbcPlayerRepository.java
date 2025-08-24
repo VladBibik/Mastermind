@@ -37,9 +37,9 @@ public class JdbcPlayerRepository implements PlayerRepository {
 
             while (resultSet.next()) {
                 PlayerConfig playerConfig = new PlayerConfig(
-                        resultSet.getInt("id"),
                         LocaleType.fromLanguageString(resultSet.getString("language")));
                 Player player = new Player(
+                        resultSet.getInt("id"),
                         resultSet.getString("player_name"),
                         SQLiteTimestampFormatter.parse(resultSet.getString("creation_date")),
                         playerConfig);
@@ -94,9 +94,9 @@ public class JdbcPlayerRepository implements PlayerRepository {
 
         if (resultSet.next()) {
             PlayerConfig playerConfig = new PlayerConfig(
-                    resultSet.getInt("id"),
                     LocaleType.fromLanguageString(resultSet.getString("language")));
             Player player = new Player(
+                    resultSet.getInt("id"),
                     resultSet.getString("player_name"),
                     SQLiteTimestampFormatter.parse(resultSet.getString("creation_date")),
                     playerConfig);
