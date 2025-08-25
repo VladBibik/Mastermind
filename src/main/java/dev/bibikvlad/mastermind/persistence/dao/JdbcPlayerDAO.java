@@ -24,7 +24,7 @@ public class JdbcPlayerDAO implements PlayerDAO {
     public List<Player> findAll() throws PersistenceException {
         List<Player> players = new ArrayList<>();
         String fetchAllPlayersQuery = """
-                SELECT *
+                SELECT id, player_name, creation_date, player_id, language
                 FROM players p
                 LEFT JOIN player_configurations conf
                 ON p.id = conf.player_id
@@ -46,7 +46,7 @@ public class JdbcPlayerDAO implements PlayerDAO {
     @Override
     public Optional<Player> findById(int playerId) throws PersistenceException {
         String fetchPlayerQuery = """
-                        SELECT *
+                        SELECT id, player_name, creation_date, player_id, language
                         FROM players p
                         LEFT JOIN player_configurations conf
                         ON p.id = conf.player_id
@@ -64,7 +64,7 @@ public class JdbcPlayerDAO implements PlayerDAO {
     @Override
     public Optional<Player> findByName(String playerName) throws PersistenceException {
         String fetchPlayerQuery = """
-                        SELECT *
+                        SELECT id, player_name, creation_date, player_id, language
                         FROM players p
                         LEFT JOIN player_configurations conf
                         ON p.id = conf.player_id
@@ -226,7 +226,7 @@ public class JdbcPlayerDAO implements PlayerDAO {
     @Override
     public boolean existsById(int playerId) throws PersistenceException {
         String playerQuery = """
-                            SELECT player_name FROM players
+                            SELECT 1 FROM players
                             WHERE id = ?;
                 """;
 
@@ -243,7 +243,7 @@ public class JdbcPlayerDAO implements PlayerDAO {
     @Override
     public boolean existsByName(String playerName) throws PersistenceException {
         String playerQuery = """
-                            SELECT player_name FROM players
+                            SELECT 1 FROM players
                             WHERE player_name = ?;
                 """;
 
@@ -259,11 +259,11 @@ public class JdbcPlayerDAO implements PlayerDAO {
 }
 
 class Test {
-    public static void main(String[] args) throws PersistenceException {
+    public static void main(String[] args) throws PersistenceException, SQLException {
         JdbcPlayerDAO jdbcPlayerRepository = new JdbcPlayerDAO(DatabaseContext.getConnection());
 
         PlayerConfig playerConfig = new PlayerConfig(LocaleType.RUSSIAN);
-        Player oldPlayer = jdbcPlayerRepository.findById(12).orElse(null);
+        Player oldPlayer = jdbcPlayerRepository.findById(5).orElse(null);
         Player newPlayer = new Player(oldPlayer.getId(), "NewPlayer?",
                 oldPlayer.getCreationDate(), playerConfig);
 
