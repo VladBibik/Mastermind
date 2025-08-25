@@ -3,10 +3,10 @@ package dev.bibikvlad.mastermind.persistence.dao;
 import dev.bibikvlad.mastermind.database.DatabaseContext;
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.model.mappers.PlayerMapper;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;
 import dev.bibikvlad.mastermind.persistence.repository.PlayerDAO;
-import dev.bibikvlad.utils.formatters.SQLiteTimestampFormatter;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -34,15 +34,7 @@ public class JdbcPlayerDAO implements PlayerDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                PlayerConfig playerConfig = new PlayerConfig(
-                        LocaleType.fromLanguageString(resultSet.getString("language")));
-                Player player = new Player(
-                        resultSet.getLong("id"),
-                        resultSet.getString("player_name"),
-                        SQLiteTimestampFormatter.parse(resultSet.getString("creation_date")),
-                        playerConfig);
-
-                players.add(player);
+                players.add(PlayerMapper.map(resultSet));
             }
 
             return players;
@@ -91,15 +83,7 @@ public class JdbcPlayerDAO implements PlayerDAO {
         ResultSet resultSet = preparedStatement.executeQuery();
 
         if (resultSet.next()) {
-            PlayerConfig playerConfig = new PlayerConfig(
-                    LocaleType.fromLanguageString(resultSet.getString("language")));
-            Player player = new Player(
-                    resultSet.getLong("id"),
-                    resultSet.getString("player_name"),
-                    SQLiteTimestampFormatter.parse(resultSet.getString("creation_date")),
-                    playerConfig);
-
-            return Optional.of(player);
+            return Optional.of(PlayerMapper.map(resultSet));
         } else {
             return Optional.empty();
         }
