@@ -39,7 +39,7 @@ public class JdbcPlayerDAO implements PlayerDAO {
                 PlayerConfig playerConfig = new PlayerConfig(
                         LocaleType.fromLanguageString(resultSet.getString("language")));
                 Player player = new Player(
-                        resultSet.getInt("id"),
+                        resultSet.getLong("id"),
                         resultSet.getString("player_name"),
                         SQLiteTimestampFormatter.parse(resultSet.getString("creation_date")),
                         playerConfig);
@@ -96,7 +96,7 @@ public class JdbcPlayerDAO implements PlayerDAO {
             PlayerConfig playerConfig = new PlayerConfig(
                     LocaleType.fromLanguageString(resultSet.getString("language")));
             Player player = new Player(
-                    resultSet.getInt("id"),
+                    resultSet.getLong("id"),
                     resultSet.getString("player_name"),
                     SQLiteTimestampFormatter.parse(resultSet.getString("creation_date")),
                     playerConfig);
