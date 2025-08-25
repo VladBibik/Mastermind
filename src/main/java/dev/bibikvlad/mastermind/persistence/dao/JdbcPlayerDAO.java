@@ -2,8 +2,6 @@ package dev.bibikvlad.mastermind.persistence.dao;
 
 import dev.bibikvlad.mastermind.database.DatabaseContext;
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
-import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
-import dev.bibikvlad.mastermind.exceptions.PlayerNotFoundException;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;
@@ -283,7 +281,7 @@ class Test {
         PlayerConfig playerConfig = new PlayerConfig(LocaleType.RUSSIAN);
         Player oldPlayer = jdbcPlayerRepository.findById(12).orElse(null);
         Player newPlayer = new Player(oldPlayer.getId(), "NewPlayer?",
-                oldPlayer.getCreationDate(),  playerConfig);
+                oldPlayer.getCreationDate(), playerConfig);
 
         jdbcPlayerRepository.update(newPlayer);
 
