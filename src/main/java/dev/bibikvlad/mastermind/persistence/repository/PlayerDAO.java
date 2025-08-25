@@ -1,8 +1,6 @@
 package dev.bibikvlad.mastermind.persistence.repository;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
-import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
-import dev.bibikvlad.mastermind.exceptions.PlayerNotFoundException;
 import dev.bibikvlad.mastermind.model.player.Player;
 
 import java.util.List;
@@ -15,15 +13,15 @@ public interface PlayerDAO {
 
     Optional<Player> findByName(String name) throws PersistenceException;
 
-    void save(Player player) throws PersistenceException, PlayerAlreadyExistException;
+    void save(Player player) throws PersistenceException;
 
-    void delete(Player player) throws PersistenceException, PlayerNotFoundException;
+    void delete(Player player) throws PersistenceException;
 
-    void deleteById(int id) throws PersistenceException, PlayerNotFoundException;
+    void deleteById(int id) throws PersistenceException;
 
-    void deleteByName(String name) throws PersistenceException, PlayerNotFoundException;
+    void deleteByName(String name) throws PersistenceException;
 
-    void update(Player oldPlayer, Player newPlayer) throws PersistenceException, PlayerNotFoundException;
+    void update(Player player) throws PersistenceException;
 
     boolean existsById(int id) throws PersistenceException;
 
