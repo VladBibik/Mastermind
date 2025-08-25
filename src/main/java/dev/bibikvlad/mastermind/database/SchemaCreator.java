@@ -15,7 +15,8 @@ public class SchemaCreator {
                 CREATE TABLE IF NOT EXISTS players (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     player_name TEXT UNIQUE NOT NULL,
-                    creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    CHECK (length(player_name) <= 100)
                 );""";
 
         Statement statement = connection.createStatement();
