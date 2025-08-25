@@ -108,12 +108,7 @@ public class JdbcPlayerDAO implements PlayerDAO {
     }
 
     @Override
-    public void save(Player player) throws PersistenceException, PlayerAlreadyExistException {
-        if (existsByName(player.getPlayerName())) {
-            throw new PlayerAlreadyExistException("Player with the name: '"
-                    + player.getPlayerName() + "' already exist!");
-        }
-
+    public void save(Player player) throws PersistenceException {
         String addPlayerQuery = """
                 INSERT INTO players (player_name) VALUES (?)
                 """;
@@ -160,10 +155,7 @@ public class JdbcPlayerDAO implements PlayerDAO {
     }
 
     @Override
-    public void delete(Player player) throws PersistenceException, PlayerNotFoundException {
-        if (!existsByName(player.getPlayerName()))
-            throw new PlayerNotFoundException("Player with the name: '" + player.getPlayerName() + "' does not exist");
-
+    public void delete(Player player) throws PersistenceException {
         String deletePlayerQuery = """
                             DELETE FROM players
                             WHERE player_name = ?;
@@ -178,10 +170,7 @@ public class JdbcPlayerDAO implements PlayerDAO {
     }
 
     @Override
-    public void deleteById(int playerId) throws PersistenceException, PlayerNotFoundException {
-        if (!existsById(playerId))
-            throw new PlayerNotFoundException("Player with id: '" + playerId + "' does not exist");
-
+    public void deleteById(int playerId) throws PersistenceException {
         String deletePlayerQuery = """
                         DELETE FROM players
                         WHERE id = ?;
@@ -196,10 +185,7 @@ public class JdbcPlayerDAO implements PlayerDAO {
     }
 
     @Override
-    public void deleteByName(String playerName) throws PersistenceException, PlayerNotFoundException {
-        if (!existsByName(playerName))
-            throw new PlayerNotFoundException("Player with the name: '" + playerName + "' does not exist");
-
+    public void deleteByName(String playerName) throws PersistenceException {
         String deletePlayerQuery = """
                         DELETE FROM players
                         WHERE player_name = ?;
@@ -214,24 +200,16 @@ public class JdbcPlayerDAO implements PlayerDAO {
     }
 
     @Override
-    public void update(Player oldPlayer, Player newPlayer) throws PersistenceException, PlayerNotFoundException {
-        if (!existsByName(oldPlayer.getPlayerName())) {
-            throw new PlayerNotFoundException(
-                    "Player with the name: '" + oldPlayer.getPlayerName() + "' does not exist");
-        }
-
+    public void update(Player player) throws PersistenceException {
         String updatePlayerQuery = """
                         UPDATE players
                         SET player_name = ?
-                        WHERE player_name = ?;
+                        WHERE id = ?;
                 """;
         String updateConfigQuery = """
                         UPDATE player_configurations
                         SET language = ?
-                        WHERE player_id = (
-                            SELECT id
-                            FROM players
-                            WHERE player_name = ?);
+                        WHERE player_id = ?;
                 """;
 
         try {
@@ -240,21 +218,20 @@ public class JdbcPlayerDAO implements PlayerDAO {
             try (PreparedStatement preparedStatement = connection.prepareStatement(updatePlayerQuery);
                  PreparedStatement configPreparedStatement = connection.prepareStatement(updateConfigQuery)) {
 
-
-                preparedStatement.setString(1, newPlayer.getPlayerName());
-                preparedStatement.setString(2, oldPlayer.getPlayerName());
+                preparedStatement.setString(1, player.getPlayerName());
+                preparedStatement.setLong(2, player.getId());
                 preparedStatement.executeUpdate();
 
                 configPreparedStatement.setString(1,
-                        newPlayer.getPlayerConfig().getLocale().getLanguageName());
-                configPreparedStatement.setString(2, newPlayer.getPlayerName());
+                        player.getPlayerConfig().getLocale().getLanguageName());
+                configPreparedStatement.setLong(2, player.getId());
                 configPreparedStatement.executeUpdate();
 
                 connection.commit();
             } catch (SQLException exception) {
                 connection.rollback();
 
-                throw new PersistenceException("Failed to update a Player: " + oldPlayer, exception);
+                throw new PersistenceException("Failed to update a Player: " + player, exception);
             } finally {
                 connection.setAutoCommit(true);
             }
@@ -304,14 +281,11 @@ class Test {
         JdbcPlayerDAO jdbcPlayerRepository = new JdbcPlayerDAO(DatabaseContext.getConnection());
 
         PlayerConfig playerConfig = new PlayerConfig(LocaleType.RUSSIAN);
-        Player player = new Player("Gigo", playerConfig);
-        Player updatedPlayer = new Player("Mayega", playerConfig);
+        Player oldPlayer = jdbcPlayerRepository.findById(12).orElse(null);
+        Player newPlayer = new Player(oldPlayer.getId(), "NewPlayer?",
+                oldPlayer.getCreationDate(),  playerConfig);
 
-        try {
-            jdbcPlayerRepository.update(player, updatedPlayer);
-        } catch (PlayerNotFoundException exception) {
-            System.out.println(exception.getMessage());
-        }
+        jdbcPlayerRepository.update(newPlayer);
 
         System.out.println(jdbcPlayerRepository.findAll());
     }
