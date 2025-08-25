@@ -5,7 +5,7 @@ import dev.bibikvlad.utils.formatters.SQLiteTimestampFormatter;
 import java.time.LocalDateTime;
 
 public class Player {
-    private Integer id;
+    private Long id;
     private final String playerName;
     private final LocalDateTime creationDate;
     private final PlayerConfig playerConfig;
@@ -16,14 +16,14 @@ public class Player {
         this.playerConfig = playerConfig;
     }
 
-    public Player(Integer id, String playerName, LocalDateTime creationDate, PlayerConfig playerConfig) {
+    public Player(Long id, String playerName, LocalDateTime creationDate, PlayerConfig playerConfig) {
         this.id = id;
         this.playerName = playerName;
         this.creationDate = creationDate;
         this.playerConfig = playerConfig;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
