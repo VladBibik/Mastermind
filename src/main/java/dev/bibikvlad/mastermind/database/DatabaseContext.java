@@ -1,27 +1,22 @@
 package dev.bibikvlad.mastermind.database;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DatabaseContext {
     private static final String DB_URL = "jdbc:sqlite:Mastermind.db";
 
-    public static Connection getConnection() {
-        try {
-            Connection connection = DriverManager.getConnection(DB_URL);
-
-            checkIfDBIsCreatedCreateIfNot(connection);
-
-            return connection;
-        } catch (SQLException exception) {
-            System.out.println(exception.getMessage());
-        }
-
-        throw new IllegalStateException("Something went wrong");
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(DB_URL);
     }
 
-    private static void checkIfDBIsCreatedCreateIfNot(Connection connection) throws SQLException {
-        if (connection != null) {
+    //TODO: Move this method to the custom class when app start point is decided!
+    public static void initialize() {
+        try (Connection connection = getConnection()) {
             SchemaCreator.create(connection);
+        } catch (SQLException exception) {
+            throw new IllegalStateException("Failed to initialize database schema", exception);
         }
     }
 }
