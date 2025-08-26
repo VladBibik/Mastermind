@@ -119,7 +119,7 @@ public class JdbcPlayerDAO implements PlayerDAO {
                 }
             }
         } catch (SQLException exception) {
-            throw new PersistenceException("Failed to save a Player", exception);
+            throw new PersistenceException("Failed to save a Player: " + player, exception);
         }
     }
 
@@ -134,7 +134,7 @@ public class JdbcPlayerDAO implements PlayerDAO {
             preparedStatement.setString(1, player.getPlayerName());
             preparedStatement.executeUpdate();
         } catch (SQLException exception) {
-            throw new PersistenceException("Failed to delete a Player", exception);
+            throw new PersistenceException("Failed to delete a Player: " + player, exception);
         }
     }
 
