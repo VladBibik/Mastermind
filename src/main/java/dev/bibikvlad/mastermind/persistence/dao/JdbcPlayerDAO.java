@@ -206,9 +206,10 @@ public class JdbcPlayerDAO implements PlayerDAO {
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(playerQuery)) {
             preparedStatement.setInt(1, playerId);
-            ResultSet resultSet = preparedStatement.executeQuery();
 
-            return resultSet.next();
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                return resultSet.next();
+            }
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to check if player with id: " + playerId + " exists", exception);
         }
@@ -223,9 +224,10 @@ public class JdbcPlayerDAO implements PlayerDAO {
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(playerQuery)) {
             preparedStatement.setString(1, playerName);
-            ResultSet resultSet = preparedStatement.executeQuery();
 
-            return resultSet.next();
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                return resultSet.next();
+            }
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to check if player with name: " + playerName + " exists", exception);
         }
