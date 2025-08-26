@@ -98,42 +98,29 @@ public class JdbcPlayerDAO implements PlayerDAO {
                 INSERT INTO player_configurations (player_id, language) VALUES (?, ?)
                 """;
 
-        try {
-            connection.setAutoCommit(false);
-
-            try (PreparedStatement playerPreparedStatement =
-                         connection.prepareStatement(addPlayerQuery, Statement.RETURN_GENERATED_KEYS);
-                 PreparedStatement configPreparedStatement = connection.prepareStatement(addPlayerConfigQuery)) {
+        try (PreparedStatement playerPreparedStatement =
+                     connection.prepareStatement(addPlayerQuery, Statement.RETURN_GENERATED_KEYS);
+             PreparedStatement configPreparedStatement = connection.prepareStatement(addPlayerConfigQuery)) {
 
 
-                playerPreparedStatement.setString(1, player.getPlayerName());
-                playerPreparedStatement.executeUpdate();
+            playerPreparedStatement.setString(1, player.getPlayerName());
+            playerPreparedStatement.executeUpdate();
 
-                try (ResultSet generatedKeys = playerPreparedStatement.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        int playerId = generatedKeys.getInt(1);
+            try (ResultSet generatedKeys = playerPreparedStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    int playerId = generatedKeys.getInt(1);
 
-                        configPreparedStatement.setInt(1, playerId);
-                        configPreparedStatement.setString(2,
-                                player.getPlayerConfig().getLocale().getLanguageName());
-                        configPreparedStatement.executeUpdate();
-
-                        connection.commit();
-                    } else {
-                        throw new PersistenceException("Creating player failed. No ID obtained.");
-                    }
+                    configPreparedStatement.setInt(1, playerId);
+                    configPreparedStatement.setString(2,
+                            player.getPlayerConfig().getLocale().getLanguageName());
+                    configPreparedStatement.executeUpdate();
+                } else {
+                    throw new PersistenceException("Creating player failed. No ID obtained.");
                 }
-            } catch (SQLException exception) {
-                connection.rollback();
-
-                throw new PersistenceException("Failed to save a Player", exception);
-            } finally {
-                connection.setAutoCommit(true);
             }
         } catch (SQLException exception) {
-            throw new PersistenceException("Transaction setup failed", exception);
+            throw new PersistenceException("Failed to save a Player", exception);
         }
-
     }
 
     @Override
@@ -194,32 +181,19 @@ public class JdbcPlayerDAO implements PlayerDAO {
                         WHERE player_id = ?;
                 """;
 
-        try {
-            connection.setAutoCommit(false);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(updatePlayerQuery);
+             PreparedStatement configPreparedStatement = connection.prepareStatement(updateConfigQuery)) {
 
-            try (PreparedStatement preparedStatement = connection.prepareStatement(updatePlayerQuery);
-                 PreparedStatement configPreparedStatement = connection.prepareStatement(updateConfigQuery)) {
+            preparedStatement.setString(1, player.getPlayerName());
+            preparedStatement.setLong(2, player.getId());
+            preparedStatement.executeUpdate();
 
-                preparedStatement.setString(1, player.getPlayerName());
-                preparedStatement.setLong(2, player.getId());
-                preparedStatement.executeUpdate();
-
-                configPreparedStatement.setString(1,
-                        player.getPlayerConfig().getLocale().getLanguageName());
-                configPreparedStatement.setLong(2, player.getId());
-                configPreparedStatement.executeUpdate();
-
-                connection.commit();
-            } catch (SQLException exception) {
-                connection.rollback();
-
-                throw new PersistenceException("Failed to update a Player: " + player, exception);
-            } finally {
-                connection.setAutoCommit(true);
-            }
-        } catch (
-                SQLException exception) {
-            throw new PersistenceException("Transaction setup failed", exception);
+            configPreparedStatement.setString(1,
+                    player.getPlayerConfig().getLocale().getLanguageName());
+            configPreparedStatement.setLong(2, player.getId());
+            configPreparedStatement.executeUpdate();
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to update a Player: " + player, exception);
         }
     }
 
