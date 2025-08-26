@@ -9,6 +9,7 @@ public enum ConsoleColor {
     PURPLE("\u001B[35m"),
     CYAN("\u001B[36m"),
     WHITE("\u001B[37m"),
+
     BRIGHT_BLACK("\u001B[90m"),
     BRIGHT_RED("\u001B[91m"),
     BRIGHT_GREEN("\u001B[92m"),
@@ -18,6 +19,7 @@ public enum ConsoleColor {
     BRIGHT_CYAN("\u001B[96m"),
     BRIGHT_WHITE("\u001B[97m"),
     ORANGE("\u001B[38;5;208m"),
+
     LIGHT_ORANGE("\u001B[38;5;214m"),
     DARK_ORANGE("\u001B[38;5;166m"),
     LIGHT_BLUE("\u001B[38;5;117m"),
@@ -40,6 +42,7 @@ public enum ConsoleColor {
     GREY("\u001B[38;5;244m"),
     LIGHT_GREY("\u001B[38;5;250m"),
     DARK_GREY("\u001B[38;5;238m"),
+
     BACKGROUND_BLACK("\u001B[40m"),
     BACKGROUND_RED("\u001B[41m"),
     BACKGROUND_GREEN("\u001B[42m"),
@@ -48,6 +51,7 @@ public enum ConsoleColor {
     BACKGROUND_PURPLE("\u001B[45m"),
     BACKGROUND_CYAN("\u001B[46m"),
     BACKGROUND_WHITE("\u001B[47m"),
+
     RESET("\u001B[0m");
 
     private final String code;
