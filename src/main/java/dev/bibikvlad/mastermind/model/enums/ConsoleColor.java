@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.model.enums.colors;
+package dev.bibikvlad.mastermind.model.enums;
 
 public enum ConsoleColor {
     BLACK("\u001B[30m"),
