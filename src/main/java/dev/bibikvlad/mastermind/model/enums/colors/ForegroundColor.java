@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.model.enums;
+package dev.bibikvlad.mastermind.model.enums.colors;
 
 public enum ForegroundColor {
     BLACK("\u001B[30m"),
