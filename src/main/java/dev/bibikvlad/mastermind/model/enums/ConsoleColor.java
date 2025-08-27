@@ -3,6 +3,7 @@ package dev.bibikvlad.mastermind.model.enums;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 public enum ConsoleColor {
     BLACK(1, "\u001B[30m", "Black", Category.FOREGROUND),
@@ -75,6 +76,7 @@ public enum ConsoleColor {
         }
     }
 
+    //TODO: FINISH THIS ENUM!!! FIX INDEX INCONSISTENCY!!!
     ConsoleColor(int id, String code, String displayName, Category category) {
         this.index = id;
         this.code = code;
@@ -96,6 +98,11 @@ public enum ConsoleColor {
 
     public Category getCategory() {
         return category;
+    }
+
+    public static ConsoleColor getByDisplayName(String displayName) {
+        return Optional.ofNullable(BY_DISPLAY_NAME.get(displayName)).orElseThrow(
+                () -> new IllegalArgumentException("Invalid Display Name: " + displayName));
     }
 
     public enum Category {FOREGROUND, BACKGROUND}
