@@ -1,26 +1,20 @@
 package dev.bibikvlad.utils.formatters;
 
-import dev.bibikvlad.utils.strings.ConsoleColors;
+import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 
 import java.util.Map;
 
 public class ConsoleColorFormatter {
     private static final Map<Character, String> COLOR_CODE_MAP = Map.of(
-            'r', ConsoleColors.BrightForeground.RED,
-            'g', ConsoleColors.BrightForeground.GREEN,
-            'y', ConsoleColors.BrightForeground.YELLOW,
-            'b', ConsoleColors.BrightForeground.BLUE,
-            'p', ConsoleColors.BrightForeground.PURPLE,
-            'w', ConsoleColors.BrightForeground.WHITE
+            'r', ConsoleColor.BRIGHT_RED.getCode(),
+            'g', ConsoleColor.BRIGHT_GREEN.getCode(),
+            'y', ConsoleColor.BRIGHT_YELLOW.getCode(),
+            'b', ConsoleColor.BRIGHT_BLUE.getCode(),
+            'p', ConsoleColor.BRIGHT_PURPLE.getCode(),
+            'w', ConsoleColor.BRIGHT_WHITE.getCode()
     );
 
     public static String getColorCode(char symbol) {
-        String colorCode = COLOR_CODE_MAP.get(Character.toLowerCase(symbol));
-
-        if (colorCode == null) {
-            throw new IllegalArgumentException("Unsupported color symbol: " + symbol);
-        }
-
-        return colorCode;
+        return COLOR_CODE_MAP.get(Character.toLowerCase(symbol));
     }
 }
