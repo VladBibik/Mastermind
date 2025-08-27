@@ -8,7 +8,7 @@ public enum ConsoleColor {
     BLUE(5, "\u001B[34m", "Blue", Category.FOREGROUND),
     PURPLE(6, "\u001B[35m", "Purple", Category.FOREGROUND),
     CYAN(7, "\u001B[36m", "Cyan", Category.FOREGROUND),
-    WHITE(8,"\u001B[37m", "White", Category.FOREGROUND),
+    WHITE(8, "\u001B[37m", "White", Category.FOREGROUND),
 
     BRIGHT_BLACK(9, "\u001B[90m", "Bright Black", Category.FOREGROUND),
     BRIGHT_RED(10, "\u001B[91m", "Bright Red", Category.FOREGROUND),
@@ -54,20 +54,20 @@ public enum ConsoleColor {
 
     RESET(Integer.MIN_VALUE, "\u001B[0m", "Reset", Category.FOREGROUND);
 
-    private final int id;
+    private final int index;
     private final String code;
     private final String displayName;
     private final Category category;
 
     ConsoleColor(int id, String code, String displayName, Category category) {
-        this.id = id;
+        this.index = id;
         this.code = code;
         this.displayName = displayName;
         this.category = category;
     }
 
-    public int getId() {
-        return id;
+    public int getIndex() {
+        return index;
     }
 
     public String getCode() {
