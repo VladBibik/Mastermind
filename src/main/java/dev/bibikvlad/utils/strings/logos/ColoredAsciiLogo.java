@@ -1,5 +1,6 @@
 package dev.bibikvlad.utils.strings.logos;
 
+import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.utils.strings.ConsoleColors;
 
 public class ColoredAsciiLogo {
@@ -16,10 +17,10 @@ public class ColoredAsciiLogo {
                 <background><borderColor>█▌<accentColor>░░░░░     ░░░░░░░░░░   ░░░░░  ░░░░░░░░░     ░░░░░    ░░░░░░░░░░ ░░░░░   ░░░░░░░░░░     ░░░░░░░░░░░░░░░    ░░░░░░░░░░░░░░░   <borderColor>▐█<reset>
                 <background><borderColor>████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████<reset>
                 """
-                .replace("<borderColor>", ConsoleColors.ExtendedAnsiForeground.ORCHID)
-                .replace("<mainColor>",  ConsoleColors.ExtendedAnsiForeground.ORANGE)
-                .replace("<accentColor>", ConsoleColors.BrightForeground.RED)
-                .replace("<background>", ConsoleColors.Background.BLACK)
-                .replace("<reset>", ConsoleColors.RESET);
+                .replace("<borderColor>", ConsoleColor.ORCHID.getCode())
+                .replace("<mainColor>",  ConsoleColor.ORANGE.getCode())
+                .replace("<accentColor>", ConsoleColor.BRIGHT_RED.getCode())
+                .replace("<background>", ConsoleColor.BACKGROUND_BLACK.getCode())
+                .replace("<reset>", ConsoleColor.RESET.getCode());
     }
 }
