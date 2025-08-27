@@ -1,5 +1,9 @@
 package dev.bibikvlad.mastermind.model.enums;
 
+import dev.bibikvlad.mastermind.localization.config.LocaleType;
+
+import java.util.HashMap;
+
 public enum ConsoleColor {
     BLACK(1, "\u001B[30m", "Black", Category.FOREGROUND),
     RED(2, "\u001B[31m", "Red", Category.FOREGROUND),
@@ -58,6 +62,18 @@ public enum ConsoleColor {
     private final String code;
     private final String displayName;
     private final Category category;
+
+    private static final HashMap<Integer, ConsoleColor> BY_ID = new HashMap<>();
+    private static final HashMap<String, ConsoleColor> BY_DISPLAY_NAME = new HashMap<>();
+    private static final HashMap<Category, ConsoleColor> BY_CATEGORY = new HashMap<>();
+
+    static {
+        for (ConsoleColor consoleColor : ConsoleColor.values()) {
+            BY_ID.put(consoleColor.getIndex(), consoleColor);
+            BY_DISPLAY_NAME.put(consoleColor.getDisplayName(), consoleColor);
+            BY_CATEGORY.put(consoleColor.getCategory(), consoleColor);
+        }
+    }
 
     ConsoleColor(int id, String code, String displayName, Category category) {
         this.index = id;
