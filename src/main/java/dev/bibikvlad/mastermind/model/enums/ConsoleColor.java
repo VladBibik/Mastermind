@@ -116,5 +116,9 @@ public enum ConsoleColor {
                 () -> new IllegalArgumentException("Invalid Display Name: " + displayName));
     }
 
+    public static ConsoleColor getByCategory(Category category) {
+        return BY_CATEGORY.get(category);
+    }
+
     public enum Category {FOREGROUND, BACKGROUND}
 }
