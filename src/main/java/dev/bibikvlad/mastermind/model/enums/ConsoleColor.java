@@ -2,8 +2,10 @@ package dev.bibikvlad.mastermind.model.enums;
 
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public enum ConsoleColor {
     BLACK(1, "\u001B[30m", "Black", Category.FOREGROUND),
@@ -64,19 +66,30 @@ public enum ConsoleColor {
     private final String displayName;
     private final Category category;
 
-    private static final HashMap<Integer, ConsoleColor> BY_ID = new HashMap<>();
+    private static final HashMap<Integer, ConsoleColor> BY_ID_FOREGROUND = new HashMap<>();
+    private static final HashMap<Integer, ConsoleColor> BY_ID_BACKGROUND = new HashMap<>();
     private static final HashMap<String, ConsoleColor> BY_DISPLAY_NAME = new HashMap<>();
     private static final HashMap<Category, ConsoleColor> BY_CATEGORY = new HashMap<>();
 
     static {
         for (ConsoleColor consoleColor : ConsoleColor.values()) {
-            BY_ID.put(consoleColor.getIndex(), consoleColor);
             BY_DISPLAY_NAME.put(consoleColor.getDisplayName(), consoleColor);
             BY_CATEGORY.put(consoleColor.getCategory(), consoleColor);
         }
+
+        for (ConsoleColor consoleColor : Arrays.stream(ConsoleColor.values())
+                .filter(color -> color.getCategory() == Category.FOREGROUND)
+                .collect(Collectors.toSet())) {
+            BY_ID_FOREGROUND.put(consoleColor.getIndex(), consoleColor);
+        }
+
+        for (ConsoleColor consoleColor : Arrays.stream(ConsoleColor.values())
+                .filter(color -> color.getCategory() == Category.BACKGROUND)
+                .collect(Collectors.toSet())) {
+            BY_ID_BACKGROUND.put(consoleColor.getIndex(), consoleColor);
+        }
     }
 
-    //TODO: FINISH THIS ENUM!!! FIX INDEX INCONSISTENCY!!!
     ConsoleColor(Integer id, String code, String displayName, Category category) {
         this.index = id;
         this.code = code;
