@@ -57,9 +57,9 @@ public enum ConsoleColor {
     BACKGROUND_CYAN(7, "\u001B[46m", "Background Cyan", Category.BACKGROUND),
     BACKGROUND_WHITE(8, "\u001B[47m", "Background White", Category.BACKGROUND),
 
-    RESET(Integer.MIN_VALUE, "\u001B[0m", "Reset", Category.FOREGROUND);
+    RESET(null, "\u001B[0m", "Reset", Category.FOREGROUND);
 
-    private final int index;
+    private final Integer index;
     private final String code;
     private final String displayName;
     private final Category category;
@@ -77,14 +77,14 @@ public enum ConsoleColor {
     }
 
     //TODO: FINISH THIS ENUM!!! FIX INDEX INCONSISTENCY!!!
-    ConsoleColor(int id, String code, String displayName, Category category) {
+    ConsoleColor(Integer id, String code, String displayName, Category category) {
         this.index = id;
         this.code = code;
         this.displayName = displayName;
         this.category = category;
     }
 
-    public int getIndex() {
+    public Integer getIndex() {
         return index;
     }
 
