@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.model.enums;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -118,6 +119,18 @@ public enum ConsoleColor {
 
     public static ConsoleColor getByCategory(Category category) {
         return BY_CATEGORY.get(category);
+    }
+
+    public static List<ConsoleColor> getForegroundColors() {
+        return Arrays.stream(ConsoleColor.values())
+                .filter(color -> color.getCategory() == Category.FOREGROUND)
+                .collect(Collectors.toList());
+    }
+
+    public static List<ConsoleColor> getBackgroundColors() {
+        return Arrays.stream(ConsoleColor.values())
+                .filter(color -> color.getCategory() == Category.BACKGROUND)
+                .collect(Collectors.toList());
     }
 
     public enum Category {FOREGROUND, BACKGROUND}
