@@ -1,7 +1,5 @@
 package dev.bibikvlad.mastermind.model.enums;
 
-import dev.bibikvlad.mastermind.localization.config.LocaleType;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Optional;
