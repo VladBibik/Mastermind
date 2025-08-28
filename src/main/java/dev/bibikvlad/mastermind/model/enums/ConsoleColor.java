@@ -112,6 +112,16 @@ public enum ConsoleColor {
         return category;
     }
 
+    public static ConsoleColor getForegroundColorByIndex(Integer index) {
+        return Optional.ofNullable(BY_ID_FOREGROUND.get(index)).orElseThrow(
+                () -> new IllegalArgumentException("No foreground color found for index " + index));
+    }
+
+    public static ConsoleColor getBackgroundColorByIndex(Integer index) {
+        return Optional.ofNullable(BY_ID_BACKGROUND.get(index)).orElseThrow(
+                () -> new IllegalArgumentException("No background color found for index " + index));
+    }
+
     public static ConsoleColor getByDisplayName(String displayName) {
         return Optional.ofNullable(BY_DISPLAY_NAME.get(displayName)).orElseThrow(
                 () -> new IllegalArgumentException("Invalid Display Name: " + displayName));
