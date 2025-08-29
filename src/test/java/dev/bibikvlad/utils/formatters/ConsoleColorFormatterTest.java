@@ -1,5 +1,6 @@
 package dev.bibikvlad.utils.formatters;
 
+import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.utils.strings.ConsoleColors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,12 +27,12 @@ public class ConsoleColorFormatterTest {
 
     private void testSymbol(char symbol) {
         String expected = switch (Character.toLowerCase(symbol)) {
-            case 'r' -> ConsoleColors.BrightForeground.RED;
-            case 'g' -> ConsoleColors.BrightForeground.GREEN;
-            case 'y' -> ConsoleColors.BrightForeground.YELLOW;
-            case 'b' -> ConsoleColors.BrightForeground.BLUE;
-            case 'p' -> ConsoleColors.BrightForeground.PURPLE;
-            case 'w' -> ConsoleColors.BrightForeground.WHITE;
+            case 'r' -> ConsoleColor.BRIGHT_RED.getCode();
+            case 'g' -> ConsoleColor.BRIGHT_GREEN.getCode();
+            case 'y' -> ConsoleColor.BRIGHT_YELLOW.getCode();
+            case 'b' -> ConsoleColor.BRIGHT_BLUE.getCode();
+            case 'p' -> ConsoleColor.BRIGHT_PURPLE.getCode();
+            case 'w' -> ConsoleColor.BRIGHT_WHITE.getCode();
             default -> throw new IllegalStateException("Unexpected symbol: " + symbol);
         };
 
