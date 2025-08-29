@@ -58,9 +58,9 @@ public enum ConsoleColor {
     BACKGROUND_CYAN(7, "\u001B[46m", "Background Cyan", Category.BACKGROUND),
     BACKGROUND_WHITE(8, "\u001B[47m", "Background White", Category.BACKGROUND),
 
-    RESET(null, "\u001B[0m", "Reset", Category.FOREGROUND);
+    RESET(0, "\u001B[0m", "Reset", Category.FOREGROUND);
 
-    private final Integer index;
+    private final int index;
     private final String code;
     private final String displayName;
     private final Category category;
@@ -89,14 +89,14 @@ public enum ConsoleColor {
         }
     }
 
-    ConsoleColor(Integer id, String code, String displayName, Category category) {
+    ConsoleColor(int id, String code, String displayName, Category category) {
         this.index = id;
         this.code = code;
         this.displayName = displayName;
         this.category = category;
     }
 
-    public Integer getIndex() {
+    public int getIndex() {
         return index;
     }
 
