@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.clues;
 
-import dev.bibikvlad.utils.strings.ConsoleColors;
+import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.utils.strings.GameCluesConstants;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,9 @@ public class InputVisualRepresentationTest {
     @Test
     @DisplayName("Testing visual representation for the single character")
     void testVisualRepresentationForSingleCharacter() {
-        String expected = ConsoleColors.BrightForeground.RED + GameCluesConstants.CIRCLE_SOLID + ConsoleColors.RESET;
+        String expected = ConsoleColor.BRIGHT_RED.getCode()
+                + GameCluesConstants.CIRCLE_SOLID
+                + ConsoleColor.RESET.getCode();
         String actual = InputVisualRepresentation.getVisualRepresentation("R");
 
         assertEquals(expected, actual);
@@ -20,10 +22,10 @@ public class InputVisualRepresentationTest {
     @Test
     @DisplayName("Testing visual representation for multiple characters")
     void testVisualRepresentationForMultipleCharacters() {
-        String expected = ConsoleColors.BrightForeground.RED + GameCluesConstants.CIRCLE_SOLID
-                + ConsoleColors.BrightForeground.GREEN + GameCluesConstants.CIRCLE_SOLID
-                + ConsoleColors.BrightForeground.BLUE + GameCluesConstants.CIRCLE_SOLID
-                + ConsoleColors.RESET;
+        String expected = ConsoleColor.BRIGHT_RED.getCode() + GameCluesConstants.CIRCLE_SOLID
+                + ConsoleColor.BRIGHT_GREEN.getCode() + GameCluesConstants.CIRCLE_SOLID
+                + ConsoleColor.BRIGHT_BLUE.getCode() + GameCluesConstants.CIRCLE_SOLID
+                + ConsoleColor.RESET.getCode();
 
         String actual = InputVisualRepresentation.getVisualRepresentation("rgb");
 
@@ -33,7 +35,7 @@ public class InputVisualRepresentationTest {
     @Test
     @DisplayName("Empty string test")
     void testVisualRepresentationForEmptyString() {
-        String expected = ConsoleColors.RESET;
+        String expected = ConsoleColor.RESET.getCode();
         String actual = InputVisualRepresentation.getVisualRepresentation("");
 
         assertEquals(expected, actual);
