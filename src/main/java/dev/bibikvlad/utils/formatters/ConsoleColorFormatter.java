@@ -3,6 +3,7 @@ package dev.bibikvlad.utils.formatters;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 
 import java.util.Map;
+import java.util.Optional;
 
 public class ConsoleColorFormatter {
     private static final Map<Character, String> COLOR_CODE_MAP = Map.of(
@@ -15,6 +16,7 @@ public class ConsoleColorFormatter {
     );
 
     public static String getColorCode(char symbol) {
-        return COLOR_CODE_MAP.get(Character.toLowerCase(symbol));
+        return Optional.ofNullable(COLOR_CODE_MAP.get(Character.toLowerCase(symbol)))
+                .orElseThrow(() -> new IllegalArgumentException("Invalid symbol: " + symbol));
     }
 }
