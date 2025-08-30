@@ -129,15 +129,11 @@ public enum ConsoleColor {
     }
 
     public static List<ConsoleColor> getForegroundColors() {
-        return Arrays.stream(ConsoleColor.values())
-                .filter(color -> color.getCategory() == Category.FOREGROUND)
-                .collect(Collectors.toList());
+        return BY_CATEGORY.get(Category.FOREGROUND);
     }
 
     public static List<ConsoleColor> getBackgroundColors() {
-        return Arrays.stream(ConsoleColor.values())
-                .filter(color -> color.getCategory() == Category.BACKGROUND)
-                .collect(Collectors.toList());
+        return BY_CATEGORY.get(Category.BACKGROUND);
     }
 
     public enum Category {FOREGROUND, BACKGROUND}
