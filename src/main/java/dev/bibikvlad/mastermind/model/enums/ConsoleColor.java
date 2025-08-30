@@ -1,9 +1,6 @@
 package dev.bibikvlad.mastermind.model.enums;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public enum ConsoleColor {
@@ -65,15 +62,15 @@ public enum ConsoleColor {
     private final String displayName;
     private final Category category;
 
-    private static final HashMap<Integer, ConsoleColor> BY_ID_FOREGROUND = new HashMap<>();
-    private static final HashMap<Integer, ConsoleColor> BY_ID_BACKGROUND = new HashMap<>();
-    private static final HashMap<String, ConsoleColor> BY_DISPLAY_NAME = new HashMap<>();
-    private static final HashMap<Category, ConsoleColor> BY_CATEGORY = new HashMap<>();
+    private static final Map<Integer, ConsoleColor> BY_ID_FOREGROUND = new HashMap<>();
+    private static final Map<Integer, ConsoleColor> BY_ID_BACKGROUND = new HashMap<>();
+    private static final Map<String, ConsoleColor> BY_DISPLAY_NAME = new HashMap<>();
+    private static final Map<Category, List<ConsoleColor>> BY_CATEGORY =
+            Arrays.stream(values()).collect(Collectors.groupingBy(ConsoleColor::getCategory));
 
     static {
         for (ConsoleColor consoleColor : ConsoleColor.values()) {
             BY_DISPLAY_NAME.put(consoleColor.getDisplayName(), consoleColor);
-            BY_CATEGORY.put(consoleColor.getCategory(), consoleColor);
         }
 
         for (ConsoleColor consoleColor : Arrays.stream(ConsoleColor.values())
@@ -127,7 +124,7 @@ public enum ConsoleColor {
                 () -> new IllegalArgumentException("Invalid Display Name: " + displayName));
     }
 
-    public static ConsoleColor getByCategory(Category category) {
+    public static List<ConsoleColor> getByCategory(Category category) {
         return BY_CATEGORY.get(category);
     }
 
