@@ -43,8 +43,8 @@ public enum ConsoleColor {
     ORCHID(35, "\u001B[38;5;170m", "Orchid", Category.FOREGROUND),
     BROWN(36, "\u001B[38;5;94m", "Brown", Category.FOREGROUND),
     GREY(37, "\u001B[38;5;244m", "Grey", Category.FOREGROUND),
-    LIGHT_GREY(38, "\u001B[38;5;250m", "Light Green", Category.FOREGROUND),
-    DARK_GREY(39, "\u001B[38;5;238m", "Dark Green", Category.FOREGROUND),
+    LIGHT_GREY(38, "\u001B[38;5;250m", "Light Gray", Category.FOREGROUND),
+    DARK_GREY(39, "\u001B[38;5;238m", "Dark Gray", Category.FOREGROUND),
 
     BACKGROUND_BLACK(1, "\u001B[40m", "Background Black", Category.BACKGROUND),
     BACKGROUND_RED(2, "\u001B[41m", "Background Red", Category.BACKGROUND),
