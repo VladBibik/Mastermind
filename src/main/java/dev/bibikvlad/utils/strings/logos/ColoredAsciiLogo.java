@@ -1,7 +1,6 @@
 package dev.bibikvlad.utils.strings.logos;
 
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
-import dev.bibikvlad.utils.strings.ConsoleColors;
 
 public class ColoredAsciiLogo {
     public static String getLogo() {
