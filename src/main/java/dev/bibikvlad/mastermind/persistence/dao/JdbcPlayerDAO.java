@@ -106,7 +106,7 @@ public class JdbcPlayerDAO implements PlayerDAO {
 
             try (ResultSet generatedKeys = playerPreparedStatement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    int playerId = generatedKeys.getInt(1);
+                    long playerId = generatedKeys.getLong(1);
 
                     configPreparedStatement.setLong(1, playerId);
                     configPreparedStatement.setString(2,
