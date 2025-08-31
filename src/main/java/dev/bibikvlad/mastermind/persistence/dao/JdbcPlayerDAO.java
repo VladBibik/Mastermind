@@ -194,9 +194,17 @@ public class JdbcPlayerDAO implements PlayerDAO {
             preparedStatement.setLong(2, player.getId());
             preparedStatement.executeUpdate();
 
-            configPreparedStatement.setString(1,
+            configPreparedStatement.setLong(1, player.getId());
+            configPreparedStatement.setString(2,
                     player.getPlayerConfig().getLocale().getLanguageName());
-            configPreparedStatement.setLong(2, player.getId());
+            configPreparedStatement.setString(3, player.getPlayerConfig()
+                    .getLogoBorderColor().getDisplayName());
+            configPreparedStatement.setString(4, player.getPlayerConfig()
+                    .getLogoMainColor().getDisplayName());
+            configPreparedStatement.setString(5, player.getPlayerConfig()
+                    .getLogoAccentColor().getDisplayName());
+            configPreparedStatement.setString(6, player.getPlayerConfig()
+                    .getLogoBackgroundColor().getDisplayName());
             configPreparedStatement.executeUpdate();
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to update a Player: " + player, exception);
