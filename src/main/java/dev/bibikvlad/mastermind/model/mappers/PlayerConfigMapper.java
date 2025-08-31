@@ -11,10 +11,10 @@ public class PlayerConfigMapper {
     public static PlayerConfig map(ResultSet resultSet) throws SQLException {
         return new PlayerConfig(LocaleType.fromLanguageString(
                 resultSet.getString("language")),
-                ConsoleColor.getByDisplayName("logo_border_color"),
-                ConsoleColor.getByDisplayName("logo_main_color"),
-                ConsoleColor.getByDisplayName("logo_accent_color"),
-                ConsoleColor.getByDisplayName("logo_background_color")
+                ConsoleColor.getByDisplayName(resultSet.getString("logo_border_color")),
+                ConsoleColor.getByDisplayName(resultSet.getString("logo_main_color")),
+                ConsoleColor.getByDisplayName(resultSet.getString("logo_accent_color")),
+                ConsoleColor.getByDisplayName(resultSet.getString("logo_background_color"))
         );
     }
 }
