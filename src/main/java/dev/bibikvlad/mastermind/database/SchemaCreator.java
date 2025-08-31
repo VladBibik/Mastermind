@@ -28,6 +28,10 @@ public class SchemaCreator {
                     CREATE TABLE IF NOT EXISTS player_configurations (
                         player_id INTEGER PRIMARY KEY,
                         language TEXT NOT NULL,
+                        logo_border_color TEXT NOT NULL,
+                        logo_main_color TEXT NOT NULL,
+                        logo_accent_color TEXT NOT NULL,
+                        logo_background_color TEXT NOT NULL,
                         FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE
                 );""";
 
