@@ -5,36 +5,37 @@ import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 
 public class PlayerConfig {
     private final LocaleType locale;
-    private final ConsoleColor borderColor;
-    private final ConsoleColor mainColor;
-    private final ConsoleColor accentColor;
-    private final ConsoleColor backgroundColor;
+    private final ConsoleColor logoBorderColor;
+    private final ConsoleColor logoMainColor;
+    private final ConsoleColor logoAccentColor;
+    private final ConsoleColor logoBackgroundColor;
 
-    public PlayerConfig(LocaleType locale, ConsoleColor borderColor, ConsoleColor mainColor, ConsoleColor accentColor, ConsoleColor backgroundColor) {
+    public PlayerConfig(LocaleType locale, ConsoleColor logoBorderColor, ConsoleColor logoMainColor,
+                        ConsoleColor logoAccentColor, ConsoleColor logoBackgroundColor) {
         this.locale = locale;
-        this.borderColor = borderColor;
-        this.mainColor = mainColor;
-        this.accentColor = accentColor;
-        this.backgroundColor = backgroundColor;
+        this.logoBorderColor = logoBorderColor;
+        this.logoMainColor = logoMainColor;
+        this.logoAccentColor = logoAccentColor;
+        this.logoBackgroundColor = logoBackgroundColor;
     }
 
     public LocaleType getLocale() {
         return locale;
     }
 
-    public ConsoleColor getBorderColor() {
-        return borderColor;
+    public ConsoleColor getLogoBorderColor() {
+        return logoBorderColor;
     }
 
-    public ConsoleColor getMainColor() {
-        return mainColor;
+    public ConsoleColor getLogoMainColor() {
+        return logoMainColor;
     }
 
-    public ConsoleColor getAccentColor() {
-        return accentColor;
+    public ConsoleColor getLogoAccentColor() {
+        return logoAccentColor;
     }
 
-    public ConsoleColor getBackgroundColor() {
-        return backgroundColor;
+    public ConsoleColor getLogoBackgroundColor() {
+        return logoBackgroundColor;
     }
 }
