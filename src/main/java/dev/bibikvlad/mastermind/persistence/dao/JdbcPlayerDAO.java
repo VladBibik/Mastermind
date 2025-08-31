@@ -3,6 +3,7 @@ package dev.bibikvlad.mastermind.persistence.dao;
 import dev.bibikvlad.mastermind.database.DatabaseContext;
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.model.mappers.PlayerMapper;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;
@@ -24,7 +25,7 @@ public class JdbcPlayerDAO implements PlayerDAO {
     public List<Player> findAll() throws PersistenceException {
         List<Player> players = new ArrayList<>();
         String fetchAllPlayersQuery = """
-                SELECT id, player_name, creation_date, player_id, language
+                SELECT id, player_name, creation_date, player_id, language, logo_border_color,  logo_main_color, logo_accent_color, logo_background_color
                 FROM players p
                 LEFT JOIN player_configurations conf
                 ON p.id = conf.player_id
@@ -46,7 +47,7 @@ public class JdbcPlayerDAO implements PlayerDAO {
     @Override
     public Optional<Player> findById(int playerId) throws PersistenceException {
         String fetchPlayerQuery = """
-                        SELECT id, player_name, creation_date, player_id, language
+                        SELECT id, player_name, creation_date, player_id, language, logo_border_color,  logo_main_color, logo_accent_color, logo_background_color
                         FROM players p
                         LEFT JOIN player_configurations conf
                         ON p.id = conf.player_id
@@ -64,7 +65,7 @@ public class JdbcPlayerDAO implements PlayerDAO {
     @Override
     public Optional<Player> findByName(String playerName) throws PersistenceException {
         String fetchPlayerQuery = """
-                        SELECT id, player_name, creation_date, player_id, language
+                        SELECT id, player_name, creation_date, player_id, language, logo_border_color,  logo_main_color, logo_accent_color, logo_background_color
                         FROM players p
                         LEFT JOIN player_configurations conf
                         ON p.id = conf.player_id
@@ -236,14 +237,14 @@ public class JdbcPlayerDAO implements PlayerDAO {
 
 class Test {
     public static void main(String[] args) throws PersistenceException, SQLException {
+        DatabaseContext.initialize();
         JdbcPlayerDAO jdbcPlayerRepository = new JdbcPlayerDAO(DatabaseContext.getConnection());
 
-        PlayerConfig playerConfig = new PlayerConfig(LocaleType.RUSSIAN);
-        Player oldPlayer = jdbcPlayerRepository.findById(5).orElse(null);
-        Player newPlayer = new Player(oldPlayer.getId(), "NewPlayer?",
-                oldPlayer.getCreationDate(), playerConfig);
+        PlayerConfig playerConfig = new PlayerConfig(LocaleType.RUSSIAN, ConsoleColor.BRIGHT_RED,
+                ConsoleColor.BRIGHT_RED, ConsoleColor.BRIGHT_RED, ConsoleColor.BACKGROUND_BLACK);
+        Player player = new Player("NewPlayer?", playerConfig);
 
-        jdbcPlayerRepository.update(newPlayer);
+        jdbcPlayerRepository.delete(player);
 
         System.out.println(jdbcPlayerRepository.findAll());
     }
