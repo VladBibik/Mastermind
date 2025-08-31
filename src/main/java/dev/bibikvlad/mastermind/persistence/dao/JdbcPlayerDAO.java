@@ -92,12 +92,9 @@ public class JdbcPlayerDAO implements PlayerDAO {
 
     @Override
     public void save(Player player) throws PersistenceException {
-        String addPlayerQuery = """
-                INSERT INTO players (player_name) VALUES (?)
-                """;
-        String addPlayerConfigQuery = """
-                INSERT INTO player_configurations (player_id, language) VALUES (?, ?)
-                """;
+        String addPlayerQuery = "INSERT INTO players (player_name) VALUES (?)";
+        String addPlayerConfigQuery = "INSERT INTO player_configurations (player_id, language, logo_border_color,  " +
+                "logo_main_color, logo_accent_color, logo_background_color) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement playerPreparedStatement =
                      connection.prepareStatement(addPlayerQuery, Statement.RETURN_GENERATED_KEYS);
@@ -114,6 +111,14 @@ public class JdbcPlayerDAO implements PlayerDAO {
                     configPreparedStatement.setInt(1, playerId);
                     configPreparedStatement.setString(2,
                             player.getPlayerConfig().getLocale().getLanguageName());
+                    configPreparedStatement.setString(3, player.getPlayerConfig()
+                            .getLogoBorderColor().getDisplayName());
+                    configPreparedStatement.setString(4, player.getPlayerConfig()
+                            .getLogoMainColor().getDisplayName());
+                    configPreparedStatement.setString(5, player.getPlayerConfig()
+                            .getLogoAccentColor().getDisplayName());
+                    configPreparedStatement.setString(6, player.getPlayerConfig()
+                            .getLogoBackgroundColor().getDisplayName());
                     configPreparedStatement.executeUpdate();
                 } else {
                     throw new PersistenceException("Creating player failed. No ID obtained.");
