@@ -109,6 +109,7 @@ public enum ConsoleColor {
         return category;
     }
 
+    //TODO: Need naming consistency between other enums
     public static ConsoleColor getForegroundColorByIndex(Integer index) {
         return Optional.ofNullable(BY_ID_FOREGROUND.get(index)).orElseThrow(
                 () -> new IllegalArgumentException("No foreground color found for index " + index));
