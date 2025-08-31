@@ -8,6 +8,7 @@ import dev.bibikvlad.mastermind.model.mappers.PlayerMapper;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;
 import dev.bibikvlad.mastermind.persistence.repository.PlayerDAO;
+import dev.bibikvlad.utils.formatters.SQLiteTimestampFormatter;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -183,7 +184,7 @@ public class JdbcPlayerDAO implements PlayerDAO {
                 """;
         String updateConfigQuery = """
                         UPDATE player_configurations
-                        SET language = ?
+                        SET language = ?, logo_border_color = ?, logo_main_color = ?, logo_accent_color = ?, logo_background_color = ?
                         WHERE player_id = ?;
                 """;
 
@@ -254,10 +255,11 @@ class Test {
         JdbcPlayerDAO jdbcPlayerRepository = new JdbcPlayerDAO(DatabaseContext.getConnection());
 
         PlayerConfig playerConfig = new PlayerConfig(LocaleType.RUSSIAN, ConsoleColor.BRIGHT_RED,
-                ConsoleColor.BRIGHT_RED, ConsoleColor.BRIGHT_RED, ConsoleColor.BACKGROUND_BLACK);
-        Player player = new Player("NewPlayer?", playerConfig);
+                ConsoleColor.BRIGHT_RED, ConsoleColor.BRIGHT_GREEN, ConsoleColor.BACKGROUND_BLACK);
+        Player player = new Player(1L, "NewPlayer?",
+                SQLiteTimestampFormatter.parse("2025-08-31 23:35:24"), playerConfig);
 
-        jdbcPlayerRepository.delete(player);
+        jdbcPlayerRepository.update(player);
 
         System.out.println(jdbcPlayerRepository.findAll());
     }
