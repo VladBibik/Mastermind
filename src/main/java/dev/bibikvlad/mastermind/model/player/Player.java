@@ -47,6 +47,10 @@ public class Player {
                 + ", Creation Date = " + SQLiteTimestampFormatter.format(creationDate)
                 + "\n    configurations:"
                 + "\n        Selected Language: " + playerConfig.getLocale().getLanguageName()
+                + "\n        Selected Logo Border Color: " + playerConfig.getLogoBorderColor().getDisplayName()
+                + "\n        Selected Logo Main Color: " + playerConfig.getLogoMainColor().getDisplayName()
+                + "\n        Selected Logo Accent Color: " + playerConfig.getLogoAccentColor().getDisplayName()
+                + "\n        Selected Logo Background Color: " + playerConfig.getLogoBackgroundColor().getDisplayName()
                 + "\n";
     }
 }
