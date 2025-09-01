@@ -26,7 +26,8 @@ public class JdbcPlayerDAO implements PlayerDAO {
     public List<Player> findAll() throws PersistenceException {
         List<Player> players = new ArrayList<>();
         String fetchAllPlayersQuery = """
-                SELECT id, player_name, creation_date, player_id, language, logo_border_color,  logo_main_color, logo_accent_color, logo_background_color
+                SELECT id, player_name, creation_date, player_id, language, logo_border_color,
+                       logo_main_color, logo_accent_color, logo_background_color
                 FROM players p
                 LEFT JOIN player_configurations conf
                 ON p.id = conf.player_id
@@ -48,7 +49,8 @@ public class JdbcPlayerDAO implements PlayerDAO {
     @Override
     public Optional<Player> findById(int playerId) throws PersistenceException {
         String fetchPlayerQuery = """
-                        SELECT id, player_name, creation_date, player_id, language, logo_border_color,  logo_main_color, logo_accent_color, logo_background_color
+                        SELECT id, player_name, creation_date, player_id, language, logo_border_color,
+                               logo_main_color, logo_accent_color, logo_background_color
                         FROM players p
                         LEFT JOIN player_configurations conf
                         ON p.id = conf.player_id
@@ -66,7 +68,8 @@ public class JdbcPlayerDAO implements PlayerDAO {
     @Override
     public Optional<Player> findByName(String playerName) throws PersistenceException {
         String fetchPlayerQuery = """
-                        SELECT id, player_name, creation_date, player_id, language, logo_border_color,  logo_main_color, logo_accent_color, logo_background_color
+                        SELECT id, player_name, creation_date, player_id, language, logo_border_color,
+                               logo_main_color, logo_accent_color, logo_background_color
                         FROM players p
                         LEFT JOIN player_configurations conf
                         ON p.id = conf.player_id
