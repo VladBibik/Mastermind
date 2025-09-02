@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface PlayerDAO {
     List<Player> findAll() throws PersistenceException;
 
-    Optional<Player> findById(int id) throws PersistenceException;
+    Optional<Player> findById(long id) throws PersistenceException;
 
     Optional<Player> findByName(String name) throws PersistenceException;
 
@@ -17,13 +17,13 @@ public interface PlayerDAO {
 
     void delete(Player player) throws PersistenceException;
 
-    void deleteById(int id) throws PersistenceException;
+    void deleteById(long id) throws PersistenceException;
 
     void deleteByName(String name) throws PersistenceException;
 
     void update(Player player) throws PersistenceException;
 
-    boolean existsById(int id) throws PersistenceException;
+    boolean existsById(long id) throws PersistenceException;
 
     boolean existsByName(String name) throws PersistenceException;
 }
