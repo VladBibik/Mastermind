@@ -58,7 +58,7 @@ public class JdbcPlayerDAO implements PlayerDAO {
                 """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(fetchPlayerQuery)) {
-            preparedStatement.setInt(1, playerId);
+            preparedStatement.setLong(1, playerId);
             return getPlayer(preparedStatement);
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to fetch player by ID: " + playerId, exception);
