@@ -47,7 +47,7 @@ public class JdbcPlayerDAO implements PlayerDAO {
     }
 
     @Override
-    public Optional<Player> findById(int playerId) throws PersistenceException {
+    public Optional<Player> findById(long playerId) throws PersistenceException {
         String fetchPlayerQuery = """
                         SELECT id, player_name, creation_date, player_id, language, logo_border_color,
                                logo_main_color, logo_accent_color, logo_background_color
@@ -149,14 +149,14 @@ public class JdbcPlayerDAO implements PlayerDAO {
     }
 
     @Override
-    public void deleteById(int playerId) throws PersistenceException {
+    public void deleteById(long playerId) throws PersistenceException {
         String deletePlayerQuery = """
                         DELETE FROM players
                         WHERE id = ?;
                 """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(deletePlayerQuery)) {
-            preparedStatement.setInt(1, playerId);
+            preparedStatement.setLong(1, playerId);
             preparedStatement.executeUpdate();
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to delete player by ID: " + playerId, exception);
@@ -187,7 +187,8 @@ public class JdbcPlayerDAO implements PlayerDAO {
                 """;
         String updateConfigQuery = """
                         UPDATE player_configurations
-                        SET language = ?, logo_border_color = ?, logo_main_color = ?, logo_accent_color = ?, logo_background_color = ?
+                        SET language = ?, logo_border_color = ?,
+                            logo_main_color = ?, logo_accent_color = ?, logo_background_color = ?
                         WHERE player_id = ?;
                 """;
 
@@ -216,14 +217,14 @@ public class JdbcPlayerDAO implements PlayerDAO {
     }
 
     @Override
-    public boolean existsById(int playerId) throws PersistenceException {
+    public boolean existsById(long playerId) throws PersistenceException {
         String playerQuery = """
                             SELECT 1 FROM players
                             WHERE id = ?;
                 """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(playerQuery)) {
-            preparedStatement.setInt(1, playerId);
+            preparedStatement.setLong(1, playerId);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 return resultSet.next();
@@ -257,10 +258,10 @@ class Test {
         DatabaseContext.initialize();
         JdbcPlayerDAO jdbcPlayerRepository = new JdbcPlayerDAO(DatabaseContext.getConnection());
 
-        PlayerConfig playerConfig = new PlayerConfig(LocaleType.RUSSIAN, ConsoleColor.BRIGHT_RED,
+        PlayerConfig playerConfig = new PlayerConfig(LocaleType.ENGLISH, ConsoleColor.BRIGHT_RED,
                 ConsoleColor.BRIGHT_RED, ConsoleColor.BRIGHT_GREEN, ConsoleColor.BACKGROUND_BLACK);
-        Player player = new Player(1L, "NewPlayer?",
-                SQLiteTimestampFormatter.parse("2025-08-31 23:35:24"), playerConfig);
+        Player player = new Player(1L, "ChangedPlayer",
+                SQLiteTimestampFormatter.parse("2025-10-31 23:35:24"), playerConfig);
 
         jdbcPlayerRepository.update(player);
 
