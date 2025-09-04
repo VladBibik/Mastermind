@@ -95,7 +95,7 @@ public class JdbcPlayerDAO implements PlayerDAO {
     }
 
     @Override
-    public void save(Player player) throws PersistenceException {
+    public boolean save(Player player) throws PersistenceException {
         String addPlayerQuery = "INSERT INTO players (player_name) VALUES (?)";
         String addPlayerConfigQuery = "INSERT INTO player_configurations (player_id, language, logo_border_color,  " +
                 "logo_main_color, logo_accent_color, logo_background_color) VALUES (?, ?, ?, ?, ?, ?)";
@@ -131,10 +131,12 @@ public class JdbcPlayerDAO implements PlayerDAO {
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to save a Player: " + player, exception);
         }
+
+        return true;
     }
 
     @Override
-    public void delete(Player player) throws PersistenceException {
+    public boolean delete(Player player) throws PersistenceException {
         String deletePlayerQuery = """
                             DELETE FROM players
                             WHERE player_name = ?;
@@ -146,10 +148,12 @@ public class JdbcPlayerDAO implements PlayerDAO {
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to delete a Player: " + player, exception);
         }
+
+        return true;
     }
 
     @Override
-    public void deleteById(long playerId) throws PersistenceException {
+    public boolean deleteById(long playerId) throws PersistenceException {
         String deletePlayerQuery = """
                         DELETE FROM players
                         WHERE id = ?;
@@ -161,10 +165,12 @@ public class JdbcPlayerDAO implements PlayerDAO {
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to delete player by ID: " + playerId, exception);
         }
+
+        return true;
     }
 
     @Override
-    public void deleteByName(String playerName) throws PersistenceException {
+    public boolean deleteByName(String playerName) throws PersistenceException {
         String deletePlayerQuery = """
                         DELETE FROM players
                         WHERE player_name = ?;
@@ -176,10 +182,12 @@ public class JdbcPlayerDAO implements PlayerDAO {
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to delete player by Name: " + playerName, exception);
         }
+
+        return true;
     }
 
     @Override
-    public void update(Player player) throws PersistenceException {
+    public boolean update(Player player) throws PersistenceException {
         String updatePlayerQuery = """
                         UPDATE players
                         SET player_name = ?
@@ -214,6 +222,8 @@ public class JdbcPlayerDAO implements PlayerDAO {
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to update a Player: " + player, exception);
         }
+
+        return true;
     }
 
     @Override
