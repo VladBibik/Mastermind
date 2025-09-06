@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface PlayerConfigRepository {
     Optional<PlayerConfig> findById(int id) throws PersistenceException;
 
-    void save(PlayerConfig playerConfig) throws PersistenceException;
+    boolean save(PlayerConfig playerConfig) throws PersistenceException;
 
-    void updateLocale(int playerId, LocaleType locale) throws PersistenceException;
+    boolean updateLocale(int playerId, LocaleType locale) throws PersistenceException;
 }
