@@ -5,9 +5,16 @@ import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;
 
+import java.sql.Connection;
 import java.util.Optional;
 
 public class JdbcPlayerConfigDAO implements PlayerConfigDAO {
+    private final Connection connection;
+
+    public JdbcPlayerConfigDAO(Connection connection) {
+        this.connection = connection;
+    }
+
     @Override
     public Optional<PlayerConfig> findById(int id) throws PersistenceException {
         return Optional.empty();
