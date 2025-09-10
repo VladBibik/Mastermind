@@ -7,7 +7,7 @@ import dev.bibikvlad.mastermind.model.player.PlayerConfig;
 
 import java.util.Optional;
 
-public interface PlayerConfigDAO{
+public interface PlayerConfigDAO {
     Optional<PlayerConfig> findById(int id) throws PersistenceException;
 
     boolean save(PlayerConfig playerConfig) throws PersistenceException;
