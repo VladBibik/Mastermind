@@ -20,7 +20,7 @@ public class JdbcPlayerConfigDAO implements PlayerConfigDAO {
     }
 
     @Override
-    public Optional<PlayerConfig> findById(int id) throws PersistenceException {
+    public Optional<PlayerConfig> findById(long id) throws PersistenceException {
         String fetchPlayerConfigQuery = """
                 SELECT player_id, language, logo_border_color, logo_main_color, logo_accent_color, logo_background_color
                 FROM player_configurations
@@ -28,7 +28,7 @@ public class JdbcPlayerConfigDAO implements PlayerConfigDAO {
                 """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(fetchPlayerConfigQuery)) {
-            preparedStatement.setInt(1, id);
+            preparedStatement.setLong(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -58,7 +58,7 @@ public class JdbcPlayerConfigDAO implements PlayerConfigDAO {
     }
 
     @Override
-    public boolean updateLocale(int playerId, LocaleType locale) throws PersistenceException {
+    public boolean updateLocale(long playerId, LocaleType locale) throws PersistenceException {
         return false;
     }
 }
