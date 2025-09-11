@@ -65,11 +65,6 @@ public class JdbcPlayerConfigDAO implements PlayerConfigDAO {
     }
 
     @Override
-    public boolean delete(PlayerConfig playerConfig) throws PersistenceException {
-        return false;
-    }
-
-    @Override
     public boolean update(Player player) throws PersistenceException {
         return false;
     }
