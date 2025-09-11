@@ -12,8 +12,6 @@ public interface PlayerConfigDAO {
 
     boolean save(long playerId, PlayerConfig playerConfig) throws PersistenceException;
 
-    boolean delete(PlayerConfig playerConfig) throws PersistenceException;
-
     boolean update(Player player) throws PersistenceException;
 
     boolean updateLocale(long playerId, LocaleType locale) throws PersistenceException;
