@@ -8,7 +8,7 @@ import dev.bibikvlad.mastermind.model.player.PlayerConfig;
 import java.util.Optional;
 
 public interface PlayerConfigDAO {
-    Optional<PlayerConfig> findById(int id) throws PersistenceException;
+    Optional<PlayerConfig> findById(long id) throws PersistenceException;
 
     boolean save(PlayerConfig playerConfig) throws PersistenceException;
 
@@ -16,5 +16,5 @@ public interface PlayerConfigDAO {
 
     boolean update(Player player) throws PersistenceException;
 
-    boolean updateLocale(int playerId, LocaleType locale) throws PersistenceException;
+    boolean updateLocale(long playerId, LocaleType locale) throws PersistenceException;
 }
