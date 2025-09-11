@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface PlayerConfigDAO {
     Optional<PlayerConfig> findById(long id) throws PersistenceException;
 
-    boolean save(PlayerConfig playerConfig) throws PersistenceException;
+    boolean save(long playerId, PlayerConfig playerConfig) throws PersistenceException;
 
     boolean delete(PlayerConfig playerConfig) throws PersistenceException;
 
