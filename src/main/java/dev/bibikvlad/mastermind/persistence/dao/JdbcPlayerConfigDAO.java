@@ -38,7 +38,7 @@ public class JdbcPlayerConfigDAO implements PlayerConfigDAO {
                 return Optional.empty();
             }
         } catch (SQLException exception) {
-            throw new PersistenceException("Failed to fetch player configuration by id: " + id, exception);
+            throw new PersistenceException("Failed to fetch player configuration by id: " + playerId, exception);
         }
     }
 
