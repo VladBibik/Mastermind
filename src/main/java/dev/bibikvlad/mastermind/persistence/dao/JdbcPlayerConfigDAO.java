@@ -80,6 +80,7 @@ public class JdbcPlayerConfigDAO implements PlayerConfigDAO {
             preparedStatement.setString(4, playerConfig.getLogoAccentColor().getDisplayName());
             preparedStatement.setString(5, playerConfig.getLogoBackgroundColor().getDisplayName());
             preparedStatement.setLong(6, playerId);
+            preparedStatement.executeUpdate();
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to update a Player Configurations for a Player with ID: "
                     + playerId, exception);
