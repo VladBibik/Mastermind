@@ -65,8 +65,27 @@ public class JdbcPlayerConfigDAO implements PlayerConfigDAO {
     }
 
     @Override
-    public boolean update(Player player) throws PersistenceException {
-        return false;
+    public boolean update(long playerId, PlayerConfig playerConfig) throws PersistenceException {
+        String updateConfigQuery = """
+                        UPDATE player_configurations
+                        SET language = ?, logo_border_color = ?,
+                            logo_main_color = ?, logo_accent_color = ?, logo_background_color = ?
+                        WHERE player_id = ?;
+                """;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(updateConfigQuery)) {
+            preparedStatement.setString(1, playerConfig.getLocale().getLanguageName());
+            preparedStatement.setString(2, playerConfig.getLogoBorderColor().getDisplayName());
+            preparedStatement.setString(3, playerConfig.getLogoMainColor().getDisplayName());
+            preparedStatement.setString(4, playerConfig.getLogoAccentColor().getDisplayName());
+            preparedStatement.setString(5, playerConfig.getLogoBackgroundColor().getDisplayName());
+            preparedStatement.setLong(6, playerId);
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to update a Player Configurations for a Player with ID: "
+                    + playerId, exception);
+        }
+
+        return true;
     }
 
     @Override
