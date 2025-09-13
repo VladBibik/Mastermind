@@ -91,6 +91,20 @@ public class JdbcPlayerConfigDAO implements PlayerConfigDAO {
 
     @Override
     public boolean updateLocale(long playerId, LocaleType locale) throws PersistenceException {
-        return false;
+        String localeUpdateQuery = """
+                UPDATE player_configurations
+                SET language = ?
+                WHERE player_id = ?;
+                """;
+        try (PreparedStatement preparedStatement = connection.prepareStatement(localeUpdateQuery)) {
+            preparedStatement.setString(1, locale.getLanguageName());
+            preparedStatement.setLong(2, playerId);
+            preparedStatement.executeUpdate();
+        } catch(SQLException exception) {
+            throw new PersistenceException("Failed to update Locale in Player Configurations for a Player with ID: "
+                    + playerId, exception);
+        }
+
+        return true;
     }
 }
