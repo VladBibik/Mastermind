@@ -3,7 +3,6 @@ package dev.bibikvlad.mastermind.persistence.dao;
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.mappers.PlayerConfigMapper;
-import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;
 
 import java.sql.Connection;
@@ -100,7 +99,7 @@ public class JdbcPlayerConfigDAO implements PlayerConfigDAO {
             preparedStatement.setString(1, locale.getLanguageName());
             preparedStatement.setLong(2, playerId);
             preparedStatement.executeUpdate();
-        } catch(SQLException exception) {
+        } catch (SQLException exception) {
             throw new PersistenceException("Failed to update Locale in Player Configurations for a Player with ID: "
                     + playerId, exception);
         }
