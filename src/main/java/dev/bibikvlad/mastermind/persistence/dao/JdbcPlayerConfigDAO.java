@@ -106,4 +106,9 @@ public class JdbcPlayerConfigDAO implements PlayerConfigDAO {
 
         return true;
     }
+
+    @Override
+    public boolean updateLogoColors(long playerId, PlayerConfig playerConfig) throws PersistenceException {
+        return false;
+    }
 }
