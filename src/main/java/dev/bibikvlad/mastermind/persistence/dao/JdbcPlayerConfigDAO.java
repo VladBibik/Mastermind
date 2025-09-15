@@ -109,6 +109,25 @@ public class JdbcPlayerConfigDAO implements PlayerConfigDAO {
 
     @Override
     public boolean updateLogoColors(long playerId, PlayerConfig playerConfig) throws PersistenceException {
-        return false;
+        String updateConfigQuery = """
+                        UPDATE player_configurations
+                        SET logo_border_color = ?, logo_main_color = ?,
+                            logo_accent_color = ?, logo_background_color = ?
+                        WHERE player_id = ?;
+                """;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(updateConfigQuery)) {
+            preparedStatement.setString(1, playerConfig.getLogoBorderColor().getDisplayName());
+            preparedStatement.setString(2, playerConfig.getLogoMainColor().getDisplayName());
+            preparedStatement.setString(3, playerConfig.getLogoAccentColor().getDisplayName());
+            preparedStatement.setString(4, playerConfig.getLogoBackgroundColor().getDisplayName());
+            preparedStatement.setLong(5, playerId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to update Logo Colors for a Player with ID: "
+                    + playerId, exception);
+        }
+
+        return true;
     }
 }
