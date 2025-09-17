@@ -9,8 +9,6 @@ import java.util.Optional;
 public interface PlayerConfigDAO {
     Optional<PlayerConfig> findById(long playerId) throws PersistenceException;
 
-    boolean save(long playerId, PlayerConfig playerConfig) throws PersistenceException;
-
     boolean update(long playerId, PlayerConfig playerConfig) throws PersistenceException;
 
     boolean updateLocale(long playerId, LocaleType locale) throws PersistenceException;
