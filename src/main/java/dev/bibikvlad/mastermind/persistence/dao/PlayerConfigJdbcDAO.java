@@ -74,15 +74,17 @@ public class PlayerConfigJdbcDAO implements PlayerConfigDAO {
                 SET language = ?
                 WHERE player_id = ?;
                 """;
+        int rowsUpdated = 0;
+
         try (PreparedStatement preparedStatement = connection.prepareStatement(localeUpdateQuery)) {
             preparedStatement.setString(1, locale.getLanguageName());
             preparedStatement.setLong(2, playerId);
-            preparedStatement.executeUpdate();
+            rowsUpdated = preparedStatement.executeUpdate();
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to update Locale in Player Configurations for a Player with ID: "
                     + playerId, exception);
         }
 
-        return true;
+        return rowsUpdated > 0;
     }
 }
