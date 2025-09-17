@@ -11,10 +11,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class JdbcPlayerConfigDAO implements PlayerConfigDAO {
+public class PlayerConfigJdbcDAO implements PlayerConfigDAO {
     private final Connection connection;
 
-    public JdbcPlayerConfigDAO(Connection connection) {
+    public PlayerConfigJdbcDAO(Connection connection) {
         this.connection = connection;
     }
 
