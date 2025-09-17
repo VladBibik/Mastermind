@@ -49,6 +49,7 @@ public class JdbcPlayerConfigDAO implements PlayerConfigDAO {
                             logo_main_color = ?, logo_accent_color = ?, logo_background_color = ?
                         WHERE player_id = ?;
                 """;
+        int rowsUpdated = 0;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(updateConfigQuery)) {
             preparedStatement.setString(1, playerConfig.getLocale().getLanguageName());
@@ -57,13 +58,13 @@ public class JdbcPlayerConfigDAO implements PlayerConfigDAO {
             preparedStatement.setString(4, playerConfig.getLogoAccentColor().getDisplayName());
             preparedStatement.setString(5, playerConfig.getLogoBackgroundColor().getDisplayName());
             preparedStatement.setLong(6, playerId);
-            preparedStatement.executeUpdate();
+            rowsUpdated = preparedStatement.executeUpdate();
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to update a Player Configurations for a Player with ID: "
                     + playerId, exception);
         }
 
-        return true;
+        return rowsUpdated > 0;
     }
 
     @Override
