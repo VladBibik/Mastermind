@@ -12,6 +12,4 @@ public interface PlayerConfigDAO {
     boolean update(long playerId, PlayerConfig playerConfig) throws PersistenceException;
 
     boolean updateLocale(long playerId, LocaleType locale) throws PersistenceException;
-
-    boolean updateLogoColors(long playerId, PlayerConfig playerConfig) throws PersistenceException;
 }
