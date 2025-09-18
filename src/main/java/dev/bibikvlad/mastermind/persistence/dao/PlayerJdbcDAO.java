@@ -7,7 +7,6 @@ import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.model.mappers.PlayerMapper;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;
-import dev.bibikvlad.mastermind.persistence.repository.PlayerDAO;
 import dev.bibikvlad.utils.formatters.SQLiteTimestampFormatter;
 
 import java.sql.*;
@@ -15,10 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class JdbcPlayerDAO implements PlayerDAO {
+public class PlayerJdbcDAO implements PlayerDAO {
     private final Connection connection;
 
-    public JdbcPlayerDAO(Connection connection) {
+    public PlayerJdbcDAO(Connection connection) {
         this.connection = connection;
     }
 
@@ -266,7 +265,7 @@ public class JdbcPlayerDAO implements PlayerDAO {
 class Test {
     public static void main(String[] args) throws PersistenceException, SQLException {
         DatabaseContext.initialize();
-        JdbcPlayerDAO jdbcPlayerRepository = new JdbcPlayerDAO(DatabaseContext.getConnection());
+        PlayerJdbcDAO jdbcPlayerRepository = new PlayerJdbcDAO(DatabaseContext.getConnection());
 
         PlayerConfig playerConfig = new PlayerConfig(LocaleType.ENGLISH, ConsoleColor.BRIGHT_RED,
                 ConsoleColor.BRIGHT_RED, ConsoleColor.BRIGHT_GREEN, ConsoleColor.BACKGROUND_BLACK);
