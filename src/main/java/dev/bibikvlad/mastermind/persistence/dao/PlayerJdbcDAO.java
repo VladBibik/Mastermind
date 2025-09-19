@@ -198,6 +198,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
                             logo_main_color = ?, logo_accent_color = ?, logo_background_color = ?
                         WHERE player_id = ?;
                 """;
+        int rowsUpdated;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(updatePlayerQuery);
              PreparedStatement configPreparedStatement = connection.prepareStatement(updateConfigQuery)) {
@@ -217,12 +218,12 @@ public class PlayerJdbcDAO implements PlayerDAO {
                     .getLogoAccentColor().getDisplayName());
             configPreparedStatement.setString(6, player.getPlayerConfig()
                     .getLogoBackgroundColor().getDisplayName());
-            configPreparedStatement.executeUpdate();
+            rowsUpdated = configPreparedStatement.executeUpdate();
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to update a Player: " + player, exception);
         }
 
-        return true;
+        return rowsUpdated > 0;
     }
 
     @Override
