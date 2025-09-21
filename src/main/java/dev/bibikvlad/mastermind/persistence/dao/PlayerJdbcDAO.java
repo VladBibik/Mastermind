@@ -174,15 +174,16 @@ public class PlayerJdbcDAO implements PlayerDAO {
                         DELETE FROM players
                         WHERE player_name = ?;
                 """;
+        int rowsUpdated;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(deletePlayerQuery)) {
             preparedStatement.setString(1, playerName);
-            preparedStatement.executeUpdate();
+            rowsUpdated = preparedStatement.executeUpdate();
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to delete player by Name: " + playerName, exception);
         }
 
-        return true;
+        return rowsUpdated > 0;
     }
 
     @Override
