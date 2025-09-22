@@ -15,7 +15,11 @@ public class TransactionManager {
     }
 
     public void commit() throws SQLException {
-        connection.commit();
+        try {
+            connection.commit();
+        } finally {
+            connection.setAutoCommit(true);
+        }
     }
 
     public void rollback() throws SQLException {
