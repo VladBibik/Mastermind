@@ -20,11 +20,17 @@ public class TransactionManager {
         }
     }
 
-    public void commit() throws SQLException {
+    public void commit() throws PersistenceException {
         try {
             connection.commit();
+        } catch (SQLException  exception) {
+            throw new PersistenceException("Failed to commit transaction", exception);
         } finally {
-            connection.setAutoCommit(true);
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException exception) {
+                //TODO: Add handling
+            }
         }
     }
 
