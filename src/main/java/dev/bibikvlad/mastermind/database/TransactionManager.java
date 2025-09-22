@@ -34,11 +34,11 @@ public class TransactionManager {
         }
     }
 
-    public void rollback() throws SQLException {
+    public void rollback() throws PersistenceException {
         try {
             connection.rollback();
         } catch (SQLException exception) {
-            //TODO: Add handling
+            throw new PersistenceException("Failed to rollback transaction", exception);
         } finally {
             try {
                 connection.setAutoCommit(true);
