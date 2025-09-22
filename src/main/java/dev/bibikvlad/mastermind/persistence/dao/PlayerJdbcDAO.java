@@ -98,6 +98,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
         String addPlayerQuery = "INSERT INTO players (player_name) VALUES (?)";
         String addPlayerConfigQuery = "INSERT INTO player_configurations (player_id, language, logo_border_color,  " +
                 "logo_main_color, logo_accent_color, logo_background_color) VALUES (?, ?, ?, ?, ?, ?)";
+        int rowsUpdated;
 
         try (PreparedStatement playerPreparedStatement =
                      connection.prepareStatement(addPlayerQuery, Statement.RETURN_GENERATED_KEYS);
@@ -122,7 +123,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
                             .getLogoAccentColor().getDisplayName());
                     configPreparedStatement.setString(6, player.getPlayerConfig()
                             .getLogoBackgroundColor().getDisplayName());
-                    configPreparedStatement.executeUpdate();
+                    rowsUpdated = configPreparedStatement.executeUpdate();
                 } else {
                     throw new PersistenceException("Creating player failed. No ID obtained.");
                 }
@@ -131,7 +132,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
             throw new PersistenceException("Failed to save a Player: " + player, exception);
         }
 
-        return true;
+        return rowsUpdated > 0;
     }
 
     @Override
@@ -140,15 +141,16 @@ public class PlayerJdbcDAO implements PlayerDAO {
                             DELETE FROM players
                             WHERE player_name = ?;
                 """;
+        int rowsUpdated;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(deletePlayerQuery)) {
             preparedStatement.setString(1, player.getPlayerName());
-            preparedStatement.executeUpdate();
+            rowsUpdated = preparedStatement.executeUpdate();
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to delete a Player: " + player, exception);
         }
 
-        return true;
+        return rowsUpdated > 0;
     }
 
     @Override
