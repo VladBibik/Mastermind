@@ -211,17 +211,17 @@ public class PlayerJdbcDAO implements PlayerDAO {
             preparedStatement.setLong(2, player.getId());
             preparedStatement.executeUpdate();
 
-            configPreparedStatement.setLong(1, player.getId());
-            configPreparedStatement.setString(2,
+            configPreparedStatement.setString(1,
                     player.getPlayerConfig().getLocale().getLanguageName());
-            configPreparedStatement.setString(3, player.getPlayerConfig()
+            configPreparedStatement.setString(2, player.getPlayerConfig()
                     .getLogoBorderColor().getDisplayName());
-            configPreparedStatement.setString(4, player.getPlayerConfig()
+            configPreparedStatement.setString(3, player.getPlayerConfig()
                     .getLogoMainColor().getDisplayName());
-            configPreparedStatement.setString(5, player.getPlayerConfig()
+            configPreparedStatement.setString(4, player.getPlayerConfig()
                     .getLogoAccentColor().getDisplayName());
-            configPreparedStatement.setString(6, player.getPlayerConfig()
+            configPreparedStatement.setString(5, player.getPlayerConfig()
                     .getLogoBackgroundColor().getDisplayName());
+            configPreparedStatement.setLong(6, player.getId());
             rowsUpdated = configPreparedStatement.executeUpdate();
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to update a Player: " + player, exception);
