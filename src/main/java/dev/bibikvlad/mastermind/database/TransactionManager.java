@@ -1,5 +1,7 @@
 package dev.bibikvlad.mastermind.database;
 
+import dev.bibikvlad.mastermind.exceptions.PersistenceException;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -10,8 +12,12 @@ public class TransactionManager {
         this.connection = connection;
     }
 
-    public void begin() throws SQLException {
-        connection.setAutoCommit(false);
+    public void begin() throws PersistenceException {
+        try {
+            connection.setAutoCommit(false);
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to begin transaction", exception);
+        }
     }
 
     public void commit() throws SQLException {
