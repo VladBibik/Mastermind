@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.persistence.dao;
 
-import dev.bibikvlad.mastermind.database.DatabaseContext;
+import dev.bibikvlad.mastermind.persistence.database.DatabaseContext;
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;

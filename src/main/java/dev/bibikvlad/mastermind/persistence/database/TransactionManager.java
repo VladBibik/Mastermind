@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.database;
+package dev.bibikvlad.mastermind.persistence.database;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 
