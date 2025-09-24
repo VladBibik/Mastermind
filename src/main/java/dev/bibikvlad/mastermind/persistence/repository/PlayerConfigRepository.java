@@ -36,4 +36,27 @@ public class PlayerConfigRepository {
 
         return result;
     }
+
+    public boolean update(Player player) throws PersistenceException {
+        boolean result = false;
+
+        try {
+            transactionManager.begin();
+
+            result = playerDAO.update(player);
+
+            transactionManager.commit();
+        } catch (PersistenceException exception) {
+            try {
+                transactionManager.rollback();
+            } catch (PersistenceException rollbackException) {
+                //TODO: Add exception handling!
+                exception.addSuppressed(rollbackException);
+            }
+
+            throw exception;
+        }
+
+        return result;
+    }
 }
