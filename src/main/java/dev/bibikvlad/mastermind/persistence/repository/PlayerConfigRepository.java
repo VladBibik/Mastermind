@@ -37,6 +37,10 @@ public class PlayerConfigRepository {
         playerDAO.deleteById(id);
     }
 
+    public void deleteByName(String name) throws PersistenceException {
+        playerDAO.deleteByName(name);
+    }
+
     public boolean save(Player player) throws PersistenceException {
         boolean result = false;
 
