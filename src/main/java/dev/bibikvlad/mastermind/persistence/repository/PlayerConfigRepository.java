@@ -54,7 +54,6 @@ public class PlayerConfigRepository {
             try {
                 transactionManager.rollback();
             } catch (PersistenceException rollbackException) {
-                //TODO: Add exception handling!
                 exception.addSuppressed(rollbackException);
             }
 
@@ -77,7 +76,6 @@ public class PlayerConfigRepository {
             try {
                 transactionManager.rollback();
             } catch (PersistenceException rollbackException) {
-                //TODO: Add exception handling!
                 exception.addSuppressed(rollbackException);
             }
 
