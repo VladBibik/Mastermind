@@ -8,7 +8,7 @@ import dev.bibikvlad.mastermind.persistence.database.TransactionManager;
 import java.util.List;
 import java.util.Optional;
 
-public class SQLPlayerRepository {
+public class SQLPlayerRepository implements PlayerRepository {
     private final PlayerDAO playerDAO;
     private final TransactionManager transactionManager;
 
@@ -17,30 +17,37 @@ public class SQLPlayerRepository {
         this.transactionManager = transactionManager;
     }
 
+    @Override
     public List<Player> findAll() throws PersistenceException {
         return playerDAO.findAll();
     }
 
+    @Override
     public Optional<Player> findById(long id) throws PersistenceException {
         return playerDAO.findById(id);
     }
 
+    @Override
     public Optional<Player> findByName(String name) throws PersistenceException {
         return playerDAO.findByName(name);
     }
 
+    @Override
     public void delete(Player player) throws PersistenceException {
         playerDAO.delete(player);
     }
 
+    @Override
     public void deleteById(long id) throws PersistenceException {
         playerDAO.deleteById(id);
     }
 
+    @Override
     public void deleteByName(String name) throws PersistenceException {
         playerDAO.deleteByName(name);
     }
 
+    @Override
     public boolean save(Player player) throws PersistenceException {
         boolean result = false;
 
@@ -63,6 +70,7 @@ public class SQLPlayerRepository {
         return result;
     }
 
+    @Override
     public boolean update(Player player) throws PersistenceException {
         boolean result = false;
 
@@ -85,10 +93,12 @@ public class SQLPlayerRepository {
         return result;
     }
 
+    @Override
     public boolean existById(long id) throws PersistenceException {
         return playerDAO.existsById(id);
     }
 
+    @Override
     public boolean existsByName(String name) throws PersistenceException {
         return playerDAO.existsByName(name);
     }
