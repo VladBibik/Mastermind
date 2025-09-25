@@ -5,6 +5,8 @@ import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.persistence.dao.PlayerDAO;
 import dev.bibikvlad.mastermind.persistence.database.TransactionManager;
 
+import java.util.List;
+
 public class PlayerConfigRepository {
     private final PlayerDAO playerDAO;
     private final TransactionManager transactionManager;
@@ -12,6 +14,10 @@ public class PlayerConfigRepository {
     public PlayerConfigRepository(PlayerDAO playerDAO, TransactionManager transactionManager) {
         this.playerDAO = playerDAO;
         this.transactionManager = transactionManager;
+    }
+
+    public List<Player> findAll() throws PersistenceException {
+        return playerDAO.findAll();
     }
 
     public boolean save(Player player) throws PersistenceException {
