@@ -6,6 +6,7 @@ import dev.bibikvlad.mastermind.persistence.dao.PlayerDAO;
 import dev.bibikvlad.mastermind.persistence.database.TransactionManager;
 
 import java.util.List;
+import java.util.Optional;
 
 public class PlayerConfigRepository {
     private final PlayerDAO playerDAO;
@@ -18,6 +19,10 @@ public class PlayerConfigRepository {
 
     public List<Player> findAll() throws PersistenceException {
         return playerDAO.findAll();
+    }
+
+    public Optional<Player> findById(long id) throws PersistenceException {
+        return playerDAO.findById(id);
     }
 
     public boolean save(Player player) throws PersistenceException {
