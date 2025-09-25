@@ -8,11 +8,11 @@ import dev.bibikvlad.mastermind.persistence.database.TransactionManager;
 import java.util.List;
 import java.util.Optional;
 
-public class PlayerRepository {
+public class SQLPlayerRepository {
     private final PlayerDAO playerDAO;
     private final TransactionManager transactionManager;
 
-    public PlayerRepository(PlayerDAO playerDAO, TransactionManager transactionManager) {
+    public SQLPlayerRepository(PlayerDAO playerDAO, TransactionManager transactionManager) {
         this.playerDAO = playerDAO;
         this.transactionManager = transactionManager;
     }
