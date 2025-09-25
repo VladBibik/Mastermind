@@ -29,6 +29,10 @@ public class PlayerConfigRepository {
         return playerDAO.findByName(name);
     }
 
+    public void delete(Player player) throws PersistenceException {
+        playerDAO.delete(player);
+    }
+
     public boolean save(Player player) throws PersistenceException {
         boolean result = false;
 
