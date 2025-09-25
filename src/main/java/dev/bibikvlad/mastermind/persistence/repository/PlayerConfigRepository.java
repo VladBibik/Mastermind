@@ -25,6 +25,10 @@ public class PlayerConfigRepository {
         return playerDAO.findById(id);
     }
 
+    public Optional<Player> findByName(String name) throws PersistenceException {
+        return playerDAO.findByName(name);
+    }
+
     public boolean save(Player player) throws PersistenceException {
         boolean result = false;
 
