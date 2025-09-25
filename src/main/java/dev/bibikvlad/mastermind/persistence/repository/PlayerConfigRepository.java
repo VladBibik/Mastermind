@@ -86,4 +86,12 @@ public class PlayerConfigRepository {
 
         return result;
     }
+
+    public boolean existById(long id) throws PersistenceException {
+        return playerDAO.existsById(id);
+    }
+
+    public boolean existsByName(String name) throws PersistenceException {
+        return playerDAO.existsByName(name);
+    }
 }
