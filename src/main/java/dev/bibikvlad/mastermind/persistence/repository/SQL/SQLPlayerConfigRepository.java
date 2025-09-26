@@ -16,4 +16,8 @@ public class SQLPlayerConfigRepository {
     public Optional<PlayerConfig> findById(long playerId) throws PersistenceException {
         return playerConfigDAO.findById(playerId);
     }
+
+    public boolean update(long playerId, PlayerConfig playerConfig) throws PersistenceException {
+        return playerConfigDAO.update(playerId, playerConfig);
+    }
 }
