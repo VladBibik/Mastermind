@@ -8,10 +8,10 @@ import dev.bibikvlad.mastermind.persistence.repository.PlayerConfigRepository;
 
 import java.util.Optional;
 
-public class SQLPlayerConfigRepository implements PlayerConfigRepository {
+public class PlayerConfigSQLRepository implements PlayerConfigRepository {
     private final PlayerConfigDAO playerConfigDAO;
 
-    public SQLPlayerConfigRepository(PlayerConfigDAO playerConfigDAO) {
+    public PlayerConfigSQLRepository(PlayerConfigDAO playerConfigDAO) {
         this.playerConfigDAO = playerConfigDAO;
     }
 
