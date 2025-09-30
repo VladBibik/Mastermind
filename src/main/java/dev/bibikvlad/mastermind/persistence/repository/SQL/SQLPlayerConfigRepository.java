@@ -4,6 +4,7 @@ import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;
 import dev.bibikvlad.mastermind.persistence.dao.PlayerConfigDAO;
+import dev.bibikvlad.mastermind.persistence.repository.PlayerConfigRepository;
 
 import java.util.Optional;
 

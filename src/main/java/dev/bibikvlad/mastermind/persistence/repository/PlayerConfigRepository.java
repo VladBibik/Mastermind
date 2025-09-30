@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.persistence.repository.SQL;
+package dev.bibikvlad.mastermind.persistence.repository;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
