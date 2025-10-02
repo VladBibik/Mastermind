@@ -9,11 +9,11 @@ import dev.bibikvlad.mastermind.persistence.repository.PlayerRepository;
 import java.util.List;
 import java.util.Optional;
 
-public class SQLPlayerRepository implements PlayerRepository {
+public class PlayerSQLRepository implements PlayerRepository {
     private final PlayerDAO playerDAO;
     private final TransactionManager transactionManager;
 
-    public SQLPlayerRepository(PlayerDAO playerDAO, TransactionManager transactionManager) {
+    public PlayerSQLRepository(PlayerDAO playerDAO, TransactionManager transactionManager) {
         this.playerDAO = playerDAO;
         this.transactionManager = transactionManager;
     }
