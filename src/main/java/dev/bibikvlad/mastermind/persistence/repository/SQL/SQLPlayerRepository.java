@@ -35,17 +35,60 @@ public class SQLPlayerRepository implements PlayerRepository {
 
     @Override
     public void delete(Player player) throws PersistenceException {
-        playerDAO.delete(player);
+        try {
+            transactionManager.begin();
+
+            playerDAO.delete(player);
+
+            transactionManager.commit();
+        } catch (PersistenceException exception) {
+            try {
+                transactionManager.rollback();
+            } catch (PersistenceException rollbackException) {
+                exception.addSuppressed(rollbackException);
+            }
+
+            //TODO: Need to throw something meaningful
+            throw exception;
+        }
     }
 
     @Override
     public void deleteById(long id) throws PersistenceException {
-        playerDAO.deleteById(id);
+        try {
+            transactionManager.begin();
+
+            playerDAO.deleteById(id);
+
+            transactionManager.commit();
+        } catch (PersistenceException exception) {
+            try {
+                transactionManager.rollback();
+            } catch (PersistenceException rollbackException) {
+                exception.addSuppressed(rollbackException);
+            }
+
+            throw exception;
+        }
     }
 
     @Override
     public void deleteByName(String name) throws PersistenceException {
-        playerDAO.deleteByName(name);
+        try {
+            transactionManager.begin();
+
+            playerDAO.deleteByName(name);
+
+            transactionManager.commit();
+        } catch (PersistenceException exception) {
+            try {
+                transactionManager.rollback();
+            } catch (PersistenceException rollbackException) {
+                exception.addSuppressed(rollbackException);
+            }
+
+            throw exception;
+        }
     }
 
     @Override
