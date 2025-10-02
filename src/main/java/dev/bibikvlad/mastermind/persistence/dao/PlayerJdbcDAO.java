@@ -266,19 +266,3 @@ public class PlayerJdbcDAO implements PlayerDAO {
         }
     }
 }
-
-class Test {
-    public static void main(String[] args) throws PersistenceException, SQLException {
-        DatabaseContext.initialize();
-        PlayerJdbcDAO jdbcPlayerRepository = new PlayerJdbcDAO(DatabaseContext.getConnection());
-
-        PlayerConfig playerConfig = new PlayerConfig(LocaleType.ENGLISH, ConsoleColor.BRIGHT_RED,
-                ConsoleColor.BRIGHT_RED, ConsoleColor.BRIGHT_GREEN, ConsoleColor.BACKGROUND_BLACK);
-        Player player = new Player(1L, "ChangedPlayer",
-                SQLiteTimestampFormatter.parse("2025-10-31 23:35:24"), playerConfig);
-
-        jdbcPlayerRepository.update(player);
-
-        System.out.println(jdbcPlayerRepository.findAll());
-    }
-}
