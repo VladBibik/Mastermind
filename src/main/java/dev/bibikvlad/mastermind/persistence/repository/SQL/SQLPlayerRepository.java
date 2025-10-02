@@ -95,7 +95,7 @@ public class SQLPlayerRepository implements PlayerRepository {
     }
 
     @Override
-    public boolean existById(long id) throws PersistenceException {
+    public boolean existsById(long id) throws PersistenceException {
         return playerDAO.existsById(id);
     }
 

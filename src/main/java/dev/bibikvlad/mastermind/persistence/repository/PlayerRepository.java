@@ -23,7 +23,7 @@ public interface PlayerRepository {
 
     boolean update(Player player) throws PersistenceException;
 
-    boolean existById(long id) throws PersistenceException;
+    boolean existsById(long id) throws PersistenceException;
 
     boolean existsByName(String name) throws PersistenceException;
 }
