@@ -50,7 +50,7 @@ public class SQLPlayerRepository implements PlayerRepository {
 
     @Override
     public boolean save(Player player) throws PersistenceException {
-        boolean result = false;
+        boolean result;
 
         try {
             transactionManager.begin();
@@ -73,7 +73,7 @@ public class SQLPlayerRepository implements PlayerRepository {
 
     @Override
     public boolean update(Player player) throws PersistenceException {
-        boolean result = false;
+        boolean result;
 
         try {
             transactionManager.begin();
