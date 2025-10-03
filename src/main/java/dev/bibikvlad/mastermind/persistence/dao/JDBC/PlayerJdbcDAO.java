@@ -1,13 +1,9 @@
-package dev.bibikvlad.mastermind.persistence.dao;
+package dev.bibikvlad.mastermind.persistence.dao.JDBC;
 
-import dev.bibikvlad.mastermind.persistence.database.DatabaseContext;
+import dev.bibikvlad.mastermind.persistence.dao.PlayerDAO;
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
-import dev.bibikvlad.mastermind.localization.config.LocaleType;
-import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.model.mappers.PlayerMapper;
 import dev.bibikvlad.mastermind.model.player.Player;
-import dev.bibikvlad.mastermind.model.player.PlayerConfig;
-import dev.bibikvlad.utils.formatters.SQLiteTimestampFormatter;
 
 import java.sql.*;
 import java.util.ArrayList;
