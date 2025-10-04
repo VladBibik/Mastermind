@@ -1,14 +1,11 @@
 package dev.bibikvlad.mastermind.persistence.repository.SQL;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
-import dev.bibikvlad.mastermind.model.mappers.PlayerMapper;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.persistence.dao.PlayerDAO;
 import dev.bibikvlad.mastermind.persistence.database.TransactionManager;
 import dev.bibikvlad.mastermind.persistence.repository.PlayerRepository;
 
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,14 +20,7 @@ public class PlayerSQLRepository implements PlayerRepository {
 
     @Override
     public List<Player> findAll() throws PersistenceException {
-        List<Player> players = new ArrayList<>();
-        List<ResultSet> findAll = playerDAO.findAll();
-
-        for (ResultSet resultSet : findAll) {
-            players.add(PlayerMapper.map(resultSet));
-        }
-
-        return players;
+        return playerDAO.findAll();
     }
 
     @Override

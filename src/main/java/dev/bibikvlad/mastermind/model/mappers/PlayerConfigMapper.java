@@ -1,6 +1,5 @@
 package dev.bibikvlad.mastermind.model.mappers;
 
-import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;
@@ -9,24 +8,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class PlayerConfigMapper {
-    public static PlayerConfig map(ResultSet resultSet) throws PersistenceException {
-        PlayerConfig playerConfig;
-
-        try {
-            playerConfig = new PlayerConfig(LocaleType.fromLanguageString(
-                    resultSet.getString("language")),
-                    ConsoleColor.getByDisplayName(resultSet.getString("logo_border_color")),
-                    ConsoleColor.getByDisplayName(resultSet.getString("logo_main_color")),
-                    ConsoleColor.getByDisplayName(resultSet.getString("logo_accent_color")),
-                    ConsoleColor.getByDisplayName(resultSet.getString("logo_background_color"))
-            );
-        } catch (SQLException exception) {
-            throw new PersistenceException(
-                    "Failed to parse a player configurations. Please try again later",
-                    exception
-            );
-        }
-
-        return playerConfig;
+    public static PlayerConfig map(ResultSet resultSet) throws SQLException {
+        return new PlayerConfig(LocaleType.fromLanguageString(
+                resultSet.getString("language")),
+                ConsoleColor.getByDisplayName(resultSet.getString("logo_border_color")),
+                ConsoleColor.getByDisplayName(resultSet.getString("logo_main_color")),
+                ConsoleColor.getByDisplayName(resultSet.getString("logo_accent_color")),
+                ConsoleColor.getByDisplayName(resultSet.getString("logo_background_color"))
+        );
     }
 }

@@ -18,8 +18,8 @@ public class PlayerJdbcDAO implements PlayerDAO {
     }
 
     @Override
-    public List<ResultSet> findAll() throws PersistenceException {
-        List<ResultSet>  resultSets = new ArrayList<>();
+    public List<Player> findAll() throws PersistenceException {
+        List<Player> players = new ArrayList<>();
         String fetchAllPlayersQuery = """
                 SELECT id, player_name, creation_date, player_id, language, logo_border_color,
                        logo_main_color, logo_accent_color, logo_background_color
@@ -29,15 +29,13 @@ public class PlayerJdbcDAO implements PlayerDAO {
                 """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(fetchAllPlayersQuery)) {
-
-
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                resultSets.add(resultSet);
+                players.add(PlayerMapper.map(resultSet));
             }
 
-            return resultSets;
+            return players;
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to fetch all players", exception);
         }
