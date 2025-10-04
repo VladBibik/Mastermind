@@ -3,11 +3,12 @@ package dev.bibikvlad.mastermind.persistence.dao;
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.model.player.Player;
 
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Optional;
 
 public interface PlayerDAO {
-    List<Player> findAll() throws PersistenceException;
+    List<ResultSet> findAll() throws PersistenceException;
 
     Optional<Player> findById(long id) throws PersistenceException;
 
