@@ -25,7 +25,25 @@ public class PlayerConfigSQLRepository implements PlayerConfigRepository {
 
     @Override
     public boolean update(long playerId, PlayerConfig playerConfig) throws PersistenceException {
-        return playerConfigDAO.update(playerId, playerConfig);
+        boolean result = false;
+
+        try {
+            transactionManager.begin();
+
+            result = playerConfigDAO.update(playerId, playerConfig);
+
+            transactionManager.commit();
+        } catch (PersistenceException exception) {
+            try {
+                transactionManager.rollback();
+            } catch (PersistenceException rollbackException) {
+                rollbackException.addSuppressed(exception);
+            }
+
+            throw exception;
+        }
+
+        return result;
     }
 
     @Override
