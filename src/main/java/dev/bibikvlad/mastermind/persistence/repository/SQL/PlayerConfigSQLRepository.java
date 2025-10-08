@@ -48,6 +48,24 @@ public class PlayerConfigSQLRepository implements PlayerConfigRepository {
 
     @Override
     public boolean updateLocale(long playerId, LocaleType locale) throws PersistenceException {
-        return playerConfigDAO.updateLocale(playerId, locale);
+        boolean result = false;
+
+        try {
+            transactionManager.begin();
+
+            result = playerConfigDAO.updateLocale(playerId, locale);
+
+            transactionManager.commit();
+        } catch (PersistenceException exception) {
+            try {
+                transactionManager.rollback();
+            } catch (PersistenceException rollbackException) {
+                rollbackException.addSuppressed(exception);
+            }
+
+            throw exception;
+        }
+
+        return result;
     }
 }
