@@ -25,7 +25,7 @@ public class PlayerConfigSQLRepository implements PlayerConfigRepository {
 
     @Override
     public boolean update(long playerId, PlayerConfig playerConfig) throws PersistenceException {
-        boolean result = false;
+        boolean result;
 
         try {
             transactionManager.begin();
@@ -48,7 +48,7 @@ public class PlayerConfigSQLRepository implements PlayerConfigRepository {
 
     @Override
     public boolean updateLocale(long playerId, LocaleType locale) throws PersistenceException {
-        boolean result = false;
+        boolean result;
 
         try {
             transactionManager.begin();
