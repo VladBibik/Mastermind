@@ -48,8 +48,7 @@ public class PlayerSQLRepository implements PlayerRepository {
                 exception.addSuppressed(rollbackException);
             }
 
-            //TODO: Need to throw something meaningful
-            throw exception;
+            throw new PersistenceException("Failed to delete player " + player.getPlayerName(), exception);
         }
     }
 
