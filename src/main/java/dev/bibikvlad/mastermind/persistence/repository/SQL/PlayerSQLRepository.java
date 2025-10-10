@@ -67,7 +67,7 @@ public class PlayerSQLRepository implements PlayerRepository {
                 exception.addSuppressed(rollbackException);
             }
 
-            throw exception;
+            throw new PersistenceException("Failed to delete player with id: " + id, exception);
         }
     }
 
@@ -86,7 +86,7 @@ public class PlayerSQLRepository implements PlayerRepository {
                 exception.addSuppressed(rollbackException);
             }
 
-            throw exception;
+            throw new PersistenceException("Failed to delete player with name: " + name, exception);
         }
     }
 
@@ -107,7 +107,7 @@ public class PlayerSQLRepository implements PlayerRepository {
                 exception.addSuppressed(rollbackException);
             }
 
-            throw exception;
+            throw new PersistenceException("Failed to save player " + player.getPlayerName(), exception);
         }
 
         return result;
@@ -130,7 +130,7 @@ public class PlayerSQLRepository implements PlayerRepository {
                 exception.addSuppressed(rollbackException);
             }
 
-            throw exception;
+            throw new PersistenceException("Failed to update player " + player.getPlayerName(), exception);
         }
 
         return result;
