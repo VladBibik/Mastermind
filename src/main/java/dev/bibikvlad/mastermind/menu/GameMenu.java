@@ -9,5 +9,5 @@ public class GameMenu {
         this.parser = parser;
     }
 
-
+    
 }
