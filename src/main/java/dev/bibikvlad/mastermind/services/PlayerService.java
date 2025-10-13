@@ -2,7 +2,10 @@ package dev.bibikvlad.mastermind.services;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
+import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.model.player.Player;
+import dev.bibikvlad.mastermind.model.player.PlayerConfig;
 import dev.bibikvlad.mastermind.persistence.repository.PlayerConfigRepository;
 import dev.bibikvlad.mastermind.persistence.repository.PlayerRepository;
 
@@ -15,11 +18,13 @@ public class PlayerService {
         this.playerConfigRepository = playerConfigRepository;
     }
 
-    public void savePlayer(Player player) throws PlayerAlreadyExistException {
+    public void savePlayerWithDefaultConfigs(String newPlayerName) throws PlayerAlreadyExistException {
         try {
-            if (playerRepository.existsByName(player.getPlayerName())) {
-                throw new PlayerAlreadyExistException("Player with name " + player.getPlayerName() + " already exists");
+            if (playerRepository.existsByName(newPlayerName)) {
+                throw new PlayerAlreadyExistException("Player with name " + newPlayerName + " already exists");
             }
+
+            Player player = new Player(newPlayerName, getDefaultPlayerConfig());
 
             playerRepository.save(player);
         } catch (PersistenceException exception) {
