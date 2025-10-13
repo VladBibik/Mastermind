@@ -26,4 +26,12 @@ public class PlayerService {
             //TODO: Add handling. Preferably just turn off the app
         }
     }
+
+    private PlayerConfig getDefaultPlayerConfig() {
+        return new PlayerConfig(LocaleType.ENGLISH,
+                ConsoleColor.ORCHID,
+                ConsoleColor.ORANGE,
+                ConsoleColor.BRIGHT_RED,
+                ConsoleColor.BACKGROUND_BLACK);
+    }
 }
