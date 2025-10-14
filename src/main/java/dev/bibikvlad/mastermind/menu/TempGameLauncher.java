@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.menu;
 
-import dev.bibikvlad.mastermind.game.parser.ConsoleInputParser;
+import dev.bibikvlad.mastermind.game.parser.ConsoleInputToLowerCaseParser;
 import dev.bibikvlad.mastermind.persistence.dao.JDBC.PlayerConfigJdbcDAO;
 import dev.bibikvlad.mastermind.persistence.dao.JDBC.PlayerJdbcDAO;
 import dev.bibikvlad.mastermind.persistence.dao.PlayerConfigDAO;
@@ -31,7 +31,7 @@ public class TempGameLauncher {
 
         PlayerService playerService = new PlayerService(playerRepository, playerConfigRepository);
 
-        GameMenu gameMenu = new GameMenu(new ConsoleInputParser(), playerService);
+        GameMenu gameMenu = new GameMenu(new ConsoleInputToLowerCaseParser(), playerService);
 
         gameMenu.displayMenu();
     }
