@@ -20,6 +20,7 @@ public class GameMenu {
         System.out.println("To create a new Player press: 1");
         System.out.println("To play a new Game press: 2");
         System.out.println("To view all Players press: 3");
+        System.out.println("To close the game print: 'close', or 'exit'");
 
         tempMenuSwitch();
     }
