@@ -21,7 +21,7 @@ public class GameMenu {
         System.out.println("To play a new Game press: 2");
         System.out.println("To view all Players press: 3");
 
-
+        tempMenuSwitch();
     }
 
     public void tempMenuSwitch() {
