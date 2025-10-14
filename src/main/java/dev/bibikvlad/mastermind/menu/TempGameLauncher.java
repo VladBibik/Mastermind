@@ -33,6 +33,6 @@ public class TempGameLauncher {
 
         GameMenu gameMenu = new GameMenu(new ConsoleInputParser(), playerService);
 
-        gameMenu.displayMenu();
+        gameMenu.menu();
     }
 }
