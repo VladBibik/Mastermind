@@ -3,6 +3,7 @@ package dev.bibikvlad.mastermind.menu;
 import dev.bibikvlad.mastermind.app.MastermindApplication;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
+import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
 public class GameMenu {
@@ -32,6 +33,12 @@ public class GameMenu {
             playerService.savePlayerWithDefaultConfigs(newPlayerName);
         } catch (PlayerAlreadyExistException exception) {
             System.out.println(exception.getMessage());
+        }
+    }
+
+    public void printAllPlayers() {
+        for (Player player : playerService.getAllPlayers()) {
+            System.out.println(player);
         }
     }
 }
