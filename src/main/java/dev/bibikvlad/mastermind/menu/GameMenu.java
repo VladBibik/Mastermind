@@ -15,22 +15,40 @@ public class GameMenu {
         this.playerService = playerService;
     }
 
+    public void menu() {
+        while (true) {
+            displayMenu();
+
+            String userInput = parser.parseUserInput();
+
+            if (userInput.equalsIgnoreCase("exit") || userInput.equalsIgnoreCase("close") ) {
+                break;
+            }
+
+            int userInputNumber;
+
+            try {
+                userInputNumber = Integer.parseInt(userInput);
+            } catch (NumberFormatException exception) {
+                System.out.println("Invalid input. Please enter a number corresponding to the menu option.");
+
+                continue;
+            }
+
+            tempMenuSwitch(userInputNumber);
+        }
+    }
+
     public void displayMenu() {
         System.out.println("Welcome to the Mastermind Game!");
         System.out.println("To create a new Player press: 1");
         System.out.println("To play a new Game press: 2");
         System.out.println("To view all Players press: 3");
         System.out.println("To close the game print: 'close', or 'exit'");
-
-        tempMenuSwitch();
     }
 
-    public void tempMenuSwitch() {
-        String userInput = parser.parseUserInput();
-
-        int selectedNumber = Integer.parseInt(userInput);
-
-        switch (selectedNumber)  {
+    public void tempMenuSwitch(int userInputNumber) {
+        switch (userInputNumber)  {
             case 1 -> createNewPlayer();
             case 2 -> launchGame();
             case 3 -> printAllPlayers();
