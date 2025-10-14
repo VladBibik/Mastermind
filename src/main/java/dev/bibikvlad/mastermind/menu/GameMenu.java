@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.menu;
 
+import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
@@ -10,5 +11,22 @@ public class GameMenu {
     public GameMenu(MastermindUserInputParser parser, PlayerService playerService) {
         this.parser = parser;
         this.playerService = playerService;
+    }
+
+    public void displayMenu() {
+        System.out.println("Welcome to the Mastermind Game!");
+        System.out.println("To create a new Player press: 1");
+        System.out.println("To play a new Game press: 2");
+        System.out.println("To view all Players press: 3");
+    }
+
+    public void createNewPlayer() {
+        String newPlayerName = parser.parseUserInput();
+
+        try {
+            playerService.savePlayerWithDefaultConfigs(newPlayerName);
+        } catch (PlayerAlreadyExistException exception) {
+            System.out.println(exception.getMessage());
+        }
     }
 }
