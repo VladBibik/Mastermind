@@ -20,6 +20,21 @@ public class GameMenu {
         System.out.println("To create a new Player press: 1");
         System.out.println("To play a new Game press: 2");
         System.out.println("To view all Players press: 3");
+
+
+    }
+
+    public void tempMenuSwitch() {
+        String userInput = parser.parseUserInput();
+
+        int selectedNumber = Integer.parseInt(userInput);
+
+        switch (selectedNumber)  {
+            case 1 -> createNewPlayer();
+            case 2 -> launchGame();
+            case 3 -> printAllPlayers();
+            default -> System.out.println("Invalid selection");
+        }
     }
 
     public void launchGame() {
