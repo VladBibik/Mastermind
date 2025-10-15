@@ -10,6 +10,9 @@ public class GameMenu {
     private final MastermindUserInputParser parser;
     private final PlayerService playerService;
 
+    //TODO: Need to add retrieval and update logic to this field!
+    private Player currentPlayer;
+
     public GameMenu(MastermindUserInputParser parser, PlayerService playerService) {
         this.parser = parser;
         this.playerService = playerService;
