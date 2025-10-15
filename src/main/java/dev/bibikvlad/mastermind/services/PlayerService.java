@@ -20,7 +20,9 @@ public class PlayerService {
         this.playerConfigRepository = playerConfigRepository;
     }
 
-    public void savePlayerWithDefaultConfigs(String newPlayerName) throws PlayerAlreadyExistException {
+    public boolean savePlayerWithDefaultConfigs(String newPlayerName) throws PlayerAlreadyExistException {
+        boolean result = false;
+
         try {
             if (playerRepository.existsByName(newPlayerName)) {
                 throw new PlayerAlreadyExistException("Player with name " + newPlayerName + " already exists");
@@ -28,10 +30,12 @@ public class PlayerService {
 
             Player player = new Player(newPlayerName, getDefaultPlayerConfig());
 
-            playerRepository.save(player);
+            result = playerRepository.save(player);
         } catch (PersistenceException exception) {
             //TODO: Add handling. Preferably just turn off the app
         }
+
+        return result;
     }
 
     public List<Player> getAllPlayers() {
