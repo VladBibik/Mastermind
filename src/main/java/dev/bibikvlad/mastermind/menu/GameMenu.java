@@ -16,9 +16,9 @@ public class GameMenu {
     }
 
     public void menu() {
-        while (true) {
-            displayMenu();
+        displayMenu();
 
+        while (true) {
             String userInput = parser.parseUserInput();
 
             if (userInput.equalsIgnoreCase("exit") || userInput.equalsIgnoreCase("close") ) {
@@ -44,6 +44,7 @@ public class GameMenu {
         System.out.println("To create a new Player press: 1");
         System.out.println("To play a new Game press: 2");
         System.out.println("To view all Players press: 3");
+        System.out.println("To view again menu options press: 4");
         System.out.println("To close the game print: 'close', or 'exit'");
     }
 
@@ -52,6 +53,7 @@ public class GameMenu {
             case 1 -> createNewPlayer();
             case 2 -> launchGame();
             case 3 -> printAllPlayers();
+            case 4 -> displayMenu();
             default -> System.out.println("Invalid selection");
         }
     }
