@@ -66,7 +66,10 @@ public class GameMenu {
         String newPlayerName = parser.parseUserInput();
 
         try {
-            playerService.savePlayerWithDefaultConfigs(newPlayerName);
+            if (playerService.savePlayerWithDefaultConfigs(newPlayerName)) {
+                System.out.println("Player with name " + newPlayerName + " has been created.");
+            }
+
         } catch (PlayerAlreadyExistException exception) {
             System.out.println(exception.getMessage());
         }
