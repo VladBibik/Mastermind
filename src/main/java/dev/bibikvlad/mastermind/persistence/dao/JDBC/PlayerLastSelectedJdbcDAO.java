@@ -4,6 +4,8 @@ import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.persistence.dao.PlayerLastSelectedDAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class PlayerLastSelectedJdbcDAO implements PlayerLastSelectedDAO {
     private final Connection connection;
@@ -13,12 +15,20 @@ public class PlayerLastSelectedJdbcDAO implements PlayerLastSelectedDAO {
     }
 
     @Override
-    public boolean saveOrUpdate(int id) throws PersistenceException {
+    public boolean saveOrUpdate(long id) throws PersistenceException {
         return false;
     }
 
     @Override
-    public int getLastSelected() throws PersistenceException {
-        return 0;
+    public long getLastSelected() throws PersistenceException {
+        String getLastSelectedQuery= "SELECT MAX(last_selected_at) FROM player_last_selected";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(getLastSelectedQuery)) {
+            preparedStatement.executeQuery();
+
+            return preparedStatement.getResultSet().getLong("player_id");
+        } catch (SQLException exception) {
+            throw new PersistenceException(exception.getMessage());
+        }
     }
 }
