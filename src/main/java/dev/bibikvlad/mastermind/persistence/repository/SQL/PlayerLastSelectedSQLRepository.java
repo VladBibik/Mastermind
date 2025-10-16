@@ -17,7 +17,25 @@ public class PlayerLastSelectedSQLRepository implements PlayerLastSelectedReposi
 
     @Override
     public boolean saveOrUpdate(long id) throws PersistenceException {
-        return false;
+        boolean result;
+
+        try {
+            transactionManager.begin();
+
+            result = playerLastSelectedDAO.saveOrUpdate(id);
+
+            transactionManager.commit();
+        } catch (PersistenceException exception) {
+            try {
+                transactionManager.rollback();
+            } catch (PersistenceException rollbackException) {
+                rollbackException.addSuppressed(exception);
+            }
+
+            throw exception;
+        }
+
+        return result;
     }
 
     @Override
