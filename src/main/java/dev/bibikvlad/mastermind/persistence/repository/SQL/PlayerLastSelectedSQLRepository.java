@@ -45,6 +45,6 @@ public class PlayerLastSelectedSQLRepository implements PlayerLastSelectedReposi
 
     @Override
     public Player getLastSelectedPlayer() throws PersistenceException {
-        return null;
+        return playerLastSelectedDAO.getLastSelectedPlayer();
     }
 }
