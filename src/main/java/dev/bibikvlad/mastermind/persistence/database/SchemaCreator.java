@@ -12,7 +12,7 @@ public class SchemaCreator {
     }
 
     private static void createPlayersTable(Connection connection) throws SQLException {
-        String createUsersTableQuery = """
+        String createPlayersTableQuery = """
                 CREATE TABLE IF NOT EXISTS players (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     player_name TEXT UNIQUE NOT NULL,
@@ -21,7 +21,7 @@ public class SchemaCreator {
                 );""";
 
         Statement statement = connection.createStatement();
-        statement.executeUpdate(createUsersTableQuery);
+        statement.executeUpdate(createPlayersTableQuery);
     }
 
     private static void createPlayerConfigurationTable(Connection connection) throws SQLException {
