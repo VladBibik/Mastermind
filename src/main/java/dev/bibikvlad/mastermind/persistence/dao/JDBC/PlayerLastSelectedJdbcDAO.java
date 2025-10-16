@@ -63,6 +63,8 @@ public class PlayerLastSelectedJdbcDAO implements PlayerLastSelectedDAO {
                 FROM player_last_selected LAST
                 LEFT JOIN players PLAYER ON LAST.player_id = PLAYER.id
                 LEFT JOIN player_configurations CONF ON LAST.player_id = CONF.player_id
+                ORDER BY LAST.last_selected_at DESC
+                LIMIT 1;
                 """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(getLastSelectedPlayerQuery)) {
