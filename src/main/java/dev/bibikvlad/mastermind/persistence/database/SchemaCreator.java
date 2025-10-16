@@ -25,7 +25,7 @@ public class SchemaCreator {
     }
 
     private static void createPlayerConfigurationTable(Connection connection) throws SQLException {
-        String createUserConfigTable = """
+        String createPlayerConfigTable = """
                     CREATE TABLE IF NOT EXISTS player_configurations (
                         player_id INTEGER PRIMARY KEY,
                         language TEXT NOT NULL,
@@ -38,7 +38,7 @@ public class SchemaCreator {
 
         Statement statement = connection.createStatement();
 
-        statement.executeUpdate(createUserConfigTable);
+        statement.executeUpdate(createPlayerConfigTable);
     }
 
     private static void createPlayerLastSelectedTable(Connection connection) throws SQLException {
