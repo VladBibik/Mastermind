@@ -28,7 +28,9 @@ public class PlayerLastSelectedJdbcDAO implements PlayerLastSelectedDAO {
         try (PreparedStatement preparedStatement = connection.prepareStatement(saveOrUpdateQuery)) {
             preparedStatement.setLong(1, id);
 
-            return preparedStatement.execute();
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            return rowsAffected > 0;
         } catch (SQLException exception) {
             throw new PersistenceException(exception.getMessage());
         }
