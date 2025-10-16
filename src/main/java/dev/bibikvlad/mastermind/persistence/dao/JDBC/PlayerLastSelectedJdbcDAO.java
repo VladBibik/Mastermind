@@ -1,6 +1,8 @@
 package dev.bibikvlad.mastermind.persistence.dao.JDBC;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
+import dev.bibikvlad.mastermind.model.mappers.PlayerMapper;
+import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.persistence.dao.PlayerLastSelectedDAO;
 
 import java.sql.Connection;
@@ -33,13 +35,33 @@ public class PlayerLastSelectedJdbcDAO implements PlayerLastSelectedDAO {
     }
 
     @Override
-    public long getLastSelected() throws PersistenceException {
+    public long getLastSelectedPlayerId() throws PersistenceException {
         String getLastSelectedQuery= "SELECT MAX(last_selected_at) FROM player_last_selected";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(getLastSelectedQuery)) {
             preparedStatement.executeQuery();
 
             return preparedStatement.getResultSet().getLong("player_id");
+        } catch (SQLException exception) {
+            throw new PersistenceException(exception.getMessage());
+        }
+    }
+
+    @Override
+    public Player getLastSelectedPlayer() throws PersistenceException {
+        String getLastSelectedPlayerQuery= """
+                SELECT PLAYER.id, PLAYER.player_name, PLAYER.creation_date,
+                       CONF.language, CONF.logo_border_color, CONF.logo_main_color,
+                       CONF.logo_accent_color, CONF.logo_background_color
+                FROM player_last_selected LAST
+                LEFT JOIN players PLAYER ON LAST.player_id = PLAYER.id
+                LEFT JOIN player_configurations CONF ON LAST.player_id = CONF.player_id
+                """;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(getLastSelectedPlayerQuery)) {
+            preparedStatement.executeQuery();
+
+            return PlayerMapper.map(preparedStatement.getResultSet());
         } catch (SQLException exception) {
             throw new PersistenceException(exception.getMessage());
         }
