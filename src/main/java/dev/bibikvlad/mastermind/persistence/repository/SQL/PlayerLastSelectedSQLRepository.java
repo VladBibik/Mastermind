@@ -40,7 +40,7 @@ public class PlayerLastSelectedSQLRepository implements PlayerLastSelectedReposi
 
     @Override
     public long getLastSelectedPlayerId() throws PersistenceException {
-        return 0;
+        return playerLastSelectedDAO.getLastSelectedPlayerId();
     }
 
     @Override
