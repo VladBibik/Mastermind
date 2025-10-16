@@ -16,7 +16,20 @@ public class PlayerLastSelectedJdbcDAO implements PlayerLastSelectedDAO {
 
     @Override
     public boolean saveOrUpdate(long id) throws PersistenceException {
-        return false;
+        String saveOrUpdateQuery = """
+                INSERT INTO player_last_selected (player_id, last_selected_at)
+                VALUES (?, CURRENT_TIMESTAMP)
+                ON CONFLICT(player_id)
+                DO UPDATE SET last_selected_at = excluded.last_selected_at;
+                """;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(saveOrUpdateQuery)) {
+            preparedStatement.setLong(1, id);
+
+            return preparedStatement.execute();
+        } catch (SQLException exception) {
+            throw new PersistenceException(exception.getMessage());
+        }
     }
 
     @Override
