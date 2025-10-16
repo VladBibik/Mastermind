@@ -8,6 +8,7 @@ public class SchemaCreator {
     public static void create(Connection connection) throws SQLException {
         createPlayersTable(connection);
         createPlayerConfigurationTable(connection);
+        createPlayerLastSelectedTable(connection);
     }
 
     private static void createPlayersTable(Connection connection) throws SQLException {
@@ -38,5 +39,18 @@ public class SchemaCreator {
         Statement statement = connection.createStatement();
 
         statement.executeUpdate(createUserConfigTable);
+    }
+
+    private static void createPlayerLastSelectedTable(Connection connection) throws SQLException {
+        String createPlayerLastSelectedTable = """
+                CREATE TABLE IF NOT EXISTS player_last_selected (
+                    player_id INTEGER PRIMARY KEY,
+                    last_selected_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE
+                );""";
+
+        Statement statement = connection.createStatement();
+
+        statement.executeUpdate(createPlayerLastSelectedTable);
     }
 }
