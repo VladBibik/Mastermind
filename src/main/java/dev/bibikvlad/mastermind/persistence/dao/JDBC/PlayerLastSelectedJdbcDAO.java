@@ -36,7 +36,12 @@ public class PlayerLastSelectedJdbcDAO implements PlayerLastSelectedDAO {
 
     @Override
     public long getLastSelectedPlayerId() throws PersistenceException {
-        String getLastSelectedQuery= "SELECT MAX(last_selected_at) FROM player_last_selected";
+        String getLastSelectedQuery= """
+                SELECT player_id
+                FROM player_last_selected
+                ORDER BY last_selected_at DESC
+                LIMIT 1;
+                """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(getLastSelectedQuery)) {
             preparedStatement.executeQuery();
