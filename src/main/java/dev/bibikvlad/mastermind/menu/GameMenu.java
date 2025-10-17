@@ -83,11 +83,6 @@ public class GameMenu {
                 System.out.println("Player with name " + newPlayerName + " has been created.\n");
             }
 
-            //TODO: Move creation logic to the DAO
-            Player newlyCreatedPlayer = playerService.getPlayerByName(newPlayerName).get();
-
-            playerService.saveOrUpdateLastSelectedPlayer(newlyCreatedPlayer.getId());
-
             loadLastSelectedPlayer();
         } catch (PlayerAlreadyExistException exception) {
             System.out.println(exception.getMessage() + "\n" + "You were returned to the main menu");
