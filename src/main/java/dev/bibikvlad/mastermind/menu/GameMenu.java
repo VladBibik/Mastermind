@@ -2,10 +2,11 @@ package dev.bibikvlad.mastermind.menu;
 
 import dev.bibikvlad.mastermind.app.MastermindApplication;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
-import dev.bibikvlad.mastermind.exceptions.PlayerNotFoundException;
 import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
+
+import java.util.Optional;
 
 public class GameMenu {
     private final MastermindUserInputParser parser;
@@ -92,13 +93,11 @@ public class GameMenu {
     }
 
     private void loadLastSelectedPlayer() {
-        try {
-            if (playerService.loadLastSelectedPlayer().isEmpty()) {
-                firstTimeLaunch();
-            } else {
-                currentPlayer = playerService.loadLastSelectedPlayer().get();
-            }
-        } catch (PlayerNotFoundException exception) {
+        Optional<Player> lastSelectedPlayer = playerService.loadLastSelectedPlayer();
+
+        if (lastSelectedPlayer.isPresent()) {
+            currentPlayer = playerService.loadLastSelectedPlayer().get();
+        } else {
             firstTimeLaunch();
         }
     }
