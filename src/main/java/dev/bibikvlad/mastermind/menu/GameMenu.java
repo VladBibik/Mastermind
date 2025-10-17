@@ -80,7 +80,7 @@ public class GameMenu {
 
         try {
             if (playerService.savePlayerWithDefaultConfigs(newPlayerName)) {
-                System.out.println("Player with name " + newPlayerName + " has been created.");
+                System.out.println("Player with name " + newPlayerName + " has been created.\n");
             }
 
             //TODO: Move creation logic to the DAO
@@ -90,7 +90,7 @@ public class GameMenu {
 
             loadLastSelectedPlayer();
         } catch (PlayerAlreadyExistException exception) {
-            System.out.println(exception.getMessage());
+            System.out.println(exception.getMessage() + "\n" + "You were returned to the main menu");
         }
     }
 
