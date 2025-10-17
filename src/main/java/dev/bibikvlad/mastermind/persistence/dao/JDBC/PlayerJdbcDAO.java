@@ -1,9 +1,9 @@
 package dev.bibikvlad.mastermind.persistence.dao.JDBC;
 
-import dev.bibikvlad.mastermind.persistence.dao.PlayerDAO;
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.model.mappers.PlayerMapper;
 import dev.bibikvlad.mastermind.model.player.Player;
+import dev.bibikvlad.mastermind.persistence.dao.PlayerDAO;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -94,11 +94,13 @@ public class PlayerJdbcDAO implements PlayerDAO {
         String addPlayerQuery = "INSERT INTO players (player_name) VALUES (?)";
         String addPlayerConfigQuery = "INSERT INTO player_configurations (player_id, language, logo_border_color,  " +
                 "logo_main_color, logo_accent_color, logo_background_color) VALUES (?, ?, ?, ?, ?, ?)";
+        String addLastPlayerSelectedQuery = "INSERT INTO player_last_selected (player_id) VALUES (?)";
         int rowsUpdated;
 
         try (PreparedStatement playerPreparedStatement =
                      connection.prepareStatement(addPlayerQuery, Statement.RETURN_GENERATED_KEYS);
-             PreparedStatement configPreparedStatement = connection.prepareStatement(addPlayerConfigQuery)) {
+             PreparedStatement configPreparedStatement = connection.prepareStatement(addPlayerConfigQuery);
+             PreparedStatement lastSelectedStatement = connection.prepareStatement(addLastPlayerSelectedQuery)) {
 
 
             playerPreparedStatement.setString(1, player.getPlayerName());
@@ -120,6 +122,9 @@ public class PlayerJdbcDAO implements PlayerDAO {
                     configPreparedStatement.setString(6, player.getPlayerConfig()
                             .getLogoBackgroundColor().getDisplayName());
                     rowsUpdated = configPreparedStatement.executeUpdate();
+
+                    lastSelectedStatement.setLong(1, playerId);
+                    lastSelectedStatement.executeUpdate();
                 } else {
                     throw new PersistenceException("Creating player failed. No ID obtained.");
                 }
