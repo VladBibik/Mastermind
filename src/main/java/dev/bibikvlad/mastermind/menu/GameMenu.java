@@ -80,6 +80,7 @@ public class GameMenu {
                 System.out.println("Player with name " + newPlayerName + " has been created.");
             }
 
+            //TODO: Move creation logic to the DAO
             Player newlyCreatedPlayer = playerService.getPlayerByName(newPlayerName).get();
 
             playerService.saveOrUpdateLastSelectedPlayer(newlyCreatedPlayer.getId());
