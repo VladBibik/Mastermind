@@ -55,13 +55,8 @@ public class PlayerService {
 
     public Player loadLastSelectedPlayer() throws PlayerNotFoundException {
         try {
-            Player player = playerLastSelectedRepository.getLastSelectedPlayer();
-
-            if (player == null) {
-                throw new PlayerNotFoundException("Player with name " + player.getPlayerName() + " not found");
-            }
-
-            return player;
+            return playerLastSelectedRepository.getLastSelectedPlayer()
+                    .orElseThrow(() -> new PlayerNotFoundException("The last selected player was not found"));
         } catch (PersistenceException exception) {
             //TODO: Add handling. Preferably just turn off the app
         }
