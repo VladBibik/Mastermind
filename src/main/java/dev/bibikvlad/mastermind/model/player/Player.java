@@ -39,6 +39,7 @@ public class Player {
         return playerConfig;
     }
 
+    //TODO: Remove it after test phase is done!
     @Override
     public String toString() {
         return "Player: \n"
@@ -47,10 +48,14 @@ public class Player {
                 + ", Creation Date = " + SQLiteTimestampFormatter.format(creationDate)
                 + "\n    configurations:"
                 + "\n        Selected Language: " + playerConfig.getLocale().getLanguageName()
-                + "\n        Selected Logo Border Color: " + playerConfig.getLogoBorderColor().getDisplayName()
-                + "\n        Selected Logo Main Color: " + playerConfig.getLogoMainColor().getDisplayName()
-                + "\n        Selected Logo Accent Color: " + playerConfig.getLogoAccentColor().getDisplayName()
-                + "\n        Selected Logo Background Color: " + playerConfig.getLogoBackgroundColor().getDisplayName()
+                + "\n        Selected Logo Border Color: " + playerConfig.getLogoColorsBundle()
+                .getLogoBorderColor().getDisplayName()
+                + "\n        Selected Logo Main Color: " + playerConfig.getLogoColorsBundle()
+                .getLogoMainColor().getDisplayName()
+                + "\n        Selected Logo Accent Color: " + playerConfig.getLogoColorsBundle()
+                .getLogoAccentColor().getDisplayName()
+                + "\n        Selected Logo Background Color: " + playerConfig.getLogoColorsBundle()
+                .getLogoBackgroundColor().getDisplayName()
                 + "\n";
     }
 }
