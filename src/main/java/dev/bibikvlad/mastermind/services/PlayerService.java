@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.services;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
+import dev.bibikvlad.mastermind.exceptions.PlayerNotFoundException;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.model.player.Player;
@@ -45,6 +46,22 @@ public class PlayerService {
     public List<Player> getAllPlayers() {
         try {
             return playerRepository.findAll();
+        } catch (PersistenceException exception) {
+            //TODO: Add handling. Preferably just turn off the app
+        }
+
+        throw new IllegalStateException();
+    }
+
+    public Player loadLastSelectedPlayer() throws PlayerNotFoundException {
+        try {
+            Player player = playerLastSelectedRepository.getLastSelectedPlayer();
+
+            if (player == null) {
+                throw new PlayerNotFoundException("Player with name " + player.getPlayerName() + " not found");
+            }
+
+            return player;
         } catch (PersistenceException exception) {
             //TODO: Add handling. Preferably just turn off the app
         }
