@@ -10,7 +10,7 @@ import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 
-public class MastermindApplication {
+public class MastermindGameLauncher {
     public static void main(String[] args) {
         LocalizationContext localizationContext = new LocalizationContext(LocaleType.ENGLISH);
         GameMessages gameMessages = localizationContext.getGameMessages();

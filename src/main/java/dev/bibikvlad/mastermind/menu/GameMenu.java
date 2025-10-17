@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.menu;
 
-import dev.bibikvlad.mastermind.app.MastermindApplication;
+import dev.bibikvlad.mastermind.app.MastermindGameLauncher;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.model.player.Player;
@@ -70,7 +70,7 @@ public class GameMenu {
     }
 
     public void launchGame() {
-        MastermindApplication.main(new String[0]);
+        MastermindGameLauncher.main(new String[0]);
     }
 
     public void createNewPlayer() {
