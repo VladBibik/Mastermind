@@ -74,6 +74,8 @@ public class GameMenu {
     }
 
     public void createNewPlayer() {
+        System.out.println("Please enter the name of the player you would like to create: ");
+
         String newPlayerName = parser.parseUserInput();
 
         try {
