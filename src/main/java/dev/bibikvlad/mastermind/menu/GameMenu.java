@@ -75,6 +75,7 @@ public class GameMenu {
                 System.out.println("Player with name " + newPlayerName + " has been created.");
             }
 
+            loadLastSelectedPlayer();
         } catch (PlayerAlreadyExistException exception) {
             System.out.println(exception.getMessage());
         }
