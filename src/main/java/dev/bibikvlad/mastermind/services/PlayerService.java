@@ -54,7 +54,7 @@ public class PlayerService {
         throw new IllegalStateException();
     }
 
-    public Optional<Player> loadLastSelectedPlayer() throws PlayerNotFoundException {
+    public Optional<Player> loadLastSelectedPlayer() {
         try {
             return playerLastSelectedRepository.getLastSelectedPlayer();
         } catch (PersistenceException exception) {
