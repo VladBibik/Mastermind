@@ -12,6 +12,7 @@ import dev.bibikvlad.mastermind.persistence.repository.PlayerLastSelectedReposit
 import dev.bibikvlad.mastermind.persistence.repository.PlayerRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class PlayerService {
     private final PlayerRepository playerRepository;
@@ -53,10 +54,9 @@ public class PlayerService {
         throw new IllegalStateException();
     }
 
-    public Player loadLastSelectedPlayer() throws PlayerNotFoundException {
+    public Optional<Player> loadLastSelectedPlayer() throws PlayerNotFoundException {
         try {
-            return playerLastSelectedRepository.getLastSelectedPlayer()
-                    .orElseThrow(() -> new PlayerNotFoundException("The last selected player was not found"));
+            return playerLastSelectedRepository.getLastSelectedPlayer();
         } catch (PersistenceException exception) {
             //TODO: Add handling. Preferably just turn off the app
         }
