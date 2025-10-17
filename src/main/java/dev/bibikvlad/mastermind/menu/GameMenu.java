@@ -20,7 +20,10 @@ public class GameMenu {
     }
 
     public void menu() {
-        loadLastSelectedPlayer();
+        if (currentPlayer == null) {
+            loadLastSelectedPlayer();
+        }
+
         displayMenu();
 
         while (true) {
