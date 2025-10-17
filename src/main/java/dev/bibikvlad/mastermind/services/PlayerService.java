@@ -7,6 +7,7 @@ import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;
 import dev.bibikvlad.mastermind.persistence.repository.PlayerConfigRepository;
+import dev.bibikvlad.mastermind.persistence.repository.PlayerLastSelectedRepository;
 import dev.bibikvlad.mastermind.persistence.repository.PlayerRepository;
 
 import java.util.List;
@@ -14,10 +15,13 @@ import java.util.List;
 public class PlayerService {
     private final PlayerRepository playerRepository;
     private final PlayerConfigRepository playerConfigRepository;
+    private final PlayerLastSelectedRepository playerLastSelectedRepository;
 
-    public PlayerService(PlayerRepository playerRepository, PlayerConfigRepository playerConfigRepository) {
+    public PlayerService(PlayerRepository playerRepository, PlayerConfigRepository playerConfigRepository,
+                         PlayerLastSelectedRepository playerLastSelectedRepository) {
         this.playerRepository = playerRepository;
         this.playerConfigRepository = playerConfigRepository;
+        this.playerLastSelectedRepository = playerLastSelectedRepository;
     }
 
     public boolean savePlayerWithDefaultConfigs(String newPlayerName) throws PlayerAlreadyExistException {
