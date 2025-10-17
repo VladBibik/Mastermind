@@ -22,6 +22,7 @@ import java.sql.SQLException;
 
 public class TempGameLauncher {
     public static void main(String[] args) throws SQLException {
+        DatabaseContext.initialize();
         Connection connection = DatabaseContext.getConnection();
 
         PlayerDAO playerDAO = new PlayerJdbcDAO(connection);
