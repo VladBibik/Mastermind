@@ -6,6 +6,8 @@ import dev.bibikvlad.mastermind.persistence.dao.PlayerLastSelectedDAO;
 import dev.bibikvlad.mastermind.persistence.database.TransactionManager;
 import dev.bibikvlad.mastermind.persistence.repository.PlayerLastSelectedRepository;
 
+import java.util.Optional;
+
 public class PlayerLastSelectedSQLRepository implements PlayerLastSelectedRepository {
     private final PlayerLastSelectedDAO playerLastSelectedDAO;
     private final TransactionManager transactionManager;
@@ -44,7 +46,7 @@ public class PlayerLastSelectedSQLRepository implements PlayerLastSelectedReposi
     }
 
     @Override
-    public Player getLastSelectedPlayer() throws PersistenceException {
+    public Optional<Player> getLastSelectedPlayer() throws PersistenceException {
         return playerLastSelectedDAO.getLastSelectedPlayer();
     }
 }

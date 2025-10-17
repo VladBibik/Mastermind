@@ -8,6 +8,7 @@ import dev.bibikvlad.mastermind.persistence.dao.PlayerLastSelectedDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class PlayerLastSelectedJdbcDAO implements PlayerLastSelectedDAO {
     private final Connection connection;
@@ -55,7 +56,7 @@ public class PlayerLastSelectedJdbcDAO implements PlayerLastSelectedDAO {
     }
 
     @Override
-    public Player getLastSelectedPlayer() throws PersistenceException {
+    public Optional<Player> getLastSelectedPlayer() throws PersistenceException {
         String getLastSelectedPlayerQuery= """
                 SELECT PLAYER.id, PLAYER.player_name, PLAYER.creation_date,
                        CONF.language, CONF.logo_border_color, CONF.logo_main_color,
@@ -70,7 +71,7 @@ public class PlayerLastSelectedJdbcDAO implements PlayerLastSelectedDAO {
         try (PreparedStatement preparedStatement = connection.prepareStatement(getLastSelectedPlayerQuery)) {
             preparedStatement.executeQuery();
 
-            return PlayerMapper.map(preparedStatement.getResultSet());
+            return Optional.of(PlayerMapper.map(preparedStatement.getResultSet()));
         } catch (SQLException exception) {
             throw new PersistenceException(exception.getMessage());
         }
