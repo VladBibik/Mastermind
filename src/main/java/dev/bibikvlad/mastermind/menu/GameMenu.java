@@ -59,6 +59,7 @@ public class GameMenu {
             case 2 -> launchGame();
             case 3 -> printAllPlayers();
             case 4 -> displayMenu();
+            case 5 -> displayCurrentPlayerDataTEMP();
             default -> System.out.println("Invalid selection");
         }
     }
@@ -100,5 +101,9 @@ public class GameMenu {
         System.out.println("Please enter your nickname:");
 
         createNewPlayer();
+    }
+
+    private void displayCurrentPlayerDataTEMP() {
+        System.out.println("Current Player: " + currentPlayer);
     }
 }
