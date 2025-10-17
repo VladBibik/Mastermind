@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.menu;
 
 import dev.bibikvlad.mastermind.app.MastermindApplication;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
+import dev.bibikvlad.mastermind.exceptions.PlayerNotFoundException;
 import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
@@ -19,6 +20,7 @@ public class GameMenu {
     }
 
     public void menu() {
+        loadLastSelectedPlayer();
         displayMenu();
 
         while (true) {
@@ -82,5 +84,20 @@ public class GameMenu {
         for (Player player : playerService.getAllPlayers()) {
             System.out.println(player);
         }
+    }
+
+    private void loadLastSelectedPlayer() {
+        try {
+            currentPlayer = playerService.loadLastSelectedPlayer();
+        } catch (PlayerNotFoundException exception) {
+            firstTimeLaunch();
+        }
+    }
+
+    private void firstTimeLaunch() {
+        System.out.println("Welcome to the Mastermind Game!");
+        System.out.println("Please enter your nickname:");
+
+        createNewPlayer();
     }
 }
