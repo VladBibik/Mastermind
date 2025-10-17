@@ -112,7 +112,6 @@ public class GameMenu {
 
     private void firstTimeLaunch() {
         System.out.println("Welcome to the Mastermind Game!");
-        System.out.println("Please enter your nickname:");
 
         createNewPlayer();
     }
