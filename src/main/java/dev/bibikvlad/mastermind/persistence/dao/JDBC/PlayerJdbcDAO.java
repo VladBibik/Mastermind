@@ -1,8 +1,10 @@
 package dev.bibikvlad.mastermind.persistence.dao.JDBC;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
+import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.model.mappers.PlayerMapper;
 import dev.bibikvlad.mastermind.model.player.Player;
+import dev.bibikvlad.mastermind.model.player.PlayerConfig;
 import dev.bibikvlad.mastermind.persistence.dao.PlayerDAO;
 
 import java.sql.*;
@@ -109,17 +111,18 @@ public class PlayerJdbcDAO implements PlayerDAO {
             try (ResultSet generatedKeys = playerPreparedStatement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     long playerId = generatedKeys.getLong(1);
+                    PlayerConfig playerConfig = player.getPlayerConfig();
+                    LogoColorsBundle logoColorsBundle = playerConfig.getLogoColorsBundle();
 
                     configPreparedStatement.setLong(1, playerId);
-                    configPreparedStatement.setString(2,
-                            player.getPlayerConfig().getLocale().getLanguageName());
-                    configPreparedStatement.setString(3, player.getPlayerConfig()
+                    configPreparedStatement.setString(2, playerConfig.getLocale().getLanguageName());
+                    configPreparedStatement.setString(3, logoColorsBundle
                             .getLogoBorderColor().getDisplayName());
-                    configPreparedStatement.setString(4, player.getPlayerConfig()
+                    configPreparedStatement.setString(4, logoColorsBundle
                             .getLogoMainColor().getDisplayName());
-                    configPreparedStatement.setString(5, player.getPlayerConfig()
+                    configPreparedStatement.setString(5, logoColorsBundle
                             .getLogoAccentColor().getDisplayName());
-                    configPreparedStatement.setString(6, player.getPlayerConfig()
+                    configPreparedStatement.setString(6, logoColorsBundle
                             .getLogoBackgroundColor().getDisplayName());
                     rowsUpdated = configPreparedStatement.executeUpdate();
 
@@ -212,16 +215,18 @@ public class PlayerJdbcDAO implements PlayerDAO {
             preparedStatement.setLong(2, player.getId());
             preparedStatement.executeUpdate();
 
-            configPreparedStatement.setString(1,
-                    player.getPlayerConfig().getLocale().getLanguageName());
-            configPreparedStatement.setString(2, player.getPlayerConfig()
-                    .getLogoBorderColor().getDisplayName());
-            configPreparedStatement.setString(3, player.getPlayerConfig()
-                    .getLogoMainColor().getDisplayName());
-            configPreparedStatement.setString(4, player.getPlayerConfig()
-                    .getLogoAccentColor().getDisplayName());
-            configPreparedStatement.setString(5, player.getPlayerConfig()
-                    .getLogoBackgroundColor().getDisplayName());
+            PlayerConfig playerConfig = player.getPlayerConfig();
+            LogoColorsBundle logoColorsBundle = playerConfig.getLogoColorsBundle();
+
+            configPreparedStatement.setString(1, playerConfig.getLocale().getLanguageName());
+            configPreparedStatement.setString(2, logoColorsBundle.getLogoBorderColor()
+                    .getDisplayName());
+            configPreparedStatement.setString(3, logoColorsBundle.getLogoMainColor()
+                    .getDisplayName());
+            configPreparedStatement.setString(4, logoColorsBundle.getLogoAccentColor()
+                    .getDisplayName());
+            configPreparedStatement.setString(5, logoColorsBundle.getLogoBackgroundColor()
+                    .getDisplayName());
             configPreparedStatement.setLong(6, player.getId());
             rowsUpdated = configPreparedStatement.executeUpdate();
         } catch (SQLException exception) {

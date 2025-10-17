@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.persistence.dao.JDBC;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.model.mappers.PlayerConfigMapper;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;
 import dev.bibikvlad.mastermind.persistence.dao.PlayerConfigDAO;
@@ -53,11 +54,13 @@ public class PlayerConfigJdbcDAO implements PlayerConfigDAO {
         int rowsUpdated;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(updateConfigQuery)) {
+            LogoColorsBundle logoColorsBundle = playerConfig.getLogoColorsBundle();
+
             preparedStatement.setString(1, playerConfig.getLocale().getLanguageName());
-            preparedStatement.setString(2, playerConfig.getLogoBorderColor().getDisplayName());
-            preparedStatement.setString(3, playerConfig.getLogoMainColor().getDisplayName());
-            preparedStatement.setString(4, playerConfig.getLogoAccentColor().getDisplayName());
-            preparedStatement.setString(5, playerConfig.getLogoBackgroundColor().getDisplayName());
+            preparedStatement.setString(2, logoColorsBundle.getLogoBorderColor().getDisplayName());
+            preparedStatement.setString(3, logoColorsBundle.getLogoMainColor().getDisplayName());
+            preparedStatement.setString(4, logoColorsBundle.getLogoAccentColor().getDisplayName());
+            preparedStatement.setString(5, logoColorsBundle.getLogoBackgroundColor().getDisplayName());
             preparedStatement.setLong(6, playerId);
             rowsUpdated = preparedStatement.executeUpdate();
         } catch (SQLException exception) {
