@@ -26,7 +26,7 @@ public class GameMenu {
         while (true) {
             String userInput = parser.parseUserInput();
 
-            if (userInput.equalsIgnoreCase("exit") || userInput.equalsIgnoreCase("close") ) {
+            if (userInput.equalsIgnoreCase("exit") || userInput.equalsIgnoreCase("close")) {
                 break;
             }
 
@@ -54,7 +54,7 @@ public class GameMenu {
     }
 
     public void tempMenuSwitch(int userInputNumber) {
-        switch (userInputNumber)  {
+        switch (userInputNumber) {
             case 1 -> createNewPlayer();
             case 2 -> launchGame();
             case 3 -> printAllPlayers();
@@ -90,7 +90,11 @@ public class GameMenu {
 
     private void loadLastSelectedPlayer() {
         try {
-            currentPlayer = playerService.loadLastSelectedPlayer();
+            if (playerService.loadLastSelectedPlayer().isEmpty()) {
+                firstTimeLaunch();
+            } else {
+                currentPlayer = playerService.loadLastSelectedPlayer().get();
+            }
         } catch (PlayerNotFoundException exception) {
             firstTimeLaunch();
         }
