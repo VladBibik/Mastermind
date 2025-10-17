@@ -80,6 +80,10 @@ public class GameMenu {
                 System.out.println("Player with name " + newPlayerName + " has been created.");
             }
 
+            Player newlyCreatedPlayer = playerService.getPlayerByName(newPlayerName).get();
+
+            playerService.saveOrUpdateLastSelectedPlayer(newlyCreatedPlayer.getId());
+
             loadLastSelectedPlayer();
         } catch (PlayerAlreadyExistException exception) {
             System.out.println(exception.getMessage());
