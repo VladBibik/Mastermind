@@ -54,6 +54,16 @@ public class PlayerService {
         throw new IllegalStateException();
     }
 
+    public Optional<Player> getPlayerByName(String playerName) {
+        try {
+            return playerRepository.findByName(playerName);
+        } catch (PersistenceException exception) {
+
+        }
+
+        throw new IllegalStateException();
+    }
+
     public Optional<Player> loadLastSelectedPlayer() {
         try {
             return playerLastSelectedRepository.getLastSelectedPlayer();
