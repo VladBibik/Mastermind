@@ -1,6 +1,7 @@
-package dev.bibikvlad.mastermind.menu;
+package dev.bibikvlad.mastermind.app;
 
 import dev.bibikvlad.mastermind.game.parser.ConsoleInputParser;
+import dev.bibikvlad.mastermind.menu.GameMenu;
 import dev.bibikvlad.mastermind.persistence.dao.JDBC.PlayerConfigJdbcDAO;
 import dev.bibikvlad.mastermind.persistence.dao.JDBC.PlayerJdbcDAO;
 import dev.bibikvlad.mastermind.persistence.dao.JDBC.PlayerLastSelectedJdbcDAO;
