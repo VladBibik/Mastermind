@@ -36,6 +36,7 @@ public class LanguageSelectionMenu {
     private void printMenuOptions() {
         System.out.println("Please select a language");
         System.out.println("Type the number or name of the language, e.g. \"English\" or \"1\".");
+        System.out.println();
         System.out.println("1. English");
         System.out.println("2. Russian");
     }
