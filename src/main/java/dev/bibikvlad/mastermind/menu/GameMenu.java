@@ -11,18 +11,14 @@ import java.util.Optional;
 public class GameMenu {
     private final MastermindUserInputParser parser;
     private final PlayerService playerService;
-    private final LanguageSelectionMenu languageSelectionMenu;
 
     private MastermindGameLauncher mastermindGameLauncher;
     //TODO: Need to add retrieval and update logic to this field!
     private Player currentPlayer;
 
-    public GameMenu(MastermindUserInputParser parser,
-                    PlayerService playerService,
-                    LanguageSelectionMenu languageSelectionMenu) {
+    public GameMenu(MastermindUserInputParser parser, PlayerService playerService) {
         this.parser = parser;
         this.playerService = playerService;
-        this.languageSelectionMenu = languageSelectionMenu;
     }
 
     public void menu() {
