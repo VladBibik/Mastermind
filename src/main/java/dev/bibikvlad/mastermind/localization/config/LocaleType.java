@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.localization.config;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 public enum LocaleType {
@@ -11,9 +12,9 @@ public enum LocaleType {
     private final String languageName;
     private final String locale;
 
-    private static final HashMap<Integer, LocaleType> BY_INDEX = new HashMap<>();
-    private static final HashMap<String, LocaleType> BY_LANGUAGE = new HashMap<>();
-    private static final HashMap<String, LocaleType> BY_LOCALE = new HashMap<>();
+    private static final Map<Integer, LocaleType> BY_INDEX = new HashMap<>();
+    private static final Map<String, LocaleType> BY_LANGUAGE = new HashMap<>();
+    private static final Map<String, LocaleType> BY_LOCALE = new HashMap<>();
 
     static {
         for (LocaleType localeType : LocaleType.values()) {
