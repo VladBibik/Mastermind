@@ -11,7 +11,17 @@ public class LanguageSelectionMenu {
     }
 
     public LocaleType selectLanguage() {
-        return null;
+        while (true) {
+            printMenuOptions();
+
+            String userInput = parser.parseUserInput().toUpperCase();
+
+            try {
+                return selectLocaleFromIndex(userInput);
+            } catch (IllegalArgumentException exception) {
+                System.out.println(exception.getMessage());
+            }
+        }
     }
 
     private void printMenuOptions() {
@@ -20,5 +30,32 @@ public class LanguageSelectionMenu {
                 "or write, for example: 'English'");
         System.out.println("1. English");
         System.out.println("2. Russian");
+    }
+
+    private LocaleType selectLocaleFromIndex(String userInput) {
+        try {
+            int userInputIndex = Integer.parseInt(userInput);
+
+            return LocaleType.fromLocaleIndex(userInputIndex);
+        } catch (NumberFormatException exception) {
+            selectLocaleFromUserInput(userInput);
+        }
+
+        throw new IllegalStateException();
+    }
+
+    private LocaleType selectLocaleFromUserInput(String userInput) {
+        LocaleType selectedLocale = LocaleType.fromLocaleString(userInput);
+
+        if (selectedLocale == null) {
+            selectedLocale = LocaleType.fromLanguageString(userInput);
+
+            if (selectedLocale == null) {
+                throw new IllegalArgumentException("Provided " + userInput
+                        + " is not a valid option for the selected languages");
+            }
+        }
+
+        return selectedLocale;
     }
 }
