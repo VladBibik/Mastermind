@@ -13,4 +13,12 @@ public class LanguageSelectionMenu {
     public LocaleType selectLanguage() {
         return null;
     }
+
+    private void printMenuOptions() {
+        System.out.println("Please select a language");
+        System.out.println("To select a language please print a corresponding number, " +
+                "or write, for example: 'English'");
+        System.out.println("1. English");
+        System.out.println("2. Russian");
+    }
 }
