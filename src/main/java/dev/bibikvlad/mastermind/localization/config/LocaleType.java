@@ -43,17 +43,14 @@ public enum LocaleType {
     }
 
     public static LocaleType fromLocaleIndex(int localeIndex) {
-        return Optional.ofNullable(BY_INDEX.get(localeIndex))
-                .orElseThrow(() -> new IllegalArgumentException("Invalid locale index: " + localeIndex));
+        return BY_INDEX.get(localeIndex);
     }
 
     public static LocaleType fromLanguageString(String languageName) {
-        return Optional.ofNullable(BY_LANGUAGE.get(languageName.toUpperCase()))
-                .orElseThrow(() -> new IllegalArgumentException("Invalid language name string: " + languageName));
+        return BY_LANGUAGE.get(languageName.toUpperCase());
     }
 
     public static LocaleType fromLocaleString(String locale) {
-        return Optional.ofNullable(BY_LOCALE.get(locale.toUpperCase()))
-                .orElseThrow(() -> new IllegalArgumentException("Invalid locale string: " + locale));
+        return BY_LOCALE.get(locale.toUpperCase());
     }
 }
