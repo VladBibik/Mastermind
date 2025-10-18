@@ -16,11 +16,13 @@ public class LanguageSelectionMenu {
 
             String userInput = parser.parseUserInput().toUpperCase();
 
-            try {
-                return selectLocaleFromIndex(userInput);
-            } catch (IllegalArgumentException exception) {
-                System.out.println(exception.getMessage());
+            LocaleType selectedLocale = selectLocaleFromIndex(userInput);
+
+            if (selectedLocale != null) {
+                return selectedLocale;
             }
+
+            System.out.println("Provided '" + userInput + "' is not a valid option for the available languages.");
         }
     }
 
@@ -46,11 +48,6 @@ public class LanguageSelectionMenu {
 
         if (selectedLocale == null) {
             selectedLocale = LocaleType.fromLanguageString(userInput);
-
-            if (selectedLocale == null) {
-                throw new IllegalArgumentException("Provided '" + userInput
-                        + "' is not a valid option for the available languages.");
-            }
         }
 
         return selectedLocale;
