@@ -12,6 +12,7 @@ public class GameMenu {
     private final MastermindUserInputParser parser;
     private final PlayerService playerService;
 
+    private MastermindGameLauncher mastermindGameLauncher;
     //TODO: Need to add retrieval and update logic to this field!
     private Player currentPlayer;
 
@@ -70,7 +71,7 @@ public class GameMenu {
     }
 
     public void launchGame() {
-        MastermindGameLauncher.main(new String[0]);
+        mastermindGameLauncher.launch();
     }
 
     public void createNewPlayer() {
@@ -100,6 +101,8 @@ public class GameMenu {
 
         if (lastSelectedPlayer.isPresent()) {
             currentPlayer = playerService.loadLastSelectedPlayer().get();
+            mastermindGameLauncher = new MastermindGameLauncher(currentPlayer.getPlayerConfig().getLocale(),
+                    currentPlayer.getPlayerConfig().getLogoColorsBundle());
         } else {
             firstTimeLaunch();
         }
