@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.game.printer;
 
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
+import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 
 import java.io.PrintStream;
 
@@ -39,7 +40,7 @@ public class StreamMessagePrinter implements MastermindMessagePrinter {
     }
 
     @Override
-    public void printAsciiLogo() {
-        printStream.println(gameMessages.getAsciiLogo());
+    public void printAsciiLogo(LogoColorsBundle logoColorsBundle) {
+        printStream.println(gameMessages.getAsciiLogo(logoColorsBundle));
     }
 }

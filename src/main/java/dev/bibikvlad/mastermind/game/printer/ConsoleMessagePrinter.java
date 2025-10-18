@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.game.printer;
 
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
+import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 
 public class ConsoleMessagePrinter implements MastermindMessagePrinter {
     private final GameMessages gameMessages;
@@ -35,7 +36,7 @@ public class ConsoleMessagePrinter implements MastermindMessagePrinter {
     }
 
     @Override
-    public void printAsciiLogo() {
-        System.out.println(gameMessages.getAsciiLogo());
+    public void printAsciiLogo(LogoColorsBundle logoColorsBundle) {
+        System.out.println(gameMessages.getAsciiLogo(logoColorsBundle));
     }
 }
