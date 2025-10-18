@@ -23,7 +23,7 @@ public class LanguageSelectionMenu {
                 continue;
             }
 
-            LocaleType selectedLocale = selectLocaleFromIndex(userInput);
+            LocaleType selectedLocale = parseLocaleSelection(userInput);
 
             if (selectedLocale != null) {
                 return selectedLocale;
@@ -40,7 +40,7 @@ public class LanguageSelectionMenu {
         System.out.println("2. Russian");
     }
 
-    private LocaleType selectLocaleFromIndex(String userInput) {
+    private LocaleType parseLocaleSelection(String userInput) {
         try {
             int userInputIndex = Integer.parseInt(userInput);
 
