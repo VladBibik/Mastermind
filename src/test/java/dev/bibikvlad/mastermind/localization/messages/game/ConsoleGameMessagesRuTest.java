@@ -3,6 +3,8 @@ package dev.bibikvlad.mastermind.localization.messages.game;
 import dev.bibikvlad.mastermind.clues.ClueGenerator;
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
+import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
+import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.utils.strings.ConsoleColoredValidSymbols;
 import dev.bibikvlad.utils.strings.Emojis;
 import dev.bibikvlad.utils.strings.GameCluesConstants;
@@ -82,8 +84,15 @@ public class ConsoleGameMessagesRuTest {
     @Test
     @DisplayName("Returns correct Ascii Logo String")
     void testAsciiLogoString() {
-        String result = gameMessages.getAsciiLogo();
-        String expected = ColoredAsciiLogo.getLogo();
+        LogoColorsBundle logoColorsBundle = new LogoColorsBundle(
+                ConsoleColor.ORCHID,
+                ConsoleColor.ORANGE,
+                ConsoleColor.BRIGHT_RED,
+                ConsoleColor.BACKGROUND_BLACK
+        );
+
+        String result = gameMessages.getAsciiLogo(logoColorsBundle);
+        String expected = ColoredAsciiLogo.getLogo(logoColorsBundle);
 
         assertEquals(result, expected);
     }
