@@ -20,7 +20,7 @@ import dev.bibikvlad.mastermind.services.PlayerService;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class TempGameLauncher {
+public class MastermindAppLauncher {
     public static void main(String[] args) throws SQLException {
         DatabaseContext.initialize();
         Connection connection = DatabaseContext.getConnection();
