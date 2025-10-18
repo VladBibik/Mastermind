@@ -1,5 +1,7 @@
 package dev.bibikvlad.mastermind.localization.messages.game;
 
+import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
+
 public class StubGameMessages implements GameMessages {
     @Override
     public String getInvalidInputMessage() {
@@ -27,7 +29,7 @@ public class StubGameMessages implements GameMessages {
     }
 
     @Override
-    public String getAsciiLogo() {
+    public String getAsciiLogo(LogoColorsBundle logoColorsBundle) {
         return "";
     }
 }
