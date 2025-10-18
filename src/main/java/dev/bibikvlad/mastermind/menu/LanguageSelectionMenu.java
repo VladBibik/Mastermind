@@ -26,8 +26,7 @@ public class LanguageSelectionMenu {
 
     private void printMenuOptions() {
         System.out.println("Please select a language");
-        System.out.println("To select a language please print a corresponding number, " +
-                "or write, for example: 'English'");
+        System.out.println("Type the number or name of the language, e.g. \"English\" or \"1\".");
         System.out.println("1. English");
         System.out.println("2. Russian");
     }
@@ -49,8 +48,8 @@ public class LanguageSelectionMenu {
             selectedLocale = LocaleType.fromLanguageString(userInput);
 
             if (selectedLocale == null) {
-                throw new IllegalArgumentException("Provided " + userInput
-                        + " is not a valid option for the selected languages");
+                throw new IllegalArgumentException("Provided '" + userInput
+                        + "' is not a valid option for the available languages.");
             }
         }
 
