@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.menu;
 
 import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.validators.StringEmptyValidator;
 
 public class LanguageSelectionMenu {
     private final MastermindUserInputParser parser;
@@ -15,6 +16,12 @@ public class LanguageSelectionMenu {
             printMenuOptions();
 
             String userInput = parser.parseUserInput();
+
+            if (StringEmptyValidator.isNullOrEmpty(userInput)) {
+                System.out.println("Input cannot be empty. Please try again.");
+
+                continue;
+            }
 
             LocaleType selectedLocale = selectLocaleFromIndex(userInput);
 
