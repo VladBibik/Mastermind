@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.game;
 
 import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.game.printer.MastermindMessagePrinter;
+import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.validators.GameInputValidator;
 
 public class MastermindConsoleGame {
@@ -10,6 +11,7 @@ public class MastermindConsoleGame {
     private final String answer;
     private final MastermindMessagePrinter printer;
     private final MastermindUserInputParser parser;
+    private final LogoColorsBundle logoColorsBundle;
 
     private final GameStateManager gameStateManager;
     private final GameCommandHandler gameCommandHandler;
@@ -17,10 +19,12 @@ public class MastermindConsoleGame {
 
     public MastermindConsoleGame(MastermindMessagePrinter printer,
                                  MastermindUserInputParser inputParser,
-                                 String answer) {
+                                 String answer,
+                                 LogoColorsBundle logoColorsBundle) {
         this.printer = printer;
         this.parser = inputParser;
         this.answer = answer;
+        this.logoColorsBundle = logoColorsBundle;
 
         gameStateManager = new GameStateManager(MAX_TURNS);
         gameCommandHandler = new GameCommandHandler(printer);
@@ -63,7 +67,7 @@ public class MastermindConsoleGame {
     }
 
     private void printLogoAndRules() {
-        printer.printAsciiLogo();
+        printer.printAsciiLogo(logoColorsBundle);
         printer.printRulesMessage();
     }
 }
