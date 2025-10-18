@@ -14,7 +14,7 @@ public class LanguageSelectionMenu {
         while (true) {
             printMenuOptions();
 
-            String userInput = parser.parseUserInput().toUpperCase();
+            String userInput = parser.parseUserInput();
 
             LocaleType selectedLocale = selectLocaleFromIndex(userInput);
 
