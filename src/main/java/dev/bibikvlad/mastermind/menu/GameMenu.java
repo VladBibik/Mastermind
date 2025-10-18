@@ -5,6 +5,7 @@ import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
+import dev.bibikvlad.mastermind.validators.StringEmptyValidator;
 
 import java.util.Optional;
 
@@ -78,6 +79,12 @@ public class GameMenu {
         System.out.println("Please enter the name of the player you would like to create: ");
 
         String newPlayerName = parser.parseUserInput();
+
+        if (StringEmptyValidator.isNullOrEmpty(newPlayerName)) {
+            System.out.println("Player name cannot be empty");
+
+            createNewPlayer();
+        }
 
         try {
             if (playerService.savePlayerWithDefaultConfigs(newPlayerName)) {
