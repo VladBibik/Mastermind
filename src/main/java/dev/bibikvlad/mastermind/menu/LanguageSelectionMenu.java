@@ -38,10 +38,8 @@ public class LanguageSelectionMenu {
 
             return LocaleType.fromLocaleIndex(userInputIndex);
         } catch (NumberFormatException exception) {
-            selectLocaleFromUserInput(userInput);
+            return selectLocaleFromUserInput(userInput);
         }
-
-        throw new IllegalStateException();
     }
 
     private LocaleType selectLocaleFromUserInput(String userInput) {
