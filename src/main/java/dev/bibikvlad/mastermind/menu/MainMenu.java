@@ -49,10 +49,11 @@ public class MainMenu {
 
     private void displayMenu() {
         System.out.println("Welcome to the Mastermind Game " + currentPlayer.getPlayerName() + "!");
-        System.out.println("To create a new Player press: 1");
-        System.out.println("To play a new Game press: 2");
-        System.out.println("To view all Players press: 3");
-        System.out.println("To view current player's data press: 4");
+        System.out.println("1. Create a new Player");
+        System.out.println("2. Play a new Game");
+        System.out.println("3. View all Players");
+        System.out.println("4. Current player's data");
+        System.out.println("5. Settings");
         System.out.println("To close the game print: 'close', or 'exit'");
     }
 
