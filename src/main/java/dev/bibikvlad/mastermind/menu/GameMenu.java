@@ -58,12 +58,18 @@ public class GameMenu {
 
     private void menuOptionSwitcher(int userInputNumber) {
         switch (userInputNumber) {
-            case 1 -> NewPlayerCreation.create(parser, playerService, currentPlayer.getPlayerConfig().getLocale());
+            case 1 -> newPlayerCreation();
             case 2 -> launchGame();
             case 3 -> printAllPlayers();
             case 4 -> displayCurrentPlayerData();
             default -> System.out.println("Invalid selection");
         }
+    }
+
+    private void newPlayerCreation() {
+        NewPlayerCreation.create(parser, playerService, currentPlayer.getPlayerConfig().getLocale());
+
+        loadLastSelectedPlayer();
     }
 
     private void launchGame() {
