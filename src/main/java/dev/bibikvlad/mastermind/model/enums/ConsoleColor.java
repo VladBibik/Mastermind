@@ -138,4 +138,7 @@ public enum ConsoleColor {
     }
 
     public enum Category {FOREGROUND, BACKGROUND}
+    public String getLocalizationKey() {
+        return name().toLowerCase();
+    }
 }
