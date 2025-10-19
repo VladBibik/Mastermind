@@ -24,9 +24,9 @@ public class GameMenu {
             loadLastSelectedPlayer();
         }
 
-        displayMenu();
-
         while (true) {
+            displayMenu();
+
             String userInput = parser.parseUserInput();
 
             if (userInput.equalsIgnoreCase("exit") || userInput.equalsIgnoreCase("close")) {
@@ -52,8 +52,7 @@ public class GameMenu {
         System.out.println("To create a new Player press: 1");
         System.out.println("To play a new Game press: 2");
         System.out.println("To view all Players press: 3");
-        System.out.println("To view again menu options press: 4");
-        System.out.println("To view current player's data press: 5");
+        System.out.println("To view current player's data press: 4");
         System.out.println("To close the game print: 'close', or 'exit'");
     }
 
@@ -62,8 +61,7 @@ public class GameMenu {
             case 1 -> NewPlayerCreation.create(parser, playerService, currentPlayer.getPlayerConfig().getLocale());
             case 2 -> launchGame();
             case 3 -> printAllPlayers();
-            case 4 -> displayMenu();
-            case 5 -> displayCurrentPlayerDataTEMP();
+            case 4 -> displayCurrentPlayerDataTEMP();
             default -> System.out.println("Invalid selection");
         }
     }
