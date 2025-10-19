@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.menu;
 
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
+import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.services.PlayerService;
 import dev.bibikvlad.mastermind.validators.StringEmptyValidator;
 
@@ -21,7 +22,30 @@ public class NewPlayerCreation {
             if (playerService.savePlayerWithDefaultConfigs(newPlayerName)) {
                 System.out.println("Player with name " + newPlayerName + " has been created.\n");
             }
-            
+
+        } catch (PlayerAlreadyExistException exception) {
+            System.out.println(exception.getMessage() + "\n" + "You were returned to the main menu");
+        }
+    }
+
+    public static void createWithLocale(MastermindUserInputParser parser,
+                                        PlayerService playerService,
+                                        LocaleType locale) {
+        System.out.println("Please enter the name of the player you would like to create: ");
+
+        String newPlayerName = parser.parseUserInput();
+
+        if (StringEmptyValidator.isNullOrEmpty(newPlayerName)) {
+            System.out.println("Player name cannot be empty");
+
+            createWithLocale(parser, playerService, locale);
+        }
+
+        try {
+            if (playerService.savePlayerWithProvidedLocale(newPlayerName, locale)) {
+                System.out.println("Player with name " + newPlayerName + " has been created.\n");
+            }
+
         } catch (PlayerAlreadyExistException exception) {
             System.out.println(exception.getMessage() + "\n" + "You were returned to the main menu");
         }
