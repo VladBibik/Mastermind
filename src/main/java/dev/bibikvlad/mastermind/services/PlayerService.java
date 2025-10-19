@@ -88,11 +88,23 @@ public class PlayerService {
 
     private PlayerConfig getDefaultPlayerConfig() {
         return new PlayerConfig(LocaleType.ENGLISH,
-                new LogoColorsBundle(
-                        ConsoleColor.ORCHID,
-                        ConsoleColor.ORANGE,
-                        ConsoleColor.BRIGHT_RED,
-                        ConsoleColor.BACKGROUND_BLACK)
+                getLogoColorsBundle()
+        );
+    }
+
+    private PlayerConfig getCustomLocaleConfig(LocaleType localeType) {
+        return new PlayerConfig(
+                localeType,
+                getLogoColorsBundle()
+        );
+    }
+
+    private LogoColorsBundle getLogoColorsBundle() {
+        return new LogoColorsBundle(
+                ConsoleColor.ORCHID,
+                ConsoleColor.ORANGE,
+                ConsoleColor.BRIGHT_RED,
+                ConsoleColor.BACKGROUND_BLACK
         );
     }
 }
