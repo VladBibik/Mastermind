@@ -107,5 +107,7 @@ public class MainMenu {
         SettingsMenu settingsMenu = new SettingsMenu(currentPlayer, playerService, parser);
 
         settingsMenu.settingsMenu();
+
+        loadLastSelectedPlayer();
     }
 }
