@@ -61,7 +61,7 @@ public class GameMenu {
             case 1 -> NewPlayerCreation.create(parser, playerService, currentPlayer.getPlayerConfig().getLocale());
             case 2 -> launchGame();
             case 3 -> printAllPlayers();
-            case 4 -> displayCurrentPlayerDataTEMP();
+            case 4 -> displayCurrentPlayerData();
             default -> System.out.println("Invalid selection");
         }
     }
@@ -90,7 +90,7 @@ public class GameMenu {
         }
     }
 
-    private void displayCurrentPlayerDataTEMP() {
+    private void displayCurrentPlayerData() {
         System.out.println("Current Player: " + currentPlayer);
     }
 }
