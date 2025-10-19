@@ -1,13 +1,15 @@
 package dev.bibikvlad.mastermind.localization.config;
 
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoMessages;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 public enum MessageType {
-    GAME(0, "i18n.game_messages", GameMessages.class);
+    GAME(0, "i18n.game_messages", GameMessages.class),
+    LOGO(1, "i18n.logo_colors", LogoMessages.class);
 
     private final int index;
     private final String resourceBundleName;
