@@ -26,24 +26,6 @@ public class PlayerService {
         this.playerLastSelectedRepository = playerLastSelectedRepository;
     }
 
-    public boolean savePlayerWithDefaultConfigs(String newPlayerName) throws PlayerAlreadyExistException {
-        boolean result = false;
-
-        try {
-            if (playerRepository.existsByName(newPlayerName)) {
-                throw new PlayerAlreadyExistException("Player with name " + newPlayerName + " already exists");
-            }
-
-            Player player = new Player(newPlayerName, getDefaultPlayerConfig());
-
-            result = playerRepository.save(player);
-        } catch (PersistenceException exception) {
-            //TODO: Add handling. Preferably just turn off the app
-        }
-
-        return result;
-    }
-
     public boolean savePlayerWithProvidedLocale(String newPlayerName, LocaleType locale)
             throws PlayerAlreadyExistException {
         boolean result = false;
