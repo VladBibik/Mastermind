@@ -47,7 +47,7 @@ public class GameMenu {
         }
     }
 
-    public void displayMenu() {
+    private void displayMenu() {
         System.out.println("Welcome to the Mastermind Game " + currentPlayer.getPlayerName());
         System.out.println("To create a new Player press: 1");
         System.out.println("To play a new Game press: 2");
@@ -56,7 +56,7 @@ public class GameMenu {
         System.out.println("To close the game print: 'close', or 'exit'");
     }
 
-    public void menuOptionSwitcher(int userInputNumber) {
+    private void menuOptionSwitcher(int userInputNumber) {
         switch (userInputNumber) {
             case 1 -> NewPlayerCreation.create(parser, playerService, currentPlayer.getPlayerConfig().getLocale());
             case 2 -> launchGame();
@@ -66,11 +66,11 @@ public class GameMenu {
         }
     }
 
-    public void launchGame() {
+    private void launchGame() {
         mastermindGameLauncher.launch();
     }
 
-    public void printAllPlayers() {
+    private void printAllPlayers() {
         for (Player player : playerService.getAllPlayers()) {
             System.out.println(player);
         }
