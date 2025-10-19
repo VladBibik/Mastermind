@@ -12,6 +12,6 @@ public class FirstTimeLaunch {
 
         LocaleType localeType = languageSelectionMenu.selectLanguage();
 
-        NewPlayerCreation.createWithLocale(parser, playerService, localeType);
+        NewPlayerCreation.create(parser, playerService, localeType);
     }
 }

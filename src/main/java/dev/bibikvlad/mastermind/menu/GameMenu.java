@@ -59,7 +59,7 @@ public class GameMenu {
 
     public void tempMenuSwitch(int userInputNumber) {
         switch (userInputNumber) {
-            case 1 -> NewPlayerCreation.create(parser, playerService);
+            case 1 -> NewPlayerCreation.create(parser, playerService, currentPlayer.getPlayerConfig().getLocale());
             case 2 -> launchGame();
             case 3 -> printAllPlayers();
             case 4 -> displayMenu();
