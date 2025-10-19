@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.menu;
 
 import dev.bibikvlad.mastermind.app.MastermindGameLauncher;
 import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
+import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
@@ -63,6 +64,7 @@ public class MainMenu {
             case 2 -> launchGame();
             case 3 -> printAllPlayers();
             case 4 -> displayCurrentPlayerData();
+            case 5 -> settings();
             default -> System.out.println("Invalid selection");
         }
     }
@@ -99,5 +101,11 @@ public class MainMenu {
 
     private void displayCurrentPlayerData() {
         System.out.println("Current Player: " + currentPlayer);
+    }
+
+    private void settings() {
+        SettingsMenu settingsMenu = new SettingsMenu(currentPlayer, playerService, parser);
+
+        settingsMenu.settingsMenu();
     }
 }
