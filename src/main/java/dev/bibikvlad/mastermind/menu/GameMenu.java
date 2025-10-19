@@ -1,11 +1,9 @@
 package dev.bibikvlad.mastermind.menu;
 
 import dev.bibikvlad.mastermind.app.MastermindGameLauncher;
-import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
-import dev.bibikvlad.mastermind.validators.StringEmptyValidator;
 
 import java.util.Optional;
 
