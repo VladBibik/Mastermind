@@ -62,7 +62,7 @@ public class GameMenu {
 
     public void tempMenuSwitch(int userInputNumber) {
         switch (userInputNumber) {
-            case 1 -> createNewPlayer();
+            case 1 -> NewPlayerCreation.create(parser, playerService);
             case 2 -> launchGame();
             case 3 -> printAllPlayers();
             case 4 -> displayMenu();
@@ -73,28 +73,6 @@ public class GameMenu {
 
     public void launchGame() {
         mastermindGameLauncher.launch();
-    }
-
-    public void createNewPlayer() {
-        System.out.println("Please enter the name of the player you would like to create: ");
-
-        String newPlayerName = parser.parseUserInput();
-
-        if (StringEmptyValidator.isNullOrEmpty(newPlayerName)) {
-            System.out.println("Player name cannot be empty");
-
-            createNewPlayer();
-        }
-
-        try {
-            if (playerService.savePlayerWithDefaultConfigs(newPlayerName)) {
-                System.out.println("Player with name " + newPlayerName + " has been created.\n");
-            }
-
-            loadLastSelectedPlayer();
-        } catch (PlayerAlreadyExistException exception) {
-            System.out.println(exception.getMessage() + "\n" + "You were returned to the main menu");
-        }
     }
 
     public void printAllPlayers() {
@@ -112,13 +90,15 @@ public class GameMenu {
                     currentPlayer.getPlayerConfig().getLogoColorsBundle());
         } else {
             firstTimeLaunch();
+
+            loadLastSelectedPlayer();
         }
     }
 
     private void firstTimeLaunch() {
         System.out.println("Welcome to the Mastermind Game!");
 
-        createNewPlayer();
+        NewPlayerCreation.create(parser, playerService);
     }
 
     private void displayCurrentPlayerDataTEMP() {
