@@ -12,7 +12,6 @@ public class GameMenu {
     private final PlayerService playerService;
 
     private MastermindGameLauncher mastermindGameLauncher;
-    //TODO: Need to add retrieval and update logic to this field!
     private Player currentPlayer;
 
     public GameMenu(MastermindUserInputParser parser, PlayerService playerService) {
