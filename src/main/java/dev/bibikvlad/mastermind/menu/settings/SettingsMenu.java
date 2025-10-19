@@ -46,5 +46,15 @@ public class SettingsMenu {
     }
 
     private void menuOptionSwitcher(int userInputNumber) {
+        switch (userInputNumber) {
+            case 1 -> changeLanguage();
+            default -> System.out.println("Invalid selection. Please enter a number corresponding to the menu option.");
+        }
+    }
+
+    private void changeLanguage() {
+        LanguageSelectionMenu languageSelectionMenu = new LanguageSelectionMenu(parser);
+
+        languageSelectionMenu.selectLanguage();
     }
 }
