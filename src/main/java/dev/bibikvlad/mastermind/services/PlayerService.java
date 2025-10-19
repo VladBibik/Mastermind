@@ -87,6 +87,14 @@ public class PlayerService {
         throw new IllegalStateException();
     }
 
+    public void updatePlayerLocale(long playerId, LocaleType locale) {
+        try {
+            playerConfigRepository.updateLocale(playerId, locale);
+        } catch (PersistenceException exception) {
+            //TODO: Add handling. Preferably just turn off the app
+        }
+    }
+
     private PlayerConfig getDefaultPlayerConfig() {
         return new PlayerConfig(LocaleType.ENGLISH,
                 getLogoColorsBundle()
