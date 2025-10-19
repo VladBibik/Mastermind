@@ -1,6 +1,8 @@
 package dev.bibikvlad.mastermind.menu.settings;
 
 import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
+import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.menu.LanguageSelectionMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
@@ -55,6 +57,8 @@ public class SettingsMenu {
     private void changeLanguage() {
         LanguageSelectionMenu languageSelectionMenu = new LanguageSelectionMenu(parser);
 
-        languageSelectionMenu.selectLanguage();
+        LocaleType localeType = languageSelectionMenu.selectLanguage();
+
+        playerService.updatePlayerLocale(currentPlayer.getId(), localeType);
     }
 }
