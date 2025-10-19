@@ -55,7 +55,7 @@ public enum ConsoleColor {
     BACKGROUND_CYAN(7, "\u001B[46m", "Background Cyan", Category.BACKGROUND),
     BACKGROUND_WHITE(8, "\u001B[47m", "Background White", Category.BACKGROUND),
 
-    RESET(0, "\u001B[0m", "Reset", Category.FOREGROUND);
+    RESET(0, "\u001B[0m", "Reset", Category.RESET);
 
     private final int index;
     private final String code;
@@ -137,8 +137,9 @@ public enum ConsoleColor {
         return BY_CATEGORY.get(Category.BACKGROUND);
     }
 
-    public enum Category {FOREGROUND, BACKGROUND}
     public String getLocalizationKey() {
         return name().toLowerCase();
     }
+
+    public enum Category {FOREGROUND, BACKGROUND, RESET}
 }
