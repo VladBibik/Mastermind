@@ -86,16 +86,10 @@ public class GameMenu {
             mastermindGameLauncher = new MastermindGameLauncher(currentPlayer.getPlayerConfig().getLocale(),
                     currentPlayer.getPlayerConfig().getLogoColorsBundle());
         } else {
-            firstTimeLaunch();
+            FirstTimeLaunch.launch(parser, playerService);
 
             loadLastSelectedPlayer();
         }
-    }
-
-    private void firstTimeLaunch() {
-        System.out.println("Welcome to the Mastermind Game!");
-
-        NewPlayerCreation.create(parser, playerService);
     }
 
     private void displayCurrentPlayerDataTEMP() {
