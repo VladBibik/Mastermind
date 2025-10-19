@@ -21,14 +21,15 @@ public class SettingsMenu {
 
             String userInput = parser.parseUserInput();
 
-            if (userInput.equalsIgnoreCase("exit") || userInput.equalsIgnoreCase("close")) {
-                break;
-            }
 
             int userInputNumber;
 
             try {
                 userInputNumber = Integer.parseInt(userInput);
+
+                if (userInputNumber == 2) {
+                    break;
+                }
             } catch (NumberFormatException exception) {
                 System.out.println("Invalid input. Please enter a number corresponding to the menu option.");
 
