@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.app;
 
 import dev.bibikvlad.mastermind.game.parser.ConsoleInputParser;
-import dev.bibikvlad.mastermind.menu.GameMenu;
+import dev.bibikvlad.mastermind.menu.MainMenu;
 import dev.bibikvlad.mastermind.persistence.dao.JDBC.PlayerConfigJdbcDAO;
 import dev.bibikvlad.mastermind.persistence.dao.JDBC.PlayerJdbcDAO;
 import dev.bibikvlad.mastermind.persistence.dao.JDBC.PlayerLastSelectedJdbcDAO;
@@ -41,7 +41,7 @@ public class MastermindAppLauncher {
         PlayerService playerService = new PlayerService(playerRepository, playerConfigRepository,
                 playerLastSelectedRepository);
 
-        GameMenu gameMenu = new GameMenu(new ConsoleInputParser(), playerService);
+        MainMenu gameMenu = new MainMenu(new ConsoleInputParser(), playerService);
 
         gameMenu.menu();
     }

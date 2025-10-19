@@ -7,14 +7,14 @@ import dev.bibikvlad.mastermind.services.PlayerService;
 
 import java.util.Optional;
 
-public class GameMenu {
+public class MainMenu {
     private final MastermindUserInputParser parser;
     private final PlayerService playerService;
 
     private MastermindGameLauncher mastermindGameLauncher;
     private Player currentPlayer;
 
-    public GameMenu(MastermindUserInputParser parser, PlayerService playerService) {
+    public MainMenu(MastermindUserInputParser parser, PlayerService playerService) {
         this.parser = parser;
         this.playerService = playerService;
     }
