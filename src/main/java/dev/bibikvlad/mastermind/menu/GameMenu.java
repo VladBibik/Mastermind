@@ -43,7 +43,7 @@ public class GameMenu {
                 continue;
             }
 
-            tempMenuSwitch(userInputNumber);
+            menuOptionSwitcher(userInputNumber);
         }
     }
 
@@ -56,7 +56,7 @@ public class GameMenu {
         System.out.println("To close the game print: 'close', or 'exit'");
     }
 
-    public void tempMenuSwitch(int userInputNumber) {
+    public void menuOptionSwitcher(int userInputNumber) {
         switch (userInputNumber) {
             case 1 -> NewPlayerCreation.create(parser, playerService, currentPlayer.getPlayerConfig().getLocale());
             case 2 -> launchGame();
