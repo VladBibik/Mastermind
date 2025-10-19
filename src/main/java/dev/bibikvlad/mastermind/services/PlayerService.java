@@ -44,6 +44,25 @@ public class PlayerService {
         return result;
     }
 
+    public boolean savePlayerWithProvidedLocale(String newPlayerName, LocaleType locale)
+            throws PlayerAlreadyExistException {
+        boolean result = false;
+
+        try {
+            if (playerRepository.existsByName(newPlayerName)) {
+                throw new PlayerAlreadyExistException("Player with name " + newPlayerName + " already exists");
+            }
+
+            Player player = new Player(newPlayerName, getCustomLocaleConfig(locale));
+
+            result = playerRepository.save(player);
+        } catch (PersistenceException exception) {
+            //TODO: Add handling. Preferably just turn off the app
+        }
+
+        return result;
+    }
+
     public boolean saveOrUpdateLastSelectedPlayer(long playerId) {
         boolean result = false;
 
