@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.Optional;
 
 public enum LocaleType {
-    ENGLISH(1, "ENGLISH", "EN"),
-    RUSSIAN(2, "RUSSIAN", "RU");
+    ENGLISH(1, "English", "EN"),
+    RUSSIAN(2, "Russian", "RU");
 
     private final int localeIndex;
     private final String languageName;
