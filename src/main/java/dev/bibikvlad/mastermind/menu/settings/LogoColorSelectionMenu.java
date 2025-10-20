@@ -7,6 +7,7 @@ import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
+import dev.bibikvlad.mastermind.validators.StringEmptyValidator;
 
 public class LogoColorSelectionMenu {
     private final Player currentPlayer;
@@ -81,7 +82,7 @@ public class LogoColorSelectionMenu {
     }
 
     private String getDefaultTipMessage() {
-        return "To select a color please enter a corresponding number or print color name";
+        return "To select a color please enter a corresponding number";
     }
 
     private String getDefaultGoBackMessage() {
