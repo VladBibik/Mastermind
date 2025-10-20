@@ -18,6 +18,10 @@ public class LocalizationContext {
         this.messageProvider = messageProvider;
     }
 
+    public void changeLocale(LocaleType localeType) {
+        messageProvider = new MessageProvider(localeType, messageFactoryRegistry);
+    }
+
     public GameMessages getGameMessages() {
         return messageProvider.getMessages(GameMessages.class, MessageType.GAME.getResourceBundleName());
     }
