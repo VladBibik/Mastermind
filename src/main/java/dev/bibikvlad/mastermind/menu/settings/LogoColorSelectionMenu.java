@@ -43,6 +43,15 @@ public class LogoColorSelectionMenu {
             }
         }
     }
+    private ConsoleColor selectLogoBorderColor() {
+        System.out.println(getDefaultTipMessage());
+        System.out.println(getDefaultGoBackMessage());
+        System.out.println("Please select border color");
+
+        printForegroundColorChoices();
+
+        return colorSelectionLoop();
+    }
 
     private void printForegroundColorChoices() {
         for (ConsoleColor color : ConsoleColor.getForegroundColors()) {
