@@ -49,4 +49,11 @@ public class LogoColorSelectionMenu {
             System.out.println(logoMessages.getColor(color.getLocalizationKey()));
         }
     }
+
+    private void printBackgroundColorChoices() {
+        for (ConsoleColor color : ConsoleColor.getBackgroundColors()) {
+            System.out.println(logoMessages.getColor(color.getLocalizationKey()));
+        }
+    }
+
 }
