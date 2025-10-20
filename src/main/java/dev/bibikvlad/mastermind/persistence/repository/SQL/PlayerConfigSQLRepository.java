@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.persistence.repository.SQL;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;
 import dev.bibikvlad.mastermind.persistence.dao.PlayerConfigDAO;
 import dev.bibikvlad.mastermind.persistence.database.TransactionManager;
@@ -54,6 +55,29 @@ public class PlayerConfigSQLRepository implements PlayerConfigRepository {
             transactionManager.begin();
 
             result = playerConfigDAO.updateLocale(playerId, locale);
+
+            transactionManager.commit();
+        } catch (PersistenceException exception) {
+            try {
+                transactionManager.rollback();
+            } catch (PersistenceException rollbackException) {
+                rollbackException.addSuppressed(exception);
+            }
+
+            throw exception;
+        }
+
+        return result;
+    }
+
+    @Override
+    public boolean updateLogoColors(long playerId, LogoColorsBundle logoColorsBundle) throws PersistenceException {
+        boolean result;
+
+        try {
+            transactionManager.begin();
+
+            result = playerConfigDAO.updateLogoColors(playerId, logoColorsBundle);
 
             transactionManager.commit();
         } catch (PersistenceException exception) {
