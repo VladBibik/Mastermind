@@ -6,6 +6,7 @@ import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.services.PlayerService;
 import dev.bibikvlad.mastermind.validators.StringEmptyValidator;
 
+//TODO: Either pass LocalizationContext, or already created Messages, or make this class a normal instance based class
 public class NewPlayerCreation {
     public static void create(MastermindUserInputParser parser,
                                         PlayerService playerService,
