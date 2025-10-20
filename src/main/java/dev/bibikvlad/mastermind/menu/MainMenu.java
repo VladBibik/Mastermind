@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.menu;
 
 import dev.bibikvlad.mastermind.app.MastermindGameLauncher;
 import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
+import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
@@ -9,13 +10,17 @@ import dev.bibikvlad.mastermind.services.PlayerService;
 import java.util.Optional;
 
 public class MainMenu {
+    private final LocalizationContext localizationContext;
     private final MastermindUserInputParser parser;
     private final PlayerService playerService;
 
     private MastermindGameLauncher mastermindGameLauncher;
     private Player currentPlayer;
 
-    public MainMenu(MastermindUserInputParser parser, PlayerService playerService) {
+    public MainMenu(LocalizationContext localizationContext,
+                    MastermindUserInputParser parser,
+                    PlayerService playerService) {
+        this.localizationContext = localizationContext;
         this.parser = parser;
         this.playerService = playerService;
     }
