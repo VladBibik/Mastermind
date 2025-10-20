@@ -1,7 +1,10 @@
 package dev.bibikvlad.mastermind.app;
 
 import dev.bibikvlad.mastermind.game.parser.ConsoleInputParser;
+import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
+import dev.bibikvlad.mastermind.menu.FirstTimeLaunch;
 import dev.bibikvlad.mastermind.menu.MainMenu;
+import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.persistence.dao.JDBC.PlayerConfigJdbcDAO;
 import dev.bibikvlad.mastermind.persistence.dao.JDBC.PlayerJdbcDAO;
 import dev.bibikvlad.mastermind.persistence.dao.JDBC.PlayerLastSelectedJdbcDAO;
@@ -20,6 +23,7 @@ import dev.bibikvlad.mastermind.services.PlayerService;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class MastermindAppLauncher {
     public static void main(String[] args) throws SQLException {
@@ -41,8 +45,22 @@ public class MastermindAppLauncher {
         PlayerService playerService = new PlayerService(playerRepository, playerConfigRepository,
                 playerLastSelectedRepository);
 
-        MainMenu gameMenu = new MainMenu(new ConsoleInputParser(), playerService);
+        LocalizationContext defaultLocalizationContext = getLocalizationContext(playerService);
+
+        MainMenu gameMenu = new MainMenu(defaultLocalizationContext, new ConsoleInputParser(), playerService);
 
         gameMenu.menu();
+    }
+
+    private static LocalizationContext getLocalizationContext(PlayerService playerService) {
+        Optional<Player> player = playerService.loadLastSelectedPlayer();
+
+        if (player.isPresent()) {
+            return new LocalizationContext(player.get().getPlayerConfig().getLocale());
+        }
+
+        FirstTimeLaunch.launch(new ConsoleInputParser(), playerService);
+
+        return getLocalizationContext(playerService);
     }
 }
