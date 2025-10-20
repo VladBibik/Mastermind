@@ -103,7 +103,7 @@ public class MainMenu {
     }
 
     private void settings() {
-        SettingsMenu settingsMenu = new SettingsMenu(currentPlayer, playerService, parser);
+        SettingsMenu settingsMenu = new SettingsMenu(currentPlayer, playerService, localizationContext, parser);
 
         settingsMenu.settingsMenu();
 
