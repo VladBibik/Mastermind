@@ -25,24 +25,14 @@ public class LogoColorSelectionMenu {
     }
 
     public LogoColorsBundle selectLogoColors() {
-        while (true) {
-
-
-            String userInput = parser.parseUserInput();
-
-
-            int userInputNumber;
-
-            try {
-                userInputNumber = Integer.parseInt(userInput);
-
-            } catch (NumberFormatException exception) {
-                System.out.println("Invalid input. Please enter a number corresponding to the menu option.");
-
-                continue;
-            }
-        }
+        return new LogoColorsBundle(
+                selectLogoBorderColor(),
+                selectLogoBorderColor(),
+                selectLogoBorderColor(),
+                selectLogoBorderColor()
+        );
     }
+
     private ConsoleColor selectLogoBorderColor() {
         System.out.println(getDefaultTipMessage());
         System.out.println(getDefaultGoBackMessage());
@@ -51,6 +41,31 @@ public class LogoColorSelectionMenu {
         printForegroundColorChoices();
 
         return colorSelectionLoop();
+    }
+
+    private ConsoleColor colorSelectionLoop() {
+        while (true) {
+            String userInput = parser.parseUserInput();
+
+            if (StringEmptyValidator.isNullOrEmpty(userInput)) {
+                System.out.println("Invalid input. Please enter a number corresponding to the menu option.");
+
+                continue;
+            }
+
+            try {
+                int userInputNumber = Integer.parseInt(userInput);
+
+                try {
+                    return ConsoleColor.getForegroundColorByIndex(userInputNumber);
+                } catch (IllegalArgumentException exception) {
+                    System.out.println("Invalid input. Please enter a number corresponding " +
+                            "to the desired color option.");
+                }
+            } catch (NumberFormatException exception) {
+                System.out.println("Invalid input. Please enter a number corresponding to the menu option.");
+            }
+        }
     }
 
     private void printForegroundColorChoices() {
