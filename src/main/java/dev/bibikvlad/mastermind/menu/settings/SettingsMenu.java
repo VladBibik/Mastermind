@@ -33,7 +33,7 @@ public class SettingsMenu {
             try {
                 userInputNumber = Integer.parseInt(userInput);
 
-                if (userInputNumber == 2) {
+                if (userInputNumber == 3) {
                     break;
                 }
             } catch (NumberFormatException exception) {
@@ -48,7 +48,8 @@ public class SettingsMenu {
 
     private void displayMenu() {
         System.out.println("1. Change language");
-        System.out.println("2. Back to the main menu");
+        System.out.println("2. Change logo colors");
+        System.out.println("3. Back to the main menu");
     }
 
     private void menuOptionSwitcher(int userInputNumber) {
@@ -68,5 +69,9 @@ public class SettingsMenu {
         localizationContext.changeLocale(localeType);
 
         System.out.println("Language changed successfully to " + localeType.getLanguageName() + "\n");
+    }
+
+    private void changeLogoColor() {
+
     }
 }
