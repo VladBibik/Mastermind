@@ -59,4 +59,8 @@ public class LogoColorSelectionMenu {
     private String getDefaultTipMessage() {
         return "To select a color please enter a corresponding number or print color name";
     }
+
+    private String getDefaultGoBackMessage() {
+        return "To return to previous menu print 'close', or 'exit'";
+    }
 }
