@@ -6,10 +6,11 @@ import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoMessages;
 
 public class LocalizationContext {
-    private final MessageProvider messageProvider;
+    private MessageProvider messageProvider;
+    private MessageFactoryRegistry messageFactoryRegistry;
 
     public LocalizationContext(LocaleType localeType) {
-        MessageFactoryRegistry messageFactoryRegistry = MessageRegistryInitializer.createAndPopulateRegistry();
+        this.messageFactoryRegistry = MessageRegistryInitializer.createAndPopulateRegistry();
         this.messageProvider = new MessageProvider(localeType, messageFactoryRegistry);
     }
 
