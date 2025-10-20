@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.app;
 
 import dev.bibikvlad.mastermind.game.parser.ConsoleInputParser;
+import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.FirstTimeLaunch;
 import dev.bibikvlad.mastermind.menu.MainMenu;
@@ -45,22 +46,26 @@ public class MastermindAppLauncher {
         PlayerService playerService = new PlayerService(playerRepository, playerConfigRepository,
                 playerLastSelectedRepository);
 
-        LocalizationContext defaultLocalizationContext = getLocalizationContext(playerService);
+        MastermindUserInputParser parser = new ConsoleInputParser();
 
-        MainMenu gameMenu = new MainMenu(defaultLocalizationContext, new ConsoleInputParser(), playerService);
+        LocalizationContext defaultLocalizationContext = getLocalizationContext(playerService, parser);
+
+
+        MainMenu gameMenu = new MainMenu(defaultLocalizationContext, parser, playerService);
 
         gameMenu.menu();
     }
 
-    private static LocalizationContext getLocalizationContext(PlayerService playerService) {
+    private static LocalizationContext getLocalizationContext(PlayerService playerService,
+                                                              MastermindUserInputParser parser) {
         Optional<Player> player = playerService.loadLastSelectedPlayer();
 
         if (player.isPresent()) {
             return new LocalizationContext(player.get().getPlayerConfig().getLocale());
         }
 
-        FirstTimeLaunch.launch(new ConsoleInputParser(), playerService);
+        FirstTimeLaunch.launch(parser, playerService);
 
-        return getLocalizationContext(playerService);
+        return getLocalizationContext(playerService, parser);
     }
 }
