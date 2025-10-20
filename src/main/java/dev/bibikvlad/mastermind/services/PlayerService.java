@@ -3,7 +3,6 @@ package dev.bibikvlad.mastermind.services;
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
-import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;
@@ -91,6 +90,14 @@ public class PlayerService {
     public void updatePlayerLocale(long playerId, LocaleType locale) {
         try {
             playerConfigRepository.updateLocale(playerId, locale);
+        } catch (PersistenceException exception) {
+            //TODO: Add handling. Preferably just turn off the app
+        }
+    }
+
+    public void updateLogoColors(long playerId, LogoColorsBundle logoColorsBundle) {
+        try {
+            playerConfigRepository.updateLogoColors(playerId, logoColorsBundle);
         } catch (PersistenceException exception) {
             //TODO: Add handling. Preferably just turn off the app
         }
