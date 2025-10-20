@@ -60,12 +60,7 @@ public class MastermindAppLauncher {
                                                               MastermindUserInputParser parser) {
         Optional<Player> player = playerService.loadLastSelectedPlayer();
 
-        if (player.isPresent()) {
-            return new LocalizationContext(player.get().getPlayerConfig().getLocale());
-        }
-
-        FirstTimeLaunch.launch(parser, playerService);
-
-        return getLocalizationContext(playerService, parser);
+        return player.map(value -> new LocalizationContext(value.getPlayerConfig().getLocale()))
+                .orElseGet(() -> FirstTimeLaunch.getLocalizationContextAfterUserSelection(parser, playerService));
     }
 }
