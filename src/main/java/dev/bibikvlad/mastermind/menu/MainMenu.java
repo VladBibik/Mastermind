@@ -93,15 +93,9 @@ public class MainMenu {
     private void loadLastSelectedPlayer() {
         Optional<Player> lastSelectedPlayer = playerService.loadLastSelectedPlayer();
 
-        if (lastSelectedPlayer.isPresent()) {
-            currentPlayer = playerService.loadLastSelectedPlayer().get();
-            mastermindGameLauncher = new MastermindGameLauncher(currentPlayer.getPlayerConfig().getLocale(),
-                    currentPlayer.getPlayerConfig().getLogoColorsBundle());
-        } else {
-            FirstTimeLaunch.launch(parser, playerService);
-
-            loadLastSelectedPlayer();
-        }
+        currentPlayer = lastSelectedPlayer.get();
+        mastermindGameLauncher = new MastermindGameLauncher(localizationContext,
+        currentPlayer.getPlayerConfig().getLogoColorsBundle());
     }
 
     private void displayCurrentPlayerData() {
