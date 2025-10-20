@@ -10,6 +10,7 @@ import dev.bibikvlad.mastermind.model.player.PlayerConfig;
 import dev.bibikvlad.mastermind.persistence.repository.PlayerConfigRepository;
 import dev.bibikvlad.mastermind.persistence.repository.PlayerLastSelectedRepository;
 import dev.bibikvlad.mastermind.persistence.repository.PlayerRepository;
+import dev.bibikvlad.utils.DefaultLogoColorsBundle;
 
 import java.util.List;
 import java.util.Optional;
@@ -98,16 +99,7 @@ public class PlayerService {
     private PlayerConfig getCustomLocaleConfig(LocaleType localeType) {
         return new PlayerConfig(
                 localeType,
-                getLogoColorsBundle()
-        );
-    }
-
-    private LogoColorsBundle getLogoColorsBundle() {
-        return new LogoColorsBundle(
-                ConsoleColor.ORCHID,
-                ConsoleColor.ORANGE,
-                ConsoleColor.BRIGHT_RED,
-                ConsoleColor.BACKGROUND_BLACK
+                DefaultLogoColorsBundle.get()
         );
     }
 }
