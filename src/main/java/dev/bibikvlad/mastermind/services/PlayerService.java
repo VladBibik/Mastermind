@@ -95,12 +95,6 @@ public class PlayerService {
         }
     }
 
-    private PlayerConfig getDefaultPlayerConfig() {
-        return new PlayerConfig(LocaleType.ENGLISH,
-                getLogoColorsBundle()
-        );
-    }
-
     private PlayerConfig getCustomLocaleConfig(LocaleType localeType) {
         return new PlayerConfig(
                 localeType,
