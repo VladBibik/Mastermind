@@ -29,35 +29,31 @@ public class LanguageSelectionMenu {
                 return selectedLocale;
             }
 
-            System.out.println("Provided '" + userInput + "' is not a valid option for the available languages.");
+            System.out.println("Provided '" + userInput + "' is not a valid index for the available languages.");
         }
     }
 
     private void printMenuOptions() {
         System.out.println("Please select a language");
-        System.out.println("Type the number or name of the language, e.g. \"English\" or \"1\".");
+        System.out.println("Enter a number corresponding to desired language.");
         System.out.println();
         System.out.println("1. English");
         System.out.println("2. Russian");
     }
 
     private LocaleType parseLocaleSelection(String userInput) {
+        int userInputIndex;
+
         try {
-            int userInputIndex = Integer.parseInt(userInput);
-
-            return LocaleType.fromLocaleIndex(userInputIndex);
+            userInputIndex = Integer.parseInt(userInput);
         } catch (NumberFormatException exception) {
-            return selectLocaleFromUserInput(userInput);
-        }
-    }
-
-    private LocaleType selectLocaleFromUserInput(String userInput) {
-        LocaleType selectedLocale = LocaleType.fromLocaleString(userInput);
-
-        if (selectedLocale == null) {
-            selectedLocale = LocaleType.fromLanguageString(userInput);
+            return null;
         }
 
-        return selectedLocale;
+        try {
+            return LocaleType.fromLocaleIndex(userInputIndex);
+        } catch (IllegalArgumentException exception) {
+            return null;
+        }
     }
 }
