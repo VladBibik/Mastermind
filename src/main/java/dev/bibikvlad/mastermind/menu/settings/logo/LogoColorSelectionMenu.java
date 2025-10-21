@@ -76,6 +76,7 @@ public class LogoColorSelectionMenu {
         switch (userInputNumber) {
             case 1 -> printCurrentLogo();
             case 2 -> changeBorderColor();
+            case 3 -> changeMainColor();
             case 6 -> resetToDefault();
             case 7 -> saveAndReturnBack();
             default -> System.out.println("Invalid selection. Please enter a number corresponding to the menu option.");
@@ -96,6 +97,20 @@ public class LogoColorSelectionMenu {
         logoColorsBundle = new LogoColorsBundle(
                 borderColor,
                 logoColorsBundle.getLogoMainColor(),
+                logoColorsBundle.getLogoAccentColor(),
+                logoColorsBundle.getLogoBackgroundColor());
+    }
+
+    private void changeMainColor() {
+        ConsoleColor mainColor = colorSelectionMenu.selectForegroundColor();
+
+        if (mainColor == null) {
+            return;
+        }
+
+        logoColorsBundle = new LogoColorsBundle(
+                logoColorsBundle.getLogoBorderColor(),
+                mainColor,
                 logoColorsBundle.getLogoAccentColor(),
                 logoColorsBundle.getLogoBackgroundColor());
     }
