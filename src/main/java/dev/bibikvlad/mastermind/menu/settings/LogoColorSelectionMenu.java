@@ -52,10 +52,11 @@ public class LogoColorSelectionMenu {
 
     private void displayMenu() {
         System.out.println();
-        System.out.println("1. Change border color");
-        System.out.println("2. Change main color");
-        System.out.println("3. Change accent color");
-        System.out.println("4. Change background color");
-        System.out.println("5. Return back to settings");
+        System.out.println("1. Print current logo");
+        System.out.println("2. Change border color");
+        System.out.println("3. Change main color");
+        System.out.println("4. Change accent color");
+        System.out.println("5. Change background color");
+        System.out.println("6. Return back to settings");
     }
 }
