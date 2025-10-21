@@ -4,6 +4,7 @@ import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.LanguageSelectionMenu;
+import dev.bibikvlad.mastermind.menu.settings.logo.LogoColorSelectionMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
@@ -55,6 +56,7 @@ public class SettingsMenu {
     private void menuOptionSwitcher(int userInputNumber) {
         switch (userInputNumber) {
             case 1 -> changeLanguage();
+            case 2 -> changeLogoColor();
             default -> System.out.println("Invalid selection. Please enter a number corresponding to the menu option.");
         }
     }
@@ -72,6 +74,9 @@ public class SettingsMenu {
     }
 
     private void changeLogoColor() {
+        LogoColorSelectionMenu menu =
+                new LogoColorSelectionMenu(currentPlayer, playerService, localizationContext, parser);
 
+        menu.selectLogoColors();
     }
 }
