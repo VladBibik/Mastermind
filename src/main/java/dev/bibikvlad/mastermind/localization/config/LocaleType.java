@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.localization.config;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public enum LocaleType {
     ENGLISH(1, "English", "EN"),
@@ -42,14 +43,17 @@ public enum LocaleType {
     }
 
     public static LocaleType fromLocaleIndex(int localeIndex) {
-        return BY_INDEX.get(localeIndex);
+        return Optional.ofNullable(BY_INDEX.get(localeIndex)).orElseThrow(
+                () -> new IllegalArgumentException("Invalid LocaleIndex: " + localeIndex));
     }
 
     public static LocaleType fromLanguageString(String languageName) {
-        return BY_LANGUAGE.get(languageName.toUpperCase());
+        return Optional.ofNullable(BY_LANGUAGE.get(languageName.toUpperCase())).orElseThrow(
+                () -> new IllegalArgumentException("Invalid Language Name: " + languageName));
     }
 
     public static LocaleType fromLocaleString(String locale) {
-        return BY_LOCALE.get(locale.toUpperCase());
+        return Optional.ofNullable(BY_LOCALE.get(locale.toUpperCase())).orElseThrow(
+                () -> new IllegalArgumentException("Invalid Locale: " + locale));
     }
 }
