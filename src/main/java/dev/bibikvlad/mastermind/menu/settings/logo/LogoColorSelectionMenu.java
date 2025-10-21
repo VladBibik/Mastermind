@@ -78,6 +78,7 @@ public class LogoColorSelectionMenu {
             case 2 -> changeBorderColor();
             case 3 -> changeMainColor();
             case 4 -> changeAccentColor();
+            case 5 -> changeBackgroundColor();
             case 6 -> resetToDefault();
             case 7 -> saveAndReturnBack();
             default -> System.out.println("Invalid selection. Please enter a number corresponding to the menu option.");
