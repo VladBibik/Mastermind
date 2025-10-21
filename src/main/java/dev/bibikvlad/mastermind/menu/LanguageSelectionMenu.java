@@ -46,10 +46,14 @@ public class LanguageSelectionMenu {
 
         try {
             userInputIndex = Integer.parseInt(userInput);
+
+            return selectLocaleByIndex(userInputIndex);
         } catch (NumberFormatException exception) {
             return null;
         }
+    }
 
+    private LocaleType selectLocaleByIndex(int userInputIndex) {
         try {
             return LocaleType.fromLocaleIndex(userInputIndex);
         } catch (IllegalArgumentException exception) {
