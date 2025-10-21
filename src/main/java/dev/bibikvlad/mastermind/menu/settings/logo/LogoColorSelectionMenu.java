@@ -130,6 +130,20 @@ public class LogoColorSelectionMenu {
                 logoColorsBundle.getLogoBackgroundColor());
     }
 
+    private void changeBackgroundColor() {
+        ConsoleColor backgroundColor = colorSelectionMenu.selectBackgroundColor();
+
+        if (backgroundColor == null) {
+            return;
+        }
+
+        logoColorsBundle = new LogoColorsBundle(
+                logoColorsBundle.getLogoBorderColor(),
+                logoColorsBundle.getLogoMainColor(),
+                logoColorsBundle.getLogoAccentColor(),
+                backgroundColor);
+    }
+
     private void resetToDefault() {
         logoColorsBundle = DefaultLogoColorsBundle.get();
     }
