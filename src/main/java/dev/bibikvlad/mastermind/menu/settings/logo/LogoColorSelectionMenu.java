@@ -7,6 +7,7 @@ import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 import dev.bibikvlad.mastermind.validators.StringEmptyValidator;
+import dev.bibikvlad.utils.DefaultLogoColorsBundle;
 import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
 
 public class LogoColorSelectionMenu {
@@ -69,11 +70,16 @@ public class LogoColorSelectionMenu {
     private void menuOptionSwitcher(int userInputNumber) {
         switch (userInputNumber) {
             case 1 -> printCurrentLogo();
+            case 6 -> resetToDefault();
             default -> System.out.println("Invalid selection. Please enter a number corresponding to the menu option.");
         }
     }
 
     private void printCurrentLogo() {
         System.out.println(ColoredAsciiLogo.getLogo(logoColorsBundle));
+    }
+
+    private void resetToDefault() {
+        logoColorsBundle = DefaultLogoColorsBundle.get();
     }
 }
