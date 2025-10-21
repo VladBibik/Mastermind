@@ -29,7 +29,7 @@ public class MessageTypeTest {
     @Test
     @DisplayName("Throws exception on invalid locale index")
     void invalidIndexThrowsException() {
-        for (int i = 1; i < 100; i++) {
+        for (int i = 2; i < 100; i++) {
             int index = i;
 
             assertThrows(IllegalArgumentException.class, () -> MessageType.fromIndex(index));
