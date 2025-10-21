@@ -2,7 +2,6 @@ package dev.bibikvlad.mastermind.localization.config;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public enum LocaleType {
     ENGLISH(1, "English", "EN"),
@@ -19,8 +18,8 @@ public enum LocaleType {
     static {
         for (LocaleType localeType : LocaleType.values()) {
             BY_INDEX.put(localeType.getLocaleIndex(), localeType);
-            BY_LANGUAGE.put(localeType.getLanguageName(), localeType);
-            BY_LOCALE.put(localeType.getLocale(), localeType);
+            BY_LANGUAGE.put(localeType.getLanguageName().toUpperCase(), localeType);
+            BY_LOCALE.put(localeType.getLocale().toUpperCase(), localeType);
         }
     }
 
