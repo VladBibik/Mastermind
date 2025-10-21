@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.menu.settings;
+package dev.bibikvlad.mastermind.menu.settings.logo;
 
 import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
