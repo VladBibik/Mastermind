@@ -79,7 +79,7 @@ public class ColorSelectionMenu {
             }
 
             try {
-                return ConsoleColor.getForegroundColorByIndex(userInputNumber);
+                return ConsoleColor.getBackgroundColorByIndex(userInputNumber);
             } catch (IllegalArgumentException exception) {
                 System.out.println("Invalid input. Please enter a number corresponding to the color option.");
             }
