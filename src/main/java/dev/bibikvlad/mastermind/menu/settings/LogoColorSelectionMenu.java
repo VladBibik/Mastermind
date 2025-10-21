@@ -30,4 +30,13 @@ public class LogoColorSelectionMenu {
     public void selectLogoColors() {
 
     }
+
+    private void displayMenu() {
+        System.out.println();
+        System.out.println("1. Change border color");
+        System.out.println("2. Change main color");
+        System.out.println("3. Change accent color");
+        System.out.println("4. Change background color");
+        System.out.println("5. Return back to settings");
+    }
 }
