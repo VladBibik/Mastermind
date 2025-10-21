@@ -40,13 +40,17 @@ public class LogoColorSelectionMenu {
                 continue;
             }
 
+            int userInputNumber;
+
             try {
-                int userInputNumber = Integer.parseInt(userInput);
+                userInputNumber = Integer.parseInt(userInput);
             } catch (NumberFormatException exception) {
                 System.out.println("Invalid input. Please enter a number corresponding to the menu option.");
 
                 continue;
             }
+
+            menuOptionSwitcher(userInputNumber);
         }
     }
 
@@ -58,5 +62,11 @@ public class LogoColorSelectionMenu {
         System.out.println("4. Change accent color");
         System.out.println("5. Change background color");
         System.out.println("6. Return back to settings");
+    }
+
+    private void menuOptionSwitcher(int userInputNumber) {
+        switch (userInputNumber) {
+            default -> System.out.println("Invalid selection. Please enter a number corresponding to the menu option.");
+        }
     }
 }
