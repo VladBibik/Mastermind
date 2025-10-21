@@ -18,6 +18,7 @@ public class LogoColorSelectionMenu {
     private final LogoMessages logoMessages;
 
     private LogoColorsBundle logoColorsBundle;
+    private boolean isDone = false;
 
     public LogoColorSelectionMenu(Player currentPlayer, PlayerService playerService,
                                   LocalizationContext localizationContext, MastermindUserInputParser parser) {
@@ -31,7 +32,8 @@ public class LogoColorSelectionMenu {
     }
 
     public void selectLogoColors() {
-        while (true) {
+        while (!isDone) {
+
             displayMenu();
 
             String userInput = parser.parseUserInput();
@@ -71,6 +73,7 @@ public class LogoColorSelectionMenu {
         switch (userInputNumber) {
             case 1 -> printCurrentLogo();
             case 6 -> resetToDefault();
+            case 7 -> saveAndReturnBack();
             default -> System.out.println("Invalid selection. Please enter a number corresponding to the menu option.");
         }
     }
@@ -81,5 +84,11 @@ public class LogoColorSelectionMenu {
 
     private void resetToDefault() {
         logoColorsBundle = DefaultLogoColorsBundle.get();
+    }
+
+    private void saveAndReturnBack() {
+        playerService.updateLogoColors(currentPlayer.getId(), logoColorsBundle);
+
+        isDone = true;
     }
 }
