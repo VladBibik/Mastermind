@@ -16,6 +16,7 @@ public class LogoColorSelectionMenu {
     private final LocalizationContext localizationContext;
     private final MastermindUserInputParser parser;
     private final LogoMessages logoMessages;
+    private final ColorSelectionMenu colorSelectionMenu;
 
     private LogoColorsBundle logoColorsBundle;
     private boolean isDone = false;
@@ -27,6 +28,7 @@ public class LogoColorSelectionMenu {
         this.localizationContext = localizationContext;
         this.parser = parser;
         this.logoMessages = localizationContext.getLogoMessages();
+        this.colorSelectionMenu = new ColorSelectionMenu(localizationContext, parser);
 
         this.logoColorsBundle = currentPlayer.getPlayerConfig().getLogoColorsBundle();
     }
