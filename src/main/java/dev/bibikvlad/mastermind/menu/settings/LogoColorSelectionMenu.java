@@ -6,6 +6,7 @@ import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoMes
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
+import dev.bibikvlad.mastermind.validators.StringEmptyValidator;
 
 public class LogoColorSelectionMenu {
     private final Player currentPlayer;
@@ -28,7 +29,25 @@ public class LogoColorSelectionMenu {
     }
 
     public void selectLogoColors() {
+        while (true) {
+            displayMenu();
 
+            String userInput = parser.parseUserInput();
+
+            if (StringEmptyValidator.isNullOrEmpty(userInput)) {
+                System.out.println("Input cannot be empty. Please try again.");
+
+                continue;
+            }
+
+            try {
+                int userInputNumber = Integer.parseInt(userInput);
+            } catch (NumberFormatException exception) {
+                System.out.println("Invalid input. Please enter a number corresponding to the menu option.");
+
+                continue;
+            }
+        }
     }
 
     private void displayMenu() {
