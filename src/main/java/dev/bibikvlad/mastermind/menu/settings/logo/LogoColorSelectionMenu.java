@@ -3,6 +3,7 @@ package dev.bibikvlad.mastermind.menu.settings.logo;
 import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoMessages;
+import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
@@ -74,6 +75,7 @@ public class LogoColorSelectionMenu {
     private void menuOptionSwitcher(int userInputNumber) {
         switch (userInputNumber) {
             case 1 -> printCurrentLogo();
+            case 2 -> changeBorderColor();
             case 6 -> resetToDefault();
             case 7 -> saveAndReturnBack();
             default -> System.out.println("Invalid selection. Please enter a number corresponding to the menu option.");
@@ -82,6 +84,20 @@ public class LogoColorSelectionMenu {
 
     private void printCurrentLogo() {
         System.out.println(ColoredAsciiLogo.getLogo(logoColorsBundle));
+    }
+
+    private void changeBorderColor() {
+        ConsoleColor borderColor = colorSelectionMenu.selectForegroundColor();
+
+        if (borderColor == null) {
+            return;
+        }
+
+        logoColorsBundle = new LogoColorsBundle(
+                borderColor,
+                logoColorsBundle.getLogoMainColor(),
+                logoColorsBundle.getLogoAccentColor(),
+                logoColorsBundle.getLogoBackgroundColor());
     }
 
     private void resetToDefault() {
