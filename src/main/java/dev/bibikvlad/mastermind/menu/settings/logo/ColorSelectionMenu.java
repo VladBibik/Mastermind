@@ -16,10 +16,10 @@ public class ColorSelectionMenu {
     }
 
     public ConsoleColor selectForegroundColor() {
-        displayForegroundColors();
-        System.out.println("\nTo get back to previous menu print 'exit', or 'quit'");
-
         while (true) {
+            displayForegroundColors();
+            System.out.println("\nTo get back to previous menu print 'exit', or 'quit'");
+
             String userInput = parser.parseUserInput();
 
             if (StringEmptyValidator.isNullOrEmpty(userInput)) {
@@ -51,10 +51,10 @@ public class ColorSelectionMenu {
     }
 
     public ConsoleColor selectBackgroundColor() {
-        displayBackgroundColors();
-        System.out.println("\nTo get back to previous menu print 'exit', or 'quit'");
-
         while (true) {
+            displayBackgroundColors();
+            System.out.println("\nTo get back to previous menu print 'exit', or 'quit'");
+
             String userInput = parser.parseUserInput();
 
             if (StringEmptyValidator.isNullOrEmpty(userInput)) {
