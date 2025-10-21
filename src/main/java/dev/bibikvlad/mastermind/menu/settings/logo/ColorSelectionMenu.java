@@ -42,7 +42,11 @@ public class ColorSelectionMenu {
                 continue;
             }
 
-            return ConsoleColor.getForegroundColorByIndex(userInputNumber);
+            try {
+                return ConsoleColor.getForegroundColorByIndex(userInputNumber);
+            } catch (IllegalArgumentException exception) {
+                System.out.println("Invalid input. Please enter a number corresponding to the color option.");
+            }
         }
     }
 
@@ -73,7 +77,11 @@ public class ColorSelectionMenu {
                 continue;
             }
 
-            return ConsoleColor.getBackgroundColorByIndex(userInputNumber);
+            try {
+                return ConsoleColor.getForegroundColorByIndex(userInputNumber);
+            } catch (IllegalArgumentException exception) {
+                System.out.println("Invalid input. Please enter a number corresponding to the color option.");
+            }
         }
     }
 
