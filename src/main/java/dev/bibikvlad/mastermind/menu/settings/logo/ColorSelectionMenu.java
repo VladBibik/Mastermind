@@ -7,12 +7,10 @@ import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.validators.StringEmptyValidator;
 
 public class ColorSelectionMenu {
-    private final LocalizationContext localizationContext;
     private final MastermindUserInputParser parser;
     private final LogoMessages logoMessages;
 
     public ColorSelectionMenu(LocalizationContext localizationContext, MastermindUserInputParser parser) {
-        this.localizationContext = localizationContext;
         this.parser = parser;
         this.logoMessages = localizationContext.getLogoMessages();
     }
