@@ -87,7 +87,8 @@ public class ColorSelectionMenu {
 
     private void displayForegroundColors() {
         for (ConsoleColor color : ConsoleColor.getForegroundColors()) {
-            System.out.println(color.getIndex() + ": " + logoMessages.getColor(color.getLocalizationKey()));
+            System.out.println(color.getIndex() + ": " + logoMessages.getColor(color.getLocalizationKey())
+                    + " " + color.getCode() + GameCluesConstants.CIRCLE_SOLID + ConsoleColor.RESET.getCode());
         }
     }
 
