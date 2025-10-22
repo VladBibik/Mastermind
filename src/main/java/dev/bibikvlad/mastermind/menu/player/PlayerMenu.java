@@ -58,5 +58,10 @@ public class PlayerMenu {
     }
 
     private void changePlayer() {
+        PlayerSelectionMenu playerSelectionMenu = new PlayerSelectionMenu(localizationContext, parser, playerService);
+
+        currentPlayer = playerSelectionMenu.selectPlayer();
+
+        System.out.println(currentPlayer);
     }
 }
