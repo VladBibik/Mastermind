@@ -62,6 +62,6 @@ public class PlayerMenu {
 
         currentPlayer = playerSelectionMenu.selectPlayer();
 
-        System.out.println(currentPlayer);
+        playerService.updateLastSelectedPlayer(currentPlayer.getId());
     }
 }
