@@ -14,6 +14,8 @@ public class SettingsMenu {
     private final LocalizationContext localizationContext;
     private final MastermindUserInputParser parser;
 
+    private boolean isDone = false;
+
     public SettingsMenu(Player currentPlayer, PlayerService playerService,
                         LocalizationContext localizationContext, MastermindUserInputParser parser) {
         this.currentPlayer = currentPlayer;
@@ -23,7 +25,7 @@ public class SettingsMenu {
     }
 
     public void settingsMenu() {
-        while (true) {
+        while (!isDone) {
             displayMenu();
 
             String userInput = parser.parseUserInput();
@@ -33,10 +35,6 @@ public class SettingsMenu {
 
             try {
                 userInputNumber = Integer.parseInt(userInput);
-
-                if (userInputNumber == 3) {
-                    break;
-                }
             } catch (NumberFormatException exception) {
                 System.out.println("Invalid input. Please enter a number corresponding to the menu option.");
 
@@ -57,6 +55,7 @@ public class SettingsMenu {
         switch (userInputNumber) {
             case 1 -> changeLanguage();
             case 2 -> changeLogoColor();
+            case 3 -> exit();
             default -> System.out.println("Invalid selection. Please enter a number corresponding to the menu option.");
         }
     }
@@ -78,5 +77,9 @@ public class SettingsMenu {
                 new LogoColorSelectionMenu(currentPlayer, playerService, localizationContext, parser);
 
         menu.selectLogoColors();
+    }
+
+    private void exit() {
+        isDone = true;
     }
 }
