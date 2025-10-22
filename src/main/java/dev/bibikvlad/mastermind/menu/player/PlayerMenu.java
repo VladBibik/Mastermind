@@ -22,7 +22,7 @@ public class PlayerMenu {
     }
 
     public void menu() {
-        while (isDone) {
+        while (!isDone) {
             displayMenu();
 
             String userInput = parser.parseUserInput();
