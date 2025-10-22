@@ -103,6 +103,14 @@ public class PlayerService {
         }
     }
 
+    public void updateLastSelectedPlayer(long playerId) {
+        try {
+            playerLastSelectedRepository.saveOrUpdate(playerId);
+        } catch (PersistenceException exception) {
+            //TODO: Add handling. Preferably just turn off the app
+        }
+    }
+
     private PlayerConfig getCustomLocaleConfig(LocaleType localeType) {
         return new PlayerConfig(
                 localeType,
