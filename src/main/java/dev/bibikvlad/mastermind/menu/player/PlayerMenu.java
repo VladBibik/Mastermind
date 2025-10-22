@@ -54,6 +54,7 @@ public class PlayerMenu {
     private void menuOptionSwitcher(int userInputNumber) {
         switch (userInputNumber) {
             case 1 -> changePlayer();
+            case 2 -> quit();
         }
     }
 
@@ -63,5 +64,9 @@ public class PlayerMenu {
         currentPlayer = playerSelectionMenu.selectPlayer();
 
         playerService.updateLastSelectedPlayer(currentPlayer.getId());
+    }
+
+    private void quit() {
+        isDone = true;
     }
 }
