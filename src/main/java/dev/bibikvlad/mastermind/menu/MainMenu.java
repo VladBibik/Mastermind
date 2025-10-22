@@ -3,6 +3,7 @@ package dev.bibikvlad.mastermind.menu;
 import dev.bibikvlad.mastermind.app.MastermindGameLauncher;
 import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
+import dev.bibikvlad.mastermind.menu.player.PlayerMenu;
 import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
@@ -57,7 +58,7 @@ public class MainMenu {
         System.out.println("Welcome to the Mastermind Game " + currentPlayer.getPlayerName() + "!");
         System.out.println("1. Create a new Player");
         System.out.println("2. Play a new Game");
-        System.out.println("3. View all Players");
+        System.out.println("3. Player menu");
         System.out.println("4. Current player's data");
         System.out.println("5. Settings");
         System.out.println("To close the game print: 'close', or 'exit'");
@@ -67,7 +68,7 @@ public class MainMenu {
         switch (userInputNumber) {
             case 1 -> newPlayerCreation();
             case 2 -> launchGame();
-            case 3 -> printAllPlayers();
+            case 3 -> playerMenu();
             case 4 -> displayCurrentPlayerData();
             case 5 -> settings();
             default -> System.out.println("Invalid selection");
@@ -84,10 +85,10 @@ public class MainMenu {
         mastermindGameLauncher.launch();
     }
 
-    private void printAllPlayers() {
-        for (Player player : playerService.getAllPlayers()) {
-            System.out.println(player);
-        }
+    private void playerMenu() {
+        PlayerMenu playerMenu = new PlayerMenu(localizationContext, parser, playerService, currentPlayer);
+
+        playerMenu.menu();
     }
 
     private void loadLastSelectedPlayer() {
