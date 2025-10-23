@@ -50,6 +50,10 @@ public class MastermindAppLauncher {
 
         LocalizationContext defaultLocalizationContext = getLocalizationContext(playerService, parser);
 
+        if (defaultLocalizationContext == null) {
+            return;
+        }
+
         MainMenu gameMenu = new MainMenu(defaultLocalizationContext, parser, playerService);
 
         gameMenu.menu();
