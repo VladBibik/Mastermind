@@ -140,6 +140,49 @@ public class PlayerJdbcDAO implements PlayerDAO {
     }
 
     @Override
+    public boolean update(Player player) throws PersistenceException {
+        String updatePlayerQuery = """
+                        UPDATE players
+                        SET player_name = ?
+                        WHERE id = ?;
+                """;
+        String updateConfigQuery = """
+                        UPDATE player_configurations
+                        SET language = ?, logo_border_color = ?,
+                            logo_main_color = ?, logo_accent_color = ?, logo_background_color = ?
+                        WHERE player_id = ?;
+                """;
+        int rowsUpdated;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(updatePlayerQuery);
+             PreparedStatement configPreparedStatement = connection.prepareStatement(updateConfigQuery)) {
+
+            preparedStatement.setString(1, player.getPlayerName());
+            preparedStatement.setLong(2, player.getId());
+            preparedStatement.executeUpdate();
+
+            PlayerConfig playerConfig = player.getPlayerConfig();
+            LogoColorsBundle logoColorsBundle = playerConfig.getLogoColorsBundle();
+
+            configPreparedStatement.setString(1, playerConfig.getLocale().getLanguageName());
+            configPreparedStatement.setString(2, logoColorsBundle.getLogoBorderColor()
+                    .getDisplayName());
+            configPreparedStatement.setString(3, logoColorsBundle.getLogoMainColor()
+                    .getDisplayName());
+            configPreparedStatement.setString(4, logoColorsBundle.getLogoAccentColor()
+                    .getDisplayName());
+            configPreparedStatement.setString(5, logoColorsBundle.getLogoBackgroundColor()
+                    .getDisplayName());
+            configPreparedStatement.setLong(6, player.getId());
+            rowsUpdated = configPreparedStatement.executeUpdate();
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to update a Player: " + player, exception);
+        }
+
+        return rowsUpdated > 0;
+    }
+
+    @Override
     public boolean delete(Player player) throws PersistenceException {
         String deletePlayerQuery = """
                             DELETE FROM players
@@ -188,49 +231,6 @@ public class PlayerJdbcDAO implements PlayerDAO {
             rowsUpdated = preparedStatement.executeUpdate();
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to delete player by Name: " + playerName, exception);
-        }
-
-        return rowsUpdated > 0;
-    }
-
-    @Override
-    public boolean update(Player player) throws PersistenceException {
-        String updatePlayerQuery = """
-                        UPDATE players
-                        SET player_name = ?
-                        WHERE id = ?;
-                """;
-        String updateConfigQuery = """
-                        UPDATE player_configurations
-                        SET language = ?, logo_border_color = ?,
-                            logo_main_color = ?, logo_accent_color = ?, logo_background_color = ?
-                        WHERE player_id = ?;
-                """;
-        int rowsUpdated;
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement(updatePlayerQuery);
-             PreparedStatement configPreparedStatement = connection.prepareStatement(updateConfigQuery)) {
-
-            preparedStatement.setString(1, player.getPlayerName());
-            preparedStatement.setLong(2, player.getId());
-            preparedStatement.executeUpdate();
-
-            PlayerConfig playerConfig = player.getPlayerConfig();
-            LogoColorsBundle logoColorsBundle = playerConfig.getLogoColorsBundle();
-
-            configPreparedStatement.setString(1, playerConfig.getLocale().getLanguageName());
-            configPreparedStatement.setString(2, logoColorsBundle.getLogoBorderColor()
-                    .getDisplayName());
-            configPreparedStatement.setString(3, logoColorsBundle.getLogoMainColor()
-                    .getDisplayName());
-            configPreparedStatement.setString(4, logoColorsBundle.getLogoAccentColor()
-                    .getDisplayName());
-            configPreparedStatement.setString(5, logoColorsBundle.getLogoBackgroundColor()
-                    .getDisplayName());
-            configPreparedStatement.setLong(6, player.getId());
-            rowsUpdated = configPreparedStatement.executeUpdate();
-        } catch (SQLException exception) {
-            throw new PersistenceException("Failed to update a Player: " + player, exception);
         }
 
         return rowsUpdated > 0;
