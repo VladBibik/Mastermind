@@ -17,6 +17,8 @@ public interface PlayerRepository {
 
     boolean update(Player player) throws PersistenceException;
 
+    boolean updatePlayerName(long id, String name) throws PersistenceException;
+
     void delete(Player player) throws PersistenceException;
 
     void deleteById(long id) throws PersistenceException;

@@ -80,6 +80,28 @@ public class PlayerSQLRepository implements PlayerRepository {
     }
 
     @Override
+    public boolean updatePlayerName(long id, String name) throws PersistenceException {
+        boolean result;
+        try {
+            transactionManager.begin();
+
+            result = playerDAO.updatePlayerName(id, name);
+
+            transactionManager.commit();
+        } catch (PersistenceException exception) {
+            try {
+                transactionManager.rollback();
+            } catch (PersistenceException rollbackException) {
+                exception.addSuppressed(rollbackException);
+            }
+
+            throw new PersistenceException("Failed to update player's name " + name, exception);
+        }
+
+        return result;
+    }
+
+    @Override
     public void delete(Player player) throws PersistenceException {
         try {
             transactionManager.begin();
