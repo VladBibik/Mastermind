@@ -8,13 +8,12 @@ import dev.bibikvlad.mastermind.validators.StringEmptyValidator;
 
 //TODO: Either pass LocalizationContext, or already created Messages, or make this class a normal instance based class
 public class NewPlayerCreation {
-    public static void create(MastermindUserInputParser parser,
+    public static boolean create(MastermindUserInputParser parser,
                                         PlayerService playerService,
                                         LocaleType locale) {
-        boolean isDone = false;
-
-        while (!isDone) {
-            System.out.println("Please enter nickname of a new player: ");
+        while (true) {
+            System.out.println("Please enter nickname of a new player");
+            System.out.println("To cancel type: 'close' or 'exit'");
 
             String newPlayerName = parser.parseUserInput();
 
@@ -22,6 +21,12 @@ public class NewPlayerCreation {
                 System.out.println("Player name cannot be empty");
 
                 continue;
+            }
+
+            if (newPlayerName.equalsIgnoreCase("exit") ||
+                    newPlayerName.equalsIgnoreCase("close")) {
+
+                return true;
             }
 
             if (newPlayerName.length() > 100) {
@@ -34,7 +39,7 @@ public class NewPlayerCreation {
                 if (playerService.savePlayerWithProvidedLocale(newPlayerName, locale)) {
                     System.out.println("Player with name " + newPlayerName + " has been created.\n");
 
-                    isDone = true;
+                    return false;
                 }
 
             } catch (PlayerAlreadyExistException exception) {
