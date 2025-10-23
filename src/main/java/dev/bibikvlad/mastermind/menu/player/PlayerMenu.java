@@ -61,7 +61,11 @@ public class PlayerMenu {
     private void changePlayer() {
         PlayerSelectionMenu playerSelectionMenu = new PlayerSelectionMenu(localizationContext, parser, playerService);
 
-        currentPlayer = playerSelectionMenu.selectPlayer();
+        Player updatedPlayer = playerSelectionMenu.selectPlayer();
+
+        if (updatedPlayer == null || updatedPlayer.getPlayerName().equals(currentPlayer.getPlayerName())) {
+            return;
+        }
 
         playerService.updateLastSelectedPlayer(currentPlayer.getId());
     }
