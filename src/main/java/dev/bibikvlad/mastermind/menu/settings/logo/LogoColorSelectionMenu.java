@@ -66,7 +66,7 @@ public class LogoColorSelectionMenu {
         System.out.println("4. Change accent color");
         System.out.println("5. Change background color");
         System.out.println("6. Reset logo colors to default");
-        System.out.println("7. Return back to settings");
+        System.out.println("7. Save and return");
     }
 
     private void menuOptionSwitcher(int userInputNumber) {
