@@ -15,13 +15,13 @@ public interface PlayerDAO {
 
     boolean save(Player player) throws PersistenceException;
 
+    boolean update(Player player) throws PersistenceException;
+
     boolean delete(Player player) throws PersistenceException;
 
     boolean deleteById(long id) throws PersistenceException;
 
     boolean deleteByName(String name) throws PersistenceException;
-
-    boolean update(Player player) throws PersistenceException;
 
     boolean existsById(long id) throws PersistenceException;
 
