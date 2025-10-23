@@ -24,6 +24,12 @@ public class NewPlayerCreation {
                 continue;
             }
 
+            if (newPlayerName.length() > 100) {
+                System.out.println("Player name cannot be longer than 100 characters");
+
+                continue;
+            }
+
             try {
                 if (playerService.savePlayerWithProvidedLocale(newPlayerName, locale)) {
                     System.out.println("Player with name " + newPlayerName + " has been created.\n");
