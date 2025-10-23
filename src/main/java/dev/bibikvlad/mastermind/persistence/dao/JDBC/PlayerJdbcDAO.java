@@ -183,6 +183,27 @@ public class PlayerJdbcDAO implements PlayerDAO {
     }
 
     @Override
+    public boolean updatePlayerName(long id, String name) throws PersistenceException {
+        String updatePlayerNameQuery = """
+                        UPDATE players
+                        SET player_name = ?
+                        WHERE id = ?;
+        """;
+
+        int rowsUpdated;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(updatePlayerNameQuery)) {
+            preparedStatement.setString(1, name);
+            preparedStatement.setLong(2, id);
+            rowsUpdated = preparedStatement.executeUpdate();
+
+            return  rowsUpdated > 0;
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to update a Player name: " + name, exception);
+        }
+    }
+
+    @Override
     public boolean delete(Player player) throws PersistenceException {
         String deletePlayerQuery = """
                             DELETE FROM players

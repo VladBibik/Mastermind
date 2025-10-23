@@ -17,6 +17,8 @@ public interface PlayerDAO {
 
     boolean update(Player player) throws PersistenceException;
 
+    boolean updatePlayerName(long id, String name) throws PersistenceException;
+
     boolean delete(Player player) throws PersistenceException;
 
     boolean deleteById(long id) throws PersistenceException;
