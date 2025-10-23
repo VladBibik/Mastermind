@@ -17,7 +17,11 @@ public class FirstTimeLaunch {
 
         LocalizationContext localizationContext = new LocalizationContext(localeType);
 
-        NewPlayerCreation.create(parser, playerService, localeType);
+        boolean isClosed = NewPlayerCreation.create(parser, playerService, localeType);
+
+        if (isClosed) {
+            return null;
+        }
 
         return localizationContext;
     }
