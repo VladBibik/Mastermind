@@ -11,23 +11,29 @@ public class NewPlayerCreation {
     public static void create(MastermindUserInputParser parser,
                                         PlayerService playerService,
                                         LocaleType locale) {
-        System.out.println("Please enter the name of the player you would like to create: ");
+        boolean isDone = false;
 
-        String newPlayerName = parser.parseUserInput();
+        while (!isDone) {
+            System.out.println("Please enter the name of the player you would like to create: ");
 
-        if (StringEmptyValidator.isNullOrEmpty(newPlayerName)) {
-            System.out.println("Player name cannot be empty");
+            String newPlayerName = parser.parseUserInput();
 
-            create(parser, playerService, locale);
-        }
+            if (StringEmptyValidator.isNullOrEmpty(newPlayerName)) {
+                System.out.println("Player name cannot be empty");
 
-        try {
-            if (playerService.savePlayerWithProvidedLocale(newPlayerName, locale)) {
-                System.out.println("Player with name " + newPlayerName + " has been created.\n");
+                continue;
             }
 
-        } catch (PlayerAlreadyExistException exception) {
-            System.out.println(exception.getMessage() + "\n" + "You were returned to the main menu");
+            try {
+                if (playerService.savePlayerWithProvidedLocale(newPlayerName, locale)) {
+                    System.out.println("Player with name " + newPlayerName + " has been created.\n");
+
+                    isDone = true;
+                }
+
+            } catch (PlayerAlreadyExistException exception) {
+                System.out.println("Player with name " + newPlayerName + " already exists.\n");
+            }
         }
     }
 }
