@@ -89,6 +89,9 @@ public class MainMenu {
         PlayerMenu playerMenu = new PlayerMenu(localizationContext, parser, playerService, currentPlayer);
 
         playerMenu.menu();
+
+        //TODO: Think of a better way of updating player
+        currentPlayer = playerService.loadLastSelectedPlayer().get();
     }
 
     private void loadLastSelectedPlayer() {
