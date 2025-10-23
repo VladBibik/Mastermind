@@ -57,11 +57,11 @@ public class PlayerSelectionMenu {
         playerList = playerService.getAllPlayers();
 
         for (int i = 0; i < playerList.size(); i++) {
-            System.out.println(i + ": " + playerList.get(i).getPlayerName());
+            System.out.println((i + 1) + ": " + playerList.get(i).getPlayerName());
         }
     }
 
     private Player selectPlayer(int playerIndex) {
-        return playerList.get(playerIndex);
+        return playerList.get(playerIndex - 1);
     }
 }
