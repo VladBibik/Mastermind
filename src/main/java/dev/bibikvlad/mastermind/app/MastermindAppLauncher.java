@@ -50,7 +50,6 @@ public class MastermindAppLauncher {
 
         LocalizationContext defaultLocalizationContext = getLocalizationContext(playerService, parser);
 
-
         MainMenu gameMenu = new MainMenu(defaultLocalizationContext, parser, playerService);
 
         gameMenu.menu();
@@ -58,9 +57,9 @@ public class MastermindAppLauncher {
 
     private static LocalizationContext getLocalizationContext(PlayerService playerService,
                                                               MastermindUserInputParser parser) {
-        Optional<Player> player = playerService.loadLastSelectedPlayer();
+        Optional<Player> lastSelectedPlayer = playerService.loadLastSelectedPlayer();
 
-        return player.map(value -> new LocalizationContext(value.getPlayerConfig().getLocale()))
+        return lastSelectedPlayer.map(player -> new LocalizationContext(player.getPlayerConfig().getLocale()))
                 .orElseGet(() -> FirstTimeLaunch.getLocalizationContextAfterUserSelection(parser, playerService));
     }
 }
