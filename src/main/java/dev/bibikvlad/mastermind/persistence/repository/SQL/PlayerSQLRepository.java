@@ -34,6 +34,52 @@ public class PlayerSQLRepository implements PlayerRepository {
     }
 
     @Override
+    public boolean save(Player player) throws PersistenceException {
+        boolean result;
+
+        try {
+            transactionManager.begin();
+
+            result = playerDAO.save(player);
+
+            transactionManager.commit();
+        } catch (PersistenceException exception) {
+            try {
+                transactionManager.rollback();
+            } catch (PersistenceException rollbackException) {
+                exception.addSuppressed(rollbackException);
+            }
+
+            throw new PersistenceException("Failed to save player " + player.getPlayerName(), exception);
+        }
+
+        return result;
+    }
+
+    @Override
+    public boolean update(Player player) throws PersistenceException {
+        boolean result;
+
+        try {
+            transactionManager.begin();
+
+            result = playerDAO.update(player);
+
+            transactionManager.commit();
+        } catch (PersistenceException exception) {
+            try {
+                transactionManager.rollback();
+            } catch (PersistenceException rollbackException) {
+                exception.addSuppressed(rollbackException);
+            }
+
+            throw new PersistenceException("Failed to update player " + player.getPlayerName(), exception);
+        }
+
+        return result;
+    }
+
+    @Override
     public void delete(Player player) throws PersistenceException {
         try {
             transactionManager.begin();
@@ -88,52 +134,6 @@ public class PlayerSQLRepository implements PlayerRepository {
 
             throw new PersistenceException("Failed to delete player with name: " + name, exception);
         }
-    }
-
-    @Override
-    public boolean save(Player player) throws PersistenceException {
-        boolean result;
-
-        try {
-            transactionManager.begin();
-
-            result = playerDAO.save(player);
-
-            transactionManager.commit();
-        } catch (PersistenceException exception) {
-            try {
-                transactionManager.rollback();
-            } catch (PersistenceException rollbackException) {
-                exception.addSuppressed(rollbackException);
-            }
-
-            throw new PersistenceException("Failed to save player " + player.getPlayerName(), exception);
-        }
-
-        return result;
-    }
-
-    @Override
-    public boolean update(Player player) throws PersistenceException {
-        boolean result;
-
-        try {
-            transactionManager.begin();
-
-            result = playerDAO.update(player);
-
-            transactionManager.commit();
-        } catch (PersistenceException exception) {
-            try {
-                transactionManager.rollback();
-            } catch (PersistenceException rollbackException) {
-                exception.addSuppressed(rollbackException);
-            }
-
-            throw new PersistenceException("Failed to update player " + player.getPlayerName(), exception);
-        }
-
-        return result;
     }
 
     @Override
