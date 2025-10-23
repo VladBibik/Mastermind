@@ -14,7 +14,7 @@ public class NewPlayerCreation {
         boolean isDone = false;
 
         while (!isDone) {
-            System.out.println("Please enter the name of the player you would like to create: ");
+            System.out.println("Please enter nickname of a new player: ");
 
             String newPlayerName = parser.parseUserInput();
 
