@@ -49,7 +49,15 @@ public class PlayerSelectionMenu {
                 continue;
             }
 
-            return selectPlayer(userInputNumber);
+            Player player = selectPlayer(userInputNumber);
+
+            if (player == null) {
+                System.out.println("Invalid input. Please enter a number corresponding to the player index.");
+
+                continue;
+            }
+
+            return player;
         }
     }
 
@@ -62,6 +70,14 @@ public class PlayerSelectionMenu {
     }
 
     private Player selectPlayer(int playerIndex) {
-        return playerList.get(playerIndex - 1);
+        Player player;
+
+        try {
+            player = playerList.get(playerIndex - 1);
+        } catch (IndexOutOfBoundsException exception) {
+            return  null;
+        }
+
+        return player;
     }
 }
