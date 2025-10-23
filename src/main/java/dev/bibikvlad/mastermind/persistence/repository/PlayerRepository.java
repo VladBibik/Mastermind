@@ -13,15 +13,15 @@ public interface PlayerRepository {
 
     Optional<Player> findByName(String name) throws PersistenceException;
 
+    boolean save(Player player) throws PersistenceException;
+
+    boolean update(Player player) throws PersistenceException;
+
     void delete(Player player) throws PersistenceException;
 
     void deleteById(long id) throws PersistenceException;
 
     void deleteByName(String name) throws PersistenceException;
-
-    boolean save(Player player) throws PersistenceException;
-
-    boolean update(Player player) throws PersistenceException;
 
     boolean existsById(long id) throws PersistenceException;
 
