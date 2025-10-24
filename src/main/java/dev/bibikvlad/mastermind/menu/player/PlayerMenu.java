@@ -73,6 +73,10 @@ public class PlayerMenu {
     }
 
     private void changePlayerName() {
+        PlayerNameChangeMenu playerNameChangeMenu =
+                new PlayerNameChangeMenu(localizationContext, parser, playerService, currentPlayer);
+
+        playerNameChangeMenu.menu();
     }
 
     private void quit() {
