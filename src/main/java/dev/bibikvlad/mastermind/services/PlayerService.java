@@ -87,6 +87,18 @@ public class PlayerService {
         throw new IllegalStateException();
     }
 
+    public void updatePlayerName(long playerId, String newPlayerName) throws PlayerAlreadyExistException {
+        try {
+            if (playerRepository.existsByName(newPlayerName)) {
+                throw new PlayerAlreadyExistException("Player with name " + newPlayerName + " already exists");
+            }
+
+            playerRepository.updatePlayerName(playerId, newPlayerName);
+        } catch (PersistenceException exception) {
+            //TODO: Add handling. Preferably just turn off the app
+        }
+    }
+
     public void updatePlayerLocale(long playerId, LocaleType locale) {
         try {
             playerConfigRepository.updateLocale(playerId, locale);
