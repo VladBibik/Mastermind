@@ -22,9 +22,7 @@ public class PlayerNameChanger {
     }
 
     public void menu() {
-        boolean isDone = false;
-
-        while (!isDone) {
+        while (true) {
             System.out.println("Please enter a new Player's name for: " + currentPlayer.getPlayerName());
             System.out.println();
             System.out.println("To go back to the previous menu enter 'exit' o 'close'");
