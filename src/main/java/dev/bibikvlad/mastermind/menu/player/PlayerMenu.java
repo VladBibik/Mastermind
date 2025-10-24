@@ -73,8 +73,8 @@ public class PlayerMenu {
     }
 
     private void changePlayerName() {
-        PlayerNameChangeMenu playerNameChangeMenu =
-                new PlayerNameChangeMenu(localizationContext, parser, playerService, currentPlayer);
+        PlayerNameChanger playerNameChangeMenu =
+                new PlayerNameChanger(localizationContext, parser, playerService, currentPlayer);
 
         playerNameChangeMenu.menu();
     }

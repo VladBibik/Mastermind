@@ -7,14 +7,14 @@ import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 import dev.bibikvlad.mastermind.validators.StringEmptyValidator;
 
-public class PlayerNameChangeMenu {
+public class PlayerNameChanger {
     private final LocalizationContext localizationContext;
     private final MastermindUserInputParser parser;
     private final PlayerService playerService;
     private final Player currentPlayer;
 
-    public PlayerNameChangeMenu(LocalizationContext localizationContext, MastermindUserInputParser parser,
-                                PlayerService playerService, Player currentPlayer) {
+    public PlayerNameChanger(LocalizationContext localizationContext, MastermindUserInputParser parser,
+                             PlayerService playerService, Player currentPlayer) {
         this.localizationContext = localizationContext;
         this.parser = parser;
         this.playerService = playerService;
