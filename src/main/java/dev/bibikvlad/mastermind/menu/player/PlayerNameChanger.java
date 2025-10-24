@@ -44,7 +44,7 @@ public class PlayerNameChanger {
 
                 break;
             } catch (PlayerAlreadyExistException exception) {
-                System.out.println("Player with name " + userInput + " already exists");
+                System.out.println("Player with name " + userInput + " already exists\n");
             }
         }
     }
