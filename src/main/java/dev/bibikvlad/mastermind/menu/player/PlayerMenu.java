@@ -48,13 +48,15 @@ public class PlayerMenu {
     private void displayMenu() {
         System.out.println();
         System.out.println("1. Change player");
-        System.out.println("2. Back to main menu");
+        System.out.println("2. Change player's name");
+        System.out.println("3. Back to main menu");
     }
 
     private void menuOptionSwitcher(int userInputNumber) {
         switch (userInputNumber) {
             case 1 -> changePlayer();
-            case 2 -> quit();
+            case 2 -> changePlayerName();
+            case 3 -> quit();
         }
     }
 
@@ -68,6 +70,9 @@ public class PlayerMenu {
         }
 
         playerService.updateLastSelectedPlayer(currentPlayer.getId());
+    }
+
+    private void changePlayerName() {
     }
 
     private void quit() {
