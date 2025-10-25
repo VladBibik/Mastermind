@@ -292,4 +292,17 @@ public class PlayerJdbcDAO implements PlayerDAO {
             throw new PersistenceException("Failed to check if player with name: " + playerName + " exists", exception);
         }
     }
+
+    @Override
+    public int count() throws PersistenceException {
+        String countQuery = "SELECT COUNT(id) FROM players";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(countQuery)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            return resultSet.getInt(1);
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to check if player count", exception);
+        }
+    }
 }

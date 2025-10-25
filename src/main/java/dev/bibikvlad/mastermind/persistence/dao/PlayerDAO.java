@@ -28,4 +28,6 @@ public interface PlayerDAO {
     boolean existsById(long id) throws PersistenceException;
 
     boolean existsByName(String name) throws PersistenceException;
+
+    int count() throws PersistenceException;
 }
