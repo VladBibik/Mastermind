@@ -82,6 +82,9 @@ public class MainMenu {
     }
 
     private void launchGame() {
+        mastermindGameLauncher = new MastermindGameLauncher(localizationContext,
+                currentPlayer.getPlayerConfig().getLogoColorsBundle());
+
         mastermindGameLauncher.launch();
     }
 
@@ -98,8 +101,6 @@ public class MainMenu {
         Optional<Player> lastSelectedPlayer = playerService.loadLastSelectedPlayer();
 
         currentPlayer = lastSelectedPlayer.get();
-        mastermindGameLauncher = new MastermindGameLauncher(localizationContext,
-        currentPlayer.getPlayerConfig().getLogoColorsBundle());
     }
 
     private void displayCurrentPlayerData() {
