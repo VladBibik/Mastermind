@@ -167,4 +167,9 @@ public class PlayerSQLRepository implements PlayerRepository {
     public boolean existsByName(String name) throws PersistenceException {
         return playerDAO.existsByName(name);
     }
+
+    @Override
+    public int  count() throws PersistenceException {
+        return playerDAO.count();
+    }
 }
