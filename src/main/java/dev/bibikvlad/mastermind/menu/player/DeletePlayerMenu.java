@@ -18,4 +18,27 @@ public class DeletePlayerMenu {
         this.playerService = playerService;
         this.currentPlayer = currentPlayer;
     }
+
+    public boolean menu() {
+        if (!playerService.isMultiplePlayersRegistered()) {
+            System.out.println("Cannot delete a player.");
+            System.out.println("Please register at least one player first.");
+
+            return false;
+        }
+
+        playerService.deletePlayer(currentPlayer.getId());
+
+        System.out.println("Player with the name: " + currentPlayer.getPlayerName() + " has been deleted.");
+
+        if (!playerService.isMultiplePlayersRegistered()) {
+            return true;
+        }
+
+        PlayerSelectionMenu playerSelectionMenu = new PlayerSelectionMenu(localizationContext, parser, playerService);
+
+        playerSelectionMenu.selectPlayer();
+
+        return true;
+    }
 }
