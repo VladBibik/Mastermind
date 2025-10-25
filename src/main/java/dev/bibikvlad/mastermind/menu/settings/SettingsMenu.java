@@ -9,19 +9,19 @@ import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
 public class SettingsMenu {
-    private final Player currentPlayer;
-    private final PlayerService playerService;
     private final LocalizationContext localizationContext;
     private final MastermindUserInputParser parser;
+    private final PlayerService playerService;
+    private final Player currentPlayer;
 
     private boolean isDone = false;
 
-    public SettingsMenu(Player currentPlayer, PlayerService playerService,
-                        LocalizationContext localizationContext, MastermindUserInputParser parser) {
-        this.currentPlayer = currentPlayer;
-        this.playerService = playerService;
+    public SettingsMenu(LocalizationContext localizationContext, MastermindUserInputParser parser,
+                        PlayerService playerService, Player currentPlayer) {
         this.localizationContext = localizationContext;
         this.parser = parser;
+        this.playerService = playerService;
+        this.currentPlayer = currentPlayer;
     }
 
     public void settingsMenu() {
