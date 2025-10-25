@@ -123,9 +123,9 @@ public class PlayerService {
         }
     }
 
-    public int getPlayerCount() {
+    public boolean isMultiplePlayersRegistered() {
         try {
-            return playerRepository.count();
+            return playerRepository.count() > 1;
         } catch (PersistenceException exception) {
             //TODO: Add handling. Preferably just turn off the app
         }
