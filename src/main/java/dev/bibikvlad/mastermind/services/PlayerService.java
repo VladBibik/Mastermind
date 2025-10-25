@@ -123,6 +123,16 @@ public class PlayerService {
         }
     }
 
+    public int getPlayerCount() {
+        try {
+            return playerRepository.count();
+        } catch (PersistenceException exception) {
+            //TODO: Add handling. Preferably just turn off the app
+        }
+
+        throw new IllegalStateException();
+    }
+
     private PlayerConfig getCustomLocaleConfig(LocaleType localeType) {
         return new PlayerConfig(
                 localeType,
