@@ -123,6 +123,14 @@ public class PlayerService {
         }
     }
 
+    public void deletePlayer(long playerId) {
+        try {
+            playerRepository.deleteById(playerId);
+        } catch (PersistenceException exception) {
+            //TODO: Add handling. Preferably just turn off the app
+        }
+    }
+
     public boolean isMultiplePlayersRegistered() {
         try {
             return playerRepository.count() > 1;
