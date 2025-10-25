@@ -35,6 +35,10 @@ public class DeletePlayerMenu {
             return true;
         }
 
+        //TODO: This def should be changed.
+        System.out.println("If you'll close player selection menu, " +
+                "previous last selected player will be picked automatically.");
+
         PlayerSelectionMenu playerSelectionMenu = new PlayerSelectionMenu(localizationContext, parser, playerService);
 
         playerSelectionMenu.selectPlayer();
