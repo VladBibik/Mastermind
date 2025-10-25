@@ -82,6 +82,12 @@ public class PlayerMenu {
     }
 
     private void deletePlayer() {
+        DeletePlayerMenu deletePlayerMenu = new DeletePlayerMenu(localizationContext, parser,
+                playerService, currentPlayer);
+
+        if (deletePlayerMenu.menu()) {
+            currentPlayer = playerService.loadLastSelectedPlayer().get();
+        }
     }
 
     private void quit() {
