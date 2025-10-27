@@ -18,6 +18,16 @@ public class PlayerLastSelectedSQLRepository implements PlayerLastSelectedReposi
     }
 
     @Override
+    public long getLastSelectedPlayerId() throws PersistenceException {
+        return playerLastSelectedDAO.getLastSelectedPlayerId();
+    }
+
+    @Override
+    public Optional<Player> getLastSelectedPlayer() throws PersistenceException {
+        return playerLastSelectedDAO.getLastSelectedPlayer();
+    }
+
+    @Override
     public boolean saveOrUpdate(long id) throws PersistenceException {
         boolean result;
 
@@ -38,15 +48,5 @@ public class PlayerLastSelectedSQLRepository implements PlayerLastSelectedReposi
         }
 
         return result;
-    }
-
-    @Override
-    public long getLastSelectedPlayerId() throws PersistenceException {
-        return playerLastSelectedDAO.getLastSelectedPlayerId();
-    }
-
-    @Override
-    public Optional<Player> getLastSelectedPlayer() throws PersistenceException {
-        return playerLastSelectedDAO.getLastSelectedPlayer();
     }
 }
