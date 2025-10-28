@@ -19,26 +19,6 @@ public class PlayerLastSelectedJdbcDAO implements PlayerLastSelectedDAO {
     }
 
     @Override
-    public boolean saveOrUpdate(long id) throws PersistenceException {
-        String saveOrUpdateQuery = """
-                INSERT INTO player_last_selected (player_id, last_selected_at)
-                VALUES (?, CURRENT_TIMESTAMP)
-                ON CONFLICT(player_id)
-                DO UPDATE SET last_selected_at = excluded.last_selected_at;
-                """;
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement(saveOrUpdateQuery)) {
-            preparedStatement.setLong(1, id);
-
-            int rowsAffected = preparedStatement.executeUpdate();
-
-            return rowsAffected > 0;
-        } catch (SQLException exception) {
-            throw new PersistenceException(exception.getMessage());
-        }
-    }
-
-    @Override
     public long getLastSelectedPlayerId() throws PersistenceException {
         String getLastSelectedQuery = """
                 SELECT player_id
@@ -77,6 +57,26 @@ public class PlayerLastSelectedJdbcDAO implements PlayerLastSelectedDAO {
             } else {
                 return Optional.empty();
             }
+        } catch (SQLException exception) {
+            throw new PersistenceException(exception.getMessage());
+        }
+    }
+
+    @Override
+    public boolean saveOrUpdate(long id) throws PersistenceException {
+        String saveOrUpdateQuery = """
+                INSERT INTO player_last_selected (player_id, last_selected_at)
+                VALUES (?, CURRENT_TIMESTAMP)
+                ON CONFLICT(player_id)
+                DO UPDATE SET last_selected_at = excluded.last_selected_at;
+                """;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(saveOrUpdateQuery)) {
+            preparedStatement.setLong(1, id);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            return rowsAffected > 0;
         } catch (SQLException exception) {
             throw new PersistenceException(exception.getMessage());
         }
