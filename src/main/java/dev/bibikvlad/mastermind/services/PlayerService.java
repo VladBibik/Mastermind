@@ -46,15 +46,13 @@ public class PlayerService {
     }
 
     public boolean saveOrUpdateLastSelectedPlayer(long playerId) {
-        boolean result = false;
-
         try {
-            playerLastSelectedRepository.saveOrUpdate(playerId);
+            return playerLastSelectedRepository.saveOrUpdate(playerId);
         } catch (PersistenceException exception) {
             //TODO: Add handling. Preferably just turn off the app
         }
 
-        return result;
+        throw new IllegalStateException();
     }
 
     public List<Player> getAllPlayers() {
