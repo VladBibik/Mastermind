@@ -15,7 +15,6 @@ public class MainMenu {
     private final MastermindUserInputParser parser;
     private final PlayerService playerService;
 
-    private MastermindGameLauncher mastermindGameLauncher;
     private Player currentPlayer;
 
     public MainMenu(LocalizationContext localizationContext,
@@ -82,7 +81,7 @@ public class MainMenu {
     }
 
     private void launchGame() {
-        mastermindGameLauncher = new MastermindGameLauncher(localizationContext,
+        MastermindGameLauncher mastermindGameLauncher = new MastermindGameLauncher(localizationContext,
                 currentPlayer.getPlayerConfig().getLogoColorsBundle());
 
         mastermindGameLauncher.launch();
