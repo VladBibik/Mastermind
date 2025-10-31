@@ -1,9 +1,12 @@
 package dev.bibikvlad.mastermind.menu.player;
 
+import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
+
+import java.util.Optional;
 
 public class PlayerMenu {
     private final LocalizationContext localizationContext;
@@ -25,23 +28,12 @@ public class PlayerMenu {
         while (!isDone) {
             displayMenu();
 
-            String userInput = parser.parseUserInput();
+            Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
 
-            if (userInput.equalsIgnoreCase("exit") || userInput.equalsIgnoreCase("close")) {
+            if (selection.isEmpty())
                 break;
-            }
 
-            int userInputNumber;
-
-            try {
-                userInputNumber = Integer.parseInt(userInput);
-            } catch (NumberFormatException exception) {
-                System.out.println("Invalid input. Please enter a number corresponding to the menu option.");
-
-                continue;
-            }
-
-            menuOptionSwitcher(userInputNumber);
+            menuOptionSwitcher(selection.get());
         }
     }
 
