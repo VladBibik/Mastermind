@@ -5,7 +5,7 @@ import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.player.PlayerMenu;
 import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;
-import dev.bibikvlad.mastermind.menu.util.IntegerInputParser;
+import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
@@ -34,7 +34,7 @@ public class MainMenu {
         while (true) {
             displayMenu();
 
-            Optional<Integer> selection = IntegerInputParser.readSelection(parser);
+            Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
 
             if (selection.isEmpty())
                 break;

@@ -1,10 +1,10 @@
-package dev.bibikvlad.mastermind.menu.util;
+package dev.bibikvlad.mastermind.input.interpreter;
 
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 
 import java.util.Optional;
 
-public class IntegerInputParser {
+public class IntegerInputInterpreter {
     public static Optional<Integer> readSelection(MastermindUserInputParser parser) {
         String userInput = parser.parseUserInput();
 
