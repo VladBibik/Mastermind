@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.game;
 
-import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
+import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.game.printer.MastermindMessagePrinter;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.input.validation.GameInputValidator;

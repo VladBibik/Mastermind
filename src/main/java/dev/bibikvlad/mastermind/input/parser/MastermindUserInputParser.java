@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.game.parser;
+package dev.bibikvlad.mastermind.input.parser;
 
 public interface MastermindUserInputParser {
     String parseUserInput();

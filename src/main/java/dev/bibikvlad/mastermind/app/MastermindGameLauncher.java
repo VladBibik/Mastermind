@@ -2,8 +2,8 @@ package dev.bibikvlad.mastermind.app;
 
 import dev.bibikvlad.mastermind.game.MastermindConsoleGame;
 import dev.bibikvlad.mastermind.game.RandomAnswerGenerator;
-import dev.bibikvlad.mastermind.game.parser.ConsoleInputToLowerCaseParser;
-import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
+import dev.bibikvlad.mastermind.input.parser.ConsoleInputToLowerCaseParser;
+import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.game.printer.ConsoleMessagePrinter;
 import dev.bibikvlad.mastermind.game.printer.MastermindMessagePrinter;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;

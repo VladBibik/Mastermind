@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.menu.util;
 
-import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
+import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 
 import java.util.Optional;
 

@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.menu;
 
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
-import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
+import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.services.PlayerService;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
