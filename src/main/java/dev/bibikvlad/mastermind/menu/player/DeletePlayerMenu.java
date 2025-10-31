@@ -22,7 +22,7 @@ public class DeletePlayerMenu {
     public boolean menu() {
         if (!playerService.isMultiplePlayersRegistered()) {
             System.out.println("Cannot delete a player.");
-            System.out.println("Please register at least one player first.");
+            System.out.println("Please register at least one more player first.");
 
             return false;
         }
