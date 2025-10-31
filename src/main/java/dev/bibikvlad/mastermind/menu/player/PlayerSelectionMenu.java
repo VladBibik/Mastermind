@@ -4,7 +4,7 @@ import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
-import dev.bibikvlad.mastermind.validators.StringEmptyValidator;
+import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 
 import java.util.List;
 

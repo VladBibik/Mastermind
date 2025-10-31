@@ -3,7 +3,7 @@ package dev.bibikvlad.mastermind.game;
 import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.game.printer.MastermindMessagePrinter;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
-import dev.bibikvlad.mastermind.validators.GameInputValidator;
+import dev.bibikvlad.mastermind.input.validation.GameInputValidator;
 
 public class MastermindConsoleGame {
     private static final int MAX_TURNS = 10;

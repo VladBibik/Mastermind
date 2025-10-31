@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.validators;
+package dev.bibikvlad.mastermind.input.validation;
 
 import java.util.regex.Pattern;
 

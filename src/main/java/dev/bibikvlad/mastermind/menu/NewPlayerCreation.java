@@ -4,7 +4,7 @@ import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.services.PlayerService;
-import dev.bibikvlad.mastermind.validators.StringEmptyValidator;
+import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 
 //TODO: Either pass LocalizationContext, or already created Messages, or make this class a normal instance based class
 public class NewPlayerCreation {

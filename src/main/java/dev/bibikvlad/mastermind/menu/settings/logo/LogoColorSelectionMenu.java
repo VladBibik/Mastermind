@@ -6,7 +6,7 @@ import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
-import dev.bibikvlad.mastermind.validators.StringEmptyValidator;
+import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.utils.DefaultLogoColorsBundle;
 import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
 

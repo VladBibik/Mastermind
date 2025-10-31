@@ -4,7 +4,7 @@ import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoMessages;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
-import dev.bibikvlad.mastermind.validators.StringEmptyValidator;
+import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.utils.strings.GameCluesConstants;
 
 public class ColorSelectionMenu {

@@ -2,7 +2,7 @@ package dev.bibikvlad.mastermind.menu;
 
 import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
-import dev.bibikvlad.mastermind.validators.StringEmptyValidator;
+import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 
 public class LanguageSelectionMenu {
     private final MastermindUserInputParser parser;
