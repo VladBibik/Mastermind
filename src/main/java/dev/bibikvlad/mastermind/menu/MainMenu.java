@@ -70,7 +70,6 @@ public class MainMenu {
             case 3 -> playerMenu();
             case 4 -> displayCurrentPlayerData();
             case 5 -> settings();
-            default -> System.out.println("Invalid selection");
         }
     }
 
