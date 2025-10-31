@@ -4,7 +4,7 @@ import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
 
 import java.util.Optional;
 
-public class IntegerUserInputParser {
+public class IntegerInputParser {
     public static Optional<Integer> parse(MastermindUserInputParser parser) {
         String userInput = parser.parseUserInput();
 
