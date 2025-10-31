@@ -82,7 +82,8 @@ public class MainMenu {
         playerMenu.menu();
 
         //TODO: Think of a better way of updating player
-        currentPlayer = playerService.loadLastSelectedPlayer().get();
+        currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
+                () -> new IllegalStateException("No last selected player found!"));
     }
 
     private void loadLastSelectedPlayer() {
