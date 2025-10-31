@@ -34,7 +34,7 @@ public class MainMenu {
         while (true) {
             displayMenu();
 
-            Optional<Integer> selection = IntegerInputParser.parse(parser);
+            Optional<Integer> selection = IntegerInputParser.readSelection(parser);
 
             if (selection.isEmpty())
                 break;

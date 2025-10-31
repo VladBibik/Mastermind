@@ -5,7 +5,7 @@ import dev.bibikvlad.mastermind.game.parser.MastermindUserInputParser;
 import java.util.Optional;
 
 public class IntegerInputParser {
-    public static Optional<Integer> parse(MastermindUserInputParser parser) {
+    public static Optional<Integer> readSelection(MastermindUserInputParser parser) {
         String userInput = parser.parseUserInput();
 
         if (userInput.equalsIgnoreCase("exit") || userInput.equalsIgnoreCase("close")) {
