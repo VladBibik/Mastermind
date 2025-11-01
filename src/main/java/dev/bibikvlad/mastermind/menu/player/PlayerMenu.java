@@ -55,6 +55,12 @@ public class PlayerMenu {
     }
 
     private void changePlayer() {
+        if (!playerService.isMultiplePlayersRegistered()) {
+            System.out.println("Please register at least one more player first.");
+
+            return;
+        }
+
         PlayerSelectionMenu playerSelectionMenu = new PlayerSelectionMenu(localizationContext, parser, playerService);
 
         Player updatedPlayer = playerSelectionMenu.selectPlayer();
