@@ -53,6 +53,7 @@ public class MainMenu {
         System.out.println("To close the game print: 'close', or 'exit'");
     }
 
+    //TODO: Think if quiting should be an menu option or leave it as prompt command
     private void menuOptionSwitcher(int userInputNumber) {
         switch (userInputNumber) {
             case 1 -> newPlayerCreation();
