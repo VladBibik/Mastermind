@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.menu.settings;
 
+import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
@@ -7,6 +8,8 @@ import dev.bibikvlad.mastermind.menu.LanguageSelectionMenu;
 import dev.bibikvlad.mastermind.menu.settings.logo.LogoColorSelectionMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
+
+import java.util.Optional;
 
 public class SettingsMenu {
     private final LocalizationContext localizationContext;
@@ -28,20 +31,12 @@ public class SettingsMenu {
         while (!isDone) {
             displayMenu();
 
-            String userInput = parser.parseUserInput();
+            Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
 
+            if (selection.isEmpty())
+                break;
 
-            int userInputNumber;
-
-            try {
-                userInputNumber = Integer.parseInt(userInput);
-            } catch (NumberFormatException exception) {
-                System.out.println("Invalid input. Please enter a number corresponding to the menu option.");
-
-                continue;
-            }
-
-            menuOptionSwitcher(userInputNumber);
+            menuOptionSwitcher(selection.get());
         }
     }
 
