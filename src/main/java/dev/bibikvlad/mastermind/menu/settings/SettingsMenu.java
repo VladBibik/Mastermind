@@ -27,7 +27,7 @@ public class SettingsMenu {
         this.currentPlayer = currentPlayer;
     }
 
-    public void settingsMenu() {
+    public void menu() {
         while (!isDone) {
             displayMenu();
 
