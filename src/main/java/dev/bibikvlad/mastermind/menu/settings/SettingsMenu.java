@@ -17,8 +17,6 @@ public class SettingsMenu {
     private final PlayerService playerService;
     private final Player currentPlayer;
 
-    private boolean isDone = false;
-
     public SettingsMenu(LocalizationContext localizationContext, MastermindUserInputParser parser,
                         PlayerService playerService, Player currentPlayer) {
         this.localizationContext = localizationContext;
@@ -28,7 +26,7 @@ public class SettingsMenu {
     }
 
     public void menu() {
-        while (!isDone) {
+        while (true) {
             displayMenu();
 
             Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
