@@ -51,6 +51,7 @@ public class PlayerMenu {
             case 2 -> changePlayerName();
             case 3 -> deletePlayer();
             case 4 -> quit();
+            default -> System.out.println("Invalid input. Please enter a number corresponding to the menu option.");
         }
     }
 
