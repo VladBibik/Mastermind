@@ -98,7 +98,7 @@ public class MainMenu {
     private void settings() {
         SettingsMenu settingsMenu = new SettingsMenu(localizationContext, parser, playerService, currentPlayer);
 
-        settingsMenu.settingsMenu();
+        settingsMenu.menu();
 
         loadLastSelectedPlayer();
     }
