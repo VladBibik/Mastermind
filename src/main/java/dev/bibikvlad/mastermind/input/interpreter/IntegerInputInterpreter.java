@@ -15,8 +15,6 @@ public class IntegerInputInterpreter {
         try {
             return Optional.of(Integer.parseInt(userInput));
         } catch (NumberFormatException exception) {
-            System.out.println("Invalid input. Please enter a number corresponding to the menu option.");
-
             return Optional.of(-1);
         }
     }
