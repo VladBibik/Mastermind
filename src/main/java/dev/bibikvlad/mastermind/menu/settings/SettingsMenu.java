@@ -50,7 +50,6 @@ public class SettingsMenu {
         switch (userInputNumber) {
             case 1 -> changeLanguage();
             case 2 -> changeLogoColor();
-            case 3 -> exit();
             default -> System.out.println("Invalid selection. Please enter a number corresponding to the menu option.");
         }
     }
@@ -72,9 +71,5 @@ public class SettingsMenu {
                 new LogoColorSelectionMenu(currentPlayer, playerService, localizationContext, parser);
 
         menu.selectLogoColors();
-    }
-
-    private void exit() {
-        isDone = true;
     }
 }
