@@ -27,6 +27,7 @@ public class SettingsMenu {
         this.currentPlayer = currentPlayer;
     }
 
+    //TODO: Should we go back on 'close', and 'exit'?
     public void menu() {
         while (!isDone) {
             displayMenu();
