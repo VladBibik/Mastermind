@@ -61,7 +61,7 @@ public class MainMenu {
             case 3 -> playerMenu();
             case 4 -> displayCurrentPlayerData();
             case 5 -> settings();
-            default -> System.out.println("Invalid input. Please enter a number corresponding to the menu option.");
+            default -> System.out.println("Invalid input. Please enter a number corresponding to the menu option.\n");
         }
     }
 
