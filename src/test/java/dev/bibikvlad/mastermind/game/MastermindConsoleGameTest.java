@@ -18,6 +18,7 @@ import java.io.*;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+//TODO: Add tags for different parts of the tests. Like "Game"/"Menu" or think about better categorization
 public class MastermindConsoleGameTest {
     private ByteArrayOutputStream outputStream;
     private PrintStream printStream;
