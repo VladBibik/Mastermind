@@ -49,7 +49,7 @@ public class MastermindConsoleGameTest {
     }
 
     @Test
-    @DisplayName("Correct answer on the first attempt")
+    @DisplayName("10 incorrect attempts in a row")
     public void tenIncorrectAttemptsInARowTest() {
         String answer = "yypw";
         String output = runGameAndGetOutputStreamString(answer, "rrrr\n".repeat(10));
