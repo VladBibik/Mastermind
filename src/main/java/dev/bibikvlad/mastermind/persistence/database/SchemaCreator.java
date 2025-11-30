@@ -53,4 +53,22 @@ public class SchemaCreator {
 
         statement.executeUpdate(createPlayerLastSelectedTableQuery);
     }
+
+    private static void createGamesTable(Connection connection) throws SQLException {
+        String createGamesTableQuery = """
+                CREATE TABLE IF NOT EXISTS games (
+                    game_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    player_id INTEGER NOT NULL,
+                    game_start_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    game_complition_time INTEGER NOT NULL,
+                    is_canceled BOOLEAN NOT NULL,
+                    is_win BOOLEAN NOT NULL,
+                    number_of_turns INTEGER NOT NULL,
+                    FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE
+        );""";
+
+        Statement statement = connection.createStatement();
+
+        statement.executeUpdate(createGamesTableQuery);
+    }
 }
