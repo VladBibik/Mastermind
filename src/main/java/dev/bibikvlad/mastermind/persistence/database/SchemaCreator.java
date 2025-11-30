@@ -9,6 +9,7 @@ public class SchemaCreator {
         createPlayersTable(connection);
         createPlayerConfigurationTable(connection);
         createPlayerLastSelectedTable(connection);
+        createGamesTable(connection);
     }
 
     private static void createPlayersTable(Connection connection) throws SQLException {
