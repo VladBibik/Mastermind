@@ -27,14 +27,14 @@ public class SchemaCreator {
 
     private static void createPlayerConfigurationTable(Connection connection) throws SQLException {
         String createPlayerConfigTableQuery = """
-                    CREATE TABLE IF NOT EXISTS player_configurations (
-                        player_id INTEGER PRIMARY KEY,
-                        language TEXT NOT NULL,
-                        logo_border_color TEXT NOT NULL,
-                        logo_main_color TEXT NOT NULL,
-                        logo_accent_color TEXT NOT NULL,
-                        logo_background_color TEXT NOT NULL,
-                        FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE
+                CREATE TABLE IF NOT EXISTS player_configurations (
+                    player_id INTEGER PRIMARY KEY,
+                    language TEXT NOT NULL,
+                    logo_border_color TEXT NOT NULL,
+                    logo_main_color TEXT NOT NULL,
+                    logo_accent_color TEXT NOT NULL,
+                    logo_background_color TEXT NOT NULL,
+                    FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE
                 );""";
 
         Statement statement = connection.createStatement();
@@ -59,14 +59,14 @@ public class SchemaCreator {
         String createGamesTableQuery = """
                 CREATE TABLE IF NOT EXISTS games (
                     game_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    player_id INTEGER NOT NULL,
+                    layer_id INTEGER NOT NULL,
                     game_start_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     game_complition_time INTEGER NOT NULL,
                     is_canceled BOOLEAN NOT NULL,
                     is_win BOOLEAN NOT NULL,
                     number_of_turns INTEGER NOT NULL,
                     FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE
-        );""";
+                );""";
 
         Statement statement = connection.createStatement();
 
