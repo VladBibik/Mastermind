@@ -23,11 +23,11 @@ public class PlayerJdbcDAO implements PlayerDAO {
     public List<Player> findAll() throws PersistenceException {
         List<Player> players = new ArrayList<>();
         String fetchAllPlayersQuery = """
-                SELECT p.player_id, player_name, creation_date, language, logo_border_color,
+                SELECT PLAYER.player_id, player_name, creation_date, language, logo_border_color,
                        logo_main_color, logo_accent_color, logo_background_color
-                FROM players p
-                LEFT JOIN player_configurations conf
-                ON p.player_id = conf.player_id
+                FROM players PLAYER
+                LEFT JOIN player_configurations CONF
+                ON PLAYER.player_id = CONF.player_id
                 """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(fetchAllPlayersQuery)) {
@@ -46,12 +46,12 @@ public class PlayerJdbcDAO implements PlayerDAO {
     @Override
     public Optional<Player> findById(long playerId) throws PersistenceException {
         String fetchPlayerQuery = """
-                        SELECT player_id, player_name, creation_date, language, logo_border_color,
+                        SELECT PLAYER.player_id, player_name, creation_date, language, logo_border_color,
                                logo_main_color, logo_accent_color, logo_background_color
-                        FROM players p
-                        LEFT JOIN player_configurations conf
-                        ON p.player_id = conf.player_id
-                        WHERE p.player_id = ?
+                        FROM players PLAYER
+                        LEFT JOIN player_configurations CONF
+                        ON PLAYER.player_id = CONF.player_id
+                        WHERE PLAYER.player_id = ?
                 """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(fetchPlayerQuery)) {
@@ -65,12 +65,12 @@ public class PlayerJdbcDAO implements PlayerDAO {
     @Override
     public Optional<Player> findByName(String playerName) throws PersistenceException {
         String fetchPlayerQuery = """
-                        SELECT player_id, player_name, creation_date, language, logo_border_color,
+                        SELECT PLAYER.player_id, player_name, creation_date, language, logo_border_color,
                                logo_main_color, logo_accent_color, logo_background_color
-                        FROM players p
-                        LEFT JOIN player_configurations conf
-                        ON p.player_id = conf.player_id
-                        WHERE p.player_name = ?
+                        FROM players PLAYER
+                        LEFT JOIN player_configurations CONF
+                        ON PLAYER.player_id = CONF.player_id
+                        WHERE PLAYER.player_name = ?
                 """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(fetchPlayerQuery)) {
