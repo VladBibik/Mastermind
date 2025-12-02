@@ -59,7 +59,7 @@ public class SchemaCreator {
         String createGamesTableQuery = """
                 CREATE TABLE IF NOT EXISTS games (
                     game_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    layer_id INTEGER NOT NULL,
+                    player_id INTEGER NOT NULL,
                     game_start_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     game_complition_time INTEGER NOT NULL,
                     is_canceled BOOLEAN NOT NULL,
