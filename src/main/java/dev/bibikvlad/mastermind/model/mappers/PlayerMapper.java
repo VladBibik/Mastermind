@@ -12,7 +12,7 @@ public class PlayerMapper {
         PlayerConfig playerConfig = PlayerConfigMapper.map(resultSet);
 
         return new Player(
-                resultSet.getLong("id"),
+                resultSet.getLong("player_id"),
                 resultSet.getString("player_name"),
                 SQLiteTimestampFormatter.parse(resultSet.getString("creation_date")),
                 playerConfig

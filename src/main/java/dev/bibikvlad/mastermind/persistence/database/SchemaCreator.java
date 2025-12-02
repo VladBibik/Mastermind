@@ -15,7 +15,7 @@ public class SchemaCreator {
     private static void createPlayersTable(Connection connection) throws SQLException {
         String createPlayersTableQuery = """
                 CREATE TABLE IF NOT EXISTS players (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    player_id INTEGER PRIMARY KEY AUTOINCREMENT,
                     player_name TEXT UNIQUE NOT NULL,
                     creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     CHECK (length(player_name) <= 100)
@@ -34,7 +34,7 @@ public class SchemaCreator {
                     logo_main_color TEXT NOT NULL,
                     logo_accent_color TEXT NOT NULL,
                     logo_background_color TEXT NOT NULL,
-                    FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE
+                    FOREIGN KEY (player_id) REFERENCES players(player_id) ON DELETE CASCADE
                 );""";
 
         Statement statement = connection.createStatement();
@@ -47,7 +47,7 @@ public class SchemaCreator {
                 CREATE TABLE IF NOT EXISTS player_last_selected (
                     player_id INTEGER PRIMARY KEY,
                     last_selected_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                    FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE
+                    FOREIGN KEY (player_id) REFERENCES players(player_id) ON DELETE CASCADE
                 );""";
 
         Statement statement = connection.createStatement();
@@ -65,7 +65,7 @@ public class SchemaCreator {
                     is_canceled BOOLEAN NOT NULL,
                     is_win BOOLEAN NOT NULL,
                     number_of_turns INTEGER NOT NULL,
-                    FOREIGN KEY (player_id) REFERENCES players(id) ON DELETE CASCADE
+                    FOREIGN KEY (player_id) REFERENCES players(player_id) ON DELETE CASCADE
                 );""";
 
         Statement statement = connection.createStatement();

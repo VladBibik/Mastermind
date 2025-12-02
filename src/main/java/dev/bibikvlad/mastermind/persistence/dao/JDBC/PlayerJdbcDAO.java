@@ -23,11 +23,11 @@ public class PlayerJdbcDAO implements PlayerDAO {
     public List<Player> findAll() throws PersistenceException {
         List<Player> players = new ArrayList<>();
         String fetchAllPlayersQuery = """
-                SELECT id, player_name, creation_date, player_id, language, logo_border_color,
+                SELECT p.player_id, player_name, creation_date, language, logo_border_color,
                        logo_main_color, logo_accent_color, logo_background_color
                 FROM players p
                 LEFT JOIN player_configurations conf
-                ON p.id = conf.player_id
+                ON p.player_id = conf.player_id
                 """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(fetchAllPlayersQuery)) {
@@ -46,12 +46,12 @@ public class PlayerJdbcDAO implements PlayerDAO {
     @Override
     public Optional<Player> findById(long playerId) throws PersistenceException {
         String fetchPlayerQuery = """
-                        SELECT id, player_name, creation_date, player_id, language, logo_border_color,
+                        SELECT player_id, player_name, creation_date, language, logo_border_color,
                                logo_main_color, logo_accent_color, logo_background_color
                         FROM players p
                         LEFT JOIN player_configurations conf
-                        ON p.id = conf.player_id
-                        WHERE p.id = ?
+                        ON p.player_id = conf.player_id
+                        WHERE p.player_id = ?
                 """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(fetchPlayerQuery)) {
@@ -65,11 +65,11 @@ public class PlayerJdbcDAO implements PlayerDAO {
     @Override
     public Optional<Player> findByName(String playerName) throws PersistenceException {
         String fetchPlayerQuery = """
-                        SELECT id, player_name, creation_date, player_id, language, logo_border_color,
+                        SELECT player_id, player_name, creation_date, language, logo_border_color,
                                logo_main_color, logo_accent_color, logo_background_color
                         FROM players p
                         LEFT JOIN player_configurations conf
-                        ON p.id = conf.player_id
+                        ON p.player_id = conf.player_id
                         WHERE p.player_name = ?
                 """;
 
@@ -144,7 +144,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
         String updatePlayerQuery = """
                         UPDATE players
                         SET player_name = ?
-                        WHERE id = ?;
+                        WHERE player_id = ?;
                 """;
         String updateConfigQuery = """
                         UPDATE player_configurations
@@ -187,7 +187,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
         String updatePlayerNameQuery = """
                         UPDATE players
                         SET player_name = ?
-                        WHERE id = ?;
+                        WHERE player_id = ?;
         """;
 
         int rowsUpdated;
@@ -225,7 +225,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
     public boolean deleteById(long playerId) throws PersistenceException {
         String deletePlayerQuery = """
                         DELETE FROM players
-                        WHERE id = ?;
+                        WHERE player_id = ?;
                 """;
         int rowsUpdated;
 
@@ -261,7 +261,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
     public boolean existsById(long playerId) throws PersistenceException {
         String playerQuery = """
                             SELECT 1 FROM players
-                            WHERE id = ?;
+                            WHERE player_id = ?;
                 """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(playerQuery)) {
@@ -295,7 +295,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
 
     @Override
     public int count() throws PersistenceException {
-        String countQuery = "SELECT COUNT(id) FROM players";
+        String countQuery = "SELECT COUNT(player_id) FROM players";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(countQuery)) {
             ResultSet resultSet = preparedStatement.executeQuery();
