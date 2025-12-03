@@ -70,7 +70,7 @@ public class PlayerMenu {
             return;
         }
 
-        playerService.updateLastSelectedPlayer(currentPlayer.getId());
+        playerService.updateLastSelectedPlayer(updatedPlayer.getId());
     }
 
     private void changePlayerName() {
