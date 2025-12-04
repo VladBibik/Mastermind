@@ -23,7 +23,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
     public List<Player> findAll() throws PersistenceException {
         List<Player> players = new ArrayList<>();
         String fetchAllPlayersQuery = """
-                SELECT PLAYER.player_id, player_name, creation_date, language, logo_border_color,
+                SELECT PLAYER.player_id, player_name, created_at, language, logo_border_color,
                        logo_main_color, logo_accent_color, logo_background_color
                 FROM players PLAYER
                 LEFT JOIN player_configurations CONF
@@ -46,7 +46,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
     @Override
     public Optional<Player> findById(long playerId) throws PersistenceException {
         String fetchPlayerQuery = """
-                        SELECT PLAYER.player_id, player_name, creation_date, language, logo_border_color,
+                        SELECT PLAYER.player_id, player_name, created_at, language, logo_border_color,
                                logo_main_color, logo_accent_color, logo_background_color
                         FROM players PLAYER
                         LEFT JOIN player_configurations CONF
@@ -65,7 +65,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
     @Override
     public Optional<Player> findByName(String playerName) throws PersistenceException {
         String fetchPlayerQuery = """
-                        SELECT PLAYER.player_id, player_name, creation_date, language, logo_border_color,
+                        SELECT PLAYER.player_id, player_name, created_at, language, logo_border_color,
                                logo_main_color, logo_accent_color, logo_background_color
                         FROM players PLAYER
                         LEFT JOIN player_configurations CONF

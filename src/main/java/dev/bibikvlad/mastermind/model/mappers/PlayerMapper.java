@@ -14,7 +14,7 @@ public class PlayerMapper {
         return new Player(
                 resultSet.getLong("player_id"),
                 resultSet.getString("player_name"),
-                SQLiteTimestampFormatter.parse(resultSet.getString("creation_date")),
+                SQLiteTimestampFormatter.parse(resultSet.getString("created_at")),
                 playerConfig
         );
     }

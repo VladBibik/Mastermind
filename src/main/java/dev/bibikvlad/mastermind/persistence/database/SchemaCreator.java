@@ -17,7 +17,7 @@ public class SchemaCreator {
                 CREATE TABLE IF NOT EXISTS players (
                     player_id INTEGER PRIMARY KEY AUTOINCREMENT,
                     player_name TEXT UNIQUE NOT NULL,
-                    creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     CHECK (length(player_name) <= 100)
                 );""";
 
@@ -60,11 +60,11 @@ public class SchemaCreator {
                 CREATE TABLE IF NOT EXISTS games (
                     game_id INTEGER PRIMARY KEY AUTOINCREMENT,
                     player_id INTEGER NOT NULL,
-                    game_start_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     game_complition_time INTEGER NOT NULL,
                     is_canceled BOOLEAN NOT NULL,
                     is_win BOOLEAN NOT NULL,
                     number_of_turns INTEGER NOT NULL,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     FOREIGN KEY (player_id) REFERENCES players(player_id) ON DELETE CASCADE
                 );""";
 

@@ -39,7 +39,7 @@ public class PlayerLastSelectedJdbcDAO implements PlayerLastSelectedDAO {
     @Override
     public Optional<Player> getLastSelectedPlayer() throws PersistenceException {
         String getLastSelectedPlayerQuery = """
-                SELECT PLAYER.player_id, PLAYER.player_name, PLAYER.creation_date,
+                SELECT PLAYER.player_id, PLAYER.player_name, PLAYER.created_at,
                        CONF.language, CONF.logo_border_color, CONF.logo_main_color,
                        CONF.logo_accent_color, CONF.logo_background_color
                 FROM player_last_selected LAST
