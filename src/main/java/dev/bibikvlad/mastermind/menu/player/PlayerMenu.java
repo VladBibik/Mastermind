@@ -64,13 +64,17 @@ public class PlayerMenu {
 
         PlayerSelectionMenu playerSelectionMenu = new PlayerSelectionMenu(localizationContext, parser, playerService);
 
-        Player updatedPlayer = playerSelectionMenu.selectPlayer();
+        Optional<Player> selectedOptionalPlayer = playerSelectionMenu.selectPlayer();
 
-        if (updatedPlayer == null || updatedPlayer.getPlayerName().equals(currentPlayer.getPlayerName())) {
-            return;
+        if (selectedOptionalPlayer.isPresent()) {
+            Player selectedPlayer = selectedOptionalPlayer.get();
+
+            if (selectedPlayer.getPlayerName().equals(currentPlayer.getPlayerName())) {
+                return;
+            }
+
+            playerService.updateLastSelectedPlayer(selectedPlayer.getId());
         }
-
-        playerService.updateLastSelectedPlayer(updatedPlayer.getId());
     }
 
     private void changePlayerName() {
@@ -93,3 +97,5 @@ public class PlayerMenu {
         isDone = true;
     }
 }
+
+//TODO: FIX DELETE POSITIONING ISSUE!

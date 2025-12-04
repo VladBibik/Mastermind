@@ -5,6 +5,8 @@ import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
+import java.util.Optional;
+
 public class DeletePlayerMenu {
     private final LocalizationContext localizationContext;
     private final MastermindUserInputParser parser;
@@ -41,7 +43,9 @@ public class DeletePlayerMenu {
 
         PlayerSelectionMenu playerSelectionMenu = new PlayerSelectionMenu(localizationContext, parser, playerService);
 
-        playerSelectionMenu.selectPlayer();
+        Optional<Player> optionalPlayer = playerSelectionMenu.selectPlayer();
+
+        optionalPlayer.ifPresent(player -> playerService.updateLastSelectedPlayer(player.getId()));
 
         return true;
     }
