@@ -67,6 +67,7 @@ public class LogoColorSelectionMenu {
         System.out.println("5. Change background color");
         System.out.println("6. Reset logo colors to default");
         System.out.println("7. Save and return");
+        System.out.println("8. Reset changes and return");
     }
 
     private void menuOptionSwitcher(int userInputNumber) {
@@ -78,6 +79,7 @@ public class LogoColorSelectionMenu {
             case 5 -> changeBackgroundColor();
             case 6 -> resetToDefault();
             case 7 -> saveAndReturnBack();
+            case 8 -> isDone = true;
         }
     }
 
