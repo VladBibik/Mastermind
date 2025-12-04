@@ -7,6 +7,7 @@ import dev.bibikvlad.mastermind.services.PlayerService;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 
 import java.util.List;
+import java.util.Optional;
 
 public class PlayerSelectionMenu {
     private final LocalizationContext localizationContext;
@@ -22,7 +23,7 @@ public class PlayerSelectionMenu {
         this.playerService = playerService;
     }
 
-    public Player selectPlayer() {
+    public Optional<Player> selectPlayer() {
         while (true) {
             displayPlayers();
             System.out.println("\nTo get back to previous menu print 'exit', or 'quit'");
@@ -36,7 +37,7 @@ public class PlayerSelectionMenu {
             }
 
             if (userInput.equals("exit") || userInput.equals("quit")) {
-                return null;
+                return Optional.empty();
             }
 
             int userInputNumber;
@@ -57,7 +58,7 @@ public class PlayerSelectionMenu {
                 continue;
             }
 
-            return player;
+            return Optional.of(player);
         }
     }
 
