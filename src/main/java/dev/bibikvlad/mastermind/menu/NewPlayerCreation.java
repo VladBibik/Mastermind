@@ -5,7 +5,10 @@ import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
+import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
+
+import java.util.Optional;
 
 //TODO: Either pass LocalizationContext, or already created Messages, or make this class a normal instance based class
 public class NewPlayerCreation implements Menu {
@@ -38,7 +41,13 @@ public class NewPlayerCreation implements Menu {
         if (newPlayerName.equalsIgnoreCase("exit") ||
                 newPlayerName.equalsIgnoreCase("close")) {
 
-            return new MainMenu(localizationContext, parser, playerService);
+            Optional<Player> optionalPlayer = playerService.loadLastSelectedPlayer();
+
+            if (optionalPlayer.isPresent()) {
+                return new MainMenu(localizationContext, parser, playerService);
+            } else {
+                return new ExitMenu();
+            }
         }
 
         if (newPlayerName.length() > 100) {
