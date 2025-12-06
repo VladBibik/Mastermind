@@ -1,61 +1,61 @@
 package dev.bibikvlad.mastermind.menu.settings.logo;
 
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
+import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
+import dev.bibikvlad.mastermind.menu.Menu;
+import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
-import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.utils.DefaultLogoColorsBundle;
 import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
 
-public class LogoColorSelectionMenu {
-    private final Player currentPlayer;
-    private final PlayerService playerService;
+public class LogoColorSelectionMenu implements Menu {
     private final LocalizationContext localizationContext;
     private final MastermindUserInputParser parser;
+    private final PlayerService playerService;
     private final ColorSelectionMenu colorSelectionMenu;
 
-    private LogoColorsBundle logoColorsBundle;
-    private boolean isDone = false;
+    private Player currentPlayer;
 
-    public LogoColorSelectionMenu(Player currentPlayer, PlayerService playerService,
-                                  LocalizationContext localizationContext, MastermindUserInputParser parser) {
-        this.currentPlayer = currentPlayer;
+    private LogoColorsBundle logoColorsBundle;
+
+    public LogoColorSelectionMenu(LocalizationContext localizationContext, MastermindUserInputParser parser,
+                                  PlayerService playerService) {
         this.playerService = playerService;
         this.localizationContext = localizationContext;
         this.parser = parser;
         this.colorSelectionMenu = new ColorSelectionMenu(localizationContext, parser);
-
+        this.currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
+                () -> new IllegalStateException("No last selected player found!"));
         this.logoColorsBundle = currentPlayer.getPlayerConfig().getLogoColorsBundle();
     }
 
-    public void selectLogoColors() {
-        while (!isDone) {
+    @Override
+    public Menu run() {
+        displayMenu();
 
-            displayMenu();
+        String userInput = parser.parseUserInput();
 
-            String userInput = parser.parseUserInput();
+        if (StringEmptyValidator.isNullOrEmpty(userInput)) {
+            System.out.println("Input cannot be empty. Please try again.");
 
-            if (StringEmptyValidator.isNullOrEmpty(userInput)) {
-                System.out.println("Input cannot be empty. Please try again.");
-
-                continue;
-            }
-
-            int userInputNumber;
-
-            try {
-                userInputNumber = Integer.parseInt(userInput);
-            } catch (NumberFormatException exception) {
-                System.out.println("Invalid input. Please enter a number corresponding to the menu option.");
-
-                continue;
-            }
-
-            menuOptionSwitcher(userInputNumber);
+            return this;
         }
+
+        int userInputNumber;
+
+        try {
+            userInputNumber = Integer.parseInt(userInput);
+        } catch (NumberFormatException exception) {
+            System.out.println("Invalid input. Please enter a number corresponding to the menu option.");
+
+            return this;
+        }
+
+        return menuOptionSwitcher(userInputNumber);
     }
 
     private void displayMenu() {
@@ -70,16 +70,49 @@ public class LogoColorSelectionMenu {
         System.out.println("8. Reset changes and return");
     }
 
-    private void menuOptionSwitcher(int userInputNumber) {
+    private Menu menuOptionSwitcher(int userInputNumber) {
         switch (userInputNumber) {
-            case 1 -> printCurrentLogo();
-            case 2 -> changeBorderColor();
-            case 3 -> changeMainColor();
-            case 4 -> changeAccentColor();
-            case 5 -> changeBackgroundColor();
-            case 6 -> resetToDefault();
-            case 7 -> saveAndReturnBack();
-            case 8 -> isDone = true;
+            case 1 -> {
+                printCurrentLogo();
+
+                return this;
+            }
+            case 2 -> {
+                changeBorderColor();
+
+                return this;
+            }
+            case 3 -> {
+                changeMainColor();
+
+                return this;
+            }
+            case 4 -> {
+                changeAccentColor();
+
+                return this;
+            }
+            case 5 -> {
+                changeBackgroundColor();
+
+                return this;
+            }
+            case 6 -> {
+                resetToDefault();
+
+                return this;
+            }
+            case 7 -> {
+                return saveAndReturnBack();
+            }
+            case 8 -> {
+                return new SettingsMenu(localizationContext, parser, playerService);
+            }
+            default -> {
+                System.out.println("Invalid input. Please enter a number corresponding to the menu option.");
+
+                return this;
+            }
         }
     }
 
@@ -147,9 +180,9 @@ public class LogoColorSelectionMenu {
         logoColorsBundle = DefaultLogoColorsBundle.get();
     }
 
-    private void saveAndReturnBack() {
+    private Menu saveAndReturnBack() {
         playerService.updateLogoColors(currentPlayer.getId(), logoColorsBundle);
 
-        isDone = true;
+        return new SettingsMenu(localizationContext, parser, playerService);
     }
 }
