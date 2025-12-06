@@ -4,6 +4,8 @@ import dev.bibikvlad.mastermind.input.parser.ConsoleInputParser;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.FirstTimeLaunch;
+import dev.bibikvlad.mastermind.menu.MainMenu;
+import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.menu.MenuRunner;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.persistence.dao.JDBC.PlayerConfigJdbcDAO;
@@ -54,7 +56,9 @@ public class MastermindAppLauncher {
             return;
         }
 
-        MenuRunner.runMenu(defaultLocalizationContext, parser, playerService);
+        Menu mainMenu = new MainMenu(defaultLocalizationContext, parser, playerService);
+
+        MenuRunner.runMenu(mainMenu);
     }
 
     private static LocalizationContext getLocalizationContext(PlayerService playerService,
