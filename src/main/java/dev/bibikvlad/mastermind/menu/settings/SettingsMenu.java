@@ -5,40 +5,41 @@ import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.LanguageSelectionMenu;
+import dev.bibikvlad.mastermind.menu.MainMenu;
+import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.menu.settings.logo.LogoColorSelectionMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
 import java.util.Optional;
 
-public class SettingsMenu {
+public class SettingsMenu implements Menu {
     private final LocalizationContext localizationContext;
     private final MastermindUserInputParser parser;
     private final PlayerService playerService;
-    private final Player currentPlayer;
 
-    private boolean isDone = false;
+    private Player currentPlayer;
 
     public SettingsMenu(LocalizationContext localizationContext, MastermindUserInputParser parser,
-                        PlayerService playerService, Player currentPlayer) {
+                        PlayerService playerService) {
         this.localizationContext = localizationContext;
         this.parser = parser;
         this.playerService = playerService;
-        this.currentPlayer = currentPlayer;
+        this.currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
+                () -> new IllegalStateException("No last selected player found!"));
     }
 
     //TODO: Should we go back on 'close', and 'exit'?
-    public void menu() {
-        while (!isDone) {
-            displayMenu();
+    @Override
+    public Menu run() {
+        displayMenu();
 
-            Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
+        Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
 
-            if (selection.isEmpty())
-                break;
+        if (selection.isEmpty())
+            return new MainMenu(localizationContext, parser, playerService);
 
-            menuOptionSwitcher(selection.get());
-        }
+        return menuOptionSwitcher(selection.get());
     }
 
     private void displayMenu() {
@@ -47,35 +48,44 @@ public class SettingsMenu {
         System.out.println("3. Back to the main menu");
     }
 
-    private void menuOptionSwitcher(int userInputNumber) {
+    private Menu menuOptionSwitcher(int userInputNumber) {
         switch (userInputNumber) {
-            case 1 -> changeLanguage();
-            case 2 -> changeLogoColor();
-            case 3 -> exit();
-            default -> System.out.println("Invalid selection. Please enter a number corresponding to the menu option.");
+            case 1 -> {
+                return changeLanguage();
+            }
+            case 2 -> {
+                return changeLogoColor();
+            }
+            case 3 -> {
+                return exit();
+            }
+            default -> {
+                System.out.println("Invalid selection. Please enter a number corresponding to the menu option.");
+
+                return this;
+            }
         }
     }
 
-    private void changeLanguage() {
+    //TODO: Is there a better way to do this?
+    private Menu changeLanguage() {
         LanguageSelectionMenu languageSelectionMenu = new LanguageSelectionMenu(parser);
 
         LocaleType localeType = languageSelectionMenu.selectLanguage();
 
-        playerService.updatePlayerLocale(currentPlayer.getId(), localeType);
+        if (!localeType.equals(currentPlayer.getPlayerConfig().getLocale())) {
+            currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
+                    () -> new IllegalStateException("No last selected player found!"));
+        }
 
-        localizationContext.changeLocale(localeType);
-
-        System.out.println("Language changed successfully to " + localeType.getLanguageName() + "\n");
+        return this;
     }
 
-    private void changeLogoColor() {
-        LogoColorSelectionMenu menu =
-                new LogoColorSelectionMenu(currentPlayer, playerService, localizationContext, parser);
-
-        menu.selectLogoColors();
+    private Menu changeLogoColor() {
+        return new LogoColorSelectionMenu(localizationContext, parser, playerService);
     }
 
-    private void exit() {
-        isDone = true;
+    private Menu exit() {
+        return new MainMenu(localizationContext, parser, playerService);
     }
 }
