@@ -3,49 +3,52 @@ package dev.bibikvlad.mastermind.menu.player;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
+import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 
-public class PlayerNameChanger {
+public class PlayerNameChanger implements Menu {
     private final LocalizationContext localizationContext;
     private final MastermindUserInputParser parser;
     private final PlayerService playerService;
     private final Player currentPlayer;
 
     public PlayerNameChanger(LocalizationContext localizationContext, MastermindUserInputParser parser,
-                             PlayerService playerService, Player currentPlayer) {
+                             PlayerService playerService) {
         this.localizationContext = localizationContext;
         this.parser = parser;
         this.playerService = playerService;
-        this.currentPlayer = currentPlayer;
+        this.currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
+                () -> new IllegalStateException("No last selected player found!"));
     }
 
-    public void menu() {
-        while (true) {
-            System.out.println("Please enter a new Player's name for: " + currentPlayer.getPlayerName());
-            System.out.println();
-            System.out.println("To go back to the previous menu enter 'exit' o 'close'");
+    @Override
+    public Menu run() {
+        System.out.println("Please enter a new Player's name for: " + currentPlayer.getPlayerName());
+        System.out.println();
+        System.out.println("To go back to the previous menu enter 'exit' o 'close'");
 
-            String userInput = parser.parseUserInput();
+        String userInput = parser.parseUserInput();
 
-            if (StringEmptyValidator.isNullOrEmpty(userInput)) {
-                System.out.println("Player's name cannot be empty");
+        if (StringEmptyValidator.isNullOrEmpty(userInput)) {
+            System.out.println("Player's name cannot be empty");
 
-                continue;
-            }
-
-            if (userInput.equalsIgnoreCase("exit") || userInput.equalsIgnoreCase("close")) {
-                break;
-            }
-
-            try {
-                playerService.updatePlayerName(currentPlayer.getId(), userInput);
-
-                break;
-            } catch (PlayerAlreadyExistException exception) {
-                System.out.println("Player with name " + userInput + " already exists\n");
-            }
+            return this;
         }
+
+        if (userInput.equalsIgnoreCase("exit") || userInput.equalsIgnoreCase("close")) {
+            return new PlayerMenu(localizationContext, parser, playerService);
+        }
+
+        try {
+            playerService.updatePlayerName(currentPlayer.getId(), userInput);
+
+            return new PlayerMenu(localizationContext, parser, playerService);
+        } catch (PlayerAlreadyExistException exception) {
+            System.out.println("Player with name " + userInput + " already exists\n");
+        }
+
+        return this;
     }
 }
