@@ -2,49 +2,62 @@ package dev.bibikvlad.mastermind.menu;
 
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
-import dev.bibikvlad.mastermind.localization.config.LocaleType;
-import dev.bibikvlad.mastermind.services.PlayerService;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
+import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
+import dev.bibikvlad.mastermind.services.PlayerService;
 
 //TODO: Either pass LocalizationContext, or already created Messages, or make this class a normal instance based class
-public class NewPlayerCreation {
-    public static boolean create(MastermindUserInputParser parser,
-                                        PlayerService playerService,
-                                        LocaleType locale) {
-        while (true) {
-            System.out.println("Please enter nickname of a new player");
-            System.out.println("To cancel type: 'close' or 'exit'");
+public class NewPlayerCreation implements Menu {
+    private final MastermindUserInputParser parser;
+    private final PlayerService playerService;
+    private final LocalizationContext  localizationContext;
+    private final LocaleType localeType;
 
-            String newPlayerName = parser.parseUserInput();
+    public NewPlayerCreation(MastermindUserInputParser parser, PlayerService playerService,
+                             LocalizationContext localizationContext, LocaleType localeType) {
+        this.parser = parser;
+        this.playerService = playerService;
+        this.localizationContext = localizationContext;
+        this.localeType = localeType;
+    }
 
-            if (StringEmptyValidator.isNullOrEmpty(newPlayerName)) {
-                System.out.println("Player name cannot be empty");
+    @Override
+    public Menu run() {
+        System.out.println("Please enter nickname of a new player");
+        System.out.println("To cancel type: 'close' or 'exit'");
 
-                continue;
-            }
+        String newPlayerName = parser.parseUserInput();
 
-            if (newPlayerName.equalsIgnoreCase("exit") ||
-                    newPlayerName.equalsIgnoreCase("close")) {
+        if (StringEmptyValidator.isNullOrEmpty(newPlayerName)) {
+            System.out.println("Player name cannot be empty");
 
-                return true;
-            }
-
-            if (newPlayerName.length() > 100) {
-                System.out.println("Player name cannot be longer than 100 characters");
-
-                continue;
-            }
-
-            try {
-                if (playerService.savePlayerWithProvidedLocale(newPlayerName, locale)) {
-                    System.out.println("Player with name " + newPlayerName + " has been created.\n");
-
-                    return false;
-                }
-
-            } catch (PlayerAlreadyExistException exception) {
-                System.out.println("Player with name " + newPlayerName + " already exists.\n");
-            }
+            return this;
         }
+
+        if (newPlayerName.equalsIgnoreCase("exit") ||
+                newPlayerName.equalsIgnoreCase("close")) {
+
+            return new MainMenu(localizationContext, parser, playerService);
+        }
+
+        if (newPlayerName.length() > 100) {
+            System.out.println("Player name cannot be longer than 100 characters");
+
+            return this;
+        }
+
+        try {
+            if (playerService.savePlayerWithProvidedLocale(newPlayerName, localeType)) {
+                System.out.println("Player with name " + newPlayerName + " has been created.\n");
+
+                return new MainMenu(localizationContext, parser, playerService);
+            }
+
+        } catch (PlayerAlreadyExistException exception) {
+            System.out.println("Player with name " + newPlayerName + " already exists.\n");
+        }
+
+        return this;
     }
 }
