@@ -2,31 +2,31 @@ package dev.bibikvlad.mastermind.menu.player;
 
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
+import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
-import java.util.Optional;
-
-public class DeletePlayerMenu {
+public class DeletePlayerMenu implements Menu {
     private final LocalizationContext localizationContext;
     private final MastermindUserInputParser parser;
     private final PlayerService playerService;
     private final Player currentPlayer;
 
     public DeletePlayerMenu(LocalizationContext localizationContext, MastermindUserInputParser parser,
-                            PlayerService playerService, Player currentPlayer) {
+                            PlayerService playerService) {
         this.localizationContext = localizationContext;
         this.parser = parser;
         this.playerService = playerService;
-        this.currentPlayer = currentPlayer;
+        this.currentPlayer = playerService.loadLastSelectedPlayer().get();
     }
 
-    public boolean menu() {
+    @Override
+    public Menu run() {
         if (!playerService.isMultiplePlayersRegistered()) {
             System.out.println("Cannot delete a player.");
             System.out.println("Please register at least one more player first.");
 
-            return false;
+            return new PlayerMenu(localizationContext, parser, playerService);
         }
 
         playerService.deletePlayer(currentPlayer.getId());
@@ -34,19 +34,13 @@ public class DeletePlayerMenu {
         System.out.println("Player with the name: " + currentPlayer.getPlayerName() + " has been deleted.");
 
         if (!playerService.isMultiplePlayersRegistered()) {
-            return true;
+            return new PlayerMenu(localizationContext, parser, playerService);
         }
 
         //TODO: This def should be changed.
         System.out.println("If you'll close player selection menu, " +
                 "previous last selected player will be picked automatically.");
 
-        PlayerSelectionMenu playerSelectionMenu = new PlayerSelectionMenu(localizationContext, parser, playerService);
-
-        Optional<Player> optionalPlayer = playerSelectionMenu.selectPlayer();
-
-        optionalPlayer.ifPresent(player -> playerService.updateLastSelectedPlayer(player.getId()));
-
-        return true;
+        return new PlayerSelectionMenu(localizationContext, parser, playerService);
     }
 }
