@@ -17,9 +17,11 @@ public class FirstTimeLaunch {
 
         LocalizationContext localizationContext = new LocalizationContext(localeType);
 
-        boolean isClosed = NewPlayerCreation.create(parser, playerService, localeType);
+        Menu playerCreationMenu = new NewPlayerCreation(parser, playerService, localizationContext, localeType);
 
-        if (isClosed) {
+        Menu exitMenu = playerCreationMenu.run();
+
+        if (exitMenu instanceof ExitMenu) {
             return null;
         }
 
