@@ -3,38 +3,39 @@ package dev.bibikvlad.mastermind.menu.player;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
+import dev.bibikvlad.mastermind.menu.MainMenu;
+import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
 import java.util.Optional;
 
-public class PlayerMenu {
+public class PlayerMenu implements Menu {
     private final LocalizationContext localizationContext;
     private final MastermindUserInputParser parser;
     private final PlayerService  playerService;
 
     private Player currentPlayer;
-    private boolean isDone = false;
 
     public PlayerMenu(LocalizationContext localizationContext, MastermindUserInputParser parser,
-                      PlayerService playerService, Player currentPlayer) {
+                      PlayerService playerService) {
         this.localizationContext = localizationContext;
         this.parser = parser;
         this.playerService = playerService;
-        this.currentPlayer = currentPlayer;
+        this.currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
+                () -> new IllegalStateException("No last selected player found!"));
     }
 
-    public void menu() {
-        while (!isDone) {
-            displayMenu();
+    @Override
+    public Menu run() {
+        displayMenu();
 
-            Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
+        Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
 
-            if (selection.isEmpty())
-                break;
+        return selection
+                .map(this::menuOptionSwitcher)
+                .orElseGet(() -> new MainMenu(localizationContext, parser, playerService));
 
-            menuOptionSwitcher(selection.get());
-        }
     }
 
     private void displayMenu() {
@@ -45,56 +46,50 @@ public class PlayerMenu {
         System.out.println("4. Back to main menu");
     }
 
-    private void menuOptionSwitcher(int userInputNumber) {
+    private Menu menuOptionSwitcher(int userInputNumber) {
         switch (userInputNumber) {
-            case 1 -> changePlayer();
-            case 2 -> changePlayerName();
-            case 3 -> deletePlayer();
-            case 4 -> quit();
-            default -> System.out.println("Invalid input. Please enter a number corresponding to the menu option.");
+            case 1 -> {
+                return changePlayer();
+            }
+            case 2 -> {
+                return changePlayerName();
+            }
+            case 3 -> {
+                return deletePlayer();
+            }
+            case 4 -> {
+                return quit();
+            }
+            default -> {
+                System.out.println("Invalid input. Please enter a number corresponding to the menu option.");
+
+                return this;
+            }
         }
     }
 
-    private void changePlayer() {
+    private Menu changePlayer() {
         if (!playerService.isMultiplePlayersRegistered()) {
             System.out.println("Please register at least one more player first.");
 
-            return;
+            return this;
         }
 
-        PlayerSelectionMenu playerSelectionMenu = new PlayerSelectionMenu(localizationContext, parser, playerService);
+        Menu playerSelectionMenu = new PlayerSelectionMenu(localizationContext, parser, playerService);
 
-        Optional<Player> selectedOptionalPlayer = playerSelectionMenu.selectPlayer();
-
-        if (selectedOptionalPlayer.isPresent()) {
-            Player selectedPlayer = selectedOptionalPlayer.get();
-
-            if (selectedPlayer.getPlayerName().equals(currentPlayer.getPlayerName())) {
-                return;
-            }
-
-            playerService.updateLastSelectedPlayer(selectedPlayer.getId());
-        }
+        return playerSelectionMenu.run();
     }
 
-    private void changePlayerName() {
-        PlayerNameChanger playerNameChangeMenu =
-                new PlayerNameChanger(localizationContext, parser, playerService, currentPlayer);
-
-        playerNameChangeMenu.menu();
+    private Menu changePlayerName() {
+        return new PlayerNameChanger(localizationContext, parser, playerService);
     }
 
-    private void deletePlayer() {
-        DeletePlayerMenu deletePlayerMenu = new DeletePlayerMenu(localizationContext, parser,
-                playerService, currentPlayer);
-
-        if (deletePlayerMenu.menu()) {
-            currentPlayer = playerService.loadLastSelectedPlayer().get();
-        }
+    private Menu deletePlayer() {
+        return new DeletePlayerMenu(localizationContext, parser, playerService);
     }
 
-    private void quit() {
-        isDone = true;
+    private Menu quit() {
+        return new MainMenu(localizationContext, parser, playerService);
     }
 }
 
