@@ -1,22 +1,22 @@
 package dev.bibikvlad.mastermind.menu;
 
 import dev.bibikvlad.mastermind.app.MastermindGameLauncher;
+import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.player.PlayerMenu;
 import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;
-import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
 import java.util.Optional;
 
-public class MainMenu {
+public class MainMenu implements Menu {
     private final LocalizationContext localizationContext;
     private final MastermindUserInputParser parser;
     private final PlayerService playerService;
 
-    private Player currentPlayer;
+    private final Player currentPlayer;
 
     public MainMenu(LocalizationContext localizationContext,
                     MastermindUserInputParser parser,
@@ -24,23 +24,20 @@ public class MainMenu {
         this.localizationContext = localizationContext;
         this.parser = parser;
         this.playerService = playerService;
+        this.currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
+                () -> new IllegalStateException("No last selected player found!"));
     }
 
-    public void menu() {
-        if (currentPlayer == null) {
-            loadLastSelectedPlayer();
-        }
+    @Override
+    public Menu run() {
+        displayMenu();
 
-        while (true) {
-            displayMenu();
+        Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
 
-            Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
+        if (selection.isEmpty())
+            return new ExitMenu();
 
-            if (selection.isEmpty())
-                break;
-
-            menuOptionSwitcher(selection.get());
-        }
+        return menuOptionSwitcher(selection.get());
     }
 
     private void displayMenu() {
@@ -54,21 +51,38 @@ public class MainMenu {
     }
 
     //TODO: Think if quiting should be an menu option or leave it as prompt command
-    private void menuOptionSwitcher(int userInputNumber) {
+    private Menu menuOptionSwitcher(int userInputNumber) {
         switch (userInputNumber) {
-            case 1 -> newPlayerCreation();
-            case 2 -> launchGame();
-            case 3 -> playerMenu();
-            case 4 -> displayCurrentPlayerData();
-            case 5 -> settings();
-            default -> System.out.println("Invalid input. Please enter a number corresponding to the menu option.\n");
+            case 1 -> {
+                return newPlayerCreation();
+            }
+            case 2 -> {
+                launchGame();
+
+                return this;
+            }
+            case 3 -> {
+                return playerMenu();
+            }
+            case 4 -> {
+                displayCurrentPlayerData();
+
+                return this;
+            }
+            case 5 -> {
+                return settings();
+            }
+            default -> {
+                System.out.println("Invalid input. Please enter a number corresponding to the menu option.\n");
+
+                return this;
+            }
         }
     }
 
-    private void newPlayerCreation() {
-        NewPlayerCreation.create(parser, playerService, currentPlayer.getPlayerConfig().getLocale());
-
-        loadLastSelectedPlayer();
+    private Menu newPlayerCreation() {
+        return new NewPlayerCreation(parser, playerService, localizationContext,
+                currentPlayer.getPlayerConfig().getLocale());
     }
 
     private void launchGame() {
@@ -78,29 +92,15 @@ public class MainMenu {
         mastermindGameLauncher.launch();
     }
 
-    private void playerMenu() {
-        PlayerMenu playerMenu = new PlayerMenu(localizationContext, parser, playerService, currentPlayer);
-
-        playerMenu.menu();
-
-        //TODO: Think of a better way of updating player
-        loadLastSelectedPlayer();
-    }
-
-    private void loadLastSelectedPlayer() {
-        currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
-                () -> new IllegalStateException("No last selected player found!"));;
+    private Menu playerMenu() {
+        return new PlayerMenu(localizationContext, parser, playerService);
     }
 
     private void displayCurrentPlayerData() {
         System.out.println("Current Player: " + currentPlayer);
     }
 
-    private void settings() {
-        SettingsMenu settingsMenu = new SettingsMenu(localizationContext, parser, playerService, currentPlayer);
-
-        settingsMenu.menu();
-
-        loadLastSelectedPlayer();
+    private Menu settings() {
+        return new SettingsMenu(localizationContext, parser, playerService);
     }
 }
