@@ -56,6 +56,10 @@ public class PlayerSelectionMenu implements Menu {
             System.out.println("Invalid input. Please enter a number corresponding to the player index.");
 
             return this;
+        } else {
+            playerService.updateLastSelectedPlayer(player.getId());
+
+            System.out.println("Player " + player.getPlayerName() + " has been selected.");
         }
 
         return new PlayerMenu(localizationContext, parser, playerService);
