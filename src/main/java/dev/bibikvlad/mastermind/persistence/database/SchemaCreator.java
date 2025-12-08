@@ -60,7 +60,7 @@ public class SchemaCreator {
                 CREATE TABLE IF NOT EXISTS games (
                     game_id INTEGER PRIMARY KEY AUTOINCREMENT,
                     player_id INTEGER NOT NULL,
-                    game_duration_seconds INTEGER NOT NULL,
+                    duration_seconds INTEGER NOT NULL,
                     is_canceled BOOLEAN NOT NULL,
                     is_win BOOLEAN NOT NULL,
                     number_of_turns INTEGER NOT NULL,
