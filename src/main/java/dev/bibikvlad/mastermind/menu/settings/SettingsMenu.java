@@ -9,15 +9,16 @@ import dev.bibikvlad.mastermind.menu.MainMenu;
 import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.menu.settings.logo.LogoColorSelectionMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
+import dev.bibikvlad.mastermind.model.player.PlayerConfig;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
 import java.util.Optional;
 
 public class SettingsMenu implements Menu {
-    private final LocalizationContext localizationContext;
     private final MastermindUserInputParser parser;
     private final PlayerService playerService;
 
+    private LocalizationContext localizationContext;
     private Player currentPlayer;
 
     public SettingsMenu(LocalizationContext localizationContext, MastermindUserInputParser parser,
@@ -67,15 +68,25 @@ public class SettingsMenu implements Menu {
         }
     }
 
-    //TODO: Is there a better way to do this?
     private Menu changeLanguage() {
         LanguageSelectionMenu languageSelectionMenu = new LanguageSelectionMenu(parser);
 
         LocaleType localeType = languageSelectionMenu.selectLanguage();
 
-        if (!localeType.equals(currentPlayer.getPlayerConfig().getLocale())) {
-            currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
-                    () -> new IllegalStateException("No last selected player found!"));
+        if (localeType.equals(currentPlayer.getPlayerConfig().getLocale())) {
+            System.out.println("Language is already selected!");
+        } else {
+            playerService.updatePlayerLocale(currentPlayer.getId(), localeType);
+
+            PlayerConfig playerConfig =
+                    new PlayerConfig(localeType, currentPlayer.getPlayerConfig().getLogoColorsBundle());
+            currentPlayer = new Player(currentPlayer.getId(), currentPlayer.getPlayerName(),
+                    currentPlayer.getCreationDate(), playerConfig);
+
+            localizationContext = new LocalizationContext(localeType);
+
+            //TODO:Language name should be localized!
+            System.out.println("Language changed to " + localeType.getLanguageName());
         }
 
         return this;
