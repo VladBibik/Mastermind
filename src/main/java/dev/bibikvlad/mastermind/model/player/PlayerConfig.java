@@ -19,4 +19,8 @@ public class PlayerConfig {
     public LogoColorsBundle getLogoColorsBundle() {
         return logoColorsBundle;
     }
+
+    public PlayerConfig withLocale(LocaleType localeType) {
+        return new PlayerConfig(localeType, logoColorsBundle);
+    }
 }
