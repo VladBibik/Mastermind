@@ -3,7 +3,7 @@ package dev.bibikvlad.mastermind.app;
 import dev.bibikvlad.mastermind.input.parser.ConsoleInputParser;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
-import dev.bibikvlad.mastermind.menu.FirstTimeLaunch;
+import dev.bibikvlad.mastermind.menu.FirstLaunch;
 import dev.bibikvlad.mastermind.menu.MainMenu;
 import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.menu.MenuRunner;
@@ -50,22 +50,20 @@ public class MastermindAppLauncher {
 
         MastermindUserInputParser parser = new ConsoleInputParser();
 
-        LocalizationContext defaultLocalizationContext = getLocalizationContext(playerService, parser);
-
-        if (defaultLocalizationContext == null) {
-            return;
-        }
-
-        Menu mainMenu = new MainMenu(defaultLocalizationContext, parser, playerService);
-
-        MenuRunner.runMenu(mainMenu);
+        launchGame(parser, playerService);
     }
 
-    private static LocalizationContext getLocalizationContext(PlayerService playerService,
-                                                              MastermindUserInputParser parser) {
-        Optional<Player> lastSelectedPlayer = playerService.loadLastSelectedPlayer();
+    private static void launchGame(MastermindUserInputParser parser, PlayerService playerService) {
+        Optional<Player> optionalPlayer = playerService.loadLastSelectedPlayer();
 
-        return lastSelectedPlayer.map(player -> new LocalizationContext(player.getPlayerConfig().getLocale()))
-                .orElseGet(() -> FirstTimeLaunch.getLocalizationContextAfterUserSelection(parser, playerService));
+        if (optionalPlayer.isPresent()) {
+            Player player = optionalPlayer.get();
+            LocalizationContext localizationContext = new LocalizationContext(player.getPlayerConfig().getLocale());
+            Menu mainMenu = new MainMenu(localizationContext, parser, playerService);
+
+            MenuRunner.runMenu(mainMenu);
+        } else {
+            FirstLaunch.start(parser, playerService);
+        }
     }
 }
