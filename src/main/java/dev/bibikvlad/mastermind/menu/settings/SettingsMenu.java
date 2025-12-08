@@ -73,6 +73,12 @@ public class SettingsMenu implements Menu {
 
         LocaleType localeType = languageSelectionMenu.selectLanguage();
 
+        checkSelectedLanguage(localeType);
+
+        return this;
+    }
+
+    private void checkSelectedLanguage(LocaleType localeType) {
         if (localeType.equals(currentPlayer.getPlayerConfig().getLocale())) {
             System.out.println("Language is already selected!");
         } else {
@@ -85,8 +91,6 @@ public class SettingsMenu implements Menu {
             //TODO:Language name should be localized!
             System.out.println("Language changed to " + localeType.getLanguageName());
         }
-
-        return this;
     }
 
     private Menu changeLogoColor() {
