@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.model.player;
 
+import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.utils.formatters.SQLiteTimestampFormatter;
 
 import java.time.LocalDateTime;
@@ -37,6 +38,12 @@ public class Player {
 
     public PlayerConfig getPlayerConfig() {
         return playerConfig;
+    }
+
+    public Player withLocale(LocaleType localeType) {
+        PlayerConfig playerConfig = getPlayerConfig().withLocale(localeType);
+
+        return new Player(id, playerName, creationDate, playerConfig);
     }
 
     //TODO: Remove it after test phase is done!
