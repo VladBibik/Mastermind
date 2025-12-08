@@ -56,14 +56,12 @@ public class MastermindAppLauncher {
     private static void launchGame(MastermindUserInputParser parser, PlayerService playerService) {
         Optional<Player> optionalPlayer = playerService.loadLastSelectedPlayer();
 
-        if (optionalPlayer.isPresent()) {
-            Player player = optionalPlayer.get();
-            LocalizationContext localizationContext = new LocalizationContext(player.getPlayerConfig().getLocale());
-            Menu mainMenu = new MainMenu(localizationContext, parser, playerService);
+        optionalPlayer.ifPresentOrElse(player -> {
+                    LocalizationContext localizationContext = new LocalizationContext(player.getPlayerConfig().getLocale());
+                    Menu mainMenu = new MainMenu(localizationContext, parser, playerService);
 
-            MenuRunner.runMenu(mainMenu);
-        } else {
-            FirstLaunch.start(parser, playerService);
-        }
+                    MenuRunner.runMenu(mainMenu);
+                },
+                () -> FirstLaunch.start(parser, playerService));
     }
 }
