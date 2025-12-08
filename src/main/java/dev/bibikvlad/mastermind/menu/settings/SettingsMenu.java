@@ -78,10 +78,7 @@ public class SettingsMenu implements Menu {
         } else {
             playerService.updatePlayerLocale(currentPlayer.getId(), localeType);
 
-            PlayerConfig playerConfig =
-                    new PlayerConfig(localeType, currentPlayer.getPlayerConfig().getLogoColorsBundle());
-            currentPlayer = new Player(currentPlayer.getId(), currentPlayer.getPlayerName(),
-                    currentPlayer.getCreationDate(), playerConfig);
+            currentPlayer = currentPlayer.withLocale(localeType);
 
             localizationContext = new LocalizationContext(localeType);
 
