@@ -64,7 +64,7 @@ public class SchemaCreator {
                     is_canceled BOOLEAN NOT NULL,
                     is_win BOOLEAN NOT NULL,
                     number_of_turns INTEGER NOT NULL,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     FOREIGN KEY (player_id) REFERENCES players(player_id) ON DELETE CASCADE
                 );""";
 
