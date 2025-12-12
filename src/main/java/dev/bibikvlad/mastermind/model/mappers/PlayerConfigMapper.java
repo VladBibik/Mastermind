@@ -10,13 +10,13 @@ import java.sql.SQLException;
 
 public class PlayerConfigMapper {
     public static PlayerConfig map(ResultSet resultSet) throws SQLException {
-        return new PlayerConfig(LocaleType.fromLanguageString(
+        return new PlayerConfig(LocaleType.valueOf(
                 resultSet.getString("language")),
                 new LogoColorsBundle(
-                        ConsoleColor.getByDisplayName(resultSet.getString("logo_border_color")),
-                        ConsoleColor.getByDisplayName(resultSet.getString("logo_main_color")),
-                        ConsoleColor.getByDisplayName(resultSet.getString("logo_accent_color")),
-                        ConsoleColor.getByDisplayName(resultSet.getString("logo_background_color")))
+                        ConsoleColor.valueOf(resultSet.getString("logo_border_color")),
+                        ConsoleColor.valueOf(resultSet.getString("logo_main_color")),
+                        ConsoleColor.valueOf(resultSet.getString("logo_accent_color")),
+                        ConsoleColor.valueOf(resultSet.getString("logo_background_color")))
         );
     }
 }
