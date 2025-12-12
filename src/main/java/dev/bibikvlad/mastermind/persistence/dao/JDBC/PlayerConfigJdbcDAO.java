@@ -56,11 +56,11 @@ public class PlayerConfigJdbcDAO implements PlayerConfigDAO {
         try (PreparedStatement preparedStatement = connection.prepareStatement(updateConfigQuery)) {
             LogoColorsBundle logoColorsBundle = playerConfig.getLogoColorsBundle();
 
-            preparedStatement.setString(1, playerConfig.getLocale().getLanguageName());
-            preparedStatement.setString(2, logoColorsBundle.getLogoBorderColor().getDisplayName());
-            preparedStatement.setString(3, logoColorsBundle.getLogoMainColor().getDisplayName());
-            preparedStatement.setString(4, logoColorsBundle.getLogoAccentColor().getDisplayName());
-            preparedStatement.setString(5, logoColorsBundle.getLogoBackgroundColor().getDisplayName());
+            preparedStatement.setString(1, playerConfig.getLocale().name());
+            preparedStatement.setString(2, logoColorsBundle.getLogoBorderColor().name());
+            preparedStatement.setString(3, logoColorsBundle.getLogoMainColor().name());
+            preparedStatement.setString(4, logoColorsBundle.getLogoAccentColor().name());
+            preparedStatement.setString(5, logoColorsBundle.getLogoBackgroundColor().name());
             preparedStatement.setLong(6, playerId);
             rowsUpdated = preparedStatement.executeUpdate();
         } catch (SQLException exception) {
@@ -81,7 +81,7 @@ public class PlayerConfigJdbcDAO implements PlayerConfigDAO {
         int rowsUpdated;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(localeUpdateQuery)) {
-            preparedStatement.setString(1, locale.getLanguageName());
+            preparedStatement.setString(1, locale.name());
             preparedStatement.setLong(2, playerId);
             rowsUpdated = preparedStatement.executeUpdate();
         } catch (SQLException exception) {
@@ -102,10 +102,10 @@ public class PlayerConfigJdbcDAO implements PlayerConfigDAO {
         int rowsUpdated;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(logoColorUpdateQuery)) {
-            preparedStatement.setString(1, logoColorsBundle.getLogoBorderColor().getDisplayName());
-            preparedStatement.setString(2, logoColorsBundle.getLogoMainColor().getDisplayName());
-            preparedStatement.setString(3, logoColorsBundle.getLogoAccentColor().getDisplayName());
-            preparedStatement.setString(4, logoColorsBundle.getLogoBackgroundColor().getDisplayName());
+            preparedStatement.setString(1, logoColorsBundle.getLogoBorderColor().name());
+            preparedStatement.setString(2, logoColorsBundle.getLogoMainColor().name());
+            preparedStatement.setString(3, logoColorsBundle.getLogoAccentColor().name());
+            preparedStatement.setString(4, logoColorsBundle.getLogoBackgroundColor().name());
             preparedStatement.setLong(5, playerId);
             rowsUpdated = preparedStatement.executeUpdate();
         } catch (SQLException exception) {
