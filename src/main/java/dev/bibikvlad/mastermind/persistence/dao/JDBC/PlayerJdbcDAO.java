@@ -115,15 +115,15 @@ public class PlayerJdbcDAO implements PlayerDAO {
                     LogoColorsBundle logoColorsBundle = playerConfig.getLogoColorsBundle();
 
                     configPreparedStatement.setLong(1, playerId);
-                    configPreparedStatement.setString(2, playerConfig.getLocale().getLanguageName());
+                    configPreparedStatement.setString(2, playerConfig.getLocale().name());
                     configPreparedStatement.setString(3, logoColorsBundle
-                            .getLogoBorderColor().getDisplayName());
+                            .getLogoBorderColor().name());
                     configPreparedStatement.setString(4, logoColorsBundle
-                            .getLogoMainColor().getDisplayName());
+                            .getLogoMainColor().name());
                     configPreparedStatement.setString(5, logoColorsBundle
-                            .getLogoAccentColor().getDisplayName());
+                            .getLogoAccentColor().name());
                     configPreparedStatement.setString(6, logoColorsBundle
-                            .getLogoBackgroundColor().getDisplayName());
+                            .getLogoBackgroundColor().name());
                     rowsUpdated = configPreparedStatement.executeUpdate();
 
                     lastSelectedStatement.setLong(1, playerId);
@@ -164,15 +164,11 @@ public class PlayerJdbcDAO implements PlayerDAO {
             PlayerConfig playerConfig = player.getPlayerConfig();
             LogoColorsBundle logoColorsBundle = playerConfig.getLogoColorsBundle();
 
-            configPreparedStatement.setString(1, playerConfig.getLocale().getLanguageName());
-            configPreparedStatement.setString(2, logoColorsBundle.getLogoBorderColor()
-                    .getDisplayName());
-            configPreparedStatement.setString(3, logoColorsBundle.getLogoMainColor()
-                    .getDisplayName());
-            configPreparedStatement.setString(4, logoColorsBundle.getLogoAccentColor()
-                    .getDisplayName());
-            configPreparedStatement.setString(5, logoColorsBundle.getLogoBackgroundColor()
-                    .getDisplayName());
+            configPreparedStatement.setString(1, playerConfig.getLocale().name());
+            configPreparedStatement.setString(2, logoColorsBundle.getLogoBorderColor().name());
+            configPreparedStatement.setString(3, logoColorsBundle.getLogoMainColor().name());
+            configPreparedStatement.setString(4, logoColorsBundle.getLogoAccentColor().name());
+            configPreparedStatement.setString(5, logoColorsBundle.getLogoBackgroundColor().name());
             configPreparedStatement.setLong(6, player.getId());
             rowsUpdated = configPreparedStatement.executeUpdate();
         } catch (SQLException exception) {
