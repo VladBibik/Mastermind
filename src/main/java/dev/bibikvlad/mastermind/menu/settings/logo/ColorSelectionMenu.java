@@ -7,6 +7,7 @@ import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.utils.strings.GameCluesConstants;
 
+//TODO: Refactor it to menu. Also, can create two classes
 public class ColorSelectionMenu {
     private final MastermindUserInputParser parser;
     private final LogoMessages logoMessages;
