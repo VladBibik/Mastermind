@@ -82,7 +82,7 @@ public class MainMenu implements Menu {
 
     private Menu newPlayerCreation() {
         return new NewPlayerCreation(parser, playerService, localizationContext,
-                currentPlayer.getPlayerConfig().getLocale());
+                currentPlayer.getPlayerConfig().getLocale(), this);
     }
 
     private void launchGame() {
