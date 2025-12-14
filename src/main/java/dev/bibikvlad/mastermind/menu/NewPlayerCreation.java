@@ -16,13 +16,15 @@ public class NewPlayerCreation implements Menu {
     private final PlayerService playerService;
     private final LocalizationContext  localizationContext;
     private final LocaleType localeType;
+    private final Menu onCancelMenu;
 
     public NewPlayerCreation(MastermindUserInputParser parser, PlayerService playerService,
-                             LocalizationContext localizationContext, LocaleType localeType) {
+                             LocalizationContext localizationContext, LocaleType localeType, Menu onCancelMenu) {
         this.parser = parser;
         this.playerService = playerService;
         this.localizationContext = localizationContext;
         this.localeType = localeType;
+        this.onCancelMenu = onCancelMenu;
     }
 
     @Override
@@ -40,14 +42,7 @@ public class NewPlayerCreation implements Menu {
 
         if (newPlayerName.equalsIgnoreCase("exit") ||
                 newPlayerName.equalsIgnoreCase("close")) {
-
-            Optional<Player> optionalPlayer = playerService.loadLastSelectedPlayer();
-
-            if (optionalPlayer.isPresent()) {
-                return new MainMenu(localizationContext, parser, playerService);
-            } else {
-                return new ExitMenu();
-            }
+            return onCancelMenu;
         }
 
         if (newPlayerName.length() > 100) {
