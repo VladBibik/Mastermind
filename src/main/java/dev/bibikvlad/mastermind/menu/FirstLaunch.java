@@ -15,7 +15,8 @@ public class FirstLaunch {
 
         LocalizationContext localizationContext = new LocalizationContext(localeType);
 
-        Menu playerCreationMenu = new NewPlayerCreation(parser, playerService, localizationContext, localeType);
+        Menu playerCreationMenu = new NewPlayerCreation(parser, playerService, localizationContext, localeType,
+                new ExitMenu());
 
         MenuRunner.runMenu(playerCreationMenu);
     }
