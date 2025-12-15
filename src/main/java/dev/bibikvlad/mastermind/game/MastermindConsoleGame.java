@@ -39,7 +39,7 @@ public class MastermindConsoleGame {
             if (gameStateManager.isOver()) {
                 printer.printGameOverMessage(answer);
 
-                gameStateManager.close();
+                gameStateManager.markClosed();
 
                 continue;
             }
@@ -47,7 +47,7 @@ public class MastermindConsoleGame {
             String userInput = parser.parseUserInput();
 
             if (gameCommandHandler.handle(userInput)) {
-                gameStateManager.close();
+                gameStateManager.markClosed();
 
                 continue;
             }
@@ -56,7 +56,7 @@ public class MastermindConsoleGame {
                 boolean won = guessEvaluator.evaluate(userInput, gameStateManager.getCurrentTurn(),  MAX_TURNS);
 
                 if (won) {
-                    gameStateManager.close();
+                    gameStateManager.markClosed();
                 } else  {
                     gameStateManager.nextTurn();
                 }
