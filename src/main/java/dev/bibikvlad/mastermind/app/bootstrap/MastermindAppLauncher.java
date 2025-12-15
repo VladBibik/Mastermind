@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.app;
+package dev.bibikvlad.mastermind.app.bootstrap;
 
 import dev.bibikvlad.mastermind.input.parser.ConsoleInputParser;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
