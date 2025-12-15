@@ -4,7 +4,6 @@ public class GameStateManager {
     private final int maxTurns;
 
     private int currentTurn = 0;
-    private boolean gameClosed = false;
 
     public GameStateManager(int maxTurns) {
         this.maxTurns = maxTurns;
@@ -16,14 +15,6 @@ public class GameStateManager {
 
     public void nextTurn() {
         currentTurn++;
-    }
-
-    public void markClosed() {
-        gameClosed = true;
-    }
-
-    public boolean isGameClosed() {
-        return gameClosed;
     }
 
     public int getCurrentTurn() {
