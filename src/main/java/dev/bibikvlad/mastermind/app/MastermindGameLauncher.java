@@ -28,6 +28,6 @@ public class MastermindGameLauncher {
         MastermindConsoleGame game = new MastermindConsoleGame(printer, parser,
                 RandomAnswerGenerator.generate(), logoColorsBundle);
 
-        return MastermindGameDurationWrapper.launch(game);
+        return TimedGameRunner.launch(game);
     }
 }

@@ -4,7 +4,7 @@ import dev.bibikvlad.mastermind.game.MastermindConsoleGame;
 import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.game.data.GameOutcome;
 
-public class MastermindGameDurationWrapper {
+public class TimedGameRunner {
     public static GameData launch(MastermindConsoleGame game) {
         long gameStart = System.currentTimeMillis();
 
