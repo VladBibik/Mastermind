@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.app;
 
 import dev.bibikvlad.mastermind.game.MastermindConsoleGame;
 import dev.bibikvlad.mastermind.game.RandomAnswerGenerator;
+import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.input.parser.ConsoleInputToLowerCaseParser;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.game.printer.ConsoleMessagePrinter;
@@ -19,7 +20,7 @@ public class MastermindGameLauncher {
         this.logoColorsBundle = logoColorsBundle;
     }
 
-    public void launch() {
+    public GameData launch() {
         GameMessages gameMessages = localizationContext.getGameMessages();
         MastermindMessagePrinter printer = new ConsoleMessagePrinter(gameMessages);
         MastermindUserInputParser parser = new ConsoleInputToLowerCaseParser();
@@ -27,6 +28,6 @@ public class MastermindGameLauncher {
         MastermindConsoleGame game = new MastermindConsoleGame(printer, parser,
                 RandomAnswerGenerator.generate(), logoColorsBundle);
 
-        game.play();
+        return MastermindGameDurationWrapper.launch(game);
     }
 }
