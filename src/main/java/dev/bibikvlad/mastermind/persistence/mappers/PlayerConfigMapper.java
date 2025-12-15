@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.model.mappers;
+package dev.bibikvlad.mastermind.persistence.mappers;
 
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
