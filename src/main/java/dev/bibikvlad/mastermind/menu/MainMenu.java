@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.menu;
 
-import dev.bibikvlad.mastermind.app.MastermindGameLauncher;
+import dev.bibikvlad.mastermind.app.game.MastermindGameLauncher;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;

@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.app;
+package dev.bibikvlad.mastermind.app.game;
 
 import dev.bibikvlad.mastermind.game.MastermindConsoleGame;
 import dev.bibikvlad.mastermind.game.data.GameData;
