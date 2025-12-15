@@ -1,5 +1,7 @@
 package dev.bibikvlad.mastermind.game;
 
+import dev.bibikvlad.mastermind.game.data.GameOutcome;
+import dev.bibikvlad.mastermind.game.data.GameResult;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.game.printer.MastermindMessagePrinter;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
@@ -34,31 +36,26 @@ public class MastermindConsoleGame {
         printLogoAndRules();
     }
 
-    public void play() {
-        while (!gameStateManager.isGameClosed()) {
+    public GameOutcome play() {
+        while (true) {
             if (gameStateManager.isOver()) {
                 printer.printGameOverMessage(answer);
 
-                gameStateManager.markClosed();
-
-                continue;
+                return new GameOutcome(gameStateManager.getCurrentTurn(), GameResult.LOSE);
             }
 
             String userInput = parser.parseUserInput();
 
             if (gameCommandHandler.handle(userInput)) {
-                gameStateManager.markClosed();
-
-                continue;
+                return new GameOutcome(gameStateManager.getCurrentTurn(), GameResult.CANCELED);
             }
 
             if (GameInputValidator.isInputValid(userInput)) {
-                boolean won = guessEvaluator.evaluate(userInput, gameStateManager.getCurrentTurn(),  MAX_TURNS);
+                boolean won = guessEvaluator.evaluate(userInput, gameStateManager.getCurrentTurn(), MAX_TURNS);
+                gameStateManager.nextTurn();
 
                 if (won) {
-                    gameStateManager.markClosed();
-                } else  {
-                    gameStateManager.nextTurn();
+                    return new GameOutcome(gameStateManager.getCurrentTurn(), GameResult.WIN);
                 }
             } else {
                 printer.printInvalidInputMessage();
