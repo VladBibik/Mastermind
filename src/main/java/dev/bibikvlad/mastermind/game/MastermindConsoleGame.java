@@ -31,12 +31,11 @@ public class MastermindConsoleGame {
         gameStateManager = new GameStateManager(MAX_TURNS);
         gameCommandHandler = new GameCommandHandler(printer);
         guessEvaluator = new GuessEvaluator(answer, printer);
-
-
-        printLogoAndRules();
     }
 
     public GameOutcome play() {
+        printLogoAndRules();
+
         while (true) {
             if (gameStateManager.isOver()) {
                 printer.printGameOverMessage(answer);
