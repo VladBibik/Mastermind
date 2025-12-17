@@ -14,4 +14,6 @@ public interface GamesDAO {
     boolean save(long playerId, GameData gameData) throws PersistenceException;
 
     int count() throws PersistenceException;
+
+    int countByPlayerId(long playerId) throws PersistenceException;
 }
