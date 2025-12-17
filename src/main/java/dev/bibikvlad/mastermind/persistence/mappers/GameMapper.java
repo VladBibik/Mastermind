@@ -19,7 +19,7 @@ public class GameMapper {
                                 resultSet.getInt("number_of_turns"),
                                 GameResult.valueOf(resultSet.getString("result"))
                         ),
-                        resultSet.getLong("duration_seconds")),
+                        resultSet.getLong("duration_milliseconds")),
                 SQLiteTimestampFormatter.parse(resultSet.getString("started_at")));
     }
 }
