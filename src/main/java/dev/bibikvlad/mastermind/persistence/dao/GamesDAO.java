@@ -9,7 +9,7 @@ import java.util.List;
 public interface GamesDAO {
     List<Game> findAll() throws PersistenceException;
 
-    List<Game> findAllById() throws PersistenceException;
+    List<Game> findAllByPlayerId(long playerId) throws PersistenceException;
 
     boolean save(long playerId, GameData gameData) throws PersistenceException;
 
