@@ -92,7 +92,11 @@ public class GamesJdbcDAO implements GamesDAO {
         try (PreparedStatement preparedStatement = DatabaseContext.getConnection().prepareStatement(countQuery)) {
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            return resultSet.getInt(1);
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+
+            return 0;
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to count the number of rows in the games table", exception);
         }
