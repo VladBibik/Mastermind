@@ -37,7 +37,27 @@ public class GamesJdbcDAO implements GamesDAO {
 
     @Override
     public List<Game> findAllByPlayerId(long playerId) throws PersistenceException {
-        return List.of();
+        List<Game> games = new ArrayList<>();
+        String findAllByPlayerIdQuery = """
+                SELECT *
+                FROM games
+                WHERE player_id = ?
+                """;
+
+        try (PreparedStatement preparedStatement = DatabaseContext.getConnection()
+                .prepareStatement(findAllByPlayerIdQuery)) {
+            preparedStatement.setLong(1, playerId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                games.add(GameMapper.map(resultSet));
+            }
+
+            return games;
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to fetch all games by Player ID: " + playerId, exception);
+        }
     }
 
     @Override
