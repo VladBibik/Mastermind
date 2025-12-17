@@ -78,7 +78,8 @@ public class GamesJdbcDAO implements GamesDAO {
 
             return rowsAffected > 0;
         } catch (SQLException exception) {
-            throw new PersistenceException("Failed to save a games data for a player with ID: " + playerId, exception);
+            throw new PersistenceException("Failed to save a a game’s data for a player with ID: " + playerId,
+                    exception);
         }
     }
 
