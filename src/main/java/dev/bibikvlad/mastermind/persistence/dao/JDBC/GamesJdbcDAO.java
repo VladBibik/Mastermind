@@ -18,7 +18,7 @@ public class GamesJdbcDAO implements GamesDAO {
     public List<Game> findAll() throws PersistenceException {
         List<Game> games = new ArrayList<>();
         String findAllQuery = """
-                SELECT *
+                SELECT game_id, player_id, duration_milliseconds, result, number_of_turns, started_at
                 FROM games
                 """;
 
@@ -39,7 +39,7 @@ public class GamesJdbcDAO implements GamesDAO {
     public List<Game> findAllByPlayerId(long playerId) throws PersistenceException {
         List<Game> games = new ArrayList<>();
         String findAllByPlayerIdQuery = """
-                SELECT *
+                SELECT game_id, player_id, duration_milliseconds, result, number_of_turns, started_at
                 FROM games
                 WHERE player_id = ?
                 """;
