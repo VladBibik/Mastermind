@@ -62,7 +62,24 @@ public class GamesJdbcDAO implements GamesDAO {
 
     @Override
     public boolean save(long playerId, GameData gameData) throws PersistenceException {
-        return false;
+        int rowsAffected;
+        String saveQuery = """
+                INSERT INTO games (player_id, duration_milliseconds, result, number_of_turns)
+                VALUES(?, ?, ?, ?)
+                """;
+
+        try (PreparedStatement preparedStatement = DatabaseContext.getConnection().prepareStatement(saveQuery)) {
+            preparedStatement.setLong(1, playerId);
+            preparedStatement.setLong(2, gameData.getGameDuration());
+            preparedStatement.setString(3, gameData.getGameOutcome().getResult().name());
+            preparedStatement.setInt(4, gameData.getGameOutcome().getTurnsPlayed());
+
+            rowsAffected = preparedStatement.executeUpdate();
+
+            return rowsAffected > 0;
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to save a games data for a player with ID: " + playerId, exception);
+        }
     }
 
     @Override
