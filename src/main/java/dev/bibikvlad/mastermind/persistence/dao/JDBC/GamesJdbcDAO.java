@@ -102,4 +102,29 @@ public class GamesJdbcDAO implements GamesDAO {
             throw new PersistenceException("Failed to count the number of rows in the games table", exception);
         }
     }
+
+    @Override
+    public int countByPlayerId(long playerId) throws PersistenceException {
+        String countByPlayerIdQuery = """
+                SELECT COUNT(game_id)
+                FROM games
+                WHERE player_id = 1
+                """;
+
+        try (PreparedStatement preparedStatement = DatabaseContext.getConnection()
+                .prepareStatement(countByPlayerIdQuery)) {
+            preparedStatement.setLong(1, playerId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+
+            return 0;
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to count the number of rows in the " +
+                    "games table for a player with ID: " + playerId, exception);
+        }
+    }
 }
