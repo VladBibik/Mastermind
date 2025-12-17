@@ -36,7 +36,7 @@ public class GamesJdbcDAO implements GamesDAO {
     }
 
     @Override
-    public List<Game> findAllById() throws PersistenceException {
+    public List<Game> findAllByPlayerId(long playerId) throws PersistenceException {
         return List.of();
     }
 
