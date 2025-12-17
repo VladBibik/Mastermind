@@ -4,13 +4,35 @@ import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.model.game.Game;
 import dev.bibikvlad.mastermind.persistence.dao.GamesDAO;
+import dev.bibikvlad.mastermind.persistence.database.DatabaseContext;
+import dev.bibikvlad.mastermind.persistence.mappers.GameMapper;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GamesJdbcDAO implements GamesDAO {
     @Override
     public List<Game> findAll() throws PersistenceException {
-        return List.of();
+        List<Game> games = new ArrayList<>();
+        String findAllQuery = """
+                SELECT *
+                FROM games
+                """;
+
+        try (PreparedStatement preparedStatement = DatabaseContext.getConnection().prepareStatement(findAllQuery)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                games.add(GameMapper.map(resultSet));
+            }
+
+            return games;
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to fetch all games", exception);
+        }
     }
 
     @Override
