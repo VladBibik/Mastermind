@@ -20,17 +20,35 @@ public class GamesSQLRepository implements GamesRepository {
 
     @Override
     public List<Game> findAll() throws PersistenceException {
-        return List.of();
+        return gamesDAO.findAll();
     }
 
     @Override
     public List<Game> findAllByPlayerId(long playerId) throws PersistenceException {
-        return List.of();
+        return gamesDAO.findAllByPlayerId(playerId);
     }
 
     @Override
     public boolean save(long playerId, GameData gameData) throws PersistenceException {
-        return false;
+        boolean result;
+
+        try {
+            transactionManager.begin();
+
+            result = gamesDAO.save(playerId, gameData);
+
+            transactionManager.commit();
+        } catch (PersistenceException exception) {
+            try {
+                transactionManager.rollback();
+            } catch (PersistenceException rollbackException) {
+                exception.addSuppressed(rollbackException);
+            }
+
+            throw new PersistenceException("Failed to save a game for a player with ID: " + playerId, exception);
+        }
+
+        return result;
     }
 
     @Override
