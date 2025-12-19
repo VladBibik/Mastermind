@@ -12,7 +12,7 @@ public class TransactionManager {
         this.connection = connection;
     }
 
-    public void begin() throws PersistenceException {
+    public void begin() {
         try {
             connection.setAutoCommit(false);
         } catch (SQLException exception) {
@@ -20,21 +20,21 @@ public class TransactionManager {
         }
     }
 
-    public void commit() throws PersistenceException {
+    public void commit() {
         try {
             connection.commit();
-        } catch (SQLException  exception) {
+        } catch (SQLException exception) {
             throw new PersistenceException("Failed to commit transaction", exception);
         } finally {
             try {
                 connection.setAutoCommit(true);
             } catch (SQLException exception) {
-                //TODO: Add handling
+                throw new PersistenceException("Failed to restore auto-commit after transaction", exception);
             }
         }
     }
 
-    public void rollback() throws PersistenceException {
+    public void rollback() {
         try {
             connection.rollback();
         } catch (SQLException exception) {
@@ -42,8 +42,8 @@ public class TransactionManager {
         } finally {
             try {
                 connection.setAutoCommit(true);
-            } catch (SQLException exception1) {
-                //TODO: Add handling
+            } catch (SQLException exception) {
+                throw new PersistenceException("Failed to restore auto-commit after transaction", exception);
             }
         }
     }
