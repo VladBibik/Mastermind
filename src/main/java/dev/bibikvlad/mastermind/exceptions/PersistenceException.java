@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.exceptions;
 
-public class PersistenceException extends Exception {
+public class PersistenceException extends RuntimeException {
     public PersistenceException(String message) {
         super(message);
     }
