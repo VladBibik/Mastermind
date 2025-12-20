@@ -1,19 +1,18 @@
 package dev.bibikvlad.mastermind.persistence.dao;
 
-import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.model.game.Game;
 
 import java.util.List;
 
 public interface GamesDAO {
-    List<Game> findAll() throws PersistenceException;
+    List<Game> findAll();
 
-    List<Game> findAllByPlayerId(long playerId) throws PersistenceException;
+    List<Game> findAllByPlayerId(long playerId);
 
-    boolean save(long playerId, GameData gameData) throws PersistenceException;
+    boolean save(long playerId, GameData gameData);
 
-    int count() throws PersistenceException;
+    int count();
 
-    int countByPlayerId(long playerId) throws PersistenceException;
+    int countByPlayerId(long playerId);
 }
