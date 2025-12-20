@@ -56,6 +56,8 @@ public class PlayerService {
         if (playerRepository.existsByName(newPlayerName)) {
             throw new PlayerAlreadyExistException("Player with name " + newPlayerName + " already exists");
         }
+
+        playerRepository.updatePlayerName(playerId, newPlayerName);
     }
 
     public void updatePlayerLocale(long playerId, LocaleType locale) {
