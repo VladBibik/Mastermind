@@ -1,6 +1,5 @@
 package dev.bibikvlad.mastermind.services;
 
-import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
@@ -28,115 +27,55 @@ public class PlayerService {
 
     public boolean savePlayerWithProvidedLocale(String newPlayerName, LocaleType locale)
             throws PlayerAlreadyExistException {
-        boolean result = false;
-
-        try {
-            if (playerRepository.existsByName(newPlayerName)) {
-                throw new PlayerAlreadyExistException("Player with name " + newPlayerName + " already exists");
-            }
-
-            Player player = new Player(newPlayerName, getCustomLocaleConfig(locale));
-
-            result = playerRepository.save(player);
-        } catch (PersistenceException exception) {
-            //TODO: Add handling. Preferably just turn off the app
+        if (playerRepository.existsByName(newPlayerName)) {
+            throw new PlayerAlreadyExistException("Player with name " + newPlayerName + " already exists");
         }
 
-        return result;
+        Player player = new Player(newPlayerName, getCustomLocaleConfig(locale));
+
+        return playerRepository.save(player);
     }
 
     public boolean saveOrUpdateLastSelectedPlayer(long playerId) {
-        try {
-            return playerLastSelectedRepository.saveOrUpdate(playerId);
-        } catch (PersistenceException exception) {
-            //TODO: Add handling. Preferably just turn off the app
-        }
-
-        throw new IllegalStateException();
+        return playerLastSelectedRepository.saveOrUpdate(playerId);
     }
 
     public List<Player> getAllPlayers() {
-        try {
-            return playerRepository.findAll();
-        } catch (PersistenceException exception) {
-            //TODO: Add handling. Preferably just turn off the app
-        }
-
-        throw new IllegalStateException();
+        return playerRepository.findAll();
     }
 
     public Optional<Player> getPlayerByName(String playerName) {
-        try {
-            return playerRepository.findByName(playerName);
-        } catch (PersistenceException exception) {
-
-        }
-
-        throw new IllegalStateException();
+        return playerRepository.findByName(playerName);
     }
 
     public Optional<Player> loadLastSelectedPlayer() {
-        try {
-            return playerLastSelectedRepository.getLastSelectedPlayer();
-        } catch (PersistenceException exception) {
-            //TODO: Add handling. Preferably just turn off the app
-        }
-
-        throw new IllegalStateException();
+        return playerLastSelectedRepository.getLastSelectedPlayer();
     }
 
     public void updatePlayerName(long playerId, String newPlayerName) throws PlayerAlreadyExistException {
-        try {
-            if (playerRepository.existsByName(newPlayerName)) {
-                throw new PlayerAlreadyExistException("Player with name " + newPlayerName + " already exists");
-            }
-
-            playerRepository.updatePlayerName(playerId, newPlayerName);
-        } catch (PersistenceException exception) {
-            //TODO: Add handling. Preferably just turn off the app
+        if (playerRepository.existsByName(newPlayerName)) {
+            throw new PlayerAlreadyExistException("Player with name " + newPlayerName + " already exists");
         }
     }
 
     public void updatePlayerLocale(long playerId, LocaleType locale) {
-        try {
-            playerConfigRepository.updateLocale(playerId, locale);
-        } catch (PersistenceException exception) {
-            //TODO: Add handling. Preferably just turn off the app
-        }
+        playerConfigRepository.updateLocale(playerId, locale);
     }
 
     public void updateLogoColors(long playerId, LogoColorsBundle logoColorsBundle) {
-        try {
-            playerConfigRepository.updateLogoColors(playerId, logoColorsBundle);
-        } catch (PersistenceException exception) {
-            //TODO: Add handling. Preferably just turn off the app
-        }
+        playerConfigRepository.updateLogoColors(playerId, logoColorsBundle);
     }
 
     public void updateLastSelectedPlayer(long playerId) {
-        try {
-            playerLastSelectedRepository.saveOrUpdate(playerId);
-        } catch (PersistenceException exception) {
-            //TODO: Add handling. Preferably just turn off the app
-        }
+        playerLastSelectedRepository.saveOrUpdate(playerId);
     }
 
     public void deletePlayer(long playerId) {
-        try {
-            playerRepository.deleteById(playerId);
-        } catch (PersistenceException exception) {
-            //TODO: Add handling. Preferably just turn off the app
-        }
+        playerRepository.deleteById(playerId);
     }
 
     public boolean isMultiplePlayersRegistered() {
-        try {
-            return playerRepository.count() > 1;
-        } catch (PersistenceException exception) {
-            //TODO: Add handling. Preferably just turn off the app
-        }
-
-        throw new IllegalStateException();
+        return playerRepository.count() > 1;
     }
 
     private PlayerConfig getCustomLocaleConfig(LocaleType localeType) {
