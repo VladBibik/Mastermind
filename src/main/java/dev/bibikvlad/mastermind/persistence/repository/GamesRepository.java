@@ -14,4 +14,6 @@ public interface GamesRepository {
     boolean save(long playerId, GameData gameData);
 
     int count();
+
+    int countByPlayerId(long playerId);
 }
