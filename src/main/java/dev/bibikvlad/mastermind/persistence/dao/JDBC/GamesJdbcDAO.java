@@ -108,7 +108,7 @@ public class GamesJdbcDAO implements GamesDAO {
         String countByPlayerIdQuery = """
                 SELECT COUNT(game_id)
                 FROM games
-                WHERE player_id = 1
+                WHERE player_id = ?
                 """;
 
         try (PreparedStatement preparedStatement = DatabaseContext.getConnection()
