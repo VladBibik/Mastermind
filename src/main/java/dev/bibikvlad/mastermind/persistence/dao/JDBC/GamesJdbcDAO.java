@@ -15,7 +15,7 @@ import java.util.List;
 
 public class GamesJdbcDAO implements GamesDAO {
     @Override
-    public List<Game> findAll() throws PersistenceException {
+    public List<Game> findAll() {
         List<Game> games = new ArrayList<>();
         String findAllQuery = """
                 SELECT game_id, player_id, duration_milliseconds, result, number_of_turns, started_at
@@ -36,7 +36,7 @@ public class GamesJdbcDAO implements GamesDAO {
     }
 
     @Override
-    public List<Game> findAllByPlayerId(long playerId) throws PersistenceException {
+    public List<Game> findAllByPlayerId(long playerId) {
         List<Game> games = new ArrayList<>();
         String findAllByPlayerIdQuery = """
                 SELECT game_id, player_id, duration_milliseconds, result, number_of_turns, started_at
@@ -61,7 +61,7 @@ public class GamesJdbcDAO implements GamesDAO {
     }
 
     @Override
-    public boolean save(long playerId, GameData gameData) throws PersistenceException {
+    public boolean save(long playerId, GameData gameData) {
         int rowsAffected;
         String saveQuery = """
                 INSERT INTO games (player_id, duration_milliseconds, result, number_of_turns)
@@ -84,7 +84,7 @@ public class GamesJdbcDAO implements GamesDAO {
     }
 
     @Override
-    public int count() throws PersistenceException {
+    public int count() {
         String countQuery = """
                 SELECT COUNT(game_id)
                 FROM games
@@ -104,7 +104,7 @@ public class GamesJdbcDAO implements GamesDAO {
     }
 
     @Override
-    public int countByPlayerId(long playerId) throws PersistenceException {
+    public int countByPlayerId(long playerId) {
         String countByPlayerIdQuery = """
                 SELECT COUNT(game_id)
                 FROM games

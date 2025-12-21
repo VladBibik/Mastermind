@@ -21,7 +21,7 @@ public class PlayerConfigJdbcDAO implements PlayerConfigDAO {
     }
 
     @Override
-    public Optional<PlayerConfig> findById(long playerId) throws PersistenceException {
+    public Optional<PlayerConfig> findById(long playerId) {
         String fetchPlayerConfigQuery = """
                 SELECT player_id, language, logo_border_color, logo_main_color, logo_accent_color, logo_background_color
                 FROM player_configurations
@@ -44,7 +44,7 @@ public class PlayerConfigJdbcDAO implements PlayerConfigDAO {
     }
 
     @Override
-    public boolean update(long playerId, PlayerConfig playerConfig) throws PersistenceException {
+    public boolean update(long playerId, PlayerConfig playerConfig) {
         String updateConfigQuery = """
                         UPDATE player_configurations
                         SET language = ?, logo_border_color = ?,
@@ -72,7 +72,7 @@ public class PlayerConfigJdbcDAO implements PlayerConfigDAO {
     }
 
     @Override
-    public boolean updateLocale(long playerId, LocaleType locale) throws PersistenceException {
+    public boolean updateLocale(long playerId, LocaleType locale) {
         String localeUpdateQuery = """
                 UPDATE player_configurations
                 SET language = ?
@@ -93,7 +93,7 @@ public class PlayerConfigJdbcDAO implements PlayerConfigDAO {
     }
 
     @Override
-    public boolean updateLogoColors(long playerId, LogoColorsBundle logoColorsBundle) throws PersistenceException {
+    public boolean updateLogoColors(long playerId, LogoColorsBundle logoColorsBundle) {
         String logoColorUpdateQuery = """
                 UPDATE player_configurations
                 SET logo_border_color = ?, logo_main_color = ?, logo_accent_color = ?, logo_background_color = ?

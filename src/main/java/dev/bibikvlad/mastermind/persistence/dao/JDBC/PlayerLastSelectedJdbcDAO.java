@@ -19,7 +19,7 @@ public class PlayerLastSelectedJdbcDAO implements PlayerLastSelectedDAO {
     }
 
     @Override
-    public long getLastSelectedPlayerId() throws PersistenceException {
+    public long getLastSelectedPlayerId() {
         String getLastSelectedQuery = """
                 SELECT player_id
                 FROM player_last_selected
@@ -37,7 +37,7 @@ public class PlayerLastSelectedJdbcDAO implements PlayerLastSelectedDAO {
     }
 
     @Override
-    public Optional<Player> getLastSelectedPlayer() throws PersistenceException {
+    public Optional<Player> getLastSelectedPlayer() {
         String getLastSelectedPlayerQuery = """
                 SELECT PLAYER.player_id, PLAYER.player_name, PLAYER.created_at,
                        CONF.language, CONF.logo_border_color, CONF.logo_main_color,
@@ -63,7 +63,7 @@ public class PlayerLastSelectedJdbcDAO implements PlayerLastSelectedDAO {
     }
 
     @Override
-    public boolean saveOrUpdate(long playerId) throws PersistenceException {
+    public boolean saveOrUpdate(long playerId) {
         String saveOrUpdateQuery = """
                 INSERT INTO player_last_selected (player_id, last_selected_at)
                 VALUES (?, CURRENT_TIMESTAMP)

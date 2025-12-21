@@ -20,7 +20,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
     }
 
     @Override
-    public List<Player> findAll() throws PersistenceException {
+    public List<Player> findAll() {
         List<Player> players = new ArrayList<>();
         String fetchAllPlayersQuery = """
                 SELECT PLAYER.player_id, player_name, created_at, language, logo_border_color,
@@ -44,7 +44,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
     }
 
     @Override
-    public Optional<Player> findById(long playerId) throws PersistenceException {
+    public Optional<Player> findById(long playerId) {
         String fetchPlayerQuery = """
                         SELECT PLAYER.player_id, player_name, created_at, language, logo_border_color,
                                logo_main_color, logo_accent_color, logo_background_color
@@ -63,7 +63,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
     }
 
     @Override
-    public Optional<Player> findByName(String playerName) throws PersistenceException {
+    public Optional<Player> findByName(String playerName) {
         String fetchPlayerQuery = """
                         SELECT PLAYER.player_id, player_name, created_at, language, logo_border_color,
                                logo_main_color, logo_accent_color, logo_background_color
@@ -92,7 +92,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
     }
 
     @Override
-    public boolean save(Player player) throws PersistenceException {
+    public boolean save(Player player) {
         String addPlayerQuery = "INSERT INTO players (player_name) VALUES (?)";
         String addPlayerConfigQuery = "INSERT INTO player_configurations (player_id, language, logo_border_color,  " +
                 "logo_main_color, logo_accent_color, logo_background_color) VALUES (?, ?, ?, ?, ?, ?)";
@@ -140,7 +140,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
     }
 
     @Override
-    public boolean update(Player player) throws PersistenceException {
+    public boolean update(Player player) {
         String updatePlayerQuery = """
                         UPDATE players
                         SET player_name = ?
@@ -179,7 +179,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
     }
 
     @Override
-    public boolean updatePlayerName(long id, String name) throws PersistenceException {
+    public boolean updatePlayerName(long id, String name) {
         String updatePlayerNameQuery = """
                         UPDATE players
                         SET player_name = ?
@@ -200,7 +200,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
     }
 
     @Override
-    public boolean delete(Player player) throws PersistenceException {
+    public boolean delete(Player player) {
         String deletePlayerQuery = """
                             DELETE FROM players
                             WHERE player_name = ?;
@@ -218,7 +218,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
     }
 
     @Override
-    public boolean deleteById(long playerId) throws PersistenceException {
+    public boolean deleteById(long playerId) {
         String deletePlayerQuery = """
                         DELETE FROM players
                         WHERE player_id = ?;
@@ -236,7 +236,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
     }
 
     @Override
-    public boolean deleteByName(String playerName) throws PersistenceException {
+    public boolean deleteByName(String playerName) {
         String deletePlayerQuery = """
                         DELETE FROM players
                         WHERE player_name = ?;
@@ -254,7 +254,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
     }
 
     @Override
-    public boolean existsById(long playerId) throws PersistenceException {
+    public boolean existsById(long playerId) {
         String playerQuery = """
                             SELECT 1 FROM players
                             WHERE player_id = ?;
@@ -272,7 +272,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
     }
 
     @Override
-    public boolean existsByName(String playerName) throws PersistenceException {
+    public boolean existsByName(String playerName) {
         String playerQuery = """
                             SELECT 1 FROM players
                             WHERE player_name = ?;
@@ -290,7 +290,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
     }
 
     @Override
-    public int count() throws PersistenceException {
+    public int count() {
         String countQuery = "SELECT COUNT(player_id) FROM players";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(countQuery)) {
