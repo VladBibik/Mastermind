@@ -4,9 +4,9 @@ import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.model.game.Game;
 import dev.bibikvlad.mastermind.persistence.dao.GamesDAO;
-import dev.bibikvlad.mastermind.persistence.database.DatabaseContext;
 import dev.bibikvlad.mastermind.persistence.mappers.GameMapper;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GamesJdbcDAO implements GamesDAO {
+    private final Connection connection;
+
+    public GamesJdbcDAO(Connection connection) {
+        this.connection = connection;
+    }
+
     @Override
     public List<Game> findAll() {
         List<Game> games = new ArrayList<>();
@@ -22,7 +28,7 @@ public class GamesJdbcDAO implements GamesDAO {
                 FROM games
                 """;
 
-        try (PreparedStatement preparedStatement = DatabaseContext.getConnection().prepareStatement(findAllQuery)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(findAllQuery)) {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -44,8 +50,7 @@ public class GamesJdbcDAO implements GamesDAO {
                 WHERE player_id = ?
                 """;
 
-        try (PreparedStatement preparedStatement = DatabaseContext.getConnection()
-                .prepareStatement(findAllByPlayerIdQuery)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(findAllByPlayerIdQuery)) {
             preparedStatement.setLong(1, playerId);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -68,7 +73,7 @@ public class GamesJdbcDAO implements GamesDAO {
                 VALUES(?, ?, ?, ?)
                 """;
 
-        try (PreparedStatement preparedStatement = DatabaseContext.getConnection().prepareStatement(saveQuery)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(saveQuery)) {
             preparedStatement.setLong(1, playerId);
             preparedStatement.setLong(2, gameData.getGameDuration());
             preparedStatement.setString(3, gameData.getGameOutcome().getResult().name());
@@ -90,7 +95,7 @@ public class GamesJdbcDAO implements GamesDAO {
                 FROM games
                 """;
 
-        try (PreparedStatement preparedStatement = DatabaseContext.getConnection().prepareStatement(countQuery)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(countQuery)) {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
@@ -111,8 +116,7 @@ public class GamesJdbcDAO implements GamesDAO {
                 WHERE player_id = ?
                 """;
 
-        try (PreparedStatement preparedStatement = DatabaseContext.getConnection()
-                .prepareStatement(countByPlayerIdQuery)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(countByPlayerIdQuery)) {
             preparedStatement.setLong(1, playerId);
 
             ResultSet resultSet = preparedStatement.executeQuery();
