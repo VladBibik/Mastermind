@@ -58,6 +58,6 @@ public class GamesSQLRepository implements GamesRepository {
 
     @Override
     public int countByPlayerId(long playerId) {
-        return 0;
+        return gamesDAO.countByPlayerId(playerId);
     }
 }
