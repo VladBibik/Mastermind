@@ -19,7 +19,7 @@ public class GamesService {
         return gamesRepository.save(newGame.getPlayerId(), newGame.getGameData());
     }
 
-    public boolean isGamePlayed(long playerId) {
+    public boolean isPlayerPlayed(long playerId) {
         return gamesRepository.countByPlayerId(playerId) > 0;
     }
 }
