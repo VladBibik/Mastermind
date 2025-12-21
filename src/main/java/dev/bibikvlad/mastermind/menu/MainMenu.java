@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.menu;
 
 import dev.bibikvlad.mastermind.app.bootstrap.GamesServiceGeneratorTEMP;
 import dev.bibikvlad.mastermind.app.game.MastermindGameLauncher;
+import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
@@ -95,7 +96,9 @@ public class MainMenu implements Menu {
         MastermindGameLauncher mastermindGameLauncher = new MastermindGameLauncher(localizationContext,
                 currentPlayer.getPlayerConfig().getLogoColorsBundle());
 
-        mastermindGameLauncher.launch();
+        GameData gameData = mastermindGameLauncher.launch();
+
+        gamesService.save(currentPlayer.getId(), gameData);
     }
 
     private Menu playerMenu() {
