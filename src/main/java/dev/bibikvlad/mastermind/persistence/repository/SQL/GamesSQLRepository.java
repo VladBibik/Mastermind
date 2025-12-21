@@ -53,7 +53,7 @@ public class GamesSQLRepository implements GamesRepository {
 
     @Override
     public int count() throws PersistenceException {
-        return 0;
+        return gamesDAO.count();
     }
 
     @Override
