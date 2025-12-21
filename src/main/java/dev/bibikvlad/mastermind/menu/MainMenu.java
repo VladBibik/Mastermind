@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.menu;
 
+import dev.bibikvlad.mastermind.app.bootstrap.GamesServiceGeneratorTEMP;
 import dev.bibikvlad.mastermind.app.game.MastermindGameLauncher;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
@@ -7,6 +8,7 @@ import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.player.PlayerMenu;
 import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
+import dev.bibikvlad.mastermind.services.GamesService;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
 import java.util.Optional;
@@ -18,6 +20,9 @@ public class MainMenu implements Menu {
 
     private final Player currentPlayer;
 
+    private final GamesService gamesService;
+
+    //TODO: Need to rethink GamesService injection logic
     public MainMenu(LocalizationContext localizationContext,
                     MastermindUserInputParser parser,
                     PlayerService playerService) {
@@ -26,6 +31,7 @@ public class MainMenu implements Menu {
         this.playerService = playerService;
         this.currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
                 () -> new IllegalStateException("No last selected player found!"));
+        this.gamesService = GamesServiceGeneratorTEMP.get();
     }
 
     @Override
