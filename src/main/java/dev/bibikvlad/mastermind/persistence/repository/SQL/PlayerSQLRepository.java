@@ -19,22 +19,22 @@ public class PlayerSQLRepository implements PlayerRepository {
     }
 
     @Override
-    public List<Player> findAll() throws PersistenceException {
+    public List<Player> findAll() {
         return playerDAO.findAll();
     }
 
     @Override
-    public Optional<Player> findById(long id) throws PersistenceException {
+    public Optional<Player> findById(long id) {
         return playerDAO.findById(id);
     }
 
     @Override
-    public Optional<Player> findByName(String name) throws PersistenceException {
+    public Optional<Player> findByName(String name) {
         return playerDAO.findByName(name);
     }
 
     @Override
-    public boolean save(Player player) throws PersistenceException {
+    public boolean save(Player player) {
         boolean result;
 
         try {
@@ -50,14 +50,14 @@ public class PlayerSQLRepository implements PlayerRepository {
                 exception.addSuppressed(rollbackException);
             }
 
-            throw new PersistenceException("Failed to save player " + player.getPlayerName(), exception);
+            throw exception;
         }
 
         return result;
     }
 
     @Override
-    public boolean update(Player player) throws PersistenceException {
+    public boolean update(Player player) {
         boolean result;
 
         try {
@@ -73,14 +73,14 @@ public class PlayerSQLRepository implements PlayerRepository {
                 exception.addSuppressed(rollbackException);
             }
 
-            throw new PersistenceException("Failed to update player " + player.getPlayerName(), exception);
+            throw exception;
         }
 
         return result;
     }
 
     @Override
-    public boolean updatePlayerName(long id, String name) throws PersistenceException {
+    public boolean updatePlayerName(long id, String name) {
         boolean result;
         try {
             transactionManager.begin();
@@ -95,14 +95,14 @@ public class PlayerSQLRepository implements PlayerRepository {
                 exception.addSuppressed(rollbackException);
             }
 
-            throw new PersistenceException("Failed to update player's name " + name, exception);
+            throw exception;
         }
 
         return result;
     }
 
     @Override
-    public void delete(Player player) throws PersistenceException {
+    public void delete(Player player) {
         try {
             transactionManager.begin();
 
@@ -116,12 +116,12 @@ public class PlayerSQLRepository implements PlayerRepository {
                 exception.addSuppressed(rollbackException);
             }
 
-            throw new PersistenceException("Failed to delete player " + player.getPlayerName(), exception);
+            throw exception;
         }
     }
 
     @Override
-    public void deleteById(long id) throws PersistenceException {
+    public void deleteById(long id) {
         try {
             transactionManager.begin();
 
@@ -135,12 +135,12 @@ public class PlayerSQLRepository implements PlayerRepository {
                 exception.addSuppressed(rollbackException);
             }
 
-            throw new PersistenceException("Failed to delete player with id: " + id, exception);
+            throw exception;
         }
     }
 
     @Override
-    public void deleteByName(String name) throws PersistenceException {
+    public void deleteByName(String name) {
         try {
             transactionManager.begin();
 
@@ -154,22 +154,22 @@ public class PlayerSQLRepository implements PlayerRepository {
                 exception.addSuppressed(rollbackException);
             }
 
-            throw new PersistenceException("Failed to delete player with name: " + name, exception);
+            throw exception;
         }
     }
 
     @Override
-    public boolean existsById(long id) throws PersistenceException {
+    public boolean existsById(long id) {
         return playerDAO.existsById(id);
     }
 
     @Override
-    public boolean existsByName(String name) throws PersistenceException {
+    public boolean existsByName(String name) {
         return playerDAO.existsByName(name);
     }
 
     @Override
-    public int  count() throws PersistenceException {
+    public int  count() {
         return playerDAO.count();
     }
 }

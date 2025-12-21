@@ -12,23 +12,24 @@ public class PlayerLastSelectedSQLRepository implements PlayerLastSelectedReposi
     private final PlayerLastSelectedDAO playerLastSelectedDAO;
     private final TransactionManager transactionManager;
 
-    public PlayerLastSelectedSQLRepository(PlayerLastSelectedDAO playerLastSelectedDAO, TransactionManager transactionManager) {
+    public PlayerLastSelectedSQLRepository(PlayerLastSelectedDAO playerLastSelectedDAO,
+                                           TransactionManager transactionManager) {
         this.playerLastSelectedDAO = playerLastSelectedDAO;
         this.transactionManager = transactionManager;
     }
 
     @Override
-    public long getLastSelectedPlayerId() throws PersistenceException {
+    public long getLastSelectedPlayerId() {
         return playerLastSelectedDAO.getLastSelectedPlayerId();
     }
 
     @Override
-    public Optional<Player> getLastSelectedPlayer() throws PersistenceException {
+    public Optional<Player> getLastSelectedPlayer() {
         return playerLastSelectedDAO.getLastSelectedPlayer();
     }
 
     @Override
-    public boolean saveOrUpdate(long id) throws PersistenceException {
+    public boolean saveOrUpdate(long id) {
         boolean result;
 
         try {

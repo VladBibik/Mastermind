@@ -24,12 +24,12 @@ public class GamesSQLRepository implements GamesRepository {
     }
 
     @Override
-    public List<Game> findAllByPlayerId(long playerId) throws PersistenceException {
+    public List<Game> findAllByPlayerId(long playerId) {
         return gamesDAO.findAllByPlayerId(playerId);
     }
 
     @Override
-    public boolean save(long playerId, GameData gameData) throws PersistenceException {
+    public boolean save(long playerId, GameData gameData) {
         boolean result;
 
         try {
@@ -45,7 +45,7 @@ public class GamesSQLRepository implements GamesRepository {
                 exception.addSuppressed(rollbackException);
             }
 
-            throw new PersistenceException("Failed to save a game for a player with ID: " + playerId, exception);
+            throw exception;
         }
 
         return result;

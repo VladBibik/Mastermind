@@ -20,12 +20,12 @@ public class PlayerConfigSQLRepository implements PlayerConfigRepository {
     }
 
     @Override
-    public Optional<PlayerConfig> findById(long playerId) throws PersistenceException {
+    public Optional<PlayerConfig> findById(long playerId) {
         return playerConfigDAO.findById(playerId);
     }
 
     @Override
-    public boolean update(long playerId, PlayerConfig playerConfig) throws PersistenceException {
+    public boolean update(long playerId, PlayerConfig playerConfig) {
         boolean result;
 
         try {
@@ -48,7 +48,7 @@ public class PlayerConfigSQLRepository implements PlayerConfigRepository {
     }
 
     @Override
-    public boolean updateLocale(long playerId, LocaleType locale) throws PersistenceException {
+    public boolean updateLocale(long playerId, LocaleType locale) {
         boolean result;
 
         try {
@@ -71,7 +71,7 @@ public class PlayerConfigSQLRepository implements PlayerConfigRepository {
     }
 
     @Override
-    public boolean updateLogoColors(long playerId, LogoColorsBundle logoColorsBundle) throws PersistenceException {
+    public boolean updateLogoColors(long playerId, LogoColorsBundle logoColorsBundle) {
         boolean result;
 
         try {
