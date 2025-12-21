@@ -13,4 +13,8 @@ public class GamesService {
     public boolean save(long playerId, GameData gameData) {
         return gamesRepository.save(playerId, gameData);
     }
+
+    public boolean isGamePlayed(long playerId) {
+        return gamesRepository.countByPlayerId(playerId) > 0;
+    }
 }
