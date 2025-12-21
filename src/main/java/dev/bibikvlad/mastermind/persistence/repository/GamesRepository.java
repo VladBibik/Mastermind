@@ -7,11 +7,11 @@ import dev.bibikvlad.mastermind.model.game.Game;
 import java.util.List;
 
 public interface GamesRepository {
-    List<Game> findAll() throws PersistenceException;
+    List<Game> findAll();
 
-    List<Game> findAllByPlayerId(long playerId) throws PersistenceException;
+    List<Game> findAllByPlayerId(long playerId);
 
-    boolean save(long playerId, GameData gameData) throws PersistenceException;
+    boolean save(long playerId, GameData gameData);
 
-    int count() throws PersistenceException;
+    int count();
 }

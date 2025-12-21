@@ -6,9 +6,9 @@ import dev.bibikvlad.mastermind.model.player.Player;
 import java.util.Optional;
 
 public interface PlayerLastSelectedRepository {
-    long getLastSelectedPlayerId() throws PersistenceException;
+    long getLastSelectedPlayerId();
 
-    Optional<Player> getLastSelectedPlayer() throws PersistenceException;
+    Optional<Player> getLastSelectedPlayer();
 
-    boolean saveOrUpdate(long id) throws PersistenceException;
+    boolean saveOrUpdate(long id);
 }

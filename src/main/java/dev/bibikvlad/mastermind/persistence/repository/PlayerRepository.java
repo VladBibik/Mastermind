@@ -7,27 +7,27 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PlayerRepository {
-    List<Player> findAll() throws PersistenceException;
+    List<Player> findAll();
 
-    Optional<Player> findById(long id) throws PersistenceException;
+    Optional<Player> findById(long id);
 
-    Optional<Player> findByName(String name) throws PersistenceException;
+    Optional<Player> findByName(String name);
 
-    boolean save(Player player) throws PersistenceException;
+    boolean save(Player player);
 
-    boolean update(Player player) throws PersistenceException;
+    boolean update(Player player);
 
-    boolean updatePlayerName(long id, String name) throws PersistenceException;
+    boolean updatePlayerName(long id, String name);
 
-    void delete(Player player) throws PersistenceException;
+    void delete(Player player);
 
-    void deleteById(long id) throws PersistenceException;
+    void deleteById(long id);
 
-    void deleteByName(String name) throws PersistenceException;
+    void deleteByName(String name);
 
-    boolean existsById(long id) throws PersistenceException;
+    boolean existsById(long id);
 
-    boolean existsByName(String name) throws PersistenceException;
+    boolean existsByName(String name);
 
-    int count() throws PersistenceException;
+    int count();
 }
