@@ -55,4 +55,9 @@ public class GamesSQLRepository implements GamesRepository {
     public int count() throws PersistenceException {
         return 0;
     }
+
+    @Override
+    public int countByPlayerId(long playerId) {
+        return 0;
+    }
 }
