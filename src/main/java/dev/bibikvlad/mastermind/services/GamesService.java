@@ -22,4 +22,8 @@ public class GamesService {
     public boolean isPlayerPlayed(long playerId) {
         return gamesRepository.countByPlayerId(playerId) > 0;
     }
+
+    public boolean isAnyGamesPlayed() {
+        return gamesRepository.count() > 0;
+    }
 }
