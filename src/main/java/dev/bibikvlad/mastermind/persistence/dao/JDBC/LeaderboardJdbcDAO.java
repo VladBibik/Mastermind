@@ -6,9 +6,16 @@ import dev.bibikvlad.mastermind.model.leaderboard.WinRateLeaderboardEntry;
 import dev.bibikvlad.mastermind.model.leaderboard.WinsLeaderboardEntry;
 import dev.bibikvlad.mastermind.persistence.dao.LeaderboardDAO;
 
+import java.sql.Connection;
 import java.util.List;
 
 public class LeaderboardJdbcDAO implements LeaderboardDAO {
+    private final Connection connection;
+
+    public LeaderboardJdbcDAO(Connection connection) {
+        this.connection = connection;
+    }
+
     @Override
     public List<TimeLeaderboardEntry> getTimeLeaderboard() {
         return List.of();
