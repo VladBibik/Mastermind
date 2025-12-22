@@ -10,9 +10,9 @@ public class MillisecondsToTimeFormatter {
 
         return new Time(
                 duration.toHours(),
-                duration.toMinutes(),
-                duration.toSeconds(),
-                duration.toMillis()
+                duration.toMinutesPart(),
+                duration.toSecondsPart(),
+                duration.toMillisPart()
         );
     }
 }
