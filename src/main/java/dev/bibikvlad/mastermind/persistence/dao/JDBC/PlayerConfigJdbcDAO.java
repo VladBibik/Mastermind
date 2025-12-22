@@ -57,10 +57,10 @@ public class PlayerConfigJdbcDAO implements PlayerConfigDAO {
             LogoColorsBundle logoColorsBundle = playerConfig.logoColorsBundle();
 
             preparedStatement.setString(1, playerConfig.locale().name());
-            preparedStatement.setString(2, logoColorsBundle.getLogoBorderColor().name());
-            preparedStatement.setString(3, logoColorsBundle.getLogoMainColor().name());
-            preparedStatement.setString(4, logoColorsBundle.getLogoAccentColor().name());
-            preparedStatement.setString(5, logoColorsBundle.getLogoBackgroundColor().name());
+            preparedStatement.setString(2, logoColorsBundle.logoBorderColor().name());
+            preparedStatement.setString(3, logoColorsBundle.logoMainColor().name());
+            preparedStatement.setString(4, logoColorsBundle.logoAccentColor().name());
+            preparedStatement.setString(5, logoColorsBundle.logoBackgroundColor().name());
             preparedStatement.setLong(6, playerId);
             rowsUpdated = preparedStatement.executeUpdate();
         } catch (SQLException exception) {
@@ -102,10 +102,10 @@ public class PlayerConfigJdbcDAO implements PlayerConfigDAO {
         int rowsUpdated;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(logoColorUpdateQuery)) {
-            preparedStatement.setString(1, logoColorsBundle.getLogoBorderColor().name());
-            preparedStatement.setString(2, logoColorsBundle.getLogoMainColor().name());
-            preparedStatement.setString(3, logoColorsBundle.getLogoAccentColor().name());
-            preparedStatement.setString(4, logoColorsBundle.getLogoBackgroundColor().name());
+            preparedStatement.setString(1, logoColorsBundle.logoBorderColor().name());
+            preparedStatement.setString(2, logoColorsBundle.logoMainColor().name());
+            preparedStatement.setString(3, logoColorsBundle.logoAccentColor().name());
+            preparedStatement.setString(4, logoColorsBundle.logoBackgroundColor().name());
             preparedStatement.setLong(5, playerId);
             rowsUpdated = preparedStatement.executeUpdate();
         } catch (SQLException exception) {

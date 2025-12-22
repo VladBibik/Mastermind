@@ -129,9 +129,9 @@ public class LogoColorSelectionMenu implements Menu {
 
         logoColorsBundle = new LogoColorsBundle(
                 borderColor,
-                logoColorsBundle.getLogoMainColor(),
-                logoColorsBundle.getLogoAccentColor(),
-                logoColorsBundle.getLogoBackgroundColor());
+                logoColorsBundle.logoMainColor(),
+                logoColorsBundle.logoAccentColor(),
+                logoColorsBundle.logoBackgroundColor());
     }
 
     private void changeMainColor() {
@@ -142,10 +142,10 @@ public class LogoColorSelectionMenu implements Menu {
         }
 
         logoColorsBundle = new LogoColorsBundle(
-                logoColorsBundle.getLogoBorderColor(),
+                logoColorsBundle.logoBorderColor(),
                 mainColor,
-                logoColorsBundle.getLogoAccentColor(),
-                logoColorsBundle.getLogoBackgroundColor());
+                logoColorsBundle.logoAccentColor(),
+                logoColorsBundle.logoBackgroundColor());
     }
 
     private void changeAccentColor() {
@@ -156,10 +156,10 @@ public class LogoColorSelectionMenu implements Menu {
         }
 
         logoColorsBundle = new LogoColorsBundle(
-                logoColorsBundle.getLogoBorderColor(),
-                logoColorsBundle.getLogoMainColor(),
+                logoColorsBundle.logoBorderColor(),
+                logoColorsBundle.logoMainColor(),
                 accentColor,
-                logoColorsBundle.getLogoBackgroundColor());
+                logoColorsBundle.logoBackgroundColor());
     }
 
     private void changeBackgroundColor() {
@@ -170,9 +170,9 @@ public class LogoColorSelectionMenu implements Menu {
         }
 
         logoColorsBundle = new LogoColorsBundle(
-                logoColorsBundle.getLogoBorderColor(),
-                logoColorsBundle.getLogoMainColor(),
-                logoColorsBundle.getLogoAccentColor(),
+                logoColorsBundle.logoBorderColor(),
+                logoColorsBundle.logoMainColor(),
+                logoColorsBundle.logoAccentColor(),
                 backgroundColor);
     }
 

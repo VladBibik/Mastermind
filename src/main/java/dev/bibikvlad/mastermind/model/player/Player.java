@@ -56,13 +56,13 @@ public class Player {
                 + "\n    configurations:"
                 + "\n        Selected Language: " + playerConfig.locale().getLanguageName()
                 + "\n        Selected Logo Border Color: " + playerConfig.logoColorsBundle()
-                .getLogoBorderColor().getDisplayName()
+                .logoBorderColor().getDisplayName()
                 + "\n        Selected Logo Main Color: " + playerConfig.logoColorsBundle()
-                .getLogoMainColor().getDisplayName()
+                .logoMainColor().getDisplayName()
                 + "\n        Selected Logo Accent Color: " + playerConfig.logoColorsBundle()
-                .getLogoAccentColor().getDisplayName()
+                .logoAccentColor().getDisplayName()
                 + "\n        Selected Logo Background Color: " + playerConfig.logoColorsBundle()
-                .getLogoBackgroundColor().getDisplayName()
+                .logoBackgroundColor().getDisplayName()
                 + "\n";
     }
 }

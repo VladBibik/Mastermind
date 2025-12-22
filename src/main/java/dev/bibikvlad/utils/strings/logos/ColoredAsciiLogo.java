@@ -17,10 +17,10 @@ public class ColoredAsciiLogo {
                 <background><borderColor>█▌<accentColor>░░░░░     ░░░░░░░░░░   ░░░░░  ░░░░░░░░░     ░░░░░    ░░░░░░░░░░ ░░░░░   ░░░░░░░░░░     ░░░░░░░░░░░░░░░    ░░░░░░░░░░░░░░░   <borderColor>▐█<reset>
                 <background><borderColor>████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████<reset>
                 """
-                .replace("<borderColor>", logoColorsBundle.getLogoBorderColor().getCode())
-                .replace("<mainColor>",  logoColorsBundle.getLogoMainColor().getCode())
-                .replace("<accentColor>", logoColorsBundle.getLogoAccentColor().getCode())
-                .replace("<background>", logoColorsBundle.getLogoBackgroundColor().getCode())
+                .replace("<borderColor>", logoColorsBundle.logoBorderColor().getCode())
+                .replace("<mainColor>",  logoColorsBundle.logoMainColor().getCode())
+                .replace("<accentColor>", logoColorsBundle.logoAccentColor().getCode())
+                .replace("<background>", logoColorsBundle.logoBackgroundColor().getCode())
                 .replace("<reset>", ConsoleColor.RESET.getCode());
     }
 }
