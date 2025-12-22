@@ -1,6 +1,6 @@
 package dev.bibikvlad.utils.formatters;
 
-import dev.bibikvlad.mastermind.model.Time;
+import dev.bibikvlad.mastermind.values.Time;
 
 import java.time.Duration;
 
