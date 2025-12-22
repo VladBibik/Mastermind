@@ -16,7 +16,7 @@ public class GamesService {
     }
 
     public boolean save(NewGame newGame) {
-        return gamesRepository.save(newGame.getPlayerId(), newGame.getGameData());
+        return gamesRepository.save(newGame.playerId(), newGame.gameData());
     }
 
     public boolean isPlayerPlayed(long playerId) {
