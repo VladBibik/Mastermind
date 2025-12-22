@@ -54,9 +54,9 @@ public class PlayerConfigJdbcDAO implements PlayerConfigDAO {
         int rowsUpdated;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(updateConfigQuery)) {
-            LogoColorsBundle logoColorsBundle = playerConfig.getLogoColorsBundle();
+            LogoColorsBundle logoColorsBundle = playerConfig.logoColorsBundle();
 
-            preparedStatement.setString(1, playerConfig.getLocale().name());
+            preparedStatement.setString(1, playerConfig.locale().name());
             preparedStatement.setString(2, logoColorsBundle.getLogoBorderColor().name());
             preparedStatement.setString(3, logoColorsBundle.getLogoMainColor().name());
             preparedStatement.setString(4, logoColorsBundle.getLogoAccentColor().name());

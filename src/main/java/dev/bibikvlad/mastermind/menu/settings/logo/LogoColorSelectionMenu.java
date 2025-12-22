@@ -30,7 +30,7 @@ public class LogoColorSelectionMenu implements Menu {
         this.colorSelectionMenu = new ColorSelectionMenu(localizationContext, parser);
         this.currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
                 () -> new IllegalStateException("No last selected player found!"));
-        this.logoColorsBundle = currentPlayer.getPlayerConfig().getLogoColorsBundle();
+        this.logoColorsBundle = currentPlayer.getPlayerConfig().logoColorsBundle();
     }
 
     @Override

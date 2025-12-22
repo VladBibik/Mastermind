@@ -9,7 +9,6 @@ import dev.bibikvlad.mastermind.menu.MainMenu;
 import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.menu.settings.logo.LogoColorSelectionMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
-import dev.bibikvlad.mastermind.model.player.PlayerConfig;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
 import java.util.Optional;
@@ -79,7 +78,7 @@ public class SettingsMenu implements Menu {
     }
 
     private void checkSelectedLanguage(LocaleType localeType) {
-        if (localeType.equals(currentPlayer.getPlayerConfig().getLocale())) {
+        if (localeType.equals(currentPlayer.getPlayerConfig().locale())) {
             System.out.println("Language is already selected!");
         } else {
             playerService.updatePlayerLocale(currentPlayer.getId(), localeType);

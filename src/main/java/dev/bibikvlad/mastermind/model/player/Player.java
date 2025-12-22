@@ -54,14 +54,14 @@ public class Player {
                 + ", Player Name = " + playerName
                 + ", Creation Date = " + SQLiteTimestampFormatter.format(creationDate)
                 + "\n    configurations:"
-                + "\n        Selected Language: " + playerConfig.getLocale().getLanguageName()
-                + "\n        Selected Logo Border Color: " + playerConfig.getLogoColorsBundle()
+                + "\n        Selected Language: " + playerConfig.locale().getLanguageName()
+                + "\n        Selected Logo Border Color: " + playerConfig.logoColorsBundle()
                 .getLogoBorderColor().getDisplayName()
-                + "\n        Selected Logo Main Color: " + playerConfig.getLogoColorsBundle()
+                + "\n        Selected Logo Main Color: " + playerConfig.logoColorsBundle()
                 .getLogoMainColor().getDisplayName()
-                + "\n        Selected Logo Accent Color: " + playerConfig.getLogoColorsBundle()
+                + "\n        Selected Logo Accent Color: " + playerConfig.logoColorsBundle()
                 .getLogoAccentColor().getDisplayName()
-                + "\n        Selected Logo Background Color: " + playerConfig.getLogoColorsBundle()
+                + "\n        Selected Logo Background Color: " + playerConfig.logoColorsBundle()
                 .getLogoBackgroundColor().getDisplayName()
                 + "\n";
     }

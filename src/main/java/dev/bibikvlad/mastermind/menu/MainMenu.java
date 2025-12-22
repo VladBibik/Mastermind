@@ -89,12 +89,12 @@ public class MainMenu implements Menu {
 
     private Menu newPlayerCreation() {
         return new NewPlayerCreation(parser, playerService, localizationContext,
-                currentPlayer.getPlayerConfig().getLocale(), this);
+                currentPlayer.getPlayerConfig().locale(), this);
     }
 
     private void launchGame() {
         MastermindGameLauncher mastermindGameLauncher = new MastermindGameLauncher(localizationContext,
-                currentPlayer.getPlayerConfig().getLogoColorsBundle());
+                currentPlayer.getPlayerConfig().logoColorsBundle());
 
         GameData gameData = mastermindGameLauncher.launch();
 
