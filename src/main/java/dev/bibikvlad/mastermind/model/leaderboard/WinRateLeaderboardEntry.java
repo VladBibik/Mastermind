@@ -1,4 +1,4 @@
 package dev.bibikvlad.mastermind.model.leaderboard;
 
-public record WinRateLeaderboardEntry(String playerName, double winPercentage) {
+public record WinRateLeaderboardEntry(String playerName, double winRate) {
 }
