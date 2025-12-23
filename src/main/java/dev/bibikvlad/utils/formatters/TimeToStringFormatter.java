@@ -15,11 +15,3 @@ public class TimeToStringFormatter {
         return stringBuilder.toString().trim();
     }
 }
-
-class Test {
-    public static void main(String[] args) {
-        Time time = MillisecondsToTimeFormatter.format(890645645);
-
-        System.out.println(TimeToStringFormatter.format(time));
-    }
-}
