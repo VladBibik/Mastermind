@@ -3,6 +3,7 @@ package dev.bibikvlad.mastermind.persistence.dao.JDBC;
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.model.leaderboard.TimeLeaderboardEntry;
 import dev.bibikvlad.mastermind.model.leaderboard.TurnsLeaderboardEntry;
+import dev.bibikvlad.mastermind.model.leaderboard.WinPercentageLeaderboardEntry;
 import dev.bibikvlad.mastermind.model.leaderboard.WinRateLeaderboardEntry;
 import dev.bibikvlad.mastermind.model.leaderboard.WinsLeaderboardEntry;
 import dev.bibikvlad.mastermind.persistence.dao.LeaderboardDAO;
@@ -56,7 +57,7 @@ public class LeaderboardJdbcDAO implements LeaderboardDAO {
     }
 
     @Override
-    public List<WinRateLeaderboardEntry> getWinRateLeaderboard() {
+    public List<WinPercentageLeaderboardEntry> getWinRateLeaderboard() {
         return List.of();
     }
 
