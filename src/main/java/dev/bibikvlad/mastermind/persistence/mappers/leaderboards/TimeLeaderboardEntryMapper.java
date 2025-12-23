@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.persistence.mappers;
+package dev.bibikvlad.mastermind.persistence.mappers.leaderboards;
 
 import dev.bibikvlad.mastermind.model.leaderboard.TimeLeaderboardEntry;
 import dev.bibikvlad.utils.formatters.MillisecondsToTimeFormatter;
