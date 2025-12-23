@@ -1,4 +1,6 @@
 package dev.bibikvlad.mastermind.model.leaderboard;
 
-public record TimeLeaderboardEntry(String playerName, long durationMilliseconds) {
+import dev.bibikvlad.mastermind.values.Time;
+
+public record TimeLeaderboardEntry(String playerName, Time gameDuration) {
 }
