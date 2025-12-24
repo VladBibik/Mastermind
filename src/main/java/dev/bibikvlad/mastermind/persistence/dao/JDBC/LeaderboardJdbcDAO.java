@@ -8,6 +8,7 @@ import dev.bibikvlad.mastermind.model.leaderboard.WinsLeaderboardEntry;
 import dev.bibikvlad.mastermind.persistence.dao.LeaderboardDAO;
 import dev.bibikvlad.mastermind.persistence.mappers.leaderboards.TimeLeaderboardEntryMapper;
 import dev.bibikvlad.mastermind.persistence.mappers.leaderboards.TurnsLeaderboardEntryMapper;
+import dev.bibikvlad.mastermind.persistence.mappers.leaderboards.WinLeaderboardEntryMapper;
 import dev.bibikvlad.mastermind.persistence.mappers.leaderboards.WinPercentageMapper;
 
 import java.sql.Connection;
@@ -109,6 +110,26 @@ public class LeaderboardJdbcDAO implements LeaderboardDAO {
 
     @Override
     public List<WinsLeaderboardEntry> getWinsLeaderboard() {
-        return List.of();
+        List<WinsLeaderboardEntry> winsLeaderboardEntries = new ArrayList<>();
+        String getWinsLeaderboardQuery = """
+                SELECT PLAYER.player_name, COUNT(*) as number_of_wins
+                FROM games GAME
+                         JOIN players PLAYER
+                              ON GAME.player_id = PLAYER.player_id
+                WHERE GAME.result = 'WIN'
+                GROUP BY PLAYER.player_id, PLAYER.player_name
+                """;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(getWinsLeaderboardQuery)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                winsLeaderboardEntries.add(WinLeaderboardEntryMapper.map(resultSet));
+            }
+
+            return winsLeaderboardEntries;
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to fetch leaderboard based on the number of wins", exception);
+        }
     }
 }
