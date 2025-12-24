@@ -33,8 +33,8 @@ public class LeaderboardJdbcDAO implements LeaderboardDAO {
                 JOIN players PLAYER
                     ON GAME.player_id = PLAYER.player_id
                 WHERE result = 'WIN'
-                ORDER BY GAME.number_of_turns ASC,
-                         GAME.duration_milliseconds ASC,
+                ORDER BY GAME.duration_milliseconds ASC,
+                         GAME.number_of_turns ASC,
                          PLAYER.player_name ASC
                 LIMIT 10
                 """;
