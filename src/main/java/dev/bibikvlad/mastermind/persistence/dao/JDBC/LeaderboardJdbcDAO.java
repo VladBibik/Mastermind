@@ -7,6 +7,7 @@ import dev.bibikvlad.mastermind.model.leaderboard.WinPercentageLeaderboardEntry;
 import dev.bibikvlad.mastermind.model.leaderboard.WinsLeaderboardEntry;
 import dev.bibikvlad.mastermind.persistence.dao.LeaderboardDAO;
 import dev.bibikvlad.mastermind.persistence.mappers.leaderboards.TimeLeaderboardEntryMapper;
+import dev.bibikvlad.mastermind.persistence.mappers.leaderboards.WinPercentageMapper;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -57,7 +58,30 @@ public class LeaderboardJdbcDAO implements LeaderboardDAO {
 
     @Override
     public List<WinPercentageLeaderboardEntry> getWinRateLeaderboard() {
-        return List.of();
+        List<WinPercentageLeaderboardEntry> winsLeaderboardEntries = new ArrayList<>();
+        String getWinRateLeaderboardQuery = """
+                SELECT
+                    PLAYER.player_name,
+                    COUNT(*) FILTER (WHERE GAME.result = 'WIN') * 100.0 / COUNT(*) AS win_percentage
+                FROM games GAME
+                         JOIN players PLAYER
+                              ON GAME.player_id = PLAYER.player_id
+                GROUP BY PLAYER.player_id, PLAYER.player_name
+                
+                """;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(getWinRateLeaderboardQuery)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                winsLeaderboardEntries.add(WinPercentageMapper.map(resultSet));
+            }
+
+            return winsLeaderboardEntries;
+
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to fetch win percentage based leaderboard data", exception);
+        }
     }
 
     @Override
