@@ -30,8 +30,8 @@ public class LeaderboardJdbcDAO implements LeaderboardDAO {
         String timeLeaderboardQuery = """
                 SELECT PLAYER.player_name, GAME.duration_milliseconds
                 FROM games GAME
-                JOIN players PLAYER
-                    ON GAME.player_id = PLAYER.player_id
+                    JOIN players PLAYER
+                        ON GAME.player_id = PLAYER.player_id
                 WHERE result = 'WIN'
                 ORDER BY GAME.duration_milliseconds ASC,
                          GAME.number_of_turns ASC,
@@ -58,8 +58,8 @@ public class LeaderboardJdbcDAO implements LeaderboardDAO {
         String turnsLeaderboardQuery = """
                 SELECT PLAYER.player_name, GAME.number_of_turns
                 FROM games GAME
-                JOIN players PLAYER
-                    ON GAME.player_id = PLAYER.player_id
+                    JOIN players PLAYER
+                        ON GAME.player_id = PLAYER.player_id
                 WHERE result = 'WIN'
                 ORDER BY GAME.number_of_turns ASC,
                          GAME.duration_milliseconds ASC,
@@ -87,8 +87,8 @@ public class LeaderboardJdbcDAO implements LeaderboardDAO {
                 SELECT PLAYER.player_name,
                        COUNT(*) FILTER (WHERE GAME.result = 'WIN') * 100.0 / COUNT(*) AS win_percentage
                 FROM games GAME
-                JOIN players PLAYER
-                    ON GAME.player_id = PLAYER.player_id
+                    JOIN players PLAYER
+                        ON GAME.player_id = PLAYER.player_id
                 GROUP BY PLAYER.player_id,
                          PLAYER.player_name
                 """;
