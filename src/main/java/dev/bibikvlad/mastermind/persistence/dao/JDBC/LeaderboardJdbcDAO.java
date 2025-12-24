@@ -7,6 +7,7 @@ import dev.bibikvlad.mastermind.model.leaderboard.WinPercentageLeaderboardEntry;
 import dev.bibikvlad.mastermind.model.leaderboard.WinsLeaderboardEntry;
 import dev.bibikvlad.mastermind.persistence.dao.LeaderboardDAO;
 import dev.bibikvlad.mastermind.persistence.mappers.leaderboards.TimeLeaderboardEntryMapper;
+import dev.bibikvlad.mastermind.persistence.mappers.leaderboards.TurnsLeaderboardEntryMapper;
 import dev.bibikvlad.mastermind.persistence.mappers.leaderboards.WinPercentageMapper;
 
 import java.sql.Connection;
@@ -30,7 +31,7 @@ public class LeaderboardJdbcDAO implements LeaderboardDAO {
                 SELECT PLAYER.player_name, GAME.duration_milliseconds
                 FROM games GAME
                 JOIN players PLAYER
-                ON GAME.player_id = PLAYER.player_id
+                    ON GAME.player_id = PLAYER.player_id
                 WHERE result = 'WIN'
                 ORDER BY GAME.number_of_turns ASC,
                          GAME.duration_milliseconds ASC,
@@ -53,7 +54,30 @@ public class LeaderboardJdbcDAO implements LeaderboardDAO {
 
     @Override
     public List<TurnsLeaderboardEntry> getTurnsLeaderboard() {
-        return List.of();
+        List<TurnsLeaderboardEntry> turnsLeaderboardEntries = new ArrayList<>();
+        String turnsLeaderboardQuery = """
+                SELECT PLAYER.player_name, GAME.number_of_turns
+                FROM games GAME
+                JOIN players PLAYER
+                    ON GAME.player_id = PLAYER.player_id
+                WHERE result = 'WIN'
+                ORDER BY GAME.number_of_turns ASC,
+                         GAME.duration_milliseconds ASC,
+                         PLAYER.player_name ASC
+                LIMIT 10
+                """;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(turnsLeaderboardQuery)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                turnsLeaderboardEntries.add(TurnsLeaderboardEntryMapper.map(resultSet));
+            }
+
+            return turnsLeaderboardEntries;
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to fetch leaderboard based on turns needed for a win", exception);
+        }
     }
 
     @Override
@@ -63,8 +87,10 @@ public class LeaderboardJdbcDAO implements LeaderboardDAO {
                 SELECT PLAYER.player_name,
                        COUNT(*) FILTER (WHERE GAME.result = 'WIN') * 100.0 / COUNT(*) AS win_percentage
                 FROM games GAME
-                JOIN players PLAYER ON GAME.player_id = PLAYER.player_id
-                GROUP BY PLAYER.player_id, PLAYER.player_name
+                JOIN players PLAYER
+                    ON GAME.player_id = PLAYER.player_id
+                GROUP BY PLAYER.player_id,
+                         PLAYER.player_name
                 """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(getWinRateLeaderboardQuery)) {
