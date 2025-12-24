@@ -104,7 +104,7 @@ public class LeaderboardJdbcDAO implements LeaderboardDAO {
             return winsLeaderboardEntries;
 
         } catch (SQLException exception) {
-            throw new PersistenceException("Failed to fetch win percentage based leaderboard data", exception);
+            throw new PersistenceException("Failed to fetch leaderboard based on win percentage", exception);
         }
     }
 
