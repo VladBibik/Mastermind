@@ -1,13 +1,12 @@
 package dev.bibikvlad.mastermind.persistence.dao;
 
-import dev.bibikvlad.mastermind.model.leaderboard.TimeLeaderboardEntry;
-import dev.bibikvlad.mastermind.model.leaderboard.TurnsLeaderboardEntry;
-import dev.bibikvlad.mastermind.model.leaderboard.WinPercentageLeaderboardEntry;
-import dev.bibikvlad.mastermind.model.leaderboard.WinsLeaderboardEntry;
+import dev.bibikvlad.mastermind.model.leaderboard.*;
 
 import java.util.List;
 
 public interface LeaderboardDAO {
+    List<MainLeaderboardEntry> getMainLeaderboard();
+
     List<TimeLeaderboardEntry> getTimeLeaderboard();
 
     List<TurnsLeaderboardEntry> getTurnsLeaderboard();
