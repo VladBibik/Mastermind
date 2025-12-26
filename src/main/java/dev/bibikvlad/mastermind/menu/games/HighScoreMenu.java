@@ -7,4 +7,8 @@ public class HighScoreMenu implements Menu {
     public Menu run() {
         return null;
     }
+
+    private void displayMenu() {
+
+    }
 }
