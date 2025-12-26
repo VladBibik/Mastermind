@@ -1,10 +1,7 @@
 package dev.bibikvlad.mastermind.persistence.dao.JDBC;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
-import dev.bibikvlad.mastermind.model.leaderboard.TimeLeaderboardEntry;
-import dev.bibikvlad.mastermind.model.leaderboard.TurnsLeaderboardEntry;
-import dev.bibikvlad.mastermind.model.leaderboard.WinPercentageLeaderboardEntry;
-import dev.bibikvlad.mastermind.model.leaderboard.WinsLeaderboardEntry;
+import dev.bibikvlad.mastermind.model.leaderboard.*;
 import dev.bibikvlad.mastermind.persistence.dao.LeaderboardDAO;
 import dev.bibikvlad.mastermind.persistence.mappers.leaderboards.TimeLeaderboardEntryMapper;
 import dev.bibikvlad.mastermind.persistence.mappers.leaderboards.TurnsLeaderboardEntryMapper;
@@ -23,6 +20,11 @@ public class LeaderboardJdbcDAO implements LeaderboardDAO {
 
     public LeaderboardJdbcDAO(Connection connection) {
         this.connection = connection;
+    }
+
+    @Override
+    public List<MainLeaderboardEntry> getMainLeaderboard() {
+        return List.of();
     }
 
     @Override
