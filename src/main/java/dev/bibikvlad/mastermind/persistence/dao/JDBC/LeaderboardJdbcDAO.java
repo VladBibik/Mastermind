@@ -3,10 +3,7 @@ package dev.bibikvlad.mastermind.persistence.dao.JDBC;
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.model.leaderboard.*;
 import dev.bibikvlad.mastermind.persistence.dao.LeaderboardDAO;
-import dev.bibikvlad.mastermind.persistence.mappers.leaderboards.TimeLeaderboardEntryMapper;
-import dev.bibikvlad.mastermind.persistence.mappers.leaderboards.TurnsLeaderboardEntryMapper;
-import dev.bibikvlad.mastermind.persistence.mappers.leaderboards.WinLeaderboardEntryMapper;
-import dev.bibikvlad.mastermind.persistence.mappers.leaderboards.WinPercentageMapper;
+import dev.bibikvlad.mastermind.persistence.mappers.leaderboards.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,7 +21,30 @@ public class LeaderboardJdbcDAO implements LeaderboardDAO {
 
     @Override
     public List<MainLeaderboardEntry> getMainLeaderboard() {
-        return List.of();
+        List<MainLeaderboardEntry> mainLeaderboardEntries = new ArrayList<>();
+        String getMainLeaderboardQuery = """
+                SELECT PLAYER.player_name, GAME.number_of_turns, GAME.duration_milliseconds
+                FROM games GAME
+                    JOIN players PLAYER
+                        ON GAME.player_id = PLAYER.player_id
+                WHERE result = 'WIN'
+                ORDER BY GAME.number_of_turns ASC,
+                         GAME.duration_milliseconds ASC,
+                         PLAYER.player_name ASC
+                LIMIT 10
+                """;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(getMainLeaderboardQuery)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                mainLeaderboardEntries.add(MainLeaderboardEntryMapper.map(resultSet));
+            }
+
+            return mainLeaderboardEntries;
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to fetch leaderboard based on min turns needed to win", exception);
+        }
     }
 
     @Override
