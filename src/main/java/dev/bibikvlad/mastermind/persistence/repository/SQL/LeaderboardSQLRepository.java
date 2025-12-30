@@ -23,7 +23,7 @@ public class LeaderboardSQLRepository implements LeaderboardRepository {
 
     @Override
     public List<TimeLeaderboardEntry> getTimeLeaderboard() {
-        return List.of();
+        return leaderboardJdbcDAO.getTimeLeaderboard();
     }
 
     @Override
