@@ -28,7 +28,7 @@ public class LeaderboardSQLRepository implements LeaderboardRepository {
 
     @Override
     public List<TurnsLeaderboardEntry> getTurnsLeaderboard() {
-        return List.of();
+        return leaderboardJdbcDAO.getTurnsLeaderboard();
     }
 
     @Override
