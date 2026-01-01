@@ -21,7 +21,7 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
     public Time getTotalPlayTimeByPlayerId(long playerId) {
         String getTotalPlayTimeByPlayerIdQuery = """
                 SELECT SUM(duration_milliseconds) AS total_playtime
-                FROM GAME
+                FROM games
                 WHERE PLAYER_ID = ?;
                 """;
 
