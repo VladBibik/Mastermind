@@ -114,6 +114,7 @@ public class LeaderboardJdbcDAO implements LeaderboardDAO {
                         ON GAME.player_id = PLAYER.player_id
                 GROUP BY PLAYER.player_id,
                          PLAYER.player_name
+                LIMIT 10;
                 """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(getWinRateLeaderboardQuery)) {
@@ -139,6 +140,7 @@ public class LeaderboardJdbcDAO implements LeaderboardDAO {
                               ON GAME.player_id = PLAYER.player_id
                 WHERE GAME.result = 'WIN'
                 GROUP BY PLAYER.player_id, PLAYER.player_name
+                LIMIT 10;
                 """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(getWinsLeaderboardQuery)) {
