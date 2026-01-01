@@ -11,7 +11,7 @@ public interface LeaderboardRepository {
 
     List<TurnsLeaderboardEntry> getTurnsLeaderboard();
 
-    List<WinPercentageLeaderboardEntry> getWinRateLeaderboard();
+    List<WinPercentageLeaderboardEntry> getWinPercentageLeaderboard();
 
     List<WinsLeaderboardEntry> getWinsLeaderboard();
 }

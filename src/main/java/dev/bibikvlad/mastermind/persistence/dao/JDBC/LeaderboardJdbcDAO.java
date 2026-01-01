@@ -104,7 +104,7 @@ public class LeaderboardJdbcDAO implements LeaderboardDAO {
     }
 
     @Override
-    public List<WinPercentageLeaderboardEntry> getWinRateLeaderboard() {
+    public List<WinPercentageLeaderboardEntry> getWinPercentageLeaderboard() {
         List<WinPercentageLeaderboardEntry> winsLeaderboardEntries = new ArrayList<>();
         String getWinRateLeaderboardQuery = """
                 SELECT PLAYER.player_name,
