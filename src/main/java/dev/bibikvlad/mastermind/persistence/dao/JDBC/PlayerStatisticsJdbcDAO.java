@@ -29,6 +29,8 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
             preparedStatement.setLong(1, playerId);
 
             ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+
             long duration_milliseconds = resultSet.getLong("total_playtime");
 
             return MillisecondsToTimeFormatter.format(duration_milliseconds);
