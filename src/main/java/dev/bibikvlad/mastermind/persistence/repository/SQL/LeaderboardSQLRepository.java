@@ -38,6 +38,6 @@ public class LeaderboardSQLRepository implements LeaderboardRepository {
 
     @Override
     public List<WinsLeaderboardEntry> getWinsLeaderboard() {
-        return List.of();
+        return leaderboardJdbcDAO.getWinsLeaderboard();
     }
 }
