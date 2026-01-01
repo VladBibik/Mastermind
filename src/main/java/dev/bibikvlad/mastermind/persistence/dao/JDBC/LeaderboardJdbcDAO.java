@@ -20,7 +20,7 @@ public class LeaderboardJdbcDAO implements LeaderboardDAO {
     }
 
     @Override
-    public List<MainLeaderboardEntry> getMainLeaderboard() {
+    public List<MainLeaderboardEntry> getOverallLeaderboard() {
         List<MainLeaderboardEntry> mainLeaderboardEntries = new ArrayList<>();
         String getMainLeaderboardQuery = """
                 SELECT PLAYER.player_name, GAME.number_of_turns, GAME.duration_milliseconds

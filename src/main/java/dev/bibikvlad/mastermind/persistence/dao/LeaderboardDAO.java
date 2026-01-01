@@ -5,7 +5,7 @@ import dev.bibikvlad.mastermind.model.leaderboard.*;
 import java.util.List;
 
 public interface LeaderboardDAO {
-    List<MainLeaderboardEntry> getMainLeaderboard();
+    List<MainLeaderboardEntry> getOverallLeaderboard();
 
     List<TimeLeaderboardEntry> getTimeLeaderboard();
 
