@@ -31,9 +31,9 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
 
-            long duration_milliseconds = resultSet.getLong("total_playtime");
+            long durationMilliseconds = resultSet.getLong("total_playtime");
 
-            return MillisecondsToTimeFormatter.format(duration_milliseconds);
+            return MillisecondsToTimeFormatter.format(durationMilliseconds);
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to fetch total play time for a player with ID: " + playerId,
                     exception);
