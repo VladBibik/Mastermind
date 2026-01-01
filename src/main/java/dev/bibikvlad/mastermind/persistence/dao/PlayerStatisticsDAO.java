@@ -5,5 +5,5 @@ import dev.bibikvlad.mastermind.values.Time;
 import java.util.List;
 
 public interface PlayerStatisticsDAO {
-    public Time getTotalPlayTimeByPlayerId(long playerId);
+    public Time getTotalPlayTime(long playerId);
 }
