@@ -106,7 +106,7 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
     @Override
     public Time getAverageGameDuration(long playerId) {
         String getAverageGameDurationQuery = """
-                SELECT AVG(duration_milliseconds) AS average_game_duration
+                SELECT COALESCE(AVG(duration_milliseconds), 0) AS average_game_duration
                 FROM games
                 WHERE player_id = ?;
                 """;
