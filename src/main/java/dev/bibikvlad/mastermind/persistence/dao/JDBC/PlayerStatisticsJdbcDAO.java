@@ -59,7 +59,7 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
     @Override
     public Time getTotalPlayTime(long playerId) {
         String getTotalPlayTimeQuery = """
-                SELECT COALESCE(SUM(duration_milliseconds)) AS total_playtime
+                SELECT COALESCE(SUM(duration_milliseconds), 0) AS total_playtime
                 FROM games
                 WHERE PLAYER_ID = ?;
                 """;
