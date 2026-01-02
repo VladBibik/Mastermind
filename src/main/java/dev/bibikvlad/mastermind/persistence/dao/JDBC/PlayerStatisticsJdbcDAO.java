@@ -39,4 +39,24 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
                     exception);
         }
     }
+
+    @Override
+    public double getWinRate(long playerId) {
+        return 0;
+    }
+
+    @Override
+    public Time getAverageGameDuration(long playerId) {
+        return null;
+    }
+
+    @Override
+    public Time getFastestWinTime(long playerId) {
+        return null;
+    }
+
+    @Override
+    public long getWinCount(long playerId) {
+        return 0;
+    }
 }
