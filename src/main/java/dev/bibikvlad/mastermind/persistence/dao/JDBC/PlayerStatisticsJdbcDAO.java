@@ -123,7 +123,7 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
 
             return resultSet.getLong("win_count");
         } catch (SQLException exception) {
-            throw new PersistenceException("Failed to fetch fastest win time for a player with ID: " + playerId,
+            throw new PersistenceException("Failed to fetch number of wins for a player with ID: " + playerId,
                     exception);
         }
     }
