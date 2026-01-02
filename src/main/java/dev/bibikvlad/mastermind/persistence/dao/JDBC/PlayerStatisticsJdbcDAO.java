@@ -1,9 +1,9 @@
 package dev.bibikvlad.mastermind.persistence.dao.JDBC;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
-import dev.bibikvlad.mastermind.model.player.PlayerStatistic;
+import dev.bibikvlad.mastermind.model.player.PlayerStatistics;
 import dev.bibikvlad.mastermind.persistence.dao.PlayerStatisticsDAO;
-import dev.bibikvlad.mastermind.persistence.mappers.player.PlayerStatisticMapper;
+import dev.bibikvlad.mastermind.persistence.mappers.player.PlayerStatisticsMapper;
 import dev.bibikvlad.mastermind.values.Time;
 import dev.bibikvlad.utils.formatters.MillisecondsToTimeFormatter;
 
@@ -20,7 +20,7 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
     }
 
     @Override
-    public PlayerStatistic getPlayerStatistic(int playerId) {
+    public PlayerStatistics getPlayerStatistic(int playerId) {
         String getTotalPlayTimeQuery = """
                 SELECT
                     COUNT(*) AS game_count,
@@ -39,7 +39,7 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
 
-            return PlayerStatisticMapper.map(resultSet);
+            return PlayerStatisticsMapper.map(resultSet);
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to fetch total play time for a player with ID: " + playerId,
                     exception);
