@@ -5,7 +5,7 @@ import dev.bibikvlad.mastermind.values.Time;
 public interface PlayerStatisticsDAO {
     Time getTotalPlayTime(long playerId);
 
-    double getWinRate(long playerId);
+    double getWinPercentage(long playerId);
 
     Time getAverageGameDuration(long playerId);
 

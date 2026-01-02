@@ -41,7 +41,7 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
     }
 
     @Override
-    public double getWinRate(long playerId) {
+    public double getWinPercentage(long playerId) {
         return 0;
     }
 
