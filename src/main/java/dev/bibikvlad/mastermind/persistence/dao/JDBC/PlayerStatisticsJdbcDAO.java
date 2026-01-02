@@ -30,7 +30,7 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
                     MIN(duration_milliseconds) FILTER (WHERE result = 'WIN') AS fastest_win_time,
                     MIN(number_of_turns) FILTER (WHERE result = 'WIN') AS min_turns_win
                 FROM games
-                WHERE player_id = 1
+                WHERE player_id = ?
                 """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(getPlayerStatisticsQuery)) {
