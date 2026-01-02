@@ -29,6 +29,7 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
                         WHEN COUNT(*) = 0 THEN 0
                         ELSE COUNT(*) FILTER (WHERE result = 'WIN') * 100.0 / COUNT(*)
                     END AS win_percentage,
+                    COALESCE(SUM(duration_milliseconds), 0) AS total_playtime,
                     COALESCE(AVG(duration_milliseconds), 0) AS average_game_duration,
                     COALESCE(
                         MIN(duration_milliseconds) FILTER (WHERE result = 'WIN'),
