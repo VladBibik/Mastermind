@@ -86,7 +86,25 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
 
     @Override
     public Time getFastestWinTime(long playerId) {
-        return null;
+        String getFastestWinTimeQuery = """
+                SELECT MIN(duration_milliseconds) AS fastest_win_time
+                FROM games
+                WHERE player_id = ?;
+                """;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(getFastestWinTimeQuery)) {
+            preparedStatement.setLong(1, playerId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+
+            long durationMilliseconds = resultSet.getLong("fastest_win_time");
+
+            return MillisecondsToTimeFormatter.format(durationMilliseconds);
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to fetch fastest win time for a player with ID: " + playerId,
+                    exception);
+        }
     }
 
     @Override
