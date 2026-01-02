@@ -109,6 +109,22 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
 
     @Override
     public long getWinCount(long playerId) {
-        return 0;
+        String getWinCountQuery = """
+                SELECT COUNT(game_id) AS win_count
+                FROM games
+                WHERE player_id = ? AND result = 'WIN';
+                """;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(getWinCountQuery)) {
+            preparedStatement.setLong(1, playerId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+
+            return resultSet.getLong("win_count");
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to fetch fastest win time for a player with ID: " + playerId,
+                    exception);
+        }
     }
 }
