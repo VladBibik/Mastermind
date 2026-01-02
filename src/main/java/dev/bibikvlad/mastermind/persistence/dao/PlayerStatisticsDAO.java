@@ -12,4 +12,6 @@ public interface PlayerStatisticsDAO {
     Time getFastestWinTime(long playerId);
 
     long getWinCount(long playerId);
+
+    int getMinTurnsWin(long playerId);
 }
