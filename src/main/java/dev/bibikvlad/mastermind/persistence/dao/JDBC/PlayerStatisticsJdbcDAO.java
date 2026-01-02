@@ -20,8 +20,8 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
     }
 
     @Override
-    public PlayerStatistics getPlayerStatistic(int playerId) {
-        String getTotalPlayTimeQuery = """
+    public PlayerStatistics getPlayerStatistics(int playerId) {
+        String getPlayerStatisticsQuery = """
                 SELECT
                     COUNT(*) AS game_count,
                     COUNT(*) FILTER (WHERE result = 'WIN') AS win_count,
@@ -33,7 +33,7 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
                 WHERE player_id = 1
                 """;
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(getTotalPlayTimeQuery)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(getPlayerStatisticsQuery)) {
             preparedStatement.setLong(1, playerId);
 
             ResultSet resultSet = preparedStatement.executeQuery();
