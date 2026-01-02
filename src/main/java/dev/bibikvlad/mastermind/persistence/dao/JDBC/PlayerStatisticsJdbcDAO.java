@@ -19,13 +19,13 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
 
     @Override
     public Time getTotalPlayTime(long playerId) {
-        String getTotalPlayTimeByPlayerIdQuery = """
+        String getTotalPlayTimeQuery = """
                 SELECT COALESCE(SUM(duration_milliseconds)) AS total_playtime
                 FROM games
                 WHERE PLAYER_ID = ?;
                 """;
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(getTotalPlayTimeByPlayerIdQuery)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(getTotalPlayTimeQuery)) {
             preparedStatement.setLong(1, playerId);
 
             ResultSet resultSet = preparedStatement.executeQuery();
