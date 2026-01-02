@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.persistence.mappers;
+package dev.bibikvlad.mastermind.persistence.mappers.player;
 
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;

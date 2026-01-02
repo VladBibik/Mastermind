@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.persistence.dao.JDBC;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
-import dev.bibikvlad.mastermind.persistence.mappers.PlayerMapper;
+import dev.bibikvlad.mastermind.persistence.mappers.player.PlayerMapper;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.persistence.dao.PlayerLastSelectedDAO;
 
