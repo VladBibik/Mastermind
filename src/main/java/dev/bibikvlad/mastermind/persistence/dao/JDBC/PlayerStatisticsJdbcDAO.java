@@ -152,7 +152,7 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
     @Override
     public long getWinCount(long playerId) {
         String getWinCountQuery = """
-                SELECT COUNT(game_id) AS win_count
+                SELECT COALESCE(COUNT(game_id), 0) AS win_count
                 FROM games
                 WHERE player_id = ? AND result = 'WIN';
                 """;
