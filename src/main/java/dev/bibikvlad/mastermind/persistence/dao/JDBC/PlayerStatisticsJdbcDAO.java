@@ -63,7 +63,25 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
 
     @Override
     public Time getAverageGameDuration(long playerId) {
-        return null;
+        String getAverageGameDurationQuery = """
+                SELECT AVG(duration_milliseconds) AS average_game_duration
+                FROM games
+                WHERE player_id = ?;
+                """;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(getAverageGameDurationQuery)) {
+            preparedStatement.setLong(1, playerId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+
+            long durationMilliseconds = resultSet.getLong("average_game_duration");
+
+            return MillisecondsToTimeFormatter.format(durationMilliseconds);
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to fetch average game duration for a player with ID: " + playerId,
+                    exception);
+        }
     }
 
     @Override
