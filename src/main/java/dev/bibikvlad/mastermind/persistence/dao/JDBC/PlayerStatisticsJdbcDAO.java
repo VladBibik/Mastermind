@@ -42,7 +42,23 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
 
     @Override
     public double getWinPercentage(long playerId) {
-        return 0;
+        String getWinPercentageQuery = """
+                SELECT COUNT(*) FILTER (WHERE result = 'WIN') * 100.0 / COUNT(*) AS win_percentage
+                FROM games
+                WHERE player_id = ?;
+                """;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(getWinPercentageQuery)) {
+            preparedStatement.setLong(1, playerId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+
+            return resultSet.getDouble("win_percentage");
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to fetch win percentage for a player with ID: " + playerId,
+                    exception);
+        }
     }
 
     @Override
