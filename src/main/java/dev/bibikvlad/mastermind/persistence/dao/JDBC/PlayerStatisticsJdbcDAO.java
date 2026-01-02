@@ -25,7 +25,10 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
                 SELECT
                     COUNT(*) AS game_count,
                     COUNT(*) FILTER (WHERE result = 'WIN') AS win_count,
-                    COUNT(*) FILTER (WHERE result = 'WIN') * 100.0 / COUNT(*) AS win_percentage,
+                    CASE
+                        WHEN COUNT(*) = 0 THEN 0
+                        ELSE COUNT(*) FILTER (WHERE result = 'WIN') * 100.0 / COUNT(*)
+                    END AS win_percentage,
                     AVG(duration_milliseconds) AS average_game_duration,
                     MIN(duration_milliseconds) FILTER (WHERE result = 'WIN') AS fastest_win_time,
                     MIN(number_of_turns) FILTER (WHERE result = 'WIN') AS min_turns_win
@@ -72,7 +75,10 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
     @Override
     public double getWinPercentage(long playerId) {
         String getWinPercentageQuery = """
-                SELECT COUNT(*) FILTER (WHERE result = 'WIN') * 100.0 / COUNT(*) AS win_percentage
+                SELECT CASE
+                           WHEN COUNT(*) = 0 THEN 0
+                           ELSE COUNT(*) FILTER (WHERE result = 'WIN') * 100.0 / COUNT(*)
+                       END AS win_percentage
                 FROM games
                 WHERE player_id = ?;
                 """;
