@@ -116,7 +116,7 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
     @Override
     public Time getFastestWinTime(long playerId) {
         String getFastestWinTimeQuery = """
-                SELECT MIN(duration_milliseconds) AS fastest_win_time
+                SELECT MIN(duration_milliseconds) FILTER (WHERE result = 'WIN') AS fastest_win_time
                 FROM games
                 WHERE player_id = ?;
                 """;
