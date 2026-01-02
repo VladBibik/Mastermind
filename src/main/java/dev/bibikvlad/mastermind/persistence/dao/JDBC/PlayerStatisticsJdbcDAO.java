@@ -127,4 +127,25 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
                     exception);
         }
     }
+
+    @Override
+    public int getMinTurnsWin(long playerId) {
+        String getMinTurnsWinQuery = """
+                SELECT MIN(number_of_turns) AS min_number_of_turns
+                FROM games
+                WHERE player_id = ? AND result = 'WIN';
+                """;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(getMinTurnsWinQuery)) {
+            preparedStatement.setLong(1, playerId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+
+            return resultSet.getInt("min_number_of_turns");
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to fetch min number of turns needed for a win for a player with ID: "
+                    + playerId, exception);
+        }
+    }
 }
