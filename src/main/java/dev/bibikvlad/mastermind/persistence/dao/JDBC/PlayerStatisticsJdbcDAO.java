@@ -173,7 +173,7 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
     @Override
     public int getMinTurnsWin(long playerId) {
         String getMinTurnsWinQuery = """
-                SELECT MIN(number_of_turns) AS min_number_of_turns
+                SELECT COALESCE(MIN(number_of_turns), 0) AS min_number_of_turns
                 FROM games
                 WHERE player_id = ? AND result = 'WIN';
                 """;
