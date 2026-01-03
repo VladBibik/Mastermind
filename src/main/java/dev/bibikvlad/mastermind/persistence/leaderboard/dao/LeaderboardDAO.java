@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.persistence.dao;
+package dev.bibikvlad.mastermind.persistence.leaderboard.dao;
 
 import dev.bibikvlad.mastermind.model.leaderboard.*;
 

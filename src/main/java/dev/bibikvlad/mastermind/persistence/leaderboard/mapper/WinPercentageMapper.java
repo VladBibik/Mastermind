@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.persistence.mappers.leaderboards;
+package dev.bibikvlad.mastermind.persistence.leaderboard.mapper;
 
 import dev.bibikvlad.mastermind.model.leaderboard.WinPercentageLeaderboardEntry;
 
