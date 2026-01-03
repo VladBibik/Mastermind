@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.app.bootstrap;
 
 import dev.bibikvlad.mastermind.persistence.dao.GamesDAO;
-import dev.bibikvlad.mastermind.persistence.dao.JDBC.GamesJdbcDAO;
+import dev.bibikvlad.mastermind.persistence.dao.jdbc.GamesJdbcDAO;
 import dev.bibikvlad.mastermind.persistence.database.DatabaseContext;
 import dev.bibikvlad.mastermind.persistence.database.TransactionManager;
 import dev.bibikvlad.mastermind.persistence.repository.GamesRepository;

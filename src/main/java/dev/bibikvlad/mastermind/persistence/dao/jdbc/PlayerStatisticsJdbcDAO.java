@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.persistence.dao.JDBC;
+package dev.bibikvlad.mastermind.persistence.dao.jdbc;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.model.player.PlayerStatistics;
