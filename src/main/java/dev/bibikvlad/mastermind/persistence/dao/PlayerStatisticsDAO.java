@@ -4,7 +4,7 @@ import dev.bibikvlad.mastermind.model.player.PlayerStatistics;
 import dev.bibikvlad.mastermind.values.Time;
 
 public interface PlayerStatisticsDAO {
-    PlayerStatistics getPlayerStatistics(int playerId);
+    PlayerStatistics getPlayerStatistics(long playerId);
 
     Time getTotalPlayTime(long playerId);
 

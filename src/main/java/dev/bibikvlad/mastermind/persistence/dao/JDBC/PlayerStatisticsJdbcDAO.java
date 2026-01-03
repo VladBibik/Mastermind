@@ -20,7 +20,7 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
     }
 
     @Override
-    public PlayerStatistics getPlayerStatistics(int playerId) {
+    public PlayerStatistics getPlayerStatistics(long playerId) {
         String getPlayerStatisticsQuery = """
                 SELECT
                     COUNT(*) AS game_count,
