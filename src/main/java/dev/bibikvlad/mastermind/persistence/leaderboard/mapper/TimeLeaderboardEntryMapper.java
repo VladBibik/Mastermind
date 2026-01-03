@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.persistence.leaderboard.mapper;
 
-import dev.bibikvlad.mastermind.model.leaderboard.TimeLeaderboardEntry;
+import dev.bibikvlad.mastermind.persistence.leaderboard.model.TimeLeaderboardEntry;
 import dev.bibikvlad.utils.formatters.MillisecondsToTimeFormatter;
 
 import java.sql.ResultSet;

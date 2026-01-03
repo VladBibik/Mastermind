@@ -1,8 +1,8 @@
 package dev.bibikvlad.mastermind.persistence.leaderboard.repository.sql;
 
-import dev.bibikvlad.mastermind.model.leaderboard.*;
 import dev.bibikvlad.mastermind.persistence.leaderboard.jdbc.LeaderboardJdbcDAO;
 import dev.bibikvlad.mastermind.persistence.database.TransactionManager;
+import dev.bibikvlad.mastermind.persistence.leaderboard.model.*;
 import dev.bibikvlad.mastermind.persistence.leaderboard.repository.LeaderboardRepository;
 
 import java.util.List;

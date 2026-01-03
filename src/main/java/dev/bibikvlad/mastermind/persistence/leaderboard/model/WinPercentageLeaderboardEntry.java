@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.model.leaderboard;
+package dev.bibikvlad.mastermind.persistence.leaderboard.model;
 
 public record WinPercentageLeaderboardEntry(String playerName, double winPercentage) {
 }

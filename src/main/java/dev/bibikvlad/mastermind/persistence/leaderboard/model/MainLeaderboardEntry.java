@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.model.leaderboard;
+package dev.bibikvlad.mastermind.persistence.leaderboard.model;
 
 import dev.bibikvlad.mastermind.values.Time;
 
