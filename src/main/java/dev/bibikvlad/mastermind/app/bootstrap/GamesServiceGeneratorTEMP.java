@@ -1,9 +1,9 @@
 package dev.bibikvlad.mastermind.app.bootstrap;
 
-import dev.bibikvlad.mastermind.persistence.game.dao.GamesDAO;
-import dev.bibikvlad.mastermind.persistence.game.jdbc.GamesJdbcDAO;
 import dev.bibikvlad.mastermind.persistence.database.DatabaseContext;
 import dev.bibikvlad.mastermind.persistence.database.TransactionManager;
+import dev.bibikvlad.mastermind.persistence.game.dao.GameDAO;
+import dev.bibikvlad.mastermind.persistence.game.jdbc.GameJdbcDAO;
 import dev.bibikvlad.mastermind.persistence.repository.GamesRepository;
 import dev.bibikvlad.mastermind.persistence.repository.SQL.GamesSQLRepository;
 import dev.bibikvlad.mastermind.services.GamesService;
@@ -15,7 +15,7 @@ public class GamesServiceGeneratorTEMP {
     public static GamesService get() {
         try {
             Connection connection = DatabaseContext.getConnection();
-            GamesDAO gamesDAO = new GamesJdbcDAO(connection);
+            GameDAO gamesDAO = new GameJdbcDAO(connection);
             GamesRepository gamesRepository = new GamesSQLRepository(gamesDAO, new TransactionManager(connection));
 
             return new GamesService(gamesRepository);

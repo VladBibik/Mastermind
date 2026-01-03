@@ -5,7 +5,7 @@ import dev.bibikvlad.mastermind.model.game.Game;
 
 import java.util.List;
 
-public interface GamesDAO {
+public interface GameDAO {
     List<Game> findAll();
 
     List<Game> findAllByPlayerId(long playerId);
