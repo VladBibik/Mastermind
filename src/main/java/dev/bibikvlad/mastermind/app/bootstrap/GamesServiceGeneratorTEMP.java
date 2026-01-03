@@ -4,8 +4,8 @@ import dev.bibikvlad.mastermind.persistence.database.DatabaseContext;
 import dev.bibikvlad.mastermind.persistence.database.TransactionManager;
 import dev.bibikvlad.mastermind.persistence.game.dao.GameDAO;
 import dev.bibikvlad.mastermind.persistence.game.jdbc.GameJdbcDAO;
-import dev.bibikvlad.mastermind.persistence.repository.GamesRepository;
-import dev.bibikvlad.mastermind.persistence.repository.SQL.GamesSQLRepository;
+import dev.bibikvlad.mastermind.persistence.game.repository.GamesRepository;
+import dev.bibikvlad.mastermind.persistence.game.repository.sql.GamesSQLRepository;
 import dev.bibikvlad.mastermind.services.GamesService;
 
 import java.sql.Connection;

@@ -1,6 +1,5 @@
-package dev.bibikvlad.mastermind.persistence.repository;
+package dev.bibikvlad.mastermind.persistence.game.repository;
 
-import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.model.game.Game;
 

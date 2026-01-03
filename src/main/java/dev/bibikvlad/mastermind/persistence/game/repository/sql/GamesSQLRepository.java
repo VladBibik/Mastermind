@@ -1,11 +1,11 @@
-package dev.bibikvlad.mastermind.persistence.repository.SQL;
+package dev.bibikvlad.mastermind.persistence.game.repository.sql;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.model.game.Game;
 import dev.bibikvlad.mastermind.persistence.game.dao.GameDAO;
 import dev.bibikvlad.mastermind.persistence.database.TransactionManager;
-import dev.bibikvlad.mastermind.persistence.repository.GamesRepository;
+import dev.bibikvlad.mastermind.persistence.game.repository.GamesRepository;
 
 import java.util.List;
 
