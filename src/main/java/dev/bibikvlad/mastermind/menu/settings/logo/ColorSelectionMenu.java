@@ -3,7 +3,7 @@ package dev.bibikvlad.mastermind.menu.settings.logo;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoMessages;
-import dev.bibikvlad.mastermind.persistence.model.enums.ConsoleColor;
+import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.utils.strings.GameCluesConstants;
 

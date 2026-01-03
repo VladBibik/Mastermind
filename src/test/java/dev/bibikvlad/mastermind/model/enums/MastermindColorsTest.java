@@ -1,6 +1,5 @@
 package dev.bibikvlad.mastermind.model.enums;
 
-import dev.bibikvlad.mastermind.persistence.model.enums.MastermindColors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

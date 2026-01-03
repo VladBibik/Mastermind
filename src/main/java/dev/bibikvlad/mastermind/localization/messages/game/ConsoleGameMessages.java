@@ -2,7 +2,7 @@ package dev.bibikvlad.mastermind.localization.messages.game;
 
 import dev.bibikvlad.mastermind.clues.ClueGenerator;
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
-import dev.bibikvlad.mastermind.persistence.model.logo.LogoColorsBundle;
+import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.utils.strings.ConsoleColoredValidSymbols;
 import dev.bibikvlad.utils.strings.Emojis;
 import dev.bibikvlad.utils.strings.GameCluesConstants;

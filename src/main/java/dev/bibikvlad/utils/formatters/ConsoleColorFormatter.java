@@ -1,6 +1,6 @@
 package dev.bibikvlad.utils.formatters;
 
-import dev.bibikvlad.mastermind.persistence.model.enums.ConsoleColor;
+import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 
 import java.util.Map;
 import java.util.Optional;

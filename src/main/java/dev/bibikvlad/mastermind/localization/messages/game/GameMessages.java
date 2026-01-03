@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.localization.messages.game;
 
-import dev.bibikvlad.mastermind.persistence.model.logo.LogoColorsBundle;
+import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 
 public interface GameMessages {
     String getInvalidInputMessage();

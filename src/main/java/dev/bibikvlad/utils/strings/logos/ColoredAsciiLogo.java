@@ -1,7 +1,7 @@
 package dev.bibikvlad.utils.strings.logos;
 
-import dev.bibikvlad.mastermind.persistence.model.enums.ConsoleColor;
-import dev.bibikvlad.mastermind.persistence.model.logo.LogoColorsBundle;
+import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
+import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 
 public class ColoredAsciiLogo {
     public static String getLogo(LogoColorsBundle logoColorsBundle) {

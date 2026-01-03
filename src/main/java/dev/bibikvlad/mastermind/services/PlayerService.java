@@ -2,7 +2,7 @@ package dev.bibikvlad.mastermind.services;
 
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
-import dev.bibikvlad.mastermind.persistence.model.logo.LogoColorsBundle;
+import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.persistence.player.model.PlayerConfig;
 import dev.bibikvlad.mastermind.persistence.player.repository.PlayerConfigRepository;

@@ -1,6 +1,6 @@
 package dev.bibikvlad.utils.strings;
 
-import dev.bibikvlad.mastermind.persistence.model.enums.ConsoleColor;
+import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 
 public class ConsoleColoredValidSymbols {
     public static String getSymbols() {

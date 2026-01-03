@@ -1,6 +1,6 @@
 package dev.bibikvlad.utils.formatters;
 
-import dev.bibikvlad.mastermind.persistence.model.enums.ConsoleColor;
+import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
