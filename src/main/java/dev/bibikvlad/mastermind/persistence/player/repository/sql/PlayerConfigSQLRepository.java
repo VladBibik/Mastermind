@@ -3,7 +3,7 @@ package dev.bibikvlad.mastermind.persistence.player.repository.sql;
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
-import dev.bibikvlad.mastermind.model.player.PlayerConfig;
+import dev.bibikvlad.mastermind.persistence.player.model.PlayerConfig;
 import dev.bibikvlad.mastermind.persistence.player.dao.PlayerConfigDAO;
 import dev.bibikvlad.mastermind.persistence.database.TransactionManager;
 import dev.bibikvlad.mastermind.persistence.player.repository.PlayerConfigRepository;

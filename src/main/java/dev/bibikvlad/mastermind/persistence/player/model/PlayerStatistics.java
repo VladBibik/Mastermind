@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.model.player;
+package dev.bibikvlad.mastermind.persistence.player.model;
 
 import dev.bibikvlad.mastermind.values.Time;
 

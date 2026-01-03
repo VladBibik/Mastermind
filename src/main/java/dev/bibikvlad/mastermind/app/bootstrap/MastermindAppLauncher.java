@@ -8,7 +8,7 @@ import dev.bibikvlad.mastermind.menu.FirstLaunch;
 import dev.bibikvlad.mastermind.menu.MainMenu;
 import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.menu.MenuRunner;
-import dev.bibikvlad.mastermind.model.player.Player;
+import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.persistence.player.jdbc.PlayerConfigJdbcDAO;
 import dev.bibikvlad.mastermind.persistence.player.jdbc.PlayerJdbcDAO;
 import dev.bibikvlad.mastermind.persistence.player.jdbc.PlayerLastSelectedJdbcDAO;

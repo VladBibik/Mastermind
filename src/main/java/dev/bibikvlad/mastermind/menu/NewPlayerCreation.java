@@ -5,10 +5,7 @@ import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
-import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
-
-import java.util.Optional;
 
 //TODO: Either pass LocalizationContext, or already created Messages, or make this class a normal instance based class
 public class NewPlayerCreation implements Menu {

@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.persistence.player.dao;
 
-import dev.bibikvlad.mastermind.model.player.Player;
+import dev.bibikvlad.mastermind.persistence.player.model.Player;
 
 import java.util.Optional;
 

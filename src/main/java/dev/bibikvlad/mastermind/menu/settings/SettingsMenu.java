@@ -8,7 +8,7 @@ import dev.bibikvlad.mastermind.menu.LanguageSelectionMenu;
 import dev.bibikvlad.mastermind.menu.MainMenu;
 import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.menu.settings.logo.LogoColorSelectionMenu;
-import dev.bibikvlad.mastermind.model.player.Player;
+import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
 import java.util.Optional;

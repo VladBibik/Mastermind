@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.persistence.player.jdbc;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
-import dev.bibikvlad.mastermind.model.player.PlayerStatistics;
+import dev.bibikvlad.mastermind.persistence.player.model.PlayerStatistics;
 import dev.bibikvlad.mastermind.persistence.player.dao.PlayerStatisticsDAO;
 import dev.bibikvlad.mastermind.persistence.player.mapper.PlayerStatisticsMapper;
 import dev.bibikvlad.mastermind.values.Time;

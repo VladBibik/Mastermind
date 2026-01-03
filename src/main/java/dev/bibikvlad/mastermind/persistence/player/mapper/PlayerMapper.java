@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.persistence.player.mapper;
 
-import dev.bibikvlad.mastermind.model.player.Player;
-import dev.bibikvlad.mastermind.model.player.PlayerConfig;
+import dev.bibikvlad.mastermind.persistence.player.model.Player;
+import dev.bibikvlad.mastermind.persistence.player.model.PlayerConfig;
 import dev.bibikvlad.utils.formatters.SQLiteTimestampFormatter;
 
 import java.sql.ResultSet;
