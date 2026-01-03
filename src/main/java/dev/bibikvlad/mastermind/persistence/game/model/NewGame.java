@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.model.game;
+package dev.bibikvlad.mastermind.persistence.game.model;
 
 import dev.bibikvlad.mastermind.game.data.GameData;
 

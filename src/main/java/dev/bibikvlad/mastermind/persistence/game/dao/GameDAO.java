@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.persistence.game.dao;
 
 import dev.bibikvlad.mastermind.game.data.GameData;
-import dev.bibikvlad.mastermind.model.game.Game;
+import dev.bibikvlad.mastermind.persistence.game.model.Game;
 
 import java.util.List;
 
