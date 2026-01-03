@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.persistence.repository;
+package dev.bibikvlad.mastermind.persistence.leaderboard.repository;
 
 import dev.bibikvlad.mastermind.model.leaderboard.*;
 
