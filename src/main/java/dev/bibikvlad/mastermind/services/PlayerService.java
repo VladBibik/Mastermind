@@ -5,9 +5,9 @@ import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;
-import dev.bibikvlad.mastermind.persistence.repository.PlayerConfigRepository;
-import dev.bibikvlad.mastermind.persistence.repository.PlayerLastSelectedRepository;
-import dev.bibikvlad.mastermind.persistence.repository.PlayerRepository;
+import dev.bibikvlad.mastermind.persistence.player.repository.PlayerConfigRepository;
+import dev.bibikvlad.mastermind.persistence.player.repository.PlayerLastSelectedRepository;
+import dev.bibikvlad.mastermind.persistence.player.repository.PlayerRepository;
 import dev.bibikvlad.utils.DefaultLogoColorsBundle;
 
 import java.util.List;

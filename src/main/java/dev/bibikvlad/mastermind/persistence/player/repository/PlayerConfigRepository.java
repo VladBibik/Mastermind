@@ -1,6 +1,5 @@
-package dev.bibikvlad.mastermind.persistence.repository;
+package dev.bibikvlad.mastermind.persistence.player.repository;
 
-import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;

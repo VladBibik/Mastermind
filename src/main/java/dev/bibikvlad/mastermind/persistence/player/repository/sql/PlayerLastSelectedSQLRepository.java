@@ -1,10 +1,10 @@
-package dev.bibikvlad.mastermind.persistence.repository.SQL;
+package dev.bibikvlad.mastermind.persistence.player.repository.sql;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.persistence.player.dao.PlayerLastSelectedDAO;
 import dev.bibikvlad.mastermind.persistence.database.TransactionManager;
-import dev.bibikvlad.mastermind.persistence.repository.PlayerLastSelectedRepository;
+import dev.bibikvlad.mastermind.persistence.player.repository.PlayerLastSelectedRepository;
 
 import java.util.Optional;
 
