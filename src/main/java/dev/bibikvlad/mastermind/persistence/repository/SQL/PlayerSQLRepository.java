@@ -2,7 +2,7 @@ package dev.bibikvlad.mastermind.persistence.repository.SQL;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.model.player.Player;
-import dev.bibikvlad.mastermind.persistence.dao.PlayerDAO;
+import dev.bibikvlad.mastermind.persistence.player.dao.PlayerDAO;
 import dev.bibikvlad.mastermind.persistence.database.TransactionManager;
 import dev.bibikvlad.mastermind.persistence.repository.PlayerRepository;
 

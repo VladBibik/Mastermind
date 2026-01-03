@@ -1,11 +1,11 @@
-package dev.bibikvlad.mastermind.persistence.dao.jdbc;
+package dev.bibikvlad.mastermind.persistence.player.jdbc;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
-import dev.bibikvlad.mastermind.persistence.mappers.player.PlayerMapper;
+import dev.bibikvlad.mastermind.persistence.player.mapper.PlayerMapper;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;
-import dev.bibikvlad.mastermind.persistence.dao.PlayerDAO;
+import dev.bibikvlad.mastermind.persistence.player.dao.PlayerDAO;
 
 import java.sql.*;
 import java.util.ArrayList;

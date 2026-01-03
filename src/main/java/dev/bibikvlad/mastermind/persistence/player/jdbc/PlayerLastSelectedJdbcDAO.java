@@ -1,9 +1,9 @@
-package dev.bibikvlad.mastermind.persistence.dao.jdbc;
+package dev.bibikvlad.mastermind.persistence.player.jdbc;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
-import dev.bibikvlad.mastermind.persistence.mappers.player.PlayerMapper;
+import dev.bibikvlad.mastermind.persistence.player.mapper.PlayerMapper;
 import dev.bibikvlad.mastermind.model.player.Player;
-import dev.bibikvlad.mastermind.persistence.dao.PlayerLastSelectedDAO;
+import dev.bibikvlad.mastermind.persistence.player.dao.PlayerLastSelectedDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.persistence.mappers.player;
+package dev.bibikvlad.mastermind.persistence.player.mapper;
 
 import dev.bibikvlad.mastermind.model.player.PlayerStatistics;
 import dev.bibikvlad.utils.formatters.MillisecondsToTimeFormatter;

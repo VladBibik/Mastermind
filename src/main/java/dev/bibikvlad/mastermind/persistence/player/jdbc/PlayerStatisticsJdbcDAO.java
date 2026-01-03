@@ -1,9 +1,9 @@
-package dev.bibikvlad.mastermind.persistence.dao.jdbc;
+package dev.bibikvlad.mastermind.persistence.player.jdbc;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.model.player.PlayerStatistics;
-import dev.bibikvlad.mastermind.persistence.dao.PlayerStatisticsDAO;
-import dev.bibikvlad.mastermind.persistence.mappers.player.PlayerStatisticsMapper;
+import dev.bibikvlad.mastermind.persistence.player.dao.PlayerStatisticsDAO;
+import dev.bibikvlad.mastermind.persistence.player.mapper.PlayerStatisticsMapper;
 import dev.bibikvlad.mastermind.values.Time;
 import dev.bibikvlad.utils.formatters.MillisecondsToTimeFormatter;
 
