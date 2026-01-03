@@ -11,12 +11,11 @@ import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 
-//TODO: Rename. Change 'Launcher' for something more suiting
-public class MastermindGameLauncher {
+public class MastermindGameBootstrap {
     private final LocalizationContext localizationContext;
     private final LogoColorsBundle logoColorsBundle;
 
-    public MastermindGameLauncher(LocalizationContext localizationContext, LogoColorsBundle logoColorsBundle) {
+    public MastermindGameBootstrap(LocalizationContext localizationContext, LogoColorsBundle logoColorsBundle) {
         this.localizationContext = localizationContext;
         this.logoColorsBundle = logoColorsBundle;
     }
