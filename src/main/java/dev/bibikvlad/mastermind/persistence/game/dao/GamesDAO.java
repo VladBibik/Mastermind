@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.persistence.dao;
+package dev.bibikvlad.mastermind.persistence.game.dao;
 
 import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.model.game.Game;

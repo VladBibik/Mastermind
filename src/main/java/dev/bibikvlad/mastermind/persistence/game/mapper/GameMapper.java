@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.persistence.mappers;
+package dev.bibikvlad.mastermind.persistence.game.mapper;
 
 import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.game.data.GameOutcome;

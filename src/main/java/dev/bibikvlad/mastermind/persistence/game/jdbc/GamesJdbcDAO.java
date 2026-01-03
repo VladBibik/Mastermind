@@ -1,10 +1,10 @@
-package dev.bibikvlad.mastermind.persistence.dao.jdbc;
+package dev.bibikvlad.mastermind.persistence.game.jdbc;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.model.game.Game;
-import dev.bibikvlad.mastermind.persistence.dao.GamesDAO;
-import dev.bibikvlad.mastermind.persistence.mappers.GameMapper;
+import dev.bibikvlad.mastermind.persistence.game.dao.GamesDAO;
+import dev.bibikvlad.mastermind.persistence.game.mapper.GameMapper;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
