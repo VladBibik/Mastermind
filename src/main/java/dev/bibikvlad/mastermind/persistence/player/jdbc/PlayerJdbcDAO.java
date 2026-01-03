@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.persistence.player.jdbc;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
-import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
+import dev.bibikvlad.mastermind.persistence.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.persistence.player.mapper.PlayerMapper;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.persistence.player.model.PlayerConfig;

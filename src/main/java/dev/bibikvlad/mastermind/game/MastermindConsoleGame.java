@@ -4,7 +4,7 @@ import dev.bibikvlad.mastermind.game.data.GameOutcome;
 import dev.bibikvlad.mastermind.game.data.GameResult;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.game.printer.MastermindMessagePrinter;
-import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
+import dev.bibikvlad.mastermind.persistence.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.input.validation.GameInputValidator;
 
 public class MastermindConsoleGame {

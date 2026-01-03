@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.model.enums;
+package dev.bibikvlad.mastermind.persistence.model.enums;
 
 import java.util.HashMap;
 import java.util.Optional;

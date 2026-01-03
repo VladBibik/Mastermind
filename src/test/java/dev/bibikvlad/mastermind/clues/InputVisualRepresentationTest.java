@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.clues;
 
-import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
+import dev.bibikvlad.mastermind.persistence.model.enums.ConsoleColor;
 import dev.bibikvlad.utils.strings.GameCluesConstants;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

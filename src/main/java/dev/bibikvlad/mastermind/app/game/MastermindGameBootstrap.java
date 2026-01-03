@@ -9,7 +9,7 @@ import dev.bibikvlad.mastermind.game.printer.ConsoleMessagePrinter;
 import dev.bibikvlad.mastermind.game.printer.MastermindMessagePrinter;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
-import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
+import dev.bibikvlad.mastermind.persistence.model.logo.LogoColorsBundle;
 
 public class MastermindGameBootstrap {
     private final LocalizationContext localizationContext;

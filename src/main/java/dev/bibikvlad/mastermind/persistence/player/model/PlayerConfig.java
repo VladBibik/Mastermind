@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.persistence.player.model;
 
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
-import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
+import dev.bibikvlad.mastermind.persistence.model.logo.LogoColorsBundle;
 
 public record PlayerConfig(LocaleType locale, LogoColorsBundle logoColorsBundle) {
 

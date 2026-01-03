@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.game.printer;
 
-import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
+import dev.bibikvlad.mastermind.persistence.model.logo.LogoColorsBundle;
 
 public interface MastermindMessagePrinter {
     void printInvalidInputMessage();
