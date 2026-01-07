@@ -1,10 +1,17 @@
 package dev.bibikvlad.mastermind.persistence.player.repository.sql;
 
+import dev.bibikvlad.mastermind.persistence.player.dao.PlayerStatisticsDAO;
 import dev.bibikvlad.mastermind.persistence.player.model.PlayerStatistics;
 import dev.bibikvlad.mastermind.persistence.player.repository.PlayerStatisticsRepository;
 import dev.bibikvlad.mastermind.values.Time;
 
 public class PlayerStatisticsSQLRepository implements PlayerStatisticsRepository {
+    private final PlayerStatisticsDAO  playerStatisticsDAO;
+
+    public PlayerStatisticsSQLRepository(PlayerStatisticsDAO playerStatisticsDAO) {
+        this.playerStatisticsDAO = playerStatisticsDAO;
+    }
+
     @Override
     public PlayerStatistics getPlayerStatistics(long playerId) {
         return null;
