@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.persistence.player.repository.sql;
 
+import dev.bibikvlad.mastermind.persistence.database.TransactionManager;
 import dev.bibikvlad.mastermind.persistence.player.dao.PlayerStatisticsDAO;
 import dev.bibikvlad.mastermind.persistence.player.model.PlayerStatistics;
 import dev.bibikvlad.mastermind.persistence.player.repository.PlayerStatisticsRepository;
@@ -7,9 +8,12 @@ import dev.bibikvlad.mastermind.values.Time;
 
 public class PlayerStatisticsSQLRepository implements PlayerStatisticsRepository {
     private final PlayerStatisticsDAO  playerStatisticsDAO;
+    private final TransactionManager transactionManager;
 
-    public PlayerStatisticsSQLRepository(PlayerStatisticsDAO playerStatisticsDAO) {
+    public PlayerStatisticsSQLRepository(PlayerStatisticsDAO playerStatisticsDAO,
+                                         TransactionManager transactionManager) {
         this.playerStatisticsDAO = playerStatisticsDAO;
+        this.transactionManager = transactionManager;
     }
 
     @Override
