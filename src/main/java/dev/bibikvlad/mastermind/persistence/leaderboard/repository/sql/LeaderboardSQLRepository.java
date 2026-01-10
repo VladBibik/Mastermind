@@ -1,14 +1,15 @@
 package dev.bibikvlad.mastermind.persistence.leaderboard.repository.sql;
 
-import dev.bibikvlad.mastermind.persistence.leaderboard.jdbc.LeaderboardJdbcDAO;
 import dev.bibikvlad.mastermind.persistence.database.TransactionManager;
+import dev.bibikvlad.mastermind.persistence.leaderboard.dao.LeaderboardDAO;
+import dev.bibikvlad.mastermind.persistence.leaderboard.jdbc.LeaderboardJdbcDAO;
 import dev.bibikvlad.mastermind.persistence.leaderboard.model.*;
 import dev.bibikvlad.mastermind.persistence.leaderboard.repository.LeaderboardRepository;
 
 import java.util.List;
 
 public class LeaderboardSQLRepository implements LeaderboardRepository {
-    private final LeaderboardJdbcDAO leaderboardJdbcDAO;
+    private final LeaderboardDAO leaderboardJdbcDAO;
     private final TransactionManager transactionManager;
 
     public LeaderboardSQLRepository(LeaderboardJdbcDAO leaderboardJdbcDAO, TransactionManager transactionManager) {
