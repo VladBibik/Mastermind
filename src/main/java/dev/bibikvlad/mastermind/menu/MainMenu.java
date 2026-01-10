@@ -6,6 +6,7 @@ import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
+import dev.bibikvlad.mastermind.menu.games.LeaderboardMenu;
 import dev.bibikvlad.mastermind.menu.player.NewPlayerCreation;
 import dev.bibikvlad.mastermind.menu.player.PlayerMenu;
 import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;
@@ -54,7 +55,8 @@ public class MainMenu implements Menu {
         System.out.println("2. Play a new Game");
         System.out.println("3. Player menu");
         System.out.println("4. Current player's data");
-        System.out.println("5. Settings");
+        System.out.println("5. Leaderboards");
+        System.out.println("6. Settings");
         System.out.println("To close the game print: 'close', or 'exit'");
     }
 
@@ -78,6 +80,9 @@ public class MainMenu implements Menu {
                 return this;
             }
             case 5 -> {
+                return leaderboards();
+            }
+            case 6 -> {
                 return settings();
             }
             default -> {
@@ -108,6 +113,10 @@ public class MainMenu implements Menu {
 
     private void displayCurrentPlayerData() {
         System.out.println("Current Player: " + currentPlayer);
+    }
+
+    private Menu leaderboards() {
+        return new LeaderboardMenu(localizationContext, parser, playerService, currentPlayer);
     }
 
     private Menu settings() {
