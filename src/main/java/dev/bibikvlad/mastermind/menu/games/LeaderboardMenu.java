@@ -4,10 +4,12 @@ import dev.bibikvlad.mastermind.app.bootstrap.LeaderboardServiceGeneratorTEMP;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
+import dev.bibikvlad.mastermind.menu.MainMenu;
 import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.persistence.leaderboard.model.*;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.LeaderboardService;
+import dev.bibikvlad.mastermind.services.PlayerService;
 import dev.bibikvlad.utils.formatters.TimeToStringFormatter;
 
 import java.util.List;
@@ -17,13 +19,15 @@ public class LeaderboardMenu implements Menu {
     private final LocalizationContext localizationContext;
     private final MastermindUserInputParser parser;
     private final LeaderboardService leaderboardService;
+    private final PlayerService playerService;
     private final Player currentPlayer;
 
     public LeaderboardMenu(LocalizationContext localizationContext, MastermindUserInputParser parser,
-                           Player currentPlayer) {
+                           PlayerService playerService, Player currentPlayer) {
         this.localizationContext = localizationContext;
         this.parser = parser;
         this.leaderboardService = LeaderboardServiceGeneratorTEMP.get();
+        this.playerService = playerService;
         this.currentPlayer = currentPlayer;
     }
 
@@ -33,8 +37,9 @@ public class LeaderboardMenu implements Menu {
 
         Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
 
-
-        return null;
+        return selection
+                .map(this::menuOptionSwitcher)
+                .orElseGet(() -> new MainMenu(localizationContext, parser, playerService));
     }
 
     private void displayMenu() {
@@ -44,6 +49,7 @@ public class LeaderboardMenu implements Menu {
         System.out.println("3. Leaderboard based on number of turns needed for win");
         System.out.println("4. Win percentage leaderboard");
         System.out.println("5. Leaderboard based on the number of wins");
+        System.out.println("6: Back to the main menu");
     }
 
     private Menu menuOptionSwitcher(int userInputNumber) {
@@ -64,6 +70,9 @@ public class LeaderboardMenu implements Menu {
             }
             case 5 -> {
                 return printWinsLeaderboard(playerId);
+            }
+            case 6 -> {
+                return quit();
             }
             default -> {
                 System.out.println("Invalid input. Please enter a number corresponding to the menu option.");
@@ -157,5 +166,9 @@ public class LeaderboardMenu implements Menu {
         });
 
         return this;
+    }
+
+    private Menu quit() {
+        return new MainMenu(localizationContext, parser, playerService);
     }
 }
