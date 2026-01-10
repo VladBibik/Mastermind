@@ -7,6 +7,7 @@ import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.persistence.leaderboard.model.MainLeaderboardEntry;
 import dev.bibikvlad.mastermind.persistence.leaderboard.model.TimeLeaderboardEntry;
+import dev.bibikvlad.mastermind.persistence.leaderboard.model.TurnsLeaderboardEntry;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.LeaderboardService;
 import dev.bibikvlad.utils.formatters.TimeToStringFormatter;
@@ -76,6 +77,23 @@ public class LeaderboardMenu implements Menu {
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
             System.out.println(leaderboardEntry.playerName() + ": "
                     + TimeToStringFormatter.format(leaderboardEntry.gameDuration()));
+        });
+
+        return this;
+    }
+
+    private Menu printTurnsLeaderboard(long playerId) {
+        Optional<List<TurnsLeaderboardEntry>> optionalLeaderboard = leaderboardService.getTurnsLeaderboard(playerId);
+
+        if (optionalLeaderboard.isEmpty()) {
+            System.out.println("No leaderboard found. Please play some games to build the leaderboard");
+
+            return this;
+        }
+
+        optionalLeaderboard.get().forEach(leaderboardEntry -> {
+            System.out.println(leaderboardEntry.playerName() + ": "
+                    + leaderboardEntry.numberOfTurns() + " turns");
         });
 
         return this;
