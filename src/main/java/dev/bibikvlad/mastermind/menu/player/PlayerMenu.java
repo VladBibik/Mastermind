@@ -32,6 +32,7 @@ public class PlayerMenu implements Menu {
 
         Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
 
+        //TODO: Check if map even needed here coz we have quit method
         return selection
                 .map(this::menuOptionSwitcher)
                 .orElseGet(() -> new MainMenu(localizationContext, parser, playerService));
