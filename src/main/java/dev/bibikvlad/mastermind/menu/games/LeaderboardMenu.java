@@ -46,6 +46,33 @@ public class LeaderboardMenu implements Menu {
         System.out.println("5. Leaderboard based on the number of wins");
     }
 
+    private Menu menuOptionSwitcher(int userInputNumber) {
+        long playerId = currentPlayer.getId();
+
+        switch (userInputNumber) {
+            case 1 -> {
+                return printLeaderboard(playerId);
+            }
+            case 2 -> {
+                return printTimeLeaderboard(playerId);
+            }
+            case 3 -> {
+                return printTurnsLeaderboard(playerId);
+            }
+            case 4 -> {
+                return printWinPercentageLeaderboard(playerId);
+            }
+            case 5 -> {
+                return printWinsLeaderboard(playerId);
+            }
+            default -> {
+                System.out.println("Invalid input. Please enter a number corresponding to the menu option.");
+
+                return this;
+            }
+        }
+    }
+
     private Menu printLeaderboard(long playerId) {
         Optional<List<MainLeaderboardEntry>> optionalLeaderboard = leaderboardService.getMainLeaderboard(playerId);
 
