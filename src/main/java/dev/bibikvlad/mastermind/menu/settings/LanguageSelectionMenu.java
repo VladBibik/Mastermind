@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.menu;
+package dev.bibikvlad.mastermind.menu.settings;
 
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
