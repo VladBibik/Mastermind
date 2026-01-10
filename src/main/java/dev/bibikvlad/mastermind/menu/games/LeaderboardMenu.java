@@ -1,25 +1,35 @@
 package dev.bibikvlad.mastermind.menu.games;
 
 import dev.bibikvlad.mastermind.app.bootstrap.LeaderboardServiceGeneratorTEMP;
+import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.Menu;
+import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.LeaderboardService;
+
+import java.util.Optional;
 
 public class LeaderboardMenu implements Menu {
     private final LocalizationContext localizationContext;
     private final MastermindUserInputParser parser;
     private final LeaderboardService leaderboardService;
+    private final Player currentPlayer;
 
-    public LeaderboardMenu(LocalizationContext localizationContext, MastermindUserInputParser parser) {
+    public LeaderboardMenu(LocalizationContext localizationContext, MastermindUserInputParser parser,
+                           Player currentPlayer) {
         this.localizationContext = localizationContext;
         this.parser = parser;
         this.leaderboardService = LeaderboardServiceGeneratorTEMP.get();
+        this.currentPlayer = currentPlayer;
     }
 
     @Override
     public Menu run() {
         displayMenu();
+
+        Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
+
 
         return null;
     }
