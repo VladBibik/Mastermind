@@ -1,9 +1,6 @@
 package dev.bibikvlad.mastermind.services;
 
-import dev.bibikvlad.mastermind.persistence.leaderboard.model.MainLeaderboardEntry;
-import dev.bibikvlad.mastermind.persistence.leaderboard.model.TimeLeaderboardEntry;
-import dev.bibikvlad.mastermind.persistence.leaderboard.model.TurnsLeaderboardEntry;
-import dev.bibikvlad.mastermind.persistence.leaderboard.model.WinPercentageLeaderboardEntry;
+import dev.bibikvlad.mastermind.persistence.leaderboard.model.*;
 import dev.bibikvlad.mastermind.persistence.leaderboard.repository.LeaderboardRepository;
 
 import java.util.List;
@@ -30,5 +27,9 @@ public class LeaderboardService {
 
     public Optional<List<WinPercentageLeaderboardEntry>> getWinPercentageLeaderboard(long playerId) {
         return Optional.ofNullable(leaderboardRepository.getWinPercentageLeaderboard());
+    }
+
+    public Optional<List<WinsLeaderboardEntry>>  getWinsLeaderboard(long playerId) {
+        return Optional.ofNullable(leaderboardRepository.getWinsLeaderboard());
     }
 }
