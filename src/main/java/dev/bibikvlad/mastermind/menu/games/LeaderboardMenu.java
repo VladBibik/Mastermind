@@ -46,7 +46,7 @@ public class LeaderboardMenu implements Menu {
         System.out.println("5. Leaderboard based on the number of wins");
     }
 
-    private Menu getLeaderboard(long playerId) {
+    private Menu printLeaderboard(long playerId) {
         Optional<List<MainLeaderboardEntry>> optionalLeaderboard = leaderboardService.getMainLeaderboard(playerId);
 
         if (optionalLeaderboard.isEmpty()) {
