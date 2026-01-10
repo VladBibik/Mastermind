@@ -19,10 +19,17 @@ public class LeaderboardMenu implements Menu {
 
     @Override
     public Menu run() {
+        displayMenu();
+
         return null;
     }
 
     private void displayMenu() {
-
+        System.out.println();
+        System.out.println("1. Leaderboard");
+        System.out.println("2. Leaderboard based on time needed for win");
+        System.out.println("3. Leaderboard based on number of turns needed for win");
+        System.out.println("4. Win percentage leaderboard");
+        System.out.println("5. Leaderboard based on the number of wins");
     }
 }
