@@ -14,22 +14,53 @@ public class LeaderboardService {
     }
 
     public Optional<List<MainLeaderboardEntry>> getMainLeaderboard(long playerId) {
-        return Optional.ofNullable(leaderboardRepository.getOverallLeaderboard());
+        List<MainLeaderboardEntry> mainLeaderboardEntries = leaderboardRepository.getOverallLeaderboard();
+
+        if (mainLeaderboardEntries.isEmpty()) {
+            return Optional.empty();
+        } else {
+            return Optional.of(mainLeaderboardEntries);
+        }
     }
 
     public Optional<List<TimeLeaderboardEntry>> getTimeLeaderboard(long playerId) {
-        return Optional.ofNullable(leaderboardRepository.getTimeLeaderboard());
+        List<TimeLeaderboardEntry> timeLeaderboardEntries = leaderboardRepository.getTimeLeaderboard();
+
+        if (timeLeaderboardEntries.isEmpty()) {
+            return Optional.empty();
+        } else {
+            return Optional.of(timeLeaderboardEntries);
+        }
     }
 
     public Optional<List<TurnsLeaderboardEntry>> getTurnsLeaderboard(long playerId) {
-        return Optional.ofNullable(leaderboardRepository.getTurnsLeaderboard());
+        List<TurnsLeaderboardEntry> turnsLeaderboardEntries = leaderboardRepository.getTurnsLeaderboard();
+
+        if (turnsLeaderboardEntries.isEmpty()) {
+            return Optional.empty();
+        } else {
+            return Optional.of(turnsLeaderboardEntries);
+        }
     }
 
     public Optional<List<WinPercentageLeaderboardEntry>> getWinPercentageLeaderboard(long playerId) {
-        return Optional.ofNullable(leaderboardRepository.getWinPercentageLeaderboard());
+        List<WinPercentageLeaderboardEntry> winPercentageLeaderboardEntries =
+                leaderboardRepository.getWinPercentageLeaderboard();
+
+        if (winPercentageLeaderboardEntries.isEmpty()) {
+            return Optional.empty();
+        } else {
+            return Optional.of(winPercentageLeaderboardEntries);
+        }
     }
 
     public Optional<List<WinsLeaderboardEntry>>  getWinsLeaderboard(long playerId) {
-        return Optional.ofNullable(leaderboardRepository.getWinsLeaderboard());
+        List<WinsLeaderboardEntry> winsLeaderboardEntries = leaderboardRepository.getWinsLeaderboard();
+
+        if (winsLeaderboardEntries.isEmpty()) {
+            return Optional.empty();
+        } else {
+            return Optional.of(winsLeaderboardEntries);
+        }
     }
 }
