@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.persistence.player.jdbc;
+package dev.bibikvlad.mastermind.persistence.player.dao.jdbc;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
