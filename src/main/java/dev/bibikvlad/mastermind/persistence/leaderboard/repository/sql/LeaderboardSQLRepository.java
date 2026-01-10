@@ -12,7 +12,7 @@ public class LeaderboardSQLRepository implements LeaderboardRepository {
     private final LeaderboardDAO leaderboardJdbcDAO;
     private final TransactionManager transactionManager;
 
-    public LeaderboardSQLRepository(LeaderboardJdbcDAO leaderboardJdbcDAO, TransactionManager transactionManager) {
+    public LeaderboardSQLRepository(LeaderboardDAO leaderboardJdbcDAO, TransactionManager transactionManager) {
         this.leaderboardJdbcDAO = leaderboardJdbcDAO;
         this.transactionManager = transactionManager;
     }
