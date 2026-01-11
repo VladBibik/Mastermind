@@ -5,15 +5,15 @@ import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 
 public abstract class Menu {
-    protected final ServiceContainer serviceContainer;
     protected final LocalizationContext localizationContext;
+    protected final ServiceContainer serviceContainer;
     protected final MastermindUserInputParser parser;
     //TODO: Add printer!
 
-    public Menu(ServiceContainer serviceContainer, LocalizationContext localizationContext,
+    public Menu(LocalizationContext localizationContext, ServiceContainer serviceContainer,
                 MastermindUserInputParser parser) {
-        this.serviceContainer = serviceContainer;
         this.localizationContext = localizationContext;
+        this.serviceContainer = serviceContainer;
         this.parser = parser;
     }
 
