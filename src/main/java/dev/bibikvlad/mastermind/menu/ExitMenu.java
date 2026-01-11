@@ -5,9 +5,9 @@ import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 
 public class ExitMenu extends Menu {
-    public ExitMenu(ServiceContainer serviceContainer, LocalizationContext localizationContext,
+    public ExitMenu(LocalizationContext localizationContext, ServiceContainer serviceContainer,
                     MastermindUserInputParser parser) {
-        super(serviceContainer, localizationContext, parser);
+        super(localizationContext, serviceContainer, parser);
     }
 
     @Override

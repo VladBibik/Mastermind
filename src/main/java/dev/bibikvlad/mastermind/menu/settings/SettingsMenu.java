@@ -18,9 +18,9 @@ public class SettingsMenu extends Menu {
 
     private Player currentPlayer;
 
-    public SettingsMenu(ServiceContainer serviceContainer, LocalizationContext localizationContext,
+    public SettingsMenu(LocalizationContext localizationContext, ServiceContainer serviceContainer,
                         MastermindUserInputParser parser) {
-        super(serviceContainer, localizationContext, parser);
+        super(localizationContext, serviceContainer, parser);
 
         this.playerService = serviceContainer.getPlayerService();
         this.currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
@@ -35,7 +35,7 @@ public class SettingsMenu extends Menu {
         Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
 
         if (selection.isEmpty())
-            return new MainMenu(serviceContainer, localizationContext, parser);
+            return new MainMenu(localizationContext, serviceContainer, parser);
 
         return menuOptionSwitcher(selection.get());
     }
@@ -86,7 +86,7 @@ public class SettingsMenu extends Menu {
             //TODO:Language name should be localized!
             System.out.println("Language changed to " + localeType.getLanguageName());
 
-            return new SettingsMenu(serviceContainer, new LocalizationContext(localeType), parser);
+            return new SettingsMenu(new LocalizationContext(localeType), serviceContainer, parser);
         }
     }
 
@@ -95,6 +95,6 @@ public class SettingsMenu extends Menu {
     }
 
     private Menu exit() {
-        return new MainMenu(serviceContainer, localizationContext, parser);
+        return new MainMenu(localizationContext, serviceContainer, parser);
     }
 }

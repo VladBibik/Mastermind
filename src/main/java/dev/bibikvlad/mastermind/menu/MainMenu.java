@@ -24,9 +24,9 @@ public class MainMenu extends Menu {
     private final PlayerService playerService;
 
     //TODO: Need to rethink GamesService injection logic
-    public MainMenu(ServiceContainer serviceContainer, LocalizationContext localizationContext,
+    public MainMenu(LocalizationContext localizationContext, ServiceContainer serviceContainer,
                     MastermindUserInputParser parser) {
-        super(serviceContainer, localizationContext, parser);
+        super(localizationContext, serviceContainer, parser);
 
         this.playerService = serviceContainer.getPlayerService();
         this.currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
