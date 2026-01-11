@@ -5,6 +5,10 @@ import dev.bibikvlad.mastermind.persistence.game.dao.GamesDAO;
 import dev.bibikvlad.mastermind.persistence.game.jdbc.GameJdbcDAO;
 import dev.bibikvlad.mastermind.persistence.game.repository.GamesRepository;
 import dev.bibikvlad.mastermind.persistence.game.repository.sql.GamesSQLRepository;
+import dev.bibikvlad.mastermind.persistence.leaderboard.dao.LeaderboardDAO;
+import dev.bibikvlad.mastermind.persistence.leaderboard.jdbc.LeaderboardJdbcDAO;
+import dev.bibikvlad.mastermind.persistence.leaderboard.repository.LeaderboardRepository;
+import dev.bibikvlad.mastermind.persistence.leaderboard.repository.sql.LeaderboardSQLRepository;
 import dev.bibikvlad.mastermind.persistence.player.dao.PlayerConfigDAO;
 import dev.bibikvlad.mastermind.persistence.player.dao.PlayerDAO;
 import dev.bibikvlad.mastermind.persistence.player.dao.PlayerLastSelectedDAO;
@@ -65,5 +69,16 @@ public class ApplicationContext {
         }
 
         return gamesService;
+    }
+
+    public LeaderboardService getLeaderboardService() {
+        if (leaderboardService == null) {
+            LeaderboardDAO leaderboardDAO = new LeaderboardJdbcDAO(connection);
+            LeaderboardRepository leaderboardRepository =
+                    new LeaderboardSQLRepository(leaderboardDAO, transactionManager);
+            leaderboardService = new LeaderboardService(leaderboardRepository);
+        }
+
+        return leaderboardService;
     }
 }
