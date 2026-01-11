@@ -115,6 +115,7 @@ public class MainMenu implements Menu {
     }
 
     //TODO: Move to separate class
+    //TODO: Think if 'press any key to continue' needed, because currently menu options are printed right after statistics, and it makes reading statistics harder
     private void displayCurrentPlayerData() {
         PlayerStatisticsService playerStatisticsService = PlayerStatisticsServiceGeneratorTEMP.get();
 
