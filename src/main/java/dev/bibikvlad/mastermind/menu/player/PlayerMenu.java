@@ -94,5 +94,3 @@ public class PlayerMenu implements Menu {
         return new MainMenu(localizationContext, parser, playerService);
     }
 }
-
-//TODO: FIX DELETE POSITIONING ISSUE!
