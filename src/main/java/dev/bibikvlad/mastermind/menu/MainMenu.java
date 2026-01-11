@@ -41,7 +41,7 @@ public class MainMenu extends Menu {
         Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
 
         if (selection.isEmpty())
-            return new ExitMenu();
+            return new ExitMenu(localizationContext, serviceContainer, parser);
 
         return menuOptionSwitcher(selection.get());
     }
@@ -133,6 +133,6 @@ public class MainMenu extends Menu {
     }
 
     private Menu settings() {
-        return new SettingsMenu(localizationContext, parser, playerService);
+        return new SettingsMenu(localizationContext, serviceContainer, parser);
     }
 }
