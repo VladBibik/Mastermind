@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.menu.settings;
 
+import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
@@ -12,18 +13,16 @@ import dev.bibikvlad.mastermind.services.PlayerService;
 
 import java.util.Optional;
 
-public class SettingsMenu implements Menu {
-    private final MastermindUserInputParser parser;
+public class SettingsMenu extends Menu {
     private final PlayerService playerService;
 
-    private LocalizationContext localizationContext;
     private Player currentPlayer;
 
-    public SettingsMenu(LocalizationContext localizationContext, MastermindUserInputParser parser,
-                        PlayerService playerService) {
-        this.localizationContext = localizationContext;
-        this.parser = parser;
-        this.playerService = playerService;
+    public SettingsMenu(ServiceContainer serviceContainer, LocalizationContext localizationContext,
+                        MastermindUserInputParser parser) {
+        super(serviceContainer, localizationContext, parser);
+
+        this.playerService = serviceContainer.getPlayerService();
         this.currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
                 () -> new IllegalStateException("No last selected player found!"));
     }
@@ -36,7 +35,7 @@ public class SettingsMenu implements Menu {
         Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
 
         if (selection.isEmpty())
-            return new MainMenu(localizationContext, parser, playerService);
+            return new MainMenu(serviceContainer, localizationContext, parser);
 
         return menuOptionSwitcher(selection.get());
     }
@@ -71,23 +70,23 @@ public class SettingsMenu implements Menu {
 
         LocaleType localeType = languageSelectionMenu.selectLanguage();
 
-        checkSelectedLanguage(localeType);
-
-        return this;
+        return checkSelectedLanguage(localeType);
     }
 
-    private void checkSelectedLanguage(LocaleType localeType) {
+    private Menu checkSelectedLanguage(LocaleType localeType) {
         if (localeType.equals(currentPlayer.getPlayerConfig().locale())) {
             System.out.println("Language is already selected!");
+
+            return this;
         } else {
             playerService.updatePlayerLocale(currentPlayer.getId(), localeType);
 
             currentPlayer = currentPlayer.withLocale(localeType);
 
-            localizationContext = new LocalizationContext(localeType);
-
             //TODO:Language name should be localized!
             System.out.println("Language changed to " + localeType.getLanguageName());
+
+            return new SettingsMenu(serviceContainer, new LocalizationContext(localeType), parser);
         }
     }
 
@@ -96,6 +95,6 @@ public class SettingsMenu implements Menu {
     }
 
     private Menu exit() {
-        return new MainMenu(localizationContext, parser, playerService);
+        return new MainMenu(serviceContainer, localizationContext, parser);
     }
 }
