@@ -54,7 +54,7 @@ public class MainMenu implements Menu {
         System.out.println("1. Create a new Player");
         System.out.println("2. Play a new Game");
         System.out.println("3. Player menu");
-        System.out.println("4. Current player's data");
+        System.out.println("4. Current player's statistics");
         System.out.println("5. Leaderboards");
         System.out.println("6. Settings");
         System.out.println("To close the game print: 'close', or 'exit'");
