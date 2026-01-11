@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.menu;
 
+import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
 import dev.bibikvlad.mastermind.app.game.MastermindGameBootstrap;
 import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
@@ -17,25 +18,20 @@ import dev.bibikvlad.utils.formatters.TimeToStringFormatter;
 
 import java.util.Optional;
 
-public class MainMenu implements Menu {
-    private final LocalizationContext localizationContext;
-    private final MastermindUserInputParser parser;
+public class MainMenu extends Menu {
+    private final Player currentPlayer;
+    private final GamesService gamesService;
     private final PlayerService playerService;
 
-    private final Player currentPlayer;
-
-    private final GamesService gamesService;
-
     //TODO: Need to rethink GamesService injection logic
-    public MainMenu(LocalizationContext localizationContext,
-                    MastermindUserInputParser parser,
-                    PlayerService playerService) {
-        this.localizationContext = localizationContext;
-        this.parser = parser;
-        this.playerService = playerService;
+    public MainMenu(ServiceContainer serviceContainer, LocalizationContext localizationContext,
+                    MastermindUserInputParser parser) {
+        super(serviceContainer, localizationContext, parser);
+
+        this.playerService = serviceContainer.getPlayerService();
         this.currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
                 () -> new IllegalStateException("No last selected player found!"));
-        this.gamesService = GamesServiceGeneratorTEMP.get();
+        this.gamesService = serviceContainer.getGamesService();
     }
 
     @Override
@@ -115,7 +111,7 @@ public class MainMenu implements Menu {
     //TODO: Move to separate class
     //TODO: Think if 'press any key to continue' needed, because currently menu options are printed right after statistics, and it makes reading statistics harder
     private void displayCurrentPlayerData() {
-        PlayerStatisticsService playerStatisticsService = PlayerStatisticsServiceGeneratorTEMP.get();
+        PlayerStatisticsService playerStatisticsService = serviceContainer.getPlayerStatisticsService();
 
         playerStatisticsService.getPlayerStatistics(currentPlayer.getId()).ifPresent(playerStatistics -> {
             System.out.println();
