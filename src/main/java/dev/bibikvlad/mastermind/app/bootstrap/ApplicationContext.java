@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.app.bootstrap;
 
 import dev.bibikvlad.mastermind.persistence.database.TransactionManager;
-import dev.bibikvlad.mastermind.persistence.game.dao.GameDAO;
+import dev.bibikvlad.mastermind.persistence.game.dao.GamesDAO;
 import dev.bibikvlad.mastermind.persistence.game.jdbc.GameJdbcDAO;
 import dev.bibikvlad.mastermind.persistence.game.repository.GamesRepository;
 import dev.bibikvlad.mastermind.persistence.game.repository.sql.GamesSQLRepository;
@@ -33,9 +33,9 @@ public class ApplicationContext {
     private LeaderboardService leaderboardService;
     private PlayerStatisticsService playerStatisticsService;
 
-    public ApplicationContext(Connection connection, TransactionManager transactionManager) {
+    public ApplicationContext(Connection connection) {
         this.connection = connection;
-        this.transactionManager = transactionManager;
+        this.transactionManager = new TransactionManager(connection);
     }
 
     public PlayerService getPlayerService() {
@@ -59,8 +59,7 @@ public class ApplicationContext {
 
     public GamesService getGamesService() {
         if (gamesService == null) {
-            //TODO: Rename it to GamesDAO!
-            GameDAO gameDAO = new GameJdbcDAO(connection);
+            GamesDAO gameDAO = new GameJdbcDAO(connection);
             GamesRepository gamesRepository = new GamesSQLRepository(gameDAO, transactionManager);
             gamesService = new GamesService(gamesRepository);
         }
