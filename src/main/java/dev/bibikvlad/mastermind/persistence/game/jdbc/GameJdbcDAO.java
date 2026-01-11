@@ -3,7 +3,7 @@ package dev.bibikvlad.mastermind.persistence.game.jdbc;
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.persistence.game.model.Game;
-import dev.bibikvlad.mastermind.persistence.game.dao.GameDAO;
+import dev.bibikvlad.mastermind.persistence.game.dao.GamesDAO;
 import dev.bibikvlad.mastermind.persistence.game.mapper.GameMapper;
 
 import java.sql.Connection;
@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameJdbcDAO implements GameDAO {
+public class GameJdbcDAO implements GamesDAO {
     private final Connection connection;
 
     public GameJdbcDAO(Connection connection) {
