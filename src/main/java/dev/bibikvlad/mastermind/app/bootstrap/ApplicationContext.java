@@ -12,15 +12,19 @@ import dev.bibikvlad.mastermind.persistence.leaderboard.repository.sql.Leaderboa
 import dev.bibikvlad.mastermind.persistence.player.dao.PlayerConfigDAO;
 import dev.bibikvlad.mastermind.persistence.player.dao.PlayerDAO;
 import dev.bibikvlad.mastermind.persistence.player.dao.PlayerLastSelectedDAO;
+import dev.bibikvlad.mastermind.persistence.player.dao.PlayerStatisticsDAO;
 import dev.bibikvlad.mastermind.persistence.player.dao.jdbc.PlayerConfigJdbcDAO;
 import dev.bibikvlad.mastermind.persistence.player.dao.jdbc.PlayerJdbcDAO;
 import dev.bibikvlad.mastermind.persistence.player.dao.jdbc.PlayerLastSelectedJdbcDAO;
+import dev.bibikvlad.mastermind.persistence.player.dao.jdbc.PlayerStatisticsJdbcDAO;
 import dev.bibikvlad.mastermind.persistence.player.repository.PlayerConfigRepository;
 import dev.bibikvlad.mastermind.persistence.player.repository.PlayerLastSelectedRepository;
 import dev.bibikvlad.mastermind.persistence.player.repository.PlayerRepository;
+import dev.bibikvlad.mastermind.persistence.player.repository.PlayerStatisticsRepository;
 import dev.bibikvlad.mastermind.persistence.player.repository.sql.PlayerConfigSQLRepository;
 import dev.bibikvlad.mastermind.persistence.player.repository.sql.PlayerLastSelectedSQLRepository;
 import dev.bibikvlad.mastermind.persistence.player.repository.sql.PlayerSQLRepository;
+import dev.bibikvlad.mastermind.persistence.player.repository.sql.PlayerStatisticsSQLRepository;
 import dev.bibikvlad.mastermind.services.GamesService;
 import dev.bibikvlad.mastermind.services.LeaderboardService;
 import dev.bibikvlad.mastermind.services.PlayerService;
@@ -80,5 +84,16 @@ public class ApplicationContext {
         }
 
         return leaderboardService;
+    }
+
+    public PlayerStatisticsService getPlayerStatisticsService() {
+        if (playerStatisticsService == null) {
+            PlayerStatisticsDAO playerStatisticsDAO = new PlayerStatisticsJdbcDAO(connection);
+            PlayerStatisticsRepository playerStatisticsRepository =
+                    new PlayerStatisticsSQLRepository(playerStatisticsDAO, transactionManager);
+            playerStatisticsService = new PlayerStatisticsService(playerStatisticsRepository);
+        }
+
+        return playerStatisticsService;
     }
 }
