@@ -15,7 +15,7 @@ import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.GamesService;
 import dev.bibikvlad.mastermind.services.PlayerService;
 import dev.bibikvlad.mastermind.services.PlayerStatisticsService;
-import dev.bibikvlad.mastermind.values.Time;
+import dev.bibikvlad.utils.formatters.TimeToStringFormatter;
 
 import java.util.Optional;
 
@@ -119,14 +119,17 @@ public class MainMenu implements Menu {
         PlayerStatisticsService playerStatisticsService = PlayerStatisticsServiceGeneratorTEMP.get();
 
         playerStatisticsService.getPlayerStatistics(currentPlayer.getId()).ifPresent(playerStatistics -> {
+            System.out.println();
             System.out.println(currentPlayer.getPlayerName() + "'s statistics:");
             System.out.println("Games played: " + playerStatistics.gameCount());
-            System.out.println("Number of wins:" +  playerStatistics.winCount());
+            System.out.println("Number of wins: " + playerStatistics.winCount());
             System.out.println("Win percentage: " + playerStatistics.winPercentage());
-            System.out.println("Total play time: " + playerStatistics.totalPlayTime());
-            System.out.println("Average game duration: " + playerStatistics.averageGameDuration());
-            System.out.println("Fastest win time: " + playerStatistics.fastestWinTime());
+            System.out.println("Total play time: " + TimeToStringFormatter.format(playerStatistics.totalPlayTime()));
+            System.out.println("Average game duration: " + TimeToStringFormatter.format(
+                    playerStatistics.averageGameDuration()));
+            System.out.println("Fastest win time: " + TimeToStringFormatter.format(playerStatistics.fastestWinTime()));
             System.out.println("Minimum turns needed for a win: " + playerStatistics.minTurnsWin());
+            System.out.println();
         });
     }
 
