@@ -1,7 +1,5 @@
 package dev.bibikvlad.mastermind.menu;
 
-import dev.bibikvlad.mastermind.app.bootstrap.GamesServiceGeneratorTEMP;
-import dev.bibikvlad.mastermind.app.bootstrap.PlayerStatisticsServiceGeneratorTEMP;
 import dev.bibikvlad.mastermind.app.game.MastermindGameBootstrap;
 import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
