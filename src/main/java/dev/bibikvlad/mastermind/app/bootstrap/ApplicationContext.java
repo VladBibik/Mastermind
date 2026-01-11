@@ -1,6 +1,10 @@
 package dev.bibikvlad.mastermind.app.bootstrap;
 
 import dev.bibikvlad.mastermind.persistence.database.TransactionManager;
+import dev.bibikvlad.mastermind.persistence.game.dao.GameDAO;
+import dev.bibikvlad.mastermind.persistence.game.jdbc.GameJdbcDAO;
+import dev.bibikvlad.mastermind.persistence.game.repository.GamesRepository;
+import dev.bibikvlad.mastermind.persistence.game.repository.sql.GamesSQLRepository;
 import dev.bibikvlad.mastermind.persistence.player.dao.PlayerConfigDAO;
 import dev.bibikvlad.mastermind.persistence.player.dao.PlayerDAO;
 import dev.bibikvlad.mastermind.persistence.player.dao.PlayerLastSelectedDAO;
@@ -51,5 +55,16 @@ public class ApplicationContext {
         }
 
         return playerService;
+    }
+
+    public GamesService getGamesService() {
+        if (gamesService == null) {
+            //TODO: Rename it to GamesDAO!
+            GameDAO gameDAO = new GameJdbcDAO(connection);
+            GamesRepository gamesRepository = new GamesSQLRepository(gameDAO, transactionManager);
+            gamesService = new GamesService(gamesRepository);
+        }
+
+        return gamesService;
     }
 }
