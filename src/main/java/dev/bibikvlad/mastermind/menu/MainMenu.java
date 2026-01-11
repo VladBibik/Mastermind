@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.menu;
 
 import dev.bibikvlad.mastermind.app.bootstrap.GamesServiceGeneratorTEMP;
+import dev.bibikvlad.mastermind.app.bootstrap.PlayerStatisticsServiceGeneratorTEMP;
 import dev.bibikvlad.mastermind.app.game.MastermindGameBootstrap;
 import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
@@ -13,6 +14,8 @@ import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.GamesService;
 import dev.bibikvlad.mastermind.services.PlayerService;
+import dev.bibikvlad.mastermind.services.PlayerStatisticsService;
+import dev.bibikvlad.mastermind.values.Time;
 
 import java.util.Optional;
 
@@ -111,8 +114,20 @@ public class MainMenu implements Menu {
         return new PlayerMenu(localizationContext, parser, playerService);
     }
 
+    //TODO: Move to separate class
     private void displayCurrentPlayerData() {
-        System.out.println("Current Player: " + currentPlayer);
+        PlayerStatisticsService playerStatisticsService = PlayerStatisticsServiceGeneratorTEMP.get();
+
+        playerStatisticsService.getPlayerStatistics(currentPlayer.getId()).ifPresent(playerStatistics -> {
+            System.out.println(currentPlayer.getPlayerName() + "'s statistics:");
+            System.out.println("Games played: " + playerStatistics.gameCount());
+            System.out.println("Number of wins:" +  playerStatistics.winCount());
+            System.out.println("Win percentage: " + playerStatistics.winPercentage());
+            System.out.println("Total play time: " + playerStatistics.totalPlayTime());
+            System.out.println("Average game duration: " + playerStatistics.averageGameDuration());
+            System.out.println("Fastest win time: " + playerStatistics.fastestWinTime());
+            System.out.println("Minimum turns needed for a win: " + playerStatistics.minTurnsWin());
+        });
     }
 
     private Menu leaderboards() {
