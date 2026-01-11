@@ -22,9 +22,9 @@ public class MastermindAppLauncher {
 
         MastermindUserInputParser parser = new ConsoleInputParser();
 
-        ApplicationContext applicationContext = new ApplicationContext(connection);
+        ServiceContainer serviceContainer = new ServiceContainer(connection);
         try {
-            launchGame(parser, applicationContext);
+            launchGame(parser, serviceContainer);
         } catch (PersistenceException exception) {
             //TODO: Move to the handler class, and add localized message
             System.out.println("Problem with the database occurred. Please check your environment and try again later");
@@ -34,16 +34,16 @@ public class MastermindAppLauncher {
     }
 
     //TODO: This needs to be moved somewhere
-    private static void launchGame(MastermindUserInputParser parser, ApplicationContext applicationContext) {
-        Optional<Player> optionalPlayer = applicationContext.getPlayerService().loadLastSelectedPlayer();
+    private static void launchGame(MastermindUserInputParser parser, ServiceContainer serviceContainer) {
+        Optional<Player> optionalPlayer = serviceContainer.getPlayerService().loadLastSelectedPlayer();
 
         optionalPlayer.ifPresentOrElse(player -> {
                     LocalizationContext localizationContext = new LocalizationContext(
                             player.getPlayerConfig().locale());
-                    Menu mainMenu = new MainMenu(localizationContext, parser, applicationContext.getPlayerService());
+                    Menu mainMenu = new MainMenu(localizationContext, parser, serviceContainer.getPlayerService());
 
                     MenuRunner.runMenu(mainMenu);
                 },
-                () -> FirstLaunch.start(parser, applicationContext.getPlayerService()));
+                () -> FirstLaunch.start(parser, serviceContainer.getPlayerService()));
     }
 }

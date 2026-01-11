@@ -32,7 +32,7 @@ import dev.bibikvlad.mastermind.services.PlayerStatisticsService;
 
 import java.sql.Connection;
 
-public class ApplicationContext {
+public class ServiceContainer {
     private final Connection connection;
     private final TransactionManager transactionManager;
 
@@ -41,7 +41,7 @@ public class ApplicationContext {
     private LeaderboardService leaderboardService;
     private PlayerStatisticsService playerStatisticsService;
 
-    public ApplicationContext(Connection connection) {
+    public ServiceContainer(Connection connection) {
         this.connection = connection;
         this.transactionManager = new TransactionManager(connection);
     }
