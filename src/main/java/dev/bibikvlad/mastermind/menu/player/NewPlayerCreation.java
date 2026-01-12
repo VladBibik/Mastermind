@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.menu.player;
 
+import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
@@ -10,18 +11,16 @@ import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
 //TODO: Either pass LocalizationContext, or already created Messages, or make this class a normal instance based class
-public class NewPlayerCreation implements Menu {
-    private final MastermindUserInputParser parser;
+public class NewPlayerCreation extends Menu {
     private final PlayerService playerService;
-    private final LocalizationContext  localizationContext;
     private final LocaleType localeType;
     private final Menu onCancelMenu;
 
-    public NewPlayerCreation(MastermindUserInputParser parser, PlayerService playerService,
-                             LocalizationContext localizationContext, LocaleType localeType, Menu onCancelMenu) {
-        this.parser = parser;
-        this.playerService = playerService;
-        this.localizationContext = localizationContext;
+    public NewPlayerCreation(LocalizationContext localizationContext, ServiceContainer serviceContainer,
+                             MastermindUserInputParser parser, LocaleType localeType, Menu onCancelMenu) {
+        super(localizationContext, serviceContainer, parser);
+
+        this.playerService = serviceContainer.getPlayerService();
         this.localeType = localeType;
         this.onCancelMenu = onCancelMenu;
     }
@@ -54,7 +53,7 @@ public class NewPlayerCreation implements Menu {
             if (playerService.savePlayerWithProvidedLocale(newPlayerName, localeType)) {
                 System.out.println("Player with name " + newPlayerName + " has been created.\n");
 
-                return new MainMenu(localizationContext, parser, playerService);
+                return new MainMenu(localizationContext, serviceContainer, parser);
             }
 
         } catch (PlayerAlreadyExistException exception) {
