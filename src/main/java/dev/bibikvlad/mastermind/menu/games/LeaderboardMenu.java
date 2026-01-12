@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.menu.games;
 
+import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
@@ -8,25 +9,20 @@ import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.persistence.leaderboard.model.*;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.LeaderboardService;
-import dev.bibikvlad.mastermind.services.PlayerService;
 import dev.bibikvlad.utils.formatters.TimeToStringFormatter;
 
 import java.util.List;
 import java.util.Optional;
 
-public class LeaderboardMenu implements Menu {
-    private final LocalizationContext localizationContext;
-    private final MastermindUserInputParser parser;
+public class LeaderboardMenu extends Menu {
     private final LeaderboardService leaderboardService;
-    private final PlayerService playerService;
     private final Player currentPlayer;
 
-    public LeaderboardMenu(LocalizationContext localizationContext, MastermindUserInputParser parser,
-                           PlayerService playerService, Player currentPlayer) {
-        this.localizationContext = localizationContext;
-        this.parser = parser;
-        this.leaderboardService = LeaderboardServiceGeneratorTEMP.get();
-        this.playerService = playerService;
+    public LeaderboardMenu(LocalizationContext localizationContext, ServiceContainer serviceContainer,
+                           MastermindUserInputParser parser, Player currentPlayer) {
+        super(localizationContext, serviceContainer, parser);
+
+        this.leaderboardService = serviceContainer.getLeaderboardService();
         this.currentPlayer = currentPlayer;
     }
 
@@ -38,7 +34,7 @@ public class LeaderboardMenu implements Menu {
 
         return selection
                 .map(this::menuOptionSwitcher)
-                .orElseGet(() -> new MainMenu(localizationContext, parser, playerService));
+                .orElseGet(() -> new MainMenu(localizationContext, serviceContainer, parser));
     }
 
     private void displayMenu() {
@@ -168,6 +164,6 @@ public class LeaderboardMenu implements Menu {
     }
 
     private Menu quit() {
-        return new MainMenu(localizationContext, parser, playerService);
+        return new MainMenu(localizationContext, serviceContainer, parser);
     }
 }
