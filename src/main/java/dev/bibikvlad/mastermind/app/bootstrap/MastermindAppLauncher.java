@@ -40,10 +40,10 @@ public class MastermindAppLauncher {
         optionalPlayer.ifPresentOrElse(player -> {
                     LocalizationContext localizationContext = new LocalizationContext(
                             player.getPlayerConfig().locale());
-                    Menu mainMenu = new MainMenu(localizationContext, parser, serviceContainer.getPlayerService());
+                    Menu mainMenu = new MainMenu(localizationContext, serviceContainer, parser);
 
                     MenuRunner.runMenu(mainMenu);
                 },
-                () -> FirstLaunch.start(parser, serviceContainer.getPlayerService()));
+                () -> FirstLaunch.start(parser, serviceContainer));
     }
 }
