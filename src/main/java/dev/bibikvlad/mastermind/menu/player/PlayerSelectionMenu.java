@@ -37,7 +37,7 @@ public class PlayerSelectionMenu extends Menu {
         }
 
         if (userInput.equals("exit") || userInput.equals("quit")) {
-            return new PlayerMenu(localizationContext, parser, playerService);
+            return new PlayerMenu(localizationContext, serviceContainer, parser);
         }
 
         int userInputNumber;
@@ -62,7 +62,7 @@ public class PlayerSelectionMenu extends Menu {
             System.out.println("Player " + player.getPlayerName() + " has been selected.");
         }
 
-        return new PlayerMenu(localizationContext, parser, playerService);
+        return new PlayerMenu(localizationContext, serviceContainer, parser);
     }
 
     private List<Player> getAllPlayers() {
