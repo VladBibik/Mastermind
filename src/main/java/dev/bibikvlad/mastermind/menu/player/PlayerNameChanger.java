@@ -1,24 +1,23 @@
 package dev.bibikvlad.mastermind.menu.player;
 
+import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
+import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
-import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 
-public class PlayerNameChanger implements Menu {
-    private final LocalizationContext localizationContext;
-    private final MastermindUserInputParser parser;
+public class PlayerNameChanger extends Menu {
     private final PlayerService playerService;
     private final Player currentPlayer;
 
-    public PlayerNameChanger(LocalizationContext localizationContext, MastermindUserInputParser parser,
-                             PlayerService playerService) {
-        this.localizationContext = localizationContext;
-        this.parser = parser;
-        this.playerService = playerService;
+    public PlayerNameChanger(LocalizationContext localizationContext, ServiceContainer serviceContainer,
+                             MastermindUserInputParser parser) {
+        super(localizationContext, serviceContainer, parser);
+
+        this.playerService = serviceContainer.getPlayerService();
         this.currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
                 () -> new IllegalStateException("No last selected player found!"));
     }
