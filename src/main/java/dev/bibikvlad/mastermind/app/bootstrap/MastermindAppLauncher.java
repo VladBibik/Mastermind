@@ -20,11 +20,11 @@ public class MastermindAppLauncher {
         DatabaseContext.initialize();
         Connection connection = DatabaseContext.getConnection();
 
-        MastermindUserInputParser parser = new ConsoleInputParser();
-
         ServiceContainer serviceContainer = new ServiceContainer(connection);
+
+        MastermindUserInputParser parser = new ConsoleInputParser();
         try {
-            launchGame(parser, serviceContainer);
+            launchGame(serviceContainer, parser);
         } catch (PersistenceException exception) {
             //TODO: Move to the handler class, and add localized message
             System.out.println("Problem with the database occurred. Please check your environment and try again later");
@@ -34,7 +34,7 @@ public class MastermindAppLauncher {
     }
 
     //TODO: This needs to be moved somewhere
-    private static void launchGame(MastermindUserInputParser parser, ServiceContainer serviceContainer) {
+    private static void launchGame(ServiceContainer serviceContainer, MastermindUserInputParser parser) {
         Optional<Player> optionalPlayer = serviceContainer.getPlayerService().loadLastSelectedPlayer();
 
         optionalPlayer.ifPresentOrElse(player -> {
