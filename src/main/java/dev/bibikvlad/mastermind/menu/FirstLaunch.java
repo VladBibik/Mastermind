@@ -6,7 +6,6 @@ import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.player.NewPlayerCreation;
 import dev.bibikvlad.mastermind.menu.settings.LanguageSelectionMenu;
-import dev.bibikvlad.mastermind.services.PlayerService;
 
 public class FirstLaunch {
     public static void start(MastermindUserInputParser parser, ServiceContainer serviceContainer) {
