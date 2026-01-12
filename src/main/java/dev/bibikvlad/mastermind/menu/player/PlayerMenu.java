@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.menu.player;
 
+import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
@@ -10,20 +11,14 @@ import dev.bibikvlad.mastermind.services.PlayerService;
 
 import java.util.Optional;
 
-public class PlayerMenu implements Menu {
-    private final LocalizationContext localizationContext;
-    private final MastermindUserInputParser parser;
-    private final PlayerService  playerService;
+public class PlayerMenu extends Menu {
+    private final PlayerService playerService;
 
-    private Player currentPlayer;
+    public PlayerMenu(LocalizationContext localizationContext, ServiceContainer serviceContainer,
+                      MastermindUserInputParser parser) {
+        super(localizationContext, serviceContainer, parser);
 
-    public PlayerMenu(LocalizationContext localizationContext, MastermindUserInputParser parser,
-                      PlayerService playerService) {
-        this.localizationContext = localizationContext;
-        this.parser = parser;
-        this.playerService = playerService;
-        this.currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
-                () -> new IllegalStateException("No last selected player found!"));
+        this.playerService = serviceContainer.getPlayerService();
     }
 
     @Override
@@ -36,7 +31,7 @@ public class PlayerMenu implements Menu {
         //menu if user input is '4', or 'close'/'exit'
         return selection
                 .map(this::menuOptionSwitcher)
-                .orElseGet(() -> new MainMenu(localizationContext, parser, playerService));
+                .orElseGet(() -> new MainMenu(localizationContext, serviceContainer, parser));
 
     }
 
@@ -77,20 +72,20 @@ public class PlayerMenu implements Menu {
             return this;
         }
 
-        Menu playerSelectionMenu = new PlayerSelectionMenu(localizationContext, parser, playerService);
+        Menu playerSelectionMenu = new PlayerSelectionMenu(localizationContext, serviceContainer, parser);
 
         return playerSelectionMenu.run();
     }
 
     private Menu changePlayerName() {
-        return new PlayerNameChanger(localizationContext, parser, playerService);
+        return new PlayerNameChanger(localizationContext, serviceContainer, parser);
     }
 
     private Menu deletePlayer() {
-        return new DeletePlayerMenu(localizationContext, parser, playerService);
+        return new DeletePlayerMenu(localizationContext, serviceContainer, parser);
     }
 
     private Menu quit() {
-        return new MainMenu(localizationContext, parser, playerService);
+        return new MainMenu(localizationContext, serviceContainer, parser);
     }
 }
