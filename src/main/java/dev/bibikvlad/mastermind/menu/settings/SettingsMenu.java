@@ -91,7 +91,7 @@ public class SettingsMenu extends Menu {
     }
 
     private Menu changeLogoColor() {
-        return new LogoColorSelectionMenu(localizationContext, parser, playerService);
+        return new LogoColorSelectionMenu(localizationContext, serviceContainer, parser);
     }
 
     private Menu exit() {
