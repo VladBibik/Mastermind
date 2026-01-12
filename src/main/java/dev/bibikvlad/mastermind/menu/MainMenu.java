@@ -91,7 +91,7 @@ public class MainMenu extends Menu {
     }
 
     private Menu newPlayerCreation() {
-        return new NewPlayerCreation(parser, playerService, localizationContext,
+        return new NewPlayerCreation(localizationContext, serviceContainer, parser,
                 currentPlayer.getPlayerConfig().locale(), this);
     }
 
@@ -105,7 +105,7 @@ public class MainMenu extends Menu {
     }
 
     private Menu playerMenu() {
-        return new PlayerMenu(localizationContext, parser, playerService);
+        return new PlayerMenu(localizationContext, serviceContainer, parser);
     }
 
     //TODO: Move to separate class
@@ -129,7 +129,7 @@ public class MainMenu extends Menu {
     }
 
     private Menu leaderboards() {
-        return new LeaderboardMenu(localizationContext, parser, playerService, currentPlayer);
+        return new LeaderboardMenu(localizationContext, serviceContainer, parser, currentPlayer);
     }
 
     private Menu settings() {
