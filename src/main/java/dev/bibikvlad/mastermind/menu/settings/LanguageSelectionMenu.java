@@ -1,8 +1,8 @@
 package dev.bibikvlad.mastermind.menu.settings;
 
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
-import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
+import dev.bibikvlad.mastermind.localization.config.LocaleType;
 
 public class LanguageSelectionMenu {
     private final MastermindUserInputParser parser;

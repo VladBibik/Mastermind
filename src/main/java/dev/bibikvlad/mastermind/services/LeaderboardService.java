@@ -54,7 +54,7 @@ public class LeaderboardService {
         }
     }
 
-    public Optional<List<WinsLeaderboardEntry>>  getWinsLeaderboard(long playerId) {
+    public Optional<List<WinsLeaderboardEntry>> getWinsLeaderboard(long playerId) {
         List<WinsLeaderboardEntry> winsLeaderboardEntries = leaderboardRepository.getWinsLeaderboard();
 
         if (winsLeaderboardEntries.isEmpty()) {
