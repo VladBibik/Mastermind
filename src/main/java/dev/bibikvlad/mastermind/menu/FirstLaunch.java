@@ -13,12 +13,15 @@ public class FirstLaunch {
 
         LanguageSelectionMenu languageSelectionMenu = new LanguageSelectionMenu(parser);
 
+
         LocaleType localeType = languageSelectionMenu.selectLanguage();
 
         LocalizationContext localizationContext = new LocalizationContext(localeType);
 
+        Menu exitMenu = new ExitMenu(localizationContext, serviceContainer, parser);
+
         Menu playerCreationMenu = new NewPlayerCreation(localizationContext, serviceContainer, parser, localeType,
-                new ExitMenu(localizationContext, serviceContainer, parser));
+                exitMenu);
 
         MenuRunner.runMenu(playerCreationMenu);
     }
