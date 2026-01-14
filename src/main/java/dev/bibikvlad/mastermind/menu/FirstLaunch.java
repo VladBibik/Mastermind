@@ -13,7 +13,6 @@ public class FirstLaunch {
 
         LanguageSelectionMenu languageSelectionMenu = new LanguageSelectionMenu(parser);
 
-
         LocaleType localeType = languageSelectionMenu.selectLanguage();
 
         LocalizationContext localizationContext = new LocalizationContext(localeType);
