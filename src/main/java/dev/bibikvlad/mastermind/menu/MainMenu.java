@@ -20,18 +20,15 @@ import java.util.Optional;
 
 public class MainMenu extends Menu {
     private final Player currentPlayer;
-    private final GamesService gamesService;
-    private final PlayerService playerService;
 
     //TODO: Need to rethink GamesService injection logic
     public MainMenu(LocalizationContext localizationContext, ServiceContainer serviceContainer,
                     MastermindUserInputParser parser) {
         super(localizationContext, serviceContainer, parser);
 
-        this.playerService = serviceContainer.getPlayerService();
+        PlayerService playerService = serviceContainer.getPlayerService();
         this.currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
                 () -> new IllegalStateException("No last selected player found!"));
-        this.gamesService = serviceContainer.getGamesService();
     }
 
     @Override
@@ -95,11 +92,14 @@ public class MainMenu extends Menu {
                 currentPlayer.getPlayerConfig().locale(), this);
     }
 
+    //TODO: This method needs refactoring. Either move it to the custom class, or split in multiple methods
     private void launchGame() {
         MastermindGameBootstrap mastermindGameLauncher = new MastermindGameBootstrap(localizationContext,
                 currentPlayer.getPlayerConfig().logoColorsBundle());
 
         GameData gameData = mastermindGameLauncher.launch();
+
+        GamesService gamesService = serviceContainer.getGamesService();
 
         gamesService.save(currentPlayer.getId(), gameData);
     }
