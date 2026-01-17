@@ -56,7 +56,7 @@ public class ProfileMenu extends Menu {
                 return newPlayerCreation();
             }
             case 3 -> {
-                return changePlayerName();
+                return renamePlayer();
             }
             case 4 -> {
                 return deletePlayer();
@@ -89,7 +89,7 @@ public class ProfileMenu extends Menu {
                 currentPlayer.getPlayerConfig().locale(), this);
     }
 
-    private Menu changePlayerName() {
+    private Menu renamePlayer() {
         return new PlayerNameChanger(localizationContext, serviceContainer, parser);
     }
 
