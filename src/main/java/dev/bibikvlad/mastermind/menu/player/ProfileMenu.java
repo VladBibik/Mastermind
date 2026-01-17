@@ -40,10 +40,11 @@ public class ProfileMenu extends Menu {
 
     private void displayMenu() {
         System.out.println();
-        System.out.println("1. Change player");
-        System.out.println("2. Change player's name");
-        System.out.println("3. Delete current player's data");
-        System.out.println("4. Back to main menu");
+        System.out.println("1. Switch");
+        System.out.println("2. Create");
+        System.out.println("3. Rename");
+        System.out.println("4. Delete");
+        System.out.println("0. Back");
     }
 
     private Menu menuOptionSwitcher(int userInputNumber) {
