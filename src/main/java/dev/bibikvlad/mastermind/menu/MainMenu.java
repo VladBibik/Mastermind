@@ -45,13 +45,12 @@ public class MainMenu extends Menu {
 
     private void displayMenu() {
         System.out.println("Welcome to the Mastermind Game " + currentPlayer.getPlayerName() + "!");
-        System.out.println("1. Create a new Player");
-        System.out.println("2. Play a new Game");
-        System.out.println("3. Player menu");
-        System.out.println("4. Current player's statistics");
-        System.out.println("5. Leaderboards");
-        System.out.println("6. Settings");
-        System.out.println("To close the game print: 'close', or 'exit'");
+        System.out.println("1. Play");
+        System.out.println("2. Leaderboards");
+        System.out.println("3. Stats");
+        System.out.println("4. Profile");
+        System.out.println("5. Settings");
+        System.out.println("6. Exit");
     }
 
     //TODO: Think if quiting should be an menu option or leave it as prompt command
