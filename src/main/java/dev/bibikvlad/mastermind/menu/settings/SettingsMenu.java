@@ -41,9 +41,9 @@ public class SettingsMenu extends Menu {
     }
 
     private void displayMenu() {
-        System.out.println("1. Change language");
-        System.out.println("2. Change logo colors");
-        System.out.println("3. Back to the main menu");
+        System.out.println("1. Language");
+        System.out.println("2. Logo colors");
+        System.out.println("0. Back");
     }
 
     private Menu menuOptionSwitcher(int userInputNumber) {
@@ -54,7 +54,7 @@ public class SettingsMenu extends Menu {
             case 2 -> {
                 return changeLogoColor();
             }
-            case 3 -> {
+            case 0 -> {
                 return exit();
             }
             default -> {
