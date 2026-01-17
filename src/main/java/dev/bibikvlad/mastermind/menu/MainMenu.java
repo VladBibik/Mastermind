@@ -36,10 +36,10 @@ public class MainMenu extends Menu {
 
         Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
 
-        if (selection.isEmpty())
-            return new ExitMenu(localizationContext, serviceContainer, parser);
+        return selection
+                .map(this::menuOptionSwitcher)
+                .orElse(null);
 
-        return menuOptionSwitcher(selection.get());
     }
 
     private void displayMenu() {
@@ -130,6 +130,6 @@ public class MainMenu extends Menu {
     }
 
     private Menu exit() {
-        return new ExitMenu(localizationContext, serviceContainer, parser);
+        return null;
     }
 }

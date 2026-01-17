@@ -14,15 +14,15 @@ import dev.bibikvlad.mastermind.services.PlayerService;
 public class NewPlayerCreation extends Menu {
     private final PlayerService playerService;
     private final LocaleType localeType;
-    private final Menu onCancelMenu;
+    private final Menu returnMenu;
 
     public NewPlayerCreation(LocalizationContext localizationContext, ServiceContainer serviceContainer,
-                             MastermindUserInputParser parser, LocaleType localeType, Menu onCancelMenu) {
+                             MastermindUserInputParser parser, LocaleType localeType, Menu returnMenu) {
         super(localizationContext, serviceContainer, parser);
 
         this.playerService = serviceContainer.getPlayerService();
         this.localeType = localeType;
-        this.onCancelMenu = onCancelMenu;
+        this.returnMenu = returnMenu;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class NewPlayerCreation extends Menu {
 
         if (newPlayerName.equalsIgnoreCase("exit") ||
                 newPlayerName.equalsIgnoreCase("close")) {
-            return onCancelMenu;
+            return returnMenu;
         }
 
         if (newPlayerName.length() > 100) {
@@ -53,7 +53,7 @@ public class NewPlayerCreation extends Menu {
             if (playerService.savePlayerWithProvidedLocale(newPlayerName, localeType)) {
                 System.out.println("Player with name " + newPlayerName + " has been created.\n");
 
-                return new MainMenu(localizationContext, serviceContainer, parser);
+                return returnMenu;
             }
 
         } catch (PlayerAlreadyExistException exception) {

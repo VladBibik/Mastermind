@@ -17,10 +17,10 @@ public class FirstLaunch {
 
         LocalizationContext localizationContext = new LocalizationContext(localeType);
 
-        Menu exitMenu = new ExitMenu(localizationContext, serviceContainer, parser);
+        Menu mainMenu = new MainMenu(localizationContext, serviceContainer, parser);
 
         Menu playerCreationMenu = new NewPlayerCreation(localizationContext, serviceContainer, parser, localeType,
-                exitMenu);
+                mainMenu);
 
         MenuRunner.runMenu(playerCreationMenu);
     }
