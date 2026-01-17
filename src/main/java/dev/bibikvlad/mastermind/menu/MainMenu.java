@@ -69,7 +69,7 @@ public class MainMenu extends Menu {
                 return this;
             }
             case 4 -> {
-                return playerMenu();
+                return profileMenu();
             }
             case 5 -> {
                 return settings();
@@ -97,7 +97,7 @@ public class MainMenu extends Menu {
         gamesService.save(currentPlayer.getId(), gameData);
     }
 
-    private Menu playerMenu() {
+    private Menu profileMenu() {
         return new ProfileMenu(localizationContext, serviceContainer, parser);
     }
 
