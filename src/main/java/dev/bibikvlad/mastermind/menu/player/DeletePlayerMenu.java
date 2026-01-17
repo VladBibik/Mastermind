@@ -26,7 +26,7 @@ public class DeletePlayerMenu extends Menu {
             System.out.println("Cannot delete a player.");
             System.out.println("Please register at least one more player first.");
 
-            return new PlayerMenu(localizationContext, serviceContainer, parser);
+            return new ProfileMenu(localizationContext, serviceContainer, parser);
         }
 
         playerService.deletePlayer(currentPlayer.getId());
@@ -34,7 +34,7 @@ public class DeletePlayerMenu extends Menu {
         System.out.println("Player with the name: " + currentPlayer.getPlayerName() + " has been deleted.");
 
         if (!playerService.isMultiplePlayersRegistered()) {
-            return new PlayerMenu(localizationContext, serviceContainer, parser);
+            return new ProfileMenu(localizationContext, serviceContainer, parser);
         }
 
         //TODO: This def should be changed.

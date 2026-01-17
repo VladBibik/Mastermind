@@ -37,13 +37,13 @@ public class PlayerNameChanger extends Menu {
         }
 
         if (userInput.equalsIgnoreCase("exit") || userInput.equalsIgnoreCase("close")) {
-            return new PlayerMenu(localizationContext, serviceContainer, parser);
+            return new ProfileMenu(localizationContext, serviceContainer, parser);
         }
 
         try {
             playerService.updatePlayerName(currentPlayer.getId(), userInput);
 
-            return new PlayerMenu(localizationContext, serviceContainer, parser);
+            return new ProfileMenu(localizationContext, serviceContainer, parser);
         } catch (PlayerAlreadyExistException exception) {
             System.out.println("Player with name " + userInput + " already exists\n");
         }

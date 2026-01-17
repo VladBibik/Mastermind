@@ -11,12 +11,12 @@ import dev.bibikvlad.mastermind.services.PlayerService;
 
 import java.util.Optional;
 
-public class PlayerMenu extends Menu {
+public class ProfileMenu extends Menu {
     private final PlayerService playerService;
     private final Player currentPlayer;
 
-    public PlayerMenu(LocalizationContext localizationContext, ServiceContainer serviceContainer,
-                      MastermindUserInputParser parser) {
+    public ProfileMenu(LocalizationContext localizationContext, ServiceContainer serviceContainer,
+                       MastermindUserInputParser parser) {
         super(localizationContext, serviceContainer, parser);
 
         this.playerService = serviceContainer.getPlayerService();

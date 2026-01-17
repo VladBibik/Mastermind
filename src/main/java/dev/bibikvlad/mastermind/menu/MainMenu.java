@@ -7,8 +7,7 @@ import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.games.LeaderboardMenu;
-import dev.bibikvlad.mastermind.menu.player.NewPlayerCreation;
-import dev.bibikvlad.mastermind.menu.player.PlayerMenu;
+import dev.bibikvlad.mastermind.menu.player.ProfileMenu;
 import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.GamesService;
@@ -99,7 +98,7 @@ public class MainMenu extends Menu {
     }
 
     private Menu playerMenu() {
-        return new PlayerMenu(localizationContext, serviceContainer, parser);
+        return new ProfileMenu(localizationContext, serviceContainer, parser);
     }
 
     //TODO: Move to separate class
