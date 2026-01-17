@@ -57,26 +57,26 @@ public class MainMenu extends Menu {
     private Menu menuOptionSwitcher(int userInputNumber) {
         switch (userInputNumber) {
             case 1 -> {
-                return newPlayerCreation();
-            }
-            case 2 -> {
                 launchGame();
 
                 return this;
             }
-            case 3 -> {
-                return playerMenu();
+            case 2 -> {
+                return leaderboards();
             }
-            case 4 -> {
+            case 3 -> {
                 displayCurrentPlayerData();
 
                 return this;
             }
+            case 4 -> {
+                return playerMenu();
+            }
             case 5 -> {
-                return leaderboards();
+                return settings();
             }
             case 6 -> {
-                return settings();
+                return exit();
             }
             default -> {
                 System.out.println("Invalid input. Please enter a number corresponding to the menu option.\n");
@@ -133,5 +133,9 @@ public class MainMenu extends Menu {
 
     private Menu settings() {
         return new SettingsMenu(localizationContext, serviceContainer, parser);
+    }
+
+    private Menu exit() {
+        return new ExitMenu(localizationContext, serviceContainer, parser);
     }
 }
