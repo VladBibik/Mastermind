@@ -6,18 +6,22 @@ import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.MainMenu;
 import dev.bibikvlad.mastermind.menu.Menu;
+import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
 import java.util.Optional;
 
 public class PlayerMenu extends Menu {
     private final PlayerService playerService;
+    private final Player currentPlayer;
 
     public PlayerMenu(LocalizationContext localizationContext, ServiceContainer serviceContainer,
                       MastermindUserInputParser parser) {
         super(localizationContext, serviceContainer, parser);
 
         this.playerService = serviceContainer.getPlayerService();
+        this.currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
+                () -> new IllegalStateException("No last selected player found!"));
     }
 
     @Override
@@ -74,6 +78,11 @@ public class PlayerMenu extends Menu {
         Menu playerSelectionMenu = new PlayerSelectionMenu(localizationContext, serviceContainer, parser);
 
         return playerSelectionMenu.run();
+    }
+
+    private Menu newPlayerCreation() {
+        return new NewPlayerCreation(localizationContext, serviceContainer, parser,
+                currentPlayer.getPlayerConfig().locale(), this);
     }
 
     private Menu changePlayerName() {

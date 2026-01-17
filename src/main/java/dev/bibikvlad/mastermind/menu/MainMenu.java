@@ -86,11 +86,6 @@ public class MainMenu extends Menu {
         }
     }
 
-    private Menu newPlayerCreation() {
-        return new NewPlayerCreation(localizationContext, serviceContainer, parser,
-                currentPlayer.getPlayerConfig().locale(), this);
-    }
-
     //TODO: This method needs refactoring. Either move it to the custom class, or split in multiple methods
     private void launchGame() {
         MastermindGameBootstrap mastermindGameLauncher = new MastermindGameBootstrap(localizationContext,
