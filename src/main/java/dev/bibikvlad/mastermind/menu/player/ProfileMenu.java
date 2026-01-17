@@ -50,7 +50,7 @@ public class ProfileMenu extends Menu {
     private Menu menuOptionSwitcher(int userInputNumber) {
         switch (userInputNumber) {
             case 1 -> {
-                return changePlayer();
+                return switchPlayer();
             }
             case 2 -> {
                 return newPlayerCreation();
@@ -72,7 +72,7 @@ public class ProfileMenu extends Menu {
         }
     }
 
-    private Menu changePlayer() {
+    private Menu switchPlayer() {
         if (!playerService.isMultiplePlayersRegistered()) {
             System.out.println("Please register at least one more player first.");
 
