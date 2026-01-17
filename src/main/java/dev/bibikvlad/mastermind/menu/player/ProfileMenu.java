@@ -53,12 +53,15 @@ public class ProfileMenu extends Menu {
                 return changePlayer();
             }
             case 2 -> {
-                return changePlayerName();
+                return newPlayerCreation();
             }
             case 3 -> {
-                return deletePlayer();
+                return changePlayerName();
             }
             case 4 -> {
+                return deletePlayer();
+            }
+            case 0 -> {
                 return quit();
             }
             default -> {
