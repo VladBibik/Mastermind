@@ -34,7 +34,7 @@ import dev.bibikvlad.mastermind.services.PlayerStatisticsService;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class ServiceContainer implements AutoCloseable{
+public class ServiceContainer implements AutoCloseable {
     private final Connection connection;
     private final TransactionManager transactionManager;
 
