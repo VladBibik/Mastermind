@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.app.bootstrap;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
+import dev.bibikvlad.mastermind.exceptions.handlers.PersistenceExceptionHandler;
 import dev.bibikvlad.mastermind.input.parser.ConsoleInputParser;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
@@ -26,10 +27,7 @@ public class MastermindAppLauncher {
         try {
             launchGame(serviceContainer, parser);
         } catch (PersistenceException exception) {
-            //TODO: Move to the handler class, and add localized message
-            System.out.println("Problem with the database occurred. Please check your environment and try again later");
-
-            System.exit(1);
+            PersistenceExceptionHandler.handle(exception);
         }
     }
 
