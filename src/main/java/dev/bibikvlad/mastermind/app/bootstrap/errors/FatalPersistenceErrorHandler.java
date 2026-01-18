@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.exceptions.handlers;
+package dev.bibikvlad.mastermind.app.bootstrap.errors;
 
 //TODO: Add printer instead of SOUT!
 public class FatalPersistenceErrorHandler {

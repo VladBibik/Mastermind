@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.app.bootstrap;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
-import dev.bibikvlad.mastermind.exceptions.handlers.FatalPersistenceErrorHandler;
+import dev.bibikvlad.mastermind.app.bootstrap.errors.FatalPersistenceErrorHandler;
 import dev.bibikvlad.mastermind.input.parser.ConsoleInputParser;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
