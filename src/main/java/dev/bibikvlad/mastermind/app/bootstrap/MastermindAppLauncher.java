@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.app.bootstrap;
 
-import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.app.bootstrap.errors.FatalPersistenceErrorHandler;
+import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.input.parser.ConsoleInputParser;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
@@ -13,22 +13,26 @@ import dev.bibikvlad.mastermind.persistence.database.DatabaseContext;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Optional;
 
 public class MastermindAppLauncher {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
+        try {
+            run();
+        } catch (PersistenceException exception) {
+            FatalPersistenceErrorHandler.handle(exception);
+        }
+    }
+
+    private static void run() throws PersistenceException {
         DatabaseContext.initialize();
         Connection connection = DatabaseContext.getConnection();
 
         ServiceContainer serviceContainer = new ServiceContainer(connection);
 
         MastermindUserInputParser parser = new ConsoleInputParser();
-        try {
-            launchGame(serviceContainer, parser);
-        } catch (PersistenceException exception) {
-            FatalPersistenceErrorHandler.handle(exception);
-        }
+
+        launchGame(serviceContainer, parser);
     }
 
     //TODO: This needs to be moved somewhere
