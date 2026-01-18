@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.exceptions.handlers;
 
 //TODO: Add printer instead of SOUT!
-public class PersistenceExceptionHandler {
+public class FatalPersistenceErrorHandler {
     private final static String EXCEPTION_MESSAGE = "Problem with the database occurred. " +
             "Please check your environment and try again later";
 

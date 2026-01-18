@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.app.bootstrap;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
-import dev.bibikvlad.mastermind.exceptions.handlers.PersistenceExceptionHandler;
+import dev.bibikvlad.mastermind.exceptions.handlers.FatalPersistenceErrorHandler;
 import dev.bibikvlad.mastermind.input.parser.ConsoleInputParser;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
@@ -27,7 +27,7 @@ public class MastermindAppLauncher {
         try {
             launchGame(serviceContainer, parser);
         } catch (PersistenceException exception) {
-            PersistenceExceptionHandler.handle(exception);
+            FatalPersistenceErrorHandler.handle(exception);
         }
     }
 
