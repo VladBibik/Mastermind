@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.app.bootstrap;
 
+import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.persistence.database.TransactionManager;
 import dev.bibikvlad.mastermind.persistence.game.dao.GamesDAO;
 import dev.bibikvlad.mastermind.persistence.game.jdbc.GameJdbcDAO;
@@ -31,8 +32,9 @@ import dev.bibikvlad.mastermind.services.PlayerService;
 import dev.bibikvlad.mastermind.services.PlayerStatisticsService;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
-public class ServiceContainer {
+public class ServiceContainer implements AutoCloseable{
     private final Connection connection;
     private final TransactionManager transactionManager;
 
@@ -95,5 +97,14 @@ public class ServiceContainer {
         }
 
         return playerStatisticsService;
+    }
+
+    @Override
+    public void close() throws PersistenceException {
+        try {
+            connection.close();
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to close database connection", exception);
+        }
     }
 }
