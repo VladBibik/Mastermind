@@ -28,11 +28,11 @@ public class MastermindAppLauncher {
         DatabaseContext.initialize();
         Connection connection = DatabaseContext.getConnection();
 
-        ServiceContainer serviceContainer = new ServiceContainer(connection);
+        try (ServiceContainer serviceContainer = new ServiceContainer(connection)) {
+            MastermindUserInputParser parser = new ConsoleInputParser();
 
-        MastermindUserInputParser parser = new ConsoleInputParser();
-
-        launchGame(serviceContainer, parser);
+            launchGame(serviceContainer, parser);
+        }
     }
 
     //TODO: This needs to be moved somewhere
