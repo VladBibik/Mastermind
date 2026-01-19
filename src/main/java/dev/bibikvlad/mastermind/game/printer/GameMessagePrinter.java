@@ -4,11 +4,11 @@ import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 
-public class MastermindGameMessagePrinter {
+public class GameMessagePrinter {
     private final Printer printer;
     private final GameMessages gameMessages;
 
-    public MastermindGameMessagePrinter(Printer printer, GameMessages gameMessages) {
+    public GameMessagePrinter(Printer printer, GameMessages gameMessages) {
         this.printer = printer;
         this.gameMessages = gameMessages;
     }

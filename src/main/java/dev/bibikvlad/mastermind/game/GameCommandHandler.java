@@ -1,11 +1,11 @@
 package dev.bibikvlad.mastermind.game;
 
-import dev.bibikvlad.mastermind.game.printer.MastermindGameMessagePrinter;
+import dev.bibikvlad.mastermind.game.printer.GameMessagePrinter;
 
 public class GameCommandHandler {
-    private final MastermindGameMessagePrinter printer;
+    private final GameMessagePrinter printer;
 
-    public GameCommandHandler(MastermindGameMessagePrinter printer) {
+    public GameCommandHandler(GameMessagePrinter printer) {
         this.printer = printer;
     }
 

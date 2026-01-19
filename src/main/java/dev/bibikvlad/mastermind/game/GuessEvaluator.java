@@ -1,12 +1,12 @@
 package dev.bibikvlad.mastermind.game;
 
-import dev.bibikvlad.mastermind.game.printer.MastermindGameMessagePrinter;
+import dev.bibikvlad.mastermind.game.printer.GameMessagePrinter;
 
 public class GuessEvaluator {
     private final String correctAnswer;
-    private final MastermindGameMessagePrinter printer;
+    private final GameMessagePrinter printer;
 
-    public GuessEvaluator(String correctAnswer, MastermindGameMessagePrinter printer) {
+    public GuessEvaluator(String correctAnswer, GameMessagePrinter printer) {
         this.correctAnswer = correctAnswer;
         this.printer = printer;
     }
