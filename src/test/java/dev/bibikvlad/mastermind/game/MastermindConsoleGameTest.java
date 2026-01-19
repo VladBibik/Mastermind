@@ -1,8 +1,9 @@
 package dev.bibikvlad.mastermind.game;
 
+import dev.bibikvlad.mastermind.app.printer.PrintStreamPrinter;
+import dev.bibikvlad.mastermind.game.printer.MastermindMessagePrinter;
 import dev.bibikvlad.mastermind.input.parser.BufferedReaderInputParser;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
-import dev.bibikvlad.mastermind.game.printer.MastermindMessagePrinter;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
@@ -77,7 +78,8 @@ public class MastermindConsoleGameTest {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
         MastermindUserInputParser inputParser = new BufferedReaderInputParser(bufferedReader);
-        MastermindMessagePrinter messagePrinter = new StreamMessagePrinter(gameMessages, printStream);
+        MastermindMessagePrinter messagePrinter = new MastermindMessagePrinter(
+                new PrintStreamPrinter(printStream), gameMessages);
 
         LogoColorsBundle logoColorsBundle = new LogoColorsBundle(
                 ConsoleColor.ORCHID,
