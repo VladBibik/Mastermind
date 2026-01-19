@@ -23,6 +23,7 @@ public class MastermindConsoleGameTest {
     private ByteArrayOutputStream outputStream;
     private PrintStream printStream;
     private GameMessages gameMessages;
+    private LogoColorsBundle logoColorsBundle;
 
     @BeforeEach
     void setUp() {
@@ -73,6 +74,16 @@ public class MastermindConsoleGameTest {
                 () -> runGameAndGetOutputStreamString("yrgw", "close"));
     }
 
+    @BeforeEach
+    public void setUpColorBundler() {
+        logoColorsBundle = new LogoColorsBundle(
+                ConsoleColor.ORCHID,
+                ConsoleColor.ORANGE,
+                ConsoleColor.BRIGHT_RED,
+                ConsoleColor.BACKGROUND_BLACK
+        );
+    }
+
     private String runGameAndGetOutputStreamString(String answer, String input) {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -80,13 +91,6 @@ public class MastermindConsoleGameTest {
         MastermindUserInputParser inputParser = new BufferedReaderInputParser(bufferedReader);
         MastermindMessagePrinter messagePrinter = new MastermindMessagePrinter(
                 new PrintStreamPrinter(printStream), gameMessages);
-
-        LogoColorsBundle logoColorsBundle = new LogoColorsBundle(
-                ConsoleColor.ORCHID,
-                ConsoleColor.ORANGE,
-                ConsoleColor.BRIGHT_RED,
-                ConsoleColor.BACKGROUND_BLACK
-        );
 
         MastermindConsoleGame game = new MastermindConsoleGame(messagePrinter, inputParser, answer, logoColorsBundle);
         game.play();
