@@ -3,7 +3,7 @@ package dev.bibikvlad.mastermind.game;
 import dev.bibikvlad.mastermind.game.data.GameOutcome;
 import dev.bibikvlad.mastermind.game.data.GameResult;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
-import dev.bibikvlad.mastermind.game.printer.MastermindMessagePrinter;
+import dev.bibikvlad.mastermind.game.printer.MastermindGameMessagePrinter;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.input.validation.GameInputValidator;
 
@@ -11,7 +11,7 @@ public class MastermindConsoleGame {
     private static final int MAX_TURNS = 10;
 
     private final String answer;
-    private final MastermindMessagePrinter printer;
+    private final MastermindGameMessagePrinter printer;
     private final MastermindUserInputParser parser;
     private final LogoColorsBundle logoColorsBundle;
 
@@ -19,7 +19,7 @@ public class MastermindConsoleGame {
     private final GameCommandHandler gameCommandHandler;
     private final GuessEvaluator guessEvaluator;
 
-    public MastermindConsoleGame(MastermindMessagePrinter printer,
+    public MastermindConsoleGame(MastermindGameMessagePrinter printer,
                                  MastermindUserInputParser inputParser,
                                  String answer,
                                  LogoColorsBundle logoColorsBundle) {
