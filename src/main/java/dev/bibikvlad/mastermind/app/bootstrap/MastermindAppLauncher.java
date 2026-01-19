@@ -1,6 +1,8 @@
 package dev.bibikvlad.mastermind.app.bootstrap;
 
 import dev.bibikvlad.mastermind.app.bootstrap.errors.FatalPersistenceErrorHandler;
+import dev.bibikvlad.mastermind.app.printer.ConsolePrinter;
+import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.input.parser.ConsoleInputParser;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
@@ -17,10 +19,14 @@ import java.util.Optional;
 
 public class MastermindAppLauncher {
     public static void main(String[] args) {
+        Printer printer = new ConsolePrinter();
+
         try {
             run();
         } catch (PersistenceException exception) {
-            FatalPersistenceErrorHandler.handle(exception);
+            FatalPersistenceErrorHandler handler = new FatalPersistenceErrorHandler(printer);
+
+            handler.handle(exception);
         }
     }
 
