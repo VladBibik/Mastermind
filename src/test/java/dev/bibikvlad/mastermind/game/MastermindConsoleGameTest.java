@@ -30,6 +30,13 @@ public class MastermindConsoleGameTest {
         outputStream = new ByteArrayOutputStream();
         printStream = new PrintStream(outputStream);
         gameMessages = new LocalizationContext(LocaleType.ENGLISH).getGameMessages();
+
+        logoColorsBundle = new LogoColorsBundle(
+                ConsoleColor.ORCHID,
+                ConsoleColor.ORANGE,
+                ConsoleColor.BRIGHT_RED,
+                ConsoleColor.BACKGROUND_BLACK
+        );
     }
 
     @Test
@@ -72,16 +79,6 @@ public class MastermindConsoleGameTest {
     public void firstAttemptCloseTest() {
         assertDoesNotThrow(
                 () -> runGameAndGetOutputStreamString("yrgw", "close"));
-    }
-
-    @BeforeEach
-    public void setUpColorBundler() {
-        logoColorsBundle = new LogoColorsBundle(
-                ConsoleColor.ORCHID,
-                ConsoleColor.ORANGE,
-                ConsoleColor.BRIGHT_RED,
-                ConsoleColor.BACKGROUND_BLACK
-        );
     }
 
     private String runGameAndGetOutputStreamString(String answer, String input) {
