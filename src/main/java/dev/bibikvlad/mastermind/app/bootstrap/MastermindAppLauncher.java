@@ -22,7 +22,7 @@ public class MastermindAppLauncher {
         Printer printer = new ConsolePrinter();
 
         try {
-            run();
+            run(printer);
         } catch (PersistenceException exception) {
             FatalPersistenceErrorHandler handler = new FatalPersistenceErrorHandler(printer);
 
@@ -30,19 +30,20 @@ public class MastermindAppLauncher {
         }
     }
 
-    private static void run() throws PersistenceException {
+    private static void run(Printer printer) throws PersistenceException {
         DatabaseContext.initialize();
         Connection connection = DatabaseContext.getConnection();
 
         try (ServiceContainer serviceContainer = new ServiceContainer(connection)) {
             MastermindUserInputParser parser = new ConsoleInputParser();
 
-            launchGame(serviceContainer, parser);
+            launchGame(serviceContainer, parser, printer);
         }
     }
 
     //TODO: This needs to be moved somewhere
-    private static void launchGame(ServiceContainer serviceContainer, MastermindUserInputParser parser) {
+    private static void launchGame(ServiceContainer serviceContainer,
+                                   MastermindUserInputParser parser, Printer printer) {
         Optional<Player> optionalPlayer = serviceContainer.getPlayerService().loadLastSelectedPlayer();
 
         optionalPlayer.ifPresentOrElse(player -> {
