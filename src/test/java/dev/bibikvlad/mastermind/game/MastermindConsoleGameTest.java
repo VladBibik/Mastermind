@@ -3,7 +3,6 @@ package dev.bibikvlad.mastermind.game;
 import dev.bibikvlad.mastermind.input.parser.BufferedReaderInputParser;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.game.printer.MastermindMessagePrinter;
-import dev.bibikvlad.mastermind.game.printer.StreamMessagePrinter;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
