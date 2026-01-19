@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.game.printer;
+package dev.bibikvlad.mastermind.game.presentation;
 
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;

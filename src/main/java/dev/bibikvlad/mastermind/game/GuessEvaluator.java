@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.game;
 
-import dev.bibikvlad.mastermind.game.printer.GameMessagePrinter;
+import dev.bibikvlad.mastermind.game.presentation.GameMessagePrinter;
 
 public class GuessEvaluator {
     private final String correctAnswer;
