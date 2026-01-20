@@ -1,10 +1,8 @@
 package dev.bibikvlad.mastermind.menu.player;
 
-import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
+import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
-import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
-import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
@@ -13,11 +11,10 @@ public class PlayerNameChanger extends Menu {
     private final PlayerService playerService;
     private final Player currentPlayer;
 
-    public PlayerNameChanger(LocalizationContext localizationContext, ServiceContainer serviceContainer,
-                             MastermindUserInputParser parser) {
-        super(localizationContext, serviceContainer, parser);
+    public PlayerNameChanger(AppContext appContext) {
+        super(appContext);
 
-        this.playerService = serviceContainer.getPlayerService();
+        this.playerService = appContext.services().getPlayerService();
         this.currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
                 () -> new IllegalStateException("No last selected player found!"));
     }
@@ -28,7 +25,7 @@ public class PlayerNameChanger extends Menu {
         System.out.println();
         System.out.println("To go back to the previous menu enter 'exit' o 'close'");
 
-        String userInput = parser.parseUserInput();
+        String userInput = appContext.parser().parseUserInput();
 
         if (StringEmptyValidator.isNullOrEmpty(userInput)) {
             System.out.println("Player's name cannot be empty");
@@ -37,13 +34,13 @@ public class PlayerNameChanger extends Menu {
         }
 
         if (userInput.equalsIgnoreCase("exit") || userInput.equalsIgnoreCase("close")) {
-            return new ProfileMenu(localizationContext, serviceContainer, parser);
+            return new ProfileMenu(appContext);
         }
 
         try {
             playerService.updatePlayerName(currentPlayer.getId(), userInput);
 
-            return new ProfileMenu(localizationContext, serviceContainer, parser);
+            return new ProfileMenu(appContext);
         } catch (PlayerAlreadyExistException exception) {
             System.out.println("Player with name " + userInput + " already exists\n");
         }
