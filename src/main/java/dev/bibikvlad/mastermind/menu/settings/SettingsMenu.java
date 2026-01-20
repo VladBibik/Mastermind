@@ -1,8 +1,7 @@
 package dev.bibikvlad.mastermind.menu.settings;
 
-import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
+import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
-import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.MainMenu;
@@ -18,11 +17,10 @@ public class SettingsMenu extends Menu {
 
     private Player currentPlayer;
 
-    public SettingsMenu(LocalizationContext localizationContext, ServiceContainer serviceContainer,
-                        MastermindUserInputParser parser) {
-        super(localizationContext, serviceContainer, parser);
+    public SettingsMenu(AppContext appContext) {
+        super(appContext);
 
-        this.playerService = serviceContainer.getPlayerService();
+        this.playerService = appContext.services().getPlayerService();
         this.currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
                 () -> new IllegalStateException("No last selected player found!"));
     }
@@ -32,10 +30,10 @@ public class SettingsMenu extends Menu {
     public Menu run() {
         displayMenu();
 
-        Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
+        Optional<Integer> selection = IntegerInputInterpreter.readSelection(appContext.parser());
 
         if (selection.isEmpty())
-            return new MainMenu(localizationContext, serviceContainer, parser);
+            return new MainMenu(appContext);
 
         return menuOptionSwitcher(selection.get());
     }
@@ -66,7 +64,7 @@ public class SettingsMenu extends Menu {
     }
 
     private Menu changeLanguage() {
-        LanguageSelectionMenu languageSelectionMenu = new LanguageSelectionMenu(parser);
+        LanguageSelectionMenu languageSelectionMenu = new LanguageSelectionMenu(appContext.parser());
 
         LocaleType localeType = languageSelectionMenu.selectLanguage();
 
@@ -86,15 +84,19 @@ public class SettingsMenu extends Menu {
             //TODO:Language name should be localized!
             System.out.println("Language changed to " + localeType.getLanguageName());
 
-            return new SettingsMenu(new LocalizationContext(localeType), serviceContainer, parser);
+            //TODO: Think about this one! Maybe it's better to move it to the other method, or even other class. Maybe LanguageSelectionMenu should handle it
+            LocalizationContext localizationContext = new LocalizationContext(localeType);
+            appContext.serLocalizationContext(localizationContext);
+
+            return new SettingsMenu(appContext);
         }
     }
 
     private Menu changeLogoColor() {
-        return new LogoColorSelectionMenu(localizationContext, serviceContainer, parser);
+        return new LogoColorSelectionMenu(appContext);
     }
 
     private Menu exit() {
-        return new MainMenu(localizationContext, serviceContainer, parser);
+        return new MainMenu(appContext);
     }
 }
