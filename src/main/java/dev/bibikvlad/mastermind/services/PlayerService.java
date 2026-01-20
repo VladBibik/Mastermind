@@ -25,15 +25,17 @@ public class PlayerService {
         this.playerLastSelectedRepository = playerLastSelectedRepository;
     }
 
-    public boolean savePlayerWithProvidedLocale(String newPlayerName, LocaleType locale)
+    //TODO: Think on renaming it
+    public Player savePlayerWithProvidedLocale(String newPlayerName, LocaleType locale)
             throws PlayerAlreadyExistException {
         if (playerRepository.existsByName(newPlayerName)) {
             throw new PlayerAlreadyExistException("Player with name " + newPlayerName + " already exists");
         }
 
         Player player = new Player(newPlayerName, getCustomLocaleConfig(locale));
+        playerRepository.save(player);
 
-        return playerRepository.save(player);
+        return player;
     }
 
     public boolean saveOrUpdateLastSelectedPlayer(long playerId) {
