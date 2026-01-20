@@ -13,12 +13,10 @@ public final class AppContext {
     private LocalizationContext localizationContext;
     private Player currentPlayer;
 
-    public AppContext(ServiceContainer serviceContainer, Printer printer, MastermindUserInputParser parser,
-                      LocalizationContext localizationContext) {
+    public AppContext(ServiceContainer serviceContainer, Printer printer, MastermindUserInputParser parser) {
         this.serviceContainer = serviceContainer;
         this.printer = printer;
         this.parser = parser;
-        this.localizationContext = localizationContext;
     }
 
     public ServiceContainer services() {
