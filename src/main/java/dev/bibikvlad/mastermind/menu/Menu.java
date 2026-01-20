@@ -1,20 +1,12 @@
 package dev.bibikvlad.mastermind.menu;
 
-import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
-import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
-import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
+import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
 
 public abstract class Menu {
-    protected final LocalizationContext localizationContext;
-    protected final ServiceContainer serviceContainer;
-    protected final MastermindUserInputParser parser;
-    //TODO: Add printer!
+    protected final AppContext appContext;
 
-    public Menu(LocalizationContext localizationContext, ServiceContainer serviceContainer,
-                MastermindUserInputParser parser) {
-        this.localizationContext = localizationContext;
-        this.serviceContainer = serviceContainer;
-        this.parser = parser;
+    public Menu(AppContext appContext) {
+        this.appContext = appContext;
     }
 
     public abstract Menu run();
