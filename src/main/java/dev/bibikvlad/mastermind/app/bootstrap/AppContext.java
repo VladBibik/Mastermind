@@ -5,6 +5,8 @@ import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 
+import java.util.Optional;
+
 public final class AppContext {
     private final ServiceContainer serviceContainer;
     private final Printer printer;
@@ -39,8 +41,8 @@ public final class AppContext {
         this.localizationContext = localizationContext;
     }
 
-    public Player currentPlayer() {
-        return currentPlayer;
+    public Optional<Player> currentPlayer() {
+        return Optional.ofNullable(currentPlayer);
     }
 
     public void setCurrentPlayer(Player currentPlayer) {
