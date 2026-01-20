@@ -1,9 +1,7 @@
 package dev.bibikvlad.mastermind.menu.player;
 
-import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
-import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
+import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
-import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
@@ -13,11 +11,10 @@ import java.util.List;
 public class PlayerSelectionMenu extends Menu {
     private final PlayerService playerService;
 
-    public PlayerSelectionMenu(LocalizationContext localizationContext, ServiceContainer serviceContainer,
-                               MastermindUserInputParser parser) {
-        super(localizationContext, serviceContainer, parser);
+    public PlayerSelectionMenu(AppContext appContext) {
+        super(appContext);
 
-        this.playerService = serviceContainer.getPlayerService();
+        this.playerService = appContext.services().getPlayerService();
     }
 
     @Override
@@ -28,7 +25,7 @@ public class PlayerSelectionMenu extends Menu {
 
         System.out.println("\nTo get back to previous menu print 'exit', or 'quit'");
 
-        String userInput = parser.parseUserInput();
+        String userInput = appContext.parser().parseUserInput();
 
         if (StringEmptyValidator.isNullOrEmpty(userInput)) {
             System.out.println("Input cannot be empty. Please try again.");
@@ -37,7 +34,7 @@ public class PlayerSelectionMenu extends Menu {
         }
 
         if (userInput.equals("exit") || userInput.equals("quit")) {
-            return new ProfileMenu(localizationContext, serviceContainer, parser);
+            return new ProfileMenu(appContext);
         }
 
         int userInputNumber;
@@ -62,7 +59,7 @@ public class PlayerSelectionMenu extends Menu {
             System.out.println("Player " + player.getPlayerName() + " has been selected.");
         }
 
-        return new ProfileMenu(localizationContext, serviceContainer, parser);
+        return new ProfileMenu(appContext);
     }
 
     private List<Player> getAllPlayers() {
