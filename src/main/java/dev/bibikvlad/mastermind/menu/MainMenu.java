@@ -1,17 +1,14 @@
 package dev.bibikvlad.mastermind.menu;
 
-import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
+import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
 import dev.bibikvlad.mastermind.app.game.MastermindGameBootstrap;
 import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
-import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
-import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.games.LeaderboardMenu;
 import dev.bibikvlad.mastermind.menu.player.ProfileMenu;
 import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.GamesService;
-import dev.bibikvlad.mastermind.services.PlayerService;
 import dev.bibikvlad.mastermind.services.PlayerStatisticsService;
 import dev.bibikvlad.utils.formatters.TimeToStringFormatter;
 
@@ -21,20 +18,17 @@ public class MainMenu extends Menu {
     private final Player currentPlayer;
 
     //TODO: Need to rethink GamesService injection logic
-    public MainMenu(LocalizationContext localizationContext, ServiceContainer serviceContainer,
-                    MastermindUserInputParser parser) {
-        super(localizationContext, serviceContainer, parser);
+    public MainMenu(AppContext appContext) {
+        super(appContext);
 
-        PlayerService playerService = serviceContainer.getPlayerService();
-        this.currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
-                () -> new IllegalStateException("No last selected player found!"));
+        this.currentPlayer = appContext.currentPlayer();
     }
 
     @Override
     public Menu run() {
         displayMenu();
 
-        Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
+        Optional<Integer> selection = IntegerInputInterpreter.readSelection(appContext.parser());
 
         return selection
                 .map(this::menuOptionSwitcher)
@@ -87,24 +81,24 @@ public class MainMenu extends Menu {
 
     //TODO: This method needs refactoring. Either move it to the custom class, or split in multiple methods
     private void launchGame() {
-        MastermindGameBootstrap mastermindGameLauncher = new MastermindGameBootstrap(localizationContext,
+        MastermindGameBootstrap mastermindGameLauncher = new MastermindGameBootstrap(appContext.localizationContext(),
                 currentPlayer.getPlayerConfig().logoColorsBundle());
 
         GameData gameData = mastermindGameLauncher.launch();
 
-        GamesService gamesService = serviceContainer.getGamesService();
+        GamesService gamesService = appContext.services().getGamesService();
 
         gamesService.save(currentPlayer.getId(), gameData);
     }
 
     private Menu profileMenu() {
-        return new ProfileMenu(localizationContext, serviceContainer, parser);
+        return new ProfileMenu(appContext);
     }
 
     //TODO: Move to separate class
     //TODO: Think if 'press any key to continue' needed, because currently menu options are printed right after statistics, and it makes reading statistics harder
     private void displayCurrentPlayerData() {
-        PlayerStatisticsService playerStatisticsService = serviceContainer.getPlayerStatisticsService();
+        PlayerStatisticsService playerStatisticsService = appContext.services().getPlayerStatisticsService();
 
         playerStatisticsService.getPlayerStatistics(currentPlayer.getId()).ifPresent(playerStatistics -> {
             System.out.println();
@@ -122,11 +116,11 @@ public class MainMenu extends Menu {
     }
 
     private Menu leaderboards() {
-        return new LeaderboardMenu(localizationContext, serviceContainer, parser, currentPlayer);
+        return new LeaderboardMenu(appContext);
     }
 
     private Menu settings() {
-        return new SettingsMenu(localizationContext, serviceContainer, parser);
+        return new SettingsMenu(appContext);
     }
 
     private Menu exit() {
