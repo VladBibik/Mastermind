@@ -1,8 +1,6 @@
 package dev.bibikvlad.mastermind.menu.player;
 
-import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
-import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
-import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
+import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
 import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
@@ -11,13 +9,11 @@ public class DeletePlayerMenu extends Menu {
     private final PlayerService playerService;
     private final Player currentPlayer;
 
-    public DeletePlayerMenu(LocalizationContext localizationContext, ServiceContainer serviceContainer,
-                            MastermindUserInputParser parser) {
-        super(localizationContext, serviceContainer, parser);
+    public DeletePlayerMenu(AppContext appContext) {
+        super(appContext);
 
-        this.playerService = serviceContainer.getPlayerService();
-        this.currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
-                () -> new IllegalStateException("No last selected player found!"));
+        this.playerService = appContext.services().getPlayerService();
+        this.currentPlayer = appContext.currentPlayer();
     }
 
     @Override
@@ -26,7 +22,7 @@ public class DeletePlayerMenu extends Menu {
             System.out.println("Cannot delete a player.");
             System.out.println("Please register at least one more player first.");
 
-            return new ProfileMenu(localizationContext, serviceContainer, parser);
+            return new ProfileMenu(appContext);
         }
 
         playerService.deletePlayer(currentPlayer.getId());
@@ -34,13 +30,13 @@ public class DeletePlayerMenu extends Menu {
         System.out.println("Player with the name: " + currentPlayer.getPlayerName() + " has been deleted.");
 
         if (!playerService.isMultiplePlayersRegistered()) {
-            return new ProfileMenu(localizationContext, serviceContainer, parser);
+            return new ProfileMenu(appContext);
         }
 
         //TODO: This def should be changed.
         System.out.println("If you'll close player selection menu, " +
                 "previous last selected player will be picked automatically.");
 
-        return new PlayerSelectionMenu(localizationContext, serviceContainer, parser);
+        return new PlayerSelectionMenu(appContext);
     }
 }
