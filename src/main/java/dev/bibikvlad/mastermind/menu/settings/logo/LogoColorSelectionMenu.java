@@ -23,7 +23,8 @@ public class LogoColorSelectionMenu extends Menu {
 
         this.playerService = appContext.services().getPlayerService();
         this.colorSelectionMenu = new ColorSelectionMenu(appContext);
-        this.currentPlayer = appContext.currentPlayer();
+        this.currentPlayer = appContext.currentPlayer().orElseThrow(
+                () -> new IllegalStateException("No active player"));
         this.logoColorsBundle = currentPlayer.getPlayerConfig().logoColorsBundle();
     }
 

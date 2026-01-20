@@ -13,7 +13,8 @@ public class DeletePlayerMenu extends Menu {
         super(appContext);
 
         this.playerService = appContext.services().getPlayerService();
-        this.currentPlayer = appContext.currentPlayer();
+        this.currentPlayer = appContext.currentPlayer().orElseThrow(
+                () -> new IllegalStateException("No active player"));
     }
 
     @Override

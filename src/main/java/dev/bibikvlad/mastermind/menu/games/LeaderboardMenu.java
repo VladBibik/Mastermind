@@ -20,7 +20,8 @@ public class LeaderboardMenu extends Menu {
         super(appContext);
 
         this.leaderboardService = appContext.services().getLeaderboardService();
-        this.currentPlayer = appContext.currentPlayer();
+        this.currentPlayer = appContext.currentPlayer().orElseThrow(
+                () -> new IllegalStateException("No active player"));
     }
 
     @Override
