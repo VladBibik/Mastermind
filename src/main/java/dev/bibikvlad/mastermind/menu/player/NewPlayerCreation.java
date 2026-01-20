@@ -5,6 +5,7 @@ import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.menu.Menu;
+import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
 public class NewPlayerCreation extends Menu {
@@ -45,16 +46,12 @@ public class NewPlayerCreation extends Menu {
         }
 
         try {
-            //TODO: Since here we are creating a current player with default setting we need to rethink it's instantiation
-            if (playerService.savePlayerWithProvidedLocale(newPlayerName, localeType)) {
-                System.out.println("Player with name " + newPlayerName + " has been created.\n");
+            Player createdPlayer = playerService.savePlayerWithProvidedLocale(newPlayerName, localeType);
+            appContext.setCurrentPlayer(createdPlayer);
 
-                //TODO:This is need to be changed. Only here to see if everything works with AppContext
-                appContext.setCurrentPlayer(playerService.loadLastSelectedPlayer().get());
+            System.out.println("Player with name " + newPlayerName + " has been created.\n");
 
-                return returnMenu;
-            }
-
+            return returnMenu;
         } catch (PlayerAlreadyExistException exception) {
             System.out.println("Player with name " + newPlayerName + " already exists.\n");
         }
