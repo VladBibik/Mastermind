@@ -1,9 +1,7 @@
 package dev.bibikvlad.mastermind.menu.player;
 
-import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
+import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
-import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
-import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.MainMenu;
 import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
@@ -15,11 +13,10 @@ public class ProfileMenu extends Menu {
     private final PlayerService playerService;
     private final Player currentPlayer;
 
-    public ProfileMenu(LocalizationContext localizationContext, ServiceContainer serviceContainer,
-                       MastermindUserInputParser parser) {
-        super(localizationContext, serviceContainer, parser);
+    public ProfileMenu(AppContext appContext) {
+        super(appContext);
 
-        this.playerService = serviceContainer.getPlayerService();
+        this.playerService = appContext.services().getPlayerService();
         this.currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
                 () -> new IllegalStateException("No last selected player found!"));
     }
@@ -28,13 +25,13 @@ public class ProfileMenu extends Menu {
     public Menu run() {
         displayMenu();
 
-        Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
+        Optional<Integer> selection = IntegerInputInterpreter.readSelection(appContext.parser());
 
         //TODO: Check if map even needed here coz we have quit method. The way it works now it either goes to the main
         //menu if user input is '4', or 'close'/'exit'
         return selection
                 .map(this::menuOptionSwitcher)
-                .orElseGet(() -> new MainMenu(localizationContext, serviceContainer, parser));
+                .orElseGet(() -> new MainMenu(appContext));
 
     }
 
@@ -79,25 +76,25 @@ public class ProfileMenu extends Menu {
             return this;
         }
 
-        Menu playerSelectionMenu = new PlayerSelectionMenu(localizationContext, serviceContainer, parser);
+        Menu playerSelectionMenu = new PlayerSelectionMenu(appContext);
 
         return playerSelectionMenu.run();
     }
 
     private Menu newPlayerCreation() {
-        return new NewPlayerCreation(localizationContext, serviceContainer, parser,
+        return new NewPlayerCreation(appContext,
                 currentPlayer.getPlayerConfig().locale(), this);
     }
 
     private Menu renamePlayer() {
-        return new PlayerNameChanger(localizationContext, serviceContainer, parser);
+        return new PlayerNameChanger(appContext);
     }
 
     private Menu deletePlayer() {
-        return new DeletePlayerMenu(localizationContext, serviceContainer, parser);
+        return new DeletePlayerMenu(appContext);
     }
 
     private Menu quit() {
-        return new MainMenu(localizationContext, serviceContainer, parser);
+        return new MainMenu(appContext);
     }
 }
