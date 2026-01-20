@@ -1,9 +1,7 @@
 package dev.bibikvlad.mastermind.menu.settings.logo;
 
-import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
-import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
+import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
-import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
@@ -20,14 +18,12 @@ public class LogoColorSelectionMenu extends Menu {
 
     private LogoColorsBundle logoColorsBundle;
 
-    public LogoColorSelectionMenu(LocalizationContext localizationContext, ServiceContainer serviceContainer,
-                                  MastermindUserInputParser parser) {
-        super(localizationContext, serviceContainer, parser);
+    public LogoColorSelectionMenu(AppContext appContext) {
+        super(appContext);
 
-        this.playerService = serviceContainer.getPlayerService();
-        this.colorSelectionMenu = new ColorSelectionMenu(localizationContext, parser);
-        this.currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
-                () -> new IllegalStateException("No last selected player found!"));
+        this.playerService = appContext.services().getPlayerService();
+        this.colorSelectionMenu = new ColorSelectionMenu(appContext);
+        this.currentPlayer = appContext.currentPlayer();
         this.logoColorsBundle = currentPlayer.getPlayerConfig().logoColorsBundle();
     }
 
@@ -35,7 +31,7 @@ public class LogoColorSelectionMenu extends Menu {
     public Menu run() {
         displayMenu();
 
-        String userInput = parser.parseUserInput();
+        String userInput = appContext.parser().parseUserInput();
 
         if (StringEmptyValidator.isNullOrEmpty(userInput)) {
             System.out.println("Input cannot be empty. Please try again.");
@@ -104,7 +100,7 @@ public class LogoColorSelectionMenu extends Menu {
                 return saveAndReturnBack();
             }
             case 8 -> {
-                return new SettingsMenu(localizationContext, serviceContainer, parser);
+                return new SettingsMenu(appContext);
             }
             default -> {
                 System.out.println("Invalid input. Please enter a number corresponding to the menu option.");
@@ -181,6 +177,6 @@ public class LogoColorSelectionMenu extends Menu {
     private Menu saveAndReturnBack() {
         playerService.updateLogoColors(currentPlayer.getId(), logoColorsBundle);
 
-        return new SettingsMenu(localizationContext, serviceContainer, parser);
+        return new SettingsMenu(appContext);
     }
 }
