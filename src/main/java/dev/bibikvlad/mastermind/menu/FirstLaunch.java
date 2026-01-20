@@ -15,7 +15,7 @@ public class FirstLaunch {
         LocaleType localeType = languageSelectionMenu.selectLanguage();
 
         LocalizationContext localizationContext = new LocalizationContext(localeType);
-        appContext.serLocalizationContext(localizationContext);
+        appContext.setLocalizationContext(localizationContext);
 
         Menu mainMenu = new MainMenu(appContext);
 

@@ -86,7 +86,7 @@ public class SettingsMenu extends Menu {
 
             //TODO: Think about this one! Maybe it's better to move it to the other method, or even other class. Maybe LanguageSelectionMenu should handle it
             LocalizationContext localizationContext = new LocalizationContext(localeType);
-            appContext.serLocalizationContext(localizationContext);
+            appContext.setLocalizationContext(localizationContext);
 
             return new SettingsMenu(appContext);
         }

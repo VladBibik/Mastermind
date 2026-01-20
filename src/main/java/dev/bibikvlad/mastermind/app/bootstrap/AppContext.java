@@ -35,7 +35,7 @@ public final class AppContext {
         return localizationContext;
     }
 
-    public void serLocalizationContext(LocalizationContext localizationContext) {
+    public void setLocalizationContext(LocalizationContext localizationContext) {
         this.localizationContext = localizationContext;
     }
 

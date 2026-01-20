@@ -49,7 +49,7 @@ public class MastermindAppLauncher {
         optionalPlayer.ifPresentOrElse(player -> {
                     LocalizationContext localizationContext = new LocalizationContext(
                             player.getPlayerConfig().locale());
-                    appContext.serLocalizationContext(localizationContext);
+                    appContext.setLocalizationContext(localizationContext);
                     appContext.setCurrentPlayer(player);
 
                     Menu mainMenu = new MainMenu(appContext);
