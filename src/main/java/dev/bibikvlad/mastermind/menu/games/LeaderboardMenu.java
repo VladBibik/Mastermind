@@ -1,9 +1,7 @@
 package dev.bibikvlad.mastermind.menu.games;
 
-import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
+import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
-import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
-import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.MainMenu;
 import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.persistence.leaderboard.model.*;
@@ -18,23 +16,22 @@ public class LeaderboardMenu extends Menu {
     private final LeaderboardService leaderboardService;
     private final Player currentPlayer;
 
-    public LeaderboardMenu(LocalizationContext localizationContext, ServiceContainer serviceContainer,
-                           MastermindUserInputParser parser, Player currentPlayer) {
-        super(localizationContext, serviceContainer, parser);
+    public LeaderboardMenu(AppContext appContext) {
+        super(appContext);
 
-        this.leaderboardService = serviceContainer.getLeaderboardService();
-        this.currentPlayer = currentPlayer;
+        this.leaderboardService = appContext.services().getLeaderboardService();
+        this.currentPlayer = appContext.currentPlayer();
     }
 
     @Override
     public Menu run() {
         displayMenu();
 
-        Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
+        Optional<Integer> selection = IntegerInputInterpreter.readSelection(appContext.parser());
 
         return selection
                 .map(this::menuOptionSwitcher)
-                .orElseGet(() -> new MainMenu(localizationContext, serviceContainer, parser));
+                .orElseGet(() -> new MainMenu(appContext));
     }
 
     private void displayMenu() {
@@ -164,6 +161,6 @@ public class LeaderboardMenu extends Menu {
     }
 
     private Menu quit() {
-        return new MainMenu(localizationContext, serviceContainer, parser);
+        return new MainMenu(appContext);
     }
 }
