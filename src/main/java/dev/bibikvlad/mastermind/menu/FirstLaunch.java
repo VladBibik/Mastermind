@@ -1,26 +1,29 @@
 package dev.bibikvlad.mastermind.menu;
 
 import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
+import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
+import dev.bibikvlad.mastermind.app.printer.Printer;
+import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
-import dev.bibikvlad.mastermind.menu.player.NewPlayerCreation;
+import dev.bibikvlad.mastermind.menu.player.FirstTimePlayerCreation;
 import dev.bibikvlad.mastermind.menu.settings.LanguageSelectionMenu;
 
 public class FirstLaunch {
-    public static void start(AppContext appContext) {
+    public static void start(ServiceContainer serviceContainer, Printer printer, MastermindUserInputParser parser) {
         System.out.println("Welcome to the Mastermind Game!");
 
-        LanguageSelectionMenu languageSelectionMenu = new LanguageSelectionMenu(appContext.parser());
+        LanguageSelectionMenu languageSelectionMenu = new LanguageSelectionMenu(parser);
 
         LocaleType localeType = languageSelectionMenu.selectLanguage();
 
         LocalizationContext localizationContext = new LocalizationContext(localeType);
-        appContext.setLocalizationContext(localizationContext);
+
+        FirstTimePlayerCreation firstTimePlayerCreation = new FirstTimePlayerCreation(localeType, serviceContainer,
+                parser, printer);
+        AppContext appContext = firstTimePlayerCreation.createPlayerAndGetContext();
 
         Menu mainMenu = new MainMenu(appContext);
-
-        Menu playerCreationMenu = new NewPlayerCreation(appContext, localeType, mainMenu);
-
-        MenuRunner.runMenu(playerCreationMenu);
+        MenuRunner.runMenu(mainMenu);
     }
 }
