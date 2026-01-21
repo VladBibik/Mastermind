@@ -10,15 +10,11 @@ import dev.bibikvlad.mastermind.services.PlayerService;
 
 public class NewPlayerCreation extends Menu {
     private final PlayerService playerService;
-    private final LocaleType localeType;
-    private final Menu returnMenu;
 
-    public NewPlayerCreation(AppContext appContext, LocaleType localeType, Menu returnMenu) {
+    public NewPlayerCreation(AppContext appContext) {
         super(appContext);
 
         this.playerService = appContext.services().getPlayerService();
-        this.localeType = localeType;
-        this.returnMenu = returnMenu;
     }
 
     @Override
@@ -36,7 +32,7 @@ public class NewPlayerCreation extends Menu {
 
         if (newPlayerName.equalsIgnoreCase("exit") ||
                 newPlayerName.equalsIgnoreCase("close")) {
-            return returnMenu;
+            return new ProfileMenu(appContext);
         }
 
         if (newPlayerName.length() > 100) {
@@ -46,12 +42,14 @@ public class NewPlayerCreation extends Menu {
         }
 
         try {
+            LocaleType localeType = appContext.currentPlayer().getPlayerConfig().locale();
             Player createdPlayer = playerService.savePlayerWithProvidedLocale(newPlayerName, localeType);
-            appContext.setCurrentPlayer(createdPlayer);
+            AppContext appContext = new AppContext(this.appContext.localizationContext(), this.appContext.services(),
+                    this.appContext.printer(), this.appContext.parser(), createdPlayer);
 
             System.out.println("Player with name " + newPlayerName + " has been created.\n");
 
-            return returnMenu;
+            return new ProfileMenu(appContext);
         } catch (PlayerAlreadyExistException exception) {
             System.out.println("Player with name " + newPlayerName + " already exists.\n");
         }
