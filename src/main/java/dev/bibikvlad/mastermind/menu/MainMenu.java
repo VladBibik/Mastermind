@@ -21,8 +21,7 @@ public class MainMenu extends Menu {
     public MainMenu(AppContext appContext) {
         super(appContext);
 
-        this.currentPlayer = appContext.currentPlayer().orElseThrow(
-                () -> new IllegalStateException("No active player"));
+        this.currentPlayer = appContext.currentPlayer();
     }
 
     @Override
