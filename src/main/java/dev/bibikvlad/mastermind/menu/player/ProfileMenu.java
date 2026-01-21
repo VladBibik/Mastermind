@@ -4,21 +4,17 @@ import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.menu.MainMenu;
 import dev.bibikvlad.mastermind.menu.Menu;
-import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
 import java.util.Optional;
 
 public class ProfileMenu extends Menu {
     private final PlayerService playerService;
-    private final Player currentPlayer;
 
     public ProfileMenu(AppContext appContext) {
         super(appContext);
 
         this.playerService = appContext.services().getPlayerService();
-        this.currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
-                () -> new IllegalStateException("No last selected player found!"));
     }
 
     @Override
@@ -82,8 +78,7 @@ public class ProfileMenu extends Menu {
     }
 
     private Menu newPlayerCreation() {
-        return new NewPlayerCreation(appContext,
-                currentPlayer.getPlayerConfig().locale(), this);
+        return new NewPlayerCreation(appContext);
     }
 
     private Menu renamePlayer() {
