@@ -5,20 +5,20 @@ import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 
-import java.util.Optional;
-
 public final class AppContext {
+    private final LocalizationContext localizationContext;
     private final ServiceContainer serviceContainer;
     private final Printer printer;
     private final MastermindUserInputParser parser;
+    private final Player currentPlayer;
 
-    private LocalizationContext localizationContext;
-    private Player currentPlayer;
-
-    public AppContext(ServiceContainer serviceContainer, Printer printer, MastermindUserInputParser parser) {
+    public AppContext(LocalizationContext localizationContext, ServiceContainer serviceContainer, Printer printer,
+                      MastermindUserInputParser parser, Player currentPlayer) {
+        this.localizationContext = localizationContext;
         this.serviceContainer = serviceContainer;
         this.printer = printer;
         this.parser = parser;
+        this.currentPlayer = currentPlayer;
     }
 
     public ServiceContainer services() {
@@ -37,15 +37,7 @@ public final class AppContext {
         return localizationContext;
     }
 
-    public void setLocalizationContext(LocalizationContext localizationContext) {
-        this.localizationContext = localizationContext;
-    }
-
-    public Optional<Player> currentPlayer() {
-        return Optional.ofNullable(currentPlayer);
-    }
-
-    public void setCurrentPlayer(Player currentPlayer) {
-        this.currentPlayer = currentPlayer;
+    public Player currentPlayer() {
+        return currentPlayer;
     }
 }
