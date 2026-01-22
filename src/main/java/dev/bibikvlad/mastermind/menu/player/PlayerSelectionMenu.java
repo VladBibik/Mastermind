@@ -59,6 +59,9 @@ public class PlayerSelectionMenu extends Menu {
             System.out.println("Player " + player.getPlayerName() + " has been selected.");
         }
 
+        AppContext appContext = new AppContext(this.appContext.localizationContext(), this.appContext.services(),
+                this.appContext.printer(), this.appContext.parser(),  player);
+
         return new ProfileMenu(appContext);
     }
 
