@@ -60,7 +60,7 @@ public class PlayerSelectionMenu extends Menu {
         }
 
         AppContext appContext = new AppContext(this.appContext.localizationContext(), this.appContext.services(),
-                this.appContext.printer(), this.appContext.parser(),  player);
+                this.appContext.printer(), this.appContext.parser(), player);
 
         return new ProfileMenu(appContext);
     }
