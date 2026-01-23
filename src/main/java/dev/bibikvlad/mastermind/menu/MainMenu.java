@@ -17,7 +17,6 @@ import java.util.Optional;
 public class MainMenu extends Menu {
     private final Player currentPlayer;
 
-    //TODO: Need to rethink GamesService injection logic
     public MainMenu(AppContext appContext) {
         super(appContext);
 
