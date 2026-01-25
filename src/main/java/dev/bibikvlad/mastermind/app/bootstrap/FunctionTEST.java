@@ -37,6 +37,14 @@ public class FunctionTEST {
 
             return stringHash + " - Hash Code of the" + heloWorld;
         });
+
+        test.consTest(answer -> {
+            if (answer.contains("r")) {
+                System.out.println("Answer has the potential to be guess on the first try");
+            } else {
+                System.out.println("Answer sucks");
+            }
+        });
     }
 }
 
@@ -114,5 +122,9 @@ class Test {
 
     public void supTest(Supplier<String> test) {
         System.out.println(test.get());
+    }
+
+    public void consTest(Consumer<String> test) {
+        test.accept(RandomAnswerGenerator.generate());
     }
 }
