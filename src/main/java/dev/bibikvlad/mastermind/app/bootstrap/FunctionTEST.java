@@ -29,6 +29,14 @@ public class FunctionTEST {
 
             return sum;
         });
+
+        String heloWorld = "Hello World!";
+
+        test.supTest(() -> {
+            int stringHash = heloWorld.hashCode();
+
+            return stringHash + " - Hash Code of the" + heloWorld;
+        });
     }
 }
 
@@ -102,5 +110,9 @@ class Test {
 
     public void funcParamTest(Function<String, Integer> test) {
         System.out.println(test.apply(RandomAnswerGenerator.generate()));
+    }
+
+    public void supTest(Supplier<String> test) {
+        System.out.println(test.get());
     }
 }
