@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.app.bootstrap;
 
 import dev.bibikvlad.mastermind.game.RandomAnswerGenerator;
+import dev.bibikvlad.mastermind.persistence.player.model.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,5 +127,21 @@ class Test {
 
     public void consTest(Consumer<String> test) {
         test.accept(RandomAnswerGenerator.generate());
+    }
+
+    public void compTest() {
+        List<Player> players = new ArrayList<>();
+        players.sort((fristPlayer, secondPlayer) -> {
+            long firstId = fristPlayer.getId();
+            long secondId = secondPlayer.getId();
+
+            if (firstId == secondId) {
+                return 0;
+            } if (firstId > secondId) {
+                return -1;
+            } else {
+                return 1;
+            }
+        });
     }
 }
