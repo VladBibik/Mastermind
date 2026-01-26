@@ -3,9 +3,7 @@ package dev.bibikvlad.mastermind.app.bootstrap;
 import dev.bibikvlad.mastermind.game.RandomAnswerGenerator;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
 
@@ -18,7 +16,7 @@ public class FunctionTEST {
         System.out.println(test.testUnFunctions(RandomAnswerGenerator.generate().hashCode()));
         System.out.println(test.biTesting(RandomAnswerGenerator.generate(), RandomAnswerGenerator.generate().hashCode()));
         System.out.println(test.predicateTesting(RandomAnswerGenerator.generate()));
-        test.runnableTest();
+        //test.runnableTest();
         test.funcParamTest(string -> {
             char[] charArray = string.toCharArray();
             Random random = new Random();
@@ -48,6 +46,20 @@ public class FunctionTEST {
         });
 
         test.predicateTest(answer -> answer.length() > 10);
+        test.runnableTest(() -> {
+            String answer = RandomAnswerGenerator.generate();
+            char[] charArray = answer.toCharArray();
+            Set<Character> characters = new HashSet<>();
+
+            for (int i = 0; i < charArray.length; i++) {
+                characters.add(charArray[i]);
+            }
+
+            if (characters.size() == 1) {
+                System.out.println("All elements of the answer were the same, and the answer was: "
+                        + Arrays.toString(charArray));
+            }
+        });
     }
 }
 
@@ -139,7 +151,8 @@ class Test {
 
             if (firstId == secondId) {
                 return 0;
-            } if (firstId > secondId) {
+            }
+            if (firstId > secondId) {
                 return -1;
             } else {
                 return 1;
@@ -151,5 +164,13 @@ class Test {
         boolean result = test.and(string -> string.length() > 0).and(test).test(RandomAnswerGenerator.generate());
 
         System.out.println(result);
+    }
+
+    public void runnableTest(Runnable test) {
+        ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor();
+
+        for (int i = 0; i < 100; i++) {
+            executorService.submit(test);
+        }
     }
 }
