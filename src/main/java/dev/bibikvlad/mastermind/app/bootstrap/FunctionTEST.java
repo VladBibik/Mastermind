@@ -46,6 +46,8 @@ public class FunctionTEST {
                 System.out.println("Answer sucks");
             }
         });
+
+        test.predicateTest(answer -> answer.length() > 10);
     }
 }
 
@@ -143,5 +145,11 @@ class Test {
                 return 1;
             }
         });
+    }
+
+    public void predicateTest(Predicate<String> test) {
+        boolean result = test.and(string -> string.length() > 0).and(test).test(RandomAnswerGenerator.generate());
+
+        System.out.println(result);
     }
 }
