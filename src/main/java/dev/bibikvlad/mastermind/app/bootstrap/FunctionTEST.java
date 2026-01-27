@@ -1,8 +1,28 @@
 package dev.bibikvlad.mastermind.app.bootstrap;
 
 import dev.bibikvlad.mastermind.game.RandomAnswerGenerator;
+import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
+import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
+import dev.bibikvlad.mastermind.persistence.database.DatabaseContext;
+import dev.bibikvlad.mastermind.persistence.database.TransactionManager;
+import dev.bibikvlad.mastermind.persistence.player.dao.PlayerConfigDAO;
+import dev.bibikvlad.mastermind.persistence.player.dao.PlayerDAO;
+import dev.bibikvlad.mastermind.persistence.player.dao.PlayerLastSelectedDAO;
+import dev.bibikvlad.mastermind.persistence.player.dao.jdbc.PlayerConfigJdbcDAO;
+import dev.bibikvlad.mastermind.persistence.player.dao.jdbc.PlayerJdbcDAO;
+import dev.bibikvlad.mastermind.persistence.player.dao.jdbc.PlayerLastSelectedJdbcDAO;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
+import dev.bibikvlad.mastermind.persistence.player.model.PlayerConfig;
+import dev.bibikvlad.mastermind.persistence.player.repository.PlayerConfigRepository;
+import dev.bibikvlad.mastermind.persistence.player.repository.PlayerLastSelectedRepository;
+import dev.bibikvlad.mastermind.persistence.player.repository.PlayerRepository;
+import dev.bibikvlad.mastermind.persistence.player.repository.sql.PlayerConfigSQLRepository;
+import dev.bibikvlad.mastermind.persistence.player.repository.sql.PlayerLastSelectedSQLRepository;
+import dev.bibikvlad.mastermind.persistence.player.repository.sql.PlayerSQLRepository;
+import dev.bibikvlad.mastermind.services.PlayerService;
 
+import java.sql.Connection;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.*;
@@ -59,6 +79,30 @@ public class FunctionTEST {
                 System.out.println("All elements of the answer were the same, and the answer was: "
                         + Arrays.toString(charArray));
             }
+        });
+
+        test.callableTest(() -> {
+            Connection connection = DatabaseContext.getConnection();
+
+            PlayerDAO playerDAO = new PlayerJdbcDAO(connection);
+            TransactionManager transactionManager = new TransactionManager(connection);
+            PlayerRepository playerRepository = new PlayerSQLRepository(playerDAO, transactionManager);
+            PlayerConfigDAO playerConfigDAO = new PlayerConfigJdbcDAO(connection);
+            PlayerConfigRepository playerConfigRepository =
+                    new PlayerConfigSQLRepository(playerConfigDAO, transactionManager);
+            PlayerLastSelectedDAO playerLastSelectedDAO = new PlayerLastSelectedJdbcDAO(connection);
+            PlayerLastSelectedRepository playerLastSelectedRepository =
+                    new PlayerLastSelectedSQLRepository(playerLastSelectedDAO, transactionManager);
+            PlayerService playerService =
+                    new PlayerService(playerRepository, playerConfigRepository, playerLastSelectedRepository);
+
+            return playerService.loadLastSelectedPlayer().orElse(
+                    new Player("John",
+                            new PlayerConfig(LocaleType.ENGLISH,
+                                    new LogoColorsBundle(ConsoleColor.GREY,
+                                            ConsoleColor.GREY,
+                                            ConsoleColor.GREY,
+                                            ConsoleColor.BACKGROUND_BLACK))));
         });
     }
 }
@@ -171,6 +215,22 @@ class Test {
 
         for (int i = 0; i < 100; i++) {
             executorService.submit(test);
+        }
+    }
+
+    public void callableTest(Callable<Player> test) {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+
+        Future<Player> future = executorService.submit(test);
+
+        executorService.shutdown();
+
+        try {
+            Player player = future.get();
+
+            System.out.println(player);
+        } catch (InterruptedException | ExecutionException exception) {
+            throw new RuntimeException(exception);
         }
     }
 }
