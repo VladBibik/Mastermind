@@ -104,6 +104,8 @@ public class FunctionTEST {
                                             ConsoleColor.GREY,
                                             ConsoleColor.BACKGROUND_BLACK))));
         });
+
+        test.biPredicateTest((String::equals));
     }
 }
 
@@ -208,6 +210,14 @@ class Test {
         boolean result = test.and(string -> string.length() > 0).and(test).test(RandomAnswerGenerator.generate());
 
         System.out.println(result);
+    }
+
+    public void biPredicateTest(BiPredicate<String, String> test) {
+        for (int i = 0; i < 1_000; i++) {
+            if (test.test(RandomAnswerGenerator.generate(), RandomAnswerGenerator.generate())) {
+                System.out.println("Both answers are the same!");
+            }
+        }
     }
 
     public void runnableTest(Runnable test) {
