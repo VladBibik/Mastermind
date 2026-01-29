@@ -22,6 +22,7 @@ import dev.bibikvlad.mastermind.persistence.player.repository.sql.PlayerLastSele
 import dev.bibikvlad.mastermind.persistence.player.repository.sql.PlayerSQLRepository;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.util.*;
 import java.util.concurrent.*;
@@ -106,6 +107,22 @@ public class FunctionTEST {
         });
 
         test.biPredicateTest((String::equals));
+
+        test.biFunctionTest((firstAnswer, secondAnswer) -> {
+            byte[] firstAnswerBytes = firstAnswer.getBytes(StandardCharsets.UTF_8);
+            byte[] secondAnswerBytes = secondAnswer.getBytes(StandardCharsets.UTF_8);
+            byte firstBytesSum = 0;
+            byte secondBytesSum = 0;
+
+            for (int i = 0; i < firstAnswerBytes.length; i++) {
+                firstBytesSum += firstAnswerBytes[i];
+            }
+            for (int i = 0; i < secondAnswerBytes.length; i++) {
+                secondBytesSum += secondAnswerBytes[i];
+            }
+
+            return firstBytesSum + secondBytesSum;
+        });
     }
 }
 
@@ -218,6 +235,11 @@ class Test {
                 System.out.println("Both answers are the same!");
             }
         }
+    }
+
+    public void biFunctionTest(BiFunction<String, String , Integer> test) {
+        int result = test.apply(RandomAnswerGenerator.generate(), RandomAnswerGenerator.generate());
+        System.out.println(result);
     }
 
     public void runnableTest(Runnable test) {
