@@ -123,6 +123,12 @@ public class FunctionTEST {
 
             return firstBytesSum + secondBytesSum;
         });
+
+        test.biConsumerTest((firstAnswer, secondAnswer) -> {
+            if (firstAnswer.equals(secondAnswer)) {
+                System.out.println("Both answers are the same. And the answer was: " + firstAnswer);
+            }
+        });
     }
 }
 
@@ -240,6 +246,12 @@ class Test {
     public void biFunctionTest(BiFunction<String, String , Integer> test) {
         int result = test.apply(RandomAnswerGenerator.generate(), RandomAnswerGenerator.generate());
         System.out.println(result);
+    }
+
+    public void biConsumerTest(BiConsumer<String, String> test) {
+        for (int i = 0; i < 1_000; i++) {
+            test.accept(RandomAnswerGenerator.generate(), RandomAnswerGenerator.generate());
+        }
     }
 
     public void runnableTest(Runnable test) {
