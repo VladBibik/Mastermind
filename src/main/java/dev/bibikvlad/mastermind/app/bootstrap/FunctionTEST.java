@@ -129,6 +129,20 @@ public class FunctionTEST {
                 System.out.println("Both answers are the same. And the answer was: " + firstAnswer);
             }
         });
+
+        test.unaryOperatorTest(answer -> {
+            Set<Character> characters = new HashSet<>();
+
+            for (int i = 0; i < answer.length(); i++) {
+                characters.add(answer.charAt(i));
+            }
+
+            if (characters.size() < 4) {
+                return "Answer contains same characters. Answer: " + answer;
+            } else {
+                return "All characters in the answer are unique. Answer: " + answer;
+            }
+        });
     }
 }
 
@@ -252,6 +266,10 @@ class Test {
         for (int i = 0; i < 1_000; i++) {
             test.accept(RandomAnswerGenerator.generate(), RandomAnswerGenerator.generate());
         }
+    }
+
+    public void unaryOperatorTest(UnaryOperator<String> test) {
+        System.out.println(test.apply(RandomAnswerGenerator.generate()));
     }
 
     public void runnableTest(Runnable test) {
