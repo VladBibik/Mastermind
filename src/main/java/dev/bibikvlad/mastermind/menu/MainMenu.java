@@ -50,7 +50,7 @@ public class MainMenu extends Menu {
                 3. Stats
                 4. Profile
                 5. Settings
-                6. Exit
+                0. Exit
                 """, currentPlayer.getPlayerName());
 
         printer.printMessage(TEMP_MENU_STRING);
@@ -78,7 +78,7 @@ public class MainMenu extends Menu {
             case 5 -> {
                 return settings();
             }
-            case 6 -> {
+            case 0 -> {
                 return exit();
             }
             default -> {
