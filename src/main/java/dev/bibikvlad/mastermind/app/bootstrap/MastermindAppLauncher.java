@@ -40,19 +40,25 @@ public class MastermindAppLauncher {
                                        MastermindUserInputParser parser) {
         Optional<Player> optionalPlayer = serviceContainer.getPlayerService().loadLastSelectedPlayer();
 
-        optionalPlayer.ifPresentOrElse(player -> {
-                    LocalizationContext localizationContext = new LocalizationContext(
-                            player.getPlayerConfig().locale());
-                    AppContext appContext = new AppContext(localizationContext, serviceContainer, printer, parser,
-                            player);
+        optionalPlayer.ifPresentOrElse(player -> startMainMenuFor(player, serviceContainer, printer, parser),
+                () -> startFirstLaunch(serviceContainer, printer, parser));
+    }
 
-                    Menu mainMenu = new MainMenu(appContext);
+    private static void startMainMenuFor(Player player, ServiceContainer serviceContainer, Printer printer,
+                                         MastermindUserInputParser parser) {
+        LocalizationContext localizationContext = new LocalizationContext(
+                player.getPlayerConfig().locale());
+        AppContext appContext = new AppContext(localizationContext, serviceContainer, printer, parser,
+                player);
 
-                    MenuRunner.runMenu(mainMenu);
-                },
-                () -> {
-                    FirstLaunchFlow firstLaunchFlow = new FirstLaunchFlow(serviceContainer, printer, parser);
-                    firstLaunchFlow.launch();
-                });
+        Menu mainMenu = new MainMenu(appContext);
+
+        MenuRunner.runMenu(mainMenu);
+    }
+
+    private static void startFirstLaunch(ServiceContainer serviceContainer, Printer printer,
+                                         MastermindUserInputParser parser) {
+        FirstLaunchFlow firstLaunchFlow = new FirstLaunchFlow(serviceContainer, printer, parser);
+        firstLaunchFlow.launch();
     }
 }
