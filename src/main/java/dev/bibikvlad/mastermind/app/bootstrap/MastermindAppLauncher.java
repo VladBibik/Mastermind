@@ -11,10 +11,8 @@ import dev.bibikvlad.mastermind.menu.FirstLaunchFlow;
 import dev.bibikvlad.mastermind.menu.MainMenu;
 import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.menu.MenuRunner;
-import dev.bibikvlad.mastermind.persistence.database.DatabaseContext;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 
-import java.sql.Connection;
 import java.util.Optional;
 
 public class MastermindAppLauncher {
@@ -31,10 +29,7 @@ public class MastermindAppLauncher {
     }
 
     private static void run(Printer printer) throws PersistenceException {
-        DatabaseContext.initialize();
-        Connection connection = DatabaseContext.getConnection();
-
-        try (ServiceContainer serviceContainer = new ServiceContainer(connection)) {
+        try (ServiceContainer serviceContainer = new ServiceContainer()) {
             MastermindUserInputParser parser = new ConsoleInputParser();
 
             runStartupFlow(serviceContainer, printer, parser);
