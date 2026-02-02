@@ -37,12 +37,12 @@ public class MastermindAppLauncher {
         try (ServiceContainer serviceContainer = new ServiceContainer(connection)) {
             MastermindUserInputParser parser = new ConsoleInputParser();
 
-            selectAndRunStartupRoutine(serviceContainer, printer, parser);
+            runStartupFlow(serviceContainer, printer, parser);
         }
     }
 
-    private static void selectAndRunStartupRoutine(ServiceContainer serviceContainer, Printer printer,
-                                                   MastermindUserInputParser parser) {
+    private static void runStartupFlow(ServiceContainer serviceContainer, Printer printer,
+                                       MastermindUserInputParser parser) {
         Optional<Player> optionalPlayer = serviceContainer.getPlayerService().loadLastSelectedPlayer();
 
         optionalPlayer.ifPresentOrElse(player -> {
