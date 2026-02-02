@@ -8,12 +8,12 @@ import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.menu.player.FirstTimePlayerCreation;
 import dev.bibikvlad.mastermind.menu.settings.LanguageSelectionMenu;
 
-public class FirstLaunch {
+public class FirstLaunchFlow {
     private final ServiceContainer serviceContainer;
     private final Printer printer;
     private final MastermindUserInputParser parser;
 
-    public FirstLaunch(ServiceContainer serviceContainer, Printer printer, MastermindUserInputParser parser) {
+    public FirstLaunchFlow(ServiceContainer serviceContainer, Printer printer, MastermindUserInputParser parser) {
         this.serviceContainer = serviceContainer;
         this.printer = printer;
         this.parser = parser;

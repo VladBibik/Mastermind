@@ -7,7 +7,7 @@ import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.input.parser.ConsoleInputParser;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
-import dev.bibikvlad.mastermind.menu.FirstLaunch;
+import dev.bibikvlad.mastermind.menu.FirstLaunchFlow;
 import dev.bibikvlad.mastermind.menu.MainMenu;
 import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.menu.MenuRunner;
@@ -56,8 +56,8 @@ public class MastermindAppLauncher {
                     MenuRunner.runMenu(mainMenu);
                 },
                 () -> {
-                    FirstLaunch firstLaunch = new FirstLaunch(serviceContainer, printer, parser);
-                    firstLaunch.launch();
+                    FirstLaunchFlow firstLaunchFlow = new FirstLaunchFlow(serviceContainer, printer, parser);
+                    firstLaunchFlow.launch();
                 });
     }
 }
