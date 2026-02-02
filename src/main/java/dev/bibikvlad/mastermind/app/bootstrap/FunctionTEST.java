@@ -143,6 +143,14 @@ public class FunctionTEST {
                 return "All characters in the answer are unique. Answer: " + answer;
             }
         });
+
+        test.binaryOperatorTest((firstAnswer, secondAnswer) -> {
+            if (firstAnswer.equals(secondAnswer)) {
+                return "You Won! The  answer was: " + firstAnswer;
+            }
+
+            return firstAnswer + " " + secondAnswer;
+        });
     }
 }
 
@@ -270,6 +278,11 @@ class Test {
 
     public void unaryOperatorTest(UnaryOperator<String> test) {
         System.out.println(test.apply(RandomAnswerGenerator.generate()));
+    }
+
+    public void binaryOperatorTest(BinaryOperator<String> test) {
+        String potentialWin = test.apply(RandomAnswerGenerator.generate(), RandomAnswerGenerator.generate());
+        System.out.println(potentialWin);
     }
 
     public void runnableTest(Runnable test) {
