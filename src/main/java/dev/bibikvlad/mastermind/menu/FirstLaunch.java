@@ -10,7 +10,7 @@ import dev.bibikvlad.mastermind.menu.settings.LanguageSelectionMenu;
 
 public class FirstLaunch {
     public static void start(ServiceContainer serviceContainer, Printer printer, MastermindUserInputParser parser) {
-        System.out.println("Welcome to the Mastermind Game!");
+        printer.printMessage("Welcome to the Mastermind Game!");
 
         LanguageSelectionMenu languageSelectionMenu = new LanguageSelectionMenu(parser);
 
