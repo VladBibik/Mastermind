@@ -4,6 +4,8 @@ import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
 import dev.bibikvlad.mastermind.app.game.MastermindGameBootstrap;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.game.data.GameData;
+import dev.bibikvlad.mastermind.game.data.GameOutcome;
+import dev.bibikvlad.mastermind.game.data.GameResult;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.menu.games.LeaderboardMenu;
 import dev.bibikvlad.mastermind.menu.player.ProfileMenu;
@@ -97,6 +99,11 @@ public class MainMenu extends Menu {
         GamesService gamesService = appContext.services().getGamesService();
 
         gamesService.save(currentPlayer.getId(), gameData);
+        //TODO: Change this!
+        if (gameData.getGameOutcome().getResult().equals(GameResult.WIN)) {
+            printer.printMessage("Print any key to continue...");
+            appContext.parser().parseUserInput();
+        }
     }
 
     private Menu profileMenu() {
