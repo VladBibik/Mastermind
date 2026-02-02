@@ -80,7 +80,7 @@ public class MainMenu extends Menu {
                 return exit();
             }
             default -> {
-                System.out.println("Invalid input. Please enter a number corresponding to the menu option.\n");
+                printer.printMessage("Invalid input. Please enter a number corresponding to the menu option.\n");
 
                 return this;
             }
@@ -109,17 +109,16 @@ public class MainMenu extends Menu {
         PlayerStatisticsService playerStatisticsService = appContext.services().getPlayerStatisticsService();
 
         playerStatisticsService.getPlayerStatistics(currentPlayer.getId()).ifPresent(playerStatistics -> {
-            System.out.println();
-            System.out.println(currentPlayer.getPlayerName() + "'s statistics:");
-            System.out.println("Games played: " + playerStatistics.gameCount());
-            System.out.println("Number of wins: " + playerStatistics.winCount());
-            System.out.println("Win percentage: " + playerStatistics.winPercentage());
-            System.out.println("Total play time: " + TimeToStringFormatter.format(playerStatistics.totalPlayTime()));
-            System.out.println("Average game duration: " + TimeToStringFormatter.format(
+            printer.printMessage("\n" + currentPlayer.getPlayerName() + "'s statistics:");
+            printer.printMessage("Games played: " + playerStatistics.gameCount());
+            printer.printMessage("Number of wins: " + playerStatistics.winCount());
+            printer.printMessage("Win percentage: " + playerStatistics.winPercentage());
+            printer.printMessage("Total play time: " + TimeToStringFormatter.format(playerStatistics.totalPlayTime()));
+            printer.printMessage("Average game duration: " + TimeToStringFormatter.format(
                     playerStatistics.averageGameDuration()));
-            System.out.println("Fastest win time: " + TimeToStringFormatter.format(playerStatistics.fastestWinTime()));
-            System.out.println("Minimum turns needed for a win: " + playerStatistics.minTurnsWin());
-            System.out.println();
+            printer.printMessage("Fastest win time: " + TimeToStringFormatter.format(
+                    playerStatistics.fastestWinTime()));
+            printer.printMessage("Minimum turns needed for a win: " + playerStatistics.minTurnsWin() + "\n");
         });
     }
 
