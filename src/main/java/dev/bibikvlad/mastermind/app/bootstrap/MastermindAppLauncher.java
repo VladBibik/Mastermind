@@ -55,6 +55,9 @@ public class MastermindAppLauncher {
 
                     MenuRunner.runMenu(mainMenu);
                 },
-                () -> FirstLaunch.start(serviceContainer, printer, parser));
+                () -> {
+                    FirstLaunch firstLaunch = new FirstLaunch(serviceContainer, printer, parser);
+                    firstLaunch.launch();
+                });
     }
 }

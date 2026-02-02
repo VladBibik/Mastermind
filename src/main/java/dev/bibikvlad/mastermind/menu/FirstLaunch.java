@@ -9,7 +9,17 @@ import dev.bibikvlad.mastermind.menu.player.FirstTimePlayerCreation;
 import dev.bibikvlad.mastermind.menu.settings.LanguageSelectionMenu;
 
 public class FirstLaunch {
-    public static void start(ServiceContainer serviceContainer, Printer printer, MastermindUserInputParser parser) {
+    private final ServiceContainer serviceContainer;
+    private final Printer printer;
+    private final MastermindUserInputParser parser;
+
+    public FirstLaunch(ServiceContainer serviceContainer, Printer printer, MastermindUserInputParser parser) {
+        this.serviceContainer = serviceContainer;
+        this.printer = printer;
+        this.parser = parser;
+    }
+
+    public void launch() {
         printer.printMessage("Welcome to the Mastermind Game!");
 
         LanguageSelectionMenu languageSelectionMenu = new LanguageSelectionMenu(parser);
