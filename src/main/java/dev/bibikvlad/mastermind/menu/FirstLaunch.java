@@ -5,7 +5,6 @@ import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
-import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.player.FirstTimePlayerCreation;
 import dev.bibikvlad.mastermind.menu.settings.LanguageSelectionMenu;
 
@@ -17,10 +16,9 @@ public class FirstLaunch {
 
         LocaleType localeType = languageSelectionMenu.selectLanguage();
 
-        LocalizationContext localizationContext = new LocalizationContext(localeType);
-
         FirstTimePlayerCreation firstTimePlayerCreation = new FirstTimePlayerCreation(localeType, serviceContainer,
                 parser, printer);
+
         AppContext appContext = firstTimePlayerCreation.createPlayerAndGetContext();
 
         Menu mainMenu = new MainMenu(appContext);
