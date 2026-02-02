@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.menu;
 
 import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
 import dev.bibikvlad.mastermind.app.game.MastermindGameBootstrap;
+import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.menu.games.LeaderboardMenu;
@@ -12,15 +13,18 @@ import dev.bibikvlad.mastermind.services.GamesService;
 import dev.bibikvlad.mastermind.services.PlayerStatisticsService;
 import dev.bibikvlad.utils.formatters.TimeToStringFormatter;
 
+import java.text.MessageFormat;
 import java.util.Optional;
 
 public class MainMenu extends Menu {
     private final Player currentPlayer;
+    private final Printer printer;
 
     public MainMenu(AppContext appContext) {
         super(appContext);
 
         this.currentPlayer = appContext.currentPlayer();
+        this.printer = appContext.printer();
     }
 
     @Override
@@ -35,14 +39,19 @@ public class MainMenu extends Menu {
 
     }
 
+    //TODO: Delete temp strings and create a proper message class!
     private void displayMenu() {
-        System.out.println("Welcome to the Mastermind Game " + currentPlayer.getPlayerName() + "!");
-        System.out.println("1. Play");
-        System.out.println("2. Leaderboards");
-        System.out.println("3. Stats");
-        System.out.println("4. Profile");
-        System.out.println("5. Settings");
-        System.out.println("6. Exit");
+        String TEMP_MENU_STRING = MessageFormat.format("""
+                Welcome to the Mastermind Game {0}!
+                1. Play
+                2. Leaderboards
+                3. Stats
+                4. Profile
+                5. Settings
+                6. Exit
+                """, currentPlayer.getPlayerName());
+
+        printer.printMessage(TEMP_MENU_STRING);
     }
 
     //TODO: Think if quiting should be an menu option or leave it as prompt command
