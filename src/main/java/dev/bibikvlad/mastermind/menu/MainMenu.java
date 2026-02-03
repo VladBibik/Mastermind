@@ -108,7 +108,7 @@ public class MainMenu extends Menu {
         GameResult gameResult = gameData.getGameOutcome().getResult();
 
         if (gameResult.equals(GameResult.LOSE) ||  gameResult.equals(GameResult.WIN)) {
-            printer.printMessage("Print any key to play again");
+            printer.printMessage("\nPrint any key to play again");
             printer.printMessage("Press '0' to return to main menu");
 
             try {
