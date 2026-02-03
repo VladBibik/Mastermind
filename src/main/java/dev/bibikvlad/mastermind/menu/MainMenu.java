@@ -99,10 +99,27 @@ public class MainMenu extends Menu {
         GamesService gamesService = appContext.services().getGamesService();
 
         gamesService.save(currentPlayer.getId(), gameData);
-        //TODO: Change this!
-        if (gameData.getGameOutcome().getResult().equals(GameResult.WIN)) {
-            printer.printMessage("Print any key to continue...");
-            appContext.parser().parseUserInput();
+
+        afterGameFlow(gameData);
+    }
+
+    //TODO: Refactor this method!
+    private void afterGameFlow(GameData gameData) {
+        GameResult gameResult = gameData.getGameOutcome().getResult();
+
+        if (gameResult.equals(GameResult.LOSE) ||  gameResult.equals(GameResult.WIN)) {
+            printer.printMessage("Print any key to play again");
+            printer.printMessage("Press '0' to return to main menu");
+
+            try {
+                int result = Integer.parseInt(appContext.parser().parseUserInput());
+
+                if (result != 0) {
+                    launchGame();
+                }
+            } catch (NumberFormatException exception) {
+                launchGame();
+            }
         }
     }
 
