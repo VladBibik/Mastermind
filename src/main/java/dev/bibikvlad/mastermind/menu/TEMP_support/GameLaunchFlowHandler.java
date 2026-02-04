@@ -16,6 +16,7 @@ public class GameLaunchFlowHandler {
     private final Printer printer;
     private final GamesService gamesService;
     private final Player currentPlayer;
+    private final MastermindGameBootstrap mastermindGameLauncher;
 
     public GameLaunchFlowHandler(AppContext appContext) {
         this.localizationContext = appContext.localizationContext();
@@ -23,12 +24,11 @@ public class GameLaunchFlowHandler {
         this.printer = appContext.printer();
         this.gamesService = appContext.services().getGamesService();
         this.currentPlayer = appContext.currentPlayer();
+        this.mastermindGameLauncher = new MastermindGameBootstrap(localizationContext,
+                currentPlayer.getPlayerConfig().logoColorsBundle());
     }
 
     public void launchGame() {
-        MastermindGameBootstrap mastermindGameLauncher = new MastermindGameBootstrap(localizationContext,
-                currentPlayer.getPlayerConfig().logoColorsBundle());
-
         GameData gameData = mastermindGameLauncher.launch();
 
         afterGameDataSaving(gameData);
