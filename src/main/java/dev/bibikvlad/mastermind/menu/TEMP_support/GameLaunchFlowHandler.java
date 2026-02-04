@@ -45,7 +45,7 @@ public class GameLaunchFlowHandler {
 
         if (gameResult.equals(GameResult.LOSE) || gameResult.equals(GameResult.WIN)) {
             printer.printMessage("\nPrint any key to play again");
-            printer.printMessage("Press '0' to return to main menu");
+            printer.printMessage("Print '0' to return to main menu");
 
             try {
                 String input = parser.parseUserInput();
