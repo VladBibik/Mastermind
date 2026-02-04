@@ -37,10 +37,10 @@ public class GameLaunchFlowHandler {
     private void afterGameDataSaving(GameData gameData) {
         gamesService.save(currentPlayer.getId(), gameData);
 
-        afterGameFlow(gameData);
+        nextStepHandler(gameData);
     }
 
-    private void afterGameFlow(GameData gameData) {
+    private void nextStepHandler(GameData gameData) {
         GameResult gameResult = gameData.getGameOutcome().getResult();
 
         if (gameResult.equals(GameResult.LOSE) || gameResult.equals(GameResult.WIN)) {
