@@ -1,16 +1,13 @@
 package dev.bibikvlad.mastermind.menu;
 
 import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
-import dev.bibikvlad.mastermind.app.game.MastermindGameBootstrap;
 import dev.bibikvlad.mastermind.app.printer.Printer;
-import dev.bibikvlad.mastermind.game.data.GameData;
-import dev.bibikvlad.mastermind.game.data.GameResult;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
+import dev.bibikvlad.mastermind.menu.TEMP_support.GameLaunchFlowHandler;
 import dev.bibikvlad.mastermind.menu.games.LeaderboardMenu;
 import dev.bibikvlad.mastermind.menu.player.ProfileMenu;
 import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
-import dev.bibikvlad.mastermind.services.GamesService;
 import dev.bibikvlad.mastermind.services.PlayerStatisticsService;
 import dev.bibikvlad.utils.formatters.TimeToStringFormatter;
 
@@ -88,38 +85,9 @@ public class MainMenu extends Menu {
         }
     }
 
-    //TODO: This method needs refactoring. Either move it to the custom class, or split in multiple methods
     private void launchGame() {
-        MastermindGameBootstrap mastermindGameLauncher = new MastermindGameBootstrap(appContext.localizationContext(),
-                currentPlayer.getPlayerConfig().logoColorsBundle());
-
-        GameData gameData = mastermindGameLauncher.launch();
-
-        GamesService gamesService = appContext.services().getGamesService();
-
-        gamesService.save(currentPlayer.getId(), gameData);
-
-        afterGameFlow(gameData);
-    }
-
-    //TODO: Refactor this method!
-    private void afterGameFlow(GameData gameData) {
-        GameResult gameResult = gameData.getGameOutcome().getResult();
-
-        if (gameResult.equals(GameResult.LOSE) || gameResult.equals(GameResult.WIN)) {
-            printer.printMessage("\nPrint any key to play again");
-            printer.printMessage("Press '0' to return to main menu");
-
-            try {
-                int result = Integer.parseInt(appContext.parser().parseUserInput());
-
-                if (result != 0) {
-                    launchGame();
-                }
-            } catch (NumberFormatException exception) {
-                launchGame();
-            }
-        }
+        GameLaunchFlowHandler gameLaunchHandler = new GameLaunchFlowHandler(appContext);
+        gameLaunchHandler.launchGame();
     }
 
     private Menu profileMenu() {
