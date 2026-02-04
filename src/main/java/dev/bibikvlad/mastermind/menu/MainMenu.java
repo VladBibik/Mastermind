@@ -33,6 +33,7 @@ public class MainMenu extends Menu {
 
         return selection
                 .map(this::menuOptionSwitcher)
+                //TODO: Create a ExitClass
                 .orElse(null);
 
     }
