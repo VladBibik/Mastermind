@@ -1,7 +1,10 @@
 package dev.bibikvlad.mastermind.menu.TEMP_support;
 
 import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
+import dev.bibikvlad.mastermind.app.game.MastermindGameBootstrap;
 import dev.bibikvlad.mastermind.app.printer.Printer;
+import dev.bibikvlad.mastermind.game.data.GameData;
+import dev.bibikvlad.mastermind.game.data.GameResult;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
@@ -20,5 +23,40 @@ public class GameLaunchFlowHandler {
         this.printer = appContext.printer();
         this.gamesService = appContext.services().getGamesService();
         this.currentPlayer = appContext.currentPlayer();
+    }
+
+    public void launchGame() {
+        MastermindGameBootstrap mastermindGameLauncher = new MastermindGameBootstrap(localizationContext,
+                currentPlayer.getPlayerConfig().logoColorsBundle());
+
+        GameData gameData = mastermindGameLauncher.launch();
+
+        afterGameDataSaving(gameData);
+    }
+
+    private void afterGameDataSaving(GameData gameData) {
+        gamesService.save(currentPlayer.getId(), gameData);
+
+        afterGameFlow(gameData);
+    }
+
+    private void afterGameFlow(GameData gameData) {
+        GameResult gameResult = gameData.getGameOutcome().getResult();
+
+        if (gameResult.equals(GameResult.LOSE) || gameResult.equals(GameResult.WIN)) {
+            printer.printMessage("\nPrint any key to play again");
+            printer.printMessage("Press '0' to return to main menu");
+
+            try {
+                String input = parser.parseUserInput();
+                int selectedNumber = Integer.parseInt(input);
+
+                if (selectedNumber != 0) {
+                    launchGame();
+                }
+            } catch (NumberFormatException exception) {
+                launchGame();
+            }
+        }
     }
 }
