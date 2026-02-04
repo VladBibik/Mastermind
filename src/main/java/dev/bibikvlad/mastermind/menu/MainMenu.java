@@ -4,7 +4,6 @@ import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
 import dev.bibikvlad.mastermind.app.game.MastermindGameBootstrap;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.game.data.GameData;
-import dev.bibikvlad.mastermind.game.data.GameOutcome;
 import dev.bibikvlad.mastermind.game.data.GameResult;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.menu.games.LeaderboardMenu;
@@ -107,7 +106,7 @@ public class MainMenu extends Menu {
     private void afterGameFlow(GameData gameData) {
         GameResult gameResult = gameData.getGameOutcome().getResult();
 
-        if (gameResult.equals(GameResult.LOSE) ||  gameResult.equals(GameResult.WIN)) {
+        if (gameResult.equals(GameResult.LOSE) || gameResult.equals(GameResult.WIN)) {
             printer.printMessage("\nPrint any key to play again");
             printer.printMessage("Press '0' to return to main menu");
 
