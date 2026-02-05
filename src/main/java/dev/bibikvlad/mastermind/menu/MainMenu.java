@@ -3,6 +3,7 @@ package dev.bibikvlad.mastermind.menu;
 import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
+import dev.bibikvlad.mastermind.input.interpreter.MainMenuInputInterpreter;
 import dev.bibikvlad.mastermind.menu.TEMP_support.GameLaunchFlowHandler;
 import dev.bibikvlad.mastermind.menu.games.LeaderboardMenu;
 import dev.bibikvlad.mastermind.menu.player.ProfileMenu;
@@ -29,7 +30,7 @@ public class MainMenu extends Menu {
     public Menu run() {
         displayMenu();
 
-        Optional<Integer> selection = IntegerInputInterpreter.readSelection(appContext.parser());
+        Optional<Integer> selection = MainMenuInputInterpreter.readSelection(appContext.parser());
 
         return selection
                 .map(this::menuOptionSwitcher)
