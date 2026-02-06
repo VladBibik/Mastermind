@@ -15,13 +15,13 @@ public enum LocaleType {
 
     private static final Map<Integer, LocaleType> BY_INDEX = new HashMap<>();
     private static final Map<String, LocaleType> BY_LANGUAGE = new HashMap<>();
-    private static final Map<Locale, LocaleType> BY_LOCALE = new HashMap<>();
+    private static final Map<String, LocaleType> BY_LOCALE_TAG = new HashMap<>();
 
     static {
         for (LocaleType localeType : LocaleType.values()) {
             BY_INDEX.put(localeType.getLocaleIndex(), localeType);
             BY_LANGUAGE.put(localeType.getLanguageName().toUpperCase(), localeType);
-            BY_LOCALE.put(localeType.getLocale(), localeType);
+            BY_LOCALE_TAG.put(localeType.getLocale().getLanguage().toLowerCase(), localeType);
         }
     }
 
@@ -53,8 +53,8 @@ public enum LocaleType {
                 () -> new IllegalArgumentException("Invalid Language Name: " + languageName));
     }
 
-    public static LocaleType fromLocaleString(Locale locale) {
-        return Optional.ofNullable(BY_LOCALE.get(locale)).orElseThrow(
+    public static LocaleType fromLocale(Locale locale) {
+        return Optional.ofNullable(BY_LOCALE_TAG.get(locale.getLanguage().toLowerCase())).orElseThrow(
                 () -> new IllegalArgumentException("Invalid Locale: " + locale));
     }
 }
