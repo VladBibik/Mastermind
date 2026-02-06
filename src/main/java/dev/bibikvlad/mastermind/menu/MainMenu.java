@@ -34,9 +34,7 @@ public class MainMenu extends Menu {
 
         return selection
                 .map(this::menuOptionSwitcher)
-                //TODO: Create a ExitClass
-                .orElse(null);
-
+                .orElse(new ExitMenu(appContext));
     }
 
     //TODO: Delete temp strings and create a proper message class!
@@ -75,9 +73,6 @@ public class MainMenu extends Menu {
             }
             case 5 -> {
                 return settings();
-            }
-            case 0 -> {
-                return exit();
             }
             default -> {
                 printer.printMessage("Invalid input. Please enter a number corresponding to the menu option.\n");
@@ -121,9 +116,5 @@ public class MainMenu extends Menu {
 
     private Menu settings() {
         return new SettingsMenu(appContext);
-    }
-
-    private Menu exit() {
-        return null;
     }
 }
