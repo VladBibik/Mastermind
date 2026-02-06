@@ -1,12 +1,15 @@
 package dev.bibikvlad.mastermind.localization.core;
 
+import dev.bibikvlad.mastermind.localization.messages.LocalizedMessages;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class MessageFactoryRegistry {
-    private final Map<Class<?>, MessageFactory<?>> messageFactories = new HashMap<>();
+    private final Map<Class<? extends LocalizedMessages>,
+            MessageFactory<? extends LocalizedMessages>> messageFactories = new HashMap<>();
 
-    public <T> void register(Class<T> messageType, MessageFactory<T> messageFactory) {
+    public <T extends LocalizedMessages> void register(Class<T> messageType, MessageFactory<T> messageFactory) {
         if (messageType == null || messageFactory == null)
             throw new IllegalArgumentException("Type and factory cannot be null");
 
@@ -14,7 +17,7 @@ public class MessageFactoryRegistry {
     }
 
     @SuppressWarnings("unchecked")
-    public <T> MessageFactory<T> getMessageFactory(Class<T> messageType) {
+    public <T extends LocalizedMessages> MessageFactory<T> getMessageFactory(Class<T> messageType) {
         MessageFactory<T> messageFactory = (MessageFactory<T>) messageFactories.get(messageType);
 
         if (messageFactory == null) {
