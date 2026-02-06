@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.localization.core;
 
+import dev.bibikvlad.mastermind.localization.messages.LocalizedMessages;
 import dev.bibikvlad.mastermind.localization.messages.game.ConsoleGameMessages;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import org.junit.jupiter.api.DisplayName;
@@ -25,8 +26,9 @@ public class MessageFactoryRegistryTest {
     @Test
     @DisplayName("Throws IllegalStateException on unknown type parameter")
     public void shouldThrowIllegalStateExceptionWhenTypeIsUnregistered() {
+        LocalizedMessages dummyMessages = new LocalizedMessages(){};
         assertThrows(IllegalStateException.class,
-                () -> messageFactoryRegistry.getMessageFactory(MessageFactoryRegistryTest.class));
+                () -> messageFactoryRegistry.getMessageFactory(dummyMessages.getClass()));
     }
 
     @Test
