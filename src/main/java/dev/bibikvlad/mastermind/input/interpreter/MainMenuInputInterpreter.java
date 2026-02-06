@@ -22,6 +22,7 @@ public class MainMenuInputInterpreter {
             "q",
             "0"
     );
+
     public static Optional<Integer> readSelection(MastermindUserInputParser parser) {
         String userInput = parser.parseUserInput();
 
