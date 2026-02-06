@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.localization.config;
 
+import dev.bibikvlad.mastermind.localization.messages.LocalizedMessages;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoMessages;
 
@@ -13,7 +14,7 @@ public enum MessageType {
 
     private final int index;
     private final String resourceBundleName;
-    private final Class<?> messageType;
+    private final Class<? extends LocalizedMessages> messageType;
 
     private static final Map<Class<?>, MessageType> BY_MESSAGE_CLASS = new HashMap<>();
     private static final Map<Integer, MessageType> BY_INDEX = new HashMap<>();
@@ -26,7 +27,7 @@ public enum MessageType {
     }
 
 
-    MessageType(int index, String resourceBundleName, Class<?> messageType) {
+    MessageType(int index, String resourceBundleName, Class<? extends LocalizedMessages> messageType) {
         this.index = index;
         this.resourceBundleName = resourceBundleName;
         this.messageType = messageType;
@@ -40,11 +41,11 @@ public enum MessageType {
         return resourceBundleName;
     }
 
-    public Class<?> getMessageType() {
+    public Class<? extends LocalizedMessages> getMessageType() {
         return messageType;
     }
 
-    public static MessageType fromMessageType(Class<?> messageType) {
+    public static MessageType fromMessageType(Class<? extends LocalizedMessages> messageType) {
         return Optional.ofNullable(BY_MESSAGE_CLASS.get(messageType)).orElseThrow(
                 () -> new IllegalArgumentException("No corresponding Message Type for provided class: " + messageType));
     }
