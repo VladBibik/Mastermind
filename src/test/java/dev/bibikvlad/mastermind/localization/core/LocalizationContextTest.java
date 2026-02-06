@@ -3,6 +3,7 @@ package dev.bibikvlad.mastermind.localization.core;
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
+import dev.bibikvlad.mastermind.localization.messages.LocalizedMessages;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import dev.bibikvlad.mastermind.localization.messages.game.StubGameMessages;
 import dev.bibikvlad.utils.strings.Emojis;
@@ -62,7 +63,7 @@ public class LocalizationContextTest {
         }
 
         @SuppressWarnings("unchecked")
-        public <T> T getMessages(Class<T> messageType, String resourceBundleName) {
+        public <T extends LocalizedMessages> T getMessages(Class<T> messageType, String resourceBundleName) {
             this.lastRequestedType = messageType;
             this.lastRequestedMessage = resourceBundleName;
 
