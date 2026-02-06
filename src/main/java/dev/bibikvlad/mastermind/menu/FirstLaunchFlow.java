@@ -30,8 +30,14 @@ public class FirstLaunchFlow {
                 parser, printer);
 
         AppContext appContext = firstTimePlayerCreation.createPlayerAndGetContext();
+        Menu menu;
 
-        Menu mainMenu = new MainMenu(appContext);
-        MenuRunner.runMenu(mainMenu);
+        if (appContext == null) {
+            menu = new ExitMenu(null);
+        } else {
+            menu = new MainMenu(appContext);
+        }
+
+        MenuRunner.runMenu(menu);
     }
 }
