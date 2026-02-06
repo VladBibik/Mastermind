@@ -16,7 +16,7 @@ public class MessageProvider {
 
     public <T extends LocalizedMessages> T getMessages(Class<T> messageType, String resourceBundleName) {
         ResourceBundle resourceBundle =
-                ResourceBundle.getBundle(resourceBundleName + "_" + localeType.getLocale());
+                ResourceBundle.getBundle(resourceBundleName, localeType.getLocale());
 
         MessageFactory<T> factory = messageFactoryRegistry.getMessageFactory(messageType);
 
