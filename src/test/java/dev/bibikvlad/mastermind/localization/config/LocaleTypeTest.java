@@ -3,6 +3,8 @@ package dev.bibikvlad.mastermind.localization.config;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Locale;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -28,13 +30,10 @@ public class LocaleTypeTest {
     }
 
     @Test
-    @DisplayName("Returns correct locale type from locale string")
-    void fromLocaleStringTest() {
-        assertEquals(LocaleType.ENGLISH, LocaleType.fromLocaleString("en"));
-        assertEquals(LocaleType.RUSSIAN, LocaleType.fromLocaleString("ru"));
-
-        assertEquals(LocaleType.ENGLISH, LocaleType.fromLocaleString("EN"));
-        assertEquals(LocaleType.RUSSIAN, LocaleType.fromLocaleString("RU"));
+    @DisplayName("Returns correct locale type from locale")
+    void fromLocaleTest() {
+        assertEquals(LocaleType.ENGLISH, LocaleType.fromLocale(Locale.ENGLISH));
+        assertEquals(LocaleType.RUSSIAN, LocaleType.fromLocale(Locale.of("ru")));
     }
 
     @Test
