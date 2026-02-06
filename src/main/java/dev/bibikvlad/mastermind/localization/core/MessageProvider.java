@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.localization.core;
 
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.localization.messages.LocalizedMessages;
 
 import java.util.ResourceBundle;
 
@@ -13,7 +14,7 @@ public class MessageProvider {
         this.messageFactoryRegistry = messageFactoryRegistry;
     }
 
-    public <T> T getMessages(Class<T> messageType, String resourceBundleName) {
+    public <T extends LocalizedMessages> T getMessages(Class<T> messageType, String resourceBundleName) {
         ResourceBundle resourceBundle =
                 ResourceBundle.getBundle(resourceBundleName + "_" + localeType.getLocale());
 
