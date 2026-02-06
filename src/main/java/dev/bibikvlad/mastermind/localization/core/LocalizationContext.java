@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.localization.core;
 
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
+import dev.bibikvlad.mastermind.localization.messages.LocalizedMessages;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoMessages;
 
@@ -31,7 +32,7 @@ public class LocalizationContext {
     }
 
     @SuppressWarnings("unchecked")
-    public <T> T getMessages(MessageType messageType) {
+    public <T extends LocalizedMessages> T getMessages(MessageType messageType) {
         return (T) messageProvider.getMessages(messageType.getMessageType(), messageType.getResourceBundleName());
     }
 }
