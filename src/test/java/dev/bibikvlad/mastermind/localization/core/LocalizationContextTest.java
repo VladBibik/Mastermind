@@ -49,7 +49,6 @@ public class LocalizationContextTest {
 
         assertSame(dummy, result);
         assertEquals(GameMessages.class, fakeMessageProvider.lastRequestedType);
-        assertEquals("i18n.game_messages", fakeMessageProvider.lastRequestedMessage);
     }
 
     static class FakeMessageProvider extends MessageProvider {
@@ -63,9 +62,8 @@ public class LocalizationContextTest {
         }
 
         @SuppressWarnings("unchecked")
-        public <T extends LocalizedMessages> T getMessages(Class<T> messageType, String resourceBundleName) {
+        public <T extends LocalizedMessages> T getMessages(Class<T> messageType) {
             this.lastRequestedType = messageType;
-            this.lastRequestedMessage = resourceBundleName;
 
             return (T) toReturn;
         }
