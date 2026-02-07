@@ -7,23 +7,23 @@ import java.util.Map;
 
 public class MessageFactoryRegistry {
     private final Map<Class<? extends LocalizedMessages>,
-            MessageFactory<? extends LocalizedMessages>> messageFactories = new HashMap<>();
+            LocalizedMessageConfig<? extends LocalizedMessages>> messageFactories = new HashMap<>();
 
-    public <T extends LocalizedMessages> void register(Class<T> messageType, MessageFactory<T> messageFactory) {
-        if (messageType == null || messageFactory == null)
+    public <T extends LocalizedMessages> void register(LocalizedMessageConfig<T> localizedMessageConfig) {
+        if (localizedMessageConfig == null)
             throw new IllegalArgumentException("Type and factory cannot be null");
 
-        messageFactories.put(messageType, messageFactory);
+        messageFactories.put(localizedMessageConfig.getMessageType(), localizedMessageConfig);
     }
 
     @SuppressWarnings("unchecked")
-    public <T extends LocalizedMessages> MessageFactory<T> getMessageFactory(Class<T> messageType) {
-        MessageFactory<T> messageFactory = (MessageFactory<T>) messageFactories.get(messageType);
+    public <T extends LocalizedMessages> LocalizedMessageConfig<T> getLocalizedMessageConfig(Class<T> messageType) {
+        LocalizedMessageConfig<?> localizedMessageConfig = messageFactories.get(messageType);
 
-        if (messageFactory == null) {
+        if (localizedMessageConfig == null) {
             throw new IllegalStateException("No factory registered for message type " + messageType.getName());
         }
 
-        return (MessageFactory<T>) messageFactories.get(messageType);
+        return (LocalizedMessageConfig<T>) localizedMessageConfig;
     }
 }
