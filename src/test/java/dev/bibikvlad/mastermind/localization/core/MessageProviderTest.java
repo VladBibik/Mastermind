@@ -1,13 +1,13 @@
 package dev.bibikvlad.mastermind.localization.core;
 
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
-import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.game.ConsoleGameMessages;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MessageProviderTest {
     @Test
@@ -16,7 +16,7 @@ public class MessageProviderTest {
         MessageProvider messageProvider =
                 new MessageProvider(LocaleType.ENGLISH, MessageRegistryInitializer.createAndPopulateRegistry());
         GameMessages providedMessages =
-                messageProvider.getMessages(GameMessages.class, MessageType.GAME.getResourceBundleName());
+                messageProvider.getMessages(GameMessages.class);
 
         assertNotNull(providedMessages);
     }
@@ -28,7 +28,7 @@ public class MessageProviderTest {
                 new MessageProvider(LocaleType.ENGLISH, MessageRegistryInitializer.createAndPopulateRegistry());
 
         assertThrows(IllegalStateException.class,
-                () -> messageProvider.getMessages(ConsoleGameMessages.class, MessageType.GAME.getResourceBundleName()));
+                () -> messageProvider.getMessages(ConsoleGameMessages.class));
     }
 
     @Test
@@ -38,6 +38,6 @@ public class MessageProviderTest {
                 new MessageProvider(LocaleType.ENGLISH, MessageRegistryInitializer.createAndPopulateRegistry());
 
         assertThrows(NullPointerException.class,
-                () -> messageProvider.getMessages(null, MessageType.GAME.getResourceBundleName()));
+                () -> messageProvider.getMessages(null));
     }
 }
