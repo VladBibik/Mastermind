@@ -9,8 +9,16 @@ public class MessageRegistryInitializer {
     public static MessageFactoryRegistry createAndPopulateRegistry() {
         MessageFactoryRegistry messageFactoryRegistry = new MessageFactoryRegistry();
 
-        messageFactoryRegistry.register(GameMessages.class, new ConsoleGameMessageFactory());
-        messageFactoryRegistry.register(LogoMessages.class, new ConsoleLogoMessagesFactory());
+        messageFactoryRegistry.register(new LocalizedMessageConfig<>(
+                GameMessages.class,
+                "i18n.game_messages",
+                new ConsoleGameMessageFactory()
+        ));
+        messageFactoryRegistry.register(new LocalizedMessageConfig<>(
+                LogoMessages.class,
+                "i18n.logo_colors",
+                new ConsoleLogoMessagesFactory()
+        ));
 
         return messageFactoryRegistry;
     }
