@@ -7,6 +7,7 @@ import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.game.presentation.GameMessagePrinter;
 import dev.bibikvlad.mastermind.input.parser.ConsoleInputToLowerCaseParser;
 import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
+import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
@@ -21,7 +22,7 @@ public class MastermindGameBootstrap {
     }
 
     public GameData launch() {
-        GameMessages gameMessages = localizationContext.getGameMessages();
+        GameMessages gameMessages = localizationContext.getMessages(MessageType.GAME);
         GameMessagePrinter printer = new GameMessagePrinter(new ConsolePrinter(), gameMessages);
         MastermindUserInputParser parser = new ConsoleInputToLowerCaseParser();
 
