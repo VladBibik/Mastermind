@@ -24,15 +24,15 @@ public class LocalizationContext {
     }
 
     public GameMessages getGameMessages() {
-        return messageProvider.getMessages(GameMessages.class, MessageType.GAME.getResourceBundleName());
+        return messageProvider.getMessages(GameMessages.class);
     }
 
     public LogoMessages getLogoMessages() {
-        return messageProvider.getMessages(LogoMessages.class, MessageType.LOGO.getResourceBundleName());
+        return messageProvider.getMessages(LogoMessages.class);
     }
 
     @SuppressWarnings("unchecked")
     public <T extends LocalizedMessages> T getMessages(MessageType messageType) {
-        return (T) messageProvider.getMessages(messageType.getMessageType(), messageType.getResourceBundleName());
+        return (T) messageProvider.getMessages(messageType.getMessageType());
     }
 }
