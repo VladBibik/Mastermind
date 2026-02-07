@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.localization.core;
 
+import dev.bibikvlad.mastermind.localization.factories.ConsoleGameMessageFactory;
 import dev.bibikvlad.mastermind.localization.messages.LocalizedMessages;
 import dev.bibikvlad.mastermind.localization.messages.game.ConsoleGameMessages;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
@@ -15,40 +16,52 @@ public class MessageFactoryRegistryTest {
     @Test
     @DisplayName("Testing correct registration of GameMessages entry")
     public void shouldReturnRegisteredFactoryWhenTypeIsRegistered() {
-        MessageFactory<GameMessages> gameMessagesFactory = ConsoleGameMessages::new;
+        LocalizedMessageConfig<GameMessages> localizedMessageConfig = new LocalizedMessageConfig<>(
+                GameMessages.class,
+                "i18n.game_messages",
+                new ConsoleGameMessageFactory()
+        );
 
-        messageFactoryRegistry.register(GameMessages.class, gameMessagesFactory);
+        messageFactoryRegistry.register(localizedMessageConfig);
 
-        MessageFactory<GameMessages> gameMessagesResult = messageFactoryRegistry.getMessageFactory(GameMessages.class);
-        assertSame(gameMessagesFactory, gameMessagesResult);
+        LocalizedMessageConfig<GameMessages> gameMessagesResult =
+                messageFactoryRegistry.getLocalizedMessageConfig(GameMessages.class);
+        assertSame(localizedMessageConfig, gameMessagesResult);
     }
 
     @Test
     @DisplayName("Throws IllegalStateException on unknown type parameter")
     public void shouldThrowIllegalStateExceptionWhenTypeIsUnregistered() {
-        LocalizedMessages dummyMessages = new LocalizedMessages(){};
+        LocalizedMessages dummyMessages = new LocalizedMessages() {
+        };
         assertThrows(IllegalStateException.class,
-                () -> messageFactoryRegistry.getMessageFactory(dummyMessages.getClass()));
+                () -> messageFactoryRegistry.getLocalizedMessageConfig(dummyMessages.getClass()));
     }
 
     @Test
     @DisplayName("Duplicate registration overwrites enty silently")
     public void shouldOverwriteExistingFactoryWhenTypeIsRegisteredTwice() {
-        MessageFactory<GameMessages> originalGameMessagesFactory = ConsoleGameMessages::new;
-        MessageFactory<GameMessages> newGameMessagesFactory = ConsoleGameMessages::new;
+        LocalizedMessageConfig<GameMessages> originalGameMessagesEntry = new LocalizedMessageConfig<>(
+                GameMessages.class,
+                "i18n.game_messages",
+                new ConsoleGameMessageFactory()
+        );
+        LocalizedMessageConfig<GameMessages> newGameMessagesEntry = new LocalizedMessageConfig<>(
+                GameMessages.class,
+                "i18n.game_messages",
+                new ConsoleGameMessageFactory()
+        );
 
-        messageFactoryRegistry.register(GameMessages.class, originalGameMessagesFactory);
-        messageFactoryRegistry.register(GameMessages.class, newGameMessagesFactory);
+        messageFactoryRegistry.register(originalGameMessagesEntry);
+        messageFactoryRegistry.register(newGameMessagesEntry);
 
-        assertSame(newGameMessagesFactory, messageFactoryRegistry.getMessageFactory(GameMessages.class));
+        assertSame(newGameMessagesEntry, messageFactoryRegistry.getLocalizedMessageConfig(GameMessages.class));
     }
 
     @Test
     @DisplayName("Throws IllegalArgumentException on null value")
     public void shouldThrowIllegalArgumentExceptionWhenTypeIsNull() {
-        MessageFactory<GameMessages> gameMessagesFactory = ConsoleGameMessages::new;
-
         assertThrows(IllegalArgumentException.class,
-                () -> messageFactoryRegistry.register(null, gameMessagesFactory));
+                () -> messageFactoryRegistry.register(null));
     }
 }
