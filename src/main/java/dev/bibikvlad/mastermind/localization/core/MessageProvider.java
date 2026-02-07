@@ -14,12 +14,13 @@ public class MessageProvider {
         this.messageFactoryRegistry = messageFactoryRegistry;
     }
 
-    public <T extends LocalizedMessages> T getMessages(Class<T> messageType, String resourceBundleName) {
+    public <T extends LocalizedMessages> T getMessages(Class<T> messageType) {
+        LocalizedMessageConfig<T> localizedMessageConfig =
+                messageFactoryRegistry.getLocalizedMessageConfig(messageType);
+
         ResourceBundle resourceBundle =
-                ResourceBundle.getBundle(resourceBundleName, localeType.getLocale());
+                ResourceBundle.getBundle(localizedMessageConfig.getBundleName(), localeType.getLocale());
 
-        MessageFactory<T> factory = messageFactoryRegistry.getMessageFactory(messageType);
-
-        return factory.create(resourceBundle);
+        return localizedMessageConfig.getMessageFactory().create(resourceBundle);
     }
 }
