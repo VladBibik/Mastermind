@@ -9,36 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MessageTypeTest {
     @Test
-    @DisplayName("Returns correct message type from the index")
+    @DisplayName("Returns correct message type class")
     void returnsCorrectMessageTypeFromIndex() {
-        assertEquals(MessageType.GAME, MessageType.fromIndex(0));
-    }
-
-    @Test
-    @DisplayName("Returns correct message type from message class")
-    void returnsCorrectMessageTypeFromMessageClass() {
-        assertEquals(MessageType.GAME, MessageType.fromMessageType(GameMessages.class));
-    }
-
-    @Test
-    @DisplayName("Throws exception on negative message type index")
-    void negativeIndexThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> MessageType.fromIndex(-1));
-    }
-
-    @Test
-    @DisplayName("Throws exception on invalid locale index")
-    void invalidIndexThrowsException() {
-        for (int i = 2; i < 100; i++) {
-            int index = i;
-
-            assertThrows(IllegalArgumentException.class, () -> MessageType.fromIndex(index));
-        }
-    }
-
-    @Test
-    @DisplayName("Returns correct Message Type Index")
-    void returnsCorrectMessageTypeIndex() {
-        assertEquals(0, MessageType.GAME.getIndex());
+        assertEquals(GameMessages.class, MessageType.GAME.getMessageClass());
     }
 }
