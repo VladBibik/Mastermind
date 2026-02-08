@@ -1,11 +1,15 @@
 package dev.bibikvlad.mastermind.localization.config;
 
 import dev.bibikvlad.mastermind.localization.messages.LocalizedMessages;
+import dev.bibikvlad.mastermind.localization.messages.error.ErrorMessages;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoMessages;
 
 public enum MessageType {
     GAME(GameMessages.class),
+    ERROR(ErrorMessages.class),
+    MAIN_MENU(MainMenuMessages.class),
     LOGO(LogoMessages.class);
 
     private final Class<? extends LocalizedMessages> messageClass;
