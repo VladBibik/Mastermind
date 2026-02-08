@@ -3,7 +3,6 @@ package dev.bibikvlad.mastermind.localization.messages.game;
 import dev.bibikvlad.mastermind.clues.ClueGenerator;
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
-import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.utils.strings.ConsoleColoredValidSymbols;
