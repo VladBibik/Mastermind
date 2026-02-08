@@ -3,6 +3,9 @@ package dev.bibikvlad.mastermind.menu;
 import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.MainMenuInputInterpreter;
+import dev.bibikvlad.mastermind.localization.config.MessageType;
+import dev.bibikvlad.mastermind.localization.messages.error.ErrorMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;
 import dev.bibikvlad.mastermind.menu.TEMP_support.GameLaunchFlowHandler;
 import dev.bibikvlad.mastermind.menu.games.LeaderboardMenu;
 import dev.bibikvlad.mastermind.menu.player.ProfileMenu;
@@ -17,12 +20,16 @@ import java.util.Optional;
 public class MainMenu extends Menu {
     private final Player currentPlayer;
     private final Printer printer;
+    private final ErrorMessages errorMessages;
+    private final MainMenuMessages mainMenuMessages;
 
     public MainMenu(AppContext appContext) {
         super(appContext);
 
         this.currentPlayer = appContext.currentPlayer();
         this.printer = appContext.printer();
+        this.errorMessages = appContext.localizationContext().getMessages(MessageType.ERROR);
+        this.mainMenuMessages = appContext.localizationContext().getMessages(MessageType.MAIN_MENU);
     }
 
     @Override
@@ -36,19 +43,9 @@ public class MainMenu extends Menu {
                 .orElse(new ExitMenu(appContext));
     }
 
-    //TODO: Delete temp strings and create a proper message class!
     private void displayMenu() {
-        String TEMP_MENU_STRING = MessageFormat.format("""
-                Welcome to the Mastermind Game {0}!
-                1. Play
-                2. Leaderboards
-                3. Stats
-                4. Profile
-                5. Settings
-                0. Exit
-                """, currentPlayer.getPlayerName());
-
-        printer.printMessage(TEMP_MENU_STRING);
+        printer.printMessage(mainMenuMessages.getWelcomeMessage(currentPlayer.getPlayerName()));
+        printer.printMessage(mainMenuMessages.getMenuOptionsMessage());
     }
 
     //TODO: Think if quiting should be an menu option or leave it as prompt command
@@ -74,7 +71,7 @@ public class MainMenu extends Menu {
                 return settings();
             }
             default -> {
-                printer.printMessage("Invalid input. Please enter a number corresponding to the menu option.\n");
+                printer.printMessage(errorMessages.getInvalidInputMessage());
 
                 return this;
             }
