@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.localization.messages.game;
 
 import dev.bibikvlad.mastermind.clues.ClueGenerator;
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
+import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
@@ -17,8 +18,8 @@ import java.util.ResourceBundle;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ConsoleGameMessagesRuTest {
-    private final ResourceBundle resourceBundle = ResourceBundle.getBundle(
-            MessageType.GAME.getResourceBundleName() + "_ru");
+    private final ResourceBundle resourceBundle = ResourceBundle
+            .getBundle("i18n.game_messages", LocaleType.RUSSIAN.getLocale());
     private final GameMessages gameMessages = new ConsoleGameMessages(resourceBundle);
 
     @Test
