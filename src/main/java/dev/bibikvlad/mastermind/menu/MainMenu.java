@@ -48,7 +48,6 @@ public class MainMenu extends Menu {
         printer.printMessage(mainMenuMessages.getMenuOptionsMessage());
     }
 
-    //TODO: Think if quiting should be an menu option or leave it as prompt command
     private Menu menuOptionSwitcher(int userInputNumber) {
         switch (userInputNumber) {
             case 1 -> {
