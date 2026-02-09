@@ -14,7 +14,6 @@ import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.PlayerStatisticsService;
 import dev.bibikvlad.utils.formatters.TimeToStringFormatter;
 
-import java.text.MessageFormat;
 import java.util.Optional;
 
 public class MainMenu extends Menu {
@@ -30,12 +29,12 @@ public class MainMenu extends Menu {
         this.printer = appContext.printer();
         this.errorMessages = appContext.localizationContext().getMessages(MessageType.ERROR);
         this.mainMenuMessages = appContext.localizationContext().getMessages(MessageType.MAIN_MENU);
+
+        displayMenu();
     }
 
     @Override
     public Menu run() {
-        displayMenu();
-
         Optional<Integer> selection = MainMenuInputInterpreter.readSelection(appContext.parser());
 
         return selection
