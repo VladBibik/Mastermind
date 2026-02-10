@@ -22,6 +22,8 @@ public class MainMenu extends Menu {
     private final ErrorMessages errorMessages;
     private final MainMenuMessages mainMenuMessages;
 
+    private boolean isFirstTimeMenuLoop = true;
+
     public MainMenu(AppContext appContext) {
         super(appContext);
 
@@ -29,12 +31,15 @@ public class MainMenu extends Menu {
         this.printer = appContext.printer();
         this.errorMessages = appContext.localizationContext().getMessages(MessageType.ERROR);
         this.mainMenuMessages = appContext.localizationContext().getMessages(MessageType.MAIN_MENU);
-
-        displayMenu();
     }
 
     @Override
     public Menu run() {
+        if (isFirstTimeMenuLoop) {
+            displayMenu();
+            isFirstTimeMenuLoop = false;
+        }
+
         Optional<Integer> selection = MainMenuInputInterpreter.readSelection(appContext.parser());
 
         return selection
