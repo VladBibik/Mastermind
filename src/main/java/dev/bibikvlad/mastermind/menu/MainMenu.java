@@ -63,7 +63,7 @@ public class MainMenu extends Menu {
                 return leaderboards();
             }
             case 3 -> {
-                displayCurrentPlayerData();
+                stats();
 
                 return this;
             }
@@ -92,7 +92,7 @@ public class MainMenu extends Menu {
 
     //TODO: Move to separate class
     //TODO: Think if 'press any key to continue' needed, because currently menu options are printed right after statistics, and it makes reading statistics harder
-    private void displayCurrentPlayerData() {
+    private void stats() {
         PlayerStatisticsService playerStatisticsService = appContext.services().getPlayerStatisticsService();
 
         playerStatisticsService.getPlayerStatistics(currentPlayer.getId()).ifPresent(playerStatistics -> {
