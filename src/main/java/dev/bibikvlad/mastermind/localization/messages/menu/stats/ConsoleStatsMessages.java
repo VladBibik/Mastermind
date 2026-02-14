@@ -43,19 +43,19 @@ public class ConsoleStatsMessages implements StatsMessages {
     @Override
     public String getTotalPlayTime(Time totalPlayTime) {
         return resourceBundle.getString("total_playtime")
-                .replace("{TOTAL_PLAYTIME}", String.valueOf(totalPlayTime));
+                .replace("{TOTAL_PLAYTIME}", TimeToStringFormatter.format(totalPlayTime));
     }
 
     @Override
     public String getAverageGameDuration(Time averageGameDuration) {
         return resourceBundle.getString("average_game_duration")
-                .replace("{AVERAGE_GAME_DURATION}", String.valueOf(averageGameDuration));
+                .replace("{AVERAGE_GAME_DURATION}", TimeToStringFormatter.format(averageGameDuration));
     }
 
     @Override
     public String getFastestWinTime(Time fastestWinTime) {
         return resourceBundle.getString("fastest_win_time")
-                .replace("{FASTEST_WIN_TIME}", String.valueOf(fastestWinTime));
+                .replace("{FASTEST_WIN_TIME}", TimeToStringFormatter.format(fastestWinTime));
     }
 
     @Override
