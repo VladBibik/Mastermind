@@ -1,9 +1,10 @@
 package dev.bibikvlad.mastermind.localization.messages.menu.stats;
 
+import dev.bibikvlad.mastermind.localization.messages.LocalizedMessages;
 import dev.bibikvlad.mastermind.persistence.player.model.PlayerStatistics;
 import dev.bibikvlad.mastermind.values.Time;
 
-public interface StatsMessages {
+public interface StatsMessages extends LocalizedMessages {
     String getDefaultStatArrangement(String playerName, PlayerStatistics playerStatistics);
 
     String getHeader(String playerName);
