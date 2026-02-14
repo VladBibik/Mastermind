@@ -5,11 +5,13 @@ import dev.bibikvlad.mastermind.localization.messages.error.ErrorMessages;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.stats.StatsMessages;
 
 public enum MessageType {
     GAME(GameMessages.class),
     ERROR(ErrorMessages.class),
     MAIN_MENU(MainMenuMessages.class),
+    STATS(StatsMessages.class),
     LOGO(LogoMessages.class);
 
     private final Class<? extends LocalizedMessages> messageClass;
