@@ -25,36 +25,42 @@ public class ConsoleStatsMessages implements StatsMessages {
 
     @Override
     public String getGamesPlayed(long gamesPlayed) {
-        return "";
+        return resourceBundle.getString("games_played")
+                .replace("{GAME_COUNT}", String.valueOf(gamesPlayed));
     }
 
     @Override
     public String getWins(long winCount) {
-        return "";
+        return resourceBundle.getString("wins").replace("{WIN_COUNT}", String.valueOf(winCount));
     }
 
     @Override
     public String getWinPercentage(double winPercentage) {
-        return "";
+        return resourceBundle.getString("win_percentage")
+                .replace("{WIN_PERCENTAGE}", String.valueOf(winPercentage));
     }
 
     @Override
     public String getTotalPlayTime(Time totalPlayTime) {
-        return "";
+        return resourceBundle.getString("total_playtime")
+                .replace("{TOTAL_PLAYTIME}", String.valueOf(totalPlayTime));
     }
 
     @Override
     public String getAverageGameDuration(Time averageGameDuration) {
-        return "";
+        return resourceBundle.getString("average_game_duration")
+                .replace("{AVERAGE_GAME_DURATION}", String.valueOf(averageGameDuration));
     }
 
     @Override
     public String getFastestWinTime(Time fastestWinTime) {
-        return "";
+        return resourceBundle.getString("fastest_win_time")
+                .replace("{FASTEST_WIN_TIME}", String.valueOf(fastestWinTime));
     }
 
     @Override
-    public String getBestTurnCount(int minTurnWin) {
-        return "";
+    public String getBestTurnCount(int minTurnsWin) {
+        return resourceBundle.getString("best_turn_count")
+                .replace("{MIN_TURNS_WIN}", String.valueOf(minTurnsWin));
     }
 }
