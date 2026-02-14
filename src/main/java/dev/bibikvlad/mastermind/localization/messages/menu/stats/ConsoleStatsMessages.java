@@ -14,7 +14,19 @@ public class ConsoleStatsMessages implements StatsMessages {
 
     @Override
     public String getDefaultStatArrangement(String playerName, PlayerStatistics playerStatistics) {
-        return getHeader(playerName);
+        StringBuilder playerStatsMessageBuilder = new StringBuilder();
+
+        playerStatsMessageBuilder
+                .append(getHeader(playerName)).append("\n")
+                .append(getGamesPlayed(playerStatistics.gameCount())).append("\n")
+                .append(getWins(playerStatistics.winCount())).append("\n")
+                .append(getWinPercentage(playerStatistics.winPercentage())).append("\n")
+                .append(getTotalPlayTime(playerStatistics.totalPlayTime())).append("\n")
+                .append(getAverageGameDuration(playerStatistics.averageGameDuration())).append("\n")
+                .append(getFastestWinTime(playerStatistics.fastestWinTime())).append("\n")
+                .append(getBestTurnCount(playerStatistics.minTurnsWin())).append("\n");
+
+        return playerStatsMessageBuilder.toString();
     }
 
     @Override
