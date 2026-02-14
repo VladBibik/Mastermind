@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.localization.messages.menu.stats;
 
 import dev.bibikvlad.mastermind.persistence.player.model.PlayerStatistics;
 import dev.bibikvlad.mastermind.values.Time;
+import dev.bibikvlad.utils.formatters.TimeToStringFormatter;
 
 import java.util.ResourceBundle;
 
