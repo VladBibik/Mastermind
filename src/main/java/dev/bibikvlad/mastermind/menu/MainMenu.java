@@ -84,6 +84,8 @@ public class MainMenu extends Menu {
     private void launchGame() {
         GameLaunchFlowHandler gameLaunchHandler = new GameLaunchFlowHandler(appContext);
         gameLaunchHandler.launchGame();
+
+        isFirstTimeMenuLoop = true;
     }
 
     private Menu profileMenu() {
