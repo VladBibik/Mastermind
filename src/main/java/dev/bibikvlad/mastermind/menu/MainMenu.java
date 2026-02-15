@@ -6,11 +6,13 @@ import dev.bibikvlad.mastermind.input.interpreter.MainMenuInputInterpreter;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.error.ErrorMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.stats.StatsMessages;
 import dev.bibikvlad.mastermind.menu.TEMP_support.GameLaunchFlowHandler;
 import dev.bibikvlad.mastermind.menu.games.LeaderboardMenu;
 import dev.bibikvlad.mastermind.menu.player.ProfileMenu;
 import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
+import dev.bibikvlad.mastermind.persistence.player.model.PlayerStatistics;
 import dev.bibikvlad.mastermind.services.PlayerStatisticsService;
 import dev.bibikvlad.utils.formatters.TimeToStringFormatter;
 
@@ -97,18 +99,11 @@ public class MainMenu extends Menu {
     private void stats() {
         PlayerStatisticsService playerStatisticsService = appContext.services().getPlayerStatisticsService();
 
-        playerStatisticsService.getPlayerStatistics(currentPlayer.getId()).ifPresent(playerStatistics -> {
-            printer.printMessage("\n" + currentPlayer.getPlayerName() + "'s statistics:");
-            printer.printMessage("Games played: " + playerStatistics.gameCount());
-            printer.printMessage("Number of wins: " + playerStatistics.winCount());
-            printer.printMessage("Win percentage: " + playerStatistics.winPercentage());
-            printer.printMessage("Total play time: " + TimeToStringFormatter.format(playerStatistics.totalPlayTime()));
-            printer.printMessage("Average game duration: " + TimeToStringFormatter.format(
-                    playerStatistics.averageGameDuration()));
-            printer.printMessage("Fastest win time: " + TimeToStringFormatter.format(
-                    playerStatistics.fastestWinTime()));
-            printer.printMessage("Minimum turns needed for a win: " + playerStatistics.minTurnsWin() + "\n");
-        });
+        PlayerStatistics stats = playerStatisticsService.getPlayerStatistics(currentPlayer.getId()).orElse(null);
+
+        StatsMessages statsMessages = appContext.localizationContext().getMessages(MessageType.STATS);
+
+        printer.printMessage(statsMessages.getDefaultStatArrangement(currentPlayer.getPlayerName(), stats));
     }
 
     private Menu leaderboards() {
