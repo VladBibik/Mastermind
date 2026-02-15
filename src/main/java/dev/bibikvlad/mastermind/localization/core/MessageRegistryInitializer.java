@@ -28,7 +28,7 @@ public class MessageRegistryInitializer {
         ));
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 StatsMessages.class,
-                "i18.player_stats",
+                "i18n.player_stats",
                 new ConsoleStatsMessageFactory()
         ));
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
