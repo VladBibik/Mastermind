@@ -1,13 +1,11 @@
 package dev.bibikvlad.mastermind.localization.core;
 
-import dev.bibikvlad.mastermind.localization.factories.ConsoleErrorMessageFactory;
-import dev.bibikvlad.mastermind.localization.factories.ConsoleGameMessageFactory;
-import dev.bibikvlad.mastermind.localization.factories.ConsoleLogoMessagesFactory;
-import dev.bibikvlad.mastermind.localization.factories.ConsoleMainMenuMessageFactory;
+import dev.bibikvlad.mastermind.localization.factories.*;
 import dev.bibikvlad.mastermind.localization.messages.error.ErrorMessages;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.stats.StatsMessages;
 
 public class MessageRegistryInitializer {
     public static MessageFactoryRegistry createAndPopulateRegistry() {
@@ -27,6 +25,11 @@ public class MessageRegistryInitializer {
                 MainMenuMessages.class,
                 "i18n.main_menu",
                 new ConsoleMainMenuMessageFactory()
+        ));
+        messageFactoryRegistry.register(new LocalizedMessageConfig<>(
+                StatsMessages.class,
+                "i18.player_stats",
+                new ConsoleStatsMessageFactory()
         ));
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 LogoMessages.class,
