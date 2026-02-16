@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.localization.core;
 
 import dev.bibikvlad.mastermind.localization.factories.*;
-import dev.bibikvlad.mastermind.localization.messages.error.ErrorMessages;
+import dev.bibikvlad.mastermind.localization.messages.error.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoMessages;
@@ -17,9 +17,9 @@ public class MessageRegistryInitializer {
                 new ConsoleGameMessageFactory()
         ));
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
-                ErrorMessages.class,
-                "i18n.error_messages",
-                new ConsoleErrorMessageFactory()
+                InteractionMessages.class,
+                "i18n.interaction_messages",
+                new ConsoleInteractionMessageFactory()
         ));
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 MainMenuMessages.class,

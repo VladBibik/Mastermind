@@ -4,7 +4,7 @@ import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.MainMenuInputInterpreter;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
-import dev.bibikvlad.mastermind.localization.messages.error.ErrorMessages;
+import dev.bibikvlad.mastermind.localization.messages.error.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.stats.StatsMessages;
 import dev.bibikvlad.mastermind.menu.TEMP_support.GameLaunchFlowHandler;
@@ -20,7 +20,7 @@ import java.util.Optional;
 public class MainMenu extends Menu {
     private final Player currentPlayer;
     private final Printer printer;
-    private final ErrorMessages errorMessages;
+    private final InteractionMessages errorMessages;
     private final MainMenuMessages mainMenuMessages;
 
     private boolean isFirstTimeMenuLoop = true;
