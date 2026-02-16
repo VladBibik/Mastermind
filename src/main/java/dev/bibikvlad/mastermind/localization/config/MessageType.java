@@ -9,7 +9,7 @@ import dev.bibikvlad.mastermind.localization.messages.menu.stats.StatsMessages;
 
 public enum MessageType {
     GAME(GameMessages.class),
-    ERROR(InteractionMessages.class),
+    INTERACTION(InteractionMessages.class),
     MAIN_MENU(MainMenuMessages.class),
     STATS(StatsMessages.class),
     LOGO(LogoMessages.class);
