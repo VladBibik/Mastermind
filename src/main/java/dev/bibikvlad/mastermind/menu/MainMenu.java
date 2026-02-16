@@ -6,21 +6,18 @@ import dev.bibikvlad.mastermind.input.interpreter.MainMenuInputInterpreter;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.error.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;
-import dev.bibikvlad.mastermind.localization.messages.menu.stats.StatsMessages;
 import dev.bibikvlad.mastermind.menu.TEMP_support.GameLaunchFlowHandler;
 import dev.bibikvlad.mastermind.menu.games.LeaderboardMenu;
 import dev.bibikvlad.mastermind.menu.player.ProfileMenu;
 import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
-import dev.bibikvlad.mastermind.persistence.player.model.PlayerStatistics;
-import dev.bibikvlad.mastermind.services.PlayerStatisticsService;
 
 import java.util.Optional;
 
 public class MainMenu extends Menu {
     private final Player currentPlayer;
     private final Printer printer;
-    private final InteractionMessages errorMessages;
+    private final InteractionMessages interactionMessages;
     private final MainMenuMessages mainMenuMessages;
 
     private boolean isFirstTimeMenuLoop = true;
@@ -30,7 +27,7 @@ public class MainMenu extends Menu {
 
         this.currentPlayer = appContext.currentPlayer();
         this.printer = appContext.printer();
-        this.errorMessages = appContext.localizationContext().getMessages(MessageType.ERROR);
+        this.interactionMessages = appContext.localizationContext().getMessages(MessageType.INTERACTION);
         this.mainMenuMessages = appContext.localizationContext().getMessages(MessageType.MAIN_MENU);
     }
 
@@ -75,7 +72,7 @@ public class MainMenu extends Menu {
                 return settings();
             }
             default -> {
-                printer.printMessage(errorMessages.getInvalidInputMessage());
+                printer.printMessage(interactionMessages.getInvalidInputMessage());
 
                 return this;
             }
