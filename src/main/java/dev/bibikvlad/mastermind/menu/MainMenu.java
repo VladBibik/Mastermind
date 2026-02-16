@@ -14,7 +14,6 @@ import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.persistence.player.model.PlayerStatistics;
 import dev.bibikvlad.mastermind.services.PlayerStatisticsService;
-import dev.bibikvlad.utils.formatters.TimeToStringFormatter;
 
 import java.util.Optional;
 
