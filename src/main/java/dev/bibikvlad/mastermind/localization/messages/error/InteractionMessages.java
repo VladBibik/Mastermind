@@ -4,4 +4,6 @@ import dev.bibikvlad.mastermind.localization.messages.LocalizedMessages;
 
 public interface InteractionMessages extends LocalizedMessages {
     String getInvalidInputMessage();
+
+    String getPressEnterMessage();
 }
