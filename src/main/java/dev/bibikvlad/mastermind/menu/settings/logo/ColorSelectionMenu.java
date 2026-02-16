@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.menu.settings.logo;
 
 import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
-import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
+import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoMessages;
@@ -10,7 +10,7 @@ import dev.bibikvlad.utils.strings.GameCluesConstants;
 
 //TODO: Refactor it to menu. Also, can create two classes
 public class ColorSelectionMenu {
-    private final MastermindUserInputParser parser;
+    private final Parser parser;
     private final LogoMessages logoMessages;
 
     public ColorSelectionMenu(AppContext appContext) {

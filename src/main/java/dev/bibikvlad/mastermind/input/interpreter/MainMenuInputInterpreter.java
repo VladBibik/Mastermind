@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.input.interpreter;
 
-import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
+import dev.bibikvlad.mastermind.input.parser.Parser;
 
 import java.util.Optional;
 import java.util.Set;
@@ -23,7 +23,7 @@ public class MainMenuInputInterpreter {
             "0"
     );
 
-    public static Optional<Integer> readSelection(MastermindUserInputParser parser) {
+    public static Optional<Integer> readSelection(Parser parser) {
         String userInput = parser.parseUserInput();
 
         if (exitSet.contains(userInput.toLowerCase())) {

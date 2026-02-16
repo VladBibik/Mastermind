@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 //TODO: Think of a better name, or different approach to this one and ConsoleInputParser!
-public class ConsoleInputToLowerCaseParser implements MastermindUserInputParser {
+public class ConsoleInputToLowerCaseParser implements Parser {
     private final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
     @Override

@@ -5,14 +5,14 @@ import dev.bibikvlad.mastermind.app.game.MastermindGameBootstrap;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.game.data.GameResult;
-import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
+import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.GamesService;
 
 public class GameLaunchFlowHandler {
     private final LocalizationContext localizationContext;
-    private final MastermindUserInputParser parser;
+    private final Parser parser;
     private final Printer printer;
     private final GamesService gamesService;
     private final Player currentPlayer;

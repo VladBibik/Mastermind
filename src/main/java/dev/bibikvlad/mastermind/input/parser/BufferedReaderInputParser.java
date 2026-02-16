@@ -3,7 +3,7 @@ package dev.bibikvlad.mastermind.input.parser;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class BufferedReaderInputParser implements MastermindUserInputParser {
+public class BufferedReaderInputParser implements Parser {
     private final BufferedReader bufferedReader;
 
     public BufferedReaderInputParser(BufferedReader bufferedReader) {

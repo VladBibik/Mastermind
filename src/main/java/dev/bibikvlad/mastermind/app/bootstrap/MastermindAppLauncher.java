@@ -5,7 +5,7 @@ import dev.bibikvlad.mastermind.app.printer.ConsolePrinter;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.input.parser.ConsoleInputParser;
-import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
+import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.FirstLaunchFlow;
 import dev.bibikvlad.mastermind.menu.MainMenu;
@@ -30,14 +30,14 @@ public class MastermindAppLauncher {
 
     private static void run(Printer printer) throws PersistenceException {
         try (ServiceContainer serviceContainer = new ServiceContainer()) {
-            MastermindUserInputParser parser = new ConsoleInputParser();
+            Parser parser = new ConsoleInputParser();
 
             runStartupFlow(serviceContainer, printer, parser);
         }
     }
 
     private static void runStartupFlow(ServiceContainer serviceContainer, Printer printer,
-                                       MastermindUserInputParser parser) {
+                                       Parser parser) {
         Optional<Player> optionalPlayer = serviceContainer.getPlayerService().loadLastSelectedPlayer();
 
         optionalPlayer.ifPresentOrElse(player -> startMainMenuFor(player, serviceContainer, printer, parser),
@@ -45,7 +45,7 @@ public class MastermindAppLauncher {
     }
 
     private static void startMainMenuFor(Player player, ServiceContainer serviceContainer, Printer printer,
-                                         MastermindUserInputParser parser) {
+                                         Parser parser) {
         LocalizationContext localizationContext = new LocalizationContext(
                 player.getPlayerConfig().locale());
         AppContext appContext = new AppContext(localizationContext, serviceContainer, printer, parser,
@@ -57,7 +57,7 @@ public class MastermindAppLauncher {
     }
 
     private static void startFirstLaunch(ServiceContainer serviceContainer, Printer printer,
-                                         MastermindUserInputParser parser) {
+                                         Parser parser) {
         FirstLaunchFlow firstLaunchFlow = new FirstLaunchFlow(serviceContainer, printer, parser);
         firstLaunchFlow.launch();
     }

@@ -2,7 +2,7 @@ package dev.bibikvlad.mastermind.game;
 
 import dev.bibikvlad.mastermind.game.data.GameOutcome;
 import dev.bibikvlad.mastermind.game.data.GameResult;
-import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
+import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.game.presentation.GameMessagePrinter;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.input.validation.GameInputValidator;
@@ -12,7 +12,7 @@ public class MastermindConsoleGame {
 
     private final String answer;
     private final GameMessagePrinter printer;
-    private final MastermindUserInputParser parser;
+    private final Parser parser;
     private final LogoColorsBundle logoColorsBundle;
 
     private final GameStateManager gameStateManager;
@@ -20,7 +20,7 @@ public class MastermindConsoleGame {
     private final GuessEvaluator guessEvaluator;
 
     public MastermindConsoleGame(GameMessagePrinter printer,
-                                 MastermindUserInputParser inputParser,
+                                 Parser inputParser,
                                  String answer,
                                  LogoColorsBundle logoColorsBundle) {
         this.printer = printer;

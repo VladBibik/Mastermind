@@ -2,7 +2,7 @@ package dev.bibikvlad.mastermind.menu.stats;
 
 import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
-import dev.bibikvlad.mastermind.input.parser.MastermindUserInputParser;
+import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.error.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.stats.StatsMessages;
@@ -18,7 +18,7 @@ public class StatsMenu extends Menu {
     private final StatsMessages statsMessages;
     private final InteractionMessages interactionMessages;
     private final Printer printer;
-    private final MastermindUserInputParser parser;
+    private final Parser parser;
 
     public StatsMenu(AppContext appContext) {
         super(appContext);

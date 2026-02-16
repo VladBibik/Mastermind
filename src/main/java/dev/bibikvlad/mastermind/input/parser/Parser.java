@@ -1,5 +1,5 @@
 package dev.bibikvlad.mastermind.input.parser;
 
-public interface MastermindUserInputParser {
+public interface Parser {
     String parseUserInput();
 }
