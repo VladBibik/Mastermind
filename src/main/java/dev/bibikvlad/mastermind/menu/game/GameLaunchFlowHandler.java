@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.menu.TEMP_support;
+package dev.bibikvlad.mastermind.menu.game;
 
 import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
 import dev.bibikvlad.mastermind.app.game.MastermindGameBootstrap;
