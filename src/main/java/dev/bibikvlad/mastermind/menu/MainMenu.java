@@ -10,6 +10,7 @@ import dev.bibikvlad.mastermind.menu.TEMP_support.GameLaunchFlowHandler;
 import dev.bibikvlad.mastermind.menu.games.LeaderboardMenu;
 import dev.bibikvlad.mastermind.menu.player.ProfileMenu;
 import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;
+import dev.bibikvlad.mastermind.menu.stats.StatsMenu;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 
 import java.util.Optional;
@@ -61,9 +62,7 @@ public class MainMenu extends Menu {
                 return leaderboards();
             }
             case 3 -> {
-                stats();
-
-                return this;
+                return stats();
             }
             case 4 -> {
                 return profileMenu();
@@ -90,16 +89,8 @@ public class MainMenu extends Menu {
         return new ProfileMenu(appContext);
     }
 
-    //TODO: Move to separate class
-    //TODO: Think if 'press any key to continue' needed, because currently menu options are printed right after statistics, and it makes reading statistics harder
-    private void stats() {
-        PlayerStatisticsService playerStatisticsService = appContext.services().getPlayerStatisticsService();
-
-        PlayerStatistics stats = playerStatisticsService.getPlayerStatistics(currentPlayer.getId()).orElse(null);
-
-        StatsMessages statsMessages = appContext.localizationContext().getMessages(MessageType.STATS);
-
-        printer.printMessage(statsMessages.getDefaultStatArrangement(currentPlayer.getPlayerName(), stats));
+    private Menu stats() {
+        return new StatsMenu(appContext);
     }
 
     private Menu leaderboards() {
