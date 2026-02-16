@@ -11,6 +11,6 @@ public class ConsoleInteractionMessages implements InteractionMessages {
 
     @Override
     public String getInvalidInputMessage() {
-        return resourceBundle.getString("invalid_input");
+        return resourceBundle.getString("error.invalid_input");
     }
 }
