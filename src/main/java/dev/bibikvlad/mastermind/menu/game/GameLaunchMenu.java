@@ -6,8 +6,12 @@ import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.game.data.GameResult;
 import dev.bibikvlad.mastermind.input.parser.Parser;
+import dev.bibikvlad.mastermind.localization.config.MessageType;
+import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
+import dev.bibikvlad.mastermind.localization.messages.menu.game.GameMenuMessages;
 import dev.bibikvlad.mastermind.menu.MainMenu;
 import dev.bibikvlad.mastermind.menu.Menu;
+import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.GamesService;
 
@@ -15,6 +19,7 @@ public class GameLaunchMenu extends Menu {
     private final GamesService gamesService;
     private final Player currentPlayer;
     private final MastermindGameBootstrap mastermindGameLauncher;
+    private final GameMenuMessages gameMenuMessages;
     private final Parser parser;
     private final Printer printer;
 
@@ -23,8 +28,12 @@ public class GameLaunchMenu extends Menu {
 
         this.gamesService = appContext.services().getGamesService();
         this.currentPlayer = appContext.currentPlayer();
-        this.mastermindGameLauncher = new MastermindGameBootstrap(appContext.localizationContext(),
-                currentPlayer.getPlayerConfig().logoColorsBundle());
+
+        LogoColorsBundle logoBundle = currentPlayer.getPlayerConfig().logoColorsBundle();
+        LocalizationContext localizationContext = appContext.localizationContext();
+
+        this.gameMenuMessages = localizationContext.getMessages(MessageType.GAME_MENU);
+        this.mastermindGameLauncher = new MastermindGameBootstrap(localizationContext, logoBundle);
         this.parser = appContext.parser();
         this.printer = appContext.printer();
     }
@@ -52,8 +61,7 @@ public class GameLaunchMenu extends Menu {
         GameResult gameResult = gameData.getGameOutcome().getResult();
 
         if (gameResult.equals(GameResult.LOSE) || gameResult.equals(GameResult.WIN)) {
-            printer.printMessage("\nPress enter to play again");
-            printer.printMessage("Print '0' to return to main menu");
+            printer.printMessage(gameMenuMessages.playAgain());
 
             try {
                 String input = parser.parseUserInput();
