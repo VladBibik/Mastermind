@@ -54,9 +54,7 @@ public class MainMenu extends Menu {
     private Menu menuOptionSwitcher(int userInputNumber) {
         switch (userInputNumber) {
             case 1 -> {
-                launchGame();
-
-                return this;
+                return launchGame();
             }
             case 2 -> {
                 return leaderboards();
@@ -78,11 +76,8 @@ public class MainMenu extends Menu {
         }
     }
 
-    private void launchGame() {
-        GameLaunchFlowHandler gameLaunchHandler = new GameLaunchFlowHandler(appContext);
-        gameLaunchHandler.launchGame();
-
-        showMenuOnNextLoop = true;
+    private Menu launchGame() {
+        return new GameLaunchFlowHandler(appContext);
     }
 
     private Menu profileMenu() {
