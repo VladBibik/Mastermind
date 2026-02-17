@@ -11,14 +11,14 @@ import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.GamesService;
 
-public class GameLaunchFlowHandler extends Menu {
+public class GameLaunchMenu extends Menu {
     private final GamesService gamesService;
     private final Player currentPlayer;
     private final MastermindGameBootstrap mastermindGameLauncher;
     private final Parser parser;
     private final Printer printer;
 
-    public GameLaunchFlowHandler(AppContext appContext) {
+    public GameLaunchMenu(AppContext appContext) {
         super(appContext);
 
         this.gamesService = appContext.services().getGamesService();

@@ -6,7 +6,7 @@ import dev.bibikvlad.mastermind.input.interpreter.MainMenuInputInterpreter;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.error.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;
-import dev.bibikvlad.mastermind.menu.game.GameLaunchFlowHandler;
+import dev.bibikvlad.mastermind.menu.game.GameLaunchMenu;
 import dev.bibikvlad.mastermind.menu.games.LeaderboardMenu;
 import dev.bibikvlad.mastermind.menu.player.ProfileMenu;
 import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;
@@ -77,7 +77,7 @@ public class MainMenu extends Menu {
     }
 
     private Menu launchGame() {
-        return new GameLaunchFlowHandler(appContext);
+        return new GameLaunchMenu(appContext);
     }
 
     private Menu profileMenu() {
