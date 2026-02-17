@@ -21,7 +21,7 @@ public class MainMenu extends Menu {
     private final InteractionMessages interactionMessages;
     private final MainMenuMessages mainMenuMessages;
 
-    private boolean isFirstTimeMenuLoop = true;
+    private boolean showMenuOnNextLoop = true;
 
     public MainMenu(AppContext appContext) {
         super(appContext);
@@ -34,9 +34,9 @@ public class MainMenu extends Menu {
 
     @Override
     public Menu run() {
-        if (isFirstTimeMenuLoop) {
+        if (showMenuOnNextLoop) {
             displayMenu();
-            isFirstTimeMenuLoop = false;
+            showMenuOnNextLoop = false;
         }
 
         Optional<Integer> selection = MainMenuInputInterpreter.readSelection(appContext.parser());
@@ -82,7 +82,7 @@ public class MainMenu extends Menu {
         GameLaunchFlowHandler gameLaunchHandler = new GameLaunchFlowHandler(appContext);
         gameLaunchHandler.launchGame();
 
-        isFirstTimeMenuLoop = true;
+        showMenuOnNextLoop = true;
     }
 
     private Menu profileMenu() {
