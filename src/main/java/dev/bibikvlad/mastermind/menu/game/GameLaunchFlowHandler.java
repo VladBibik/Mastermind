@@ -6,26 +6,34 @@ import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.game.data.GameResult;
 import dev.bibikvlad.mastermind.input.parser.Parser;
-import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
+import dev.bibikvlad.mastermind.menu.MainMenu;
+import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.GamesService;
 
-public class GameLaunchFlowHandler {
-    private final LocalizationContext localizationContext;
-    private final Parser parser;
-    private final Printer printer;
+public class GameLaunchFlowHandler extends Menu {
     private final GamesService gamesService;
     private final Player currentPlayer;
     private final MastermindGameBootstrap mastermindGameLauncher;
+    private final Parser parser;
+    private final Printer printer;
 
     public GameLaunchFlowHandler(AppContext appContext) {
-        this.localizationContext = appContext.localizationContext();
-        this.parser = appContext.parser();
-        this.printer = appContext.printer();
+        super(appContext);
+
         this.gamesService = appContext.services().getGamesService();
         this.currentPlayer = appContext.currentPlayer();
-        this.mastermindGameLauncher = new MastermindGameBootstrap(localizationContext,
+        this.mastermindGameLauncher = new MastermindGameBootstrap(appContext.localizationContext(),
                 currentPlayer.getPlayerConfig().logoColorsBundle());
+        this.parser = appContext.parser();
+        this.printer = appContext.printer();
+    }
+
+    @Override
+    public Menu run() {
+        launchGame();
+
+        return new MainMenu(appContext);
     }
 
     public void launchGame() {
