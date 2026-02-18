@@ -104,7 +104,7 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
     }
 
     @Override
-    public Time getAverageGameDuration(long playerId) {
+    public long getAverageGameDuration(long playerId) {
         String getAverageGameDurationQuery = """
                 SELECT COALESCE(AVG(duration_milliseconds), 0) AS average_game_duration
                 FROM games
@@ -117,9 +117,7 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
 
-            long durationMilliseconds = resultSet.getLong("average_game_duration");
-
-            return MillisecondsToTimeFormatter.format(durationMilliseconds);
+            return resultSet.getLong("average_game_duration");
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to fetch average game duration for a player with ID: " + playerId,
                     exception);
@@ -127,7 +125,7 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
     }
 
     @Override
-    public Time getFastestWinTime(long playerId) {
+    public long getFastestWinTime(long playerId) {
         String getFastestWinTimeQuery = """
                 SELECT COALESCE(MIN(duration_milliseconds) FILTER (WHERE result = 'WIN'), 0) AS fastest_win_time
                 FROM games
@@ -140,9 +138,7 @@ public class PlayerStatisticsJdbcDAO implements PlayerStatisticsDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
 
-            long durationMilliseconds = resultSet.getLong("fastest_win_time");
-
-            return MillisecondsToTimeFormatter.format(durationMilliseconds);
+            return resultSet.getLong("fastest_win_time");
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to fetch fastest win time for a player with ID: " + playerId,
                     exception);
