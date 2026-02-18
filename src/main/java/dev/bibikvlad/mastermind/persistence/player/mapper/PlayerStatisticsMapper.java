@@ -13,8 +13,8 @@ public class PlayerStatisticsMapper {
                 resultSet.getLong("win_count"),
                 resultSet.getDouble("win_percentage"),
                 MillisecondsToTimeFormatter.format(resultSet.getLong("total_playtime")),
-                MillisecondsToTimeFormatter.format(resultSet.getLong("average_game_duration")),
-                MillisecondsToTimeFormatter.format(resultSet.getLong("fastest_win_time")),
+                resultSet.getLong("average_game_duration"),
+                resultSet.getLong("fastest_win_time"),
                 resultSet.getInt("min_turns_win")
         );
     }
