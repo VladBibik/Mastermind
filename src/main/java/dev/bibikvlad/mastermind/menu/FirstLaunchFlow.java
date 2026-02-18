@@ -8,6 +8,7 @@ import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.menu.player.FirstTimePlayerCreation;
 import dev.bibikvlad.mastermind.menu.settings.LanguageSelectionMenu;
 
+//TODO: Is this correct package?
 public class FirstLaunchFlow {
     private final ServiceContainer serviceContainer;
     private final Printer printer;
