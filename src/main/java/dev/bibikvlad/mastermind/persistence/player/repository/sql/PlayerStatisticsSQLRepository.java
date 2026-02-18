@@ -32,12 +32,12 @@ public class PlayerStatisticsSQLRepository implements PlayerStatisticsRepository
     }
 
     @Override
-    public Time getAverageGameDuration(long playerId) {
+    public long getAverageGameDuration(long playerId) {
         return playerStatisticsDAO.getAverageGameDuration(playerId);
     }
 
     @Override
-    public Time getFastestWinTime(long playerId) {
+    public long getFastestWinTime(long playerId) {
         return playerStatisticsDAO.getFastestWinTime(playerId);
     }
 

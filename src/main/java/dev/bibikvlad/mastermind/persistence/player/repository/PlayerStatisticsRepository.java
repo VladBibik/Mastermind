@@ -10,9 +10,9 @@ public interface PlayerStatisticsRepository {
 
     double getWinPercentage(long playerId);
 
-    Time getAverageGameDuration(long playerId);
+    long getAverageGameDuration(long playerId);
 
-    Time getFastestWinTime(long playerId);
+    long getFastestWinTime(long playerId);
 
     long getWinCount(long playerId);
 
