@@ -78,7 +78,7 @@ public class LeaderboardMenu extends Menu {
         Optional<List<MainLeaderboardEntry>> optionalLeaderboard = leaderboardService.getMainLeaderboard(playerId);
 
         if (optionalLeaderboard.isEmpty()) {
-            System.out.println("No leaderboard found. Please play some games to build the leaderboard");
+            System.out.println("No leaderboard found. Please play some games to build up the leaderboard");
 
             return this;
         }
