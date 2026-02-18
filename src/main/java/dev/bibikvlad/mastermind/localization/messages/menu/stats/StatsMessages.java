@@ -17,9 +17,9 @@ public interface StatsMessages extends LocalizedMessages {
 
     String getTotalPlayTime(Time totalPlayTime);
 
-    String getAverageGameDuration(Time averageGameDuration);
+    String getAverageGameDuration(long averageGameDuration);
 
-    String getFastestWinTime(Time fastestWinTime);
+    String getFastestWinTime(long fastestWinTime);
 
     String getBestTurnCount(int minTurnWin);
 }

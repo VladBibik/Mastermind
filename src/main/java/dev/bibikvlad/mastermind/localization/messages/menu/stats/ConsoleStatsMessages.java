@@ -59,16 +59,17 @@ public class ConsoleStatsMessages implements StatsMessages {
                 .replace("{TOTAL_PLAYTIME}", TimeToStringFormatter.format(totalPlayTime));
     }
 
+    //TODO: Fix messages! Replace long with formatted clock time!
     @Override
-    public String getAverageGameDuration(Time averageGameDuration) {
+    public String getAverageGameDuration(long averageGameDuration) {
         return resourceBundle.getString("average_game_duration")
-                .replace("{AVERAGE_GAME_DURATION}", TimeToStringFormatter.format(averageGameDuration));
+                .replace("{AVERAGE_GAME_DURATION}", Long.toString(averageGameDuration));
     }
 
     @Override
-    public String getFastestWinTime(Time fastestWinTime) {
+    public String getFastestWinTime(long fastestWinTime) {
         return resourceBundle.getString("fastest_win_time")
-                .replace("{FASTEST_WIN_TIME}", TimeToStringFormatter.format(fastestWinTime));
+                .replace("{FASTEST_WIN_TIME}", Long.toString(fastestWinTime));
     }
 
     @Override
