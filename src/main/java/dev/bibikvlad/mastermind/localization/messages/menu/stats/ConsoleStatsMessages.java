@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.localization.messages.menu.stats;
 
 import dev.bibikvlad.mastermind.persistence.player.model.PlayerStatistics;
 import dev.bibikvlad.mastermind.values.Time;
+import dev.bibikvlad.utils.formatters.ClockDisplayFormatter;
 import dev.bibikvlad.utils.formatters.TimeToStringFormatter;
 
 import java.util.ResourceBundle;
@@ -59,17 +60,16 @@ public class ConsoleStatsMessages implements StatsMessages {
                 .replace("{TOTAL_PLAYTIME}", TimeToStringFormatter.format(totalPlayTime));
     }
 
-    //TODO: Fix messages! Replace long with formatted clock time!
     @Override
     public String getAverageGameDuration(long averageGameDuration) {
         return resourceBundle.getString("average_game_duration")
-                .replace("{AVERAGE_GAME_DURATION}", Long.toString(averageGameDuration));
+                .replace("{AVERAGE_GAME_DURATION}", ClockDisplayFormatter.format(averageGameDuration));
     }
 
     @Override
     public String getFastestWinTime(long fastestWinTime) {
         return resourceBundle.getString("fastest_win_time")
-                .replace("{FASTEST_WIN_TIME}", Long.toString(fastestWinTime));
+                .replace("{FASTEST_WIN_TIME}", ClockDisplayFormatter.format(fastestWinTime));
     }
 
     @Override
