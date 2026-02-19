@@ -25,9 +25,7 @@ public class FirstLaunchFlow {
     public void launch() {
         printer.printMessage(WELCOME_MESSAGE);
 
-        LanguageSelectionMenu languageSelectionMenu = new LanguageSelectionMenu(parser);
-
-        LocaleType localeType = languageSelectionMenu.selectLanguage();
+        LocaleType localeType = selectLanguage();
 
         FirstTimePlayerCreation firstTimePlayerCreation = new FirstTimePlayerCreation(localeType, serviceContainer,
                 parser, printer);
@@ -42,5 +40,11 @@ public class FirstLaunchFlow {
         }
 
         MenuRunner.runMenu(menu);
+    }
+
+    private LocaleType selectLanguage() {
+        LanguageSelectionMenu languageSelectionMenu = new LanguageSelectionMenu(parser);
+
+        return languageSelectionMenu.selectLanguage();
     }
 }
