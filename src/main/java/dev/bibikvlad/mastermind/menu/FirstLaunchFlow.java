@@ -25,12 +25,8 @@ public class FirstLaunchFlow {
     public void launch() {
         printer.printMessage(WELCOME_MESSAGE);
 
-        LocaleType localeType = selectLanguage();
+        AppContext appContext = createPlayerAndContext(selectLanguage());
 
-        FirstTimePlayerCreation firstTimePlayerCreation = new FirstTimePlayerCreation(localeType, serviceContainer,
-                parser, printer);
-
-        AppContext appContext = firstTimePlayerCreation.createPlayerAndGetContext();
         Menu menu;
 
         if (appContext == null) {
@@ -46,5 +42,12 @@ public class FirstLaunchFlow {
         LanguageSelectionMenu languageSelectionMenu = new LanguageSelectionMenu(parser);
 
         return languageSelectionMenu.selectLanguage();
+    }
+
+    private AppContext createPlayerAndContext(LocaleType localeType) {
+        FirstTimePlayerCreation firstTimePlayerCreation =
+                new FirstTimePlayerCreation(localeType, serviceContainer, parser, printer);
+
+        return firstTimePlayerCreation.createPlayerAndGetContext();
     }
 }
