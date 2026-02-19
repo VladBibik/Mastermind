@@ -32,7 +32,7 @@ public class FirstLaunchLanguageSelection {
             String userInput = parser.parseUserInput();
 
             if (StringEmptyValidator.isNullOrEmpty(userInput)) {
-                System.out.println(EMPTY_INPUT_ERROR);
+                printer.printMessage(EMPTY_INPUT_ERROR);
 
                 continue;
             }
@@ -43,12 +43,12 @@ public class FirstLaunchLanguageSelection {
                 return selectedLocale;
             }
 
-            System.out.println(INVALID_INPUT_ERROR);
+            printer.printMessage(INVALID_INPUT_ERROR);
         }
     }
 
     private void printMenuOptions() {
-        System.out.println(MENU_OPTIONS);
+        printer.printMessage(MENU_OPTIONS);
     }
 
     private LocaleType parseLocaleSelection(String userInput) {
