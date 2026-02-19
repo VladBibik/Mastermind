@@ -32,7 +32,7 @@ public class FirstLaunchFlow {
     }
 
     private LocaleType selectLanguage() {
-        FirstLaunchLanguageSelection firstLaunchLanguageSelection = new FirstLaunchLanguageSelection(parser);
+        FirstLaunchLanguageSelection firstLaunchLanguageSelection = new FirstLaunchLanguageSelection(printer, parser);
 
         return firstLaunchLanguageSelection.selectLanguage();
     }

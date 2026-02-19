@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.menu.settings;
 
+import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
@@ -16,9 +17,11 @@ public class FirstLaunchLanguageSelection {
             2. Russian
             """;
 
+    private final Printer printer;
     private final Parser parser;
 
-    public FirstLaunchLanguageSelection(Parser parser) {
+    public FirstLaunchLanguageSelection(Printer printer, Parser parser) {
+        this.printer = printer;
         this.parser = parser;
     }
 

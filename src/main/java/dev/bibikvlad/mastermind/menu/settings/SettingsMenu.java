@@ -64,7 +64,8 @@ public class SettingsMenu extends Menu {
     }
 
     private Menu changeLanguage() {
-        FirstLaunchLanguageSelection firstLaunchLanguageSelection = new FirstLaunchLanguageSelection(appContext.parser());
+        FirstLaunchLanguageSelection firstLaunchLanguageSelection =
+                new FirstLaunchLanguageSelection(appContext.printer(), appContext.parser());
 
         LocaleType localeType = firstLaunchLanguageSelection.selectLanguage();
 
