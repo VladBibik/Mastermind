@@ -27,15 +27,7 @@ public class FirstLaunchFlow {
 
         AppContext appContext = createPlayerAndContext(selectLanguage());
 
-        Menu menu;
-
-        if (appContext == null) {
-            menu = new ExitMenu(null);
-        } else {
-            menu = new MainMenu(appContext);
-        }
-
-        MenuRunner.runMenu(menu);
+        startMenu(appContext);
     }
 
     private LocaleType selectLanguage() {
@@ -49,5 +41,17 @@ public class FirstLaunchFlow {
                 new FirstTimePlayerCreation(localeType, serviceContainer, parser, printer);
 
         return firstTimePlayerCreation.createPlayerAndGetContext();
+    }
+
+    private void startMenu(AppContext appContext) {
+        Menu menu;
+
+        if (appContext == null) {
+            menu = new ExitMenu(null);
+        } else {
+            menu = new MainMenu(appContext);
+        }
+
+        MenuRunner.runMenu(menu);
     }
 }
