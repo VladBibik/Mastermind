@@ -1,14 +1,15 @@
-package dev.bibikvlad.mastermind.menu;
+package dev.bibikvlad.mastermind.app.bootstrap;
 
-import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
-import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.menu.ExitMenu;
+import dev.bibikvlad.mastermind.menu.MainMenu;
+import dev.bibikvlad.mastermind.menu.Menu;
+import dev.bibikvlad.mastermind.menu.MenuRunner;
 import dev.bibikvlad.mastermind.menu.player.FirstTimePlayerCreation;
 import dev.bibikvlad.mastermind.menu.settings.LanguageSelectionMenu;
 
-//TODO: Is this correct package?
 public class FirstLaunchFlow {
     private static final String WELCOME_MESSAGE = "Welcome to the Mastermind Game!";
 

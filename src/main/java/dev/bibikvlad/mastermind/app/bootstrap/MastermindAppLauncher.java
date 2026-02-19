@@ -7,7 +7,6 @@ import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.input.parser.ConsoleInputParser;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
-import dev.bibikvlad.mastermind.menu.FirstLaunchFlow;
 import dev.bibikvlad.mastermind.menu.MainMenu;
 import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.menu.MenuRunner;
