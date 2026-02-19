@@ -10,6 +10,8 @@ import dev.bibikvlad.mastermind.menu.settings.LanguageSelectionMenu;
 
 //TODO: Is this correct package?
 public class FirstLaunchFlow {
+    private static final String WELCOME_MESSAGE = "Welcome to the Mastermind Game!";
+
     private final ServiceContainer serviceContainer;
     private final Printer printer;
     private final Parser parser;
@@ -21,7 +23,7 @@ public class FirstLaunchFlow {
     }
 
     public void launch() {
-        printer.printMessage("Welcome to the Mastermind Game!");
+        printer.printMessage(WELCOME_MESSAGE);
 
         LanguageSelectionMenu languageSelectionMenu = new LanguageSelectionMenu(parser);
 
