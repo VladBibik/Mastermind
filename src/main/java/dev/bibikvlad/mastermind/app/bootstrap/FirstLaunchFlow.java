@@ -8,7 +8,7 @@ import dev.bibikvlad.mastermind.menu.MainMenu;
 import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.menu.MenuRunner;
 import dev.bibikvlad.mastermind.menu.player.FirstTimePlayerCreation;
-import dev.bibikvlad.mastermind.menu.settings.LanguageSelectionMenu;
+import dev.bibikvlad.mastermind.menu.settings.FirstLaunchLanguageSelection;
 
 public class FirstLaunchFlow {
     private static final String WELCOME_MESSAGE = "Welcome to the Mastermind Game!";
@@ -32,9 +32,9 @@ public class FirstLaunchFlow {
     }
 
     private LocaleType selectLanguage() {
-        LanguageSelectionMenu languageSelectionMenu = new LanguageSelectionMenu(parser);
+        FirstLaunchLanguageSelection firstLaunchLanguageSelection = new FirstLaunchLanguageSelection(parser);
 
-        return languageSelectionMenu.selectLanguage();
+        return firstLaunchLanguageSelection.selectLanguage();
     }
 
     private AppContext createPlayerAndContext(LocaleType localeType) {

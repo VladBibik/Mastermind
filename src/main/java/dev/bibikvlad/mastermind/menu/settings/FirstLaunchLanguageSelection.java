@@ -4,10 +4,10 @@ import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 
-public class LanguageSelectionMenu {
+public class FirstLaunchLanguageSelection {
     private final Parser parser;
 
-    public LanguageSelectionMenu(Parser parser) {
+    public FirstLaunchLanguageSelection(Parser parser) {
         this.parser = parser;
     }
 

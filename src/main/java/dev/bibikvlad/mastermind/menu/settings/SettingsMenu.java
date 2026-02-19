@@ -64,9 +64,9 @@ public class SettingsMenu extends Menu {
     }
 
     private Menu changeLanguage() {
-        LanguageSelectionMenu languageSelectionMenu = new LanguageSelectionMenu(appContext.parser());
+        FirstLaunchLanguageSelection firstLaunchLanguageSelection = new FirstLaunchLanguageSelection(appContext.parser());
 
-        LocaleType localeType = languageSelectionMenu.selectLanguage();
+        LocaleType localeType = firstLaunchLanguageSelection.selectLanguage();
 
         return checkSelectedLanguage(localeType);
     }
@@ -84,7 +84,7 @@ public class SettingsMenu extends Menu {
             //TODO:Language name should be localized!
             System.out.println("Language changed to " + localeType.getLanguageName());
 
-            //TODO: Think about this one! Maybe it's better to move it to the other method, or even other class. Maybe LanguageSelectionMenu should handle it
+            //TODO: Think about this one! Maybe it's better to move it to the other method, or even other class. Maybe FirstLaunchLanguageSelection should handle it
             LocalizationContext localizationContext = new LocalizationContext(localeType);
             AppContext appContext = new AppContext(localizationContext, this.appContext.services(),
                     this.appContext.printer(), this.appContext.parser(), this.currentPlayer);
