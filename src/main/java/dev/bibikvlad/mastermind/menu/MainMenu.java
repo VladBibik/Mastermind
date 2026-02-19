@@ -7,7 +7,7 @@ import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.error.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;
 import dev.bibikvlad.mastermind.menu.game.GameLaunchMenu;
-import dev.bibikvlad.mastermind.menu.games.LeaderboardMenu;
+import dev.bibikvlad.mastermind.menu.leaderboard.LeaderboardMenu;
 import dev.bibikvlad.mastermind.menu.player.ProfileMenu;
 import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;
 import dev.bibikvlad.mastermind.menu.stats.StatsMenu;

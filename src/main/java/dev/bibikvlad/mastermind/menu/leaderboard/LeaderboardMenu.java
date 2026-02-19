@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.menu.games;
+package dev.bibikvlad.mastermind.menu.leaderboard;
 
 import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
