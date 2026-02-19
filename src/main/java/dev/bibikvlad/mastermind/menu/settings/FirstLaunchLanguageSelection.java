@@ -5,6 +5,17 @@ import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 
 public class FirstLaunchLanguageSelection {
+    private static final String EMPTY_INPUT_ERROR = "Input cannot be empty. Please try again.";
+    private static final String INVALID_INPUT_ERROR =
+            "❌ Invalid input. Please enter a number corresponding to the menu option";
+    private static final String MENU_OPTIONS = """
+            Please select a language
+            Enter a number corresponding to desired language
+            
+            1. English
+            2. Russian
+            """;
+
     private final Parser parser;
 
     public FirstLaunchLanguageSelection(Parser parser) {
@@ -18,7 +29,7 @@ public class FirstLaunchLanguageSelection {
             String userInput = parser.parseUserInput();
 
             if (StringEmptyValidator.isNullOrEmpty(userInput)) {
-                System.out.println("Input cannot be empty. Please try again.");
+                System.out.println(EMPTY_INPUT_ERROR);
 
                 continue;
             }
@@ -29,16 +40,12 @@ public class FirstLaunchLanguageSelection {
                 return selectedLocale;
             }
 
-            System.out.println("Provided '" + userInput + "' is not a valid index for the available languages.");
+            System.out.println(INVALID_INPUT_ERROR);
         }
     }
 
     private void printMenuOptions() {
-        System.out.println("Please select a language");
-        System.out.println("Enter a number corresponding to desired language.");
-        System.out.println();
-        System.out.println("1. English");
-        System.out.println("2. Russian");
+        System.out.println(MENU_OPTIONS);
     }
 
     private LocaleType parseLocaleSelection(String userInput) {
