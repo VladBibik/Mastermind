@@ -3,9 +3,9 @@ package dev.bibikvlad.mastermind.menu.player;
 import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
 import dev.bibikvlad.mastermind.menu.Menu;
 
-public class PlayerCreationMenu extends Menu {
+public class LanguageSelectionMenu extends Menu {
 
-    public PlayerCreationMenu(AppContext appContext) {
+    public LanguageSelectionMenu(AppContext appContext) {
         super(appContext);
     }
 
