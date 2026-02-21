@@ -32,36 +32,9 @@ public class LanguageSelectionMenu extends Menu {
 
         Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
 
-        if (selection.isPresent()) {
-            LocaleType localeType = selectLocaleByIndex(selection.get());
-
-            if (localeType == null) {
-                printer.printMessage("❌ Invalid input. Please enter a number corresponding to the menu option");
-
-                return this;
-            }
-
-            if (localeType.equals(appContext.currentPlayer().getPlayerConfig().locale())) {
-                printer.printMessage("Language is already selected.");
-
-                return this;
-            }
-
-            printer.printMessage("Language changed to: " + localeType.getLanguageName());
-
-            playerService.updatePlayerLocale(appContext.currentPlayer().getId(), localeType);
-
-            Player updatedPlayer = appContext.currentPlayer().withLocale(localeType);
-            LocalizationContext newLocalizationContext = new LocalizationContext(localeType);
-            AppContext newAppContext = new AppContext(newLocalizationContext, this.appContext.services(),
-                    this.appContext.printer(), this.appContext.parser(), updatedPlayer);
-
-            return new SettingsMenu(newAppContext);
-        } else {
-            printer.printMessage("❌ Invalid input. Please enter a number corresponding to the menu option");
-
-            return this;
-        }
+        return selection
+                .map(this::selectLocaleByIndex)
+                .orElse(this);
     }
 
     private void printMenuOptions() {
@@ -74,11 +47,44 @@ public class LanguageSelectionMenu extends Menu {
                 """);
     }
 
-    private LocaleType selectLocaleByIndex(int userInputIndex) {
+    private Menu selectLocaleByIndex(int userInputIndex) {
         try {
-            return LocaleType.fromLocaleIndex(userInputIndex);
+            return checkLanguageSelection(LocaleType.fromLocaleIndex(userInputIndex));
         } catch (IllegalArgumentException exception) {
-            return null;
+            printer.printMessage("❌ Invalid input. Please enter a number corresponding to the menu option");
+
+            return this;
         }
+    }
+
+    private Menu checkLanguageSelection(LocaleType localeType) {
+        if (localeType.equals(appContext.currentPlayer().getPlayerConfig().locale())) {
+            printer.printMessage("Language is already selected.");
+
+            return this;
+        } else {
+            printer.printMessage("Language changed to: " + localeType.getLanguageName());
+
+            return updateLanguage(localeType);
+        }
+    }
+
+    private Menu updateLanguage(LocaleType localeType) {
+        playerService.updatePlayerLocale(appContext.currentPlayer().getId(), localeType);
+
+        return createNewContext(localeType);
+    }
+
+    private Menu createNewContext(LocaleType localeType) {
+        Player updatedPlayer = appContext.currentPlayer().withLocale(localeType);
+        LocalizationContext newLocalizationContext = new LocalizationContext(localeType);
+        AppContext newAppContext = new AppContext(newLocalizationContext, this.appContext.services(),
+                this.appContext.printer(), this.appContext.parser(), updatedPlayer);
+
+        return backToSettings(newAppContext);
+    }
+
+    private Menu backToSettings(AppContext appContext) {
+        return new SettingsMenu(appContext);
     }
 }
