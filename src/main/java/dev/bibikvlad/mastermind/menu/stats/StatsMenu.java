@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.menu.stats;
 
-import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
+import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.config.MessageType;

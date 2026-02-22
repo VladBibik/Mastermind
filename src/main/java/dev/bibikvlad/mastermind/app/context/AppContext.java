@@ -1,5 +1,6 @@
-package dev.bibikvlad.mastermind.app.bootstrap;
+package dev.bibikvlad.mastermind.app.context;
 
+import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;

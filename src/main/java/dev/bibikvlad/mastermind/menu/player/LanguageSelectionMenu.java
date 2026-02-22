@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.menu.player;
 
-import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
-import dev.bibikvlad.mastermind.app.bootstrap.AppContextFactory;
+import dev.bibikvlad.mastermind.app.context.AppContext;
+import dev.bibikvlad.mastermind.app.context.AppContextFactory;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;

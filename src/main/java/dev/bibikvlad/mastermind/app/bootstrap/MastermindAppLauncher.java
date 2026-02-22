@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.app.bootstrap;
 
 import dev.bibikvlad.mastermind.app.bootstrap.errors.FatalPersistenceErrorHandler;
+import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.ConsolePrinter;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;

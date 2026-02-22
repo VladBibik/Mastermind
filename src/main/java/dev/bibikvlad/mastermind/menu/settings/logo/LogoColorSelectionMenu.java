@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.menu.settings.logo;
 
-import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
+import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;

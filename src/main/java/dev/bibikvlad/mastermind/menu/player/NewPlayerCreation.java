@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.menu.player;
 
-import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
+import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;

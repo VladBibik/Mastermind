@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.app.bootstrap;
+package dev.bibikvlad.mastermind.app.context;
 
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;

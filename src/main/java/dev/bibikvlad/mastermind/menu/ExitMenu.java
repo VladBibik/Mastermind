@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.menu;
 
-import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
+import dev.bibikvlad.mastermind.app.context.AppContext;
 
 public class ExitMenu extends Menu {
     public ExitMenu(AppContext appContext) {
