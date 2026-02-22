@@ -75,7 +75,7 @@ public class LanguageSelectionMenu extends Menu {
     }
 
     private Menu createNewContext(LocaleType localeType) {
-        return backToSettings(AppContextRecreator.recreateWithLocale(appContext, localeType));
+        return backToSettings(AppContextRecreator.withLocale(appContext, localeType));
     }
 
     private Menu backToSettings(AppContext appContext) {

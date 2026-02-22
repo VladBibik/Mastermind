@@ -5,7 +5,7 @@ import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 
 public class AppContextRecreator {
-    public static AppContext recreateWithLocale(AppContext appContext, LocaleType localeType) {
+    public static AppContext withLocale(AppContext appContext, LocaleType localeType) {
         Player updatedPlayer = appContext.currentPlayer().withLocale(localeType);
         LocalizationContext newLocalizationContext = new LocalizationContext(localeType);
 
@@ -13,7 +13,7 @@ public class AppContextRecreator {
                 appContext.printer(), appContext.parser(), updatedPlayer);
     }
 
-    public static AppContext recreateForNewPlayer(AppContext appContext, Player newPlayer) {
+    public static AppContext withNewPlayer(AppContext appContext, Player newPlayer) {
         return new AppContext(appContext.localizationContext(), appContext.services(),
                 appContext.printer(), appContext.parser(), newPlayer);
     }
