@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.menu.player;
 
 import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
-import dev.bibikvlad.mastermind.app.bootstrap.AppContextRecreator;
+import dev.bibikvlad.mastermind.app.bootstrap.AppContextFactory;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
@@ -75,7 +75,7 @@ public class LanguageSelectionMenu extends Menu {
     }
 
     private Menu createNewContext(LocaleType localeType) {
-        return backToSettings(AppContextRecreator.withLocale(appContext, localeType));
+        return backToSettings(AppContextFactory.withLocale(appContext, localeType));
     }
 
     private Menu backToSettings(AppContext appContext) {

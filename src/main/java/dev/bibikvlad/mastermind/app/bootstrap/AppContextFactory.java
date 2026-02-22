@@ -4,7 +4,7 @@ import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 
-public class AppContextRecreator {
+public class AppContextFactory {
     public static AppContext withLocale(AppContext appContext, LocaleType localeType) {
         Player updatedPlayer = appContext.currentPlayer().withLocale(localeType);
         LocalizationContext newLocalizationContext = new LocalizationContext(localeType);
