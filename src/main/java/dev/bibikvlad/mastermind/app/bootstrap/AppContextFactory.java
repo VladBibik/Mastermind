@@ -5,22 +5,16 @@ import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 
 public class AppContextFactory {
-    private final AppContext appContext;
-
-    public AppContextFactory(AppContext appContext) {
-        this.appContext = appContext;
-    }
-
-    public AppContext recreateWithLocale(LocaleType localeType) {
+    public AppContext recreateWithLocale(AppContext appContext, LocaleType localeType) {
         Player updatedPlayer = appContext.currentPlayer().withLocale(localeType);
         LocalizationContext newLocalizationContext = new LocalizationContext(localeType);
 
-        return new AppContext(newLocalizationContext, this.appContext.services(),
-                this.appContext.printer(), this.appContext.parser(), updatedPlayer);
+        return new AppContext(newLocalizationContext, appContext.services(),
+                appContext.printer(), appContext.parser(), updatedPlayer);
     }
 
-    public AppContext recreateForNewPlayer(Player newPlayer) {
-        return new AppContext(this.appContext.localizationContext(), this.appContext.services(),
-                this.appContext.printer(), this.appContext.parser(), newPlayer);
+    public AppContext recreateForNewPlayer(AppContext appContext, Player newPlayer) {
+        return new AppContext(appContext.localizationContext(), appContext.services(),
+                appContext.printer(), appContext.parser(), newPlayer);
     }
 }
