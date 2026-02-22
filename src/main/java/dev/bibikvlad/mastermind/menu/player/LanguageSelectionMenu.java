@@ -1,15 +1,13 @@
 package dev.bibikvlad.mastermind.menu.player;
 
 import dev.bibikvlad.mastermind.app.bootstrap.AppContext;
-import dev.bibikvlad.mastermind.app.bootstrap.AppContextFactory;
+import dev.bibikvlad.mastermind.app.bootstrap.AppContextRecreator;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
-import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;
-import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
 import java.util.Optional;
@@ -77,9 +75,7 @@ public class LanguageSelectionMenu extends Menu {
     }
 
     private Menu createNewContext(LocaleType localeType) {
-        AppContextFactory appContextFactory = new AppContextFactory();
-
-        return backToSettings(appContextFactory.recreateWithLocale(appContext, localeType));
+        return backToSettings(AppContextRecreator.recreateWithLocale(appContext, localeType));
     }
 
     private Menu backToSettings(AppContext appContext) {
