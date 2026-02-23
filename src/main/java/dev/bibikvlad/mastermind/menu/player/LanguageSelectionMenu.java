@@ -39,7 +39,7 @@ public class LanguageSelectionMenu extends Menu {
     private void printMenuOptions() {
         printer.printMessage("""
                 Please select a language
-                Enter a number corresponding to desired language
+                Enter a number corresponding to the desired language
                 
                 1. English
                 2. Russian
