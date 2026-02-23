@@ -6,37 +6,29 @@ import java.util.Map;
 import java.util.Optional;
 
 public enum LocaleType {
-    ENGLISH(1, "English", Locale.ENGLISH),
-    RUSSIAN(2, "Russian", Locale.of("ru"));
+    ENGLISH(1, Locale.ENGLISH),
+    RUSSIAN(2, Locale.of("ru"));
 
     private final int localeIndex;
-    private final String languageName;
     private final Locale locale;
 
     private static final Map<Integer, LocaleType> BY_INDEX = new HashMap<>();
-    private static final Map<String, LocaleType> BY_LANGUAGE = new HashMap<>();
     private static final Map<String, LocaleType> BY_LOCALE_TAG = new HashMap<>();
 
     static {
         for (LocaleType localeType : LocaleType.values()) {
             BY_INDEX.put(localeType.getLocaleIndex(), localeType);
-            BY_LANGUAGE.put(localeType.getLanguageName().toUpperCase(), localeType);
             BY_LOCALE_TAG.put(localeType.getLocale().getLanguage().toLowerCase(), localeType);
         }
     }
 
-    LocaleType(int localeIndex, String language, Locale locale) {
+    LocaleType(int localeIndex, Locale locale) {
         this.localeIndex = localeIndex;
-        this.languageName = language;
         this.locale = locale;
     }
 
     public int getLocaleIndex() {
         return localeIndex;
-    }
-
-    public String getLanguageName() {
-        return languageName;
     }
 
     public Locale getLocale() {
@@ -46,11 +38,6 @@ public enum LocaleType {
     public static LocaleType fromLocaleIndex(int localeIndex) {
         return Optional.ofNullable(BY_INDEX.get(localeIndex)).orElseThrow(
                 () -> new IllegalArgumentException("Invalid LocaleIndex: " + localeIndex));
-    }
-
-    public static LocaleType fromLanguageString(String languageName) {
-        return Optional.ofNullable(BY_LANGUAGE.get(languageName.toUpperCase())).orElseThrow(
-                () -> new IllegalArgumentException("Invalid Language Name: " + languageName));
     }
 
     public static LocaleType fromLocale(Locale locale) {
