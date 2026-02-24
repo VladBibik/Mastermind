@@ -15,4 +15,8 @@ public enum LocaleType {
     public Locale getLocale() {
         return locale;
     }
+
+    public String getLocalizedLanguageName() {
+        return locale.getDisplayName(locale);
+    }
 }
