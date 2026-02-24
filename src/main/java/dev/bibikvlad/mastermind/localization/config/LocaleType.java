@@ -23,7 +23,7 @@ public enum LocaleType {
     }
 
     public static LocaleType fromIndex(int index) {
-        if (index < 0 || index >= values().length) {
+        if (index <= 0 || index >= values().length) {
             throw new IllegalArgumentException("Invalid locale index: " + index);
         }
 
