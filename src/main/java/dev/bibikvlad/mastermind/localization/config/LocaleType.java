@@ -21,4 +21,12 @@ public enum LocaleType {
 
         return displayName.substring(0, 1).toUpperCase() + displayName.substring(1);
     }
+
+    public LocaleType fromIndex(int index) {
+        if (index < 0 || index >= values().length) {
+            throw new IllegalArgumentException("Invalid locale index: " + index);
+        }
+
+        return values()[index - 1];
+    }
 }
