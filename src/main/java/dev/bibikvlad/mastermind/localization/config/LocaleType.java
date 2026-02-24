@@ -17,7 +17,7 @@ public enum LocaleType {
     }
 
     public String getNativeDisplayName() {
-        String displayName = locale.getDisplayName(locale);
+        String displayName = locale.getDisplayLanguage(locale);
 
         return displayName.substring(0, 1).toUpperCase(locale) + displayName.substring(1);
     }
