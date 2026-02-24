@@ -65,7 +65,7 @@ public class FirstLaunchLanguageSelection {
 
     private LocaleType selectLocaleByIndex(int userInputIndex) {
         try {
-            return LocaleType.fromLocaleIndex(userInputIndex);
+            return LocaleType.fromIndex(userInputIndex);
         } catch (IllegalArgumentException exception) {
             return null;
         }

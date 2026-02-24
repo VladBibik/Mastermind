@@ -54,7 +54,7 @@ public class Player {
                 + ", Player Name = " + playerName
                 + ", Creation Date = " + SQLiteTimestampFormatter.format(creationDate)
                 + "\n    configurations:"
-                + "\n        Selected Language: " + playerConfig.locale().getLanguageName()
+                + "\n        Selected Language: " + playerConfig.locale().getNativeDisplayName()
                 + "\n        Selected Logo Border Color: " + playerConfig.logoColorsBundle()
                 .logoBorderColor().getDisplayName()
                 + "\n        Selected Logo Main Color: " + playerConfig.logoColorsBundle()

@@ -48,7 +48,7 @@ public class LanguageSelectionMenu extends Menu {
 
     private Menu selectLocaleByIndex(int userInputIndex) {
         try {
-            return checkLanguageSelection(LocaleType.fromLocaleIndex(userInputIndex));
+            return checkLanguageSelection(LocaleType.fromIndex(userInputIndex));
         } catch (IllegalArgumentException exception) {
             printer.printMessage("❌ Invalid input. Please enter a number corresponding to the menu option");
 
@@ -62,7 +62,7 @@ public class LanguageSelectionMenu extends Menu {
 
             return this;
         } else {
-            printer.printMessage("Language changed to: " + localeType.getLanguageName());
+            printer.printMessage("Language changed to: " + localeType.getNativeDisplayName());
 
             return updateLanguage(localeType);
         }
