@@ -36,6 +36,7 @@ public class LanguageSelectionMenu extends Menu {
                 .orElse(this);
     }
 
+    //TODO: Languages must be printed dynamically!
     private void printMenuOptions() {
         printer.printMessage("""
                 Please select a language
