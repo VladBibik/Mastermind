@@ -6,15 +6,14 @@ import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 
 public class FirstLaunchLanguageSelection {
-    private static final String EMPTY_INPUT_ERROR = "Input cannot be empty. Please try again.";
+    private static final String EMPTY_INPUT_ERROR =
+            "Input cannot be empty. Please enter a number corresponding to the menu option";
     private static final String INVALID_INPUT_ERROR =
             "❌ Invalid input. Please enter a number corresponding to the menu option";
     private static final String MENU_OPTIONS = """
-            Please select a language
-            Enter a number corresponding to desired language
-            
-            1. English
-            2. Russian
+                Please select a language.
+                Enter the number corresponding to your choice.
+                Enter '0' to return to the Settings menu.
             """;
 
     private final Printer printer;
@@ -49,6 +48,14 @@ public class FirstLaunchLanguageSelection {
 
     private void printMenuOptions() {
         printer.printMessage(MENU_OPTIONS);
+
+        LocaleType[] locales = LocaleType.values();
+
+        for (int i = 0; i < locales.length; i++) {
+            String languageOption = (i + 1) + ". " + locales[i].getNativeDisplayName();
+
+            printer.printMessage(languageOption);
+        }
     }
 
     private LocaleType parseLocaleSelection(String userInput) {
