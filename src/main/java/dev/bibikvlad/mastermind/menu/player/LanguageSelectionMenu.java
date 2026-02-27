@@ -64,7 +64,7 @@ public class LanguageSelectionMenu extends Menu {
 
             return this;
         } else {
-            printer.printMessage("Language changed to: " + localeType.getNativeDisplayName());
+            printer.printMessage("Language successfully changed to : " + localeType.getNativeDisplayName());
 
             return updateLanguage(localeType);
         }
