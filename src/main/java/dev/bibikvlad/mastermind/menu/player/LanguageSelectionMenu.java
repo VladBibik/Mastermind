@@ -6,6 +6,9 @@ import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.localization.config.MessageType;
+import dev.bibikvlad.mastermind.localization.messages.error.InteractionMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.settings.language.LanguageSelectionMessages;
 import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;
 import dev.bibikvlad.mastermind.services.PlayerService;
@@ -16,6 +19,8 @@ public class LanguageSelectionMenu extends Menu {
     private final PlayerService playerService;
     private final Printer printer;
     private final Parser parser;
+    private final InteractionMessages interactionMessages;
+    private final LanguageSelectionMessages languageSelectionMessages;
 
     public LanguageSelectionMenu(AppContext appContext) {
         super(appContext);
@@ -23,6 +28,8 @@ public class LanguageSelectionMenu extends Menu {
         this.playerService = appContext.services().getPlayerService();
         this.printer = appContext.printer();
         this.parser = appContext.parser();
+        this.interactionMessages = appContext.localizationContext().getMessages(MessageType.INTERACTION);
+        this.languageSelectionMessages = appContext.localizationContext().getMessages(MessageType.LANGUAGE_MENU);
     }
 
     @Override
@@ -37,11 +44,7 @@ public class LanguageSelectionMenu extends Menu {
     }
 
     private void printMenuOptions() {
-        printer.printMessage("""
-                Please select a language.
-                Enter the number corresponding to your choice.
-                Enter '0' to return to the Settings menu.
-                """);
+        printer.printMessage(languageSelectionMessages.getMenuOptions());
 
         LocaleType[] locales = LocaleType.values();
 
@@ -56,7 +59,7 @@ public class LanguageSelectionMenu extends Menu {
         try {
             return checkLanguageSelection(LocaleType.fromIndex(userInputIndex));
         } catch (IllegalArgumentException exception) {
-            printer.printMessage("❌ Invalid input. Please enter a number corresponding to the menu option");
+            printer.printMessage(interactionMessages.getInvalidInputMessage());
 
             return this;
         }
@@ -64,11 +67,11 @@ public class LanguageSelectionMenu extends Menu {
 
     private Menu checkLanguageSelection(LocaleType localeType) {
         if (localeType.equals(appContext.currentPlayer().getPlayerConfig().locale())) {
-            printer.printMessage("❌ This language is already selected");
+            printer.printMessage(languageSelectionMessages.getAlreadySelected());
 
             return this;
         } else {
-            printer.printMessage("✅ Language successfully changed to : " + localeType.getNativeDisplayName());
+            printer.printMessage(languageSelectionMessages.getLanguageChanged(localeType.getNativeDisplayName()));
 
             return updateLanguage(localeType);
         }
