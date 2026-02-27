@@ -33,13 +33,14 @@ public class LanguageSelectionMenu extends Menu {
 
         return selection
                 .map(this::selectLocaleByIndex)
-                .orElse(this);
+                .orElse(new SettingsMenu(appContext));
     }
 
     private void printMenuOptions() {
         printer.printMessage("""
-                Please select a language
-                Enter a number corresponding to the desired language
+                Please select a language.
+                Enter the number corresponding to your choice.
+                Enter '0' to return to the Settings menu.
                 """);
 
         for (LocaleType locale : LocaleType.values()) {
