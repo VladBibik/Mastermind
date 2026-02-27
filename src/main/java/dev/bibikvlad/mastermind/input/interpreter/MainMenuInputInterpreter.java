@@ -9,11 +9,11 @@ public class MainMenuInputInterpreter {
     public static Optional<Integer> readSelection(Parser parser) {
         String userInput = parser.parseUserInput().trim().toLowerCase();
 
-        if (GlobalMenuCommands.PLAY.contains(userInput)) {
+        if (GlobalMenuCommands.EXIT.contains(userInput)) {
             return Optional.empty();
         }
 
-        if (GlobalMenuCommands.EXIT.contains(userInput)) {
+        if (GlobalMenuCommands.PLAY.contains(userInput)) {
             return Optional.of(1);
         }
 
