@@ -2,10 +2,10 @@ package dev.bibikvlad.mastermind.localization.messages.menu.settings.language;
 
 import java.util.ResourceBundle;
 
-public class ConsoleLanguageSelectionMessages implements LanguageSelectionMessages {
+public class ConsoleLanguageMessages implements LanguageSelectionMessages {
     private final ResourceBundle resourceBundle;
 
-    public ConsoleLanguageSelectionMessages(ResourceBundle resourceBundle) {
+    public ConsoleLanguageMessages(ResourceBundle resourceBundle) {
         this.resourceBundle = resourceBundle;
     }
 
