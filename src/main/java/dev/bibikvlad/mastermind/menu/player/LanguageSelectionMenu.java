@@ -43,8 +43,10 @@ public class LanguageSelectionMenu extends Menu {
                 Enter '0' to return to the Settings menu.
                 """);
 
-        for (int i = 0; i < LocaleType.values().length; i++) {
-            String languageOption = (i + 1) + ". " + LocaleType.values()[i].getNativeDisplayName();
+        LocaleType[] locales = LocaleType.values();
+
+        for (int i = 0; i < locales.length; i++) {
+            String languageOption = (i + 1) + ". " + locales[i].getNativeDisplayName();
 
             printer.printMessage(languageOption);
         }
