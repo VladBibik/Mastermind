@@ -60,7 +60,7 @@ public class LanguageSelectionMenu extends Menu {
 
     private Menu checkLanguageSelection(LocaleType localeType) {
         if (localeType.equals(appContext.currentPlayer().getPlayerConfig().locale())) {
-            printer.printMessage("Language is already selected.");
+            printer.printMessage("This language is already selected");
 
             return this;
         } else {
