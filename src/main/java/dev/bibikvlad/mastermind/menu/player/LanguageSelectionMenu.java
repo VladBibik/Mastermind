@@ -71,10 +71,17 @@ public class LanguageSelectionMenu extends Menu {
 
             return this;
         } else {
-            printer.printMessage(languageSelectionMessages.getLanguageChanged(localeType.getNativeDisplayName()));
-
-            return updateLanguage(localeType);
+            return proceedSuccessLanguageChange(localeType);
         }
+    }
+
+    private Menu proceedSuccessLanguageChange(LocaleType localeType) {
+        printer.printMessage(languageSelectionMessages.getLanguageChanged(localeType.getNativeDisplayName()));
+        printer.printMessage(languageSelectionMessages.getBackToSettings());
+
+        parser.parseUserInput();
+
+        return updateLanguage(localeType);
     }
 
     private Menu updateLanguage(LocaleType localeType) {
