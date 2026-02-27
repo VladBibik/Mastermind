@@ -6,15 +6,14 @@ import java.util.Optional;
 
 public class MainMenuInputInterpreter {
 
-
     public static Optional<Integer> readSelection(Parser parser) {
-        String userInput = parser.parseUserInput().toLowerCase();
+        String userInput = parser.parseUserInput().trim().toLowerCase();
 
-        if (GlobalMenuCommands.PLAY.contains(userInput.toLowerCase())) {
+        if (GlobalMenuCommands.PLAY.contains(userInput)) {
             return Optional.empty();
         }
 
-        if (GlobalMenuCommands.EXIT.contains(userInput.toLowerCase())) {
+        if (GlobalMenuCommands.EXIT.contains(userInput)) {
             return Optional.of(1);
         }
 
