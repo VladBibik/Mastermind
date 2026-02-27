@@ -5,6 +5,7 @@ import dev.bibikvlad.mastermind.localization.messages.error.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.game.GameMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.settings.language.LanguageSelectionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.stats.StatsMessages;
 
@@ -31,6 +32,11 @@ public class MessageRegistryInitializer {
                 GameMenuMessages.class,
                 "i18n.game_menu",
                 new ConsoleGameMenuMessageFactory()
+        ));
+        messageFactoryRegistry.register(new LocalizedMessageConfig<>(
+                LanguageSelectionMessages.class,
+                "i18n.language_selection",
+                new ConsoleLanguageMessagesFactory()
         ));
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 StatsMessages.class,
