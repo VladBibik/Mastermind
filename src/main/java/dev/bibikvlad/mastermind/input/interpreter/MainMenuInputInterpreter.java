@@ -3,34 +3,18 @@ package dev.bibikvlad.mastermind.input.interpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 
 import java.util.Optional;
-import java.util.Set;
 
 public class MainMenuInputInterpreter {
-    private static final Set<String> playSet = Set.of(
-            "play",
-            "",
-            "start",
-            "go",
-            "mastermind",
-            "1"
-    );
-    private static final Set<String> exitSet = Set.of(
-            "exit",
-            "close",
-            "quit",
-            "back",
-            "q",
-            "0"
-    );
+
 
     public static Optional<Integer> readSelection(Parser parser) {
-        String userInput = parser.parseUserInput();
+        String userInput = parser.parseUserInput().toLowerCase();
 
-        if (exitSet.contains(userInput.toLowerCase())) {
+        if (GlobalMenuCommands.PLAY.contains(userInput.toLowerCase())) {
             return Optional.empty();
         }
 
-        if (playSet.contains(userInput.toLowerCase())) {
+        if (GlobalMenuCommands.EXIT.contains(userInput.toLowerCase())) {
             return Optional.of(1);
         }
 
