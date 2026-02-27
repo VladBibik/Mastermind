@@ -24,4 +24,9 @@ public class ConsoleLanguageMessages implements LanguageSelectionMessages {
         return resourceBundle.getString("success_language_change")
                 .replace("{LANGUAGE_NAME}", languageName);
     }
+
+    @Override
+    public String getBackToSettings() {
+        return resourceBundle.getString("redirect_to_settings");
+    }
 }

@@ -8,4 +8,6 @@ public interface LanguageSelectionMessages extends LocalizedMessages {
     String getAlreadySelected();
 
     String getLanguageChanged(String languageName);
+
+    String getBackToSettings();
 }
