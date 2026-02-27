@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public class IntegerInputInterpreter {
     public static Optional<Integer> readSelection(Parser parser) {
-        String userInput = parser.parseUserInput();
+        String userInput = parser.parseUserInput().trim().toLowerCase();
 
         if (userInput.equalsIgnoreCase("exit") || userInput.equalsIgnoreCase("close")) {
             return Optional.empty();
