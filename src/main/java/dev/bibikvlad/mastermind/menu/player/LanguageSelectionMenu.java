@@ -82,7 +82,7 @@ public class LanguageSelectionMenu extends Menu {
     }
 
     private Menu applyLanguageChange(LocaleType localeType) {
-        AppContext appContext = AppContextFactory.withLocale(this.appContext, localeType);
+        AppContext newAppContext = AppContextFactory.withLocale(this.appContext, localeType);
 
         updateLanguage(localeType);
         printLanguageChangeConfirmation(appContext, localeType);
