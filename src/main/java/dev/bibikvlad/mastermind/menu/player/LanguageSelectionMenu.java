@@ -85,26 +85,21 @@ public class LanguageSelectionMenu extends Menu {
         AppContext appContext = AppContextFactory.withLocale(this.appContext, localeType);
 
         languageSelectionMessages = appContext.localizationContext().getMessages(MessageType.LANGUAGE_MENU);
-        //----------------------------------------
+
+        notifySuccessLanguageChange(localeType);
+        updateLanguage(localeType);
+
+        return new SettingsMenu(appContext);
+    }
+
+    private void notifySuccessLanguageChange(LocaleType localeType) {
         printer.printMessage(languageSelectionMessages.getLanguageChanged(localeType.getNativeDisplayName()));
         printer.printMessage(languageSelectionMessages.getBackToSettings());
 
         parser.parseUserInput();
-
-        return updateLanguage(localeType);
     }
 
-    private Menu updateLanguage(LocaleType localeType) {
+    private void updateLanguage(LocaleType localeType) {
         playerService.updatePlayerLocale(appContext.currentPlayer().getId(), localeType);
-
-        return createNewContext(localeType);
-    }
-
-    private Menu createNewContext(LocaleType localeType) {
-        return backToSettings(AppContextFactory.withLocale(appContext, localeType));
-    }
-
-    private Menu backToSettings(AppContext appContext) {
-        return new SettingsMenu(appContext);
     }
 }
