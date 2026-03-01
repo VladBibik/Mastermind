@@ -16,7 +16,7 @@ public class ConsoleLanguageMessages implements LanguageSelectionMessages {
 
     @Override
     public String getAlreadySelected() {
-        return resourceBundle.getString("langauge_already_selected");
+        return resourceBundle.getString("language_already_selected");
     }
 
     @Override
