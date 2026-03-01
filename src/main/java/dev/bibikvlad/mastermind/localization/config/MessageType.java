@@ -5,6 +5,7 @@ import dev.bibikvlad.mastermind.localization.messages.error.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.game.GameMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.settings.SettingsMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.settings.language.LanguageSelectionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.stats.StatsMessages;
@@ -14,6 +15,7 @@ public enum MessageType {
     INTERACTION(InteractionMessages.class),
     MAIN_MENU(MainMenuMessages.class),
     GAME_MENU(GameMenuMessages.class),
+    SETTINGS(SettingsMenuMessages.class),
     LANGUAGE_MENU(LanguageSelectionMessages.class),
     STATS(StatsMessages.class),
     LOGO(LogoMessages.class);
