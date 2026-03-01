@@ -11,14 +11,14 @@ import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoMes
 import dev.bibikvlad.mastermind.localization.messages.menu.stats.StatsMessages;
 
 public enum MessageType {
-    GAME(GameMessages.class),
-    INTERACTION(InteractionMessages.class),
     MAIN_MENU(MainMenuMessages.class),
+    GAME(GameMessages.class),
     GAME_MENU(GameMenuMessages.class),
+    STATS(StatsMessages.class),
     SETTINGS(SettingsMenuMessages.class),
     LANGUAGE_MENU(LanguageSelectionMessages.class),
-    STATS(StatsMessages.class),
-    LOGO(LogoMessages.class);
+    LOGO(LogoMessages.class),
+    INTERACTION(InteractionMessages.class);
 
     private final Class<? extends LocalizedMessages> messageClass;
 
