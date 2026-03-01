@@ -20,8 +20,8 @@ public class LanguageSelectionMenu extends Menu {
     private final Printer printer;
     private final Parser parser;
     private final InteractionMessages interactionMessages;
+    private final LanguageSelectionMessages languageSelectionMessages;
 
-    private LanguageSelectionMessages languageSelectionMessages;
     private boolean showMenuOnNextLoop = true;
 
     public LanguageSelectionMenu(AppContext appContext) {
@@ -84,17 +84,17 @@ public class LanguageSelectionMenu extends Menu {
     private Menu proceedSuccessLanguageChange(LocaleType localeType) {
         AppContext appContext = AppContextFactory.withLocale(this.appContext, localeType);
 
-        languageSelectionMessages = appContext.localizationContext().getMessages(MessageType.LANGUAGE_MENU);
-
-        notifySuccessLanguageChange(localeType);
+        notifySuccessLanguageChange(appContext, localeType);
         updateLanguage(localeType);
 
         return new SettingsMenu(appContext);
     }
 
-    private void notifySuccessLanguageChange(LocaleType localeType) {
-        printer.printMessage(languageSelectionMessages.getLanguageChanged(localeType.getNativeDisplayName()));
-        printer.printMessage(languageSelectionMessages.getBackToSettings());
+    private void notifySuccessLanguageChange(AppContext newAppContext, LocaleType localeType) {
+        LanguageSelectionMessages messages = newAppContext.localizationContext().getMessages(MessageType.LANGUAGE_MENU);
+
+        printer.printMessage(messages.getLanguageChanged(localeType.getNativeDisplayName()));
+        printer.printMessage(messages.getBackToSettings());
 
         parser.parseUserInput();
     }
