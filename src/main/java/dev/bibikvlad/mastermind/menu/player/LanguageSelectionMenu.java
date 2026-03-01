@@ -84,10 +84,14 @@ public class LanguageSelectionMenu extends Menu {
     private Menu proceedSuccessLanguageChange(LocaleType localeType) {
         AppContext appContext = AppContextFactory.withLocale(this.appContext, localeType);
 
-        notifySuccessLanguageChange(appContext, localeType);
         updateLanguage(localeType);
+        notifySuccessLanguageChange(appContext, localeType);
 
         return new SettingsMenu(appContext);
+    }
+
+    private void updateLanguage(LocaleType localeType) {
+        playerService.updatePlayerLocale(appContext.currentPlayer().getId(), localeType);
     }
 
     private void notifySuccessLanguageChange(AppContext newAppContext, LocaleType localeType) {
@@ -97,9 +101,5 @@ public class LanguageSelectionMenu extends Menu {
         printer.printMessage(messages.getBackToSettings());
 
         parser.parseUserInput();
-    }
-
-    private void updateLanguage(LocaleType localeType) {
-        playerService.updatePlayerLocale(appContext.currentPlayer().getId(), localeType);
     }
 }
