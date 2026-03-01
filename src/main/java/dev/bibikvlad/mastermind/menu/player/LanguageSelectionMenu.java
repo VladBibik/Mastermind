@@ -77,11 +77,11 @@ public class LanguageSelectionMenu extends Menu {
 
             return this;
         } else {
-            return proceedSuccessLanguageChange(localeType);
+            return applyLanguageChange(localeType);
         }
     }
 
-    private Menu proceedSuccessLanguageChange(LocaleType localeType) {
+    private Menu applyLanguageChange(LocaleType localeType) {
         AppContext appContext = AppContextFactory.withLocale(this.appContext, localeType);
 
         updateLanguage(localeType);
