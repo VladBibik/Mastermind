@@ -84,13 +84,13 @@ public class LanguageSelectionMenu extends Menu {
     private Menu applyLanguageChange(LocaleType localeType) {
         AppContext newAppContext = AppContextFactory.withLocale(this.appContext, localeType);
 
-        updateLanguage(localeType);
+        updatePlayerLocale(localeType);
         printLanguageChangeConfirmation(newAppContext, localeType);
 
         return new SettingsMenu(newAppContext);
     }
 
-    private void updateLanguage(LocaleType localeType) {
+    private void updatePlayerLocale(LocaleType localeType) {
         playerService.updatePlayerLocale(appContext.currentPlayer().getId(), localeType);
     }
 
