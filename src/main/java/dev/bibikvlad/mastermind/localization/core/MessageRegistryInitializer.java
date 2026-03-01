@@ -15,16 +15,6 @@ public class MessageRegistryInitializer {
         MessageFactoryRegistry messageFactoryRegistry = new MessageFactoryRegistry();
 
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
-                GameMessages.class,
-                "i18n.game_messages",
-                new ConsoleGameMessageFactory()
-        ));
-        messageFactoryRegistry.register(new LocalizedMessageConfig<>(
-                InteractionMessages.class,
-                "i18n.interaction_messages",
-                new ConsoleInteractionMessageFactory()
-        ));
-        messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 MainMenuMessages.class,
                 "i18n.main_menu",
                 new ConsoleMainMenuMessageFactory()
@@ -33,6 +23,16 @@ public class MessageRegistryInitializer {
                 GameMenuMessages.class,
                 "i18n.game_menu",
                 new ConsoleGameMenuMessageFactory()
+        ));
+        messageFactoryRegistry.register(new LocalizedMessageConfig<>(
+                GameMessages.class,
+                "i18n.game_messages",
+                new ConsoleGameMessageFactory()
+        ));
+        messageFactoryRegistry.register(new LocalizedMessageConfig<>(
+                StatsMessages.class,
+                "i18n.player_stats",
+                new ConsoleStatsMessageFactory()
         ));
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 SettingsMenuMessages.class,
@@ -45,14 +45,14 @@ public class MessageRegistryInitializer {
                 new ConsoleLanguageMessagesFactory()
         ));
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
-                StatsMessages.class,
-                "i18n.player_stats",
-                new ConsoleStatsMessageFactory()
-        ));
-        messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 LogoMessages.class,
                 "i18n.logo_colors",
                 new ConsoleLogoMessagesFactory()
+        ));
+        messageFactoryRegistry.register(new LocalizedMessageConfig<>(
+                InteractionMessages.class,
+                "i18n.interaction_messages",
+                new ConsoleInteractionMessageFactory()
         ));
 
         return messageFactoryRegistry;
