@@ -11,9 +11,9 @@ public class FirstLaunchLanguageSelection {
     private static final String INVALID_INPUT_ERROR =
             "❌ Invalid input. Please enter a number corresponding to the menu option";
     private static final String MENU_OPTIONS = """
-                Please select a language.
-                Enter the number corresponding to your choice.
-                Enter '0' to return to the Settings menu.
+            
+            Please select a language.
+            Enter the number corresponding to your choice.
             """;
 
     private final Printer printer;
