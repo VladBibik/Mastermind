@@ -14,7 +14,6 @@ public class SettingsMenu extends Menu {
         super(appContext);
     }
 
-    //TODO: Should we go back on 'close', and 'exit'?
     @Override
     public Menu run() {
         displayMenu();
