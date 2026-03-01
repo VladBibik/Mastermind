@@ -10,13 +10,19 @@ import dev.bibikvlad.mastermind.menu.settings.logo.LogoColorSelectionMenu;
 import java.util.Optional;
 
 public class SettingsMenu extends Menu {
+    private boolean showMenuOnNextLoop = true;
+
     public SettingsMenu(AppContext appContext) {
         super(appContext);
     }
 
     @Override
     public Menu run() {
-        displayMenu();
+        if (showMenuOnNextLoop) {
+            displayMenu();
+
+            showMenuOnNextLoop = false;
+        }
 
         Optional<Integer> selection = IntegerInputInterpreter.readSelection(appContext.parser());
 
