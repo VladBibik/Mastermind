@@ -85,7 +85,7 @@ public class LanguageSelectionMenu extends Menu {
         AppContext appContext = AppContextFactory.withLocale(this.appContext, localeType);
 
         updateLanguage(localeType);
-        notifySuccessLanguageChange(appContext, localeType);
+        printLanguageChangeConfirmation(appContext, localeType);
 
         return new SettingsMenu(appContext);
     }
@@ -94,7 +94,7 @@ public class LanguageSelectionMenu extends Menu {
         playerService.updatePlayerLocale(appContext.currentPlayer().getId(), localeType);
     }
 
-    private void notifySuccessLanguageChange(AppContext newAppContext, LocaleType localeType) {
+    private void printLanguageChangeConfirmation(AppContext newAppContext, LocaleType localeType) {
         LanguageSelectionMessages messages = newAppContext.localizationContext().getMessages(MessageType.LANGUAGE_MENU);
 
         printer.printMessage(messages.getLanguageChanged(localeType.getNativeDisplayName()));
