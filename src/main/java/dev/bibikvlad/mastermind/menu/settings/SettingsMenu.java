@@ -1,7 +1,10 @@
 package dev.bibikvlad.mastermind.menu.settings;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
+import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
+import dev.bibikvlad.mastermind.localization.messages.error.InteractionMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.settings.SettingsMenuMessages;
 import dev.bibikvlad.mastermind.menu.MainMenu;
 import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.menu.player.LanguageSelectionMenu;
@@ -10,10 +13,18 @@ import dev.bibikvlad.mastermind.menu.settings.logo.LogoColorSelectionMenu;
 import java.util.Optional;
 
 public class SettingsMenu extends Menu {
+    private final Printer printer;
+    private final SettingsMenuMessages settingsMenuMessages;
+    private final InteractionMessages  interactionMessages;
+
     private boolean showMenuOnNextLoop = true;
 
     public SettingsMenu(AppContext appContext) {
         super(appContext);
+
+        this.printer = appContext.printer();
+        this.settingsMenuMessages = appContext.localizationContext().getMessages(SettingsMenuMessages.class);
+        this.interactionMessages = appContext.localizationContext().getMessages(InteractionMessages.class);
     }
 
     @Override
@@ -32,9 +43,7 @@ public class SettingsMenu extends Menu {
     }
 
     private void displayMenu() {
-        System.out.println("1. Language");
-        System.out.println("2. Logo colors");
-        System.out.println("0. Back");
+        printer.printMessage(settingsMenuMessages.getMenuOptions());
     }
 
     private Menu menuOptionSwitcher(int userInputNumber) {
@@ -49,7 +58,7 @@ public class SettingsMenu extends Menu {
                 return exit();
             }
             default -> {
-                System.out.println("Invalid selection. Please enter a number corresponding to the menu option.");
+                printer.printMessage(interactionMessages.getInvalidInputMessage());
 
                 return this;
             }
