@@ -26,10 +26,9 @@ public class SettingsMenu extends Menu {
 
         Optional<Integer> selection = IntegerInputInterpreter.readSelection(appContext.parser());
 
-        if (selection.isEmpty())
-            return new MainMenu(appContext);
-
-        return menuOptionSwitcher(selection.get());
+        return selection
+                .map(this::menuOptionSwitcher)
+                .orElse(new MainMenu(appContext));
     }
 
     private void displayMenu() {
