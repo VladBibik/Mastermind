@@ -85,9 +85,9 @@ public class LanguageSelectionMenu extends Menu {
         AppContext newAppContext = AppContextFactory.withLocale(this.appContext, localeType);
 
         updateLanguage(localeType);
-        printLanguageChangeConfirmation(appContext, localeType);
+        printLanguageChangeConfirmation(newAppContext, localeType);
 
-        return new SettingsMenu(appContext);
+        return new SettingsMenu(newAppContext);
     }
 
     private void updateLanguage(LocaleType localeType) {
