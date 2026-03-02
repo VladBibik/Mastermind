@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.menu.settings.logo;
+package dev.bibikvlad.mastermind.menu.settings.logo.color;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.input.parser.Parser;
