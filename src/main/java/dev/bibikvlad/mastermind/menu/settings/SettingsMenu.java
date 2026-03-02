@@ -15,7 +15,7 @@ import java.util.Optional;
 public class SettingsMenu extends Menu {
     private final Printer printer;
     private final SettingsMenuMessages settingsMenuMessages;
-    private final InteractionMessages  interactionMessages;
+    private final InteractionMessages interactionMessages;
 
     private boolean showMenuOnNextLoop = true;
 
