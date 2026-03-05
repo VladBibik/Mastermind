@@ -8,7 +8,6 @@ import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoMes
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.utils.strings.GameCluesConstants;
 
-//TODO: Refactor it to menu. Also, can create two classes
 public class ColorSelectionMenu {
     private final Parser parser;
     private final LogoMessages logoMessages;
