@@ -8,8 +8,6 @@ import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoMes
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.utils.strings.GameCluesConstants;
 
-import java.util.List;
-
 public class ColorSelectionMenu {
     private final Parser parser;
     private final LogoMessages logoMessages;
@@ -21,7 +19,7 @@ public class ColorSelectionMenu {
 
     public ConsoleColor selectForegroundColor() {
         while (true) {
-            displayColors(ConsoleColor.getForegroundColors());
+            displayForegroundColors();
             System.out.println("\nTo get back to previous menu print 'exit', or 'quit'");
 
             String userInput = parser.parseUserInput();
@@ -56,7 +54,7 @@ public class ColorSelectionMenu {
 
     public ConsoleColor selectBackgroundColor() {
         while (true) {
-            displayColors(ConsoleColor.getBackgroundColors());
+            displayBackgroundColors();
             System.out.println("\nTo get back to previous menu print 'exit', or 'quit'");
 
             String userInput = parser.parseUserInput();
@@ -89,10 +87,17 @@ public class ColorSelectionMenu {
         }
     }
 
-    private void displayColors(List<ConsoleColor> colors) {
-        for (ConsoleColor color : colors) {
+    private void displayForegroundColors() {
+        for (ConsoleColor color : ConsoleColor.getForegroundColors()) {
             System.out.println(color.getIndex() + ": " + logoMessages.getColor(color.getLocalizationKey())
                     + " " + color.getCode() + GameCluesConstants.CIRCLE_SOLID + ConsoleColor.RESET.getCode());
+        }
+    }
+
+    private void displayBackgroundColors() {
+        for (ConsoleColor color : ConsoleColor.getBackgroundColors()) {
+            System.out.println(color.getIndex() + ": " + logoMessages.getColor(color.getLocalizationKey())
+                    + " " + color.getCode() + "    " + ConsoleColor.RESET.getCode());
         }
     }
 }
