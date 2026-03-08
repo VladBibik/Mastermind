@@ -71,15 +71,28 @@ public class ColorSelectionMenu {
 
     private void displayForegroundColors() {
         for (ConsoleColor color : ConsoleColor.getForegroundColors()) {
-            printer.printMessage(color.getIndex() + ": " + logoMessages.getColor(color.getLocalizationKey())
-                    + " " + color.getCode() + GameCluesConstants.CIRCLE_SOLID + ConsoleColor.RESET.getCode());
+            String foregroundColor = String.format("%d: %-1s %s%s%s%n",
+                    color.getIndex(),
+                    logoMessages.getColor(color.getLocalizationKey()),
+                    color.getCode(),
+                    GameCluesConstants.CIRCLE_SOLID,
+                    ConsoleColor.RESET.getCode());
+
+            printer.printMessage(foregroundColor);
         }
     }
 
     private void displayBackgroundColors() {
         for (ConsoleColor color : ConsoleColor.getBackgroundColors()) {
-            printer.printMessage(color.getIndex() + ": " + logoMessages.getColor(color.getLocalizationKey())
-                    + " " + color.getCode() + "    " + ConsoleColor.RESET.getCode());
+            String backgroundColor = String.format("%d: %-18s %s%s%s%n",
+                    color.getIndex(),
+                    logoMessages.getColor(color.getLocalizationKey()),
+                    color.getCode(),
+                    "    ",
+                    ConsoleColor.RESET.getCode()
+                    );
+
+            printer.printMessage(backgroundColor);
         }
     }
 }
