@@ -71,7 +71,7 @@ public class ColorSelectionMenu {
 
     private void displayForegroundColors() {
         for (ConsoleColor color : ConsoleColor.getForegroundColors()) {
-            String foregroundColor = String.format("%2d: %-23s %s%s%s%n",
+            String foregroundColor = String.format("%2d: %-23s %s%s%s",
                     color.getIndex(),
                     logoMessages.getColor(color.getLocalizationKey()),
                     color.getCode(),
@@ -84,13 +84,12 @@ public class ColorSelectionMenu {
 
     private void displayBackgroundColors() {
         for (ConsoleColor color : ConsoleColor.getBackgroundColors()) {
-            String backgroundColor = String.format("%d: %-18s %s%s%s%n",
+            String backgroundColor = String.format("%d: %-18s %s%s%s",
                     color.getIndex(),
                     logoMessages.getColor(color.getLocalizationKey()),
                     color.getCode(),
                     "    ",
-                    ConsoleColor.RESET.getCode()
-                    );
+                    ConsoleColor.RESET.getCode());
 
             printer.printMessage(backgroundColor);
         }
