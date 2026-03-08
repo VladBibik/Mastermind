@@ -5,7 +5,7 @@ import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
-import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.color.ColorMessages;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.utils.strings.GameCluesConstants;
 
@@ -15,12 +15,12 @@ import java.util.function.Function;
 public class ColorSelectionMenu {
     private final Printer printer;
     private final Parser parser;
-    private final LogoMessages logoMessages;
+    private final ColorMessages logoMessages;
 
     public ColorSelectionMenu(AppContext appContext) {
         this.printer = appContext.printer();
         this.parser = appContext.parser();
-        this.logoMessages = appContext.localizationContext().getMessages(MessageType.LOGO);
+        this.logoMessages = appContext.localizationContext().getMessages(MessageType.COLOR);
     }
 
     public ConsoleColor selectForegroundColor() {

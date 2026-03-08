@@ -7,7 +7,7 @@ import dev.bibikvlad.mastermind.localization.messages.menu.game.GameMenuMessages
 import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.settings.SettingsMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.settings.language.LanguageSelectionMessages;
-import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.color.ColorMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.stats.StatsMessages;
 
 public class MessageRegistryInitializer {
@@ -45,7 +45,7 @@ public class MessageRegistryInitializer {
                 new ConsoleLanguageMessagesFactory()
         ));
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
-                LogoMessages.class,
+                ColorMessages.class,
                 "i18n.logo_colors",
                 new ConsoleLogoMessagesFactory()
         ));

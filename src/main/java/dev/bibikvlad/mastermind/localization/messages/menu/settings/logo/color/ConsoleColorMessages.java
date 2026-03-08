@@ -1,11 +1,11 @@
-package dev.bibikvlad.mastermind.localization.messages.menu.settings.logo;
+package dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.color;
 
 import java.util.ResourceBundle;
 
-public class ConsoleLogoMessages implements LogoMessages {
+public class ConsoleColorMessages implements ColorMessages {
     private final ResourceBundle resourceBundle;
 
-    public ConsoleLogoMessages(ResourceBundle resourceBundle) {
+    public ConsoleColorMessages(ResourceBundle resourceBundle) {
         this.resourceBundle = resourceBundle;
     }
 

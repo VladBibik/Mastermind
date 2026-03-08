@@ -1,14 +1,14 @@
 package dev.bibikvlad.mastermind.localization.factories;
 
 import dev.bibikvlad.mastermind.localization.core.MessageFactory;
-import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.ConsoleLogoMessages;
-import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.color.ConsoleColorMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.color.ColorMessages;
 
 import java.util.ResourceBundle;
 
-public class ConsoleLogoMessagesFactory implements MessageFactory<LogoMessages> {
+public class ConsoleLogoMessagesFactory implements MessageFactory<ColorMessages> {
     @Override
-    public LogoMessages create(ResourceBundle resourceBundle) {
-        return new ConsoleLogoMessages(resourceBundle);
+    public ColorMessages create(ResourceBundle resourceBundle) {
+        return new ConsoleColorMessages(resourceBundle);
     }
 }

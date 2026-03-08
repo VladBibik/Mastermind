@@ -7,7 +7,7 @@ import dev.bibikvlad.mastermind.localization.messages.menu.game.GameMenuMessages
 import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.settings.SettingsMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.settings.language.LanguageSelectionMessages;
-import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.color.ColorMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.stats.StatsMessages;
 
 public enum MessageType {
@@ -17,7 +17,7 @@ public enum MessageType {
     STATS(StatsMessages.class),
     SETTINGS(SettingsMenuMessages.class),
     LANGUAGE_MENU(LanguageSelectionMessages.class),
-    LOGO(LogoMessages.class),
+    COLOR(ColorMessages.class),
     INTERACTION(InteractionMessages.class);
 
     private final Class<? extends LocalizedMessages> messageClass;
