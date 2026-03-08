@@ -56,7 +56,7 @@ public class LogoColorSelectionMenu extends Menu {
 
     private void displayMenu() {
         System.out.println();
-        System.out.println("1. Print current logo");
+        System.out.println("1. Preview logo");
         System.out.println("2. Change border color");
         System.out.println("3. Change main color");
         System.out.println("4. Change accent color");
