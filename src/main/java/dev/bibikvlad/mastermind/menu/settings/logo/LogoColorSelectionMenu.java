@@ -123,11 +123,7 @@ public class LogoColorSelectionMenu extends Menu {
             return;
         }
 
-        logoColorsBundle = new LogoColorsBundle(
-                borderColor,
-                logoColorsBundle.logoMainColor(),
-                logoColorsBundle.logoAccentColor(),
-                logoColorsBundle.logoBackgroundColor());
+        logoColorsBundle = logoColorsBundle.withLogoBorderColor(borderColor);
     }
 
     private void changeMainColor() {
@@ -137,11 +133,7 @@ public class LogoColorSelectionMenu extends Menu {
             return;
         }
 
-        logoColorsBundle = new LogoColorsBundle(
-                logoColorsBundle.logoBorderColor(),
-                mainColor,
-                logoColorsBundle.logoAccentColor(),
-                logoColorsBundle.logoBackgroundColor());
+        logoColorsBundle = logoColorsBundle.withLogoMainColor(mainColor);
     }
 
     private void changeAccentColor() {
@@ -151,11 +143,7 @@ public class LogoColorSelectionMenu extends Menu {
             return;
         }
 
-        logoColorsBundle = new LogoColorsBundle(
-                logoColorsBundle.logoBorderColor(),
-                logoColorsBundle.logoMainColor(),
-                accentColor,
-                logoColorsBundle.logoBackgroundColor());
+        logoColorsBundle = logoColorsBundle.withLogoAccentColor(accentColor);
     }
 
     private void changeBackgroundColor() {
@@ -165,11 +153,7 @@ public class LogoColorSelectionMenu extends Menu {
             return;
         }
 
-        logoColorsBundle = new LogoColorsBundle(
-                logoColorsBundle.logoBorderColor(),
-                logoColorsBundle.logoMainColor(),
-                logoColorsBundle.logoAccentColor(),
-                backgroundColor);
+        logoColorsBundle = logoColorsBundle.withLogoBackgroundColor(backgroundColor);
     }
 
     private void resetToDefault() {
