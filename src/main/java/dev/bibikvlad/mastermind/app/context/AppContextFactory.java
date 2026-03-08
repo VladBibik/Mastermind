@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.app.context;
 
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
+import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 
 public class AppContextFactory {
@@ -10,6 +11,13 @@ public class AppContextFactory {
         LocalizationContext newLocalizationContext = new LocalizationContext(localeType);
 
         return new AppContext(newLocalizationContext, appContext.services(),
+                appContext.printer(), appContext.parser(), updatedPlayer);
+    }
+
+    public static AppContext withColorBundle(AppContext appContext, LogoColorsBundle newLogoBundle) {
+        Player updatedPlayer = appContext.currentPlayer().withLogoColorBundle(newLogoBundle);
+
+        return new AppContext(appContext.localizationContext(), appContext.services(),
                 appContext.printer(), appContext.parser(), updatedPlayer);
     }
 
