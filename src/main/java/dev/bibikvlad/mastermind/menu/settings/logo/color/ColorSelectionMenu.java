@@ -8,6 +8,8 @@ import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoMes
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.utils.strings.GameCluesConstants;
 
+import java.util.function.Function;
+
 public class ColorSelectionMenu {
     private final Parser parser;
     private final LogoMessages logoMessages;
@@ -18,43 +20,20 @@ public class ColorSelectionMenu {
     }
 
     public ConsoleColor selectForegroundColor() {
-        while (true) {
-            displayForegroundColors();
-            System.out.println("\nTo get back to previous menu print 'exit', or 'quit'");
+        displayForegroundColors();
 
-            String userInput = parser.parseUserInput();
-
-            if (StringEmptyValidator.isNullOrEmpty(userInput)) {
-                System.out.println("Input cannot be empty. Please try again.");
-
-                continue;
-            }
-
-            if (userInput.equals("exit") || userInput.equals("quit")) {
-                return null;
-            }
-
-            int userInputNumber;
-
-            try {
-                userInputNumber = Integer.parseInt(userInput);
-            } catch (NumberFormatException exception) {
-                System.out.println("Invalid input. Please enter a number corresponding to the color option.");
-
-                continue;
-            }
-
-            try {
-                return ConsoleColor.getForegroundColorByIndex(userInputNumber);
-            } catch (IllegalArgumentException exception) {
-                System.out.println("Invalid input. Please enter a number corresponding to the color option.");
-            }
-        }
+        return selectColor(ConsoleColor::getForegroundColorByIndex);
     }
 
     public ConsoleColor selectBackgroundColor() {
+        displayBackgroundColors();
+
+        return selectColor(ConsoleColor::getBackgroundColorByIndex);
+    }
+
+    private ConsoleColor selectColor(Function<Integer, ConsoleColor> colorSelector) {
         while (true) {
-            displayBackgroundColors();
+
             System.out.println("\nTo get back to previous menu print 'exit', or 'quit'");
 
             String userInput = parser.parseUserInput();
@@ -80,7 +59,7 @@ public class ColorSelectionMenu {
             }
 
             try {
-                return ConsoleColor.getBackgroundColorByIndex(userInputNumber);
+                return colorSelector.apply(userInputNumber);
             } catch (IllegalArgumentException exception) {
                 System.out.println("Invalid input. Please enter a number corresponding to the color option.");
             }
