@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.persistence.player.model;
 
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.utils.formatters.SQLiteTimestampFormatter;
 
 import java.time.LocalDateTime;
@@ -42,6 +43,12 @@ public class Player {
 
     public Player withLocale(LocaleType localeType) {
         PlayerConfig playerConfig = getPlayerConfig().withLocale(localeType);
+
+        return new Player(id, playerName, creationDate, playerConfig);
+    }
+
+    public Player withLogoColorBundle(LogoColorsBundle logoColorsBundle) {
+        PlayerConfig playerConfig = getPlayerConfig().withLogoColorsBundle(logoColorsBundle);
 
         return new Player(id, playerName, creationDate, playerConfig);
     }
