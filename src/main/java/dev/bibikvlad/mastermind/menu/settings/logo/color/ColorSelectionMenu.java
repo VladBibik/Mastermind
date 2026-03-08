@@ -71,7 +71,7 @@ public class ColorSelectionMenu {
 
     private void displayForegroundColors() {
         for (ConsoleColor color : ConsoleColor.getForegroundColors()) {
-            String foregroundColor = String.format("%d: %-1s %s%s%s%n",
+            String foregroundColor = String.format("%2d: %-23s %s%s%s%n",
                     color.getIndex(),
                     logoMessages.getColor(color.getLocalizationKey()),
                     color.getCode(),
