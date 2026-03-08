@@ -47,7 +47,7 @@ public class Player {
         return new Player(id, playerName, creationDate, playerConfig);
     }
 
-    public Player withLogoColorBundle(LogoColorsBundle logoColorsBundle) {
+    public Player withLogoColorsBundle(LogoColorsBundle logoColorsBundle) {
         PlayerConfig playerConfig = getPlayerConfig().withLogoColorsBundle(logoColorsBundle);
 
         return new Player(id, playerName, creationDate, playerConfig);

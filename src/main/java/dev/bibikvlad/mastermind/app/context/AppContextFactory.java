@@ -15,7 +15,7 @@ public class AppContextFactory {
     }
 
     public static AppContext withColorBundle(AppContext appContext, LogoColorsBundle newLogoBundle) {
-        Player updatedPlayer = appContext.currentPlayer().withLogoColorBundle(newLogoBundle);
+        Player updatedPlayer = appContext.currentPlayer().withLogoColorsBundle(newLogoBundle);
 
         return new AppContext(appContext.localizationContext(), appContext.services(),
                 appContext.printer(), appContext.parser(), updatedPlayer);
