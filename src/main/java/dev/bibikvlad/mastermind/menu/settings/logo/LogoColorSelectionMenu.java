@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.menu.settings.logo;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
+import dev.bibikvlad.mastermind.app.context.AppContextFactory;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.menu.Menu;
 import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;
@@ -178,6 +179,6 @@ public class LogoColorSelectionMenu extends Menu {
     private Menu saveAndReturnBack() {
         playerService.updateLogoColors(currentPlayer.getId(), logoColorsBundle);
 
-        return new SettingsMenu(appContext);
+        return new SettingsMenu(AppContextFactory.withColorBundle(appContext, logoColorsBundle));
     }
 }
