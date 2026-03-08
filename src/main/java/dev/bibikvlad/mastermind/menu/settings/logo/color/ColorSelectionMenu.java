@@ -36,9 +36,9 @@ public class ColorSelectionMenu {
     }
 
     private ConsoleColor selectColor(Function<Integer, ConsoleColor> colorSelector) {
-        while (true) {
-            printer.printMessage("Enter '0' to return to the Logo Color Selection Menu");
+        printer.printMessage("Enter '0' to return to the Logo Color Selection Menu");
 
+        while (true) {
             Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
 
             try {
