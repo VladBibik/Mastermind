@@ -8,4 +8,8 @@ public record PlayerConfig(LocaleType locale, LogoColorsBundle logoColorsBundle)
     public PlayerConfig withLocale(LocaleType localeType) {
         return new PlayerConfig(localeType, logoColorsBundle);
     }
+
+    public PlayerConfig withLogoColorsBundle(LogoColorsBundle logoColorsBundle) {
+        return new PlayerConfig(locale, logoColorsBundle);
+    }
 }
