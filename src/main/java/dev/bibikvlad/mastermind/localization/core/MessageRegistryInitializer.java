@@ -5,7 +5,7 @@ import dev.bibikvlad.mastermind.localization.factories.interaction.ConsoleIntera
 import dev.bibikvlad.mastermind.localization.factories.menu.main.ConsoleMainMenuMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.game.ConsoleGameMenuMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.ConsoleSettingsMessageFactory;
-import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.language.ConsoleLanguageMessagesFactory;
+import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.language.ConsoleLanguageMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.logo.ConsoleColorMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.logo.ConsoleLogoMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.stats.ConsoleStatsMessageFactory;
@@ -51,7 +51,7 @@ public class MessageRegistryInitializer {
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 LanguageSelectionMessages.class,
                 "i18n.language_selection",
-                new ConsoleLanguageMessagesFactory()
+                new ConsoleLanguageMessageFactory()
         ));
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 LogoColorSelectionMessages.class,

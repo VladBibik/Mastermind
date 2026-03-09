@@ -6,7 +6,7 @@ import dev.bibikvlad.mastermind.localization.messages.menu.settings.language.Lan
 
 import java.util.ResourceBundle;
 
-public class ConsoleLanguageMessagesFactory implements MessageFactory<LanguageSelectionMessages> {
+public class ConsoleLanguageMessageFactory implements MessageFactory<LanguageSelectionMessages> {
     @Override
     public ConsoleLanguageMessages create(ResourceBundle resourceBundle) {
         return new ConsoleLanguageMessages(resourceBundle);
