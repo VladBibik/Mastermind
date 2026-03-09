@@ -5,6 +5,8 @@ import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
+import dev.bibikvlad.mastermind.localization.messages.error.InteractionMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoColorSelectionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.color.ColorMessages;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.utils.strings.GameCluesConstants;
@@ -15,12 +17,16 @@ import java.util.function.Function;
 public class ColorSelectionMenu {
     private final Printer printer;
     private final Parser parser;
+    private final LogoColorSelectionMessages logoMessages;
     private final ColorMessages colorMessages;
+    private final InteractionMessages interactionMessages;
 
     public ColorSelectionMenu(AppContext appContext) {
         this.printer = appContext.printer();
         this.parser = appContext.parser();
+        this.logoMessages = appContext.localizationContext().getMessages(MessageType.LOGO);
         this.colorMessages = appContext.localizationContext().getMessages(MessageType.COLOR);
+        this.interactionMessages = appContext.localizationContext().getMessages(MessageType.INTERACTION);
     }
 
     public ConsoleColor selectForegroundColor() {
@@ -36,7 +42,7 @@ public class ColorSelectionMenu {
     }
 
     private ConsoleColor selectColor(Function<Integer, ConsoleColor> colorSelector) {
-        printer.printMessage("Enter '0' to return to the Logo Color Selection Menu");
+        printer.printMessage(logoMessages.getColorReturn());
 
         while (true) {
             Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
@@ -46,7 +52,7 @@ public class ColorSelectionMenu {
                         .map(colorSelector)
                         .orElse(null);
             } catch (IllegalArgumentException exception) {
-                printer.printMessage("Invalid input. Please enter a number corresponding to the color option.");
+                printer.printMessage(interactionMessages.getInvalidInputMessage());
             }
         }
     }
