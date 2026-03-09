@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.menu;
+package dev.bibikvlad.mastermind.menu.main;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
@@ -6,11 +6,13 @@ import dev.bibikvlad.mastermind.input.interpreter.MainMenuInputInterpreter;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;
-import dev.bibikvlad.mastermind.menu.game.GameLaunchMenu;
-import dev.bibikvlad.mastermind.menu.leaderboard.LeaderboardMenu;
+import dev.bibikvlad.mastermind.menu.core.ExitMenu;
+import dev.bibikvlad.mastermind.menu.core.Menu;
+import dev.bibikvlad.mastermind.menu.main.game.GameLaunchMenu;
+import dev.bibikvlad.mastermind.menu.main.leaderboard.LeaderboardMenu;
 import dev.bibikvlad.mastermind.menu.player.ProfileMenu;
-import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;
-import dev.bibikvlad.mastermind.menu.stats.StatsMenu;
+import dev.bibikvlad.mastermind.menu.main.settings.SettingsMenu;
+import dev.bibikvlad.mastermind.menu.main.stats.StatsMenu;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 
 import java.util.Optional;

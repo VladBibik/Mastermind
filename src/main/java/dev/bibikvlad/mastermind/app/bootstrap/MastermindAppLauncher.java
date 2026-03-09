@@ -8,9 +8,9 @@ import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.input.parser.ConsoleInputParser;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
-import dev.bibikvlad.mastermind.menu.MainMenu;
-import dev.bibikvlad.mastermind.menu.Menu;
-import dev.bibikvlad.mastermind.menu.MenuRunner;
+import dev.bibikvlad.mastermind.menu.main.MainMenu;
+import dev.bibikvlad.mastermind.menu.core.Menu;
+import dev.bibikvlad.mastermind.menu.core.MenuRunner;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 
 import java.util.Optional;

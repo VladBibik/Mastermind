@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.menu.settings.logo.color;
+package dev.bibikvlad.mastermind.menu.main.settings.logo.color;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;

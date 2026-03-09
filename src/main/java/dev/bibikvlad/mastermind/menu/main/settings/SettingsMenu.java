@@ -1,14 +1,14 @@
-package dev.bibikvlad.mastermind.menu.settings;
+package dev.bibikvlad.mastermind.menu.main.settings;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.SettingsMenuMessages;
-import dev.bibikvlad.mastermind.menu.MainMenu;
-import dev.bibikvlad.mastermind.menu.Menu;
-import dev.bibikvlad.mastermind.menu.player.LanguageSelectionMenu;
-import dev.bibikvlad.mastermind.menu.settings.logo.LogoColorSelectionMenu;
+import dev.bibikvlad.mastermind.menu.main.MainMenu;
+import dev.bibikvlad.mastermind.menu.core.Menu;
+import dev.bibikvlad.mastermind.menu.main.settings.language.LanguageSelectionMenu;
+import dev.bibikvlad.mastermind.menu.main.settings.logo.LogoColorSelectionMenu;
 
 import java.util.Optional;
 

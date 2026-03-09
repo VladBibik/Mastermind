@@ -4,12 +4,12 @@ import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
-import dev.bibikvlad.mastermind.menu.ExitMenu;
-import dev.bibikvlad.mastermind.menu.MainMenu;
-import dev.bibikvlad.mastermind.menu.Menu;
-import dev.bibikvlad.mastermind.menu.MenuRunner;
-import dev.bibikvlad.mastermind.menu.player.FirstTimePlayerCreation;
-import dev.bibikvlad.mastermind.menu.settings.FirstLaunchLanguageSelection;
+import dev.bibikvlad.mastermind.menu.core.ExitMenu;
+import dev.bibikvlad.mastermind.menu.main.MainMenu;
+import dev.bibikvlad.mastermind.menu.core.Menu;
+import dev.bibikvlad.mastermind.menu.core.MenuRunner;
+import dev.bibikvlad.mastermind.menu.first.FirstTimePlayerCreation;
+import dev.bibikvlad.mastermind.menu.first.FirstLaunchLanguageSelection;
 
 public class FirstLaunchFlow {
     private static final String WELCOME_MESSAGE = "Welcome to the Mastermind Game!";

@@ -2,8 +2,8 @@ package dev.bibikvlad.mastermind.menu.player;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
-import dev.bibikvlad.mastermind.menu.MainMenu;
-import dev.bibikvlad.mastermind.menu.Menu;
+import dev.bibikvlad.mastermind.menu.main.MainMenu;
+import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
 import java.util.Optional;

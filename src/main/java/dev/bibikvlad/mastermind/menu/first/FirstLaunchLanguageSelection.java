@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.menu.settings;
+package dev.bibikvlad.mastermind.menu.first;
 
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.parser.Parser;

@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.menu.player;
+package dev.bibikvlad.mastermind.menu.first;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;

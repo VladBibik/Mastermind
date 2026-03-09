@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.menu.player;
+package dev.bibikvlad.mastermind.menu.main.settings.language;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.context.AppContextFactory;
@@ -9,8 +9,8 @@ import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.language.LanguageSelectionMessages;
-import dev.bibikvlad.mastermind.menu.Menu;
-import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;
+import dev.bibikvlad.mastermind.menu.core.Menu;
+import dev.bibikvlad.mastermind.menu.main.settings.SettingsMenu;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
 import java.util.Optional;

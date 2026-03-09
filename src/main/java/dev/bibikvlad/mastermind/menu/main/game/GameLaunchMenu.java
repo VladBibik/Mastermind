@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.menu.game;
+package dev.bibikvlad.mastermind.menu.main.game;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.game.MastermindGameBootstrap;
@@ -9,8 +9,8 @@ import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.game.GameMenuMessages;
-import dev.bibikvlad.mastermind.menu.MainMenu;
-import dev.bibikvlad.mastermind.menu.Menu;
+import dev.bibikvlad.mastermind.menu.main.MainMenu;
+import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.GamesService;

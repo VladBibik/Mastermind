@@ -1,9 +1,9 @@
-package dev.bibikvlad.mastermind.menu.leaderboard;
+package dev.bibikvlad.mastermind.menu.main.leaderboard;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
-import dev.bibikvlad.mastermind.menu.MainMenu;
-import dev.bibikvlad.mastermind.menu.Menu;
+import dev.bibikvlad.mastermind.menu.main.MainMenu;
+import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.persistence.leaderboard.model.*;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.LeaderboardService;

@@ -1,11 +1,11 @@
-package dev.bibikvlad.mastermind.menu.settings.logo;
+package dev.bibikvlad.mastermind.menu.main.settings.logo;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.context.AppContextFactory;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
-import dev.bibikvlad.mastermind.menu.Menu;
-import dev.bibikvlad.mastermind.menu.settings.SettingsMenu;
-import dev.bibikvlad.mastermind.menu.settings.logo.color.ColorSelectionMenu;
+import dev.bibikvlad.mastermind.menu.core.Menu;
+import dev.bibikvlad.mastermind.menu.main.settings.SettingsMenu;
+import dev.bibikvlad.mastermind.menu.main.settings.logo.color.ColorSelectionMenu;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;

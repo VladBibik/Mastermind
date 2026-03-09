@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.menu;
+package dev.bibikvlad.mastermind.menu.core;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
 
