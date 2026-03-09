@@ -23,26 +23,50 @@ public class MessageRegistryInitializer {
     public static MessageFactoryRegistry createAndPopulateRegistry() {
         MessageFactoryRegistry messageFactoryRegistry = new MessageFactoryRegistry();
 
-        messageFactoryRegistry.register(new LocalizedMessageConfig<>(
-                MainMenuMessages.class,
-                "i18n.main_menu",
-                new ConsoleMainMenuMessageFactory()
-        ));
-        messageFactoryRegistry.register(new LocalizedMessageConfig<>(
-                GameMenuMessages.class,
-                "i18n.game_menu",
-                new ConsoleGameMenuMessageFactory()
-        ));
+        populateGameRegistry(messageFactoryRegistry);
+        populateMainMenuRegistry(messageFactoryRegistry);
+        populateInteractionRegistry(messageFactoryRegistry);
+
+        return messageFactoryRegistry;
+    }
+
+    private static void populateGameRegistry(MessageFactoryRegistry messageFactoryRegistry) {
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 GameMessages.class,
                 "i18n.game_messages",
                 new ConsoleGameMessageFactory()
         ));
+    }
+
+    private static void populateMainMenuRegistry(MessageFactoryRegistry messageFactoryRegistry) {
+        messageFactoryRegistry.register(new LocalizedMessageConfig<>(
+                MainMenuMessages.class,
+                "i18n.main_menu",
+                new ConsoleMainMenuMessageFactory()
+        ));
+
+        populateGameMenuRegistry(messageFactoryRegistry);
+        populateStatsRegistry(messageFactoryRegistry);
+        populateSettingsRegistry(messageFactoryRegistry);
+    }
+
+    private static void populateGameMenuRegistry(MessageFactoryRegistry messageFactoryRegistry) {
+        messageFactoryRegistry.register(new LocalizedMessageConfig<>(
+                GameMenuMessages.class,
+                "i18n.game_menu",
+                new ConsoleGameMenuMessageFactory()
+        ));
+    }
+
+    private static void populateStatsRegistry(MessageFactoryRegistry messageFactoryRegistry) {
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 StatsMessages.class,
                 "i18n.player_stats",
                 new ConsoleStatsMessageFactory()
         ));
+    }
+
+    private static void populateSettingsRegistry(MessageFactoryRegistry messageFactoryRegistry) {
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 SettingsMenuMessages.class,
                 "i18n.settings_menu",
@@ -63,12 +87,13 @@ public class MessageRegistryInitializer {
                 "i18n.logo_colors",
                 new ConsoleColorMessageFactory()
         ));
+    }
+
+    private static void populateInteractionRegistry(MessageFactoryRegistry messageFactoryRegistry) {
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 InteractionMessages.class,
                 "i18n.interaction_messages",
                 new ConsoleInteractionMessageFactory()
         ));
-
-        return messageFactoryRegistry;
     }
 }
