@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.localization.messages.menu.game;
+package dev.bibikvlad.mastermind.localization.messages.menu.main.game;
 
 import java.util.ResourceBundle;
 

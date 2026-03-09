@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.localization.messages.menu.settings.language;
+package dev.bibikvlad.mastermind.localization.messages.menu.main.settings.language;
 
 import dev.bibikvlad.mastermind.localization.messages.LocalizedMessages;
 

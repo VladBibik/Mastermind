@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.localization.messages.menu.stats;
+package dev.bibikvlad.mastermind.localization.messages.menu.main.stats;
 
 import dev.bibikvlad.mastermind.persistence.player.model.PlayerStatistics;
 import dev.bibikvlad.mastermind.values.Time;

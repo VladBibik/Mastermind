@@ -3,13 +3,13 @@ package dev.bibikvlad.mastermind.localization.config;
 import dev.bibikvlad.mastermind.localization.messages.LocalizedMessages;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
-import dev.bibikvlad.mastermind.localization.messages.menu.game.GameMenuMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.game.GameMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;
-import dev.bibikvlad.mastermind.localization.messages.menu.settings.SettingsMenuMessages;
-import dev.bibikvlad.mastermind.localization.messages.menu.settings.language.LanguageSelectionMessages;
-import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoColorSelectionMessages;
-import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.color.ColorMessages;
-import dev.bibikvlad.mastermind.localization.messages.menu.stats.StatsMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.SettingsMenuMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.language.LanguageSelectionMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.logo.LogoColorSelectionMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.logo.color.ColorMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.stats.StatsMessages;
 
 public enum MessageType {
     MAIN_MENU(MainMenuMessages.class),

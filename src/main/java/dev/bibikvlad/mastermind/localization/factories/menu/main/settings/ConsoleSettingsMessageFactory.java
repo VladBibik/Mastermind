@@ -1,8 +1,8 @@
 package dev.bibikvlad.mastermind.localization.factories.menu.main.settings;
 
 import dev.bibikvlad.mastermind.localization.core.MessageFactory;
-import dev.bibikvlad.mastermind.localization.messages.menu.settings.ConsoleSettingsMenuMessages;
-import dev.bibikvlad.mastermind.localization.messages.menu.settings.SettingsMenuMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.ConsoleSettingsMenuMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.SettingsMenuMessages;
 
 import java.util.ResourceBundle;
 

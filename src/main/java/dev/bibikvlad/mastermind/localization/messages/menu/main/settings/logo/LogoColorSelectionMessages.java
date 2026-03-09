@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.localization.messages.menu.settings.logo;
+package dev.bibikvlad.mastermind.localization.messages.menu.main.settings.logo;
 
 import dev.bibikvlad.mastermind.localization.messages.LocalizedMessages;
 

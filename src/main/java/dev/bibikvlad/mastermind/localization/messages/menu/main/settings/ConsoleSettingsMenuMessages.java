@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.localization.messages.menu.settings;
+package dev.bibikvlad.mastermind.localization.messages.menu.main.settings;
 
 import java.util.ResourceBundle;
 
