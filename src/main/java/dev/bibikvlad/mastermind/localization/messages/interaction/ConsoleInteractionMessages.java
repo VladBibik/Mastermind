@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.localization.messages.error;
+package dev.bibikvlad.mastermind.localization.messages.interaction;
 
 import java.util.ResourceBundle;
 

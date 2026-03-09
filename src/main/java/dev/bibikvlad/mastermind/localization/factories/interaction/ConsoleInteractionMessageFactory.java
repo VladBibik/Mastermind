@@ -1,8 +1,8 @@
 package dev.bibikvlad.mastermind.localization.factories.interaction;
 
 import dev.bibikvlad.mastermind.localization.core.MessageFactory;
-import dev.bibikvlad.mastermind.localization.messages.error.ConsoleInteractionMessages;
-import dev.bibikvlad.mastermind.localization.messages.error.InteractionMessages;
+import dev.bibikvlad.mastermind.localization.messages.interaction.ConsoleInteractionMessages;
+import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 
 import java.util.ResourceBundle;
 

@@ -5,7 +5,7 @@ import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
-import dev.bibikvlad.mastermind.localization.messages.error.InteractionMessages;
+import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.LogoColorSelectionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.color.ColorMessages;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;

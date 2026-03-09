@@ -4,7 +4,7 @@ import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.MainMenuInputInterpreter;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
-import dev.bibikvlad.mastermind.localization.messages.error.InteractionMessages;
+import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;
 import dev.bibikvlad.mastermind.menu.game.GameLaunchMenu;
 import dev.bibikvlad.mastermind.menu.leaderboard.LeaderboardMenu;

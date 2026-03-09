@@ -9,7 +9,7 @@ import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.langua
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.logo.ConsoleColorMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.logo.ConsoleLogoMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.stats.ConsoleStatsMessageFactory;
-import dev.bibikvlad.mastermind.localization.messages.error.InteractionMessages;
+import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.game.GameMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;

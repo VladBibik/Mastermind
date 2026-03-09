@@ -3,7 +3,7 @@ package dev.bibikvlad.mastermind.menu.settings;
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
-import dev.bibikvlad.mastermind.localization.messages.error.InteractionMessages;
+import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.settings.SettingsMenuMessages;
 import dev.bibikvlad.mastermind.menu.MainMenu;
 import dev.bibikvlad.mastermind.menu.Menu;

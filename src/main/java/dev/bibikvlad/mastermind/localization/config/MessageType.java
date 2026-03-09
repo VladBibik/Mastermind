@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.localization.config;
 
 import dev.bibikvlad.mastermind.localization.messages.LocalizedMessages;
-import dev.bibikvlad.mastermind.localization.messages.error.InteractionMessages;
+import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.game.GameMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;
