@@ -15,12 +15,12 @@ import java.util.function.Function;
 public class ColorSelectionMenu {
     private final Printer printer;
     private final Parser parser;
-    private final ColorMessages logoMessages;
+    private final ColorMessages colorMessages;
 
     public ColorSelectionMenu(AppContext appContext) {
         this.printer = appContext.printer();
         this.parser = appContext.parser();
-        this.logoMessages = appContext.localizationContext().getMessages(MessageType.COLOR);
+        this.colorMessages = appContext.localizationContext().getMessages(MessageType.COLOR);
     }
 
     public ConsoleColor selectForegroundColor() {
@@ -55,7 +55,7 @@ public class ColorSelectionMenu {
         for (ConsoleColor color : ConsoleColor.getForegroundColors()) {
             String foregroundColor = String.format("%2d: %-23s %s%s%s",
                     color.getIndex(),
-                    logoMessages.getColor(color.getLocalizationKey()),
+                    colorMessages.getColor(color.getLocalizationKey()),
                     color.getCode(),
                     GameCluesConstants.CIRCLE_SOLID,
                     ConsoleColor.RESET.getCode());
@@ -68,7 +68,7 @@ public class ColorSelectionMenu {
         for (ConsoleColor color : ConsoleColor.getBackgroundColors()) {
             String backgroundColor = String.format("%d: %-18s %s%s%s",
                     color.getIndex(),
-                    logoMessages.getColor(color.getLocalizationKey()),
+                    colorMessages.getColor(color.getLocalizationKey()),
                     color.getCode(),
                     "    ",
                     ConsoleColor.RESET.getCode());
