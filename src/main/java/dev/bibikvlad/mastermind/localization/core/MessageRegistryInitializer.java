@@ -47,7 +47,7 @@ public class MessageRegistryInitializer {
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 ColorMessages.class,
                 "i18n.logo_colors",
-                new ConsoleLogoMessagesFactory()
+                new ConsoleColorMessagesFactory()
         ));
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 InteractionMessages.class,
