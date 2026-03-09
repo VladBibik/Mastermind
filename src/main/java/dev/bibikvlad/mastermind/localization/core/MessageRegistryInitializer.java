@@ -1,6 +1,14 @@
 package dev.bibikvlad.mastermind.localization.core;
 
-import dev.bibikvlad.mastermind.localization.factories.*;
+import dev.bibikvlad.mastermind.localization.factories.game.ConsoleGameMessageFactory;
+import dev.bibikvlad.mastermind.localization.factories.interaction.ConsoleInteractionMessageFactory;
+import dev.bibikvlad.mastermind.localization.factories.menu.main.ConsoleMainMenuMessageFactory;
+import dev.bibikvlad.mastermind.localization.factories.menu.main.game.ConsoleGameMenuMessageFactory;
+import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.ConsoleSettingsMessageFactory;
+import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.language.ConsoleLanguageMessagesFactory;
+import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.logo.ConsoleColorMessageFactory;
+import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.logo.ConsoleLogoMessageFactory;
+import dev.bibikvlad.mastermind.localization.factories.menu.main.stats.ConsoleStatsMessageFactory;
 import dev.bibikvlad.mastermind.localization.messages.error.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.game.GameMenuMessages;

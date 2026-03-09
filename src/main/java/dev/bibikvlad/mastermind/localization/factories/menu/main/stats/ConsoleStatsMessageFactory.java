@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.localization.factories;
+package dev.bibikvlad.mastermind.localization.factories.menu.main.stats;
 
 import dev.bibikvlad.mastermind.localization.core.MessageFactory;
 import dev.bibikvlad.mastermind.localization.messages.menu.stats.ConsoleStatsMessages;

@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.localization.core;
 
-import dev.bibikvlad.mastermind.localization.factories.ConsoleGameMessageFactory;
+import dev.bibikvlad.mastermind.localization.factories.game.ConsoleGameMessageFactory;
 import dev.bibikvlad.mastermind.localization.messages.LocalizedMessages;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import org.junit.jupiter.api.DisplayName;
