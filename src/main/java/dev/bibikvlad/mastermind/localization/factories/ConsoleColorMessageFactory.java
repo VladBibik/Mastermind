@@ -6,7 +6,7 @@ import dev.bibikvlad.mastermind.localization.messages.menu.settings.logo.color.C
 
 import java.util.ResourceBundle;
 
-public class ConsoleColorMessagesFactory implements MessageFactory<ColorMessages> {
+public class ConsoleColorMessageFactory implements MessageFactory<ColorMessages> {
     @Override
     public ColorMessages create(ResourceBundle resourceBundle) {
         return new ConsoleColorMessages(resourceBundle);
