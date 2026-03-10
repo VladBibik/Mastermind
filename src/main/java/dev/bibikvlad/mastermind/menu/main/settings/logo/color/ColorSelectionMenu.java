@@ -59,27 +59,31 @@ public class ColorSelectionMenu {
 
     private void displayForegroundColors() {
         for (ConsoleColor color : ConsoleColor.getForegroundColors()) {
-            String foregroundColor = String.format("%2d: %-23s %s%s%s",
-                    color.getIndex(),
-                    colorMessages.getColor(color.getLocalizationKey()),
-                    color.getCode(),
-                    GameCluesConstants.CIRCLE_SOLID,
-                    ConsoleColor.RESET.getCode());
-
-            printer.printMessage(foregroundColor);
+            printer.printMessage(foregroundColorFormatter(color));
         }
+    }
+
+    private String foregroundColorFormatter(ConsoleColor color) {
+        return String.format("%2d: %-23s %s%s%s",
+                color.getIndex(),
+                colorMessages.getColor(color.getLocalizationKey()),
+                color.getCode(),
+                GameCluesConstants.CIRCLE_SOLID,
+                ConsoleColor.RESET.getCode());
     }
 
     private void displayBackgroundColors() {
         for (ConsoleColor color : ConsoleColor.getBackgroundColors()) {
-            String backgroundColor = String.format("%d: %-18s %s%s%s",
-                    color.getIndex(),
-                    colorMessages.getColor(color.getLocalizationKey()),
-                    color.getCode(),
-                    "    ",
-                    ConsoleColor.RESET.getCode());
-
-            printer.printMessage(backgroundColor);
+            printer.printMessage(backgroundColorFormatter(color));
         }
+    }
+
+    private String backgroundColorFormatter(ConsoleColor color) {
+        return String.format("%d: %-18s %s%s%s",
+                color.getIndex(),
+                colorMessages.getColor(color.getLocalizationKey()),
+                color.getCode(),
+                "    ",
+                ConsoleColor.RESET.getCode());
     }
 }
