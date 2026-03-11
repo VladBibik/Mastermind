@@ -22,6 +22,7 @@ public class LogoColorSelectionMenu extends Menu {
     private final Player currentPlayer;
 
     private LogoColorsBundle logoColorsBundle;
+    private boolean showMenuOnNextLoop = true;
 
     public LogoColorSelectionMenu(AppContext appContext) {
         super(appContext);
@@ -34,7 +35,11 @@ public class LogoColorSelectionMenu extends Menu {
 
     @Override
     public Menu run() {
-        displayMenu();
+        if (showMenuOnNextLoop) {
+            displayMenu();
+
+            showMenuOnNextLoop = false;
+        }
 
         Optional<Integer> selection = IntegerInputInterpreter.readSelection(appContext.parser());
 
