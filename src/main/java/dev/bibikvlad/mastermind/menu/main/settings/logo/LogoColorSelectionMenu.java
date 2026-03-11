@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.menu.main.settings.logo;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.context.AppContextFactory;
+import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.settings.SettingsMenu;
@@ -12,6 +13,8 @@ import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 import dev.bibikvlad.utils.DefaultLogoColorsBundle;
 import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
+
+import java.util.Optional;
 
 public class LogoColorSelectionMenu extends Menu {
     private final PlayerService playerService;
@@ -33,25 +36,11 @@ public class LogoColorSelectionMenu extends Menu {
     public Menu run() {
         displayMenu();
 
-        String userInput = appContext.parser().parseUserInput();
+        Optional<Integer> selection = IntegerInputInterpreter.readSelection(appContext.parser());
 
-        if (StringEmptyValidator.isNullOrEmpty(userInput)) {
-            System.out.println("Input cannot be empty. Please try again.");
-
-            return this;
-        }
-
-        int userInputNumber;
-
-        try {
-            userInputNumber = Integer.parseInt(userInput);
-        } catch (NumberFormatException exception) {
-            System.out.println("Invalid input. Please enter a number corresponding to the menu option.");
-
-            return this;
-        }
-
-        return menuOptionSwitcher(userInputNumber);
+        return selection
+                .map(this::menuOptionSwitcher)
+                .orElse(new SettingsMenu(appContext));
     }
 
     private void displayMenu() {
