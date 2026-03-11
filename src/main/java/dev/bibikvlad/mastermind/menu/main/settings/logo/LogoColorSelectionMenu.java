@@ -3,7 +3,6 @@ package dev.bibikvlad.mastermind.menu.main.settings.logo;
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.context.AppContextFactory;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
-import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.settings.SettingsMenu;
 import dev.bibikvlad.mastermind.menu.main.settings.logo.color.ColorSelectionMenu;
