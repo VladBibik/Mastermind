@@ -13,4 +13,9 @@ public class ConsoleLogoColorMessages implements LogoColorSelectionMessages {
     public String getColorReturn() {
         return resourceBundle.getString("color.return");
     }
+
+    @Override
+    public String getMenuOptions() {
+        return resourceBundle.getString("menu.menu_options");
+    }
 }

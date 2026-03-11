@@ -4,4 +4,6 @@ import dev.bibikvlad.mastermind.localization.messages.LocalizedMessages;
 
 public interface LogoColorSelectionMessages extends LocalizedMessages {
     String getColorReturn();
+
+    String getMenuOptions();
 }
