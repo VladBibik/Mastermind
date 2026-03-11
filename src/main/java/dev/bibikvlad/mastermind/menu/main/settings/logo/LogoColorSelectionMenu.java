@@ -2,7 +2,10 @@ package dev.bibikvlad.mastermind.menu.main.settings.logo;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.context.AppContextFactory;
+import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
+import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.logo.LogoColorSelectionMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.settings.SettingsMenu;
 import dev.bibikvlad.mastermind.menu.main.settings.logo.color.ColorSelectionMenu;
@@ -16,9 +19,12 @@ import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
 import java.util.Optional;
 
 public class LogoColorSelectionMenu extends Menu {
+    private final Printer printer;
     private final PlayerService playerService;
     private final ColorSelectionMenu colorSelectionMenu;
     private final Player currentPlayer;
+    private final LogoColorSelectionMessages logoMessages;
+    private final InteractionMessages interactionMessages;
 
     private LogoColorsBundle logoColorsBundle;
     private boolean showMenuOnNextLoop = true;
@@ -26,10 +32,13 @@ public class LogoColorSelectionMenu extends Menu {
     public LogoColorSelectionMenu(AppContext appContext) {
         super(appContext);
 
+        this.printer = appContext.printer();
         this.playerService = appContext.services().getPlayerService();
         this.colorSelectionMenu = new ColorSelectionMenu(appContext);
         this.currentPlayer = appContext.currentPlayer();
         this.logoColorsBundle = currentPlayer.getPlayerConfig().logoColorsBundle();
+        this.logoMessages = appContext.localizationContext().getMessages(LogoColorSelectionMessages.class);
+        this.interactionMessages = appContext.localizationContext().getMessages(InteractionMessages.class);
     }
 
     @Override
@@ -48,15 +57,7 @@ public class LogoColorSelectionMenu extends Menu {
     }
 
     private void displayMenu() {
-        System.out.println();
-        System.out.println("1. Preview logo");
-        System.out.println("2. Change border color");
-        System.out.println("3. Change main color");
-        System.out.println("4. Change accent color");
-        System.out.println("5. Change background color");
-        System.out.println("6. Reset logo colors to default");
-        System.out.println("7. Save and return");
-        System.out.println("8. Reset changes and return");
+        printer.printMessage(logoMessages.getMenuOptions());
     }
 
     private Menu menuOptionSwitcher(int userInputNumber) {
@@ -98,7 +99,7 @@ public class LogoColorSelectionMenu extends Menu {
                 return new SettingsMenu(appContext);
             }
             default -> {
-                System.out.println("Invalid input. Please enter a number corresponding to the menu option.");
+                printer.printMessage(interactionMessages.getInvalidInputMessage());
 
                 return this;
             }
@@ -106,7 +107,7 @@ public class LogoColorSelectionMenu extends Menu {
     }
 
     private void printCurrentLogo() {
-        System.out.println(ColoredAsciiLogo.getLogo(logoColorsBundle));
+        printer.printMessage(ColoredAsciiLogo.getLogo(logoColorsBundle));
     }
 
     private void changeBorderColor() {
