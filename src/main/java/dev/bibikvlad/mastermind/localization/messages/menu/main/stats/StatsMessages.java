@@ -1,25 +1,21 @@
 package dev.bibikvlad.mastermind.localization.messages.menu.main.stats;
 
 import dev.bibikvlad.mastermind.localization.messages.LocalizedMessages;
-import dev.bibikvlad.mastermind.persistence.player.model.PlayerStatistics;
-import dev.bibikvlad.mastermind.values.Time;
 
 public interface StatsMessages extends LocalizedMessages {
-    String getDefaultStatArrangement(String playerName, PlayerStatistics playerStatistics);
+    String getHeader();
 
-    String getHeader(String playerName);
+    String getGamesPlayed();
 
-    String getGamesPlayed(long gamesPlayed);
+    String getWins();
 
-    String getWins(long winCount);
+    String getWinPercentage();
 
-    String getWinPercentage(double winPercentage);
+    String getTotalPlayTime();
 
-    String getTotalPlayTime(Time totalPlayTime);
+    String getAverageGameDuration();
 
-    String getAverageGameDuration(long averageGameDuration);
+    String getFastestWinTime();
 
-    String getFastestWinTime(long fastestWinTime);
-
-    String getBestTurnCount(int minTurnWin);
+    String getBestTurnCount();
 }
