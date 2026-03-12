@@ -1,10 +1,5 @@
 package dev.bibikvlad.mastermind.localization.messages.menu.main.stats;
 
-import dev.bibikvlad.mastermind.persistence.player.model.PlayerStatistics;
-import dev.bibikvlad.mastermind.values.Time;
-import dev.bibikvlad.utils.formatters.ClockDisplayFormatter;
-import dev.bibikvlad.utils.formatters.TimeToStringFormatter;
-
 import java.util.ResourceBundle;
 
 public class ConsoleStatsMessages implements StatsMessages {
@@ -14,67 +9,44 @@ public class ConsoleStatsMessages implements StatsMessages {
         this.resourceBundle = resourceBundle;
     }
 
+
     @Override
-    public String getDefaultStatArrangement(String playerName, PlayerStatistics playerStatistics) {
-        StringBuilder playerStatsMessageBuilder = new StringBuilder();
-
-        playerStatsMessageBuilder
-                .append(getHeader(playerName)).append("\n")
-                .append(getGamesPlayed(playerStatistics.gameCount())).append("\n")
-                .append(getWins(playerStatistics.winCount())).append("\n")
-                .append(getWinPercentage(playerStatistics.winPercentage())).append("\n")
-                .append(getTotalPlayTime(playerStatistics.totalPlayTime())).append("\n")
-                .append(getAverageGameDuration(playerStatistics.averageGameDuration())).append("\n")
-                .append(getFastestWinTime(playerStatistics.fastestWinTime())).append("\n")
-                .append(getBestTurnCount(playerStatistics.minTurnsWin())).append("\n");
-
-        return playerStatsMessageBuilder.toString();
+    public String getHeader() {
+        return resourceBundle.getString("header_message");
     }
 
     @Override
-    public String getHeader(String playerName) {
-        return resourceBundle.getString("header_message")
-                .replace("{PLAYER_NAME}", playerName);
+    public String getGamesPlayed() {
+        return resourceBundle.getString("games_played");
     }
 
     @Override
-    public String getGamesPlayed(long gamesPlayed) {
-        return resourceBundle.getString("games_played")
-                .replace("{GAME_COUNT}", String.valueOf(gamesPlayed));
+    public String getWins() {
+        return resourceBundle.getString("wins");
     }
 
     @Override
-    public String getWins(long winCount) {
-        return resourceBundle.getString("wins").replace("{WIN_COUNT}", String.valueOf(winCount));
+    public String getWinPercentage() {
+        return resourceBundle.getString("win_percentage");
     }
 
     @Override
-    public String getWinPercentage(double winPercentage) {
-        return resourceBundle.getString("win_percentage")
-                .replace("{WIN_PERCENTAGE}", String.valueOf(winPercentage));
+    public String getTotalPlayTime() {
+        return resourceBundle.getString("total_playtime");
     }
 
     @Override
-    public String getTotalPlayTime(Time totalPlayTime) {
-        return resourceBundle.getString("total_playtime")
-                .replace("{TOTAL_PLAYTIME}", TimeToStringFormatter.format(totalPlayTime));
+    public String getAverageGameDuration() {
+        return resourceBundle.getString("average_game_duration");
     }
 
     @Override
-    public String getAverageGameDuration(long averageGameDuration) {
-        return resourceBundle.getString("average_game_duration")
-                .replace("{AVERAGE_GAME_DURATION}", ClockDisplayFormatter.format(averageGameDuration));
+    public String getFastestWinTime() {
+        return resourceBundle.getString("fastest_win_time");
     }
 
     @Override
-    public String getFastestWinTime(long fastestWinTime) {
-        return resourceBundle.getString("fastest_win_time")
-                .replace("{FASTEST_WIN_TIME}", ClockDisplayFormatter.format(fastestWinTime));
-    }
-
-    @Override
-    public String getBestTurnCount(int minTurnsWin) {
-        return resourceBundle.getString("best_turn_count")
-                .replace("{MIN_TURNS_WIN}", String.valueOf(minTurnsWin));
+    public String getBestTurnCount() {
+        return resourceBundle.getString("best_turn_count");
     }
 }
