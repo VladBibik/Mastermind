@@ -43,13 +43,24 @@ public class StatsMenu extends Menu {
     private void printStats() {
         PlayerStatistics stats = fetchPlayerStatistics(currentPlayer.getId());
 
-        printer.printMessage(statsMessages.getDefaultStatArrangement(currentPlayer.getPlayerName(), stats));
+        printer.printMessage(statsMessages.getHeader(currentPlayer.getPlayerName()));
+        printer.printMessage(formatStat(statsMessages.getGamesPlayed(), stats.gameCount()));
+        printer.printMessage(formatStat(statsMessages.getWins(), stats.winCount()));
+        printer.printMessage(formatStat(statsMessages.getWinPercentage(), stats.winPercentage()));
+        printer.printMessage(formatStat(statsMessages.getTotalPlayTime(), stats.totalPlayTime()));
+        printer.printMessage(formatStat(statsMessages.getAverageGameDuration(), stats.averageGameDuration()));
+        printer.printMessage(formatStat(statsMessages.getFastestWinTime(), stats.fastestWinTime()));
+        printer.printMessage(formatStat(statsMessages.getBestTurnCount(), stats.minTurnsWin()));
     }
 
     private PlayerStatistics fetchPlayerStatistics(long playerId) {
         return playerStatisticsService.getPlayerStatistics(playerId)
                 .orElseThrow(() -> new IllegalStateException("Statistics for the player with ID: "
                         + playerId + " not found"));
+    }
+
+    private String formatStat(String label, Object value) {
+        return String.format("%-35s %s", label, value);
     }
 
     private void confirmToContinue() {
