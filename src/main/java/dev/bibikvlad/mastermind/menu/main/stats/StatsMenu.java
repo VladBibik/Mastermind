@@ -47,7 +47,8 @@ public class StatsMenu extends Menu {
         printer.printMessage(statsMessages.getHeader(currentPlayer.getPlayerName()));
         printer.printMessage(formatStat(statsMessages.getGamesPlayed(), stats.gameCount()));
         printer.printMessage(formatStat(statsMessages.getWins(), stats.winCount()));
-        printer.printMessage(formatStat(statsMessages.getWinPercentage(), stats.winPercentage()));
+        printer.printMessage(formatStat(statsMessages.getWinPercentage(),
+                Math.floor(stats.winPercentage() * 100) / 100) + "%");
         printer.printMessage(formatStat(statsMessages.getTotalPlayTime(),
                 TimeToStringFormatter.format(stats.totalPlayTime())));
         printer.printMessage(formatStat(statsMessages.getAverageGameDuration(), stats.averageGameDuration()));
