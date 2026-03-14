@@ -33,7 +33,7 @@ public class MessageRegistryInitializer {
     private static void populateGameRegistry(MessageFactoryRegistry messageFactoryRegistry) {
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 GameMessages.class,
-                "i18n.game_messages",
+                "i18n.game.game_messages",
                 new ConsoleGameMessageFactory()
         ));
     }
@@ -41,7 +41,7 @@ public class MessageRegistryInitializer {
     private static void populateMainMenuRegistry(MessageFactoryRegistry messageFactoryRegistry) {
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 MainMenuMessages.class,
-                "i18n.main_menu",
+                "i18n.menu.main.main_menu",
                 new ConsoleMainMenuMessageFactory()
         ));
 
@@ -53,7 +53,7 @@ public class MessageRegistryInitializer {
     private static void populateGameMenuRegistry(MessageFactoryRegistry messageFactoryRegistry) {
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 GameMenuMessages.class,
-                "i18n.game_menu",
+                "i18n.menu.main.game.game_menu",
                 new ConsoleGameMenuMessageFactory()
         ));
     }
@@ -61,7 +61,7 @@ public class MessageRegistryInitializer {
     private static void populateStatsRegistry(MessageFactoryRegistry messageFactoryRegistry) {
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 StatsMessages.class,
-                "i18n.player_stats",
+                "i18n.menu.main.stats.player_stats",
                 new ConsoleStatsMessageFactory()
         ));
     }
@@ -69,22 +69,22 @@ public class MessageRegistryInitializer {
     private static void populateSettingsRegistry(MessageFactoryRegistry messageFactoryRegistry) {
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 SettingsMenuMessages.class,
-                "i18n.settings_menu",
+                "i18n.menu.main.settings.settings_menu",
                 new ConsoleSettingsMessageFactory()
         ));
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 LanguageSelectionMessages.class,
-                "i18n.language_selection",
+                "i18n.menu.main.settings.language.language_selection",
                 new ConsoleLanguageMessageFactory()
         ));
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 LogoColorSelectionMessages.class,
-                "i18n.logo_color_selection",
+                "i18n.menu.main.settings.logo.logo_color_selection",
                 new ConsoleLogoMessageFactory()
         ));
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 ColorMessages.class,
-                "i18n.logo_colors",
+                "i18n.menu.main.settings.logo.color.logo_colors",
                 new ConsoleColorMessageFactory()
         ));
     }
@@ -92,7 +92,7 @@ public class MessageRegistryInitializer {
     private static void populateInteractionRegistry(MessageFactoryRegistry messageFactoryRegistry) {
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 InteractionMessages.class,
-                "i18n.interaction_messages",
+                "i18n.interaction.interaction_messages",
                 new ConsoleInteractionMessageFactory()
         ));
     }
