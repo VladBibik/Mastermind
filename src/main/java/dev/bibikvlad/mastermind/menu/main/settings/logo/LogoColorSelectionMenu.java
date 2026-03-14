@@ -126,7 +126,7 @@ public class LogoColorSelectionMenu extends Menu {
             return;
         }
 
-        processSuccessfulChange(borderColor);
+        processForegroundChange(borderColor);
 
         logoColorsBundle = logoColorsBundle.withLogoBorderColor(borderColor);
     }
@@ -138,7 +138,7 @@ public class LogoColorSelectionMenu extends Menu {
             return;
         }
 
-        processSuccessfulChange(mainColor);
+        processForegroundChange(mainColor);
 
         logoColorsBundle = logoColorsBundle.withLogoMainColor(mainColor);
     }
@@ -150,7 +150,7 @@ public class LogoColorSelectionMenu extends Menu {
             return;
         }
 
-        processSuccessfulChange(accentColor);
+        processForegroundChange(accentColor);
 
         logoColorsBundle = logoColorsBundle.withLogoAccentColor(accentColor);
     }
@@ -162,14 +162,26 @@ public class LogoColorSelectionMenu extends Menu {
             return;
         }
 
-        processSuccessfulChange(backgroundColor);
+        processBackgroundChange(backgroundColor);
 
         logoColorsBundle = logoColorsBundle.withLogoBackgroundColor(backgroundColor);
     }
 
-    private void processSuccessfulChange(ConsoleColor color) {
+    private void processForegroundChange(ConsoleColor color) {
         printer.printMessage("Color successfully changed to "
                 + color.getCode() + GameCluesConstants.CIRCLE_SOLID + ConsoleColor.RESET.getCode());
+
+        proceedSuccess();
+    }
+
+    private void processBackgroundChange(ConsoleColor color) {
+        printer.printMessage("Background successfully changed to "
+                + color.getCode() + "    " + ConsoleColor.RESET.getCode());
+
+        proceedSuccess();
+    }
+
+    private void proceedSuccess() {
         printer.printMessage(interactionMessages.getPressEnterMessage());
 
         showMenuOnNextLoop = true;
