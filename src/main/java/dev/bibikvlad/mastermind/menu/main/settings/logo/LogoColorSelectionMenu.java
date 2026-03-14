@@ -4,6 +4,7 @@ import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.context.AppContextFactory;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
+import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.logo.LogoColorSelectionMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
@@ -19,6 +20,7 @@ import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
 import java.util.Optional;
 
 public class LogoColorSelectionMenu extends Menu {
+    private final Parser parser;
     private final Printer printer;
     private final PlayerService playerService;
     private final ColorSelectionMenu colorSelectionMenu;
@@ -32,6 +34,7 @@ public class LogoColorSelectionMenu extends Menu {
     public LogoColorSelectionMenu(AppContext appContext) {
         super(appContext);
 
+        this.parser = appContext.parser();
         this.printer = appContext.printer();
         this.playerService = appContext.services().getPlayerService();
         this.colorSelectionMenu = new ColorSelectionMenu(appContext);
