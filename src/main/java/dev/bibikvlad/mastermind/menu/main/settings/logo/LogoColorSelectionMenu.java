@@ -15,6 +15,7 @@ import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 import dev.bibikvlad.utils.DefaultLogoColorsBundle;
+import dev.bibikvlad.utils.strings.GameCluesConstants;
 import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
 
 import java.util.Optional;
@@ -125,6 +126,8 @@ public class LogoColorSelectionMenu extends Menu {
             return;
         }
 
+        processSuccessfulChange(borderColor);
+
         logoColorsBundle = logoColorsBundle.withLogoBorderColor(borderColor);
     }
 
@@ -134,6 +137,8 @@ public class LogoColorSelectionMenu extends Menu {
         if (mainColor == null) {
             return;
         }
+
+        processSuccessfulChange(mainColor);
 
         logoColorsBundle = logoColorsBundle.withLogoMainColor(mainColor);
     }
@@ -145,6 +150,8 @@ public class LogoColorSelectionMenu extends Menu {
             return;
         }
 
+        processSuccessfulChange(accentColor);
+
         logoColorsBundle = logoColorsBundle.withLogoAccentColor(accentColor);
     }
 
@@ -154,6 +161,8 @@ public class LogoColorSelectionMenu extends Menu {
         if (backgroundColor == null) {
             return;
         }
+
+        processSuccessfulChange(backgroundColor);
 
         logoColorsBundle = logoColorsBundle.withLogoBackgroundColor(backgroundColor);
     }
