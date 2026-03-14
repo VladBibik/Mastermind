@@ -11,6 +11,7 @@ import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.persistence.player.model.PlayerStatistics;
 import dev.bibikvlad.mastermind.services.PlayerStatisticsService;
+import dev.bibikvlad.utils.formatters.ClockDisplayFormatter;
 import dev.bibikvlad.utils.formatters.TimeToStringFormatter;
 
 public class StatsMenu extends Menu {
@@ -51,8 +52,10 @@ public class StatsMenu extends Menu {
                 Math.floor(stats.winPercentage() * 100) / 100) + "%");
         printer.printMessage(formatStat(statsMessages.getTotalPlayTime(),
                 TimeToStringFormatter.format(stats.totalPlayTime())));
-        printer.printMessage(formatStat(statsMessages.getAverageGameDuration(), stats.averageGameDuration()));
-        printer.printMessage(formatStat(statsMessages.getFastestWinTime(), stats.fastestWinTime()));
+        printer.printMessage(formatStat(statsMessages.getAverageGameDuration(),
+                ClockDisplayFormatter.format(stats.averageGameDuration())));
+        printer.printMessage(formatStat(statsMessages.getFastestWinTime(),
+                ClockDisplayFormatter.format(stats.fastestWinTime())));
         printer.printMessage(formatStat(statsMessages.getBestTurnCount(), stats.minTurnsWin()));
     }
 
