@@ -111,6 +111,11 @@ public class LogoColorSelectionMenu extends Menu {
 
     private void printCurrentLogo() {
         printer.printMessage(ColoredAsciiLogo.getLogo(logoColorsBundle));
+        printer.printMessage(interactionMessages.getPressEnterMessage());
+
+        parser.parseUserInput();
+
+        showMenuOnNextLoop = true;
     }
 
     private void changeBorderColor() {
