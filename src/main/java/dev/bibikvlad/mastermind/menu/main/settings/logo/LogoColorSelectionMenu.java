@@ -158,6 +158,16 @@ public class LogoColorSelectionMenu extends Menu {
         logoColorsBundle = logoColorsBundle.withLogoBackgroundColor(backgroundColor);
     }
 
+    private void processSuccessfulChange(ConsoleColor color) {
+        printer.printMessage("Color successfully changed to "
+                + color.getCode() + GameCluesConstants.CIRCLE_SOLID + ConsoleColor.RESET.getCode());
+        printer.printMessage(interactionMessages.getPressEnterMessage());
+
+        showMenuOnNextLoop = true;
+
+        parser.parseUserInput();
+    }
+
     private void resetToDefault() {
         logoColorsBundle = DefaultLogoColorsBundle.get();
     }
