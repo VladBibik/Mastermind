@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.localization.messages.menu.main.stats;
 
+import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 public class ConsoleStatsMessages implements StatsMessages {
@@ -12,7 +13,7 @@ public class ConsoleStatsMessages implements StatsMessages {
 
     @Override
     public String getHeader(String playerName) {
-        return resourceBundle.getString("header_message").replace("{PLAYER_NAME}", playerName);
+        return MessageFormat.format(resourceBundle.getString("header_message"), playerName);
     }
 
     @Override
