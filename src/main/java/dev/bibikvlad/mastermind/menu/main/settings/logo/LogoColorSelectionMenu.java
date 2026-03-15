@@ -99,7 +99,7 @@ public class LogoColorSelectionMenu extends Menu {
             case 7 -> {
                 return saveAndReturnBack();
             }
-            case 8 -> {
+            case 0 -> {
                 return new SettingsMenu(appContext);
             }
             default -> {
