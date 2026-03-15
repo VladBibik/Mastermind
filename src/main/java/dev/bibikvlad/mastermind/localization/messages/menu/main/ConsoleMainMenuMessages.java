@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.localization.messages.menu.main;
 
+import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 public class ConsoleMainMenuMessages implements MainMenuMessages {
@@ -11,8 +12,7 @@ public class ConsoleMainMenuMessages implements MainMenuMessages {
 
     @Override
     public String getWelcomeMessage(String playerName) {
-        return resourceBundle.getString("welcome_message")
-                .replace("{PLAYER_NAME}", playerName);
+        return MessageFormat.format(resourceBundle.getString("welcome_message"), playerName);
     }
 
     @Override
