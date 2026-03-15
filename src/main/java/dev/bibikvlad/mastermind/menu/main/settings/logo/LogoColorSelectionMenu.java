@@ -126,7 +126,7 @@ public class LogoColorSelectionMenu extends Menu {
             return;
         }
 
-        processForegroundChange(borderColor);
+        showForegroundChangeMessage(borderColor);
 
         logoColorsBundle = logoColorsBundle.withLogoBorderColor(borderColor);
     }
@@ -138,7 +138,7 @@ public class LogoColorSelectionMenu extends Menu {
             return;
         }
 
-        processForegroundChange(mainColor);
+        showForegroundChangeMessage(mainColor);
 
         logoColorsBundle = logoColorsBundle.withLogoMainColor(mainColor);
     }
@@ -150,7 +150,7 @@ public class LogoColorSelectionMenu extends Menu {
             return;
         }
 
-        processForegroundChange(accentColor);
+        showForegroundChangeMessage(accentColor);
 
         logoColorsBundle = logoColorsBundle.withLogoAccentColor(accentColor);
     }
@@ -162,26 +162,26 @@ public class LogoColorSelectionMenu extends Menu {
             return;
         }
 
-        processBackgroundChange(backgroundColor);
+        showBackgroundChangeMessage(backgroundColor);
 
         logoColorsBundle = logoColorsBundle.withLogoBackgroundColor(backgroundColor);
     }
 
-    private void processForegroundChange(ConsoleColor color) {
+    private void showForegroundChangeMessage(ConsoleColor color) {
         printer.printMessage("Color successfully changed to "
                 + color.getCode() + GameCluesConstants.CIRCLE_SOLID + ConsoleColor.RESET.getCode());
 
-        proceedSuccess();
+        waitForUserConfirmation();
     }
 
-    private void processBackgroundChange(ConsoleColor color) {
+    private void showBackgroundChangeMessage(ConsoleColor color) {
         printer.printMessage("Background successfully changed to "
                 + color.getCode() + "    " + ConsoleColor.RESET.getCode());
 
-        proceedSuccess();
+        waitForUserConfirmation();
     }
 
-    private void proceedSuccess() {
+    private void waitForUserConfirmation() {
         printer.printMessage(interactionMessages.getPressEnterMessage());
 
         showMenuOnNextLoop = true;
