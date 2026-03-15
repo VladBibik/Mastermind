@@ -21,21 +21,21 @@ public class ConsoleLogoColorMessages implements LogoColorSelectionMessages {
 
     @Override
     public String getMenuBorderChanged(String preview) {
-        return resourceBundle.getString("menu.border_color_changed");
+        return String.format(resourceBundle.getString("menu.border_color_changed"), preview);
     }
 
     @Override
     public String getMenuMainChanged(String preview) {
-        return resourceBundle.getString("menu.main_color_changed");
+        return String.format(resourceBundle.getString("menu.main_color_changed"), preview);
     }
 
     @Override
     public String getMenuAccentChanged(String preview) {
-        return resourceBundle.getString("menu.accent_color_changed");
+        return String.format(resourceBundle.getString("menu.accent_color_changed"), preview);
     }
 
     @Override
     public String getMenuBackgroundChanged(String preview) {
-        return resourceBundle.getString("menu.background_color_changed");
+        return String.format(resourceBundle.getString("menu.background_color_changed"), preview);
     }
 }
