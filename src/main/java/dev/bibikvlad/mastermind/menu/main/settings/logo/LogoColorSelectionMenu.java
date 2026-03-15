@@ -126,9 +126,11 @@ public class LogoColorSelectionMenu extends Menu {
             return;
         }
 
-        showForegroundChangeMessage(borderColor);
-
         logoColorsBundle = logoColorsBundle.withLogoBorderColor(borderColor);
+
+        printer.printMessage(logoMessages.getMenuBorderChanged(getForegroundPreview(borderColor)));
+
+        waitForUserConfirmation();
     }
 
     private void changeMainColor() {
@@ -138,9 +140,11 @@ public class LogoColorSelectionMenu extends Menu {
             return;
         }
 
-        showForegroundChangeMessage(mainColor);
-
         logoColorsBundle = logoColorsBundle.withLogoMainColor(mainColor);
+
+        printer.printMessage(logoMessages.getMenuMainChanged(getForegroundPreview(mainColor)));
+
+        waitForUserConfirmation();
     }
 
     private void changeAccentColor() {
@@ -150,9 +154,11 @@ public class LogoColorSelectionMenu extends Menu {
             return;
         }
 
-        showForegroundChangeMessage(accentColor);
-
         logoColorsBundle = logoColorsBundle.withLogoAccentColor(accentColor);
+
+        printer.printMessage(logoMessages.getMenuAccentChanged(getForegroundPreview(accentColor)));
+
+        waitForUserConfirmation();
     }
 
     private void changeBackgroundColor() {
@@ -162,23 +168,19 @@ public class LogoColorSelectionMenu extends Menu {
             return;
         }
 
-        showBackgroundChangeMessage(backgroundColor);
-
         logoColorsBundle = logoColorsBundle.withLogoBackgroundColor(backgroundColor);
-    }
 
-    private void showForegroundChangeMessage(ConsoleColor color) {
-        printer.printMessage("Color successfully changed to "
-                + color.getCode() + GameCluesConstants.CIRCLE_SOLID + ConsoleColor.RESET.getCode());
+        printer.printMessage(logoMessages.getMenuBackgroundChanged(getBackgroundPreview(backgroundColor)));
 
         waitForUserConfirmation();
     }
 
-    private void showBackgroundChangeMessage(ConsoleColor color) {
-        printer.printMessage("Background successfully changed to "
-                + color.getCode() + "    " + ConsoleColor.RESET.getCode());
+    private String getForegroundPreview(ConsoleColor color) {
+        return color.getCode() + GameCluesConstants.CIRCLE_SOLID + ConsoleColor.RESET.getCode();
+    }
 
-        waitForUserConfirmation();
+    private String getBackgroundPreview(ConsoleColor color) {
+        return color.getCode() + "    " + ConsoleColor.RESET.getCode();
     }
 
     private void waitForUserConfirmation() {
