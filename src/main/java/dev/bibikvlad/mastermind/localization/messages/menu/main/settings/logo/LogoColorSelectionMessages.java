@@ -6,4 +6,12 @@ public interface LogoColorSelectionMessages extends LocalizedMessages {
     String getColorReturn();
 
     String getMenuOptions();
+
+    String getMenuBorderChanged(String preview);
+
+    String getMenuMainChanged(String preview);
+
+    String getMenuAccentChanged(String preview);
+
+    String getMenuBackgroundChanged(String preview);
 }
