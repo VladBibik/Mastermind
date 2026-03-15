@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.localization.messages.menu.main.settings.language;
 
+import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 public class ConsoleLanguageMessages implements LanguageSelectionMessages {
@@ -21,8 +22,7 @@ public class ConsoleLanguageMessages implements LanguageSelectionMessages {
 
     @Override
     public String getLanguageChanged(String languageName) {
-        return resourceBundle.getString("success_language_change")
-                .replace("{LANGUAGE_NAME}", languageName);
+        return MessageFormat.format(resourceBundle.getString("success_language_change"), languageName);
     }
 
     @Override
