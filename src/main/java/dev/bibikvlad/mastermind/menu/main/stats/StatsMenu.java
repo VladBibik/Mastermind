@@ -6,8 +6,8 @@ import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.stats.StatsMessages;
-import dev.bibikvlad.mastermind.menu.main.MainMenu;
 import dev.bibikvlad.mastermind.menu.core.Menu;
+import dev.bibikvlad.mastermind.menu.main.MainMenu;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.persistence.player.model.PlayerStatistics;
 import dev.bibikvlad.mastermind.services.PlayerStatisticsService;
@@ -45,18 +45,27 @@ public class StatsMenu extends Menu {
     private void printStats() {
         PlayerStatistics stats = fetchPlayerStatistics(currentPlayer.getId());
 
-        printer.printMessage(statsMessages.getHeader(currentPlayer.getPlayerName()));
-        printer.printMessage(formatStat(statsMessages.getGamesPlayed(), stats.gameCount()));
-        printer.printMessage(formatStat(statsMessages.getWins(), stats.winCount()));
-        printer.printMessage(formatStat(statsMessages.getWinPercentage(),
-                Math.floor(stats.winPercentage() * 100) / 100) + "%");
-        printer.printMessage(formatStat(statsMessages.getTotalPlayTime(),
-                TimeToStringFormatter.format(stats.totalPlayTime())));
-        printer.printMessage(formatStat(statsMessages.getAverageGameDuration(),
-                ClockDisplayFormatter.format(stats.averageGameDuration())));
-        printer.printMessage(formatStat(statsMessages.getFastestWinTime(),
-                ClockDisplayFormatter.format(stats.fastestWinTime())));
-        printer.printMessage(formatStat(statsMessages.getBestTurnCount(), stats.minTurnsWin()));
+        String header = statsMessages.getHeader(currentPlayer.getPlayerName());
+        String gamesPlayed = formatStat(statsMessages.getGamesPlayed(), stats.gameCount());
+        String wins = formatStat(statsMessages.getWins(), stats.winCount());
+        String winPercentage = formatStat(statsMessages.getWinPercentage(),
+                String.format("%.2f%%", stats.winPercentage()));
+        String totalPlayTime = formatStat(statsMessages.getTotalPlayTime(),
+                TimeToStringFormatter.format(stats.totalPlayTime()));
+        String averageGameDuration = formatStat(statsMessages.getFastestWinTime(),
+                ClockDisplayFormatter.format(stats.fastestWinTime()));
+        String fastestWinTime = formatStat(statsMessages.getFastestWinTime(),
+                ClockDisplayFormatter.format(stats.fastestWinTime()));
+        String bestTurnCount = formatStat(statsMessages.getBestTurnCount(), stats.minTurnsWin());
+
+        printer.printMessage(header);
+        printer.printMessage(gamesPlayed);
+        printer.printMessage(wins);
+        printer.printMessage(winPercentage);
+        printer.printMessage(totalPlayTime);
+        printer.printMessage(averageGameDuration);
+        printer.printMessage(fastestWinTime);
+        printer.printMessage(bestTurnCount);
     }
 
     private PlayerStatistics fetchPlayerStatistics(long playerId) {
