@@ -69,8 +69,8 @@ public class StatsMenu extends Menu {
                 TimeToStringFormatter.format(stats.totalPlayTime())));
         statList.add(formatStat(statsMessages.getFastestWinTime(),
                 ClockDisplayFormatter.format(stats.fastestWinTime())));
-        statList.add(formatStat(statsMessages.getFastestWinTime(),
-                ClockDisplayFormatter.format(stats.fastestWinTime())));
+        statList.add(formatStat(statsMessages.getAverageGameDuration(),
+                ClockDisplayFormatter.format(stats.averageGameDuration())));
         statList.add(formatStat(statsMessages.getBestTurnCount(), stats.minTurnsWin()));
 
         return statList;
