@@ -14,6 +14,9 @@ import dev.bibikvlad.mastermind.services.PlayerStatisticsService;
 import dev.bibikvlad.utils.formatters.ClockDisplayFormatter;
 import dev.bibikvlad.utils.formatters.TimeToStringFormatter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StatsMenu extends Menu {
     private final PlayerStatisticsService playerStatisticsService;
     private final Player currentPlayer;
@@ -45,33 +48,32 @@ public class StatsMenu extends Menu {
     private void printStats() {
         PlayerStatistics stats = fetchPlayerStatistics(currentPlayer.getId());
 
-        String header = statsMessages.getHeader(currentPlayer.getPlayerName());
-        String gamesPlayed = formatStat(statsMessages.getGamesPlayed(), stats.gameCount());
-        String wins = formatStat(statsMessages.getWins(), stats.winCount());
-        String winPercentage = formatStat(statsMessages.getWinPercentage(),
-                String.format("%.2f%%", stats.winPercentage()));
-        String totalPlayTime = formatStat(statsMessages.getTotalPlayTime(),
-                TimeToStringFormatter.format(stats.totalPlayTime()));
-        String averageGameDuration = formatStat(statsMessages.getFastestWinTime(),
-                ClockDisplayFormatter.format(stats.fastestWinTime()));
-        String fastestWinTime = formatStat(statsMessages.getFastestWinTime(),
-                ClockDisplayFormatter.format(stats.fastestWinTime()));
-        String bestTurnCount = formatStat(statsMessages.getBestTurnCount(), stats.minTurnsWin());
-
-        printer.printMessage(header);
-        printer.printMessage(gamesPlayed);
-        printer.printMessage(wins);
-        printer.printMessage(winPercentage);
-        printer.printMessage(totalPlayTime);
-        printer.printMessage(averageGameDuration);
-        printer.printMessage(fastestWinTime);
-        printer.printMessage(bestTurnCount);
+        prepareStats(stats).forEach(printer::printMessage);
     }
 
     private PlayerStatistics fetchPlayerStatistics(long playerId) {
         return playerStatisticsService.getPlayerStatistics(playerId)
                 .orElseThrow(() -> new IllegalStateException("Statistics for the player with ID: "
                         + playerId + " not found"));
+    }
+
+    private List<String> prepareStats(PlayerStatistics stats) {
+        List<String> statList = new ArrayList<>();
+
+        statList.add(statsMessages.getHeader(currentPlayer.getPlayerName()));
+        statList.add(formatStat(statsMessages.getGamesPlayed(), stats.gameCount()));
+        statList.add(formatStat(statsMessages.getWins(), stats.winCount()));
+        statList.add(formatStat(statsMessages.getWinPercentage(),
+                String.format("%.2f%%", stats.winPercentage())));
+        statList.add(formatStat(statsMessages.getTotalPlayTime(),
+                TimeToStringFormatter.format(stats.totalPlayTime())));
+        statList.add(formatStat(statsMessages.getFastestWinTime(),
+                ClockDisplayFormatter.format(stats.fastestWinTime())));
+        statList.add(formatStat(statsMessages.getFastestWinTime(),
+                ClockDisplayFormatter.format(stats.fastestWinTime())));
+        statList.add(formatStat(statsMessages.getBestTurnCount(), stats.minTurnsWin()));
+
+        return statList;
     }
 
     private String formatStat(String label, Object value) {
