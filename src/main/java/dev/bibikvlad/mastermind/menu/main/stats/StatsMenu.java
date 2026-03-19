@@ -14,7 +14,6 @@ import dev.bibikvlad.mastermind.services.PlayerStatisticsService;
 import dev.bibikvlad.utils.formatters.ClockDisplayFormatter;
 import dev.bibikvlad.utils.formatters.TimeToStringFormatter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StatsMenu extends Menu {
@@ -58,22 +57,17 @@ public class StatsMenu extends Menu {
     }
 
     private List<String> buildStatsLines(PlayerStatistics stats) {
-        List<String> statList = new ArrayList<>();
-
-        statList.add(statsMessages.getHeader(currentPlayer.getPlayerName()));
-        statList.add(formatStat(statsMessages.getGamesPlayed(), stats.gameCount()));
-        statList.add(formatStat(statsMessages.getWins(), stats.winCount()));
-        statList.add(formatStat(statsMessages.getWinPercentage(),
-                String.format("%.2f%%", stats.winPercentage())));
-        statList.add(formatStat(statsMessages.getTotalPlayTime(),
-                TimeToStringFormatter.format(stats.totalPlayTime())));
-        statList.add(formatStat(statsMessages.getFastestWinTime(),
-                ClockDisplayFormatter.format(stats.fastestWinTime())));
-        statList.add(formatStat(statsMessages.getAverageGameDuration(),
-                ClockDisplayFormatter.format(stats.averageGameDuration())));
-        statList.add(formatStat(statsMessages.getBestTurnCount(), stats.minTurnsWin()));
-
-        return statList;
+        return List.of(
+                statsMessages.getHeader(currentPlayer.getPlayerName()),
+                formatStat(statsMessages.getGamesPlayed(), stats.gameCount()),
+                formatStat(statsMessages.getWins(), stats.winCount()),
+                formatStat(statsMessages.getWinPercentage(), String.format("%.2f%%", stats.winPercentage())),
+                formatStat(statsMessages.getTotalPlayTime(), TimeToStringFormatter.format(stats.totalPlayTime())),
+                formatStat(statsMessages.getFastestWinTime(), ClockDisplayFormatter.format(stats.fastestWinTime())),
+                formatStat(statsMessages.getAverageGameDuration(),
+                        ClockDisplayFormatter.format(stats.averageGameDuration())),
+                formatStat(statsMessages.getBestTurnCount(), stats.minTurnsWin())
+        );
     }
 
     private String formatStat(String label, Object value) {
