@@ -17,6 +17,8 @@ import dev.bibikvlad.utils.formatters.TimeToStringFormatter;
 import java.util.List;
 
 public class StatsMenu extends Menu {
+    private static final int LABEL_WIDTH = 35;
+
     private final PlayerStatisticsService playerStatisticsService;
     private final Player currentPlayer;
     private final StatsMessages statsMessages;
@@ -71,7 +73,7 @@ public class StatsMenu extends Menu {
     }
 
     private String formatStat(String label, Object value) {
-        return String.format("%-35s %s", label, value);
+        return String.format("%-" + LABEL_WIDTH + "s %s", label, value);
     }
 
     private void confirmToContinue() {
