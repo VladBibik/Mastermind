@@ -2,13 +2,13 @@ package dev.bibikvlad.mastermind.menu.player;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
+import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
 import java.util.List;
 
-//TODO: Fix incorrect language issue after player switching!
 public class PlayerSelectionMenu extends Menu {
     private final PlayerService playerService;
 
@@ -60,8 +60,8 @@ public class PlayerSelectionMenu extends Menu {
             System.out.println("Player " + player.getPlayerName() + " has been selected.");
         }
 
-        AppContext appContext = new AppContext(this.appContext.localizationContext(), this.appContext.services(),
-                this.appContext.printer(), this.appContext.parser(), player);
+        AppContext appContext = new AppContext(new LocalizationContext(player.getPlayerConfig().locale()),
+                this.appContext.services(), this.appContext.printer(), this.appContext.parser(), player);
 
         return new ProfileMenu(appContext);
     }
