@@ -8,6 +8,7 @@ import dev.bibikvlad.mastermind.services.PlayerService;
 
 import java.util.List;
 
+//TODO: Fix incorrect language issue after player switching!
 public class PlayerSelectionMenu extends Menu {
     private final PlayerService playerService;
 
