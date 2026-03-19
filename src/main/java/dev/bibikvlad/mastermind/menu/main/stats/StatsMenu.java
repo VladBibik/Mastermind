@@ -48,7 +48,7 @@ public class StatsMenu extends Menu {
     private void printStats() {
         PlayerStatistics stats = fetchPlayerStatistics(currentPlayer.getId());
 
-        prepareStats(stats).forEach(printer::printMessage);
+        buildStatsLines(stats).forEach(printer::printMessage);
     }
 
     private PlayerStatistics fetchPlayerStatistics(long playerId) {
@@ -57,7 +57,7 @@ public class StatsMenu extends Menu {
                         + playerId + " not found"));
     }
 
-    private List<String> prepareStats(PlayerStatistics stats) {
+    private List<String> buildStatsLines(PlayerStatistics stats) {
         List<String> statList = new ArrayList<>();
 
         statList.add(statsMessages.getHeader(currentPlayer.getPlayerName()));
