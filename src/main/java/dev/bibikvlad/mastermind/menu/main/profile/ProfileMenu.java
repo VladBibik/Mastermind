@@ -1,9 +1,13 @@
-package dev.bibikvlad.mastermind.menu.player;
+package dev.bibikvlad.mastermind.menu.main.profile;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.menu.main.MainMenu;
 import dev.bibikvlad.mastermind.menu.core.Menu;
+import dev.bibikvlad.mastermind.menu.main.profile.delete.DeletePlayerMenu;
+import dev.bibikvlad.mastermind.menu.main.profile.create.NewPlayerCreation;
+import dev.bibikvlad.mastermind.menu.main.profile.rename.PlayerNameChanger;
+import dev.bibikvlad.mastermind.menu.main.profile.selection.PlayerSelectionMenu;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
 import java.util.Optional;

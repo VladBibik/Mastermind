@@ -12,7 +12,7 @@ import dev.bibikvlad.mastermind.menu.main.game.GameLaunchMenu;
 import dev.bibikvlad.mastermind.menu.main.leaderboard.LeaderboardMenu;
 import dev.bibikvlad.mastermind.menu.main.settings.SettingsMenu;
 import dev.bibikvlad.mastermind.menu.main.stats.StatsMenu;
-import dev.bibikvlad.mastermind.menu.player.ProfileMenu;
+import dev.bibikvlad.mastermind.menu.main.profile.ProfileMenu;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 
 import java.util.Optional;
