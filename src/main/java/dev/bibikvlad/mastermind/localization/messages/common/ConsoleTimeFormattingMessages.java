@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.localization.messages.common;
 
+import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 public class ConsoleTimeFormattingMessages implements TimeFormattingMessages {
@@ -11,21 +12,21 @@ public class ConsoleTimeFormattingMessages implements TimeFormattingMessages {
 
     @Override
     public String getHours(long hour) {
-        return resourceBundle.getString("hours");
+        return MessageFormat.format(resourceBundle.getString("hours"), hour);
     }
 
     @Override
     public String getMinutes(long minute) {
-        return resourceBundle.getString("minutes");
+        return MessageFormat.format(resourceBundle.getString("minutes"), minute);
     }
 
     @Override
     public String getSeconds(long second) {
-        return resourceBundle.getString("seconds");
+        return MessageFormat.format(resourceBundle.getString("seconds"), second);
     }
 
     @Override
     public String getMillisecond(long millisecond) {
-        return resourceBundle.getString("milliseconds");
+        return MessageFormat.format(resourceBundle.getString("milliseconds"), millisecond);
     }
 }
