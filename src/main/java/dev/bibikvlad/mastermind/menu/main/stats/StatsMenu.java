@@ -67,8 +67,8 @@ public class StatsMenu extends Menu {
 
         return List.of(
                 statsMessages.getHeader(currentPlayer.getPlayerName()),
-                formatStat(statsMessages.getGamesPlayed(), stats.gameCount()),
-                formatStat(statsMessages.getWins(), stats.winCount()),
+                formatStat(statsMessages.getGamesPlayed(), String.valueOf(stats.gameCount())),
+                formatStat(statsMessages.getWins(), String.valueOf(stats.winCount())),
                 formatStat(statsMessages.getWinPercentage(),
                         String.format(currentLocale, "%.2f%%", stats.winPercentage())),
                 formatStat(statsMessages.getTotalPlayTime(),
@@ -76,11 +76,11 @@ public class StatsMenu extends Menu {
                 formatStat(statsMessages.getFastestWinTime(), ClockDisplayFormatter.format(stats.fastestWinTime())),
                 formatStat(statsMessages.getAverageGameDuration(),
                         ClockDisplayFormatter.format(stats.averageGameDuration())),
-                formatStat(statsMessages.getBestTurnCount(), stats.minTurnsWin())
+                formatStat(statsMessages.getBestTurnCount(), String.valueOf(stats.minTurnsWin()))
         );
     }
 
-    private String formatStat(String label, Object value) {
+    private String formatStat(String label, String value) {
         return String.format("%-" + LABEL_WIDTH + "s %s", label, value);
     }
 
