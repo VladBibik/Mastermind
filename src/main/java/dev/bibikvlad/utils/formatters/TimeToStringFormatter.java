@@ -7,11 +7,11 @@ public class TimeToStringFormatter {
     public static String format(Time time, TimeFormattingMessages messages) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        if (time.hour() > 0) stringBuilder.append(messages.getHours(time.hour()));
-        if (time.minutes() > 0) stringBuilder.append(messages.getHours(time.minutes()));
-        if (time.second() > 0) stringBuilder.append(messages.getHours(time.second()));
+        if (time.hour() > 0) stringBuilder.append(messages.getHours(time.hour())).append(" ");
+        if (time.minutes() > 0) stringBuilder.append(messages.getMinutes(time.minutes())).append(" ");
+        if (time.second() > 0) stringBuilder.append(messages.getSeconds(time.second())).append(" ");
 
-        stringBuilder.append(messages.getHours(time.millisecond()));
+        stringBuilder.append(messages.getMillisecond(time.millisecond()));
 
         return stringBuilder.toString().trim();
     }
