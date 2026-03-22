@@ -2,12 +2,12 @@ package dev.bibikvlad.mastermind.menu.main.leaderboard;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
-import dev.bibikvlad.mastermind.menu.main.MainMenu;
 import dev.bibikvlad.mastermind.menu.core.Menu;
+import dev.bibikvlad.mastermind.menu.main.MainMenu;
 import dev.bibikvlad.mastermind.persistence.leaderboard.model.*;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.LeaderboardService;
-import dev.bibikvlad.utils.formatters.TimeToStringFormatter;
+import dev.bibikvlad.utils.formatters.ClockDisplayFormatter;
 
 import java.util.List;
 import java.util.Optional;
@@ -85,7 +85,7 @@ public class LeaderboardMenu extends Menu {
 
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
             System.out.println(leaderboardEntry.playerName() + ": " + leaderboardEntry.numberOfTurns() + " turns, "
-                    + TimeToStringFormatter.format(leaderboardEntry.gameDuration()));
+                    + ClockDisplayFormatter.format(leaderboardEntry.gameDuration()));
         });
 
         return this;
@@ -102,7 +102,7 @@ public class LeaderboardMenu extends Menu {
 
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
             System.out.println(leaderboardEntry.playerName() + ": "
-                    + TimeToStringFormatter.format(leaderboardEntry.gameDuration()));
+                    + ClockDisplayFormatter.format(leaderboardEntry.gameDuration()));
         });
 
         return this;
