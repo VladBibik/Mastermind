@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.localization.core;
 
+import dev.bibikvlad.mastermind.localization.factories.common.ConsoleTimeMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.game.ConsoleGameMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.interaction.ConsoleInteractionMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.ConsoleMainMenuMessageFactory;
@@ -9,10 +10,11 @@ import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.langua
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.logo.ConsoleColorMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.logo.ConsoleLogoMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.stats.ConsoleStatsMessageFactory;
-import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
+import dev.bibikvlad.mastermind.localization.messages.common.TimeFormattingMessages;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
-import dev.bibikvlad.mastermind.localization.messages.menu.main.game.GameMenuMessages;
+import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.game.GameMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.SettingsMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.language.LanguageSelectionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.logo.LogoColorSelectionMessages;
@@ -23,11 +25,20 @@ public class MessageRegistryInitializer {
     public static MessageFactoryRegistry createAndPopulateRegistry() {
         MessageFactoryRegistry messageFactoryRegistry = new MessageFactoryRegistry();
 
+        populateCommonRegistry(messageFactoryRegistry);
         populateGameRegistry(messageFactoryRegistry);
         populateMainMenuRegistry(messageFactoryRegistry);
         populateInteractionRegistry(messageFactoryRegistry);
 
         return messageFactoryRegistry;
+    }
+
+    private static void populateCommonRegistry(MessageFactoryRegistry messageFactoryRegistry) {
+        messageFactoryRegistry.register(new LocalizedMessageConfig<>(
+                TimeFormattingMessages.class,
+                "i18n.common.time_formatting",
+                new ConsoleTimeMessageFactory()
+        ));
     }
 
     private static void populateGameRegistry(MessageFactoryRegistry messageFactoryRegistry) {
