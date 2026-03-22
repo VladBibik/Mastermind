@@ -4,6 +4,7 @@ import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
+import dev.bibikvlad.mastermind.localization.messages.common.TimeFormattingMessages;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.stats.StatsMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
@@ -23,6 +24,7 @@ public class StatsMenu extends Menu {
     private final Player currentPlayer;
     private final StatsMessages statsMessages;
     private final InteractionMessages interactionMessages;
+    private final TimeFormattingMessages timeFormattingMessages;
     private final Printer printer;
     private final Parser parser;
 
@@ -33,6 +35,7 @@ public class StatsMenu extends Menu {
         this.currentPlayer = appContext.currentPlayer();
         this.statsMessages = appContext.localizationContext().getMessages(MessageType.STATS);
         this.interactionMessages = appContext.localizationContext().getMessages(MessageType.INTERACTION);
+        this.timeFormattingMessages = appContext.localizationContext().getMessages(MessageType.TIME);
         this.printer = appContext.printer();
         this.parser = appContext.parser();
     }
@@ -64,7 +67,8 @@ public class StatsMenu extends Menu {
                 formatStat(statsMessages.getGamesPlayed(), stats.gameCount()),
                 formatStat(statsMessages.getWins(), stats.winCount()),
                 formatStat(statsMessages.getWinPercentage(), String.format("%.2f%%", stats.winPercentage())),
-                formatStat(statsMessages.getTotalPlayTime(), TimeToStringFormatter.format(stats.totalPlayTime())),
+                formatStat(statsMessages.getTotalPlayTime(),
+                        TimeToStringFormatter.format(stats.totalPlayTime(), timeFormattingMessages)),
                 formatStat(statsMessages.getFastestWinTime(), ClockDisplayFormatter.format(stats.fastestWinTime())),
                 formatStat(statsMessages.getAverageGameDuration(),
                         ClockDisplayFormatter.format(stats.averageGameDuration())),
