@@ -26,7 +26,7 @@ public class ConsoleTimeFormattingMessages implements TimeFormattingMessages {
     }
 
     @Override
-    public String getMillisecond(long millisecond) {
+    public String getMilliseconds(long millisecond) {
         return MessageFormat.format(resourceBundle.getString("milliseconds"), millisecond);
     }
 }

@@ -9,5 +9,5 @@ public interface TimeFormattingMessages extends LocalizedMessages {
 
     String getSeconds(long second);
 
-    String getMillisecond(long millisecond);
+    String getMilliseconds(long millisecond);
 }
