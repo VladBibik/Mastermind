@@ -16,6 +16,7 @@ import dev.bibikvlad.utils.formatters.ClockDisplayFormatter;
 import dev.bibikvlad.utils.formatters.TimeToStringFormatter;
 
 import java.util.List;
+import java.util.Locale;
 
 public class StatsMenu extends Menu {
     private static final int LABEL_WIDTH = 35;
@@ -62,11 +63,14 @@ public class StatsMenu extends Menu {
     }
 
     private List<String> buildStatsLines(PlayerStatistics stats) {
+        Locale currentLocale = currentPlayer.getPlayerConfig().locale().getLocale();
+
         return List.of(
                 statsMessages.getHeader(currentPlayer.getPlayerName()),
                 formatStat(statsMessages.getGamesPlayed(), stats.gameCount()),
                 formatStat(statsMessages.getWins(), stats.winCount()),
-                formatStat(statsMessages.getWinPercentage(), String.format("%.2f%%", stats.winPercentage())),
+                formatStat(statsMessages.getWinPercentage(),
+                        String.format(currentLocale, "%.2f%%", stats.winPercentage())),
                 formatStat(statsMessages.getTotalPlayTime(),
                         TimeToStringFormatter.format(stats.totalPlayTime(), timeFormattingMessages)),
                 formatStat(statsMessages.getFastestWinTime(), ClockDisplayFormatter.format(stats.fastestWinTime())),
