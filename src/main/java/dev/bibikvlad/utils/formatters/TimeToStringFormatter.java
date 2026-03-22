@@ -11,7 +11,7 @@ public class TimeToStringFormatter {
         if (time.minutes() > 0) stringBuilder.append(messages.getMinutes(time.minutes())).append(" ");
         if (time.second() > 0) stringBuilder.append(messages.getSeconds(time.second())).append(" ");
 
-        stringBuilder.append(messages.getMillisecond(time.millisecond()));
+        stringBuilder.append(messages.getMilliseconds(time.millisecond()));
 
         return stringBuilder.toString().trim();
     }
