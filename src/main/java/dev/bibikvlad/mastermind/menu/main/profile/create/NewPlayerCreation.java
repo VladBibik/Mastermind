@@ -44,10 +44,7 @@ public class NewPlayerCreation extends Menu {
 
         try {
             LocaleType localeType = appContext.currentPlayer().getPlayerConfig().locale();
-            playerService.savePlayerWithProvidedLocale(newPlayerName, localeType);
-
-            Player createdPlayer = playerService.loadLastSelectedPlayer()
-                    .orElseThrow(IllegalStateException::new);
+            Player createdPlayer = playerService.savePlayerWithProvidedLocale(newPlayerName, localeType);
             AppContext appContext = new AppContext(this.appContext.localizationContext(), this.appContext.services(),
                     this.appContext.printer(), this.appContext.parser(), createdPlayer);
 
