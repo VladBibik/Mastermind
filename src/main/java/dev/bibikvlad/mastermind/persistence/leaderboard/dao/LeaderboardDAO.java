@@ -11,7 +11,7 @@ public interface LeaderboardDAO {
 
     List<TurnsLeaderboardEntry> getTurnsLeaderboard();
 
-    List<WinPercentageLeaderboardEntry> getWinPercentageLeaderboard();
+    List<WinPercentageLeaderboardEntry> getWinPercentageLeaderboard(int minGamesPlayed);
 
     List<WinsLeaderboardEntry> getWinsLeaderboard();
 }
