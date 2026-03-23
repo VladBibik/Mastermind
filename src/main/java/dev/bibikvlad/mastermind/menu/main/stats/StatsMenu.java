@@ -5,6 +5,7 @@ import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.common.TimeFormattingMessages;
+import dev.bibikvlad.mastermind.localization.messages.error.ErrorMessages;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.stats.StatsMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
@@ -26,6 +27,7 @@ public class StatsMenu extends Menu {
     private final StatsMessages statsMessages;
     private final InteractionMessages interactionMessages;
     private final TimeFormattingMessages timeFormattingMessages;
+    private final ErrorMessages errorMessages;
     private final Printer printer;
     private final Parser parser;
 
@@ -37,6 +39,7 @@ public class StatsMenu extends Menu {
         this.statsMessages = appContext.localizationContext().getMessages(MessageType.STATS);
         this.interactionMessages = appContext.localizationContext().getMessages(MessageType.INTERACTION);
         this.timeFormattingMessages = appContext.localizationContext().getMessages(MessageType.TIME);
+        this.errorMessages = appContext.localizationContext().getMessages(MessageType.ERROR);
         this.printer = appContext.printer();
         this.parser = appContext.parser();
     }
@@ -58,8 +61,7 @@ public class StatsMenu extends Menu {
 
     private PlayerStatistics fetchPlayerStatistics(long playerId) {
         return playerStatisticsService.getPlayerStatistics(playerId)
-                .orElseThrow(() -> new IllegalStateException("Statistics for the player with ID: "
-                        + playerId + " not found"));
+                .orElseThrow(() -> new IllegalStateException(errorMessages.getStatsNotFoundMessage(playerId)));
     }
 
     private List<String> buildStatsLines(PlayerStatistics stats) {
