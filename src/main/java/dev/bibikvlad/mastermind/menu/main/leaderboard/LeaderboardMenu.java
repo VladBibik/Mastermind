@@ -127,7 +127,7 @@ public class LeaderboardMenu extends Menu {
 
     private Menu printWinPercentageLeaderboard(long playerId) {
         Optional<List<WinPercentageLeaderboardEntry>> optionalLeaderboard =
-                leaderboardService.getWinPercentageLeaderboard(playerId);
+                leaderboardService.getWinPercentageLeaderboard(playerId, 10);
 
         if (optionalLeaderboard.isEmpty()) {
             System.out.println("No leaderboard found. Please play some games to build the leaderboard");
