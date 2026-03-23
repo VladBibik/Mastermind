@@ -33,8 +33,8 @@ public class LeaderboardSQLRepository implements LeaderboardRepository {
     }
 
     @Override
-    public List<WinPercentageLeaderboardEntry> getWinPercentageLeaderboard() {
-        return leaderboardJdbcDAO.getWinPercentageLeaderboard();
+    public List<WinPercentageLeaderboardEntry> getWinPercentageLeaderboard(int minGamesPlayed) {
+        return leaderboardJdbcDAO.getWinPercentageLeaderboard(minGamesPlayed);
     }
 
     @Override
