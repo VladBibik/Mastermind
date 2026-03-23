@@ -43,9 +43,10 @@ public class LeaderboardService {
         }
     }
 
-    public Optional<List<WinPercentageLeaderboardEntry>> getWinPercentageLeaderboard(long playerId) {
+    public Optional<List<WinPercentageLeaderboardEntry>> getWinPercentageLeaderboard(long playerId,
+                                                                                     int minGamesPlayed) {
         List<WinPercentageLeaderboardEntry> winPercentageLeaderboardEntries =
-                leaderboardRepository.getWinPercentageLeaderboard();
+                leaderboardRepository.getWinPercentageLeaderboard(minGamesPlayed);
 
         if (winPercentageLeaderboardEntries.isEmpty()) {
             return Optional.empty();
