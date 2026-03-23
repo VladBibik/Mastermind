@@ -137,7 +137,8 @@ public class LeaderboardMenu extends Menu {
 
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
             System.out.println(leaderboardEntry.playerName() + ": "
-                    + leaderboardEntry.winPercentage() + "%");
+                    + leaderboardEntry.winPercentage() + "% "
+                    + leaderboardEntry.gamesPlayed() + " games" );
         });
 
         return this;
