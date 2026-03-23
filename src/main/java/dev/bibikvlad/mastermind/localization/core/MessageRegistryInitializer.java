@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.localization.core;
 
 import dev.bibikvlad.mastermind.localization.factories.common.ConsoleTimeMessageFactory;
+import dev.bibikvlad.mastermind.localization.factories.error.ConsoleErrorMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.game.ConsoleGameMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.interaction.ConsoleInteractionMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.ConsoleMainMenuMessageFactory;
@@ -11,6 +12,7 @@ import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.logo.C
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.logo.ConsoleLogoMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.stats.ConsoleStatsMessageFactory;
 import dev.bibikvlad.mastermind.localization.messages.common.TimeFormattingMessages;
+import dev.bibikvlad.mastermind.localization.messages.error.ErrorMessages;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;
@@ -26,6 +28,7 @@ public class MessageRegistryInitializer {
         MessageFactoryRegistry messageFactoryRegistry = new MessageFactoryRegistry();
 
         populateCommonRegistry(messageFactoryRegistry);
+        populateErrorRegistry(messageFactoryRegistry);
         populateGameRegistry(messageFactoryRegistry);
         populateMainMenuRegistry(messageFactoryRegistry);
         populateInteractionRegistry(messageFactoryRegistry);
@@ -38,6 +41,14 @@ public class MessageRegistryInitializer {
                 TimeFormattingMessages.class,
                 "i18n.common.time_formatting",
                 new ConsoleTimeMessageFactory()
+        ));
+    }
+
+    private static void populateErrorRegistry(MessageFactoryRegistry messageFactoryRegistry) {
+        messageFactoryRegistry.register(new LocalizedMessageConfig<>(
+                ErrorMessages.class,
+                "i18n.error.error_messages",
+                new ConsoleErrorMessageFactory()
         ));
     }
 
