@@ -104,7 +104,7 @@ public class LeaderboardJdbcDAO implements LeaderboardDAO {
     }
 
     @Override
-    public List<WinPercentageLeaderboardEntry> getWinPercentageLeaderboard() {
+    public List<WinPercentageLeaderboardEntry> getWinPercentageLeaderboard(int minGamesPlayed) {
         List<WinPercentageLeaderboardEntry> winsLeaderboardEntries = new ArrayList<>();
         String getWinRateLeaderboardQuery = """
                 SELECT PLAYER.player_name,
@@ -115,6 +115,7 @@ public class LeaderboardJdbcDAO implements LeaderboardDAO {
                         ON GAME.player_id = PLAYER.player_id
                 GROUP BY PLAYER.player_id,
                          PLAYER.player_name
+                HAVING COUNT(*) >= ?
                 ORDER BY win_percentage DESC,
                          games_played DESC,
                          PLAYER.player_name ASC
@@ -122,6 +123,7 @@ public class LeaderboardJdbcDAO implements LeaderboardDAO {
                 """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(getWinRateLeaderboardQuery)) {
+            preparedStatement.setInt(1, minGamesPlayed);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
