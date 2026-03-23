@@ -1,4 +1,4 @@
 package dev.bibikvlad.mastermind.persistence.leaderboard.model;
 
-public record WinPercentageLeaderboardEntry(String playerName, double winPercentage) {
+public record WinPercentageLeaderboardEntry(String playerName, double winPercentage, long gamesPlayed) {
 }
