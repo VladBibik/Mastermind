@@ -9,7 +9,8 @@ public class WinPercentageMapper {
     public static WinPercentageLeaderboardEntry map(ResultSet resultSet) throws SQLException {
         return new WinPercentageLeaderboardEntry(
                 resultSet.getString("player_name"),
-                resultSet.getDouble("win_percentage")
+                resultSet.getDouble("win_percentage"),
+                resultSet.getLong("games_played")
         );
     }
 }
