@@ -108,7 +108,8 @@ public class LeaderboardJdbcDAO implements LeaderboardDAO {
         List<WinPercentageLeaderboardEntry> winsLeaderboardEntries = new ArrayList<>();
         String getWinRateLeaderboardQuery = """
                 SELECT PLAYER.player_name,
-                       COUNT(*) FILTER (WHERE GAME.result = 'WIN') * 100.0 / COUNT(*) AS win_percentage
+                       COUNT(*) FILTER (WHERE GAME.result = 'WIN') * 100.0 / COUNT(*) AS win_percentage,
+                       COUNT(*) AS games_played
                 FROM games GAME
                     JOIN players PLAYER
                         ON GAME.player_id = PLAYER.player_id
