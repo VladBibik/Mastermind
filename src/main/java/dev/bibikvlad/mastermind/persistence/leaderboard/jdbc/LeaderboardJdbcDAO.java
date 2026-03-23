@@ -115,6 +115,9 @@ public class LeaderboardJdbcDAO implements LeaderboardDAO {
                         ON GAME.player_id = PLAYER.player_id
                 GROUP BY PLAYER.player_id,
                          PLAYER.player_name
+                ORDER BY win_percentage DESC,
+                         games_played DESC,
+                         PLAYER.player_name ASC
                 LIMIT 10;
                 """;
 
