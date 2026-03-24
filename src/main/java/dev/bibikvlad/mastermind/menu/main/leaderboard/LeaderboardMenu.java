@@ -78,10 +78,12 @@ public class LeaderboardMenu extends Menu {
             return this;
         }
 
+        System.out.printf("%-19s%-15s%s", "Name", "Turns", "Time");
+        System.out.println();
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
             System.out.printf("%-20s %-10s %s%n",
-                    leaderboardEntry.playerName() + ":",
-                    leaderboardEntry.numberOfTurns() + " turns",
+                    leaderboardEntry.playerName(),
+                    leaderboardEntry.numberOfTurns(),
                     ClockDisplayFormatter.format(leaderboardEntry.gameDuration()));
         });
 
