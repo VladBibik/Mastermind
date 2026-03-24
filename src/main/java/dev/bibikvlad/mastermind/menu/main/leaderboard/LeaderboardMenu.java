@@ -34,11 +34,11 @@ public class LeaderboardMenu extends Menu {
     private void displayMenu() {
         System.out.println();
         System.out.println("1. Leaderboard");
-        System.out.println("2. Leaderboard based on time needed for win");
-        System.out.println("3. Leaderboard based on number of turns needed for win");
+        System.out.println("2. Leaderboard based on time needed for a win");
+        System.out.println("3. Leaderboard based on number of turns needed for a win");
         System.out.println("4. Win percentage leaderboard");
         System.out.println("5. Leaderboard based on the number of wins");
-        System.out.println("6: Back to the main menu");
+        System.out.println("0: Back to the main menu");
     }
 
     private Menu menuOptionSwitcher(int userInputNumber) {
@@ -58,7 +58,7 @@ public class LeaderboardMenu extends Menu {
             case 5 -> {
                 return printWinsLeaderboard();
             }
-            case 6 -> {
+            case 0 -> {
                 return quit();
             }
             default -> {
