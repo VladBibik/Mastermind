@@ -78,16 +78,26 @@ public class LeaderboardMenu extends Menu {
             return this;
         }
 
-        System.out.printf("%-19s%-15s%s", "Name", "Turns", "Time");
+        System.out.printf("%-25s%-18s%s", "Name", "Turns", "Time");
         System.out.println();
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
-            System.out.printf("%-20s %-10s %s%n",
-                    leaderboardEntry.playerName(),
+            System.out.printf("%-26s %-13s %s%n",
+                    checkAndCropName(leaderboardEntry.playerName()),
                     leaderboardEntry.numberOfTurns(),
                     ClockDisplayFormatter.format(leaderboardEntry.gameDuration()));
         });
 
         return this;
+    }
+
+    private String checkAndCropName(String playerName) {
+        if (playerName.length() < 20) {
+            return playerName;
+        } else {
+            String croppedName = playerName.substring(0, 20);
+
+            return croppedName + "...";
+        }
     }
 
     private Menu printTimeLeaderboard() {
