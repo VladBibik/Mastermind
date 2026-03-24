@@ -5,7 +5,6 @@ import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.MainMenu;
 import dev.bibikvlad.mastermind.persistence.leaderboard.model.*;
-import dev.bibikvlad.mastermind.persistence.player.model.Player;
 import dev.bibikvlad.mastermind.services.LeaderboardService;
 import dev.bibikvlad.utils.formatters.ClockDisplayFormatter;
 
@@ -14,13 +13,11 @@ import java.util.Optional;
 
 public class LeaderboardMenu extends Menu {
     private final LeaderboardService leaderboardService;
-    private final Player currentPlayer;
 
     public LeaderboardMenu(AppContext appContext) {
         super(appContext);
 
         this.leaderboardService = appContext.services().getLeaderboardService();
-        this.currentPlayer = appContext.currentPlayer();
     }
 
     @Override
@@ -45,23 +42,21 @@ public class LeaderboardMenu extends Menu {
     }
 
     private Menu menuOptionSwitcher(int userInputNumber) {
-        long playerId = currentPlayer.getId();
-
         switch (userInputNumber) {
             case 1 -> {
-                return printLeaderboard(playerId);
+                return printLeaderboard();
             }
             case 2 -> {
-                return printTimeLeaderboard(playerId);
+                return printTimeLeaderboard();
             }
             case 3 -> {
-                return printTurnsLeaderboard(playerId);
+                return printTurnsLeaderboard();
             }
             case 4 -> {
-                return printWinPercentageLeaderboard(playerId);
+                return printWinPercentageLeaderboard();
             }
             case 5 -> {
-                return printWinsLeaderboard(playerId);
+                return printWinsLeaderboard();
             }
             case 6 -> {
                 return quit();
@@ -74,8 +69,8 @@ public class LeaderboardMenu extends Menu {
         }
     }
 
-    private Menu printLeaderboard(long playerId) {
-        Optional<List<MainLeaderboardEntry>> optionalLeaderboard = leaderboardService.getMainLeaderboard(playerId);
+    private Menu printLeaderboard() {
+        Optional<List<MainLeaderboardEntry>> optionalLeaderboard = leaderboardService.getMainLeaderboard();
 
         if (optionalLeaderboard.isEmpty()) {
             System.out.println("No leaderboard found. Please play some games to build up the leaderboard");
@@ -91,8 +86,8 @@ public class LeaderboardMenu extends Menu {
         return this;
     }
 
-    private Menu printTimeLeaderboard(long playerId) {
-        Optional<List<TimeLeaderboardEntry>> optionalLeaderboard = leaderboardService.getTimeLeaderboard(playerId);
+    private Menu printTimeLeaderboard() {
+        Optional<List<TimeLeaderboardEntry>> optionalLeaderboard = leaderboardService.getTimeLeaderboard();
 
         if (optionalLeaderboard.isEmpty()) {
             System.out.println("No leaderboard found. Please play some games to build the leaderboard");
@@ -108,8 +103,8 @@ public class LeaderboardMenu extends Menu {
         return this;
     }
 
-    private Menu printTurnsLeaderboard(long playerId) {
-        Optional<List<TurnsLeaderboardEntry>> optionalLeaderboard = leaderboardService.getTurnsLeaderboard(playerId);
+    private Menu printTurnsLeaderboard() {
+        Optional<List<TurnsLeaderboardEntry>> optionalLeaderboard = leaderboardService.getTurnsLeaderboard();
 
         if (optionalLeaderboard.isEmpty()) {
             System.out.println("No leaderboard found. Please play some games to build the leaderboard");
@@ -125,9 +120,9 @@ public class LeaderboardMenu extends Menu {
         return this;
     }
 
-    private Menu printWinPercentageLeaderboard(long playerId) {
+    private Menu printWinPercentageLeaderboard() {
         Optional<List<WinPercentageLeaderboardEntry>> optionalLeaderboard =
-                leaderboardService.getWinPercentageLeaderboard(playerId, 10);
+                leaderboardService.getWinPercentageLeaderboard(10);
 
         if (optionalLeaderboard.isEmpty()) {
             System.out.println("No leaderboard found. Please play some games to build the leaderboard");
@@ -138,15 +133,15 @@ public class LeaderboardMenu extends Menu {
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
             System.out.println(leaderboardEntry.playerName() + ": "
                     + leaderboardEntry.winPercentage() + "% "
-                    + leaderboardEntry.gamesPlayed() + " games" );
+                    + leaderboardEntry.gamesPlayed() + " games");
         });
 
         return this;
     }
 
-    private Menu printWinsLeaderboard(long playerId) {
+    private Menu printWinsLeaderboard() {
         Optional<List<WinsLeaderboardEntry>> optionalLeaderboard =
-                leaderboardService.getWinsLeaderboard(playerId);
+                leaderboardService.getWinsLeaderboard();
 
         if (optionalLeaderboard.isEmpty()) {
             System.out.println("No leaderboard found. Please play some games to build the leaderboard");

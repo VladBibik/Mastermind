@@ -13,7 +13,7 @@ public class LeaderboardService {
         this.leaderboardRepository = leaderboardRepository;
     }
 
-    public Optional<List<MainLeaderboardEntry>> getMainLeaderboard(long playerId) {
+    public Optional<List<MainLeaderboardEntry>> getMainLeaderboard() {
         List<MainLeaderboardEntry> mainLeaderboardEntries = leaderboardRepository.getOverallLeaderboard();
 
         if (mainLeaderboardEntries.isEmpty()) {
@@ -23,7 +23,7 @@ public class LeaderboardService {
         }
     }
 
-    public Optional<List<TimeLeaderboardEntry>> getTimeLeaderboard(long playerId) {
+    public Optional<List<TimeLeaderboardEntry>> getTimeLeaderboard() {
         List<TimeLeaderboardEntry> timeLeaderboardEntries = leaderboardRepository.getTimeLeaderboard();
 
         if (timeLeaderboardEntries.isEmpty()) {
@@ -33,7 +33,7 @@ public class LeaderboardService {
         }
     }
 
-    public Optional<List<TurnsLeaderboardEntry>> getTurnsLeaderboard(long playerId) {
+    public Optional<List<TurnsLeaderboardEntry>> getTurnsLeaderboard() {
         List<TurnsLeaderboardEntry> turnsLeaderboardEntries = leaderboardRepository.getTurnsLeaderboard();
 
         if (turnsLeaderboardEntries.isEmpty()) {
@@ -43,8 +43,7 @@ public class LeaderboardService {
         }
     }
 
-    public Optional<List<WinPercentageLeaderboardEntry>> getWinPercentageLeaderboard(long playerId,
-                                                                                     int minGamesPlayed) {
+    public Optional<List<WinPercentageLeaderboardEntry>> getWinPercentageLeaderboard(int minGamesPlayed) {
         List<WinPercentageLeaderboardEntry> winPercentageLeaderboardEntries =
                 leaderboardRepository.getWinPercentageLeaderboard(minGamesPlayed);
 
@@ -55,7 +54,7 @@ public class LeaderboardService {
         }
     }
 
-    public Optional<List<WinsLeaderboardEntry>> getWinsLeaderboard(long playerId) {
+    public Optional<List<WinsLeaderboardEntry>> getWinsLeaderboard() {
         List<WinsLeaderboardEntry> winsLeaderboardEntries = leaderboardRepository.getWinsLeaderboard();
 
         if (winsLeaderboardEntries.isEmpty()) {
