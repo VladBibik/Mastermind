@@ -90,16 +90,6 @@ public class LeaderboardMenu extends Menu {
         return this;
     }
 
-    private String checkAndCropName(String playerName) {
-        if (playerName.length() < 20) {
-            return playerName;
-        } else {
-            String croppedName = playerName.substring(0, 20);
-
-            return croppedName + "...";
-        }
-    }
-
     private Menu printTimeLeaderboard() {
         Optional<List<TimeLeaderboardEntry>> optionalLeaderboard = leaderboardService.getTimeLeaderboard();
 
@@ -168,6 +158,16 @@ public class LeaderboardMenu extends Menu {
         });
 
         return this;
+    }
+
+    private String checkAndCropName(String playerName) {
+        if (playerName.length() < 20) {
+            return playerName;
+        } else {
+            String croppedName = playerName.substring(0, 20);
+
+            return croppedName + "...";
+        }
     }
 
     private Menu quit() {
