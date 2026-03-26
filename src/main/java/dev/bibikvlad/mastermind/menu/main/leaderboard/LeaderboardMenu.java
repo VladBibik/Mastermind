@@ -99,9 +99,11 @@ public class LeaderboardMenu extends Menu {
             return this;
         }
 
+        System.out.printf("%-29s%s", "Name", "Time");
+        System.out.println();
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
-            System.out.println(leaderboardEntry.playerName() + ": "
-                    + ClockDisplayFormatter.format(leaderboardEntry.gameDuration()));
+            System.out.printf("%-26s %-13s%n", checkAndCropName(leaderboardEntry.playerName()),
+                    ClockDisplayFormatter.format(leaderboardEntry.gameDuration()));
         });
 
         return this;
