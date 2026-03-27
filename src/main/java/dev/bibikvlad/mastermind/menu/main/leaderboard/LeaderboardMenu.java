@@ -163,13 +163,13 @@ public class LeaderboardMenu extends Menu {
     }
 
     private String checkAndCropName(String playerName) {
-        if (playerName.length() < 20) {
-            return playerName;
-        } else {
-            String croppedName = playerName.substring(0, 20);
+        int length = playerName.codePointCount(0, playerName.length());
 
-            return croppedName + "...";
-        }
+        if (length <= 20) return playerName;
+
+        int endIndex = playerName.offsetByCodePoints(0, 20);
+
+        return playerName.substring(0, endIndex) + "...";
     }
 
     private Menu quit() {
