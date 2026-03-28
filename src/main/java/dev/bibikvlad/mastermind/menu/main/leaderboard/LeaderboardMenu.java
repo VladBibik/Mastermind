@@ -118,9 +118,11 @@ public class LeaderboardMenu extends Menu {
             return this;
         }
 
+        System.out.printf("%-25s%s", "Name", "Turns");
+        System.out.println();
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
-            System.out.println(leaderboardEntry.playerName() + ": "
-                    + leaderboardEntry.numberOfTurns() + " turns");
+            System.out.printf("%-26s %-13s%n", checkAndCropName(leaderboardEntry.playerName()),
+                    leaderboardEntry.numberOfTurns());
         });
 
         return this;
