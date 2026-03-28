@@ -138,18 +138,30 @@ public class LeaderboardMenu extends Menu {
             return this;
         }
 
-        System.out.printf("%-25s%-18s%s", "Name", "Win %", "Games");
-        System.out.println();
-        optionalLeaderboard.get().forEach(leaderboardEntry -> {
-            String percentage = String.format("%.2f%%", leaderboardEntry.winPercentage());
+        List<WinPercentageLeaderboardEntry> winPercentageLeaderboard = optionalLeaderboard.get();
 
-            int nameWidth = Math.max(24, leaderboardEntry.playerName().length() + 2);
-            int percentageWidth = Math.max(17, percentage.length() + 2);
+        for (WinPercentageLeaderboardEntry entry : winPercentageLeaderboard) {
+            String nameHeader = "Name";
+            String percentageHeader = "Win %";
+            String gamesHeader = "Games";
 
-            System.out.printf("%-" + nameWidth + "s %-" + percentageWidth + "s %s%n", leaderboardEntry.playerName(),
-                    percentage,
-                    leaderboardEntry.gamesPlayed());
-        });
+            int padding = 10;
+            int nameWidth = nameHeader.length();
+            int percentageWidth = percentageHeader.length();
+            int gamesWidth = gamesHeader.length();
+
+            String percentage = String.format("%.2f%%", entry.winPercentage());
+
+            nameWidth = Math.max(nameWidth + padding, checkAndCropName(entry.playerName()).length() + padding);
+            percentageWidth = Math.max(percentageWidth + padding, percentage.length() + padding);
+            gamesWidth = Math.toIntExact(Math.max(gamesWidth + padding, entry.gamesPlayed() + padding));
+
+            String formatting = "%-" + nameWidth + "s%-" + percentageWidth + "s%s";
+
+            System.out.printf(formatting, nameHeader, percentageHeader, gamesHeader);
+            System.out.println();
+            System.out.printf(formatting, entry.playerName(), percentage, entry.gamesPlayed());
+        }
 
         return this;
     }
