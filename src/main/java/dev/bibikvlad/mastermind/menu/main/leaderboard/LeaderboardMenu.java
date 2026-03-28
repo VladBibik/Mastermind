@@ -138,10 +138,17 @@ public class LeaderboardMenu extends Menu {
             return this;
         }
 
+        System.out.printf("%-25s%-18s%s", "Name", "Win %", "Games");
+        System.out.println();
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
-            System.out.println(leaderboardEntry.playerName() + ": "
-                    + leaderboardEntry.winPercentage() + "% "
-                    + leaderboardEntry.gamesPlayed() + " games");
+            String percentage = String.format("%.2f%%", leaderboardEntry.winPercentage());
+
+            int nameWidth = Math.max(24, leaderboardEntry.playerName().length() + 2);
+            int percentageWidth = Math.max(17, percentage.length() + 2);
+
+            System.out.printf("%-" + nameWidth + "s %-" + percentageWidth + "s %s%n", leaderboardEntry.playerName(),
+                    percentage,
+                    leaderboardEntry.gamesPlayed());
         });
 
         return this;
