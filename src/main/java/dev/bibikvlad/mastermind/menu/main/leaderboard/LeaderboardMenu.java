@@ -8,7 +8,6 @@ import dev.bibikvlad.mastermind.persistence.leaderboard.model.*;
 import dev.bibikvlad.mastermind.services.LeaderboardService;
 import dev.bibikvlad.utils.formatters.ClockDisplayFormatter;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -195,13 +194,15 @@ public class LeaderboardMenu extends Menu {
     }
 
     private String checkAndCropName(String playerName) {
-        int length = playerName.codePointCount(0, playerName.length());
+        if (playerName.length() <= 20) return playerName;
 
-        if (length <= 20) return playerName;
+        int end = 20;
 
-        int endIndex = playerName.offsetByCodePoints(0, 20);
+        if (Character.isHighSurrogate(playerName.charAt(end - 1))) {
+            end--;
+        }
 
-        return playerName.substring(0, endIndex) + "...";
+        return playerName.substring(0, end) + "...";
     }
 
     private Menu quit() {
