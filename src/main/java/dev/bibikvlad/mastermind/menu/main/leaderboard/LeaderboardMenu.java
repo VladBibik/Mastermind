@@ -173,10 +173,6 @@ public class LeaderboardMenu extends Menu {
         return this;
     }
 
-    private int calculateWidth(int header, int data) {
-        return Math.max(header, data) + PADDING;
-    }
-
     private Menu printWinsLeaderboard() {
         Optional<List<WinsLeaderboardEntry>> optionalLeaderboard =
                 leaderboardService.getWinsLeaderboard();
@@ -194,6 +190,10 @@ public class LeaderboardMenu extends Menu {
         return this;
     }
 
+    private Menu quit() {
+        return new MainMenu(appContext);
+    }
+
     private String checkAndCropName(String playerName) {
         if (playerName.length() <= 20)
             return playerName;
@@ -207,7 +207,7 @@ public class LeaderboardMenu extends Menu {
         return playerName.substring(0, end) + "...";
     }
 
-    private Menu quit() {
-        return new MainMenu(appContext);
+    private int calculateWidth(int header, int data) {
+        return Math.max(header, data) + PADDING;
     }
 }
