@@ -8,6 +8,7 @@ import dev.bibikvlad.mastermind.persistence.leaderboard.model.*;
 import dev.bibikvlad.mastermind.services.LeaderboardService;
 import dev.bibikvlad.utils.formatters.ClockDisplayFormatter;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -132,7 +133,7 @@ public class LeaderboardMenu extends Menu {
 
     private Menu printWinPercentageLeaderboard() {
         Optional<List<WinPercentageLeaderboardEntry>> optionalLeaderboard =
-                leaderboardService.getWinPercentageLeaderboard(10);
+                leaderboardService.getWinPercentageLeaderboard(1);
 
         if (optionalLeaderboard.isEmpty()) {
             System.out.println("No leaderboard found. Please play some games to build the leaderboard");
@@ -140,13 +141,20 @@ public class LeaderboardMenu extends Menu {
             return this;
         }
 
+        String nameHeader = "Name";
+        String percentageHeader = "Win %";
+        String gamesHeader = "Games";
+
         List<WinPercentageLeaderboardEntry> winPercentageLeaderboard = optionalLeaderboard.get();
 
-        for (WinPercentageLeaderboardEntry entry : winPercentageLeaderboard) {
-            String nameHeader = "Name";
-            String percentageHeader = "Win %";
-            String gamesHeader = "Games";
+        int longestName = winPercentageLeaderboard.stream()
+                .map(entry -> checkAndCropName(entry.playerName()).length())
+                .max(Integer::compareTo)
+                .orElse(0);
 
+        System.out.println("Longest Name: " + longestName);
+
+        for (WinPercentageLeaderboardEntry entry : winPercentageLeaderboard) {
             String percentage = String.format("%.2f%%", entry.winPercentage());
 
             int nameWidth = calculateWidth(nameHeader.length(), checkAndCropName(entry.playerName()).length());
