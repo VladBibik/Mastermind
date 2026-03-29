@@ -145,17 +145,13 @@ public class LeaderboardMenu extends Menu {
             String percentageHeader = "Win %";
             String gamesHeader = "Games";
 
-            int padding = 10;
-            int nameWidth = nameHeader.length();
-            int percentageWidth = percentageHeader.length();
-
             String percentage = String.format("%.2f%%", entry.winPercentage());
 
-            nameWidth = Math.max(nameWidth, checkAndCropName(entry.playerName()).length()) + padding;
-            percentageWidth = Math.max(percentageWidth, percentage.length()) + padding;
+            int nameWidth = calculateWidth(nameHeader.length(), checkAndCropName(entry.playerName()).length());
+            int percentageWidth = calculateWidth(percentageHeader.length(), percentage.length());
 
             String formatting = "%-" + nameWidth + "s%-" + percentageWidth + "s%s";
-            int lineWidth = nameWidth + percentageWidth + padding;
+            int lineWidth = nameWidth + percentageWidth + 10;
 
             System.out.printf(formatting, nameHeader, percentageHeader, gamesHeader);
             System.out.println();
@@ -165,6 +161,12 @@ public class LeaderboardMenu extends Menu {
         }
 
         return this;
+    }
+
+    private int calculateWidth(int header, int data) {
+        int padding = 10;
+
+        return Math.max(header, data) + padding;
     }
 
     private Menu printWinsLeaderboard() {
