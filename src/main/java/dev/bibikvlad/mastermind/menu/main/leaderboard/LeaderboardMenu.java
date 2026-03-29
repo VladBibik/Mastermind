@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class LeaderboardMenu extends Menu {
+    private final static int PADDING = 10;
+
     private final LeaderboardService leaderboardService;
 
     public LeaderboardMenu(AppContext appContext) {
@@ -151,7 +153,7 @@ public class LeaderboardMenu extends Menu {
             int percentageWidth = calculateWidth(percentageHeader.length(), percentage.length());
 
             String formatting = "%-" + nameWidth + "s%-" + percentageWidth + "s%s";
-            int lineWidth = nameWidth + percentageWidth + 10;
+            int lineWidth = nameWidth + percentageWidth + PADDING;
 
             System.out.printf(formatting, nameHeader, percentageHeader, gamesHeader);
             System.out.println();
@@ -164,9 +166,7 @@ public class LeaderboardMenu extends Menu {
     }
 
     private int calculateWidth(int header, int data) {
-        int padding = 10;
-
-        return Math.max(header, data) + padding;
+        return Math.max(header, data) + PADDING;
     }
 
     private Menu printWinsLeaderboard() {
