@@ -195,11 +195,12 @@ public class LeaderboardMenu extends Menu {
     }
 
     private String checkAndCropName(String playerName) {
-        if (playerName.length() <= 20) return playerName;
+        if (playerName.length() <= 20)
+            return playerName;
 
         int end = 20;
 
-        if (Character.isHighSurrogate(playerName.charAt(end - 1))) {
+        if (Character.isSurrogate(playerName.charAt(end - 1))) {
             end--;
         }
 
