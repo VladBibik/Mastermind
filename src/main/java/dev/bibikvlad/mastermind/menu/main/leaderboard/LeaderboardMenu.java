@@ -153,7 +153,7 @@ public class LeaderboardMenu extends Menu {
 
         int nameColumWidth = calculateWidth(nameHeader.length(), longestName);
         int percentageColumWidth = calculateWidth(percentageHeader.length(),
-                winPercentageLeaderboard.getFirst().toString().length());
+                String.valueOf(winPercentageLeaderboard.getFirst().winPercentage()).length());
 
         String formatting = "%-" + nameColumWidth + "s%-" + percentageColumWidth + "s%s";
         int lineWidth = nameColumWidth + percentageColumWidth + PADDING;
