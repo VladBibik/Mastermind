@@ -154,14 +154,14 @@ public class LeaderboardMenu extends Menu {
             nameWidth = Math.max(nameWidth, checkAndCropName(entry.playerName()).length()) + padding;
             percentageWidth = Math.max(percentageWidth, percentage.length()) + padding;
 
-            String formatting = "%-" + nameWidth + "s|%-" + percentageWidth + "s|%s";
+            String formatting = "%-" + nameWidth + "s%-" + percentageWidth + "s%s";
             int lineWidth = nameWidth + percentageWidth + padding;
 
             System.out.printf(formatting, nameHeader, percentageHeader, gamesHeader);
             System.out.println();
-            System.out.print("_".repeat(Math.max(0, lineWidth)));
+            System.out.print("-".repeat(Math.max(0, lineWidth)));
             System.out.println();
-            System.out.printf(formatting, entry.playerName() + "|", percentage + "|", entry.gamesPlayed());
+            System.out.printf(formatting, entry.playerName(), percentage, entry.gamesPlayed());
         }
 
         return this;
