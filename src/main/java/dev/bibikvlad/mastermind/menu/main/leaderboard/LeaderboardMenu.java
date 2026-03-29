@@ -167,7 +167,7 @@ public class LeaderboardMenu extends Menu {
             System.out.println();
             System.out.print("-".repeat(Math.max(0, lineWidth)));
             System.out.println();
-            System.out.printf(formatting, entry.playerName(), percentage, entry.gamesPlayed());
+            System.out.printf(formatting, checkAndCropName(entry.playerName()), percentage, entry.gamesPlayed());
         }
 
         return this;
