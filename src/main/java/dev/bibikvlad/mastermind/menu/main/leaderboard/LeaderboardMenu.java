@@ -151,22 +151,23 @@ public class LeaderboardMenu extends Menu {
                 .max(Integer::compareTo)
                 .orElse(0);
 
-        System.out.println("Longest Name: " + longestName);
+        int nameColumWidth = calculateWidth(nameHeader.length(), longestName);
+        int percentageColumWidth = calculateWidth(percentageHeader.length(),
+                winPercentageLeaderboard.getFirst().toString().length());
+
+        String formatting = "%-" + nameColumWidth + "s%-" + percentageColumWidth + "s%s";
+        int lineWidth = nameColumWidth + percentageColumWidth + PADDING;
+
+        System.out.printf(formatting, nameHeader, percentageHeader, gamesHeader);
+        System.out.println();
+        System.out.print("-".repeat(Math.max(0, lineWidth)));
+        System.out.println();
 
         for (WinPercentageLeaderboardEntry entry : winPercentageLeaderboard) {
             String percentage = String.format("%.2f%%", entry.winPercentage());
 
-            int nameWidth = calculateWidth(nameHeader.length(), checkAndCropName(entry.playerName()).length());
-            int percentageWidth = calculateWidth(percentageHeader.length(), percentage.length());
-
-            String formatting = "%-" + nameWidth + "s%-" + percentageWidth + "s%s";
-            int lineWidth = nameWidth + percentageWidth + PADDING;
-
-            System.out.printf(formatting, nameHeader, percentageHeader, gamesHeader);
-            System.out.println();
-            System.out.print("-".repeat(Math.max(0, lineWidth)));
-            System.out.println();
             System.out.printf(formatting, checkAndCropName(entry.playerName()), percentage, entry.gamesPlayed());
+            System.out.println();
         }
 
         return this;
