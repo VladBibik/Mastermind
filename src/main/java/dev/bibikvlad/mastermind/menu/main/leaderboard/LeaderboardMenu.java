@@ -201,7 +201,7 @@ public class LeaderboardMenu extends Menu {
         int end = 20;
 
         if (Character.isSurrogate(playerName.charAt(end - 1))) {
-            end--;
+            end = 18;
         }
 
         return playerName.substring(0, end) + "...";
