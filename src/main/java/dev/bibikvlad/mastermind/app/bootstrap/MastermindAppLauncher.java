@@ -11,7 +11,6 @@ import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.core.MenuRunner;
 import dev.bibikvlad.mastermind.menu.main.MainMenu;
-import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.persistence.player.model.Player;
 
 import java.util.Optional;
@@ -61,21 +60,5 @@ public class MastermindAppLauncher {
                                          Parser parser) {
         FirstLaunchFlow firstLaunchFlow = new FirstLaunchFlow(serviceContainer, printer, parser);
         firstLaunchFlow.launch();
-    }
-}
-
-class Test {
-    public static void main(String[] args) {
-        System.out.println(ConsoleColor.DARK_ORANGE.getCode() + "The_Bomber_Man_\uD83D\uDCA3\uD83D\uDD25" + ConsoleColor.RESET.getCode());
-        String name = "\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43\uD83D\uDE43";
-        System.out.println(name.codePointCount(0, name.length()));
-        "Giga TEXT! А Русский?".codePoints().forEach(codePoint -> {
-            String character = new String(Character.toChars(codePoint));
-            System.out.println(Character.getName(codePoint) + "| " + character + ": " + codePoint);
-        });
-
-        //char emoji = '\uD83D\uDE43';
-        char halfEmoji = '\uDE43';
-        System.out.println(halfEmoji);
     }
 }
