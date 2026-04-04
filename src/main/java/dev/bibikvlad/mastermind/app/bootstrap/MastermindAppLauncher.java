@@ -73,5 +73,9 @@ class Test {
             String character = new String(Character.toChars(codePoint));
             System.out.println(Character.getName(codePoint) + "| " + character + ": " + codePoint);
         });
+
+        //char emoji = '\uD83D\uDE43';
+        char halfEmoji = '\uDE43';
+        System.out.println(halfEmoji);
     }
 }
