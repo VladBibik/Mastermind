@@ -5,7 +5,7 @@ import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 public class AnsiSafeFormatter {
     private static final String RESET = ConsoleColor.RESET.getCode();
 
-    public static String format(String message) {
+    public static String isolate(String message) {
         return message + RESET;
     }
 }
