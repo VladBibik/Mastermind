@@ -15,6 +15,7 @@ import dev.bibikvlad.mastermind.menu.main.profile.ProfileMenu;
 import dev.bibikvlad.mastermind.menu.main.settings.SettingsMenu;
 import dev.bibikvlad.mastermind.menu.main.stats.StatsMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
+import dev.bibikvlad.mastermind.model.player.PlayerNameNormalizer;
 
 import java.util.Optional;
 
@@ -50,7 +51,8 @@ public class MainMenu extends Menu {
     }
 
     private void displayMenu() {
-        String playerName = AnsiSafeFormatter.isolate(currentPlayer.getPlayerName());
+        String playerName = PlayerNameNormalizer.normalize(currentPlayer.getPlayerName());
+        playerName = AnsiSafeFormatter.isolate(playerName);
 
         printer.printMessage(mainMenuMessages.getWelcomeMessage(playerName));
         printer.printMessage(mainMenuMessages.getMenuOptionsMessage());
