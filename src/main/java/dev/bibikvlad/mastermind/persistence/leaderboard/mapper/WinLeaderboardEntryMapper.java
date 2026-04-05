@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.persistence.leaderboard.mapper;
 
-import dev.bibikvlad.mastermind.persistence.leaderboard.model.WinsLeaderboardEntry;
+import dev.bibikvlad.mastermind.model.leaderboard.WinsLeaderboardEntry;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

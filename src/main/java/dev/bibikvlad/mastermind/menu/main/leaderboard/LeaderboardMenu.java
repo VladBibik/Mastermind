@@ -4,7 +4,7 @@ import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.MainMenu;
-import dev.bibikvlad.mastermind.persistence.leaderboard.model.*;
+import dev.bibikvlad.mastermind.model.leaderboard.*;
 import dev.bibikvlad.mastermind.services.LeaderboardService;
 import dev.bibikvlad.utils.formatters.ClockDisplayFormatter;
 

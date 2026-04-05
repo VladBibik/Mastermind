@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.persistence.leaderboard.model;
+package dev.bibikvlad.mastermind.model.leaderboard;
 
 public record TurnsLeaderboardEntry(String playerName, int numberOfTurns) {
 }

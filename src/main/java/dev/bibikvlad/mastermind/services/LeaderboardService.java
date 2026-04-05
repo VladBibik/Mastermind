@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.services;
 
-import dev.bibikvlad.mastermind.persistence.leaderboard.model.*;
+import dev.bibikvlad.mastermind.model.leaderboard.*;
 import dev.bibikvlad.mastermind.persistence.leaderboard.repository.LeaderboardRepository;
 
 import java.util.List;

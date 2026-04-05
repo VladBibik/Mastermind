@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.persistence.leaderboard.dao;
 
-import dev.bibikvlad.mastermind.persistence.leaderboard.model.*;
+import dev.bibikvlad.mastermind.model.leaderboard.*;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
 package dev.bibikvlad.mastermind.persistence.leaderboard.jdbc;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
+import dev.bibikvlad.mastermind.model.leaderboard.*;
 import dev.bibikvlad.mastermind.persistence.leaderboard.dao.LeaderboardDAO;
 import dev.bibikvlad.mastermind.persistence.leaderboard.mapper.*;
-import dev.bibikvlad.mastermind.persistence.leaderboard.model.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
