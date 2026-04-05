@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.model.player;
+package dev.bibikvlad.mastermind.model.player.utils;
 
 import dev.bibikvlad.mastermind.app.printer.AnsiSafeFormatter;
 

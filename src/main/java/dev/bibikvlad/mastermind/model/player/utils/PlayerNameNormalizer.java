@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.model.player;
+package dev.bibikvlad.mastermind.model.player.utils;
 
 public class PlayerNameNormalizer {
     public static String normalize(String name) {
