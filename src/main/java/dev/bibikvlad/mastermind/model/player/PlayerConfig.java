@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.persistence.player.model;
+package dev.bibikvlad.mastermind.model.player;
 
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;

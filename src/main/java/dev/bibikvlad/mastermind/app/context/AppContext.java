@@ -4,7 +4,7 @@ import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
-import dev.bibikvlad.mastermind.persistence.player.model.Player;
+import dev.bibikvlad.mastermind.model.player.Player;
 
 public final class AppContext {
     private final LocalizationContext localizationContext;

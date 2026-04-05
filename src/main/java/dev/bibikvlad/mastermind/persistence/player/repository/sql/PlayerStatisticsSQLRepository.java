@@ -2,7 +2,7 @@ package dev.bibikvlad.mastermind.persistence.player.repository.sql;
 
 import dev.bibikvlad.mastermind.persistence.database.TransactionManager;
 import dev.bibikvlad.mastermind.persistence.player.dao.PlayerStatisticsDAO;
-import dev.bibikvlad.mastermind.persistence.player.model.PlayerStatistics;
+import dev.bibikvlad.mastermind.model.player.PlayerStatistics;
 import dev.bibikvlad.mastermind.persistence.player.repository.PlayerStatisticsRepository;
 import dev.bibikvlad.mastermind.values.Time;
 

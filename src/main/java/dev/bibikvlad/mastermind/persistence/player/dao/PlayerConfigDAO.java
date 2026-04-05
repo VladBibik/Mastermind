@@ -2,7 +2,7 @@ package dev.bibikvlad.mastermind.persistence.player.dao;
 
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
-import dev.bibikvlad.mastermind.persistence.player.model.PlayerConfig;
+import dev.bibikvlad.mastermind.model.player.PlayerConfig;
 
 import java.util.Optional;
 

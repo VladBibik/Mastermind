@@ -11,7 +11,7 @@ import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.core.MenuRunner;
 import dev.bibikvlad.mastermind.menu.main.MainMenu;
-import dev.bibikvlad.mastermind.persistence.player.model.Player;
+import dev.bibikvlad.mastermind.model.player.Player;
 
 import java.util.Optional;
 

@@ -12,7 +12,7 @@ import dev.bibikvlad.mastermind.localization.messages.menu.main.game.GameMenuMes
 import dev.bibikvlad.mastermind.menu.main.MainMenu;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
-import dev.bibikvlad.mastermind.persistence.player.model.Player;
+import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.GamesService;
 
 public class GameLaunchMenu extends Menu {

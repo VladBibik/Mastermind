@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.persistence.player.dao;
 
-import dev.bibikvlad.mastermind.persistence.player.model.PlayerStatistics;
+import dev.bibikvlad.mastermind.model.player.PlayerStatistics;
 import dev.bibikvlad.mastermind.values.Time;
 
 public interface PlayerStatisticsDAO {

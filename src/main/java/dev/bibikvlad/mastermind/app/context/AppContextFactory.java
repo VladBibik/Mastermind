@@ -3,7 +3,7 @@ package dev.bibikvlad.mastermind.app.context;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
-import dev.bibikvlad.mastermind.persistence.player.model.Player;
+import dev.bibikvlad.mastermind.model.player.Player;
 
 public class AppContextFactory {
     public static AppContext withLocale(AppContext appContext, LocaleType localeType) {
