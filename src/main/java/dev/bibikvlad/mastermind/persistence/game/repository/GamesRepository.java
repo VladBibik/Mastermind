@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.persistence.game.repository;
 
 import dev.bibikvlad.mastermind.game.data.GameData;
-import dev.bibikvlad.mastermind.persistence.game.model.Game;
+import dev.bibikvlad.mastermind.model.game.Game;
 
 import java.util.List;
 

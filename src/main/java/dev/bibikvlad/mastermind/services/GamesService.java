@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.services;
 
 import dev.bibikvlad.mastermind.game.data.GameData;
-import dev.bibikvlad.mastermind.persistence.game.model.NewGame;
+import dev.bibikvlad.mastermind.model.game.NewGame;
 import dev.bibikvlad.mastermind.persistence.game.repository.GamesRepository;
 
 public class GamesService {

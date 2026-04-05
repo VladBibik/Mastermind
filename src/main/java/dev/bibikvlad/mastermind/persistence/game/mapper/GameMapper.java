@@ -3,7 +3,7 @@ package dev.bibikvlad.mastermind.persistence.game.mapper;
 import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.game.data.GameOutcome;
 import dev.bibikvlad.mastermind.game.data.GameResult;
-import dev.bibikvlad.mastermind.persistence.game.model.Game;
+import dev.bibikvlad.mastermind.model.game.Game;
 import dev.bibikvlad.utils.formatters.SQLiteTimestampFormatter;
 
 import java.sql.ResultSet;
