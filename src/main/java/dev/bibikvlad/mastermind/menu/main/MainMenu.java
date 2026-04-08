@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.menu.main;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
+import dev.bibikvlad.mastermind.app.printer.AnsiSafeFormatter;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.MainMenuInputInterpreter;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
@@ -14,7 +15,6 @@ import dev.bibikvlad.mastermind.menu.main.profile.ProfileMenu;
 import dev.bibikvlad.mastermind.menu.main.settings.SettingsMenu;
 import dev.bibikvlad.mastermind.menu.main.stats.StatsMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
-import dev.bibikvlad.mastermind.model.player.utils.PlayerNameFormatter;
 
 import java.util.Optional;
 
@@ -50,7 +50,7 @@ public class MainMenu extends Menu {
     }
 
     private void displayMenu() {
-        String playerName = PlayerNameFormatter.format(currentPlayer.getPlayerName());
+        String playerName = AnsiSafeFormatter.isolate(currentPlayer.getPlayerName());
 
         printer.printMessage(mainMenuMessages.getWelcomeMessage(playerName));
         printer.printMessage(mainMenuMessages.getMenuOptionsMessage());
