@@ -10,6 +10,7 @@ import dev.bibikvlad.utils.formatters.ClockDisplayFormatter;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public class LeaderboardMenu extends Menu {
     private final static int PADDING = 10;
@@ -146,12 +147,12 @@ public class LeaderboardMenu extends Menu {
 
         List<WinPercentageLeaderboardEntry> winPercentageLeaderboard = optionalLeaderboard.get();
 
-        int longestName = winPercentageLeaderboard.stream()
-                .map(entry -> entry.playerName().length())
-                .max(Integer::compareTo)
-                .orElse(0);
+        int longestNameSize = getLongestNameSize(
+                winPercentageLeaderboard
+                        .stream()
+                        .map(WinPercentageLeaderboardEntry::playerName));
 
-        int nameColumWidth = calculateWidth(nameHeader.length(), longestName);
+        int nameColumWidth = calculateWidth(nameHeader.length(), longestNameSize);
         int percentageColumWidth = calculateWidth(percentageHeader.length(),
                 String.valueOf(winPercentageLeaderboard.getFirst().winPercentage()).length());
 
@@ -192,6 +193,12 @@ public class LeaderboardMenu extends Menu {
 
     private Menu quit() {
         return new MainMenu(appContext);
+    }
+
+    private int getLongestNameSize(Stream<String> namesStream) {
+        return namesStream.map(String::length)
+                .max(Integer::compareTo)
+                .orElse(0);
     }
 
     private String checkAndCropName(String playerName) {
