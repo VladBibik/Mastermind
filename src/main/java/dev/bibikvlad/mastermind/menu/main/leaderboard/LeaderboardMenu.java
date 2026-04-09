@@ -147,7 +147,7 @@ public class LeaderboardMenu extends Menu {
         List<WinPercentageLeaderboardEntry> winPercentageLeaderboard = optionalLeaderboard.get();
 
         int longestName = winPercentageLeaderboard.stream()
-                .map(entry -> checkAndCropName(entry.playerName()).length())
+                .map(entry -> entry.playerName().length())
                 .max(Integer::compareTo)
                 .orElse(0);
 
@@ -166,7 +166,7 @@ public class LeaderboardMenu extends Menu {
         for (WinPercentageLeaderboardEntry entry : winPercentageLeaderboard) {
             String percentage = String.format("%.2f%%", entry.winPercentage());
 
-            System.out.printf(formatting, checkAndCropName(entry.playerName()), percentage, entry.gamesPlayed());
+            System.out.printf(formatting, entry.playerName(), percentage, entry.gamesPlayed());
             System.out.println();
         }
 
