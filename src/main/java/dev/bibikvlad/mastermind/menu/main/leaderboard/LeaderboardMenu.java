@@ -87,11 +87,12 @@ public class LeaderboardMenu extends Menu {
                         .stream()
                         .map(MainLeaderboardEntry::playerName),
                 "Name".length());
+        int turnsColumnWidth = "Turns".length() + PADDING;
 
-        System.out.printf("%-" + nameColumnWidth + "s%-18s%s", "Name", "Turns", "Time");
+        System.out.printf("%-" + nameColumnWidth + "s%-" + turnsColumnWidth + "s%s", "Name", "Turns", "Time");
         System.out.println();
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
-            System.out.printf("%-" + nameColumnWidth + "s%-13s %s%n",
+            System.out.printf("%-" + nameColumnWidth + "s%-" + turnsColumnWidth + "s%s%n",
                     leaderboardEntry.playerName(),
                     leaderboardEntry.numberOfTurns(),
                     ClockDisplayFormatter.format(leaderboardEntry.gameDuration()));
