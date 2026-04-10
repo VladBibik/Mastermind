@@ -206,7 +206,7 @@ public class LeaderboardMenu extends Menu {
                 .max(Integer::compareTo)
                 .orElse(0);
 
-        return Math.max(nameColumWidth, headerLength);
+        return Math.max(nameColumWidth, headerLength) + PADDING;
     }
 
     private String checkAndCropName(String playerName) {
