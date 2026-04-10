@@ -123,11 +123,26 @@ public class LeaderboardMenu extends Menu {
             return this;
         }
 
-        System.out.printf("%-29s%s", "Name", "Time");
+        String nameColumnHeader = "Name";
+        String timeColumnHeader = "Time";
+
+        int nameColumnWidth = getNameColumnWidth(
+                optionalLeaderboard
+                        .get()
+                        .stream()
+                        .map(TimeLeaderboardEntry::playerName),
+                nameColumnHeader.length()
+        );
+        int timeColumnWidth = timeColumnHeader.length() + PADDING;
+
+        String formatting = "%-" + nameColumnWidth + "s%-" + timeColumnWidth + "s";
+
+        System.out.printf(formatting, nameColumnHeader, timeColumnHeader);
         System.out.println();
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
-            System.out.printf("%-26s %-13s%n", checkAndCropName(leaderboardEntry.playerName()),
-                    ClockDisplayFormatter.format(leaderboardEntry.gameDuration()));
+            System.out.printf(formatting,
+                    leaderboardEntry.playerName(), ClockDisplayFormatter.format(leaderboardEntry.gameDuration()));
+            System.out.println();
         });
 
         return this;
