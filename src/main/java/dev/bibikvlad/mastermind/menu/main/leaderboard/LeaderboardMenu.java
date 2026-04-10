@@ -167,8 +167,7 @@ public class LeaderboardMenu extends Menu {
                         .stream()
                         .map(WinPercentageLeaderboardEntry::playerName),
                 nameHeader.length());
-        int percentageColumWidth = calculateWidth(percentageHeader.length(),
-                String.valueOf(winPercentageLeaderboard.getFirst().winPercentage()).length());
+        int percentageColumWidth = percentageHeader.length() + PADDING;
 
         String formatting = "%-" + nameColumWidth + "s%-" + percentageColumWidth + "s%s";
         int lineWidth = nameColumWidth + percentageColumWidth + PADDING;
@@ -228,9 +227,5 @@ public class LeaderboardMenu extends Menu {
         }
 
         return playerName.substring(0, end) + "...";
-    }
-
-    private int calculateWidth(int header, int data) {
-        return Math.max(header, data) + PADDING;
     }
 }
