@@ -93,8 +93,9 @@ public class LeaderboardMenu extends Menu {
                 nameColumnHeader.length());
         int turnsColumnWidth = turnsColumnHeader.length() + PADDING;
 
-        System.out.printf("%-" + nameColumnWidth + "s%-" + turnsColumnWidth + "s%s",
-                nameColumnHeader, turnsColumnHeader, timeColumnHeader);
+        String formatting = "%-" + nameColumnWidth + "s%-" + turnsColumnWidth + "s%s";
+
+        System.out.printf(formatting, nameColumnHeader, turnsColumnHeader, timeColumnHeader);
         System.out.println();
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
             System.out.printf("%-" + nameColumnWidth + "s%-" + turnsColumnWidth + "s%s%n",
