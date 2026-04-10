@@ -147,12 +147,11 @@ public class LeaderboardMenu extends Menu {
 
         List<WinPercentageLeaderboardEntry> winPercentageLeaderboard = optionalLeaderboard.get();
 
-        int longestNameSize = getLongestNameSize(
+        int nameColumWidth = getNameColumnWidth(
                 winPercentageLeaderboard
                         .stream()
-                        .map(WinPercentageLeaderboardEntry::playerName));
-
-        int nameColumWidth = calculateWidth(nameHeader.length(), longestNameSize);
+                        .map(WinPercentageLeaderboardEntry::playerName),
+                nameHeader.length());
         int percentageColumWidth = calculateWidth(percentageHeader.length(),
                 String.valueOf(winPercentageLeaderboard.getFirst().winPercentage()).length());
 
@@ -195,10 +194,12 @@ public class LeaderboardMenu extends Menu {
         return new MainMenu(appContext);
     }
 
-    private int getLongestNameSize(Stream<String> namesStream) {
-        return namesStream.map(String::length)
+    private int getNameColumnWidth(Stream<String> namesStream, int headerLength) {
+        int nameColumWidth = namesStream.map(String::length)
                 .max(Integer::compareTo)
                 .orElse(0);
+
+        return Math.max(nameColumWidth, headerLength);
     }
 
     private String checkAndCropName(String playerName) {
