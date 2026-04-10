@@ -1,7 +1,9 @@
 package dev.bibikvlad.mastermind.menu.main.leaderboard;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
+import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
+import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.MainMenu;
 import dev.bibikvlad.mastermind.model.leaderboard.*;
@@ -15,11 +17,15 @@ import java.util.stream.Stream;
 public class LeaderboardMenu extends Menu {
     private final static int PADDING = 10;
 
+    private final Printer printer;
+    private final Parser parser;
     private final LeaderboardService leaderboardService;
 
     public LeaderboardMenu(AppContext appContext) {
         super(appContext);
 
+        this.printer = appContext.printer();
+        this.parser = appContext.parser();
         this.leaderboardService = appContext.services().getLeaderboardService();
     }
 
