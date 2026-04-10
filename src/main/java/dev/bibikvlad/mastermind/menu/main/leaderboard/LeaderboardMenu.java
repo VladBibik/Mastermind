@@ -81,11 +81,18 @@ public class LeaderboardMenu extends Menu {
             return this;
         }
 
-        System.out.printf("%-25s%-18s%s", "Name", "Turns", "Time");
+        int nameColumnWidth = getNameColumnWidth(
+                optionalLeaderboard
+                        .get()
+                        .stream()
+                        .map(MainLeaderboardEntry::playerName),
+                "Name".length());
+
+        System.out.printf("%-" + nameColumnWidth + "s%-18s%s", "Name", "Turns", "Time");
         System.out.println();
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
-            System.out.printf("%-26s %-13s %s%n",
-                    checkAndCropName(leaderboardEntry.playerName()),
+            System.out.printf("%-" + nameColumnWidth + "s%-13s %s%n",
+                    leaderboardEntry.playerName(),
                     leaderboardEntry.numberOfTurns(),
                     ClockDisplayFormatter.format(leaderboardEntry.gameDuration()));
         });
