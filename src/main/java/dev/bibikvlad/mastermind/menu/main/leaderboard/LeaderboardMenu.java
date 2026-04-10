@@ -81,15 +81,20 @@ public class LeaderboardMenu extends Menu {
             return this;
         }
 
+        String nameColumnHeader = "Name";
+        String turnsColumnHeader = "Turns";
+        String timeColumnHeader = "Time";
+
         int nameColumnWidth = getNameColumnWidth(
                 optionalLeaderboard
                         .get()
                         .stream()
                         .map(MainLeaderboardEntry::playerName),
-                "Name".length());
-        int turnsColumnWidth = "Turns".length() + PADDING;
+                nameColumnHeader.length());
+        int turnsColumnWidth = turnsColumnHeader.length() + PADDING;
 
-        System.out.printf("%-" + nameColumnWidth + "s%-" + turnsColumnWidth + "s%s", "Name", "Turns", "Time");
+        System.out.printf("%-" + nameColumnWidth + "s%-" + turnsColumnWidth + "s%s",
+                nameColumnHeader, turnsColumnHeader, timeColumnHeader);
         System.out.println();
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
             System.out.printf("%-" + nameColumnWidth + "s%-" + turnsColumnWidth + "s%s%n",
