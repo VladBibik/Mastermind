@@ -98,10 +98,11 @@ public class LeaderboardMenu extends Menu {
         System.out.printf(formatting, nameColumnHeader, turnsColumnHeader, timeColumnHeader);
         System.out.println();
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
-            System.out.printf("%-" + nameColumnWidth + "s%-" + turnsColumnWidth + "s%s%n",
+            System.out.printf(formatting,
                     leaderboardEntry.playerName(),
                     leaderboardEntry.numberOfTurns(),
                     ClockDisplayFormatter.format(leaderboardEntry.gameDuration()));
+            System.out.println();
         });
 
         return this;
