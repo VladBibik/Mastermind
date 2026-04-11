@@ -157,11 +157,26 @@ public class LeaderboardMenu extends Menu {
             return this;
         }
 
-        System.out.printf("%-25s%s", "Name", "Turns");
+        String nameColumnHeader = "Name";
+        String turnsColumnHeader = "Turns";
+
+        int nameColumnWidth = getNameColumnWidth(
+                optionalLeaderboard
+                        .get()
+                        .stream()
+                        .map(TurnsLeaderboardEntry::playerName),
+                nameColumnHeader.length()
+        );
+        int turnsColumnWidth = turnsColumnHeader.length() + PADDING;
+
+        String formatting = "%-" + nameColumnWidth + "s%-" + turnsColumnWidth + "s";
+
+        System.out.printf(formatting, "Name", "Turns");
         System.out.println();
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
-            System.out.printf("%-26s %-13s%n", checkAndCropName(leaderboardEntry.playerName()),
-                    leaderboardEntry.numberOfTurns());
+            System.out.printf(formatting,
+                    leaderboardEntry.playerName(), leaderboardEntry.numberOfTurns());
+            System.out.println();
         });
 
         return this;
