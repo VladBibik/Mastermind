@@ -251,17 +251,4 @@ public class LeaderboardMenu extends Menu {
 
         return Math.max(nameColumWidth, headerLength) + PADDING;
     }
-
-    private String checkAndCropName(String playerName) {
-        if (playerName.length() <= 20)
-            return playerName;
-
-        int end = 20;
-
-        if (Character.isSurrogate(playerName.charAt(end - 1))) {
-            end = 18;
-        }
-
-        return playerName.substring(0, end) + "...";
-    }
 }
