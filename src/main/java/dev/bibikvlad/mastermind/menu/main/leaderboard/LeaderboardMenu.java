@@ -98,8 +98,8 @@ public class LeaderboardMenu extends Menu {
                         .stream()
                         .map(MainLeaderboardEntry::playerName),
                 nameColumnHeader.length());
-        int turnsColumnWidth = turnsColumnHeader.length() + PADDING;
-        int timeColumnWidth = timeColumnHeader.length() + PADDING;
+        int turnsColumnWidth = addPadding(turnsColumnHeader.length());
+        int timeColumnWidth = addPadding(timeColumnHeader.length());
 
         String formatting = "%-" + nameColumnWidth + "s%-" + turnsColumnWidth + "s%s";
 
@@ -136,7 +136,7 @@ public class LeaderboardMenu extends Menu {
                         .map(TimeLeaderboardEntry::playerName),
                 nameColumnHeader.length()
         );
-        int timeColumnWidth = timeColumnHeader.length() + PADDING;
+        int timeColumnWidth = addPadding(timeColumnHeader.length());
 
         String formatting = "%-" + nameColumnWidth + "s%-" + timeColumnWidth + "s";
 
@@ -170,7 +170,7 @@ public class LeaderboardMenu extends Menu {
                         .map(TurnsLeaderboardEntry::playerName),
                 nameColumnHeader.length()
         );
-        int turnsColumnWidth = turnsColumnHeader.length() + PADDING;
+        int turnsColumnWidth = addPadding(turnsColumnHeader.length());
 
         String formatting = "%-" + nameColumnWidth + "s%-" + turnsColumnWidth + "s";
 
@@ -206,7 +206,7 @@ public class LeaderboardMenu extends Menu {
                         .stream()
                         .map(WinPercentageLeaderboardEntry::playerName),
                 nameHeader.length());
-        int percentageColumWidth = percentageHeader.length() + PADDING;
+        int percentageColumWidth = addPadding(percentageHeader.length());
 
         String formatting = "%-" + nameColumWidth + "s%-" + percentageColumWidth + "s%s";
 
