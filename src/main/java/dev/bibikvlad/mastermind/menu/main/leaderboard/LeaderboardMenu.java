@@ -207,12 +207,13 @@ public class LeaderboardMenu extends Menu {
                         .map(WinPercentageLeaderboardEntry::playerName),
                 nameHeader.length());
         int percentageColumWidth = addPadding(percentageHeader.length());
+        int gamesColumWidth = addPadding(gamesHeader.length());
 
         String formatting = "%-" + nameColumWidth + "s%-" + percentageColumWidth + "s%s";
 
         System.out.printf(formatting, nameHeader, percentageHeader, gamesHeader);
         System.out.println();
-        System.out.print(getDividerLine(nameColumWidth, percentageColumWidth));
+        System.out.print(getDividerLine(nameColumWidth, percentageColumWidth, gamesColumWidth));
         System.out.println();
 
         for (WinPercentageLeaderboardEntry entry : winPercentageLeaderboard) {
