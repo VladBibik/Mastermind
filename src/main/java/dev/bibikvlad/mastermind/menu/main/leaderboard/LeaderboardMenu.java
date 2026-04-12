@@ -99,11 +99,13 @@ public class LeaderboardMenu extends Menu {
                         .map(MainLeaderboardEntry::playerName),
                 nameColumnHeader.length());
         int turnsColumnWidth = turnsColumnHeader.length() + PADDING;
+        int timeColumnWidth = timeColumnHeader.length() + PADDING;
 
         String formatting = "%-" + nameColumnWidth + "s%-" + turnsColumnWidth + "s%s";
 
         System.out.printf(formatting, nameColumnHeader, turnsColumnHeader, timeColumnHeader);
         System.out.println();
+        System.out.println(getDividerLine(nameColumnWidth, turnsColumnWidth, timeColumnWidth));
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
             System.out.printf(formatting,
                     leaderboardEntry.playerName(),
