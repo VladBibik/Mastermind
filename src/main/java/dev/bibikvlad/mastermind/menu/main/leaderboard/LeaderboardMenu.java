@@ -253,7 +253,7 @@ public class LeaderboardMenu extends Menu {
     }
 
     private String getDividerLine(int... headerLengths) {
-        int headerLength = Arrays.stream(headerLengths).sum() + PADDING;
+        int headerLength = Arrays.stream(headerLengths).sum();
 
         return "_".repeat(headerLength);
     }
