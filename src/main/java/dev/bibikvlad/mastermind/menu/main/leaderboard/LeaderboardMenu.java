@@ -10,6 +10,7 @@ import dev.bibikvlad.mastermind.model.leaderboard.*;
 import dev.bibikvlad.mastermind.services.LeaderboardService;
 import dev.bibikvlad.utils.formatters.ClockDisplayFormatter;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -206,11 +207,10 @@ public class LeaderboardMenu extends Menu {
         int percentageColumWidth = percentageHeader.length() + PADDING;
 
         String formatting = "%-" + nameColumWidth + "s%-" + percentageColumWidth + "s%s";
-        int lineWidth = nameColumWidth + percentageColumWidth + PADDING;
 
         System.out.printf(formatting, nameHeader, percentageHeader, gamesHeader);
         System.out.println();
-        System.out.print("-".repeat(Math.max(0, lineWidth)));
+        System.out.print(getDividerLine(nameColumWidth, percentageColumWidth));
         System.out.println();
 
         for (WinPercentageLeaderboardEntry entry : winPercentageLeaderboard) {
@@ -250,5 +250,11 @@ public class LeaderboardMenu extends Menu {
                 .orElse(0);
 
         return Math.max(nameColumWidth, headerLength) + PADDING;
+    }
+
+    private String getDividerLine(int... headerLengths) {
+        int headerLength = Arrays.stream(headerLengths).sum() + PADDING;
+
+        return "_".repeat(headerLength);
     }
 }
