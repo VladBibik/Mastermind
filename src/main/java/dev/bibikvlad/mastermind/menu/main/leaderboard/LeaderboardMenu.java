@@ -142,6 +142,7 @@ public class LeaderboardMenu extends Menu {
 
         System.out.printf(formatting, nameColumnHeader, timeColumnHeader);
         System.out.println();
+        System.out.println(getDividerLine(nameColumnWidth, timeColumnWidth));
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
             System.out.printf(formatting,
                     leaderboardEntry.playerName(), ClockDisplayFormatter.format(leaderboardEntry.gameDuration()));
@@ -176,6 +177,7 @@ public class LeaderboardMenu extends Menu {
 
         System.out.printf(formatting, "Name", "Turns");
         System.out.println();
+        System.out.println(getDividerLine(nameColumnWidth, turnsColumnWidth));
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
             System.out.printf(formatting,
                     leaderboardEntry.playerName(), leaderboardEntry.numberOfTurns());
