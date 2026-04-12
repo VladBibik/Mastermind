@@ -251,12 +251,16 @@ public class LeaderboardMenu extends Menu {
                 .max(Integer::compareTo)
                 .orElse(0);
 
-        return Math.max(nameColumWidth, headerLength) + PADDING;
+        return addPadding(Math.max(nameColumWidth, headerLength));
     }
 
     private String getDividerLine(int... headerLengths) {
         int headerLength = Arrays.stream(headerLengths).sum();
 
         return "_".repeat(headerLength);
+    }
+
+    private int addPadding(int value) {
+        return value + PADDING;
     }
 }
