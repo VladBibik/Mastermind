@@ -235,9 +235,27 @@ public class LeaderboardMenu extends Menu {
 
             return this;
         }
+        String nameColumnHeader = "Name";
+        String winsColumnHeader = "Wins";
 
+        int nameColumnWidth = getNameColumnWidth(
+                optionalLeaderboard
+                        .get()
+                        .stream()
+                        .map(WinsLeaderboardEntry::playerName),
+                nameColumnHeader.length());
+        int winsColumnWidth = addPadding(winsColumnHeader.length());
+
+        String formatting = "%-" + nameColumnWidth + "s%-" + winsColumnWidth + "s";
+
+        System.out.printf(formatting, nameColumnHeader, winsColumnHeader);
+        System.out.println();
+        System.out.println(getDividerLine(nameColumnWidth, winsColumnWidth));
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
-            System.out.println(leaderboardEntry.playerName() + ": " + leaderboardEntry.numberOfWins());
+            System.out.printf(formatting,
+                    leaderboardEntry.playerName(),
+                    leaderboardEntry.numberOfWins());
+            System.out.println();
         });
 
         return this;
