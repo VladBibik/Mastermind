@@ -105,7 +105,7 @@ public class LeaderboardMenu extends Menu {
 
         System.out.printf(formatting, nameColumnHeader, turnsColumnHeader, timeColumnHeader);
         System.out.println();
-        System.out.println(getDividerLine(nameColumnWidth, turnsColumnWidth, timeColumnWidth));
+        printDividerLine(nameColumnWidth, turnsColumnWidth, timeColumnWidth);
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
             System.out.printf(formatting,
                     leaderboardEntry.playerName(),
@@ -141,8 +141,7 @@ public class LeaderboardMenu extends Menu {
         String formatting = "%-" + nameColumnWidth + "s%-" + timeColumnWidth + "s";
 
         System.out.printf(formatting, nameColumnHeader, timeColumnHeader);
-        System.out.println();
-        System.out.println(getDividerLine(nameColumnWidth, timeColumnWidth));
+        printDividerLine(nameColumnWidth, timeColumnWidth);
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
             System.out.printf(formatting,
                     leaderboardEntry.playerName(), ClockDisplayFormatter.format(leaderboardEntry.gameDuration()));
@@ -176,8 +175,7 @@ public class LeaderboardMenu extends Menu {
         String formatting = "%-" + nameColumnWidth + "s%-" + turnsColumnWidth + "s";
 
         System.out.printf(formatting, "Name", "Turns");
-        System.out.println();
-        System.out.println(getDividerLine(nameColumnWidth, turnsColumnWidth));
+        printDividerLine(nameColumnWidth, turnsColumnWidth);
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
             System.out.printf(formatting,
                     leaderboardEntry.playerName(), leaderboardEntry.numberOfTurns());
@@ -214,9 +212,7 @@ public class LeaderboardMenu extends Menu {
         String formatting = "%-" + nameColumWidth + "s%-" + percentageColumWidth + "s%s";
 
         System.out.printf(formatting, nameHeader, percentageHeader, gamesHeader);
-        System.out.println();
-        System.out.print(getDividerLine(nameColumWidth, percentageColumWidth, gamesColumWidth));
-        System.out.println();
+        printDividerLine(nameColumWidth, percentageColumWidth, gamesColumWidth);
 
         for (WinPercentageLeaderboardEntry entry : winPercentageLeaderboard) {
             String percentage = String.format("%.2f%%", entry.winPercentage());
@@ -251,8 +247,7 @@ public class LeaderboardMenu extends Menu {
         String formatting = "%-" + nameColumnWidth + "s%-" + winsColumnWidth + "s";
 
         System.out.printf(formatting, nameColumnHeader, winsColumnHeader);
-        System.out.println();
-        System.out.println(getDividerLine(nameColumnWidth, winsColumnWidth));
+        printDividerLine(nameColumnWidth, winsColumnWidth);
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
             System.out.printf(formatting,
                     leaderboardEntry.playerName(),
@@ -275,10 +270,10 @@ public class LeaderboardMenu extends Menu {
         return addPadding(Math.max(nameColumWidth, headerLength));
     }
 
-    private String getDividerLine(int... headerLengths) {
+    private void printDividerLine(int... headerLengths) {
         int headerLength = Arrays.stream(headerLengths).sum();
 
-        return "_".repeat(headerLength);
+        printer.printMessage("\n" + "_".repeat(headerLength));
     }
 
     private int addPadding(int value) {
