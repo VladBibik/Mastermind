@@ -6,6 +6,7 @@ import dev.bibikvlad.mastermind.localization.factories.game.ConsoleGameMessageFa
 import dev.bibikvlad.mastermind.localization.factories.interaction.ConsoleInteractionMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.ConsoleMainMenuMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.game.ConsoleGameMenuMessageFactory;
+import dev.bibikvlad.mastermind.localization.factories.menu.main.leaderboard.ConsoleLeaderboardMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.ConsoleSettingsMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.language.ConsoleLanguageMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.logo.ConsoleColorMessageFactory;
@@ -17,6 +18,8 @@ import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.game.GameMenuMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.leaderboards.ConsoleLeaderboardMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.leaderboards.LeaderboardMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.SettingsMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.language.LanguageSelectionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.logo.LogoColorSelectionMessages;
@@ -68,6 +71,7 @@ public class MessageRegistryInitializer {
         ));
 
         populateGameMenuRegistry(messageFactoryRegistry);
+        populateLeaderboardsRegistry(messageFactoryRegistry);
         populateStatsRegistry(messageFactoryRegistry);
         populateSettingsRegistry(messageFactoryRegistry);
     }
@@ -77,6 +81,14 @@ public class MessageRegistryInitializer {
                 GameMenuMessages.class,
                 "i18n.menu.main.game.game_menu",
                 new ConsoleGameMenuMessageFactory()
+        ));
+    }
+
+    private static void populateLeaderboardsRegistry(MessageFactoryRegistry messageFactoryRegistry) {
+        messageFactoryRegistry.register(new LocalizedMessageConfig<>(
+                LeaderboardMessages.class,
+                "i18n.menu.main.leaderboards.leaderboard_menu",
+                new ConsoleLeaderboardMessageFactory()
         ));
     }
 
