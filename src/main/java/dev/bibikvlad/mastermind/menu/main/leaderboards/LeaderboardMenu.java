@@ -292,7 +292,7 @@ public class LeaderboardMenu extends Menu {
     private void printDividerLine(int... headerLengths) {
         int headerLength = Arrays.stream(headerLengths).sum();
 
-        printer.printMessage("\n" + "_".repeat(headerLength));
+        printer.printMessage("_".repeat(headerLength));
     }
 
     private int addPadding(int value) {
