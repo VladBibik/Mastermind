@@ -6,7 +6,7 @@ import dev.bibikvlad.mastermind.localization.messages.menu.main.leaderboards.Lea
 
 import java.util.ResourceBundle;
 
-public class LeaderboardMessageFactory implements MessageFactory<LeaderboardMessages> {
+public class ConsoleLeaderboardMessageFactory implements MessageFactory<LeaderboardMessages> {
     @Override
     public LeaderboardMessages create(ResourceBundle resourceBundle) {
         return new ConsoleLeaderboardMessages(resourceBundle);
