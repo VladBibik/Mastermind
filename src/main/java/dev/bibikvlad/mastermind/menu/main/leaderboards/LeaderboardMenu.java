@@ -4,6 +4,9 @@ import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
+import dev.bibikvlad.mastermind.localization.config.MessageType;
+import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.leaderboards.LeaderboardMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.MainMenu;
 import dev.bibikvlad.mastermind.model.leaderboard.*;
@@ -20,6 +23,8 @@ public class LeaderboardMenu extends Menu {
 
     private final Printer printer;
     private final Parser parser;
+    private final LeaderboardMessages leaderboardMessages;
+    private final InteractionMessages interactionMessages;
     private final LeaderboardService leaderboardService;
 
     public LeaderboardMenu(AppContext appContext) {
@@ -27,6 +32,8 @@ public class LeaderboardMenu extends Menu {
 
         this.printer = appContext.printer();
         this.parser = appContext.parser();
+        this.leaderboardMessages = appContext.localizationContext().getMessages(MessageType.LEADERBOARDS);
+        this.interactionMessages = appContext.localizationContext().getMessages(MessageType.INTERACTION);
         this.leaderboardService = appContext.services().getLeaderboardService();
     }
 
