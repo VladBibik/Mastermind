@@ -117,6 +117,8 @@ public class LeaderboardMenu extends Menu {
             printer.printMessage(row);
         });
 
+        waitForConfirmation();
+
         return this;
     }
 
@@ -155,6 +157,8 @@ public class LeaderboardMenu extends Menu {
             printer.printMessage(row);
         });
 
+        waitForConfirmation();
+
         return this;
     }
 
@@ -192,6 +196,8 @@ public class LeaderboardMenu extends Menu {
 
             printer.printMessage(row);
         });
+
+        waitForConfirmation();
 
         return this;
     }
@@ -236,6 +242,8 @@ public class LeaderboardMenu extends Menu {
             printer.printMessage(row);
         });
 
+        waitForConfirmation();
+
         return this;
     }
 
@@ -274,6 +282,8 @@ public class LeaderboardMenu extends Menu {
             printer.printMessage(row);
         });
 
+        waitForConfirmation();
+
         return this;
     }
 
@@ -297,5 +307,11 @@ public class LeaderboardMenu extends Menu {
 
     private int addPadding(int value) {
         return value + PADDING;
+    }
+
+    private void waitForConfirmation() {
+        printer.printMessage(interactionMessages.getPressEnterMessage());
+
+        parser.parseUserInput();
     }
 }
