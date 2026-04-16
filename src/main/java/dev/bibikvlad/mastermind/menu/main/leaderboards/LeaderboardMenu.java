@@ -114,7 +114,7 @@ public class LeaderboardMenu extends Menu {
                     leaderboardEntry.numberOfTurns(),
                     ClockDisplayFormatter.format(leaderboardEntry.gameDuration()));
 
-            printer.printMessage(row + "\n");
+            printer.printMessage(row);
         });
 
         return this;
@@ -152,7 +152,7 @@ public class LeaderboardMenu extends Menu {
                     leaderboardEntry.playerName(),
                     ClockDisplayFormatter.format(leaderboardEntry.gameDuration()));
 
-            printer.printMessage(row + "\n");
+            printer.printMessage(row);
         });
 
         return this;
@@ -190,7 +190,7 @@ public class LeaderboardMenu extends Menu {
                     leaderboardEntry.playerName(),
                     leaderboardEntry.numberOfTurns());
 
-            printer.printMessage(row + "\n");
+            printer.printMessage(row);
         });
 
         return this;
@@ -233,7 +233,7 @@ public class LeaderboardMenu extends Menu {
                     percentage,
                     leaderboardEntry.gamesPlayed());
 
-            printer.printMessage(row + "\n");
+            printer.printMessage(row);
         });
 
         return this;
@@ -271,7 +271,7 @@ public class LeaderboardMenu extends Menu {
                     leaderboardEntry.playerName(),
                     leaderboardEntry.numberOfWins());
 
-            printer.printMessage(row + "\n");
+            printer.printMessage(row);
         });
 
         return this;
