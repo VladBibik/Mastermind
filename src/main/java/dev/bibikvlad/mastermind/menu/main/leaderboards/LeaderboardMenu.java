@@ -49,13 +49,7 @@ public class LeaderboardMenu extends Menu {
     }
 
     private void displayMenu() {
-        System.out.println();
-        System.out.println("1. Leaderboard");
-        System.out.println("2. Leaderboard based on time needed for a win");
-        System.out.println("3. Leaderboard based on number of turns needed for a win");
-        System.out.println("4. Win percentage leaderboard");
-        System.out.println("5. Leaderboard based on the number of wins");
-        System.out.println("0: Back to the main menu");
+        printer.printMessage(leaderboardMessages.getMenuOptions());
     }
 
     private Menu menuOptionSwitcher(int userInputNumber) {
@@ -79,7 +73,7 @@ public class LeaderboardMenu extends Menu {
                 return quit();
             }
             default -> {
-                System.out.println("Invalid input. Please enter a number corresponding to the menu option.");
+                printer.printMessage(interactionMessages.getInvalidInputMessage());
 
                 return this;
             }
@@ -90,14 +84,14 @@ public class LeaderboardMenu extends Menu {
         Optional<List<MainLeaderboardEntry>> optionalLeaderboard = leaderboardService.getMainLeaderboard();
 
         if (optionalLeaderboard.isEmpty()) {
-            System.out.println("No leaderboard found. Please play some games to build up the leaderboard");
+            printer.printMessage(leaderboardMessages.getNoLeaderboardError());
 
             return this;
         }
 
-        String nameColumnHeader = "Name";
-        String turnsColumnHeader = "Turns";
-        String timeColumnHeader = "Time";
+        String nameColumnHeader = leaderboardMessages.getHeaderName();
+        String turnsColumnHeader = leaderboardMessages.getHeaderTurns();
+        String timeColumnHeader = leaderboardMessages.getHeaderTime();
 
         int nameColumnWidth = getNameColumnWidth(
                 optionalLeaderboard
@@ -109,16 +103,18 @@ public class LeaderboardMenu extends Menu {
         int timeColumnWidth = addPadding(timeColumnHeader.length());
 
         String formatting = "%-" + nameColumnWidth + "s%-" + turnsColumnWidth + "s%s";
+        String header = String.format(formatting, nameColumnHeader, turnsColumnHeader, timeColumnHeader);
 
-        System.out.printf(formatting, nameColumnHeader, turnsColumnHeader, timeColumnHeader);
-        System.out.println();
+        printer.printMessage(header);
         printDividerLine(nameColumnWidth, turnsColumnWidth, timeColumnWidth);
+
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
-            System.out.printf(formatting,
+            String row = String.format(formatting,
                     leaderboardEntry.playerName(),
                     leaderboardEntry.numberOfTurns(),
                     ClockDisplayFormatter.format(leaderboardEntry.gameDuration()));
-            System.out.println();
+
+            printer.printMessage(row + "\n");
         });
 
         return this;
@@ -128,13 +124,13 @@ public class LeaderboardMenu extends Menu {
         Optional<List<TimeLeaderboardEntry>> optionalLeaderboard = leaderboardService.getTimeLeaderboard();
 
         if (optionalLeaderboard.isEmpty()) {
-            System.out.println("No leaderboard found. Please play some games to build the leaderboard");
+            printer.printMessage(leaderboardMessages.getNoLeaderboardError());
 
             return this;
         }
 
-        String nameColumnHeader = "Name";
-        String timeColumnHeader = "Time";
+        String nameColumnHeader = leaderboardMessages.getHeaderName();
+        String timeColumnHeader = leaderboardMessages.getHeaderTime();
 
         int nameColumnWidth = getNameColumnWidth(
                 optionalLeaderboard
@@ -146,13 +142,17 @@ public class LeaderboardMenu extends Menu {
         int timeColumnWidth = addPadding(timeColumnHeader.length());
 
         String formatting = "%-" + nameColumnWidth + "s%-" + timeColumnWidth + "s";
+        String header = String.format(formatting, nameColumnHeader, timeColumnHeader);
 
-        System.out.printf(formatting, nameColumnHeader, timeColumnHeader);
+        printer.printMessage(header);
         printDividerLine(nameColumnWidth, timeColumnWidth);
+
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
-            System.out.printf(formatting,
-                    leaderboardEntry.playerName(), ClockDisplayFormatter.format(leaderboardEntry.gameDuration()));
-            System.out.println();
+            String row = String.format(formatting,
+                    leaderboardEntry.playerName(),
+                    ClockDisplayFormatter.format(leaderboardEntry.gameDuration()));
+
+            printer.printMessage(row + "\n");
         });
 
         return this;
@@ -162,13 +162,13 @@ public class LeaderboardMenu extends Menu {
         Optional<List<TurnsLeaderboardEntry>> optionalLeaderboard = leaderboardService.getTurnsLeaderboard();
 
         if (optionalLeaderboard.isEmpty()) {
-            System.out.println("No leaderboard found. Please play some games to build the leaderboard");
+            printer.printMessage(leaderboardMessages.getNoLeaderboardError());
 
             return this;
         }
 
-        String nameColumnHeader = "Name";
-        String turnsColumnHeader = "Turns";
+        String nameColumnHeader = leaderboardMessages.getHeaderName();
+        String turnsColumnHeader = leaderboardMessages.getHeaderTurns();
 
         int nameColumnWidth = getNameColumnWidth(
                 optionalLeaderboard
@@ -180,13 +180,17 @@ public class LeaderboardMenu extends Menu {
         int turnsColumnWidth = addPadding(turnsColumnHeader.length());
 
         String formatting = "%-" + nameColumnWidth + "s%-" + turnsColumnWidth + "s";
+        String header = String.format(formatting, nameColumnHeader, turnsColumnHeader);
 
-        System.out.printf(formatting, "Name", "Turns");
+        printer.printMessage(header);
         printDividerLine(nameColumnWidth, turnsColumnWidth);
+
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
-            System.out.printf(formatting,
-                    leaderboardEntry.playerName(), leaderboardEntry.numberOfTurns());
-            System.out.println();
+            String row = String.format(formatting,
+                    leaderboardEntry.playerName(),
+                    leaderboardEntry.numberOfTurns());
+
+            printer.printMessage(row + "\n");
         });
 
         return this;
@@ -197,14 +201,14 @@ public class LeaderboardMenu extends Menu {
                 leaderboardService.getWinPercentageLeaderboard(1);
 
         if (optionalLeaderboard.isEmpty()) {
-            System.out.println("No leaderboard found. Please play some games to build the leaderboard");
+            printer.printMessage(leaderboardMessages.getNoLeaderboardError());
 
             return this;
         }
 
-        String nameHeader = "Name";
-        String percentageHeader = "Win %";
-        String gamesHeader = "Games";
+        String nameHeader = leaderboardMessages.getHeaderName();
+        String percentageHeader = leaderboardMessages.getHeaderPercentage();
+        String gamesHeader = leaderboardMessages.getHeaderGames();
 
         List<WinPercentageLeaderboardEntry> winPercentageLeaderboard = optionalLeaderboard.get();
 
@@ -217,16 +221,20 @@ public class LeaderboardMenu extends Menu {
         int gamesColumWidth = addPadding(gamesHeader.length());
 
         String formatting = "%-" + nameColumWidth + "s%-" + percentageColumWidth + "s%s";
+        String header = String.format(formatting, nameHeader, percentageHeader, gamesHeader);
 
-        System.out.printf(formatting, nameHeader, percentageHeader, gamesHeader);
+        printer.printMessage(header);
         printDividerLine(nameColumWidth, percentageColumWidth, gamesColumWidth);
 
-        for (WinPercentageLeaderboardEntry entry : winPercentageLeaderboard) {
-            String percentage = String.format("%.2f%%", entry.winPercentage());
+        winPercentageLeaderboard.forEach(leaderboardEntry -> {
+            String percentage = String.format("%.2f%%", leaderboardEntry.winPercentage());
+            String row = String.format(formatting,
+                    leaderboardEntry.playerName(),
+                    percentage,
+                    leaderboardEntry.gamesPlayed());
 
-            System.out.printf(formatting, entry.playerName(), percentage, entry.gamesPlayed());
-            System.out.println();
-        }
+            printer.printMessage(row + "\n");
+        });
 
         return this;
     }
@@ -236,12 +244,13 @@ public class LeaderboardMenu extends Menu {
                 leaderboardService.getWinsLeaderboard();
 
         if (optionalLeaderboard.isEmpty()) {
-            System.out.println("No leaderboard found. Please play some games to build the leaderboard");
+            printer.printMessage(leaderboardMessages.getNoLeaderboardError());
 
             return this;
         }
-        String nameColumnHeader = "Name";
-        String winsColumnHeader = "Wins";
+
+        String nameColumnHeader = leaderboardMessages.getHeaderName();
+        String winsColumnHeader = leaderboardMessages.getHeaderWins();
 
         int nameColumnWidth = getNameColumnWidth(
                 optionalLeaderboard
@@ -252,14 +261,17 @@ public class LeaderboardMenu extends Menu {
         int winsColumnWidth = addPadding(winsColumnHeader.length());
 
         String formatting = "%-" + nameColumnWidth + "s%-" + winsColumnWidth + "s";
+        String header = String.format(formatting, nameColumnHeader, winsColumnHeader);
 
-        System.out.printf(formatting, nameColumnHeader, winsColumnHeader);
+        printer.printMessage(header);
         printDividerLine(nameColumnWidth, winsColumnWidth);
+
         optionalLeaderboard.get().forEach(leaderboardEntry -> {
-            System.out.printf(formatting,
+            String row = String.format(formatting,
                     leaderboardEntry.playerName(),
                     leaderboardEntry.numberOfWins());
-            System.out.println();
+
+            printer.printMessage(row + "\n");
         });
 
         return this;
