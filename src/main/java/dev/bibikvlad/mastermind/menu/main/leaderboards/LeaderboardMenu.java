@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.menu.main.leaderboard;
+package dev.bibikvlad.mastermind.menu.main.leaderboards;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;

@@ -10,7 +10,7 @@ import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages
 import dev.bibikvlad.mastermind.menu.core.ExitMenu;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.game.GameLaunchMenu;
-import dev.bibikvlad.mastermind.menu.main.leaderboard.LeaderboardMenu;
+import dev.bibikvlad.mastermind.menu.main.leaderboards.LeaderboardMenu;
 import dev.bibikvlad.mastermind.menu.main.profile.ProfileMenu;
 import dev.bibikvlad.mastermind.menu.main.settings.SettingsMenu;
 import dev.bibikvlad.mastermind.menu.main.stats.StatsMenu;
