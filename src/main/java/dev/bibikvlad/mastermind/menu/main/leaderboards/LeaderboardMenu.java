@@ -19,8 +19,6 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public class LeaderboardMenu extends Menu {
-    private final static int PADDING = 10;
-
     private final Printer printer;
     private final Parser parser;
     private final LeaderboardMessages leaderboardMessages;
@@ -306,7 +304,9 @@ public class LeaderboardMenu extends Menu {
     }
 
     private int addPadding(int value) {
-        return value + PADDING;
+        int padding = 10;
+
+        return value + padding;
     }
 
     private void waitForConfirmation() {
