@@ -9,6 +9,7 @@ import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMes
 import dev.bibikvlad.mastermind.localization.messages.menu.main.leaderboards.LeaderboardMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.MainMenu;
+import dev.bibikvlad.mastermind.menu.main.leaderboards.percentage.WinPercentageLeaderboardMenu;
 import dev.bibikvlad.mastermind.model.leaderboard.*;
 import dev.bibikvlad.mastermind.services.LeaderboardService;
 import dev.bibikvlad.utils.formatters.ClockDisplayFormatter;
@@ -201,48 +202,7 @@ public class LeaderboardMenu extends Menu {
     }
 
     private Menu printWinPercentageLeaderboard() {
-        Optional<List<WinPercentageLeaderboardEntry>> optionalLeaderboard =
-                leaderboardService.getWinPercentageLeaderboard(1);
-
-        if (optionalLeaderboard.isEmpty()) {
-            printer.printMessage(leaderboardMessages.getNoLeaderboardError());
-
-            return this;
-        }
-
-        String nameHeader = leaderboardMessages.getHeaderName();
-        String percentageHeader = leaderboardMessages.getHeaderPercentage();
-        String gamesHeader = leaderboardMessages.getHeaderGames();
-
-        List<WinPercentageLeaderboardEntry> winPercentageLeaderboard = optionalLeaderboard.get();
-
-        int nameColumWidth = getNameColumnWidth(
-                winPercentageLeaderboard
-                        .stream()
-                        .map(WinPercentageLeaderboardEntry::playerName),
-                nameHeader.length());
-        int percentageColumWidth = addPadding(percentageHeader.length());
-        int gamesColumWidth = addPadding(gamesHeader.length());
-
-        String formatting = "%-" + nameColumWidth + "s%-" + percentageColumWidth + "s%s";
-        String header = String.format(formatting, nameHeader, percentageHeader, gamesHeader);
-
-        printer.printMessage(header);
-        printDividerLine(nameColumWidth, percentageColumWidth, gamesColumWidth);
-
-        winPercentageLeaderboard.forEach(leaderboardEntry -> {
-            String percentage = String.format("%.2f%%", leaderboardEntry.winPercentage());
-            String row = String.format(formatting,
-                    leaderboardEntry.playerName(),
-                    percentage,
-                    leaderboardEntry.gamesPlayed());
-
-            printer.printMessage(row);
-        });
-
-        waitForConfirmation();
-
-        return this;
+        return new WinPercentageLeaderboardMenu(appContext);
     }
 
     private Menu printWinsLeaderboard() {
