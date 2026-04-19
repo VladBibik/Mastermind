@@ -66,7 +66,7 @@ public class LeaderboardMenu extends Menu {
                 return printTurnsLeaderboard();
             }
             case 4 -> {
-                return printWinPercentageLeaderboard();
+                return winPercentageLeaderboard();
             }
             case 5 -> {
                 return printWinsLeaderboard();
@@ -204,7 +204,7 @@ public class LeaderboardMenu extends Menu {
         return this;
     }
 
-    private Menu printWinPercentageLeaderboard() {
+    private Menu winPercentageLeaderboard() {
         int minRequiredCutoff = 10;
 
         if (gamesService.hasAnyPlayerWithAtLeastGames(minRequiredCutoff)) {
