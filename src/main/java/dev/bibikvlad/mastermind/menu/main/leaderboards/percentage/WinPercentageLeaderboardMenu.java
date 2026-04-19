@@ -60,6 +60,14 @@ public class WinPercentageLeaderboardMenu extends Menu {
     }
 
     private Menu menuOptionSwitcher(int userInputNumber) {
+        if (isValidCutoff(userInputNumber)) {
+            return printWinPercentageLeaderboard(userInputNumber);
+        } else {
+            return shortcutOptionSwitcher(userInputNumber);
+        }
+    }
+
+    private Menu shortcutOptionSwitcher(int userInputNumber) {
         switch (userInputNumber) {
             case 1 -> {
                 return printWinPercentageLeaderboard(10);
@@ -71,15 +79,15 @@ public class WinPercentageLeaderboardMenu extends Menu {
                 return printWinPercentageLeaderboard(1000);
             }
             default -> {
-                if (userInputNumber >= 10 && userInputNumber <= 1000) {
-                    return printWinPercentageLeaderboard(userInputNumber);
-                } else {
-                    printer.printMessage(interactionMessages.getInvalidInputMessage());
+                printer.printMessage(interactionMessages.getInvalidInputMessage());
 
-                    return this;
-                }
+                return this;
             }
         }
+    }
+
+    private boolean isValidCutoff(int userInputNumber) {
+        return userInputNumber >= 10 && userInputNumber <= 1000;
     }
 
     private Menu printWinPercentageLeaderboard(int sampleSize) {
