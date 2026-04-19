@@ -70,13 +70,14 @@ public class WinPercentageLeaderboardMenu extends Menu {
             case 3 -> {
                 return printWinPercentageLeaderboard(1000);
             }
-            case 10 - 1000 -> {
-                return printWinPercentageLeaderboard(userInputNumber);
-            }
             default -> {
-                printer.printMessage(interactionMessages.getInvalidInputMessage());
+                if (userInputNumber >= 10 && userInputNumber <= 1000) {
+                    return printWinPercentageLeaderboard(userInputNumber);
+                } else {
+                    printer.printMessage(interactionMessages.getInvalidInputMessage());
 
-                return this;
+                    return this;
+                }
             }
         }
     }
