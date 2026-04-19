@@ -11,6 +11,7 @@ import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.MainMenu;
 import dev.bibikvlad.mastermind.menu.main.leaderboards.percentage.WinPercentageLeaderboardMenu;
 import dev.bibikvlad.mastermind.model.leaderboard.*;
+import dev.bibikvlad.mastermind.services.GamesService;
 import dev.bibikvlad.mastermind.services.LeaderboardService;
 import dev.bibikvlad.utils.formatters.ClockDisplayFormatter;
 
@@ -25,6 +26,7 @@ public class LeaderboardMenu extends Menu {
     private final LeaderboardMessages leaderboardMessages;
     private final InteractionMessages interactionMessages;
     private final LeaderboardService leaderboardService;
+    private final GamesService gamesService;
 
     public LeaderboardMenu(AppContext appContext) {
         super(appContext);
@@ -34,6 +36,7 @@ public class LeaderboardMenu extends Menu {
         this.leaderboardMessages = appContext.localizationContext().getMessages(MessageType.LEADERBOARDS);
         this.interactionMessages = appContext.localizationContext().getMessages(MessageType.INTERACTION);
         this.leaderboardService = appContext.services().getLeaderboardService();
+        this.gamesService = appContext.services().getGamesService();
     }
 
     @Override
@@ -202,7 +205,16 @@ public class LeaderboardMenu extends Menu {
     }
 
     private Menu printWinPercentageLeaderboard() {
-        return new WinPercentageLeaderboardMenu(appContext);
+        int minRequiredCutoff = 10;
+
+        if (gamesService.hasAnyPlayerWithAtLeastGames(minRequiredCutoff)) {
+            return new WinPercentageLeaderboardMenu(appContext);
+        } else {
+            //TODO: Add a custom error message!
+            printer.printMessage(leaderboardMessages.getNoLeaderboardError());
+
+            return this;
+        }
     }
 
     private Menu printWinsLeaderboard() {
