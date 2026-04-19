@@ -40,12 +40,22 @@ public class ConsoleLeaderboardMessages implements LeaderboardMessages {
     }
 
     @Override
-    public String getMenuOptions() {
-        return resourceBundle.getString("menu_options");
+    public String getLeaderboardMenuOptions() {
+        return resourceBundle.getString("leaderboard.menu_options");
+    }
+
+    @Override
+    public String getPercentageMenuOptions() {
+        return resourceBundle.getString("percentage.menu_options");
     }
 
     @Override
     public String getNoLeaderboardError() {
         return resourceBundle.getString("no_leaderboard_error");
+    }
+
+    @Override
+    public String getNotEnoughGamesPlayedError() {
+        return resourceBundle.getString("not_enough_games_played_error");
     }
 }
