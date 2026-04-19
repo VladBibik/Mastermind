@@ -26,4 +26,8 @@ public class GamesService {
     public boolean isAnyGamesPlayed() {
         return gamesRepository.count() > 0;
     }
+
+    public int getMaxGamesPlayedByPlayer() {
+        return gamesRepository.getMaxGamesPlayedByPlayer();
+    }
 }
