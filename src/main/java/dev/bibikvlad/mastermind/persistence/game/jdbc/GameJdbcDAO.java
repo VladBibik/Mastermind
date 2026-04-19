@@ -2,9 +2,9 @@ package dev.bibikvlad.mastermind.persistence.game.jdbc;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.game.data.GameData;
+import dev.bibikvlad.mastermind.model.game.Game;
 import dev.bibikvlad.mastermind.persistence.game.dao.GamesDAO;
 import dev.bibikvlad.mastermind.persistence.game.mapper.GameMapper;
-import dev.bibikvlad.mastermind.model.game.Game;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -129,6 +129,28 @@ public class GameJdbcDAO implements GamesDAO {
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to count the number of rows in the " +
                     "games table for a player with ID: " + playerId, exception);
+        }
+    }
+
+    @Override
+    public int maxGamesPlayedByPlayer() {
+        String maxGamesPlayedQuery = """
+                        SELECT MAX(game_count)
+                                FROM (SELECT COUNT(game_id) AS game_count
+                                      FROM games
+                                      GROUP BY player_id)
+                """;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(maxGamesPlayedQuery)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+
+            return 0;
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to fetch max games played by player", exception);
         }
     }
 }
