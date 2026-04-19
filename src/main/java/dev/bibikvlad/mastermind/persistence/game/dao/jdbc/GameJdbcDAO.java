@@ -150,7 +150,7 @@ public class GameJdbcDAO implements GamesDAO {
 
             return 0;
         } catch (SQLException exception) {
-            throw new PersistenceException("Failed to fetch max games played by player", exception);
+            throw new PersistenceException("Failed to fetch max games per player", exception);
         }
     }
 }
