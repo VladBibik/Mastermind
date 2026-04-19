@@ -21,4 +21,17 @@ public class WinPercentageLeaderboardMenu extends Menu {
         return null;
     }
 
+    private void displayMenu() {
+        String menuOptions = """
+                Please select a sample size of played games.
+                You can select a custom number of games between 10 and 1000.
+                
+                1. 10 games.
+                2. 100 games.
+                3. 1000 games.
+                0. Back to the leaderboards menu
+                """;
+
+        printer.printMessage(menuOptions);
+    }
 }
