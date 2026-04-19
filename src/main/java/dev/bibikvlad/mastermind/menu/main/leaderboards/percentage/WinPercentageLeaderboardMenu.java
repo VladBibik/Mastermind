@@ -2,29 +2,53 @@ package dev.bibikvlad.mastermind.menu.main.leaderboards.percentage;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
+import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
+import dev.bibikvlad.mastermind.localization.config.MessageType;
+import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.leaderboards.LeaderboardMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
+import dev.bibikvlad.mastermind.menu.main.leaderboards.LeaderboardMenu;
+import dev.bibikvlad.mastermind.model.leaderboard.WinPercentageLeaderboardEntry;
+import dev.bibikvlad.mastermind.services.LeaderboardService;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 public class WinPercentageLeaderboardMenu extends Menu {
     private final Printer printer;
     private final Parser parser;
+    private final LeaderboardMessages leaderboardMessages;
+    private final InteractionMessages interactionMessages;
+    private final LeaderboardService leaderboardService;
 
     public WinPercentageLeaderboardMenu(AppContext appContext) {
         super(appContext);
 
         this.printer = appContext.printer();
         this.parser = appContext.parser();
+        this.leaderboardMessages = appContext.localizationContext().getMessages(MessageType.LEADERBOARDS);
+        this.interactionMessages = appContext.localizationContext().getMessages(MessageType.INTERACTION);
+        this.leaderboardService = appContext.services().getLeaderboardService();
     }
 
     @Override
     public Menu run() {
-        return null;
+        displayMenu();
+
+        Optional<Integer> selection = IntegerInputInterpreter.readSelection(appContext.parser());
+
+        return selection
+                .map(this::menuOptionSwitcher)
+                .orElseGet(() -> new LeaderboardMenu(appContext));
     }
 
     private void displayMenu() {
         String menuOptions = """
-                Please select a sample size of played games.
-                You can select a custom number of games between 10 and 1000.
+                Please select a minimum number of played games.
+                You can select a custom number of played games between 10 and 1000.
                 
                 1. 10 games.
                 2. 100 games.
@@ -33,5 +57,98 @@ public class WinPercentageLeaderboardMenu extends Menu {
                 """;
 
         printer.printMessage(menuOptions);
+    }
+
+    private Menu menuOptionSwitcher(int userInputNumber) {
+        switch (userInputNumber) {
+            case 1 -> {
+                return printWinPercentageLeaderboard(10);
+            }
+            case 2 -> {
+                return printWinPercentageLeaderboard(100);
+            }
+            case 3 -> {
+                return printWinPercentageLeaderboard(1000);
+            }
+            case 10 - 1000 -> {
+                return printWinPercentageLeaderboard(userInputNumber);
+            }
+            default -> {
+                printer.printMessage(interactionMessages.getInvalidInputMessage());
+
+                return this;
+            }
+        }
+    }
+
+    private Menu printWinPercentageLeaderboard(int sampleSize) {
+        Optional<List<WinPercentageLeaderboardEntry>> optionalLeaderboard =
+                leaderboardService.getWinPercentageLeaderboard(sampleSize);
+
+        if (optionalLeaderboard.isEmpty()) {
+            printer.printMessage(leaderboardMessages.getNoLeaderboardError());
+
+            return this;
+        }
+
+        String nameHeader = leaderboardMessages.getHeaderName();
+        String percentageHeader = leaderboardMessages.getHeaderPercentage();
+        String gamesHeader = leaderboardMessages.getHeaderGames();
+
+        List<WinPercentageLeaderboardEntry> winPercentageLeaderboard = optionalLeaderboard.get();
+
+        int nameColumWidth = getNameColumnWidth(
+                winPercentageLeaderboard
+                        .stream()
+                        .map(WinPercentageLeaderboardEntry::playerName),
+                nameHeader.length());
+        int percentageColumWidth = addPadding(percentageHeader.length());
+        int gamesColumWidth = addPadding(gamesHeader.length());
+
+        String formatting = "%-" + nameColumWidth + "s%-" + percentageColumWidth + "s%s";
+        String header = String.format(formatting, nameHeader, percentageHeader, gamesHeader);
+
+        printer.printMessage(header);
+        printDividerLine(nameColumWidth, percentageColumWidth, gamesColumWidth);
+
+        winPercentageLeaderboard.forEach(leaderboardEntry -> {
+            String percentage = String.format("%.2f%%", leaderboardEntry.winPercentage());
+            String row = String.format(formatting,
+                    leaderboardEntry.playerName(),
+                    percentage,
+                    leaderboardEntry.gamesPlayed());
+
+            printer.printMessage(row);
+        });
+
+        waitForConfirmation();
+
+        return this;
+    }
+
+    private int getNameColumnWidth(Stream<String> namesStream, int headerLength) {
+        int nameColumWidth = namesStream.map(String::length)
+                .max(Integer::compareTo)
+                .orElse(0);
+
+        return addPadding(Math.max(nameColumWidth, headerLength));
+    }
+
+    private void printDividerLine(int... headerLengths) {
+        int headerLength = Arrays.stream(headerLengths).sum();
+
+        printer.printMessage("-".repeat(headerLength));
+    }
+
+    private int addPadding(int value) {
+        int padding = 10;
+
+        return value + padding;
+    }
+
+    private void waitForConfirmation() {
+        printer.printMessage(interactionMessages.getPressEnterMessage());
+
+        parser.parseUserInput();
     }
 }
