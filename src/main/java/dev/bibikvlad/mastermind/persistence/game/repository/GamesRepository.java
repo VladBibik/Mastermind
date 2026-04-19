@@ -15,4 +15,6 @@ public interface GamesRepository {
     int count();
 
     int countByPlayerId(long playerId);
+
+    int getMaxGamesPlayedByPlayer();
 }
