@@ -133,7 +133,7 @@ public class GameJdbcDAO implements GamesDAO {
     }
 
     @Override
-    public int maxGamesPlayedByPlayer() {
+    public int getMaxGamesPlayedByPlayer() {
         String maxGamesPlayedQuery = """
                         SELECT MAX(game_count)
                                 FROM (SELECT COUNT(game_id) AS game_count
