@@ -51,7 +51,7 @@ public class LeaderboardMenu extends Menu {
     }
 
     private void displayMenu() {
-        printer.printMessage(leaderboardMessages.getMenuOptions());
+        printer.printMessage(leaderboardMessages.getLeaderboardMenuOptions());
     }
 
     private Menu menuOptionSwitcher(int userInputNumber) {
@@ -210,7 +210,6 @@ public class LeaderboardMenu extends Menu {
         if (gamesService.hasAnyPlayerWithAtLeastGames(minRequiredCutoff)) {
             return new WinPercentageLeaderboardMenu(appContext);
         } else {
-            //TODO: Add a custom error message!
             printer.printMessage(leaderboardMessages.getNoLeaderboardError());
 
             return this;
