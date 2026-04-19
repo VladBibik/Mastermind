@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.persistence.leaderboard.jdbc;
+package dev.bibikvlad.mastermind.persistence.leaderboard.dao.jdbc;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.model.leaderboard.*;
