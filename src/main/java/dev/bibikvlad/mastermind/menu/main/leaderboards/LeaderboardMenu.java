@@ -205,9 +205,9 @@ public class LeaderboardMenu extends Menu {
     }
 
     private Menu handleWinPercentageLeaderboardSelection() {
-        int minRequiredCutoff = 10;
+        final int minGamesForPercentage = 10;
 
-        if (gamesService.hasAnyPlayerWithAtLeastGames(minRequiredCutoff)) {
+        if (gamesService.hasAnyPlayerWithAtLeastGames(minGamesForPercentage)) {
             return new WinPercentageLeaderboardMenu(appContext);
         } else {
             printer.printMessage(leaderboardMessages.getNotEnoughGamesPlayedError());
