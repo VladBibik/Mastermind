@@ -10,7 +10,10 @@ import dev.bibikvlad.mastermind.localization.messages.menu.main.leaderboards.Lea
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.MainMenu;
 import dev.bibikvlad.mastermind.menu.main.leaderboards.percentage.WinPercentageLeaderboardMenu;
-import dev.bibikvlad.mastermind.model.leaderboard.*;
+import dev.bibikvlad.mastermind.model.leaderboard.MainLeaderboardEntry;
+import dev.bibikvlad.mastermind.model.leaderboard.TimeLeaderboardEntry;
+import dev.bibikvlad.mastermind.model.leaderboard.TurnsLeaderboardEntry;
+import dev.bibikvlad.mastermind.model.leaderboard.WinsLeaderboardEntry;
 import dev.bibikvlad.mastermind.services.GamesService;
 import dev.bibikvlad.mastermind.services.LeaderboardService;
 import dev.bibikvlad.utils.formatters.ClockDisplayFormatter;
