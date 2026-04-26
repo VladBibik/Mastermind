@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.localization.messages.menu.main.leaderboards;
 
+import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 public class ConsoleLeaderboardMessages implements LeaderboardMessages {
@@ -45,8 +46,8 @@ public class ConsoleLeaderboardMessages implements LeaderboardMessages {
     }
 
     @Override
-    public String getPercentageMenuOptions() {
-        return resourceBundle.getString("percentage.menu_options");
+    public String getPercentageMenuOptions(int playedGames) {
+        return MessageFormat.format(resourceBundle.getString("percentage.menu_options"), playedGames);
     }
 
     @Override

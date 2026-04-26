@@ -17,7 +17,7 @@ public interface LeaderboardMessages extends LocalizedMessages {
 
     String getLeaderboardMenuOptions();
 
-    String getPercentageMenuOptions();
+    String getPercentageMenuOptions(int playedGames);
 
     String getNoLeaderboardError();
 
