@@ -64,6 +64,9 @@ public class WinPercentageLeaderboardMenu extends Menu {
             return printWinPercentageLeaderboard(10);
         } else {
             printer.printMessage(interactionMessages.getInvalidInputMessage());
+            printer.printMessage(interactionMessages.getPressEnterMessage());
+
+            parser.parseUserInput();
 
             return this;
         }
