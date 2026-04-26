@@ -23,8 +23,9 @@ public class WinPercentageLeaderboardMenu extends Menu {
     private final LeaderboardMessages leaderboardMessages;
     private final InteractionMessages interactionMessages;
     private final LeaderboardService leaderboardService;
+    private final int playedGames;
 
-    public WinPercentageLeaderboardMenu(AppContext appContext) {
+    public WinPercentageLeaderboardMenu(AppContext appContext, int playedGames) {
         super(appContext);
 
         this.printer = appContext.printer();
@@ -32,11 +33,12 @@ public class WinPercentageLeaderboardMenu extends Menu {
         this.leaderboardMessages = appContext.localizationContext().getMessages(MessageType.LEADERBOARDS);
         this.interactionMessages = appContext.localizationContext().getMessages(MessageType.INTERACTION);
         this.leaderboardService = appContext.services().getLeaderboardService();
+        this.playedGames = playedGames;
     }
 
     @Override
     public Menu run() {
-        displayMenu();
+        displayMenu(playedGames);
 
         Optional<Integer> selection = IntegerInputInterpreter.readSelection(appContext.parser());
 
@@ -45,8 +47,8 @@ public class WinPercentageLeaderboardMenu extends Menu {
                 .orElseGet(() -> new LeaderboardMenu(appContext));
     }
 
-    private void displayMenu() {
-        printer.printMessage(leaderboardMessages.getPercentageMenuOptions());
+    private void displayMenu(int playedGames) {
+        printer.printMessage(leaderboardMessages.getPercentageMenuOptions(playedGames));
     }
 
     private Menu menuOptionSwitcher(int userInputNumber) {
@@ -58,21 +60,12 @@ public class WinPercentageLeaderboardMenu extends Menu {
     }
 
     private Menu shortcutOptionSwitcher(int userInputNumber) {
-        switch (userInputNumber) {
-            case 1 -> {
-                return printWinPercentageLeaderboard(10);
-            }
-            case 2 -> {
-                return printWinPercentageLeaderboard(100);
-            }
-            case 3 -> {
-                return printWinPercentageLeaderboard(1000);
-            }
-            default -> {
-                printer.printMessage(interactionMessages.getInvalidInputMessage());
+        if (userInputNumber == 1) {
+            return printWinPercentageLeaderboard(10);
+        } else {
+            printer.printMessage(interactionMessages.getInvalidInputMessage());
 
-                return this;
-            }
+            return this;
         }
     }
 
