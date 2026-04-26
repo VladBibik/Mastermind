@@ -27,7 +27,7 @@ public class GamesService {
         return gamesRepository.count() > 0;
     }
 
-    public boolean hasAnyPlayerWithAtLeastGames(int cutoff) {
-        return gamesRepository.getMaxGamesPlayedByPlayer() >= cutoff;
+    public int getMaxGamesPlayedByPlayer() {
+        return gamesRepository.getMaxGamesPlayedByPlayer();
     }
 }
