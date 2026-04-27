@@ -25,6 +25,8 @@ public class WinPercentageLeaderboardMenu extends Menu {
     private final LeaderboardService leaderboardService;
     private final int playedGames;
 
+    private boolean showMenuOnNextLoop = true;
+
     public WinPercentageLeaderboardMenu(AppContext appContext, int playedGames) {
         super(appContext);
 
@@ -38,7 +40,10 @@ public class WinPercentageLeaderboardMenu extends Menu {
 
     @Override
     public Menu run() {
-        displayMenu(playedGames);
+        if (showMenuOnNextLoop) {
+            displayMenu(playedGames);
+            showMenuOnNextLoop = false;
+        }
 
         Optional<Integer> selection = IntegerInputInterpreter.readSelection(appContext.parser());
 
@@ -78,10 +83,7 @@ public class WinPercentageLeaderboardMenu extends Menu {
                 leaderboardService.getWinPercentageLeaderboard(sampleSize);
 
         if (optionalLeaderboard.isEmpty()) {
-            printer.printMessage(leaderboardMessages.getNoLeaderboardError());
-            printer.printMessage(interactionMessages.getPressEnterMessage());
-
-            parser.parseUserInput();
+            printer.printMessage(leaderboardMessages.getNotEnoughGamesPlayedError());
 
             return this;
         }
