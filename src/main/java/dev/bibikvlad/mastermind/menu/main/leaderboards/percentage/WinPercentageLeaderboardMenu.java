@@ -57,9 +57,17 @@ public class WinPercentageLeaderboardMenu extends Menu {
     }
 
     private Menu menuOptionSwitcher(int userInputNumber) {
-        if (isValidCutoff(userInputNumber)) {
+        boolean isValidCutoff = userInputNumber >= 10 && userInputNumber <= playedGames;
+
+        if (isValidCutoff) {
             return printWinPercentageLeaderboard(userInputNumber);
         } else {
+            if (userInputNumber > playedGames) {
+                printer.printMessage(leaderboardMessages.getInvalidCutoffError(userInputNumber));
+
+                return this;
+            }
+
             return shortcutOptionSwitcher(userInputNumber);
         }
     }
@@ -74,10 +82,6 @@ public class WinPercentageLeaderboardMenu extends Menu {
 
             return this;
         }
-    }
-
-    private boolean isValidCutoff(int userInputNumber) {
-        return userInputNumber >= 10 && userInputNumber <= playedGames;
     }
 
     private Menu printWinPercentageLeaderboard(int sampleSize) {
