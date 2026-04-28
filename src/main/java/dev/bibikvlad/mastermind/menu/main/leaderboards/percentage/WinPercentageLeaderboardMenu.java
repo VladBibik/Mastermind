@@ -85,7 +85,7 @@ public class WinPercentageLeaderboardMenu extends Menu {
                 leaderboardService.getWinPercentageLeaderboard(sampleSize);
 
         if (optionalLeaderboard.isEmpty()) {
-            printer.printMessage(leaderboardMessages.getNotEnoughGamesPlayedError());
+            printer.printMessage(leaderboardMessages.getInvalidCutoffError(sampleSize));
 
             return this;
         }
