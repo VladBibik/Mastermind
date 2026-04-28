@@ -148,6 +148,8 @@ public class WinPercentageLeaderboardMenu extends Menu {
     private void waitForConfirmation() {
         printer.printMessage(interactionMessages.getPressEnterMessage());
 
+        showMenuOnNextLoop = true;
+
         parser.parseUserInput();
     }
 }
