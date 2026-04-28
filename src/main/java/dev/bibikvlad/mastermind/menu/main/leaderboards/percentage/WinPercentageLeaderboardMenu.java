@@ -65,8 +65,10 @@ public class WinPercentageLeaderboardMenu extends Menu {
     }
 
     private Menu shortcutOptionSwitcher(int userInputNumber) {
+        final int DEFAULT_CUTOFF_VALUE = 10;
+
         if (userInputNumber == 1) {
-            return printWinPercentageLeaderboard(10);
+            return printWinPercentageLeaderboard(DEFAULT_CUTOFF_VALUE);
         } else {
             printer.printMessage(interactionMessages.getInvalidInputMessage());
 
