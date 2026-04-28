@@ -59,4 +59,9 @@ public class ConsoleLeaderboardMessages implements LeaderboardMessages {
     public String getNotEnoughGamesPlayedError() {
         return resourceBundle.getString("not_enough_games_played_error");
     }
+
+    @Override
+    public String getInvalidCutoffError(int playedGames) {
+        return MessageFormat.format(resourceBundle.getString("invalid_cutoff_error"), playedGames);
+    }
 }

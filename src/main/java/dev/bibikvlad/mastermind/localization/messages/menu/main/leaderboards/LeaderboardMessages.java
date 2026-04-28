@@ -22,4 +22,6 @@ public interface LeaderboardMessages extends LocalizedMessages {
     String getNoLeaderboardError();
 
     String getNotEnoughGamesPlayedError();
+
+    String getInvalidCutoffError(int playedGames);
 }
