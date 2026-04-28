@@ -75,7 +75,7 @@ public class WinPercentageLeaderboardMenu extends Menu {
     }
 
     private boolean isValidCutoff(int userInputNumber) {
-        return userInputNumber >= 10 && userInputNumber <= 1000;
+        return userInputNumber >= 10 && userInputNumber <= playedGames;
     }
 
     private Menu printWinPercentageLeaderboard(int sampleSize) {
