@@ -57,8 +57,8 @@ public class WinPercentageLeaderboardMenu extends Menu {
     }
 
     private Menu validateCutoff(int userInputNumber) {
-        if (userInputNumber >= 10 && userInputNumber <= playedGames) {
-            return printWinPercentageLeaderboard(userInputNumber);
+        if (userInputNumber < 10) {
+            return shortcutOptionSwitcher(userInputNumber);
         } else {
             return checkIfInputBiggerThanMaxGamesPlayed(userInputNumber);
         }
@@ -71,7 +71,7 @@ public class WinPercentageLeaderboardMenu extends Menu {
 
             return this;
         } else {
-            return shortcutOptionSwitcher(userInputNumber);
+            return printWinPercentageLeaderboard(userInputNumber);
         }
     }
 
