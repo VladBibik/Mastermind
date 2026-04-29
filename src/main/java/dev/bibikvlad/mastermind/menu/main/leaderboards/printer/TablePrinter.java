@@ -7,6 +7,7 @@ public class TablePrinter<T> {
     private final int PADDING = 10;
 
     public void print(List<T> data, List<Column<T>> columns) {
+        //1.Width calculation
         List<Integer> columnWidths = new ArrayList<>();
 
         for (int i = 0; i < columns.size(); i++) {
@@ -22,5 +23,14 @@ public class TablePrinter<T> {
 
             columnWidths.add(Math.max(columnHeaderMaxLength, columnValueMaxLength) + PADDING);
         }
+
+        //2. Print Header
+        StringBuilder formattingBuilder = new StringBuilder();
+
+        for (int i = 0; i < columnWidths.size(); i++) {
+            formattingBuilder.append("%-" + columnWidths.get(i) + "s");
+        }
+
+        String formatting = formattingBuilder.toString();
     }
 }
