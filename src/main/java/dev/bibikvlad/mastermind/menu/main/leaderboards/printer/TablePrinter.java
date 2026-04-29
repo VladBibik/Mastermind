@@ -45,5 +45,7 @@ public class TablePrinter<T> {
                 .stream()
                 .map(Column::getHeader)
                 .toArray());
+
+        printer.printMessage(header);
     }
 }
