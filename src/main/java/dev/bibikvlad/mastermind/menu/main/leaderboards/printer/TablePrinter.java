@@ -11,8 +11,8 @@ public class TablePrinter<T> {
 
     private final Printer printer;
 
-    public TablePrinter(AppContext appContext) {
-        this.printer = appContext.printer();
+    public TablePrinter(Printer printer) {
+        this.printer = printer;
     }
 
     public void print(List<T> data, List<Column<T>> columns) {
