@@ -16,7 +16,7 @@ public class TablePrinter<T> {
     }
 
     public void print(List<T> data, List<Column<T>> columns) {
-        //1.Width calculation
+        //1.Width Calculation
         List<Integer> columnWidths = new ArrayList<>();
 
         for (int i = 0; i < columns.size(); i++) {
@@ -52,5 +52,15 @@ public class TablePrinter<T> {
         int dividerLineLength = columnWidths.stream().reduce(0, Integer::sum);
 
         printer.printMessage("-".repeat(dividerLineLength));
+
+        //4. Print Rows
+        data.forEach(entry -> {
+            String row = String.format(formatting, columns
+                    .stream()
+                    .map(column -> column.getValueExtractor().apply(entry))
+                    .toArray());
+
+            printer.printMessage(row);
+        });
     }
 }
