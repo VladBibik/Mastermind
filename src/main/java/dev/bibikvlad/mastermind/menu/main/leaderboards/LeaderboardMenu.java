@@ -65,18 +65,26 @@ public class LeaderboardMenu extends Menu {
     private Menu menuOptionSwitcher(int userInputNumber) {
         switch (userInputNumber) {
             case 1 -> {
+                showMenuOnNextLoop = true;
+
                 return printLeaderboard();
             }
             case 2 -> {
+                showMenuOnNextLoop = true;
+
                 return printTimeLeaderboard();
             }
             case 3 -> {
+                showMenuOnNextLoop = true;
+
                 return printTurnsLeaderboard();
             }
             case 4 -> {
                 return handleWinPercentageLeaderboardSelection();
             }
             case 5 -> {
+                showMenuOnNextLoop = true;
+
                 return printWinsLeaderboard();
             }
             case 0 -> {
