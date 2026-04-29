@@ -47,5 +47,10 @@ public class TablePrinter<T> {
                 .toArray());
 
         printer.printMessage(header);
+
+        //3. Print Divider
+        int dividerLineLength = columnWidths.stream().reduce(0, Integer::sum);
+
+        printer.printMessage("-".repeat(dividerLineLength));
     }
 }
