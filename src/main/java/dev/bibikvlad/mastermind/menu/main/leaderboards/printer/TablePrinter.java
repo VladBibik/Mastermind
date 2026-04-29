@@ -1,6 +1,5 @@
 package dev.bibikvlad.mastermind.menu.main.leaderboards.printer;
 
-import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 
 import java.util.ArrayList;
