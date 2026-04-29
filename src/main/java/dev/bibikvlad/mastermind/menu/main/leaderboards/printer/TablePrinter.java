@@ -36,8 +36,8 @@ public class TablePrinter<T> {
         //2. Print Header
         StringBuilder formattingBuilder = new StringBuilder();
 
-        for (int i = 0; i < columnWidths.size(); i++) {
-            formattingBuilder.append("%-" + columnWidths.get(i) + "s");
+        for (Integer columnWidth : columnWidths) {
+            formattingBuilder.append("%-").append(columnWidth).append("s");
         }
 
         String formatting = formattingBuilder.toString();
