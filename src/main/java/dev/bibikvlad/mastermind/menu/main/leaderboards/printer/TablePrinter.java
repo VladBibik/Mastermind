@@ -19,19 +19,17 @@ public class TablePrinter<T> {
         //1.Width Calculation
         List<Integer> columnWidths = new ArrayList<>();
 
-        for (int i = 0; i < columns.size(); i++) {
-            int temp = i;
-
-            int columnHeaderLength = columns.get(i).getHeader().length();
+        columns.forEach(column -> {
+            int columnHeaderLength = column.getHeader().length();
             int columnValueMaxLength = data
                     .stream()
-                    .map(entry -> columns.get(temp).getValueExtractor().apply(entry))
+                    .map(entry -> column.getValueExtractor().apply(entry))
                     .map(String::length)
                     .max(Integer::compareTo)
                     .orElse(0);
 
             columnWidths.add(Math.max(columnHeaderLength, columnValueMaxLength) + PADDING);
-        }
+        });
 
         //2. Print Header
         StringBuilder formattingBuilder = new StringBuilder();
