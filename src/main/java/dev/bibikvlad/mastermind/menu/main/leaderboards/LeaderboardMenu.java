@@ -10,6 +10,8 @@ import dev.bibikvlad.mastermind.localization.messages.menu.main.leaderboards.Lea
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.MainMenu;
 import dev.bibikvlad.mastermind.menu.main.leaderboards.percentage.WinPercentageLeaderboardMenu;
+import dev.bibikvlad.mastermind.menu.main.leaderboards.printer.Column;
+import dev.bibikvlad.mastermind.menu.main.leaderboards.printer.TablePrinter;
 import dev.bibikvlad.mastermind.model.leaderboard.MainLeaderboardEntry;
 import dev.bibikvlad.mastermind.model.leaderboard.TimeLeaderboardEntry;
 import dev.bibikvlad.mastermind.model.leaderboard.TurnsLeaderboardEntry;
@@ -107,33 +109,17 @@ public class LeaderboardMenu extends Menu {
             return this;
         }
 
-        String nameColumnHeader = leaderboardMessages.getHeaderName();
-        String turnsColumnHeader = leaderboardMessages.getHeaderTurns();
-        String timeColumnHeader = leaderboardMessages.getHeaderTime();
-
-        int nameColumnWidth = getNameColumnWidth(
-                optionalLeaderboard
-                        .get()
-                        .stream()
-                        .map(MainLeaderboardEntry::playerName),
-                nameColumnHeader.length());
-        int turnsColumnWidth = addPadding(turnsColumnHeader.length());
-        int timeColumnWidth = addPadding(timeColumnHeader.length());
-
-        String formatting = "%-" + nameColumnWidth + "s%-" + turnsColumnWidth + "s%s";
-        String header = String.format(formatting, nameColumnHeader, turnsColumnHeader, timeColumnHeader);
-
-        printer.printMessage(header);
-        printDividerLine(nameColumnWidth, turnsColumnWidth, timeColumnWidth);
-
-        optionalLeaderboard.get().forEach(leaderboardEntry -> {
-            String row = String.format(formatting,
-                    leaderboardEntry.playerName(),
-                    leaderboardEntry.numberOfTurns(),
-                    ClockDisplayFormatter.format(leaderboardEntry.gameDuration()));
-
-            printer.printMessage(row);
-        });
+        TablePrinter<MainLeaderboardEntry> tablePrinter = new TablePrinter<>(printer);
+        tablePrinter.print(
+                optionalLeaderboard.get(),
+                List.of(
+                        new Column<>(leaderboardMessages.getHeaderName(), MainLeaderboardEntry::playerName),
+                        new Column<>(leaderboardMessages.getHeaderTurns(),
+                                entry -> String.valueOf(entry.numberOfTurns())),
+                        new Column<>(leaderboardMessages.getHeaderTime(),
+                                entry -> ClockDisplayFormatter.format(entry.gameDuration()))
+                )
+        );
 
         waitForConfirmation();
 
