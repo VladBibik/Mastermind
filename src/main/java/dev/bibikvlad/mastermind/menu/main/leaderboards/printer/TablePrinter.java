@@ -1,10 +1,19 @@
 package dev.bibikvlad.mastermind.menu.main.leaderboards.printer;
 
+import dev.bibikvlad.mastermind.app.context.AppContext;
+import dev.bibikvlad.mastermind.app.printer.Printer;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class TablePrinter<T> {
     private final int PADDING = 10;
+
+    private final Printer printer;
+
+    public TablePrinter(AppContext appContext) {
+        this.printer = appContext.printer();
+    }
 
     public void print(List<T> data, List<Column<T>> columns) {
         //1.Width calculation
