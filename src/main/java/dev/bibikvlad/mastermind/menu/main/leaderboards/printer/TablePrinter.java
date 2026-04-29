@@ -32,5 +32,9 @@ public class TablePrinter<T> {
         }
 
         String formatting = formattingBuilder.toString();
+        String header = String.format(formatting, columns
+                .stream()
+                .map(Column::getHeader)
+                .toArray());
     }
 }
