@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TablePrinter<T> {
-    private final int PADDING = 10;
+    private static final int PADDING = 10;
 
     private final Printer printer;
 
