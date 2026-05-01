@@ -135,31 +135,15 @@ public class LeaderboardMenu extends Menu {
             return this;
         }
 
-        String nameColumnHeader = leaderboardMessages.getHeaderName();
-        String timeColumnHeader = leaderboardMessages.getHeaderTime();
-
-        int nameColumnWidth = getNameColumnWidth(
-                optionalLeaderboard
-                        .get()
-                        .stream()
-                        .map(TimeLeaderboardEntry::playerName),
-                nameColumnHeader.length()
+        TablePrinter<TimeLeaderboardEntry> tablePrinter = new TablePrinter<>(printer);
+        tablePrinter.print(
+                optionalLeaderboard.get(),
+                List.of(
+                        new Column<>(leaderboardMessages.getHeaderName(), TimeLeaderboardEntry::playerName),
+                        new Column<>(leaderboardMessages.getHeaderTime(),
+                                entry -> ClockDisplayFormatter.format(entry.gameDuration()))
+                )
         );
-        int timeColumnWidth = addPadding(timeColumnHeader.length());
-
-        String formatting = "%-" + nameColumnWidth + "s%-" + timeColumnWidth + "s";
-        String header = String.format(formatting, nameColumnHeader, timeColumnHeader);
-
-        printer.printMessage(header);
-        printDividerLine(nameColumnWidth, timeColumnWidth);
-
-        optionalLeaderboard.get().forEach(leaderboardEntry -> {
-            String row = String.format(formatting,
-                    leaderboardEntry.playerName(),
-                    ClockDisplayFormatter.format(leaderboardEntry.gameDuration()));
-
-            printer.printMessage(row);
-        });
 
         waitForConfirmation();
 
