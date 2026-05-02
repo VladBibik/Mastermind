@@ -14,10 +14,8 @@ import dev.bibikvlad.mastermind.menu.main.leaderboards.printer.TablePrinter;
 import dev.bibikvlad.mastermind.model.leaderboard.WinPercentageLeaderboardEntry;
 import dev.bibikvlad.mastermind.services.LeaderboardService;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 public class WinPercentageLeaderboardMenu extends Menu {
     private final Printer printer;
@@ -114,26 +112,6 @@ public class WinPercentageLeaderboardMenu extends Menu {
         waitForConfirmation();
 
         return this;
-    }
-
-    private int getNameColumnWidth(Stream<String> namesStream, int headerLength) {
-        int nameColumWidth = namesStream.map(String::length)
-                .max(Integer::compareTo)
-                .orElse(0);
-
-        return addPadding(Math.max(nameColumWidth, headerLength));
-    }
-
-    private void printDividerLine(int... headerLengths) {
-        int headerLength = Arrays.stream(headerLengths).sum();
-
-        printer.printMessage("-".repeat(headerLength));
-    }
-
-    private int addPadding(int value) {
-        int padding = 10;
-
-        return value + padding;
     }
 
     private void waitForConfirmation() {
