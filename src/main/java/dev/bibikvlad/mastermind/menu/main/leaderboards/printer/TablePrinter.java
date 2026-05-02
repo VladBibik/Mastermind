@@ -2,7 +2,6 @@ package dev.bibikvlad.mastermind.menu.main.leaderboards.printer;
 
 import dev.bibikvlad.mastermind.app.printer.Printer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TablePrinter<T> {
@@ -16,19 +15,21 @@ public class TablePrinter<T> {
 
     public void print(List<T> data, List<Column<T>> columns) {
         //1.Width Calculation
-        List<Integer> columnWidths = new ArrayList<>();
+        List<Integer> columnWidths = columns
+                .stream()
+                .mapToInt(column -> {
+                    int columnHeaderLength = column.getHeader().length();
+                    int columnValueMaxLength = data
+                            .stream()
+                            .map(entry -> column.getValueExtractor().apply(entry))
+                            .map(String::length)
+                            .max(Integer::compareTo)
+                            .orElse(0);
 
-        columns.forEach(column -> {
-            int columnHeaderLength = column.getHeader().length();
-            int columnValueMaxLength = data
-                    .stream()
-                    .map(entry -> column.getValueExtractor().apply(entry))
-                    .map(String::length)
-                    .max(Integer::compareTo)
-                    .orElse(0);
-
-            columnWidths.add(Math.max(columnHeaderLength, columnValueMaxLength) + PADDING);
-        });
+                    return Math.max(columnHeaderLength, columnValueMaxLength) + PADDING;
+                })
+                .boxed()
+                .toList();
 
         //2. Print Header
         StringBuilder formattingBuilder = new StringBuilder();
