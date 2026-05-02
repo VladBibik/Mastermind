@@ -159,31 +159,15 @@ public class LeaderboardMenu extends Menu {
             return this;
         }
 
-        String nameColumnHeader = leaderboardMessages.getHeaderName();
-        String turnsColumnHeader = leaderboardMessages.getHeaderTurns();
-
-        int nameColumnWidth = getNameColumnWidth(
-                optionalLeaderboard
-                        .get()
-                        .stream()
-                        .map(TurnsLeaderboardEntry::playerName),
-                nameColumnHeader.length()
+        TablePrinter<TurnsLeaderboardEntry> tablePrinter = new TablePrinter<>(printer);
+        tablePrinter.print(
+                optionalLeaderboard.get(),
+                List.of(
+                        new Column<>(leaderboardMessages.getHeaderName(), TurnsLeaderboardEntry::playerName),
+                        new Column<>(leaderboardMessages.getHeaderTurns(),
+                                entry -> Integer.toString(entry.numberOfTurns()))
+                )
         );
-        int turnsColumnWidth = addPadding(turnsColumnHeader.length());
-
-        String formatting = "%-" + nameColumnWidth + "s%-" + turnsColumnWidth + "s";
-        String header = String.format(formatting, nameColumnHeader, turnsColumnHeader);
-
-        printer.printMessage(header);
-        printDividerLine(nameColumnWidth, turnsColumnWidth);
-
-        optionalLeaderboard.get().forEach(leaderboardEntry -> {
-            String row = String.format(formatting,
-                    leaderboardEntry.playerName(),
-                    leaderboardEntry.numberOfTurns());
-
-            printer.printMessage(row);
-        });
 
         waitForConfirmation();
 
