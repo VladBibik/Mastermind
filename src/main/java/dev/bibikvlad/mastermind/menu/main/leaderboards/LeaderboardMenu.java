@@ -198,30 +198,15 @@ public class LeaderboardMenu extends Menu {
             return this;
         }
 
-        String nameColumnHeader = leaderboardMessages.getHeaderName();
-        String winsColumnHeader = leaderboardMessages.getHeaderWins();
-
-        int nameColumnWidth = getNameColumnWidth(
-                optionalLeaderboard
-                        .get()
-                        .stream()
-                        .map(WinsLeaderboardEntry::playerName),
-                nameColumnHeader.length());
-        int winsColumnWidth = addPadding(winsColumnHeader.length());
-
-        String formatting = "%-" + nameColumnWidth + "s%-" + winsColumnWidth + "s";
-        String header = String.format(formatting, nameColumnHeader, winsColumnHeader);
-
-        printer.printMessage(header);
-        printDividerLine(nameColumnWidth, winsColumnWidth);
-
-        optionalLeaderboard.get().forEach(leaderboardEntry -> {
-            String row = String.format(formatting,
-                    leaderboardEntry.playerName(),
-                    leaderboardEntry.numberOfWins());
-
-            printer.printMessage(row);
-        });
+        TablePrinter<WinsLeaderboardEntry> tablePrinter = new TablePrinter<>(printer);
+        tablePrinter.print(
+                optionalLeaderboard.get(),
+                List.of(
+                        new Column<>(leaderboardMessages.getHeaderName(), WinsLeaderboardEntry::playerName),
+                        new Column<>(leaderboardMessages.getHeaderWins(),
+                                entry -> Long.toString(entry.numberOfWins()))
+                )
+        );
 
         waitForConfirmation();
 
