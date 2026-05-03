@@ -50,7 +50,7 @@ public class WinPercentageLeaderboardMenu extends Menu {
         Optional<Integer> selection = IntegerInputInterpreter.readSelection(appContext.parser());
 
         return selection
-                .map(this::validateCutoff)
+                .map(this::handleSelection)
                 .orElseGet(() -> new LeaderboardMenu(appContext));
     }
 
@@ -58,35 +58,24 @@ public class WinPercentageLeaderboardMenu extends Menu {
         printer.printMessage(leaderboardMessages.getPercentageMenuOptions(playedGames));
     }
 
-    private Menu validateCutoff(int userInputNumber) {
-        if (userInputNumber < 10) {
-            return shortcutOptionSwitcher(userInputNumber);
-        } else {
-            return checkIfInputBiggerThanMaxGamesPlayed(userInputNumber);
+    private Menu handleSelection(int input) {
+        if (input == 1) {
+            return printWinPercentageLeaderboard(DEFAULT_CUTOFF);
         }
-    }
 
-    //TODO: Rename to something comprehensible
-    private Menu checkIfInputBiggerThanMaxGamesPlayed(int userInputNumber) {
-        if (userInputNumber > playedGames) {
-            printer.printMessage(leaderboardMessages.getInvalidCutoffError(playedGames));
-
-            return this;
-        } else {
-            return printWinPercentageLeaderboard(userInputNumber);
-        }
-    }
-
-    private Menu shortcutOptionSwitcher(int userInputNumber) {
-        final int DEFAULT_CUTOFF_VALUE = 10;
-
-        if (userInputNumber == 1) {
-            return printWinPercentageLeaderboard(DEFAULT_CUTOFF_VALUE);
-        } else {
+        if (input < DEFAULT_CUTOFF) {
             printer.printMessage(interactionMessages.getInvalidInputMessage());
 
             return this;
         }
+
+        if (input > playedGames) {
+            printer.printMessage(leaderboardMessages.getInvalidCutoffError(playedGames));
+
+            return this;
+        }
+
+        return printWinPercentageLeaderboard(input);
     }
 
     private Menu printWinPercentageLeaderboard(int sampleSize) {
