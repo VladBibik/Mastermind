@@ -74,7 +74,7 @@ public class LeaderboardMenu extends Menu {
                 return printTurnsLeaderboard();
             }
             case 4 -> {
-                return handleWinPercentageLeaderboardSelection();
+                return handleWinPercentageSelection();
             }
             case 5 -> {
                 return printWinsLeaderboard();
@@ -164,7 +164,7 @@ public class LeaderboardMenu extends Menu {
         return this;
     }
 
-    private Menu handleWinPercentageLeaderboardSelection() {
+    private Menu handleWinPercentageSelection() {
         final int minGamesForPercentage = 10;
 
         int maxGamesPlayedByPlayer = gamesService.getMaxGamesPlayedByPlayer();
