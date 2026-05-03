@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class WinPercentageLeaderboardMenu extends Menu {
+    private static final int DEFAULT_CUTOFF = 10;
+
     private final Printer printer;
     private final Parser parser;
     private final LeaderboardMessages leaderboardMessages;
