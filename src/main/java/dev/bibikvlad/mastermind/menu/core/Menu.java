@@ -5,7 +5,7 @@ import dev.bibikvlad.mastermind.app.context.AppContext;
 public abstract class Menu {
     protected final AppContext appContext;
 
-    public Menu(AppContext appContext) {
+    protected Menu(AppContext appContext) {
         this.appContext = appContext;
     }
 
