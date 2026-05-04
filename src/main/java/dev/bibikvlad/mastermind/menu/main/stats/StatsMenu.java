@@ -65,6 +65,18 @@ public class StatsMenu extends Menu {
                 .orElseThrow(() -> new IllegalStateException(errorMessages.getStatsNotFoundMessage(playerId)));
     }
 
+    private List<String> createLabelList() {
+        return List.of(
+                statsMessages.getGamesPlayed(),
+                statsMessages.getWins(),
+                statsMessages.getWinPercentage(),
+                statsMessages.getTotalPlayTime(),
+                statsMessages.getFastestWinTime(),
+                statsMessages.getAverageGameDuration(),
+                statsMessages.getBestTurnCount()
+        );
+    }
+
     private List<String> buildStatsLines(PlayerStatistics stats) {
         Locale currentLocale = currentPlayer.getPlayerConfig().locale().getLocale();
 
