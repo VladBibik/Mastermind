@@ -83,12 +83,24 @@ public class StatsMenu extends Menu {
         return lines;
     }
 
-    private int findLongestLabel(List<String> labels) {
-        return labels
+    private Map<Integer, Integer> findLongestLabel(Map<String, String> statsLines) {
+        int longestLabel = statsLines
+                .keySet()
                 .stream()
                 .mapToInt(String::length)
                 .max()
                 .orElse(0);
+
+        int longestStat = statsLines
+                .values()
+                .stream()
+                .mapToInt(String::length)
+                .max()
+                .orElse(0);
+
+
+
+        return Map.of(longestLabel, longestStat);
     }
 
     private String createFormattingString(int longestLabelLength, int longestStatLength) {
