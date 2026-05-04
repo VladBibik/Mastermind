@@ -114,7 +114,7 @@ public class StatsMenu extends Menu {
     }
 
     private String createFormattingString(int longestLabelLength, int longestStatLength) {
-        return "%-" + longestLabelLength + PADDING + "s%-" + longestStatLength + PADDING + "s";
+        return "%-" + (longestLabelLength + PADDING) + "s%-" + (longestStatLength + PADDING) + "s";
     }
 
     private void printDividingLine(int longestLabelLength, int longestStatLength) {
