@@ -43,7 +43,7 @@ public class WinPercentageLeaderboardMenu extends Menu {
     @Override
     public Menu run() {
         if (showMenuOnNextLoop) {
-            displayMenu(playedGames);
+            displayMenu();
             showMenuOnNextLoop = false;
         }
 
@@ -54,7 +54,7 @@ public class WinPercentageLeaderboardMenu extends Menu {
                 .orElseGet(() -> new LeaderboardMenu(appContext));
     }
 
-    private void displayMenu(int playedGames) {
+    private void displayMenu() {
         printer.printMessage(leaderboardMessages.getPercentageMenuOptions(playedGames));
     }
 
