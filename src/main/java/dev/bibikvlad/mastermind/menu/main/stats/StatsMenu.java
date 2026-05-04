@@ -77,6 +77,14 @@ public class StatsMenu extends Menu {
         );
     }
 
+    private int findLongestLabel(List<String> labels) {
+        return labels
+                .stream()
+                .mapToInt(String::length)
+                .max()
+                .orElse(0);
+    }
+
     private List<String> buildStatsLines(PlayerStatistics stats) {
         Locale currentLocale = currentPlayer.getPlayerConfig().locale().getLocale();
 
