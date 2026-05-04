@@ -17,7 +17,9 @@ import dev.bibikvlad.mastermind.services.PlayerStatisticsService;
 import dev.bibikvlad.utils.formatters.ClockDisplayFormatter;
 import dev.bibikvlad.utils.formatters.TimeToStringFormatter;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Locale;
+import java.util.Map;
 
 public class StatsMenu extends Menu {
     private static final int LABEL_WIDTH = 35;
@@ -59,9 +61,16 @@ public class StatsMenu extends Menu {
 
         Map<String, String> statsLines = createStatsLines(stats);
 
-        List<Integer> longestValues = findLongestValues(statsLines);
+        int longestLabelLength = findLongestLabel(statsLines);
+        int longestStatLength = findLongestStat(statsLines);
+
+        String formatting = createFormattingString(longestLabelLength, longestStatLength);
 
         printer.printMessage(statsMessages.getHeader(AnsiSafeFormatter.isolate(currentPlayer.getPlayerName())));
+
+        printDividingLine(longestLabelLength, longestStatLength);
+
+        printStatsLines(statsLines, formatting);
     }
 
     private PlayerStatistics fetchPlayerStatistics(long playerId) {
