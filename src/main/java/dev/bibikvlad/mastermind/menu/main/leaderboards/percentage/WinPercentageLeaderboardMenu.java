@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.menu.main.leaderboards.percentage;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
+import dev.bibikvlad.mastermind.app.printer.AnsiSafeFormatter;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
@@ -92,7 +93,8 @@ public class WinPercentageLeaderboardMenu extends Menu {
         tablePrinter.print(
                 optionalLeaderboard.get(),
                 List.of(
-                        new Column<>(leaderboardMessages.getHeaderName(), WinPercentageLeaderboardEntry::playerName),
+                        new Column<>(leaderboardMessages.getHeaderName(),
+                                entry -> AnsiSafeFormatter.isolate(entry.playerName())),
                         new Column<>(leaderboardMessages.getHeaderPercentage(),
                                 entry -> String.format("%.2f%%", entry.winPercentage())),
                         new Column<>(leaderboardMessages.getHeaderGames(),
