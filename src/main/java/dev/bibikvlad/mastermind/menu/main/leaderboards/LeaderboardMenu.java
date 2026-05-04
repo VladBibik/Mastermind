@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.menu.main.leaderboards;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
+import dev.bibikvlad.mastermind.app.printer.AnsiSafeFormatter;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
@@ -103,7 +104,8 @@ public class LeaderboardMenu extends Menu {
         tablePrinter.print(
                 optionalLeaderboard.get(),
                 List.of(
-                        new Column<>(leaderboardMessages.getHeaderName(), MainLeaderboardEntry::playerName),
+                        new Column<>(leaderboardMessages.getHeaderName(),
+                                entry -> AnsiSafeFormatter.isolate(entry.playerName())),
                         new Column<>(leaderboardMessages.getHeaderTurns(),
                                 entry -> String.valueOf(entry.numberOfTurns())),
                         new Column<>(leaderboardMessages.getHeaderTime(),
@@ -129,7 +131,8 @@ public class LeaderboardMenu extends Menu {
         tablePrinter.print(
                 optionalLeaderboard.get(),
                 List.of(
-                        new Column<>(leaderboardMessages.getHeaderName(), TimeLeaderboardEntry::playerName),
+                        new Column<>(leaderboardMessages.getHeaderName(),
+                                entry -> AnsiSafeFormatter.isolate(entry.playerName())),
                         new Column<>(leaderboardMessages.getHeaderTime(),
                                 entry -> ClockDisplayFormatter.format(entry.gameDuration()))
                 )
@@ -153,7 +156,8 @@ public class LeaderboardMenu extends Menu {
         tablePrinter.print(
                 optionalLeaderboard.get(),
                 List.of(
-                        new Column<>(leaderboardMessages.getHeaderName(), TurnsLeaderboardEntry::playerName),
+                        new Column<>(leaderboardMessages.getHeaderName(),
+                                entry -> AnsiSafeFormatter.isolate(entry.playerName())),
                         new Column<>(leaderboardMessages.getHeaderTurns(),
                                 entry -> String.valueOf(entry.numberOfTurns()))
                 )
@@ -192,7 +196,8 @@ public class LeaderboardMenu extends Menu {
         tablePrinter.print(
                 optionalLeaderboard.get(),
                 List.of(
-                        new Column<>(leaderboardMessages.getHeaderName(), WinsLeaderboardEntry::playerName),
+                        new Column<>(leaderboardMessages.getHeaderName(),
+                                entry -> AnsiSafeFormatter.isolate(entry.playerName())),
                         new Column<>(leaderboardMessages.getHeaderWins(),
                                 entry -> String.valueOf(entry.numberOfWins()))
                 )
