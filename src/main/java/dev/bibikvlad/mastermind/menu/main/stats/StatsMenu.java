@@ -57,6 +57,8 @@ public class StatsMenu extends Menu {
     private void printStats() {
         PlayerStatistics stats = fetchPlayerStatistics(currentPlayer.getId());
 
+        printer.printMessage(statsMessages.getHeader(AnsiSafeFormatter.isolate(currentPlayer.getPlayerName())));
+
         buildStatsLines(stats).forEach(printer::printMessage);
     }
 
@@ -83,7 +85,7 @@ public class StatsMenu extends Menu {
         return lines;
     }
 
-    private Map<Integer, Integer> findLongestLabel(Map<String, String> statsLines) {
+    private Map<Integer, Integer> findLongestValues(Map<String, String> statsLines) {
         int longestLabel = statsLines
                 .keySet()
                 .stream()
@@ -98,8 +100,6 @@ public class StatsMenu extends Menu {
                 .max()
                 .orElse(0);
 
-
-
         return Map.of(longestLabel, longestStat);
     }
 
@@ -107,26 +107,16 @@ public class StatsMenu extends Menu {
         return "%-" + longestLabelLength + PADDING + "s%-" + longestStatLength + PADDING + "s";
     }
 
-    private List<String> buildStatsLines(PlayerStatistics stats) {
-        Locale currentLocale = currentPlayer.getPlayerConfig().locale().getLocale();
-
-        return List.of(
-                statsMessages.getHeader(AnsiSafeFormatter.isolate(currentPlayer.getPlayerName())),
-                formatStat(statsMessages.getGamesPlayed(), String.valueOf(stats.gameCount())),
-                formatStat(statsMessages.getWins(), String.valueOf(stats.winCount())),
-                formatStat(statsMessages.getWinPercentage(),
-                        String.format(currentLocale, "%.2f%%", stats.winPercentage())),
-                formatStat(statsMessages.getTotalPlayTime(),
-                        TimeToStringFormatter.format(stats.totalPlayTime(), timeFormattingMessages)),
-                formatStat(statsMessages.getFastestWinTime(), ClockDisplayFormatter.format(stats.fastestWinTime())),
-                formatStat(statsMessages.getAverageGameDuration(),
-                        ClockDisplayFormatter.format(stats.averageGameDuration())),
-                formatStat(statsMessages.getBestTurnCount(), String.valueOf(stats.minTurnsWin()))
-        );
+    private void printDividingLine(int longestLabelLength, int longestStatLength) {
+        printer.printMessage("-".repeat(longestLabelLength + longestStatLength + (PADDING * 2)));
     }
 
-    private String formatStat(String label, String value) {
-        return String.format("%-" + LABEL_WIDTH + "s %s", label, value);
+    private void printStatsLines(Map<String, String> statsLines, String formatting) {
+        statsLines.forEach((key, value) -> {
+            String statLine = String.format(formatting, key, value);
+
+            printer.printMessage(statLine);
+        });
     }
 
     private void confirmToContinue() {
