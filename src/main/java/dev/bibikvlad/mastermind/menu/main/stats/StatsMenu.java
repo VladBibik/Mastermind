@@ -17,8 +17,7 @@ import dev.bibikvlad.mastermind.services.PlayerStatisticsService;
 import dev.bibikvlad.utils.formatters.ClockDisplayFormatter;
 import dev.bibikvlad.utils.formatters.TimeToStringFormatter;
 
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 public class StatsMenu extends Menu {
     private static final int LABEL_WIDTH = 35;
@@ -66,16 +65,22 @@ public class StatsMenu extends Menu {
                 .orElseThrow(() -> new IllegalStateException(errorMessages.getStatsNotFoundMessage(playerId)));
     }
 
-    private List<String> createLabelList() {
-        return List.of(
-                statsMessages.getGamesPlayed(),
-                statsMessages.getWins(),
-                statsMessages.getWinPercentage(),
-                statsMessages.getTotalPlayTime(),
-                statsMessages.getFastestWinTime(),
-                statsMessages.getAverageGameDuration(),
-                statsMessages.getBestTurnCount()
-        );
+    private Map<String, String> createStatsLines(PlayerStatistics stats) {
+        Locale currentLocale = currentPlayer.getPlayerConfig().locale().getLocale();
+
+        Map<String, String> lines = new LinkedHashMap<>();
+        lines.put(statsMessages.getGamesPlayed(), String.valueOf(stats.gameCount()));
+        lines.put(statsMessages.getWins(), String.valueOf(stats.winCount()));
+        lines.put(statsMessages.getWinPercentage(),
+                String.format(currentLocale, "%.2f%%", stats.winPercentage()));
+        lines.put(statsMessages.getTotalPlayTime(),
+                TimeToStringFormatter.format(stats.totalPlayTime(), timeFormattingMessages));
+        lines.put(statsMessages.getFastestWinTime(), ClockDisplayFormatter.format(stats.fastestWinTime()));
+        lines.put(statsMessages.getAverageGameDuration(),
+                ClockDisplayFormatter.format(stats.averageGameDuration()));
+        lines.put(statsMessages.getBestTurnCount(), String.valueOf(stats.minTurnsWin()));
+
+        return lines;
     }
 
     private int findLongestLabel(List<String> labels) {
