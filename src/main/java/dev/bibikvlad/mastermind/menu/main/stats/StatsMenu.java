@@ -57,9 +57,11 @@ public class StatsMenu extends Menu {
     private void printStats() {
         PlayerStatistics stats = fetchPlayerStatistics(currentPlayer.getId());
 
-        printer.printMessage(statsMessages.getHeader(AnsiSafeFormatter.isolate(currentPlayer.getPlayerName())));
+        Map<String, String> statsLines = createStatsLines(stats);
 
-        buildStatsLines(stats).forEach(printer::printMessage);
+        List<Integer> longestValues = findLongestValues(statsLines);
+
+        printer.printMessage(statsMessages.getHeader(AnsiSafeFormatter.isolate(currentPlayer.getPlayerName())));
     }
 
     private PlayerStatistics fetchPlayerStatistics(long playerId) {
@@ -85,22 +87,22 @@ public class StatsMenu extends Menu {
         return lines;
     }
 
-    private Map<Integer, Integer> findLongestValues(Map<String, String> statsLines) {
-        int longestLabel = statsLines
+    private int findLongestLabel(Map<String, String> statsLines) {
+        return statsLines
                 .keySet()
                 .stream()
                 .mapToInt(String::length)
                 .max()
                 .orElse(0);
+    }
 
-        int longestStat = statsLines
+    private int findLongestStat(Map<String, String> statsLines) {
+        return statsLines
                 .values()
                 .stream()
                 .mapToInt(String::length)
                 .max()
                 .orElse(0);
-
-        return Map.of(longestLabel, longestStat);
     }
 
     private String createFormattingString(int longestLabelLength, int longestStatLength) {
