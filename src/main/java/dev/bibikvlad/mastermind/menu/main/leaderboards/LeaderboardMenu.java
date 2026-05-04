@@ -155,7 +155,7 @@ public class LeaderboardMenu extends Menu {
                 List.of(
                         new Column<>(leaderboardMessages.getHeaderName(), TurnsLeaderboardEntry::playerName),
                         new Column<>(leaderboardMessages.getHeaderTurns(),
-                                entry -> Integer.toString(entry.numberOfTurns()))
+                                entry -> String.valueOf(entry.numberOfTurns()))
                 )
         );
 
@@ -194,7 +194,7 @@ public class LeaderboardMenu extends Menu {
                 List.of(
                         new Column<>(leaderboardMessages.getHeaderName(), WinsLeaderboardEntry::playerName),
                         new Column<>(leaderboardMessages.getHeaderWins(),
-                                entry -> Long.toString(entry.numberOfWins()))
+                                entry -> String.valueOf(entry.numberOfWins()))
                 )
         );
 
