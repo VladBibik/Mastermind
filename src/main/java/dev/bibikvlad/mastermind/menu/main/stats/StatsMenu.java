@@ -22,6 +22,7 @@ import java.util.Locale;
 
 public class StatsMenu extends Menu {
     private static final int LABEL_WIDTH = 35;
+    private static final int PADDING = 10;
 
     private final PlayerStatisticsService playerStatisticsService;
     private final Player currentPlayer;
