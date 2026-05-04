@@ -96,7 +96,7 @@ public class WinPercentageLeaderboardMenu extends Menu {
                         new Column<>(leaderboardMessages.getHeaderPercentage(),
                                 entry -> String.format("%.2f%%", entry.winPercentage())),
                         new Column<>(leaderboardMessages.getHeaderGames(),
-                                entry -> Long.toString(entry.gamesPlayed()))
+                                entry -> String.valueOf(entry.gamesPlayed()))
                 )
         );
 
