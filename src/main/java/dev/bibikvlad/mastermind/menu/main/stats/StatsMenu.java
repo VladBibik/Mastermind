@@ -118,7 +118,7 @@ public class StatsMenu extends Menu {
     }
 
     private void printDividingLine(int longestLabelLength, int longestStatLength) {
-        printer.printMessage("-".repeat(longestLabelLength + longestStatLength + (PADDING * 2)));
+        printer.printMessage("-".repeat(longestLabelLength + longestStatLength + PADDING));
     }
 
     private void printStatsLines(Map<String, String> statsLines, String formatting) {
