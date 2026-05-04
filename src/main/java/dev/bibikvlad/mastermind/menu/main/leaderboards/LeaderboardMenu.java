@@ -11,8 +11,8 @@ import dev.bibikvlad.mastermind.localization.messages.menu.main.leaderboards.Lea
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.MainMenu;
 import dev.bibikvlad.mastermind.menu.main.leaderboards.percentage.WinPercentageLeaderboardMenu;
-import dev.bibikvlad.mastermind.menu.main.leaderboards.printer.Column;
-import dev.bibikvlad.mastermind.menu.main.leaderboards.printer.TablePrinter;
+import dev.bibikvlad.mastermind.app.printer.table.Column;
+import dev.bibikvlad.mastermind.app.printer.table.TablePrinter;
 import dev.bibikvlad.mastermind.model.leaderboard.MainLeaderboardEntry;
 import dev.bibikvlad.mastermind.model.leaderboard.TimeLeaderboardEntry;
 import dev.bibikvlad.mastermind.model.leaderboard.TurnsLeaderboardEntry;

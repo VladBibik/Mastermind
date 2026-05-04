@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.menu.main.leaderboards.printer;
+package dev.bibikvlad.mastermind.app.printer.table;
 
 import dev.bibikvlad.mastermind.app.printer.Printer;
 

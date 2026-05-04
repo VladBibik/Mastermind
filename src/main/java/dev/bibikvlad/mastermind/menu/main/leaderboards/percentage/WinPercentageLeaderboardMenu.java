@@ -10,8 +10,8 @@ import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMes
 import dev.bibikvlad.mastermind.localization.messages.menu.main.leaderboards.LeaderboardMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.leaderboards.LeaderboardMenu;
-import dev.bibikvlad.mastermind.menu.main.leaderboards.printer.Column;
-import dev.bibikvlad.mastermind.menu.main.leaderboards.printer.TablePrinter;
+import dev.bibikvlad.mastermind.app.printer.table.Column;
+import dev.bibikvlad.mastermind.app.printer.table.TablePrinter;
 import dev.bibikvlad.mastermind.model.leaderboard.WinPercentageLeaderboardEntry;
 import dev.bibikvlad.mastermind.services.LeaderboardService;
 
