@@ -86,6 +86,10 @@ public class StatsMenu extends Menu {
                 .orElse(0);
     }
 
+    private String createFormattingString(int longestLabelLength, int longestStatLength) {
+        return "%-" + longestLabelLength + PADDING + "s%-" + longestStatLength + PADDING + "s";
+    }
+
     private List<String> buildStatsLines(PlayerStatistics stats) {
         Locale currentLocale = currentPlayer.getPlayerConfig().locale().getLocale();
 
