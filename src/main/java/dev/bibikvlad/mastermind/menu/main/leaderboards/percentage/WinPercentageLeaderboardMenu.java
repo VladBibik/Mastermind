@@ -47,7 +47,7 @@ public class WinPercentageLeaderboardMenu extends Menu {
             showMenuOnNextLoop = false;
         }
 
-        Optional<Integer> selection = IntegerInputInterpreter.readSelection(appContext.parser());
+        Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
 
         return selection
                 .map(this::handleSelection)
