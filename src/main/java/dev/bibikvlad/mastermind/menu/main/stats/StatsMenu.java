@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.menu.main.stats;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
+import dev.bibikvlad.mastermind.app.printer.AnsiSafeFormatter;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
@@ -68,7 +69,7 @@ public class StatsMenu extends Menu {
         Locale currentLocale = currentPlayer.getPlayerConfig().locale().getLocale();
 
         return List.of(
-                statsMessages.getHeader(currentPlayer.getPlayerName()),
+                statsMessages.getHeader(AnsiSafeFormatter.isolate(currentPlayer.getPlayerName())),
                 formatStat(statsMessages.getGamesPlayed(), String.valueOf(stats.gameCount())),
                 formatStat(statsMessages.getWins(), String.valueOf(stats.winCount())),
                 formatStat(statsMessages.getWinPercentage(),
