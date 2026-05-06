@@ -20,7 +20,6 @@ import dev.bibikvlad.utils.formatters.TimeToStringFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 public class StatsMenu extends Menu {
     private static final int PADDING = 10;
@@ -61,13 +60,13 @@ public class StatsMenu extends Menu {
 
         List<StatRow> statsRows = createStatsLines(stats);
 
-        Map<Integer, Integer> longestLengths = findLongestLengths(statsRows);
+        Widths longestWidths = findLongestWidths(statsRows);
 
-        String formatting = createFormattingString(longestLengths);
+        String formatting = createFormattingString(longestWidths);
 
         printer.printMessage(statsMessages.getHeader(AnsiSafeFormatter.isolate(currentPlayer.getPlayerName())));
 
-        printDividingLine(longestLengths);
+        printDividingLine(longestWidths);
 
         printStatsLines(statsRows, formatting);
     }
@@ -95,8 +94,8 @@ public class StatsMenu extends Menu {
         return lines;
     }
 
-    private Map<Integer, Integer> findLongestLengths(List<StatRow> statsRows) {
-        return Map.of(
+    private Widths findLongestWidths(List<StatRow> statsRows) {
+        return new Widths(
                 statsRows
                         .stream()
                         .mapToInt(entry -> entry.label().length())
@@ -109,13 +108,12 @@ public class StatsMenu extends Menu {
                         .orElse(0));
     }
 
-    private String createFormattingString(Map<Integer, Integer> longestLengths) {
-        return "%-" + (longestLengths.keySet().stream().findAny().orElse(0) + PADDING) + "s%s";
+    private String createFormattingString(Widths longestWidths) {
+        return "%-" + (longestWidths.label() + PADDING) + "s%s";
     }
 
-    private void printDividingLine(Map<Integer, Integer> longestLengths) {
-        printer.printMessage("-".repeat(longestLengths.keySet().stream().findAny().orElse(0)
-                + longestLengths.values().stream().findAny().orElse(0) + (PADDING * 2)));
+    private void printDividingLine(Widths longestWidths) {
+        printer.printMessage("-".repeat(longestWidths.label() + longestWidths.value() + (PADDING * 2)));
     }
 
     private void printStatsLines(List<StatRow> statRows, String formatting) {
