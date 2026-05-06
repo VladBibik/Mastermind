@@ -17,7 +17,8 @@ import dev.bibikvlad.mastermind.services.PlayerStatisticsService;
 import dev.bibikvlad.utils.formatters.ClockDisplayFormatter;
 import dev.bibikvlad.utils.formatters.TimeToStringFormatter;
 
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -58,18 +59,17 @@ public class StatsMenu extends Menu {
     private void printStats() {
         PlayerStatistics stats = fetchPlayerStatistics(currentPlayer.getId());
 
-        Map<String, String> statsLines = createStatsLines(stats);
+        List<StatRow> statsRows = createStatsLines(stats);
 
-        int longestLabelLength = findLongestLabel(statsLines);
-        int longestStatLength = findLongestStat(statsLines);
+        Map<Integer, Integer> longestLengths = findLongestLengths(statsRows);
 
-        String formatting = createFormattingString(longestLabelLength, longestStatLength);
+        String formatting = createFormattingString(longestLengths);
 
         printer.printMessage(statsMessages.getHeader(AnsiSafeFormatter.isolate(currentPlayer.getPlayerName())));
 
-        printDividingLine(longestLabelLength, longestStatLength);
+        printDividingLine(longestLengths);
 
-        printStatsLines(statsLines, formatting);
+        printStatsLines(statsRows, formatting);
     }
 
     private PlayerStatistics fetchPlayerStatistics(long playerId) {
@@ -77,53 +77,50 @@ public class StatsMenu extends Menu {
                 .orElseThrow(() -> new IllegalStateException(errorMessages.getStatsNotFoundMessage(playerId)));
     }
 
-    private Map<String, String> createStatsLines(PlayerStatistics stats) {
+    private List<StatRow> createStatsLines(PlayerStatistics stats) {
         Locale currentLocale = currentPlayer.getPlayerConfig().locale().getLocale();
 
-        Map<String, String> lines = new LinkedHashMap<>();
-        lines.put(statsMessages.getGamesPlayed(), String.valueOf(stats.gameCount()));
-        lines.put(statsMessages.getWins(), String.valueOf(stats.winCount()));
-        lines.put(statsMessages.getWinPercentage(),
-                String.format(currentLocale, "%.2f%%", stats.winPercentage()));
-        lines.put(statsMessages.getTotalPlayTime(),
-                TimeToStringFormatter.format(stats.totalPlayTime(), timeFormattingMessages));
-        lines.put(statsMessages.getFastestWinTime(), ClockDisplayFormatter.format(stats.fastestWinTime()));
-        lines.put(statsMessages.getAverageGameDuration(),
-                ClockDisplayFormatter.format(stats.averageGameDuration()));
-        lines.put(statsMessages.getBestTurnCount(), String.valueOf(stats.minTurnsWin()));
+        List<StatRow> lines = new ArrayList<>();
+        lines.add(new StatRow(statsMessages.getGamesPlayed(), String.valueOf(stats.gameCount())));
+        lines.add(new StatRow(statsMessages.getWins(), String.valueOf(stats.winCount())));
+        lines.add(new StatRow(statsMessages.getWinPercentage(),
+                String.format(currentLocale, "%.2f%%", stats.winPercentage())));
+        lines.add(new StatRow(statsMessages.getTotalPlayTime(),
+                TimeToStringFormatter.format(stats.totalPlayTime(), timeFormattingMessages)));
+        lines.add(new StatRow(statsMessages.getFastestWinTime(), ClockDisplayFormatter.format(stats.fastestWinTime())));
+        lines.add(new StatRow(statsMessages.getAverageGameDuration(),
+                ClockDisplayFormatter.format(stats.averageGameDuration())));
+        lines.add(new StatRow(statsMessages.getBestTurnCount(), String.valueOf(stats.minTurnsWin())));
 
         return lines;
     }
 
-    private int findLongestLabel(Map<String, String> statsLines) {
-        return statsLines
-                .keySet()
-                .stream()
-                .mapToInt(String::length)
-                .max()
-                .orElse(0);
+    private Map<Integer, Integer> findLongestLengths(List<StatRow> statsRows) {
+        return Map.of(
+                statsRows
+                        .stream()
+                        .mapToInt(entry -> entry.label().length())
+                        .max()
+                        .orElse(0),
+                statsRows
+                        .stream()
+                        .mapToInt(entry -> entry.value().length())
+                        .max()
+                        .orElse(0));
     }
 
-    private int findLongestStat(Map<String, String> statsLines) {
-        return statsLines
-                .values()
-                .stream()
-                .mapToInt(String::length)
-                .max()
-                .orElse(0);
+    private String createFormattingString(Map<Integer, Integer> longestLengths) {
+        return "%-" + (longestLengths.keySet().stream().findAny().orElse(0) + PADDING) + "s%s";
     }
 
-    private String createFormattingString(int longestLabelLength, int longestStatLength) {
-        return "%-" + (longestLabelLength + PADDING) + "s%-" + (longestStatLength + PADDING) + "s";
+    private void printDividingLine(Map<Integer, Integer> longestLengths) {
+        printer.printMessage("-".repeat(longestLengths.keySet().stream().findAny().orElse(0)
+                + longestLengths.values().stream().findAny().orElse(0) + (PADDING * 2)));
     }
 
-    private void printDividingLine(int longestLabelLength, int longestStatLength) {
-        printer.printMessage("-".repeat(longestLabelLength + longestStatLength + PADDING));
-    }
-
-    private void printStatsLines(Map<String, String> statsLines, String formatting) {
-        statsLines.forEach((key, value) -> {
-            String statLine = String.format(formatting, key, value);
+    private void printStatsLines(List<StatRow> statRows, String formatting) {
+        statRows.forEach(entry -> {
+            String statLine = String.format(formatting, entry.label(), entry.value());
 
             printer.printMessage(statLine);
         });
