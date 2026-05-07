@@ -110,7 +110,7 @@ public class StatsMenu extends Menu {
     }
 
     private void printDividingLine(RowWidths longestRowWidths) {
-        printer.printMessage("-".repeat(longestRowWidths.label() + longestRowWidths.value() + (PADDING * 2)));
+        printer.printMessage("-".repeat(longestRowWidths.label() + longestRowWidths.value() + PADDING));
     }
 
     private void printStatsLines(List<StatRow> statRows, String formatting) {
