@@ -60,13 +60,13 @@ public class StatsMenu extends Menu {
 
         List<StatRow> statsRows = createStatsLines(stats);
 
-        Widths longestWidths = findLongestWidths(statsRows);
+        RowWidths longestRowWidths = findLongestWidths(statsRows);
 
-        String formatting = createFormattingString(longestWidths);
+        String formatting = createFormattingString(longestRowWidths);
 
         printer.printMessage(statsMessages.getHeader(AnsiSafeFormatter.isolate(currentPlayer.getPlayerName())));
 
-        printDividingLine(longestWidths);
+        printDividingLine(longestRowWidths);
 
         printStatsLines(statsRows, formatting);
     }
@@ -94,8 +94,8 @@ public class StatsMenu extends Menu {
         return lines;
     }
 
-    private Widths findLongestWidths(List<StatRow> statsRows) {
-        return new Widths(
+    private RowWidths findLongestWidths(List<StatRow> statsRows) {
+        return new RowWidths(
                 statsRows
                         .stream()
                         .mapToInt(entry -> entry.label().length())
@@ -108,12 +108,12 @@ public class StatsMenu extends Menu {
                         .orElse(0));
     }
 
-    private String createFormattingString(Widths longestWidths) {
-        return "%-" + (longestWidths.label() + PADDING) + "s%s";
+    private String createFormattingString(RowWidths longestRowWidths) {
+        return "%-" + (longestRowWidths.label() + PADDING) + "s%s";
     }
 
-    private void printDividingLine(Widths longestWidths) {
-        printer.printMessage("-".repeat(longestWidths.label() + longestWidths.value() + (PADDING * 2)));
+    private void printDividingLine(RowWidths longestRowWidths) {
+        printer.printMessage("-".repeat(longestRowWidths.label() + longestRowWidths.value() + (PADDING * 2)));
     }
 
     private void printStatsLines(List<StatRow> statRows, String formatting) {
