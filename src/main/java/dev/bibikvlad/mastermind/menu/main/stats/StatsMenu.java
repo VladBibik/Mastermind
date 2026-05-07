@@ -60,7 +60,7 @@ public class StatsMenu extends Menu {
 
         List<StatRow> statsRows = buildStatRows(stats);
 
-        RowWidths longestRowWidths = findLongestWidths(statsRows);
+        RowWidths longestRowWidths = calculateWidths(statsRows);
 
         String formatting = createFormattingString(longestRowWidths);
 
@@ -94,7 +94,7 @@ public class StatsMenu extends Menu {
         return lines;
     }
 
-    private RowWidths findLongestWidths(List<StatRow> statsRows) {
+    private RowWidths calculateWidths(List<StatRow> statsRows) {
         return new RowWidths(
                 statsRows
                         .stream()
