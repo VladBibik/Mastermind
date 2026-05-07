@@ -17,7 +17,6 @@ import dev.bibikvlad.mastermind.services.PlayerStatisticsService;
 import dev.bibikvlad.utils.formatters.ClockDisplayFormatter;
 import dev.bibikvlad.utils.formatters.TimeToStringFormatter;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -79,19 +78,17 @@ public class StatsMenu extends Menu {
     private List<StatRow> buildStatRows(PlayerStatistics stats) {
         Locale currentLocale = currentPlayer.getPlayerConfig().locale().getLocale();
 
-        List<StatRow> lines = new ArrayList<>();
-        lines.add(new StatRow(statsMessages.getGamesPlayed(), String.valueOf(stats.gameCount())));
-        lines.add(new StatRow(statsMessages.getWins(), String.valueOf(stats.winCount())));
-        lines.add(new StatRow(statsMessages.getWinPercentage(),
-                String.format(currentLocale, "%.2f%%", stats.winPercentage())));
-        lines.add(new StatRow(statsMessages.getTotalPlayTime(),
-                TimeToStringFormatter.format(stats.totalPlayTime(), timeFormattingMessages)));
-        lines.add(new StatRow(statsMessages.getFastestWinTime(), ClockDisplayFormatter.format(stats.fastestWinTime())));
-        lines.add(new StatRow(statsMessages.getAverageGameDuration(),
-                ClockDisplayFormatter.format(stats.averageGameDuration())));
-        lines.add(new StatRow(statsMessages.getBestTurnCount(), String.valueOf(stats.minTurnsWin())));
-
-        return lines;
+        return List.of(
+                new StatRow(statsMessages.getGamesPlayed(), String.valueOf(stats.gameCount())),
+                new StatRow(statsMessages.getWins(), String.valueOf(stats.winCount())),
+                new StatRow(statsMessages.getWinPercentage(),
+                        String.format(currentLocale, "%.2f%%", stats.winPercentage())),
+                new StatRow(statsMessages.getTotalPlayTime(),
+                        TimeToStringFormatter.format(stats.totalPlayTime(), timeFormattingMessages)),
+                new StatRow(statsMessages.getFastestWinTime(), ClockDisplayFormatter.format(stats.fastestWinTime())),
+                new StatRow(statsMessages.getAverageGameDuration(),
+                        ClockDisplayFormatter.format(stats.averageGameDuration())),
+                new StatRow(statsMessages.getBestTurnCount(), String.valueOf(stats.minTurnsWin())));
     }
 
     private RowWidths calculateWidths(List<StatRow> statsRows) {
