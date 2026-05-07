@@ -58,7 +58,7 @@ public class StatsMenu extends Menu {
     private void printStats() {
         PlayerStatistics stats = fetchPlayerStatistics(currentPlayer.getId());
 
-        List<StatRow> statsRows = createStatsLines(stats);
+        List<StatRow> statsRows = buildStatRows(stats);
 
         RowWidths longestRowWidths = findLongestWidths(statsRows);
 
@@ -76,7 +76,7 @@ public class StatsMenu extends Menu {
                 .orElseThrow(() -> new IllegalStateException(errorMessages.getStatsNotFoundMessage(playerId)));
     }
 
-    private List<StatRow> createStatsLines(PlayerStatistics stats) {
+    private List<StatRow> buildStatRows(PlayerStatistics stats) {
         Locale currentLocale = currentPlayer.getPlayerConfig().locale().getLocale();
 
         List<StatRow> lines = new ArrayList<>();
