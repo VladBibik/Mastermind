@@ -56,7 +56,7 @@ public class ProfileMenu extends Menu {
                 return switchPlayer();
             }
             case 2 -> {
-                return newPlayerCreation();
+                return openNewPlayerMenu();
             }
             case 3 -> {
                 return renamePlayer();
@@ -87,7 +87,7 @@ public class ProfileMenu extends Menu {
         return playerSelectionMenu.run();
     }
 
-    private Menu newPlayerCreation() {
+    private Menu openNewPlayerMenu() {
         return new NewPlayerCreation(appContext);
     }
 
