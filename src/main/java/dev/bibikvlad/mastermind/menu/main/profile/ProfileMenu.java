@@ -82,9 +82,7 @@ public class ProfileMenu extends Menu {
             return this;
         }
 
-        Menu playerSelectionMenu = new PlayerSelectionMenu(appContext);
-
-        return playerSelectionMenu.run();
+        return new PlayerSelectionMenu(appContext);
     }
 
     private Menu openNewPlayerMenu() {
