@@ -1,7 +1,9 @@
 package dev.bibikvlad.mastermind.menu.main.profile;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
+import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
+import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.menu.main.MainMenu;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.profile.delete.DeletePlayerMenu;
@@ -13,11 +15,15 @@ import dev.bibikvlad.mastermind.services.PlayerService;
 import java.util.Optional;
 
 public class ProfileMenu extends Menu {
+    private final Printer printer;
+    private final Parser parser;
     private final PlayerService playerService;
 
     public ProfileMenu(AppContext appContext) {
         super(appContext);
 
+        this.printer = appContext.printer();
+        this.parser = appContext.parser();
         this.playerService = appContext.services().getPlayerService();
     }
 
