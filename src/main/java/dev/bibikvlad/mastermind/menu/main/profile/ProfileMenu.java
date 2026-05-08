@@ -31,7 +31,7 @@ public class ProfileMenu extends Menu {
     public Menu run() {
         displayMenu();
 
-        Optional<Integer> selection = IntegerInputInterpreter.readSelection(appContext.parser());
+        Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
 
         return selection
                 .map(this::menuOptionSwitcher)
