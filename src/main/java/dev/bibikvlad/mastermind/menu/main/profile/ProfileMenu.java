@@ -27,8 +27,6 @@ public class ProfileMenu extends Menu {
 
         Optional<Integer> selection = IntegerInputInterpreter.readSelection(appContext.parser());
 
-        //TODO: Check if map even needed here coz we have quit method. The way it works now it either goes to the main
-        //menu if user input is '4', or 'close'/'exit'
         return selection
                 .map(this::menuOptionSwitcher)
                 .orElseGet(() -> new MainMenu(appContext));
