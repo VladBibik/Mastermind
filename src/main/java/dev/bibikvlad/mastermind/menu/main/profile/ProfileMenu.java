@@ -4,10 +4,10 @@ import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
-import dev.bibikvlad.mastermind.menu.main.MainMenu;
 import dev.bibikvlad.mastermind.menu.core.Menu;
-import dev.bibikvlad.mastermind.menu.main.profile.delete.DeletePlayerMenu;
+import dev.bibikvlad.mastermind.menu.main.MainMenu;
 import dev.bibikvlad.mastermind.menu.main.profile.create.NewPlayerCreation;
+import dev.bibikvlad.mastermind.menu.main.profile.delete.DeletePlayerMenu;
 import dev.bibikvlad.mastermind.menu.main.profile.rename.PlayerNameChanger;
 import dev.bibikvlad.mastermind.menu.main.profile.selection.PlayerSelectionMenu;
 import dev.bibikvlad.mastermind.services.PlayerService;
@@ -40,12 +40,14 @@ public class ProfileMenu extends Menu {
     }
 
     private void displayMenu() {
-        System.out.println();
-        System.out.println("1. Switch");
-        System.out.println("2. Create");
-        System.out.println("3. Rename");
-        System.out.println("4. Delete");
-        System.out.println("0. Back");
+        printer.printMessage("""
+                1. Switch
+                2. Create
+                3. Rename
+                4. Delete
+                0. Back
+                """);
+
     }
 
     private Menu menuOptionSwitcher(int userInputNumber) {
@@ -66,7 +68,7 @@ public class ProfileMenu extends Menu {
                 return quit();
             }
             default -> {
-                System.out.println("Invalid input. Please enter a number corresponding to the menu option.");
+                printer.printMessage("Invalid input. Please enter a number corresponding to the menu option.");
 
                 return this;
             }
@@ -75,7 +77,7 @@ public class ProfileMenu extends Menu {
 
     private Menu switchPlayer() {
         if (!playerService.isMultiplePlayersRegistered()) {
-            System.out.println("Please register at least one more player first.");
+            printer.printMessage("Please register at least one more player first.");
 
             return this;
         }
