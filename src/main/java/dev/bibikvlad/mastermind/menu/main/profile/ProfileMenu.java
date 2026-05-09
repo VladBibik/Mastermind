@@ -47,14 +47,7 @@ public class ProfileMenu extends Menu {
     }
 
     private void displayMenu() {
-        printer.printMessage("""
-                1. Switch
-                2. Create
-                3. Rename
-                4. Delete
-                0. Back
-                """);
-
+        printer.printMessage(profileMenuMessages.getMenuOptions());
     }
 
     private Menu menuOptionSwitcher(int userInputNumber) {
@@ -75,7 +68,7 @@ public class ProfileMenu extends Menu {
                 return quit();
             }
             default -> {
-                printer.printMessage("Invalid input. Please enter a number corresponding to the menu option.");
+                printer.printMessage(interactionMessages.getInvalidInputMessage());
 
                 return this;
             }
@@ -84,7 +77,7 @@ public class ProfileMenu extends Menu {
 
     private Menu switchPlayer() {
         if (!playerService.isMultiplePlayersRegistered()) {
-            printer.printMessage("Please register at least one more player first.");
+            printer.printMessage(profileMenuMessages.getSwitchError());
 
             return this;
         }
