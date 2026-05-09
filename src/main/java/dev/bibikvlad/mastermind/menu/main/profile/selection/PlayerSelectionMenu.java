@@ -31,12 +31,12 @@ public class PlayerSelectionMenu extends Menu {
 
         displayPlayers(playerList);
 
-        System.out.println("\nTo get back to previous menu print 'exit', or 'quit'");
+        printer.printMessage("To get back to previous menu print 'exit', or 'quit'");
 
-        String userInput = appContext.parser().parseUserInput();
+        String userInput = parser.parseUserInput();
 
         if (StringEmptyValidator.isNullOrEmpty(userInput)) {
-            System.out.println("Input cannot be empty. Please try again.");
+            printer.printMessage("Input cannot be empty. Please try again.");
 
             return this;
         }
@@ -46,8 +46,7 @@ public class PlayerSelectionMenu extends Menu {
 
             AppContext updatedAppContext = new AppContext(
                     new LocalizationContext(lastSelectedPlayer.getPlayerConfig().locale()),
-                    this.appContext.services(), this.appContext.printer(), this.appContext.parser(),
-                    lastSelectedPlayer);
+                    this.appContext.services(), this.printer, this.parser, lastSelectedPlayer);
 
             return new ProfileMenu(updatedAppContext);
         }
@@ -57,7 +56,7 @@ public class PlayerSelectionMenu extends Menu {
         try {
             userInputNumber = Integer.parseInt(userInput);
         } catch (NumberFormatException exception) {
-            System.out.println("Invalid input. Please enter a number corresponding to the player index.");
+            printer.printMessage("Invalid input. Please enter a number corresponding to the player index.");
 
             return this;
         }
@@ -65,17 +64,17 @@ public class PlayerSelectionMenu extends Menu {
         Player player = selectPlayer(playerList, userInputNumber);
 
         if (player == null) {
-            System.out.println("Invalid input. Please enter a number corresponding to the player index.");
+            printer.printMessage("Invalid input. Please enter a number corresponding to the player index.");
 
             return this;
         } else {
             playerService.updateLastSelectedPlayer(player.getId());
 
-            System.out.println("Player " + player.getPlayerName() + " has been selected.");
+            printer.printMessage("Player " + player.getPlayerName() + " has been selected.");
         }
 
         AppContext appContext = new AppContext(new LocalizationContext(player.getPlayerConfig().locale()),
-                this.appContext.services(), this.appContext.printer(), this.appContext.parser(), player);
+                this.appContext.services(), this.printer, this.parser, player);
 
         return new ProfileMenu(appContext);
     }
@@ -86,7 +85,7 @@ public class PlayerSelectionMenu extends Menu {
 
     private void displayPlayers(List<Player> playerList) {
         for (int i = 0; i < playerList.size(); i++) {
-            System.out.println((i + 1) + ": " + playerList.get(i).getPlayerName());
+            printer.printMessage((i + 1) + ": " + playerList.get(i).getPlayerName());
         }
     }
 
