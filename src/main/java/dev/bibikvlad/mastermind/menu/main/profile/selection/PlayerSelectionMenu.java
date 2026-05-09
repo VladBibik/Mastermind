@@ -56,7 +56,7 @@ public class PlayerSelectionMenu extends Menu {
         } else {
             playerService.updateLastSelectedPlayer(player.getId());
 
-            printer.printMessage("Player " + player.getPlayerName() + " has been selected.");
+            printer.printMessage("Player " + AnsiSafeFormatter.isolate(player.getPlayerName()) + " has been selected.");
         }
 
         return new ProfileMenu(updateAppContext(player));
