@@ -32,7 +32,7 @@ public class PlayerSelectionMenu extends Menu {
     public Menu run() {
         List<Player> playerList = getAllPlayers();
 
-        displayPlayers(playerList);
+        displayMenuOptions(playerList);
 
         Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
 
@@ -66,7 +66,7 @@ public class PlayerSelectionMenu extends Menu {
         return playerService.getAllPlayers();
     }
 
-    private void displayPlayers(List<Player> playerList) {
+    private void displayMenuOptions(List<Player> playerList) {
         for (int i = 0; i < playerList.size(); i++) {
             String playerName = AnsiSafeFormatter.isolate(playerList.get(i).getPlayerName());
 
