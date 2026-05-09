@@ -40,8 +40,6 @@ public class PlayerSelectionMenu extends Menu {
     }
 
     private Menu playerSelection(List<Player> playerList, int userInputNumber) {
-        printer.printMessage("To get back to previous menu print 'exit', or 'quit'");
-
         Player player = selectPlayer(playerList, userInputNumber);
 
         if (player == null) {
@@ -65,6 +63,8 @@ public class PlayerSelectionMenu extends Menu {
         for (int i = 0; i < playerList.size(); i++) {
             printer.printMessage((i + 1) + ": " + playerList.get(i).getPlayerName());
         }
+
+        printer.printMessage("0. Back to the profile menu");
     }
 
     private Player selectPlayer(List<Player> playerList, int playerIndex) {
