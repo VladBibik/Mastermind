@@ -36,7 +36,14 @@ public class PlayerSelectionMenu extends Menu {
         }
 
         if (userInput.equals("exit") || userInput.equals("quit")) {
-            return new ProfileMenu(appContext);
+            Player lastSelectedPlayer = playerService.loadLastSelectedPlayer().get();
+
+            AppContext updatedAppContext = new AppContext(
+                    new LocalizationContext(lastSelectedPlayer.getPlayerConfig().locale()),
+                    this.appContext.services(), this.appContext.printer(), this.appContext.parser(),
+                    lastSelectedPlayer);
+
+            return new ProfileMenu(updatedAppContext);
         }
 
         int userInputNumber;
