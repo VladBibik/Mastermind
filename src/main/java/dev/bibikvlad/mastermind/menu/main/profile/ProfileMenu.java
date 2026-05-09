@@ -4,6 +4,9 @@ import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
+import dev.bibikvlad.mastermind.localization.config.MessageType;
+import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.ProfileMenuMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.MainMenu;
 import dev.bibikvlad.mastermind.menu.main.profile.create.NewPlayerCreation;
@@ -17,6 +20,8 @@ import java.util.Optional;
 public class ProfileMenu extends Menu {
     private final Printer printer;
     private final Parser parser;
+    private final InteractionMessages interactionMessages;
+    private final ProfileMenuMessages profileMenuMessages;
     private final PlayerService playerService;
 
     public ProfileMenu(AppContext appContext) {
@@ -24,6 +29,8 @@ public class ProfileMenu extends Menu {
 
         this.printer = appContext.printer();
         this.parser = appContext.parser();
+        this.interactionMessages = appContext.localizationContext().getMessages(MessageType.INTERACTION);
+        this.profileMenuMessages = appContext.localizationContext().getMessages(MessageType.PROFILE);
         this.playerService = appContext.services().getPlayerService();
     }
 
