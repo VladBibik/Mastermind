@@ -44,11 +44,7 @@ public class PlayerSelectionMenu extends Menu {
         if (userInput.equals("exit") || userInput.equals("quit")) {
             Player lastSelectedPlayer = playerService.loadLastSelectedPlayer().get();
 
-            AppContext updatedAppContext = new AppContext(
-                    new LocalizationContext(lastSelectedPlayer.getPlayerConfig().locale()),
-                    this.appContext.services(), this.printer, this.parser, lastSelectedPlayer);
-
-            return new ProfileMenu(updatedAppContext);
+            return new ProfileMenu(updateAppContext(lastSelectedPlayer));
         }
 
         int userInputNumber;
@@ -73,10 +69,7 @@ public class PlayerSelectionMenu extends Menu {
             printer.printMessage("Player " + player.getPlayerName() + " has been selected.");
         }
 
-        AppContext appContext = new AppContext(new LocalizationContext(player.getPlayerConfig().locale()),
-                this.appContext.services(), this.printer, this.parser, player);
-
-        return new ProfileMenu(appContext);
+        return new ProfileMenu(updateAppContext(player));
     }
 
     private List<Player> getAllPlayers() {
@@ -99,5 +92,10 @@ public class PlayerSelectionMenu extends Menu {
         }
 
         return player;
+    }
+
+    private AppContext updateAppContext(Player player) {
+        return new AppContext(new LocalizationContext(player.getPlayerConfig().locale()),
+                this.appContext.services(), this.printer, this.parser, player);
     }
 }
