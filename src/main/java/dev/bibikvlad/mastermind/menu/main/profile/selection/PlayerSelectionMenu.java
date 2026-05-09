@@ -2,15 +2,18 @@ package dev.bibikvlad.mastermind.menu.main.profile.selection;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
+import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.core.Menu;
+import dev.bibikvlad.mastermind.menu.main.MainMenu;
 import dev.bibikvlad.mastermind.menu.main.profile.ProfileMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
 import java.util.List;
+import java.util.Optional;
 
 public class PlayerSelectionMenu extends Menu {
     private final Printer printer;
@@ -27,35 +30,19 @@ public class PlayerSelectionMenu extends Menu {
 
     @Override
     public Menu run() {
+        Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
+
+        return selection
+                .map(this::playerSelection)
+                .orElseGet(() -> new ProfileMenu(appContext));
+    }
+
+    private Menu playerSelection(int userInputNumber) {
         List<Player> playerList = getAllPlayers();
 
         displayPlayers(playerList);
 
         printer.printMessage("To get back to previous menu print 'exit', or 'quit'");
-
-        String userInput = parser.parseUserInput();
-
-        if (StringEmptyValidator.isNullOrEmpty(userInput)) {
-            printer.printMessage("Input cannot be empty. Please try again.");
-
-            return this;
-        }
-
-        if (userInput.equals("exit") || userInput.equals("quit")) {
-            Player lastSelectedPlayer = playerService.loadLastSelectedPlayer().get();
-
-            return new ProfileMenu(updateAppContext(lastSelectedPlayer));
-        }
-
-        int userInputNumber;
-
-        try {
-            userInputNumber = Integer.parseInt(userInput);
-        } catch (NumberFormatException exception) {
-            printer.printMessage("Invalid input. Please enter a number corresponding to the player index.");
-
-            return this;
-        }
 
         Player player = selectPlayer(playerList, userInputNumber);
 
