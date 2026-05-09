@@ -5,5 +5,5 @@ import dev.bibikvlad.mastermind.localization.messages.LocalizedMessages;
 public interface ProfileMenuMessages extends LocalizedMessages {
     String getMenuOptions();
 
-    String getSwitchError();
+    String getNotEnoughPlayersError();
 }

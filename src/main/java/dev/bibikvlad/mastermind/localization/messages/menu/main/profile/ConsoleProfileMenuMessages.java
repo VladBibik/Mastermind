@@ -15,7 +15,7 @@ public class ConsoleProfileMenuMessages implements ProfileMenuMessages {
     }
 
     @Override
-    public String getSwitchError() {
-        return resourceBundle.getString("switch_error");
+    public String getNotEnoughPlayersError() {
+        return resourceBundle.getString("not_enough_players_error");
     }
 }
