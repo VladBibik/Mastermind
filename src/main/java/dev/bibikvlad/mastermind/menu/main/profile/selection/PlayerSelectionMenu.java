@@ -3,6 +3,7 @@ package dev.bibikvlad.mastermind.menu.main.profile.selection;
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.AnsiSafeFormatter;
 import dev.bibikvlad.mastermind.app.printer.Printer;
+import dev.bibikvlad.mastermind.exceptions.PlayerNotFoundException;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
@@ -37,7 +38,12 @@ public class PlayerSelectionMenu extends Menu {
 
         return selection
                 .map(input -> playerSelection(playerList, input))
-                .orElseGet(() -> new ProfileMenu(appContext));
+                .orElseGet(() -> {
+                    Player lastSelectedPlayer = playerService.loadLastSelectedPlayer()
+                            .orElseThrow(() -> new PlayerNotFoundException("Last selected player is not found"));
+
+                    return new ProfileMenu(updateAppContext(lastSelectedPlayer));
+                });
     }
 
     private Menu playerSelection(List<Player> playerList, int userInputNumber) {
