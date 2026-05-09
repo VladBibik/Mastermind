@@ -81,15 +81,11 @@ public class ProfileMenu extends Menu {
     }
 
     private Menu switchPlayer() {
-        if (!playerService.isMultiplePlayersRegistered()) {
-            printer.printMessage(profileMenuMessages.getSwitchError());
-
-            showMenuOnNextLoop = false;
-
+        if (checkIfEnoughPlayersExist()) {
+            return new PlayerSelectionMenu(appContext);
+        } else {
             return this;
         }
-
-        return new PlayerSelectionMenu(appContext);
     }
 
     private Menu openNewPlayerMenu() {
@@ -101,10 +97,26 @@ public class ProfileMenu extends Menu {
     }
 
     private Menu deletePlayer() {
-        return new DeletePlayerMenu(appContext);
+        if (checkIfEnoughPlayersExist()) {
+            return new DeletePlayerMenu(appContext);
+        } else {
+            return this;
+        }
     }
 
     private Menu quit() {
         return new MainMenu(appContext);
+    }
+
+    private boolean checkIfEnoughPlayersExist() {
+        if (!playerService.isMultiplePlayersRegistered()) {
+            printer.printMessage(profileMenuMessages.getSwitchError());
+
+            showMenuOnNextLoop = false;
+
+            return false;
+        } else {
+            return true;
+        }
     }
 }
