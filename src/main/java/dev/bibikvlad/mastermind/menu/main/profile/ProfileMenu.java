@@ -24,6 +24,8 @@ public class ProfileMenu extends Menu {
     private final ProfileMenuMessages profileMenuMessages;
     private final PlayerService playerService;
 
+    private boolean showMenuOnNextLoop = true;
+
     public ProfileMenu(AppContext appContext) {
         super(appContext);
 
@@ -36,7 +38,10 @@ public class ProfileMenu extends Menu {
 
     @Override
     public Menu run() {
-        displayMenu();
+        if (showMenuOnNextLoop) {
+            displayMenu();
+            showMenuOnNextLoop = false;
+        }
 
         Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
 
@@ -78,6 +83,8 @@ public class ProfileMenu extends Menu {
     private Menu switchPlayer() {
         if (!playerService.isMultiplePlayersRegistered()) {
             printer.printMessage(profileMenuMessages.getSwitchError());
+
+            showMenuOnNextLoop = false;
 
             return this;
         }
