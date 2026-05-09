@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.menu.main.profile.selection;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
+import dev.bibikvlad.mastermind.app.printer.AnsiSafeFormatter;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
@@ -61,7 +62,9 @@ public class PlayerSelectionMenu extends Menu {
 
     private void displayPlayers(List<Player> playerList) {
         for (int i = 0; i < playerList.size(); i++) {
-            printer.printMessage((i + 1) + ": " + playerList.get(i).getPlayerName());
+            String playerName = AnsiSafeFormatter.isolate(playerList.get(i).getPlayerName());
+
+            printer.printMessage((i + 1) + ": " + playerName);
         }
 
         printer.printMessage("0. Back to the profile menu");
