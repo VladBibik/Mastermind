@@ -7,6 +7,7 @@ import dev.bibikvlad.mastermind.localization.factories.interaction.ConsoleIntera
 import dev.bibikvlad.mastermind.localization.factories.menu.main.ConsoleMainMenuMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.game.ConsoleGameMenuMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.leaderboard.ConsoleLeaderboardMessageFactory;
+import dev.bibikvlad.mastermind.localization.factories.menu.main.profile.ConsoleProfileMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.ConsoleSettingsMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.language.ConsoleLanguageMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.logo.ConsoleColorMessageFactory;
@@ -20,6 +21,7 @@ import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages
 import dev.bibikvlad.mastermind.localization.messages.menu.main.game.GameMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.leaderboards.ConsoleLeaderboardMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.leaderboards.LeaderboardMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.ProfileMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.SettingsMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.language.LanguageSelectionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.logo.LogoColorSelectionMessages;
@@ -73,6 +75,7 @@ public class MessageRegistryInitializer {
         populateGameMenuRegistry(messageFactoryRegistry);
         populateLeaderboardsRegistry(messageFactoryRegistry);
         populateStatsRegistry(messageFactoryRegistry);
+        populateProfileRegistry(messageFactoryRegistry);
         populateSettingsRegistry(messageFactoryRegistry);
     }
 
@@ -97,6 +100,14 @@ public class MessageRegistryInitializer {
                 StatsMessages.class,
                 "i18n.menu.main.stats.player_stats",
                 new ConsoleStatsMessageFactory()
+        ));
+    }
+
+    private static void populateProfileRegistry(MessageFactoryRegistry messageFactoryRegistry) {
+        messageFactoryRegistry.register(new LocalizedMessageConfig<>(
+                ProfileMenuMessages.class,
+                "i18n.menu.main.profile.profile_menu",
+                new ConsoleProfileMessageFactory()
         ));
     }
 
