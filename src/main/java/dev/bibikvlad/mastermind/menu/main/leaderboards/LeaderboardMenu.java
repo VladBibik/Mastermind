@@ -3,6 +3,8 @@ package dev.bibikvlad.mastermind.menu.main.leaderboards;
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.AnsiSafeFormatter;
 import dev.bibikvlad.mastermind.app.printer.Printer;
+import dev.bibikvlad.mastermind.app.printer.table.Column;
+import dev.bibikvlad.mastermind.app.printer.table.TablePrinter;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
@@ -11,8 +13,6 @@ import dev.bibikvlad.mastermind.localization.messages.menu.main.leaderboards.Lea
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.MainMenu;
 import dev.bibikvlad.mastermind.menu.main.leaderboards.percentage.WinPercentageLeaderboardMenu;
-import dev.bibikvlad.mastermind.app.printer.table.Column;
-import dev.bibikvlad.mastermind.app.printer.table.TablePrinter;
 import dev.bibikvlad.mastermind.model.leaderboard.MainLeaderboardEntry;
 import dev.bibikvlad.mastermind.model.leaderboard.TimeLeaderboardEntry;
 import dev.bibikvlad.mastermind.model.leaderboard.TurnsLeaderboardEntry;
