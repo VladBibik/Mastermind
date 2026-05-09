@@ -30,18 +30,18 @@ public class PlayerSelectionMenu extends Menu {
 
     @Override
     public Menu run() {
-        Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
-
-        return selection
-                .map(this::playerSelection)
-                .orElseGet(() -> new ProfileMenu(appContext));
-    }
-
-    private Menu playerSelection(int userInputNumber) {
         List<Player> playerList = getAllPlayers();
 
         displayPlayers(playerList);
 
+        Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
+
+        return selection
+                .map(input -> playerSelection(playerList, input))
+                .orElseGet(() -> new ProfileMenu(appContext));
+    }
+
+    private Menu playerSelection(List<Player> playerList, int userInputNumber) {
         printer.printMessage("To get back to previous menu print 'exit', or 'quit'");
 
         Player player = selectPlayer(playerList, userInputNumber);
