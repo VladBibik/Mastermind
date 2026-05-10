@@ -15,7 +15,7 @@ public class ConsoleProfileMenuMessages implements ProfileMenuMessages {
     }
 
     @Override
-    public String getNotEnoughPlayersError() {
-        return resourceBundle.getString("not_enough_players_error");
+    public String getMultiplePlayersRequired() {
+        return resourceBundle.getString("multiple_players_required");
     }
 }

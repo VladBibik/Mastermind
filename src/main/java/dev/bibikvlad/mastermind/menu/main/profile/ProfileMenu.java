@@ -110,7 +110,7 @@ public class ProfileMenu extends Menu {
 
     private boolean checkIfEnoughPlayersExist() {
         if (!playerService.isMultiplePlayersRegistered()) {
-            printer.printMessage(profileMenuMessages.getNotEnoughPlayersError());
+            printer.printMessage(profileMenuMessages.getMultiplePlayersRequired());
 
             return false;
         } else {
