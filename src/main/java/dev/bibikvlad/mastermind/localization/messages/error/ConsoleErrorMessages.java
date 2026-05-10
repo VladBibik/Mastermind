@@ -11,7 +11,7 @@ public class ConsoleErrorMessages implements ErrorMessages {
     }
 
     @Override
-    public String getStatsNotFoundMessage(long playerId) {
+    public String getStatsNotFound(long playerId) {
         return MessageFormat.format(resourceBundle.getString("stats.no_statistics_found"), playerId);
     }
 

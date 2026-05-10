@@ -72,7 +72,7 @@ public class StatsMenu extends Menu {
 
     private PlayerStatistics fetchPlayerStatistics(long playerId) {
         return playerStatisticsService.getPlayerStatistics(playerId)
-                .orElseThrow(() -> new IllegalStateException(errorMessages.getStatsNotFoundMessage(playerId)));
+                .orElseThrow(() -> new IllegalStateException(errorMessages.getStatsNotFound(playerId)));
     }
 
     private List<StatRow> buildStatRows(PlayerStatistics stats) {
