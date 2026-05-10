@@ -10,12 +10,12 @@ public class ConsoleInteractionMessages implements InteractionMessages {
     }
 
     @Override
-    public String getInvalidInputMessage() {
+    public String getInvalidInput() {
         return resourceBundle.getString("error.invalid_input");
     }
 
     @Override
-    public String getPressEnterMessage() {
+    public String getPressEnter() {
         return resourceBundle.getString("prompt.press_enter");
     }
 }

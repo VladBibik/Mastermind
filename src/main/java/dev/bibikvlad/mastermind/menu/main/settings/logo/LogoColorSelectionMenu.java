@@ -103,7 +103,7 @@ public class LogoColorSelectionMenu extends Menu {
                 return new SettingsMenu(appContext);
             }
             default -> {
-                printer.printMessage(interactionMessages.getInvalidInputMessage());
+                printer.printMessage(interactionMessages.getInvalidInput());
 
                 return this;
             }
@@ -112,7 +112,7 @@ public class LogoColorSelectionMenu extends Menu {
 
     private void printCurrentLogo() {
         printer.printMessage(ColoredAsciiLogo.getLogo(logoColorsBundle));
-        printer.printMessage(interactionMessages.getPressEnterMessage());
+        printer.printMessage(interactionMessages.getPressEnter());
 
         parser.parseUserInput();
 
@@ -184,7 +184,7 @@ public class LogoColorSelectionMenu extends Menu {
     }
 
     private void waitForUserConfirmation() {
-        printer.printMessage(interactionMessages.getPressEnterMessage());
+        printer.printMessage(interactionMessages.getPressEnter());
 
         showMenuOnNextLoop = true;
 

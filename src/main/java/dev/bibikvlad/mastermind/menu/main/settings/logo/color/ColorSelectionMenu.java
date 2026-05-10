@@ -52,7 +52,7 @@ public class ColorSelectionMenu {
                         .map(colorSelector)
                         .orElse(null);
             } catch (IllegalArgumentException exception) {
-                printer.printMessage(interactionMessages.getInvalidInputMessage());
+                printer.printMessage(interactionMessages.getInvalidInput());
             }
         }
     }

@@ -65,7 +65,7 @@ public class WinPercentageLeaderboardMenu extends Menu {
         }
 
         if (input < DEFAULT_CUTOFF) {
-            printer.printMessage(interactionMessages.getInvalidInputMessage());
+            printer.printMessage(interactionMessages.getInvalidInput());
 
             return this;
         }
@@ -108,7 +108,7 @@ public class WinPercentageLeaderboardMenu extends Menu {
     }
 
     private void waitForConfirmation() {
-        printer.printMessage(interactionMessages.getPressEnterMessage());
+        printer.printMessage(interactionMessages.getPressEnter());
 
         showMenuOnNextLoop = true;
 

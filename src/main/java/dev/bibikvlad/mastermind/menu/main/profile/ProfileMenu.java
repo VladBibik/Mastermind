@@ -73,7 +73,7 @@ public class ProfileMenu extends Menu {
                 return quit();
             }
             default -> {
-                printer.printMessage(interactionMessages.getInvalidInputMessage());
+                printer.printMessage(interactionMessages.getInvalidInput());
 
                 return this;
             }

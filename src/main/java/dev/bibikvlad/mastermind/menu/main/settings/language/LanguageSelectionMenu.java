@@ -65,7 +65,7 @@ public class LanguageSelectionMenu extends Menu {
         try {
             return checkLanguageSelection(LocaleType.fromIndex(userInputIndex));
         } catch (IllegalArgumentException exception) {
-            printer.printMessage(interactionMessages.getInvalidInputMessage());
+            printer.printMessage(interactionMessages.getInvalidInput());
 
             return this;
         }

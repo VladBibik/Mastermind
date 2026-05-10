@@ -74,7 +74,7 @@ public class MainMenu extends Menu {
                 return settings();
             }
             default -> {
-                printer.printMessage(interactionMessages.getInvalidInputMessage());
+                printer.printMessage(interactionMessages.getInvalidInput());
 
                 return this;
             }

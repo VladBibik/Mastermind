@@ -58,7 +58,7 @@ public class SettingsMenu extends Menu {
                 return exit();
             }
             default -> {
-                printer.printMessage(interactionMessages.getInvalidInputMessage());
+                printer.printMessage(interactionMessages.getInvalidInput());
 
                 return this;
             }

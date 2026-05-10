@@ -84,7 +84,7 @@ public class LeaderboardMenu extends Menu {
                 return quit();
             }
             default -> {
-                printer.printMessage(interactionMessages.getInvalidInputMessage());
+                printer.printMessage(interactionMessages.getInvalidInput());
 
                 return this;
             }
@@ -213,7 +213,7 @@ public class LeaderboardMenu extends Menu {
     }
 
     private void waitForConfirmation() {
-        printer.printMessage(interactionMessages.getPressEnterMessage());
+        printer.printMessage(interactionMessages.getPressEnter());
 
         showMenuOnNextLoop = true;
 
