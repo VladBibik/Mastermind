@@ -4,4 +4,6 @@ import dev.bibikvlad.mastermind.localization.messages.LocalizedMessages;
 
 public interface ErrorMessages extends LocalizedMessages {
     String getStatsNotFoundMessage(long playerId);
+
+    String getLastSelectedPlayerNotFound();
 }
