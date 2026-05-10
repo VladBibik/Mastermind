@@ -52,8 +52,8 @@ public class MainMenu extends Menu {
     private void displayMenu() {
         String playerName = AnsiSafeFormatter.isolate(currentPlayer.getPlayerName());
 
-        printer.printMessage(mainMenuMessages.getWelcomeMessage(playerName));
-        printer.printMessage(mainMenuMessages.getMenuOptionsMessage());
+        printer.printMessage(mainMenuMessages.getWelcome(playerName));
+        printer.printMessage(mainMenuMessages.getMenuOptions());
     }
 
     private Menu menuOptionSwitcher(int userInputNumber) {

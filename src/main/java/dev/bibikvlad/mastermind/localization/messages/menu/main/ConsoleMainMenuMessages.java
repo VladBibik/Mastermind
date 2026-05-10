@@ -11,12 +11,12 @@ public class ConsoleMainMenuMessages implements MainMenuMessages {
     }
 
     @Override
-    public String getWelcomeMessage(String playerName) {
+    public String getWelcome(String playerName) {
         return MessageFormat.format(resourceBundle.getString("welcome_message"), playerName);
     }
 
     @Override
-    public String getMenuOptionsMessage() {
+    public String getMenuOptions() {
         return resourceBundle.getString("menu_options");
     }
 }
