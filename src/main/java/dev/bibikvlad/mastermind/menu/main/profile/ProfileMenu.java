@@ -112,8 +112,6 @@ public class ProfileMenu extends Menu {
         if (!playerService.isMultiplePlayersRegistered()) {
             printer.printMessage(profileMenuMessages.getNotEnoughPlayersError());
 
-            showMenuOnNextLoop = false;
-
             return false;
         } else {
             return true;
