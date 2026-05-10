@@ -58,16 +58,16 @@ public class ProfileMenu extends Menu {
     private Menu menuOptionSwitcher(int userInputNumber) {
         switch (userInputNumber) {
             case 1 -> {
-                return switchPlayer();
+                return openPlayerSwitchMenu();
             }
             case 2 -> {
                 return openNewPlayerMenu();
             }
             case 3 -> {
-                return renamePlayer();
+                return openRenamePlayerMenu();
             }
             case 4 -> {
-                return deletePlayer();
+                return openDeletePlayerMenu();
             }
             case 0 -> {
                 return quit();
@@ -80,20 +80,20 @@ public class ProfileMenu extends Menu {
         }
     }
 
-    private Menu switchPlayer() {
-        return checkIfEnoughPlayersExist() ? new PlayerSelectionMenu(appContext): this;
+    private Menu openPlayerSwitchMenu() {
+        return checkIfEnoughPlayersExist() ? new PlayerSelectionMenu(appContext) : this;
     }
 
     private Menu openNewPlayerMenu() {
         return new NewPlayerCreation(appContext);
     }
 
-    private Menu renamePlayer() {
+    private Menu openRenamePlayerMenu() {
         return new PlayerNameChanger(appContext);
     }
 
-    private Menu deletePlayer() {
-        return checkIfEnoughPlayersExist() ? new DeletePlayerMenu(appContext): this;
+    private Menu openDeletePlayerMenu() {
+        return checkIfEnoughPlayersExist() ? new DeletePlayerMenu(appContext) : this;
     }
 
     private Menu quit() {
