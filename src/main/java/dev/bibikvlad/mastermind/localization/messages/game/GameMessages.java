@@ -4,15 +4,15 @@ import dev.bibikvlad.mastermind.localization.messages.LocalizedMessages;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 
 public interface GameMessages extends LocalizedMessages {
-    String getInvalidInputMessage();
+    String getInvalidInput();
 
-    String getIncorrectGuessMessage(int maxTurns, int currentTurn, String answer, String userInput);
+    String getIncorrectGuess(int maxTurns, int currentTurn, String answer, String userInput);
 
-    String getGameOverMessage(String answer);
+    String getGameOver(String answer);
 
-    String getWinMessage(String answer);
+    String getWin(String answer);
 
-    String getRulesMessage();
+    String getRules();
 
     String getAsciiLogo(LogoColorsBundle logoColorsBundle);
 }

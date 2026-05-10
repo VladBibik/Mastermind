@@ -14,23 +14,23 @@ public class GameMessagePrinter {
     }
 
     public void printInvalidInputMessage() {
-        printer.printMessage(gameMessages.getInvalidInputMessage());
+        printer.printMessage(gameMessages.getInvalidInput());
     }
 
     public void printIncorrectGuessMessage(int maxTurns, int currentTurn, String answer, String userInput) {
-        printer.printMessage(gameMessages.getIncorrectGuessMessage(maxTurns, currentTurn, answer, userInput));
+        printer.printMessage(gameMessages.getIncorrectGuess(maxTurns, currentTurn, answer, userInput));
     }
 
     public void printGameOverMessage(String answer) {
-        printer.printMessage(gameMessages.getGameOverMessage(answer));
+        printer.printMessage(gameMessages.getGameOver(answer));
     }
 
     public void printWinMessage(String answer) {
-        printer.printMessage(gameMessages.getWinMessage(answer));
+        printer.printMessage(gameMessages.getWin(answer));
     }
 
     public void printRulesMessage() {
-        printer.printMessage(gameMessages.getRulesMessage());
+        printer.printMessage(gameMessages.getRules());
     }
 
     public void printAsciiLogo(LogoColorsBundle logoColorsBundle) {

@@ -24,7 +24,7 @@ public class ConsoleGameMessagesRuTest {
     @Test
     @DisplayName("Returns correct Invalid Input Message String")
     void testInvalidInputMessage() {
-        String result = gameMessages.getInvalidInputMessage();
+        String result = gameMessages.getInvalidInput();
         String expected = "Неверный формат ответа. Ответ должен включать только буквы: "
                 + ConsoleColoredValidSymbols.getSymbols();
 
@@ -34,7 +34,7 @@ public class ConsoleGameMessagesRuTest {
     @Test
     @DisplayName("Returns correct Incorrect Guess Message String")
     void testIncorrectGuessMessage() {
-        String result = gameMessages.getIncorrectGuessMessage(10, 5, "rgby", "rbww");
+        String result = gameMessages.getIncorrectGuess(10, 5, "rgby", "rbww");
         String expected = "Раунд: 6 из 10.\n" +
                 "Ваш ответ: rbww            " + ClueGenerator.generate("rgby", "rbww");
 
@@ -44,7 +44,7 @@ public class ConsoleGameMessagesRuTest {
     @Test
     @DisplayName("Returns correct Game Over Message String")
     void testGameOverMessage() {
-        String result = gameMessages.getGameOverMessage("rgby");
+        String result = gameMessages.getGameOver("rgby");
         String expected = "Game Over! Ответом была комбинация: "
                 + InputVisualRepresentation.getVisualRepresentation("rgby");
 
@@ -54,7 +54,7 @@ public class ConsoleGameMessagesRuTest {
     @Test
     @DisplayName("Returns correct Win Message String")
     void testWinMessage() {
-        String result = gameMessages.getWinMessage("rgby");
+        String result = gameMessages.getWin("rgby");
         String expected = "Вы Победили! " + Emojis.CELEBRATION_TADA +
                 "\nВы Mastermind!\n" +
                 "Ответом была комбинация: " + InputVisualRepresentation.getVisualRepresentation("rgby");
@@ -65,7 +65,7 @@ public class ConsoleGameMessagesRuTest {
     @Test
     @DisplayName("Returns correct Rules Message String")
     void testRulesMessage() {
-        String result = gameMessages.getRulesMessage();
+        String result = gameMessages.getRules();
         String expected = "Пазл состоит из 4 ячеек. Каждый ход Вы выбираете из 6 цветов.\n"
                 + "Варианты цветов: " + ConsoleColoredValidSymbols.getSymbols() + "\n"
                 + "Пример хода: ybgr\n"

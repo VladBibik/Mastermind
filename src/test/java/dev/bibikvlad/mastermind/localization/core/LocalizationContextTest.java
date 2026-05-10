@@ -28,6 +28,6 @@ public class LocalizationContextTest {
         assertEquals("You Won! " + Emojis.CELEBRATION_TADA + "\n" +
                         "You are the Mastermind!\n" +
                         "Solution was: " + InputVisualRepresentation.getVisualRepresentation(ANSWER),
-                gameMessages.getWinMessage(ANSWER));
+                gameMessages.getWin(ANSWER));
     }
 }

@@ -4,27 +4,27 @@ import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 
 public class StubGameMessages implements GameMessages {
     @Override
-    public String getInvalidInputMessage() {
+    public String getInvalidInput() {
         return "";
     }
 
     @Override
-    public String getIncorrectGuessMessage(int maxTurns, int currentTurn, String answer, String userInput) {
+    public String getIncorrectGuess(int maxTurns, int currentTurn, String answer, String userInput) {
         return "";
     }
 
     @Override
-    public String getGameOverMessage(String answer) {
+    public String getGameOver(String answer) {
         return "";
     }
 
     @Override
-    public String getWinMessage(String answer) {
+    public String getWin(String answer) {
         return "Win! " + answer;
     }
 
     @Override
-    public String getRulesMessage() {
+    public String getRules() {
         return "";
     }
 
