@@ -81,11 +81,7 @@ public class ProfileMenu extends Menu {
     }
 
     private Menu switchPlayer() {
-        if (checkIfEnoughPlayersExist()) {
-            return new PlayerSelectionMenu(appContext);
-        } else {
-            return this;
-        }
+        return checkIfEnoughPlayersExist() ? new PlayerSelectionMenu(appContext): this;
     }
 
     private Menu openNewPlayerMenu() {
@@ -97,11 +93,7 @@ public class ProfileMenu extends Menu {
     }
 
     private Menu deletePlayer() {
-        if (checkIfEnoughPlayersExist()) {
-            return new DeletePlayerMenu(appContext);
-        } else {
-            return this;
-        }
+        return checkIfEnoughPlayersExist() ? new DeletePlayerMenu(appContext): this;
     }
 
     private Menu quit() {
