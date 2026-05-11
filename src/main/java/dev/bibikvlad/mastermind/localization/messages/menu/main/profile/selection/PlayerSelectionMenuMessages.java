@@ -1,6 +1,8 @@
 package dev.bibikvlad.mastermind.localization.messages.menu.main.profile.selection;
 
-public interface PlayerSelectionMenuMessages {
+import dev.bibikvlad.mastermind.localization.messages.LocalizedMessages;
+
+public interface PlayerSelectionMenuMessages extends LocalizedMessages {
     String getBackMenuOption();
 
     String getPlayerSelected(String playerName);
