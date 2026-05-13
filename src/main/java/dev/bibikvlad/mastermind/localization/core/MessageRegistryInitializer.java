@@ -8,6 +8,7 @@ import dev.bibikvlad.mastermind.localization.factories.menu.main.ConsoleMainMenu
 import dev.bibikvlad.mastermind.localization.factories.menu.main.game.ConsoleGameMenuMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.leaderboard.ConsoleLeaderboardMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.profile.ConsoleProfileMessageFactory;
+import dev.bibikvlad.mastermind.localization.factories.menu.main.profile.selection.ConsolePlayerSelectionFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.ConsoleSettingsMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.language.ConsoleLanguageMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.logo.ConsoleColorMessageFactory;
@@ -21,6 +22,7 @@ import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages
 import dev.bibikvlad.mastermind.localization.messages.menu.main.game.GameMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.leaderboards.LeaderboardMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.ProfileMenuMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.selection.PlayerSelectionMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.SettingsMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.language.LanguageSelectionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.logo.LogoColorSelectionMessages;
@@ -107,6 +109,11 @@ public class MessageRegistryInitializer {
                 ProfileMenuMessages.class,
                 "i18n.menu.main.profile.profile_menu",
                 new ConsoleProfileMessageFactory()
+        ));
+        messageFactoryRegistry.register(new LocalizedMessageConfig<>(
+                PlayerSelectionMenuMessages.class,
+                "i18n.menu.main.profile.player_selection_menu",
+                new ConsolePlayerSelectionFactory()
         ));
     }
 
