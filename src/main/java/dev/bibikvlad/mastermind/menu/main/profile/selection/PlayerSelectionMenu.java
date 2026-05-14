@@ -6,7 +6,10 @@ import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.exceptions.PlayerNotFoundException;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
+import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
+import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.selection.PlayerSelectionMenuMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.profile.ProfileMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
@@ -19,6 +22,8 @@ public class PlayerSelectionMenu extends Menu {
     private final Printer printer;
     private final Parser parser;
     private final PlayerService playerService;
+    private final PlayerSelectionMenuMessages selectionMenuMessages;
+    private final InteractionMessages interactionMessages;
 
     public PlayerSelectionMenu(AppContext appContext) {
         super(appContext);
@@ -26,6 +31,8 @@ public class PlayerSelectionMenu extends Menu {
         this.printer = appContext.printer();
         this.parser = appContext.parser();
         this.playerService = appContext.services().getPlayerService();
+        this.interactionMessages = appContext.localizationContext().getMessages(MessageType.INTERACTION);
+        this.selectionMenuMessages = appContext.localizationContext().getMessages(MessageType.SELECTION);
     }
 
     @Override
