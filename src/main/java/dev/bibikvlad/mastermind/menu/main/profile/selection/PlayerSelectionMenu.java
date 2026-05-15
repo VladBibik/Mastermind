@@ -8,6 +8,7 @@ import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
+import dev.bibikvlad.mastermind.localization.messages.error.ErrorMessages;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.selection.PlayerSelectionMenuMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
@@ -24,6 +25,7 @@ public class PlayerSelectionMenu extends Menu {
     private final PlayerService playerService;
     private final PlayerSelectionMenuMessages selectionMenuMessages;
     private final InteractionMessages interactionMessages;
+    private final ErrorMessages errorMessages;
 
     public PlayerSelectionMenu(AppContext appContext) {
         super(appContext);
@@ -33,6 +35,7 @@ public class PlayerSelectionMenu extends Menu {
         this.playerService = appContext.services().getPlayerService();
         this.interactionMessages = appContext.localizationContext().getMessages(MessageType.INTERACTION);
         this.selectionMenuMessages = appContext.localizationContext().getMessages(MessageType.SELECTION);
+        this.errorMessages = appContext.localizationContext().getMessages(MessageType.ERROR);
     }
 
     @Override
