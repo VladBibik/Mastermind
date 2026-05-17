@@ -2,10 +2,10 @@ package dev.bibikvlad.mastermind.localization.messages.menu.main.profile.selecti
 
 import java.util.ResourceBundle;
 
-public class ConsoleSelectionMenuMessages implements PlayerSelectionMenuMessages {
+public class ConsolePlayerSelectionMenuMessages implements PlayerSelectionMenuMessages {
     private final ResourceBundle resourceBundle;
 
-    public ConsoleSelectionMenuMessages(ResourceBundle resourceBundle) {
+    public ConsolePlayerSelectionMenuMessages(ResourceBundle resourceBundle) {
         this.resourceBundle = resourceBundle;
     }
 
