@@ -47,7 +47,7 @@ public class PlayerSelectionMenu extends Menu {
         Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
 
         return selection
-                .map(input -> playerSelection(playerList, input))
+                .map(input -> handlePlayerSelection(playerList, input))
                 .orElseGet(() -> {
                     Player lastSelectedPlayer = playerService.loadLastSelectedPlayer()
                             .orElseThrow(() -> new PlayerNotFoundException(
@@ -57,7 +57,7 @@ public class PlayerSelectionMenu extends Menu {
                 });
     }
 
-    private Menu playerSelection(List<Player> playerList, int userInputNumber) {
+    private Menu handlePlayerSelection(List<Player> playerList, int userInputNumber) {
         Optional<Player> optionalPlayer = selectPlayer(playerList, userInputNumber);
 
         if (optionalPlayer.isEmpty()) {
