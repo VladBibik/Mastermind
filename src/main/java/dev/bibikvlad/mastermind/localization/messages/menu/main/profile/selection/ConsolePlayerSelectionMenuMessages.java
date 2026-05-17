@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.localization.messages.menu.main.profile.selection;
 
+import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 public class ConsolePlayerSelectionMenuMessages implements PlayerSelectionMenuMessages {
@@ -16,6 +17,6 @@ public class ConsolePlayerSelectionMenuMessages implements PlayerSelectionMenuMe
 
     @Override
     public String getPlayerSelected(String playerName) {
-        return String.format(resourceBundle.getString("player_selected"), playerName);
+        return MessageFormat.format(resourceBundle.getString("player_selected"), playerName);
     }
 }
