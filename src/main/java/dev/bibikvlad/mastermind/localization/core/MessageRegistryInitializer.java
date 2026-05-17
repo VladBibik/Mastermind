@@ -112,7 +112,7 @@ public class MessageRegistryInitializer {
         ));
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 PlayerSelectionMenuMessages.class,
-                "i18n.menu.main.profile.player_selection_menu",
+                "i18n.menu.main.profile.selection.player_selection_menu",
                 new ConsolePlayerSelectionFactory()
         ));
     }
