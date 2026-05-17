@@ -40,7 +40,7 @@ public class PlayerSelectionMenu extends Menu {
 
     @Override
     public Menu run() {
-        List<Player> playerList = getAllPlayers();
+        List<Player> playerList = playerService.getAllPlayers();
 
         displayMenuOptions(playerList);
 
@@ -74,10 +74,6 @@ public class PlayerSelectionMenu extends Menu {
 
             return new ProfileMenu(updateAppContext(player));
         }
-    }
-
-    private List<Player> getAllPlayers() {
-        return playerService.getAllPlayers();
     }
 
     private void displayMenuOptions(List<Player> playerList) {
