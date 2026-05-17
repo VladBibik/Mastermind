@@ -58,20 +58,22 @@ public class PlayerSelectionMenu extends Menu {
     }
 
     private Menu playerSelection(List<Player> playerList, int userInputNumber) {
-        Player player = selectPlayer(playerList, userInputNumber);
+        Optional<Player> optionalPlayer = selectPlayer(playerList, userInputNumber);
 
-        if (player == null) {
+        if (optionalPlayer.isEmpty()) {
             printer.printMessage(interactionMessages.getInvalidInput());
 
             return this;
         } else {
+            Player player = optionalPlayer.get();
+
             playerService.updateLastSelectedPlayer(player.getId());
 
             printer.printMessage(selectionMenuMessages.getPlayerSelected(
                     AnsiSafeFormatter.isolate(player.getPlayerName())));
-        }
 
-        return new ProfileMenu(updateAppContext(player));
+            return new ProfileMenu(updateAppContext(player));
+        }
     }
 
     private List<Player> getAllPlayers() {
@@ -88,14 +90,14 @@ public class PlayerSelectionMenu extends Menu {
         printer.printMessage(selectionMenuMessages.getBackMenuOption());
     }
 
-    private Player selectPlayer(List<Player> playerList, int playerIndex) {
+    private Optional<Player> selectPlayer(List<Player> playerList, int playerIndex) {
         int index = playerIndex - 1;
 
         if (index < 0 || index >= playerList.size()) {
-            return null;
+            return Optional.empty();
         }
 
-        return playerList.get(index);
+        return Optional.of(playerList.get(index));
     }
 
     private AppContext updateAppContext(Player player) {
