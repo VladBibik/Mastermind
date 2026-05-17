@@ -75,12 +75,11 @@ public class PlayerSelectionMenu extends Menu {
 
             playerService.updateLastSelectedPlayer(player.getId());
 
-            printer.printMessage(selectionMenuMessages.getPlayerSelected(
-                    AnsiSafeFormatter.isolate(player.getPlayerName())));
+            AppContext newAppContext = updateAppContext(player);
 
-            confirmToContinue();
+            printConfirmationWithCorrectLocale(newAppContext, player.getPlayerName());
 
-            return new ProfileMenu(updateAppContext(player));
+            return new ProfileMenu(newAppContext);
         }
     }
 
@@ -109,8 +108,18 @@ public class PlayerSelectionMenu extends Menu {
                 this.appContext.services(), this.printer, this.parser, player);
     }
 
-    private void confirmToContinue() {
-        printer.printMessage(interactionMessages.getPressEnter());
+    private void printConfirmationWithCorrectLocale(AppContext appContext, String playerName) {
+        PlayerSelectionMenuMessages updatedSelectionMenuMessages =
+                appContext.localizationContext().getMessages(MessageType.SELECTION);
+
+        printer.printMessage(updatedSelectionMenuMessages.getPlayerSelected(
+                AnsiSafeFormatter.isolate(playerName)));
+
+        confirmToContinue(appContext.localizationContext().getMessages(MessageType.INTERACTION));
+    }
+
+    private void confirmToContinue(InteractionMessages updatedInteractionMessages) {
+        printer.printMessage(updatedInteractionMessages.getPressEnter());
 
         parser.parseUserInput();
     }
