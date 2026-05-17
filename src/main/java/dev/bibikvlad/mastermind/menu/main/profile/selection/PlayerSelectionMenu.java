@@ -89,15 +89,13 @@ public class PlayerSelectionMenu extends Menu {
     }
 
     private Player selectPlayer(List<Player> playerList, int playerIndex) {
-        Player player;
+        int index = playerIndex - 1;
 
-        try {
-            player = playerList.get(playerIndex - 1);
-        } catch (IndexOutOfBoundsException exception) {
+        if (index < 0 || index >= playerList.size()) {
             return null;
         }
 
-        return player;
+        return playerList.get(index);
     }
 
     private AppContext updateAppContext(Player player) {
