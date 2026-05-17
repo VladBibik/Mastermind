@@ -72,6 +72,8 @@ public class PlayerSelectionMenu extends Menu {
             printer.printMessage(selectionMenuMessages.getPlayerSelected(
                     AnsiSafeFormatter.isolate(player.getPlayerName())));
 
+            confirmToContinue();
+
             return new ProfileMenu(updateAppContext(player));
         }
     }
@@ -99,5 +101,11 @@ public class PlayerSelectionMenu extends Menu {
     private AppContext updateAppContext(Player player) {
         return new AppContext(new LocalizationContext(player.getPlayerConfig().locale()),
                 this.appContext.services(), this.printer, this.parser, player);
+    }
+
+    private void confirmToContinue() {
+        printer.printMessage(interactionMessages.getPressEnter());
+
+        parser.parseUserInput();
     }
 }
