@@ -50,7 +50,8 @@ public class PlayerSelectionMenu extends Menu {
                 .map(input -> playerSelection(playerList, input))
                 .orElseGet(() -> {
                     Player lastSelectedPlayer = playerService.loadLastSelectedPlayer()
-                            .orElseThrow(() -> new PlayerNotFoundException("Last selected player is not found"));
+                            .orElseThrow(() -> new PlayerNotFoundException(
+                                    errorMessages.getLastSelectedPlayerNotFound()));
 
                     return new ProfileMenu(updateAppContext(lastSelectedPlayer));
                 });
@@ -60,13 +61,14 @@ public class PlayerSelectionMenu extends Menu {
         Player player = selectPlayer(playerList, userInputNumber);
 
         if (player == null) {
-            printer.printMessage("Invalid input. Please enter a number corresponding to the player index.");
+            printer.printMessage(interactionMessages.getInvalidInput());
 
             return this;
         } else {
             playerService.updateLastSelectedPlayer(player.getId());
 
-            printer.printMessage("Player " + AnsiSafeFormatter.isolate(player.getPlayerName()) + " has been selected.");
+            printer.printMessage(selectionMenuMessages.getPlayerSelected(
+                    AnsiSafeFormatter.isolate(player.getPlayerName())));
         }
 
         return new ProfileMenu(updateAppContext(player));
@@ -83,7 +85,7 @@ public class PlayerSelectionMenu extends Menu {
             printer.printMessage((i + 1) + ": " + playerName);
         }
 
-        printer.printMessage("0. Back to the profile menu");
+        printer.printMessage(selectionMenuMessages.getBackMenuOption());
     }
 
     private Player selectPlayer(List<Player> playerList, int playerIndex) {
