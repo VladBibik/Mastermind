@@ -70,17 +70,17 @@ public class PlayerSelectionMenu extends Menu {
             printer.printMessage(interactionMessages.getInvalidInput());
 
             return this;
-        } else {
-            Player player = optionalPlayer.get();
-
-            playerService.updateLastSelectedPlayer(player.getId());
-
-            AppContext newAppContext = updateAppContext(player);
-
-            printConfirmationWithCorrectLocale(newAppContext, player.getPlayerName());
-
-            return new ProfileMenu(newAppContext);
         }
+
+        Player player = optionalPlayer.get();
+
+        playerService.updateLastSelectedPlayer(player.getId());
+
+        AppContext newAppContext = updateAppContext(player);
+
+        printConfirmationWithCorrectLocale(newAppContext, player.getPlayerName());
+
+        return new ProfileMenu(newAppContext);
     }
 
     private void displayMenuOptions(List<Player> playerList) {
