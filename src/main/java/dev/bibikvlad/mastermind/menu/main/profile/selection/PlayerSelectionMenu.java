@@ -59,7 +59,7 @@ public class PlayerSelectionMenu extends Menu {
                             .orElseThrow(() -> new PlayerNotFoundException(
                                     errorMessages.getLastSelectedPlayerNotFound()));
 
-                    return new ProfileMenu(updateAppContext(lastSelectedPlayer));
+                    return new ProfileMenu(createUpdatedAppContext(lastSelectedPlayer));
                 });
     }
 
@@ -76,7 +76,7 @@ public class PlayerSelectionMenu extends Menu {
 
         playerService.updateLastSelectedPlayer(player.getId());
 
-        AppContext newAppContext = updateAppContext(player);
+        AppContext newAppContext = createUpdatedAppContext(player);
 
         printConfirmationWithCorrectLocale(newAppContext, player.getPlayerName());
 
@@ -103,7 +103,7 @@ public class PlayerSelectionMenu extends Menu {
         return Optional.of(playerList.get(index));
     }
 
-    private AppContext updateAppContext(Player player) {
+    private AppContext createUpdatedAppContext(Player player) {
         return new AppContext(new LocalizationContext(player.getPlayerConfig().locale()),
                 this.appContext.services(), this.printer, this.parser, player);
     }
