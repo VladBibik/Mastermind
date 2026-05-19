@@ -24,7 +24,7 @@ public class ProfileMenu extends Menu {
     private final ProfileMenuMessages profileMenuMessages;
     private final PlayerService playerService;
 
-    private boolean showMenuOnNextLoop = true;
+    private boolean shouldRenderMenu = true;
 
     public ProfileMenu(AppContext appContext) {
         super(appContext);
@@ -38,9 +38,9 @@ public class ProfileMenu extends Menu {
 
     @Override
     public Menu run() {
-        if (showMenuOnNextLoop) {
+        if (shouldRenderMenu) {
             displayMenu();
-            showMenuOnNextLoop = false;
+            shouldRenderMenu = false;
         }
 
         Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);

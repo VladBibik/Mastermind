@@ -28,7 +28,7 @@ public class WinPercentageLeaderboardMenu extends Menu {
     private final LeaderboardService leaderboardService;
     private final int playedGames;
 
-    private boolean showMenuOnNextLoop = true;
+    private boolean shouldRenderMenu = true;
 
     public WinPercentageLeaderboardMenu(AppContext appContext, int playedGames) {
         super(appContext);
@@ -43,9 +43,9 @@ public class WinPercentageLeaderboardMenu extends Menu {
 
     @Override
     public Menu run() {
-        if (showMenuOnNextLoop) {
+        if (shouldRenderMenu) {
             displayMenu();
-            showMenuOnNextLoop = false;
+            shouldRenderMenu = false;
         }
 
         Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
@@ -110,7 +110,7 @@ public class WinPercentageLeaderboardMenu extends Menu {
     private void waitForConfirmation() {
         printer.printMessage(interactionMessages.getPressEnter());
 
-        showMenuOnNextLoop = true;
+        shouldRenderMenu = true;
 
         parser.parseUserInput();
     }

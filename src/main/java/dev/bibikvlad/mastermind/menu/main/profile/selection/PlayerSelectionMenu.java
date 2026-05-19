@@ -27,7 +27,7 @@ public class PlayerSelectionMenu extends Menu {
     private final InteractionMessages interactionMessages;
     private final ErrorMessages errorMessages;
 
-    private boolean showMenuOnNextLoop = true;
+    private boolean shouldRenderMenu = true;
 
     public PlayerSelectionMenu(AppContext appContext) {
         super(appContext);
@@ -44,10 +44,10 @@ public class PlayerSelectionMenu extends Menu {
     public Menu run() {
         List<Player> playerList = playerService.getAllPlayers();
 
-        if (showMenuOnNextLoop) {
+        if (shouldRenderMenu) {
             displayMenuOptions(playerList);
 
-            showMenuOnNextLoop = false;
+            shouldRenderMenu = false;
         }
 
         Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);

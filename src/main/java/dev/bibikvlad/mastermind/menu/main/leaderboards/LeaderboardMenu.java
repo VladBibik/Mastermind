@@ -32,7 +32,7 @@ public class LeaderboardMenu extends Menu {
     private final LeaderboardService leaderboardService;
     private final GamesService gamesService;
 
-    private boolean showMenuOnNextLoop = true;
+    private boolean shouldRenderMenu = true;
 
     public LeaderboardMenu(AppContext appContext) {
         super(appContext);
@@ -47,9 +47,9 @@ public class LeaderboardMenu extends Menu {
 
     @Override
     public Menu run() {
-        if (showMenuOnNextLoop) {
+        if (shouldRenderMenu) {
             displayMenu();
-            showMenuOnNextLoop = false;
+            shouldRenderMenu = false;
         }
 
         Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);
@@ -215,7 +215,7 @@ public class LeaderboardMenu extends Menu {
     private void waitForConfirmation() {
         printer.printMessage(interactionMessages.getPressEnter());
 
-        showMenuOnNextLoop = true;
+        shouldRenderMenu = true;
 
         parser.parseUserInput();
     }

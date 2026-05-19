@@ -30,7 +30,7 @@ public class LogoColorSelectionMenu extends Menu {
     private final InteractionMessages interactionMessages;
 
     private LogoColorsBundle logoColorsBundle;
-    private boolean showMenuOnNextLoop = true;
+    private boolean shouldRenderMenu = true;
 
     public LogoColorSelectionMenu(AppContext appContext) {
         super(appContext);
@@ -47,10 +47,10 @@ public class LogoColorSelectionMenu extends Menu {
 
     @Override
     public Menu run() {
-        if (showMenuOnNextLoop) {
+        if (shouldRenderMenu) {
             displayMenu();
 
-            showMenuOnNextLoop = false;
+            shouldRenderMenu = false;
         }
 
         Optional<Integer> selection = IntegerInputInterpreter.readSelection(appContext.parser());
@@ -116,7 +116,7 @@ public class LogoColorSelectionMenu extends Menu {
 
         parser.parseUserInput();
 
-        showMenuOnNextLoop = true;
+        shouldRenderMenu = true;
     }
 
     private void changeBorderColor() {
@@ -186,7 +186,7 @@ public class LogoColorSelectionMenu extends Menu {
     private void waitForUserConfirmation() {
         printer.printMessage(interactionMessages.getPressEnter());
 
-        showMenuOnNextLoop = true;
+        shouldRenderMenu = true;
 
         parser.parseUserInput();
     }

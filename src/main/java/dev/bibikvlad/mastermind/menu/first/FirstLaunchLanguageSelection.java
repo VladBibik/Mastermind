@@ -19,7 +19,7 @@ public class FirstLaunchLanguageSelection {
     private final Printer printer;
     private final Parser parser;
 
-    private boolean showMenuOnNextLoop = true;
+    private boolean shouldRenderMenu = true;
 
     public FirstLaunchLanguageSelection(Printer printer, Parser parser) {
         this.printer = printer;
@@ -28,10 +28,10 @@ public class FirstLaunchLanguageSelection {
 
     public LocaleType selectLanguage() {
         while (true) {
-            if (showMenuOnNextLoop) {
+            if (shouldRenderMenu) {
                 printMenuOptions();
 
-                showMenuOnNextLoop = false;
+                shouldRenderMenu = false;
             }
 
             String userInput = parser.parseUserInput();

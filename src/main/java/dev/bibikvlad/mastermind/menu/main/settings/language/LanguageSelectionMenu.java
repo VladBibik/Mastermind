@@ -22,7 +22,7 @@ public class LanguageSelectionMenu extends Menu {
     private final InteractionMessages interactionMessages;
     private final LanguageSelectionMessages languageSelectionMessages;
 
-    private boolean showMenuOnNextLoop = true;
+    private boolean shouldRenderMenu = true;
 
     public LanguageSelectionMenu(AppContext appContext) {
         super(appContext);
@@ -36,10 +36,10 @@ public class LanguageSelectionMenu extends Menu {
 
     @Override
     public Menu run() {
-        if (showMenuOnNextLoop) {
+        if (shouldRenderMenu) {
             printMenuOptions();
 
-            showMenuOnNextLoop = false;
+            shouldRenderMenu = false;
         }
 
         Optional<Integer> selection = IntegerInputInterpreter.readSelection(parser);

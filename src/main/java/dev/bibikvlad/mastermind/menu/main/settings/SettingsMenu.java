@@ -17,7 +17,7 @@ public class SettingsMenu extends Menu {
     private final SettingsMenuMessages settingsMenuMessages;
     private final InteractionMessages interactionMessages;
 
-    private boolean showMenuOnNextLoop = true;
+    private boolean shouldRenderMenu = true;
 
     public SettingsMenu(AppContext appContext) {
         super(appContext);
@@ -29,10 +29,10 @@ public class SettingsMenu extends Menu {
 
     @Override
     public Menu run() {
-        if (showMenuOnNextLoop) {
+        if (shouldRenderMenu) {
             displayMenu();
 
-            showMenuOnNextLoop = false;
+            shouldRenderMenu = false;
         }
 
         Optional<Integer> selection = IntegerInputInterpreter.readSelection(appContext.parser());

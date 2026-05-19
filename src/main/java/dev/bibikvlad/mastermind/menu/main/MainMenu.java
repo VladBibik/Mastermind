@@ -24,7 +24,7 @@ public class MainMenu extends Menu {
     private final InteractionMessages interactionMessages;
     private final MainMenuMessages mainMenuMessages;
 
-    private boolean showMenuOnNextLoop = true;
+    private boolean shouldRenderMenu = true;
 
     public MainMenu(AppContext appContext) {
         super(appContext);
@@ -37,9 +37,9 @@ public class MainMenu extends Menu {
 
     @Override
     public Menu run() {
-        if (showMenuOnNextLoop) {
+        if (shouldRenderMenu) {
             displayMenu();
-            showMenuOnNextLoop = false;
+            shouldRenderMenu = false;
         }
 
         Optional<Integer> selection = MainMenuInputInterpreter.readSelection(appContext.parser());
