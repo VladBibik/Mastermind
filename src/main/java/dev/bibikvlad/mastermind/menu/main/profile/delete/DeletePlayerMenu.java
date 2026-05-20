@@ -37,7 +37,17 @@ public class DeletePlayerMenu extends Menu {
 
     @Override
     public Menu run() {
+        firstWarning();
+
         return handlePlayerDeletion();
+    }
+
+    private void firstWarning() {
+        printer.printMessage("⚠\uFE0F WARNING. You are entering dangerous zone! ⚠\uFE0F");
+        printer.printMessage("If you continue with the deletion, all data for the player: "
+                + currentPlayer.getPlayerName() + " will be deleted permanently!");
+
+        confirmToContinue();
     }
 
     private Menu handlePlayerDeletion() {
