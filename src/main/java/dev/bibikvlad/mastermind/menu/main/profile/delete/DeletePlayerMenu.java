@@ -2,12 +2,16 @@ package dev.bibikvlad.mastermind.menu.main.profile.delete;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
+import dev.bibikvlad.mastermind.exceptions.PlayerNotFoundException;
 import dev.bibikvlad.mastermind.input.parser.Parser;
+import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.profile.ProfileMenu;
 import dev.bibikvlad.mastermind.menu.main.profile.selection.PlayerSelectionMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
+
+import java.util.Optional;
 
 public class DeletePlayerMenu extends Menu {
     private final Printer printer;
@@ -35,12 +39,20 @@ public class DeletePlayerMenu extends Menu {
         printer.printMessage("Player with the name: " + currentPlayer.getPlayerName() + " has been deleted.");
 
         if (!playerService.isMultiplePlayersRegistered()) {
-            return new ProfileMenu(appContext);
+            return new ProfileMenu(createUpdatedAppContext());
         } else {
             printer.printMessage("If you'll close player selection menu, " +
                     "previous last selected player will be picked automatically.");
 
             return new PlayerSelectionMenu(appContext);
         }
+    }
+
+    private AppContext createUpdatedAppContext() {
+        Optional<Player> optionalPlayer = playerService.loadLastSelectedPlayer();
+        Player player = optionalPlayer.orElseThrow(() -> new PlayerNotFoundException(""));
+
+        return new AppContext(new LocalizationContext(player.getPlayerConfig().locale()),
+                this.appContext.services(), this.printer, this.parser, player);
     }
 }
