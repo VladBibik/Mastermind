@@ -91,11 +91,11 @@ public class DeletePlayerMenu extends Menu {
 
             return new PlayerSelectionMenu(appContext);
         } else {
-            return handleOnePlayerLeftCase();
+            return selectRemainingPlayer();
         }
     }
 
-    private Menu handleOnePlayerLeftCase() {
+    private Menu selectRemainingPlayer() {
         Player player = getLastSelectedPlayer();
         String playerName = AnsiSafeFormatter.isolate(player.getPlayerName());
 
