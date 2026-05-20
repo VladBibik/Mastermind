@@ -87,6 +87,8 @@ public class DeletePlayerMenu extends Menu {
             printer.printMessage("If you'll close player selection menu, " +
                     "previous last selected player will be picked automatically.");
 
+            confirmToContinue();
+
             return new PlayerSelectionMenu(appContext);
         }
     }
