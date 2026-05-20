@@ -43,7 +43,7 @@ public class DeletePlayerMenu extends Menu {
         printer.printMessage("Player with the name: " + currentPlayer.getPlayerName() + " has been deleted.");
 
         if (!playerService.isMultiplePlayersRegistered()) {
-            return new ProfileMenu(createUpdatedAppContext());
+            return handleOnePlayerLeftCase();
         } else {
             printer.printMessage("If you'll close player selection menu, " +
                     "previous last selected player will be picked automatically.");
@@ -52,11 +52,17 @@ public class DeletePlayerMenu extends Menu {
         }
     }
 
-    private AppContext createUpdatedAppContext() {
+    private Menu handleOnePlayerLeftCase() {
         Optional<Player> optionalPlayer = playerService.loadLastSelectedPlayer();
         Player player = optionalPlayer.orElseThrow(() -> new PlayerNotFoundException(
                 errorMessages.getLastSelectedPlayerNotFound()));
 
+        printer.printMessage("Player with the name: " + player.getPlayerName() + " has been selected.");
+
+        return new ProfileMenu(createUpdatedAppContext(player));
+    }
+
+    private AppContext createUpdatedAppContext(Player player) {
         return new AppContext(new LocalizationContext(player.getPlayerConfig().locale()),
                 this.appContext.services(), this.printer, this.parser, player);
     }
