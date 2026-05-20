@@ -1,6 +1,8 @@
 package dev.bibikvlad.mastermind.menu.main.profile.delete;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
+import dev.bibikvlad.mastermind.app.printer.Printer;
+import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.profile.ProfileMenu;
 import dev.bibikvlad.mastermind.menu.main.profile.selection.PlayerSelectionMenu;
@@ -8,12 +10,16 @@ import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
 public class DeletePlayerMenu extends Menu {
+    private final Printer printer;
+    private final Parser parser;
     private final PlayerService playerService;
     private final Player currentPlayer;
 
     public DeletePlayerMenu(AppContext appContext) {
         super(appContext);
 
+        this.printer = appContext.printer();
+        this.parser = appContext.parser();
         this.playerService = appContext.services().getPlayerService();
         this.currentPlayer = appContext.currentPlayer();
     }
