@@ -56,7 +56,7 @@ public class DeletePlayerMenu extends Menu {
 
     private boolean isFirstCheckPassed() {
         printer.printMessage("Are you sure you want to delete a player: " + currentPlayer.getPlayerName()
-                + "with all of their data permanently?");
+                + " with all of their data permanently?");
         printer.printMessage("Print 'yes' if you want to continue with deletion process. "
                 + "Any other input will return you back to the Profile Menu");
 
@@ -68,7 +68,7 @@ public class DeletePlayerMenu extends Menu {
     private boolean isSecondCheckPassed() {
         printer.printMessage("⚠\uFE0F This is the last warning!");
         printer.printMessage("If you want to permanently delete a player: " + currentPlayer.getPlayerName()
-                + "with all of their data type 'DELETE' (all uppercase). "
+                + " with all of their data type 'DELETE' (all uppercase). "
                 + "Any other input will return you back to the Profile Menu");
 
         String userInput = parser.parseUserInput();
