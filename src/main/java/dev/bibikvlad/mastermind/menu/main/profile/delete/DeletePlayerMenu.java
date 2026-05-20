@@ -39,13 +39,11 @@ public class DeletePlayerMenu extends Menu {
     public Menu run() {
         firstWarning();
 
-        if (isFirstCheckPassed()) {
-
-        } else {
-            return new ProfileMenu(appContext);
+        if (isFirstCheckPassed() && isSecondCheckPassed()) {
+            return handlePlayerDeletion();
         }
 
-        return handlePlayerDeletion();
+        return new ProfileMenu(appContext);
     }
 
     private void firstWarning() {
@@ -65,6 +63,17 @@ public class DeletePlayerMenu extends Menu {
         String userInput = parser.parseUserInput();
 
         return userInput.equalsIgnoreCase("yes");
+    }
+
+    private boolean isSecondCheckPassed() {
+        printer.printMessage("⚠\uFE0F This is the last warning!");
+        printer.printMessage("If you want to permanently delete a player: " + currentPlayer.getPlayerName()
+                + "with all of their data type 'DELETE' (all uppercase). "
+                + "Any other input will return you back to the Profile Menu");
+
+        String userInput = parser.parseUserInput();
+
+        return userInput.equals("DELETE");
     }
 
     private Menu handlePlayerDeletion() {
