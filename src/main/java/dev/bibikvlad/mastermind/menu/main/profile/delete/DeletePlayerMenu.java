@@ -26,17 +26,21 @@ public class DeletePlayerMenu extends Menu {
 
     @Override
     public Menu run() {
+        return handlePlayerDeletion();
+    }
+
+    private Menu handlePlayerDeletion() {
         playerService.deletePlayer(currentPlayer.getId());
 
         printer.printMessage("Player with the name: " + currentPlayer.getPlayerName() + " has been deleted.");
 
         if (!playerService.isMultiplePlayersRegistered()) {
             return new ProfileMenu(appContext);
+        } else {
+            printer.printMessage("If you'll close player selection menu, " +
+                    "previous last selected player will be picked automatically.");
+
+            return new PlayerSelectionMenu(appContext);
         }
-
-        printer.printMessage("If you'll close player selection menu, " +
-                "previous last selected player will be picked automatically.");
-
-        return new PlayerSelectionMenu(appContext);
     }
 }
