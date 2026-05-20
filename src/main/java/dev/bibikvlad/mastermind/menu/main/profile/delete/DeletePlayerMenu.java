@@ -4,7 +4,9 @@ import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.exceptions.PlayerNotFoundException;
 import dev.bibikvlad.mastermind.input.parser.Parser;
+import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
+import dev.bibikvlad.mastermind.localization.messages.error.ErrorMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.profile.ProfileMenu;
 import dev.bibikvlad.mastermind.menu.main.profile.selection.PlayerSelectionMenu;
@@ -18,6 +20,7 @@ public class DeletePlayerMenu extends Menu {
     private final Parser parser;
     private final PlayerService playerService;
     private final Player currentPlayer;
+    private final ErrorMessages errorMessages;
 
     public DeletePlayerMenu(AppContext appContext) {
         super(appContext);
@@ -26,6 +29,7 @@ public class DeletePlayerMenu extends Menu {
         this.parser = appContext.parser();
         this.playerService = appContext.services().getPlayerService();
         this.currentPlayer = appContext.currentPlayer();
+        this.errorMessages = appContext.localizationContext().getMessages(MessageType.ERROR);
     }
 
     @Override
@@ -50,7 +54,8 @@ public class DeletePlayerMenu extends Menu {
 
     private AppContext createUpdatedAppContext() {
         Optional<Player> optionalPlayer = playerService.loadLastSelectedPlayer();
-        Player player = optionalPlayer.orElseThrow(() -> new PlayerNotFoundException(""));
+        Player player = optionalPlayer.orElseThrow(() -> new PlayerNotFoundException(
+                errorMessages.getLastSelectedPlayerNotFound()));
 
         return new AppContext(new LocalizationContext(player.getPlayerConfig().locale()),
                 this.appContext.services(), this.printer, this.parser, player);
