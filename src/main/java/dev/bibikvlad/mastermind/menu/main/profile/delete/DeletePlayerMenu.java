@@ -39,6 +39,12 @@ public class DeletePlayerMenu extends Menu {
     public Menu run() {
         firstWarning();
 
+        if (isFirstCheckPassed()) {
+
+        } else {
+            return new ProfileMenu(appContext);
+        }
+
         return handlePlayerDeletion();
     }
 
@@ -48,6 +54,17 @@ public class DeletePlayerMenu extends Menu {
                 + currentPlayer.getPlayerName() + " will be deleted permanently!");
 
         confirmToContinue();
+    }
+
+    private boolean isFirstCheckPassed() {
+        printer.printMessage("Are you sure you want to delete a player: " + currentPlayer.getPlayerName()
+                + "with all of their data permanently?");
+        printer.printMessage("Print 'yes' if you want to continue with deletion process. "
+                + "Any other input will return you back to the Profile Menu");
+
+        String userInput = parser.parseUserInput();
+
+        return userInput.equalsIgnoreCase("yes");
     }
 
     private Menu handlePlayerDeletion() {
