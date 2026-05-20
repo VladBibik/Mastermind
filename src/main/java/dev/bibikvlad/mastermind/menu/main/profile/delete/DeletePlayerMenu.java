@@ -26,13 +26,6 @@ public class DeletePlayerMenu extends Menu {
 
     @Override
     public Menu run() {
-        if (!playerService.isMultiplePlayersRegistered()) {
-            printer.printMessage("Cannot delete a player.");
-            printer.printMessage("Please register at least one more player first.");
-
-            return new ProfileMenu(appContext);
-        }
-
         playerService.deletePlayer(currentPlayer.getId());
 
         printer.printMessage("Player with the name: " + currentPlayer.getPlayerName() + " has been deleted.");
