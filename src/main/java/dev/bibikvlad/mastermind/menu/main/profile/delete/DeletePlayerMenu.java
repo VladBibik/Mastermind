@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.menu.main.profile.delete;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
+import dev.bibikvlad.mastermind.app.printer.AnsiSafeFormatter;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.exceptions.PlayerNotFoundException;
 import dev.bibikvlad.mastermind.input.parser.Parser;
@@ -37,25 +38,27 @@ public class DeletePlayerMenu extends Menu {
 
     @Override
     public Menu run() {
-        firstWarning();
+        String playerName = AnsiSafeFormatter.isolate(currentPlayer.getPlayerName());
 
-        if (isFirstCheckPassed() && isSecondCheckPassed()) {
+        firstWarning(playerName);
+
+        if (isFirstCheckPassed(playerName) && isSecondCheckPassed(playerName)) {
             return handlePlayerDeletion();
         }
 
         return new ProfileMenu(appContext);
     }
 
-    private void firstWarning() {
+    private void firstWarning(String playerName) {
         printer.printMessage("⚠\uFE0F WARNING. You are entering dangerous zone! ⚠\uFE0F");
         printer.printMessage("If you continue with the deletion, all data for the player: "
-                + currentPlayer.getPlayerName() + " will be deleted permanently!");
+                + playerName + " will be deleted permanently!");
 
         confirmToContinue();
     }
 
-    private boolean isFirstCheckPassed() {
-        printer.printMessage("Are you sure you want to delete a player: " + currentPlayer.getPlayerName()
+    private boolean isFirstCheckPassed(String playerName) {
+        printer.printMessage("Are you sure you want to delete a player: " + playerName
                 + " with all of their data permanently?");
         printer.printMessage("Print 'yes' if you want to continue with deletion process. "
                 + "Any other input will return you back to the Profile Menu");
@@ -65,9 +68,9 @@ public class DeletePlayerMenu extends Menu {
         return userInput.equalsIgnoreCase("yes");
     }
 
-    private boolean isSecondCheckPassed() {
+    private boolean isSecondCheckPassed(String playerName) {
         printer.printMessage("⚠\uFE0F This is the last warning!");
-        printer.printMessage("If you want to permanently delete a player: " + currentPlayer.getPlayerName()
+        printer.printMessage("If you want to permanently delete a player: " + playerName
                 + " with all of their data type 'DELETE' (all uppercase). "
                 + "Any other input will return you back to the Profile Menu");
 
@@ -79,7 +82,9 @@ public class DeletePlayerMenu extends Menu {
     private Menu handlePlayerDeletion() {
         playerService.deletePlayer(currentPlayer.getId());
 
-        printer.printMessage("Player with the name: " + currentPlayer.getPlayerName() + " has been deleted.");
+        String playerName = AnsiSafeFormatter.isolate(currentPlayer.getPlayerName());
+
+        printer.printMessage("Player with the name: " + playerName + " has been deleted.");
 
         if (playerService.isMultiplePlayersRegistered()) {
             printSelectionWarning();
@@ -94,8 +99,9 @@ public class DeletePlayerMenu extends Menu {
         Optional<Player> optionalPlayer = playerService.loadLastSelectedPlayer();
         Player player = optionalPlayer.orElseThrow(() -> new PlayerNotFoundException(
                 errorMessages.getLastSelectedPlayerNotFound()));
+        String playerName = AnsiSafeFormatter.isolate(player.getPlayerName());
 
-        printer.printMessage("Player with the name: " + player.getPlayerName() + " has been selected.");
+        printer.printMessage("Player with the name: " + playerName + " has been selected.");
 
         return new ProfileMenu(createUpdatedAppContext(player));
     }
@@ -104,9 +110,10 @@ public class DeletePlayerMenu extends Menu {
         Optional<Player> optionalPlayer = playerService.loadLastSelectedPlayer();
         Player player = optionalPlayer.orElseThrow(() -> new PlayerNotFoundException(
                 errorMessages.getLastSelectedPlayerNotFound()));
+        String playerName = AnsiSafeFormatter.isolate(player.getPlayerName());
 
         printer.printMessage("If you'll close player selection menu, " +
-                "player: " + player.getPlayerName() + " will be selected automatically.");
+                "player: " + playerName + " will be selected automatically.");
 
         confirmToContinue();
     }
