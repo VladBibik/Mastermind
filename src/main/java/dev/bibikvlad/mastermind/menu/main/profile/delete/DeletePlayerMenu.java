@@ -96,9 +96,7 @@ public class DeletePlayerMenu extends Menu {
     }
 
     private Menu handleOnePlayerLeftCase() {
-        Optional<Player> optionalPlayer = playerService.loadLastSelectedPlayer();
-        Player player = optionalPlayer.orElseThrow(() -> new PlayerNotFoundException(
-                errorMessages.getLastSelectedPlayerNotFound()));
+        Player player = getLastSelectedPlayer();
         String playerName = AnsiSafeFormatter.isolate(player.getPlayerName());
 
         printer.printMessage("Player with the name: " + playerName + " has been selected.");
@@ -107,15 +105,19 @@ public class DeletePlayerMenu extends Menu {
     }
 
     private void printSelectionWarning() {
-        Optional<Player> optionalPlayer = playerService.loadLastSelectedPlayer();
-        Player player = optionalPlayer.orElseThrow(() -> new PlayerNotFoundException(
-                errorMessages.getLastSelectedPlayerNotFound()));
-        String playerName = AnsiSafeFormatter.isolate(player.getPlayerName());
+        String playerName = AnsiSafeFormatter.isolate(getLastSelectedPlayer().getPlayerName());
 
         printer.printMessage("If you'll close player selection menu, " +
                 "player: " + playerName + " will be selected automatically.");
 
         confirmToContinue();
+    }
+
+    private Player getLastSelectedPlayer() {
+        Optional<Player> optionalPlayer = playerService.loadLastSelectedPlayer();
+
+        return optionalPlayer.orElseThrow(() -> new PlayerNotFoundException(
+                errorMessages.getLastSelectedPlayerNotFound()));
     }
 
     private AppContext createUpdatedAppContext(Player player) {
