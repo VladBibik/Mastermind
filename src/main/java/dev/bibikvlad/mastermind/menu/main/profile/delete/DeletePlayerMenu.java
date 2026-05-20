@@ -81,15 +81,15 @@ public class DeletePlayerMenu extends Menu {
 
         printer.printMessage("Player with the name: " + currentPlayer.getPlayerName() + " has been deleted.");
 
-        if (!playerService.isMultiplePlayersRegistered()) {
-            return handleOnePlayerLeftCase();
-        } else {
+        if (playerService.isMultiplePlayersRegistered()) {
             printer.printMessage("If you'll close player selection menu, " +
                     "previous last selected player will be picked automatically.");
 
             confirmToContinue();
 
             return new PlayerSelectionMenu(appContext);
+        } else {
+            return handleOnePlayerLeftCase();
         }
     }
 
