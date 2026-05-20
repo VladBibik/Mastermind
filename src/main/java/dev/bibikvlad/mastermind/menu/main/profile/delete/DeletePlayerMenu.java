@@ -27,21 +27,21 @@ public class DeletePlayerMenu extends Menu {
     @Override
     public Menu run() {
         if (!playerService.isMultiplePlayersRegistered()) {
-            System.out.println("Cannot delete a player.");
-            System.out.println("Please register at least one more player first.");
+            printer.printMessage("Cannot delete a player.");
+            printer.printMessage("Please register at least one more player first.");
 
             return new ProfileMenu(appContext);
         }
 
         playerService.deletePlayer(currentPlayer.getId());
 
-        System.out.println("Player with the name: " + currentPlayer.getPlayerName() + " has been deleted.");
+        printer.printMessage("Player with the name: " + currentPlayer.getPlayerName() + " has been deleted.");
 
         if (!playerService.isMultiplePlayersRegistered()) {
             return new ProfileMenu(appContext);
         }
 
-        System.out.println("If you'll close player selection menu, " +
+        printer.printMessage("If you'll close player selection menu, " +
                 "previous last selected player will be picked automatically.");
 
         return new PlayerSelectionMenu(appContext);
