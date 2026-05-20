@@ -41,7 +41,6 @@ public class DeletePlayerMenu extends Menu {
             return new ProfileMenu(appContext);
         }
 
-        //TODO: This doesn't work! You can close PlayerSelectionMenu, and deleted player will be selected. Need a fix!
         System.out.println("If you'll close player selection menu, " +
                 "previous last selected player will be picked automatically.");
 
