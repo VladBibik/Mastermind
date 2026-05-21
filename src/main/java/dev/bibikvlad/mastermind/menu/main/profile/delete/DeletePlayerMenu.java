@@ -79,9 +79,9 @@ public class DeletePlayerMenu extends Menu {
             showSelectionWarning();
 
             return new PlayerSelectionMenu(appContext);
-        } else {
-            return selectRemainingPlayer();
         }
+
+        return selectRemainingPlayer();
     }
 
     private Menu selectRemainingPlayer() {
