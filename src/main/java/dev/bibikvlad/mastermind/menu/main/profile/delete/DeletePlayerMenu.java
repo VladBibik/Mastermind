@@ -40,16 +40,16 @@ public class DeletePlayerMenu extends Menu {
     public Menu run() {
         String playerName = AnsiSafeFormatter.isolate(currentPlayer.getPlayerName());
 
-        firstWarning(playerName);
+        printWarning(playerName);
 
-        if (isFirstCheckPassed(playerName) && isSecondCheckPassed(playerName)) {
+        if (isDeleteCheckPassed(playerName)) {
             return handlePlayerDeletion();
         }
 
         return new ProfileMenu(appContext);
     }
 
-    private void firstWarning(String playerName) {
+    private void printWarning(String playerName) {
         printer.printMessage("⚠\uFE0F WARNING. You are entering dangerous zone! ⚠\uFE0F");
         printer.printMessage("If you continue with the deletion, all data for the player: "
                 + playerName + " will be deleted permanently!");
@@ -57,18 +57,7 @@ public class DeletePlayerMenu extends Menu {
         confirmToContinue();
     }
 
-    private boolean isFirstCheckPassed(String playerName) {
-        printer.printMessage("Are you sure you want to delete a player: " + playerName
-                + " with all of their data permanently?");
-        printer.printMessage("Print 'yes' if you want to continue with deletion process. "
-                + "Any other input will return you back to the Profile Menu");
-
-        String userInput = parser.parseUserInput();
-
-        return userInput.equalsIgnoreCase("yes");
-    }
-
-    private boolean isSecondCheckPassed(String playerName) {
+    private boolean isDeleteCheckPassed(String playerName) {
         printer.printMessage("⚠\uFE0F This is the last warning!");
         printer.printMessage("If you want to permanently delete a player: " + playerName
                 + " with all of their data type 'DELETE' (all uppercase). "
