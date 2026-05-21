@@ -42,7 +42,7 @@ public class DeletePlayerMenu extends Menu {
 
         printWarning(playerName);
 
-        if (isDeleteCheckPassed(playerName)) {
+        if (isDeletionConfirmed(playerName)) {
             return handlePlayerDeletion();
         }
 
@@ -57,7 +57,7 @@ public class DeletePlayerMenu extends Menu {
         confirmToContinue();
     }
 
-    private boolean isDeleteCheckPassed(String playerName) {
+    private boolean isDeletionConfirmed(String playerName) {
         printer.printMessage("⚠\uFE0F This is the last warning!");
         printer.printMessage("If you want to permanently delete a player: " + playerName
                 + " with all of their data type 'DELETE' (all uppercase). "
