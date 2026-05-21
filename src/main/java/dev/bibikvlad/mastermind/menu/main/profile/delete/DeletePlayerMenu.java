@@ -76,7 +76,7 @@ public class DeletePlayerMenu extends Menu {
         printer.printMessage("Player with the name: " + playerName + " has been deleted.");
 
         if (playerService.isMultiplePlayersRegistered()) {
-            printSelectionWarning();
+            showSelectionWarning();
 
             return new PlayerSelectionMenu(appContext);
         } else {
@@ -93,7 +93,7 @@ public class DeletePlayerMenu extends Menu {
         return new ProfileMenu(createUpdatedAppContext(player));
     }
 
-    private void printSelectionWarning() {
+    private void showSelectionWarning() {
         String playerName = AnsiSafeFormatter.isolate(getLastSelectedPlayer().getPlayerName());
 
         printer.printMessage("If you'll close player selection menu, " +
