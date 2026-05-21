@@ -40,7 +40,7 @@ public class DeletePlayerMenu extends Menu {
     public Menu run() {
         String playerName = AnsiSafeFormatter.isolate(currentPlayer.getPlayerName());
 
-        printWarning(playerName);
+        printDeletionWarning(playerName);
 
         if (isDeletionConfirmed(playerName)) {
             return handlePlayerDeletion();
@@ -49,7 +49,7 @@ public class DeletePlayerMenu extends Menu {
         return new ProfileMenu(appContext);
     }
 
-    private void printWarning(String playerName) {
+    private void printDeletionWarning(String playerName) {
         printer.printMessage("⚠\uFE0F WARNING. You are entering dangerous zone! ⚠\uFE0F");
         printer.printMessage("If you continue with the deletion, all data for the player: "
                 + playerName + " will be deleted permanently!");
