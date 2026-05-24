@@ -8,7 +8,7 @@ import dev.bibikvlad.mastermind.localization.factories.menu.main.ConsoleMainMenu
 import dev.bibikvlad.mastermind.localization.factories.menu.main.game.ConsoleGameMenuMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.leaderboard.ConsoleLeaderboardMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.profile.ConsoleProfileMessageFactory;
-import dev.bibikvlad.mastermind.localization.factories.menu.main.profile.selection.ConsolePlayerSelectionFactory;
+import dev.bibikvlad.mastermind.localization.factories.menu.main.profile.selection.ConsolePlayerSelectionMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.ConsoleSettingsMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.language.ConsoleLanguageMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.logo.ConsoleColorMessageFactory;
@@ -113,7 +113,7 @@ public class MessageRegistryInitializer {
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 PlayerSelectionMenuMessages.class,
                 "i18n.menu.main.profile.selection.player_selection_menu",
-                new ConsolePlayerSelectionFactory()
+                new ConsolePlayerSelectionMessageFactory()
         ));
     }
 

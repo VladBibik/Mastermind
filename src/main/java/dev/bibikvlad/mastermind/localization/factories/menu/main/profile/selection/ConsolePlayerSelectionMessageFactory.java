@@ -6,7 +6,7 @@ import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.selectio
 
 import java.util.ResourceBundle;
 
-public class ConsolePlayerSelectionFactory implements MessageFactory<PlayerSelectionMenuMessages> {
+public class ConsolePlayerSelectionMessageFactory implements MessageFactory<PlayerSelectionMenuMessages> {
     @Override
     public PlayerSelectionMenuMessages create(ResourceBundle resourceBundle) {
         return new ConsolePlayerSelectionMenuMessages(resourceBundle);
