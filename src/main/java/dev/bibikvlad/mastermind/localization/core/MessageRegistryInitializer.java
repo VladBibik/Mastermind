@@ -119,7 +119,7 @@ public class MessageRegistryInitializer {
         ));
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 DeletePlayerMenuMessages.class,
-                "i18n.menu.main.profile.selection.delete_player_menu",
+                "i18n.menu.main.profile.delete.delete_player_menu",
                 new ConsoleDeletePlayerMessageFactory()
         ));
     }
