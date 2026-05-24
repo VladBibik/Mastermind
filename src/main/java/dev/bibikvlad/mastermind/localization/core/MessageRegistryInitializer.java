@@ -8,6 +8,7 @@ import dev.bibikvlad.mastermind.localization.factories.menu.main.ConsoleMainMenu
 import dev.bibikvlad.mastermind.localization.factories.menu.main.game.ConsoleGameMenuMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.leaderboard.ConsoleLeaderboardMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.profile.ConsoleProfileMessageFactory;
+import dev.bibikvlad.mastermind.localization.factories.menu.main.profile.delete.ConsoleDeletePlayerMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.profile.selection.ConsolePlayerSelectionMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.ConsoleSettingsMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.language.ConsoleLanguageMessageFactory;
@@ -22,6 +23,7 @@ import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages
 import dev.bibikvlad.mastermind.localization.messages.menu.main.game.GameMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.leaderboards.LeaderboardMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.ProfileMenuMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.delete.DeletePlayerMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.selection.PlayerSelectionMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.SettingsMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.language.LanguageSelectionMessages;
@@ -114,6 +116,11 @@ public class MessageRegistryInitializer {
                 PlayerSelectionMenuMessages.class,
                 "i18n.menu.main.profile.selection.player_selection_menu",
                 new ConsolePlayerSelectionMessageFactory()
+        ));
+        messageFactoryRegistry.register(new LocalizedMessageConfig<>(
+                DeletePlayerMenuMessages.class,
+                "i18n.menu.main.profile.selection.delete_player_menu",
+                new ConsoleDeletePlayerMessageFactory()
         ));
     }
 
