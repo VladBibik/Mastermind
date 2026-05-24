@@ -20,8 +20,8 @@ public class ConsoleDeletePlayerMessages implements DeletePlayerMenuMessages {
         String coloredWarningTitle = RED_CONSOLE_CODE + resourceBundle.getString("first_warning_title")
                 + CONSOLE_RESET_CODE;
 
-        return coloredWarningTitle
-                + MessageFormat.format(resourceBundle.getString("first_warning_message"), playerName);
+        return coloredWarningTitle + "\n"
+                + MessageFormat.format(resourceBundle.getString("first_warning"), playerName);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class ConsoleDeletePlayerMessages implements DeletePlayerMenuMessages {
         String coloredWarningTitle = RED_CONSOLE_CODE + resourceBundle.getString("delete_confirmation_title")
                 + CONSOLE_RESET_CODE;
 
-        return coloredWarningTitle
+        return coloredWarningTitle + "\n"
                 + MessageFormat.format(resourceBundle.getString("delete_confirmation"), playerName);
     }
 
