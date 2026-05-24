@@ -9,6 +9,7 @@ import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.error.ErrorMessages;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.delete.DeletePlayerMenuMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.profile.ProfileMenu;
 import dev.bibikvlad.mastermind.menu.main.profile.selection.PlayerSelectionMenu;
@@ -22,6 +23,7 @@ public class DeletePlayerMenu extends Menu {
     private final Parser parser;
     private final PlayerService playerService;
     private final Player currentPlayer;
+    private final DeletePlayerMenuMessages deletePlayerMenuMessages;
     private final InteractionMessages interactionMessages;
     private final ErrorMessages errorMessages;
 
@@ -32,6 +34,7 @@ public class DeletePlayerMenu extends Menu {
         this.parser = appContext.parser();
         this.playerService = appContext.services().getPlayerService();
         this.currentPlayer = appContext.currentPlayer();
+        this.deletePlayerMenuMessages = appContext.localizationContext().getMessages(MessageType.DELETE);
         this.interactionMessages = appContext.localizationContext().getMessages(MessageType.INTERACTION);
         this.errorMessages = appContext.localizationContext().getMessages(MessageType.ERROR);
     }
@@ -50,18 +53,13 @@ public class DeletePlayerMenu extends Menu {
     }
 
     private void printDeletionWarning(String playerName) {
-        printer.printMessage("⚠\uFE0F WARNING. You are entering dangerous zone! ⚠\uFE0F");
-        printer.printMessage("If you continue with the deletion, all data for the player: "
-                + playerName + " will be deleted permanently!");
+        printer.printMessage(deletePlayerMenuMessages.getFirstWarning(playerName));
 
         confirmToContinue();
     }
 
     private boolean isDeletionConfirmed(String playerName) {
-        printer.printMessage("⚠\uFE0F This is the last warning!");
-        printer.printMessage("If you want to permanently delete a player: " + playerName
-                + " with all of their data type 'DELETE' (all uppercase). "
-                + "Any other input will return you back to the Profile Menu");
+        printer.printMessage(deletePlayerMenuMessages.getDeleteConfirmation(playerName));
 
         String userInput = parser.parseUserInput();
 
@@ -73,7 +71,7 @@ public class DeletePlayerMenu extends Menu {
 
         String playerName = AnsiSafeFormatter.isolate(currentPlayer.getPlayerName());
 
-        printer.printMessage("Player with the name: " + playerName + " has been deleted.");
+        printer.printMessage(deletePlayerMenuMessages.getPlayerDeleted(playerName));
 
         if (playerService.isMultiplePlayersRegistered()) {
             showSelectionWarning();
@@ -88,7 +86,7 @@ public class DeletePlayerMenu extends Menu {
         Player player = getLastSelectedPlayer();
         String playerName = AnsiSafeFormatter.isolate(player.getPlayerName());
 
-        printer.printMessage("Player with the name: " + playerName + " has been selected.");
+        printer.printMessage(deletePlayerMenuMessages.getPlayerAutoSelected(playerName));
 
         return new ProfileMenu(createUpdatedAppContext(player));
     }
@@ -96,8 +94,7 @@ public class DeletePlayerMenu extends Menu {
     private void showSelectionWarning() {
         String playerName = AnsiSafeFormatter.isolate(getLastSelectedPlayer().getPlayerName());
 
-        printer.printMessage("If you'll close player selection menu, " +
-                "player: " + playerName + " will be selected automatically.");
+        printer.printMessage(deletePlayerMenuMessages.getAutoSelectionWarning(playerName));
 
         confirmToContinue();
     }
