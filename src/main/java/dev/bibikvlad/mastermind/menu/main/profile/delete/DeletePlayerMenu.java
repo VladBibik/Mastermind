@@ -19,6 +19,8 @@ import dev.bibikvlad.mastermind.services.PlayerService;
 import java.util.Optional;
 
 public class DeletePlayerMenu extends Menu {
+    private static final String DELETE_CONFIRMATION_KEY = "DELETE";
+
     private final Printer printer;
     private final Parser parser;
     private final PlayerService playerService;
@@ -63,7 +65,7 @@ public class DeletePlayerMenu extends Menu {
 
         String userInput = parser.parseUserInput();
 
-        return userInput.equals("DELETE");
+        return userInput.equals(DELETE_CONFIRMATION_KEY);
     }
 
     private Menu handlePlayerDeletion() {
