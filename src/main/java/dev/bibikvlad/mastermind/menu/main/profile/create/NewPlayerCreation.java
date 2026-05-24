@@ -1,7 +1,9 @@
 package dev.bibikvlad.mastermind.menu.main.profile.create;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
+import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
+import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.menu.core.Menu;
@@ -10,23 +12,27 @@ import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
 public class NewPlayerCreation extends Menu {
+    private final Printer printer;
+    private final Parser parser;
     private final PlayerService playerService;
 
     public NewPlayerCreation(AppContext appContext) {
         super(appContext);
 
+        this.printer = appContext.printer();
+        this.parser = appContext.parser();
         this.playerService = appContext.services().getPlayerService();
     }
 
     @Override
     public Menu run() {
-        System.out.println("Please enter nickname of a new player");
-        System.out.println("To cancel type: 'close' or 'exit'");
+        printer.printMessage("Please enter nickname of a new player");
+        printer.printMessage("To cancel type: 'close' or 'exit'");
 
-        String newPlayerName = appContext.parser().parseUserInput();
+        String newPlayerName = parser.parseUserInput();
 
         if (StringEmptyValidator.isNullOrEmpty(newPlayerName)) {
-            System.out.println("Player name cannot be empty");
+            printer.printMessage("Player name cannot be empty");
 
             return this;
         }
@@ -37,7 +43,7 @@ public class NewPlayerCreation extends Menu {
         }
 
         if (newPlayerName.length() > 100) {
-            System.out.println("Player name cannot be longer than 100 characters");
+            printer.printMessage("Player name cannot be longer than 100 characters");
 
             return this;
         }
@@ -48,11 +54,11 @@ public class NewPlayerCreation extends Menu {
             AppContext appContext = new AppContext(this.appContext.localizationContext(), this.appContext.services(),
                     this.appContext.printer(), this.appContext.parser(), createdPlayer);
 
-            System.out.println("Player with name " + newPlayerName + " has been created.\n");
+            printer.printMessage("Player with name " + newPlayerName + " has been created.\n");
 
             return new ProfileMenu(appContext);
         } catch (PlayerAlreadyExistException exception) {
-            System.out.println("Player with name " + newPlayerName + " already exists.\n");
+            printer.printMessage("Player with name " + newPlayerName + " already exists.\n");
         }
 
         return this;
