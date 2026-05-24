@@ -41,7 +41,7 @@ public class DeletePlayerMenu extends Menu {
 
     @Override
     public Menu run() {
-        String playerName = AnsiSafeFormatter.isolate(currentPlayer.getPlayerName());
+        String playerName = safePlayerName(currentPlayer);
 
         printDeletionWarning(playerName);
 
@@ -69,9 +69,7 @@ public class DeletePlayerMenu extends Menu {
     private Menu handlePlayerDeletion() {
         playerService.deletePlayer(currentPlayer.getId());
 
-        String playerName = AnsiSafeFormatter.isolate(currentPlayer.getPlayerName());
-
-        printer.printMessage(deletePlayerMenuMessages.getPlayerDeleted(playerName));
+        printer.printMessage(deletePlayerMenuMessages.getPlayerDeleted(safePlayerName(currentPlayer)));
 
         if (playerService.isMultiplePlayersRegistered()) {
             showSelectionWarning();
@@ -84,17 +82,15 @@ public class DeletePlayerMenu extends Menu {
 
     private Menu selectRemainingPlayer() {
         Player player = getLastSelectedPlayer();
-        String playerName = AnsiSafeFormatter.isolate(player.getPlayerName());
 
-        printer.printMessage(deletePlayerMenuMessages.getPlayerAutoSelected(playerName));
+        printer.printMessage(deletePlayerMenuMessages.getPlayerAutoSelected(safePlayerName(player)));
 
         return new ProfileMenu(createUpdatedAppContext(player));
     }
 
     private void showSelectionWarning() {
-        String playerName = AnsiSafeFormatter.isolate(getLastSelectedPlayer().getPlayerName());
-
-        printer.printMessage(deletePlayerMenuMessages.getAutoSelectionWarning(playerName));
+        printer.printMessage(deletePlayerMenuMessages.getAutoSelectionWarning(
+                safePlayerName(getLastSelectedPlayer())));
 
         confirmToContinue();
     }
@@ -104,6 +100,10 @@ public class DeletePlayerMenu extends Menu {
 
         return optionalPlayer.orElseThrow(() -> new PlayerNotFoundException(
                 errorMessages.getLastSelectedPlayerNotFound()));
+    }
+
+    private String safePlayerName(Player player) {
+        return AnsiSafeFormatter.isolate(player.getPlayerName());
     }
 
     private AppContext createUpdatedAppContext(Player player) {
