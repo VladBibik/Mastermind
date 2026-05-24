@@ -17,7 +17,7 @@ public class ConsoleDeletePlayerMessages implements DeletePlayerMenuMessages {
 
     @Override
     public String getFirstWarning(String playerName) {
-        String redWarning = RED_CONSOLE_CODE + resourceBundle.getString("first_warning_color")
+        String redWarning = RED_CONSOLE_CODE + resourceBundle.getString("first_warning_title")
                 + CONSOLE_RESET_CODE;
 
         return redWarning + MessageFormat.format(resourceBundle.getString("first_warning_message"), playerName);
@@ -25,7 +25,7 @@ public class ConsoleDeletePlayerMessages implements DeletePlayerMenuMessages {
 
     @Override
     public String getDeleteConfirmation(String playerName) {
-        String redWarning = RED_CONSOLE_CODE + resourceBundle.getString("delete_confirmation_color")
+        String redWarning = RED_CONSOLE_CODE + resourceBundle.getString("delete_confirmation_title")
                 + CONSOLE_RESET_CODE;
 
         return redWarning + MessageFormat.format(resourceBundle.getString("delete_confirmation"), playerName);
