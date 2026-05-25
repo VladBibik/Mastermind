@@ -27,14 +27,14 @@ public class FirstTimePlayerCreation {
     }
 
     public AppContext createPlayerAndGetContext() {
-        System.out.println("Please enter nickname of a new player");
-        System.out.println("To cancel type: 'close' or 'exit'");
+        printer.printMessage("Please enter nickname of a new player");
+        printer.printMessage("To cancel type: 'close' or 'exit'");
 
         while (true) {
             String newPlayerName = parser.parseUserInput();
 
             if (StringEmptyValidator.isNullOrEmpty(newPlayerName)) {
-                System.out.println("Player name cannot be empty");
+                printer.printMessage("Player name cannot be empty");
 
                 continue;
             }
@@ -45,7 +45,7 @@ public class FirstTimePlayerCreation {
             }
 
             if (newPlayerName.length() > 100) {
-                System.out.println("Player name cannot be longer than 100 characters");
+                printer.printMessage("Player name cannot be longer than 100 characters");
 
                 continue;
             }
@@ -54,12 +54,12 @@ public class FirstTimePlayerCreation {
                 Player createdPlayer = serviceContainer.getPlayerService()
                         .savePlayerWithProvidedLocale(newPlayerName, localeType);
 
-                System.out.println("Player with name " + newPlayerName + " has been created.\n");
+                printer.printMessage("Player with name " + newPlayerName + " has been created.\n");
 
                 return new AppContext(localizationContext, serviceContainer, printer, parser,
                         createdPlayer);
             } catch (PlayerAlreadyExistException exception) {
-                System.out.println("Player with name " + newPlayerName + " already exists.\n");
+                printer.printMessage("Player with name " + newPlayerName + " already exists.\n");
             }
         }
     }
