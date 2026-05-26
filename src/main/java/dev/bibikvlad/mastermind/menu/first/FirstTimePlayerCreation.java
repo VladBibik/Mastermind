@@ -33,21 +33,13 @@ public class FirstTimePlayerCreation {
         while (true) {
             String newPlayerName = parser.parseUserInput();
 
-            if (StringEmptyValidator.isNullOrEmpty(newPlayerName)) {
-                printer.printMessage("Player name cannot be empty");
-
+            if (isStringEmpty(newPlayerName) || exceedsLengthConstraint(newPlayerName)) {
                 continue;
             }
 
             if (newPlayerName.equalsIgnoreCase("exit") ||
                     newPlayerName.equalsIgnoreCase("close")) {
                 return null;
-            }
-
-            if (newPlayerName.length() > 100) {
-                printer.printMessage("Player name cannot be longer than 100 characters");
-
-                continue;
             }
 
             try {
@@ -62,5 +54,27 @@ public class FirstTimePlayerCreation {
                 printer.printMessage("Player with name " + newPlayerName + " already exists.\n");
             }
         }
+    }
+
+    private boolean isStringEmpty(String userInput) {
+        boolean empty = StringEmptyValidator.isNullOrEmpty(userInput);
+
+        if (empty) {
+            printer.printMessage("Player name cannot be empty");
+        }
+
+        return empty;
+    }
+
+    private boolean exceedsLengthConstraint(String userInput) {
+        final int MAX_STRING_LENGTH = 100;
+
+        boolean exceedsLimit = userInput.length() > MAX_STRING_LENGTH;
+
+        if (exceedsLimit) {
+            printer.printMessage("Player name cannot be longer than 100 characters");
+        }
+
+        return exceedsLimit;
     }
 }
