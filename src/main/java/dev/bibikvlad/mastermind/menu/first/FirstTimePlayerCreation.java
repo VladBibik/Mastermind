@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.menu.first;
 
-import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
+import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.input.parser.Parser;
@@ -33,7 +33,7 @@ public class FirstTimePlayerCreation {
         while (true) {
             String newPlayerName = parser.parseUserInput();
 
-            if (isStringEmpty(newPlayerName) || exceedsLengthConstraint(newPlayerName)) {
+            if (isInvalidPlayerName(newPlayerName)) {
                 continue;
             }
 
@@ -56,25 +56,21 @@ public class FirstTimePlayerCreation {
         }
     }
 
-    private boolean isStringEmpty(String userInput) {
-        boolean empty = StringEmptyValidator.isNullOrEmpty(userInput);
+    private boolean isInvalidPlayerName(String playerName) {
+        final int MAX_NAME_LENGTH = 100;
 
-        if (empty) {
+        if (StringEmptyValidator.isNullOrEmpty(playerName)) {
             printer.printMessage("Player name cannot be empty");
+
+            return true;
         }
 
-        return empty;
-    }
-
-    private boolean exceedsLengthConstraint(String userInput) {
-        final int MAX_STRING_LENGTH = 100;
-
-        boolean exceedsLimit = userInput.length() > MAX_STRING_LENGTH;
-
-        if (exceedsLimit) {
+        if (playerName.length() > MAX_NAME_LENGTH) {
             printer.printMessage("Player name cannot be longer than 100 characters");
+
+            return true;
         }
 
-        return exceedsLimit;
+        return false;
     }
 }
