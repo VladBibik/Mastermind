@@ -6,6 +6,8 @@ import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.localization.config.MessageType;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.create.NewPlayerCreationMenuMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.profile.ProfileMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
@@ -15,6 +17,7 @@ public class NewPlayerCreation extends Menu {
     private final Printer printer;
     private final Parser parser;
     private final PlayerService playerService;
+    private final NewPlayerCreationMenuMessages newPlayerCreationMenuMessages;
 
     public NewPlayerCreation(AppContext appContext) {
         super(appContext);
@@ -22,17 +25,17 @@ public class NewPlayerCreation extends Menu {
         this.printer = appContext.printer();
         this.parser = appContext.parser();
         this.playerService = appContext.services().getPlayerService();
+        this.newPlayerCreationMenuMessages = appContext.localizationContext().getMessages(MessageType.CREATE);
     }
 
     @Override
     public Menu run() {
-        printer.printMessage("Please enter nickname of a new player");
-        printer.printMessage("To cancel type: 'close' or 'exit'");
+        printer.printMessage(newPlayerCreationMenuMessages.getNewPlayerTitle());
 
         String newPlayerName = parser.parseUserInput();
 
         if (StringEmptyValidator.isNullOrEmpty(newPlayerName)) {
-            printer.printMessage("Player name cannot be empty");
+            printer.printMessage(newPlayerCreationMenuMessages.getPlayerNameEmptyError(newPlayerName));
 
             return this;
         }
@@ -43,7 +46,7 @@ public class NewPlayerCreation extends Menu {
         }
 
         if (newPlayerName.length() > 100) {
-            printer.printMessage("Player name cannot be longer than 100 characters");
+            printer.printMessage(newPlayerCreationMenuMessages.getPlayerNameLengthError(newPlayerName));
 
             return this;
         }
@@ -54,11 +57,11 @@ public class NewPlayerCreation extends Menu {
             AppContext appContext = new AppContext(this.appContext.localizationContext(), this.appContext.services(),
                     this.appContext.printer(), this.appContext.parser(), createdPlayer);
 
-            printer.printMessage("Player with name " + newPlayerName + " has been created.\n");
+            printer.printMessage(newPlayerCreationMenuMessages.getPlayerCreatedSuccess(newPlayerName));
 
             return new ProfileMenu(appContext);
         } catch (PlayerAlreadyExistException exception) {
-            printer.printMessage("Player with name " + newPlayerName + " already exists.\n");
+            printer.printMessage(newPlayerCreationMenuMessages.getPlayerAlreadyExistsError(newPlayerName));
         }
 
         return this;
