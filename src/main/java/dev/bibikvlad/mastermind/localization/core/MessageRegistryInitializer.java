@@ -8,6 +8,7 @@ import dev.bibikvlad.mastermind.localization.factories.menu.main.ConsoleMainMenu
 import dev.bibikvlad.mastermind.localization.factories.menu.main.game.ConsoleGameMenuMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.leaderboard.ConsoleLeaderboardMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.profile.ConsoleProfileMessageFactory;
+import dev.bibikvlad.mastermind.localization.factories.menu.main.profile.create.ConsoleCreatePlayerMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.profile.delete.ConsoleDeletePlayerMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.profile.selection.ConsolePlayerSelectionMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.ConsoleSettingsMessageFactory;
@@ -23,6 +24,8 @@ import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages
 import dev.bibikvlad.mastermind.localization.messages.menu.main.game.GameMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.leaderboards.LeaderboardMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.ProfileMenuMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.create.ConsoleNewPlayerCreationMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.create.NewPlayerCreationMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.delete.DeletePlayerMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.selection.PlayerSelectionMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.SettingsMenuMessages;
@@ -111,6 +114,11 @@ public class MessageRegistryInitializer {
                 ProfileMenuMessages.class,
                 "i18n.menu.main.profile.profile_menu",
                 new ConsoleProfileMessageFactory()
+        ));
+        messageFactoryRegistry.register(new LocalizedMessageConfig<>(
+                NewPlayerCreationMenuMessages.class,
+                "i18n.menu.main.profile.new_player_creation_menu",
+                new ConsoleCreatePlayerMessageFactory()
         ));
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 PlayerSelectionMenuMessages.class,
