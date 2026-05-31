@@ -116,7 +116,7 @@ public class MessageRegistryInitializer {
         ));
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
                 NewPlayerCreationMenuMessages.class,
-                "i18n.menu.main.profile.new_player_creation_menu",
+                "i18n.menu.main.profile.create.new_player_creation_menu",
                 new ConsoleCreatePlayerMessageFactory()
         ));
         messageFactoryRegistry.register(new LocalizedMessageConfig<>(
