@@ -9,6 +9,7 @@ import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages
 import dev.bibikvlad.mastermind.localization.messages.menu.main.game.GameMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.leaderboards.LeaderboardMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.ProfileMenuMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.create.NewPlayerCreationMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.delete.DeletePlayerMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.selection.PlayerSelectionMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.SettingsMenuMessages;
@@ -24,6 +25,7 @@ public enum MessageType {
     LEADERBOARDS(LeaderboardMessages.class),
     STATS(StatsMessages.class),
     PROFILE(ProfileMenuMessages.class),
+    CREATE(NewPlayerCreationMenuMessages.class),
     SELECTION(PlayerSelectionMenuMessages.class),
     DELETE(DeletePlayerMenuMessages.class),
     SETTINGS(SettingsMenuMessages.class),
