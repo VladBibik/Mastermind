@@ -40,7 +40,7 @@ public class FirstLaunchFlow {
 
     private AppContext createPlayerAndContext(LocaleType localeType) {
         FirstTimePlayerCreation firstTimePlayerCreation =
-                new FirstTimePlayerCreation(localeType, serviceContainer, parser, printer);
+                new FirstTimePlayerCreation(parser, printer, localeType, serviceContainer);
 
         return firstTimePlayerCreation.createPlayerAndGetContext();
     }

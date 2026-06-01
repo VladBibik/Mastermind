@@ -7,23 +7,27 @@ import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.create.NewPlayerCreationMenuMessages;
 import dev.bibikvlad.mastermind.model.player.Player;
 
 public class FirstTimePlayerCreation {
+    private final Parser parser;
+    private final Printer printer;
     private final LocaleType localeType;
     private final LocalizationContext localizationContext;
     private final ServiceContainer serviceContainer;
-    private final Parser parser;
-    private final Printer printer;
+    private final NewPlayerCreationMenuMessages newPlayerCreationMenuMessages;
 
-    public FirstTimePlayerCreation(LocaleType localeType, ServiceContainer serviceContainer,
-                                   Parser parser, Printer printer) {
+    public FirstTimePlayerCreation(Parser parser, Printer printer, LocaleType localeType,
+                                   ServiceContainer serviceContainer) {
+        this.parser = parser;
+        this.printer = printer;
         this.localeType = localeType;
         this.localizationContext = new LocalizationContext(localeType);
         this.serviceContainer = serviceContainer;
-        this.parser = parser;
-        this.printer = printer;
+        this.newPlayerCreationMenuMessages = localizationContext.getMessages(MessageType.CREATE);
     }
 
     public AppContext createPlayerAndGetContext() {
