@@ -5,11 +5,13 @@ import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.input.parser.Parser;
+import dev.bibikvlad.mastermind.input.validation.PlayerNameValidator;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.create.NewPlayerCreationMenuMessages;
+import dev.bibikvlad.mastermind.menu.main.profile.create.PlayerNameValidationResult;
 import dev.bibikvlad.mastermind.model.player.Player;
 
 public class FirstTimePlayerCreation {
@@ -37,7 +39,7 @@ public class FirstTimePlayerCreation {
         while (true) {
             String newPlayerName = parser.parseUserInput();
 
-            if (isInvalidPlayerName(newPlayerName)) {
+            if (!handleInvalidPlayerName(newPlayerName)) {
                 continue;
             }
 
@@ -60,21 +62,14 @@ public class FirstTimePlayerCreation {
         }
     }
 
-    private boolean isInvalidPlayerName(String playerName) {
-        final int MAX_NAME_LENGTH = 100;
+    private boolean handleInvalidPlayerName(String newPlayerName) {
+        PlayerNameValidator validator = new PlayerNameValidator(newPlayerCreationMenuMessages);
+        PlayerNameValidationResult result = validator.validate(newPlayerName);
 
-        if (StringEmptyValidator.isNullOrEmpty(playerName)) {
-            printer.printMessage("Player name cannot be empty");
-
-            return true;
+        if (!result.valid()) {
+            printer.printMessage(result.message());
         }
 
-        if (playerName.length() > MAX_NAME_LENGTH) {
-            printer.printMessage("Player name cannot be longer than 100 characters");
-
-            return true;
-        }
-
-        return false;
+        return result.valid();
     }
 }
