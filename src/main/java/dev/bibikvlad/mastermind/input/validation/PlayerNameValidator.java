@@ -2,7 +2,6 @@ package dev.bibikvlad.mastermind.input.validation;
 
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.create.NewPlayerCreationMenuMessages;
-import dev.bibikvlad.mastermind.menu.main.profile.create.PlayerNameValidationResult;
 
 public class PlayerNameValidator {
     private static final int MAX_NAME_LENGTH = 100;

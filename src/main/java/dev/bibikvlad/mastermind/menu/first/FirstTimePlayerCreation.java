@@ -10,7 +10,6 @@ import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.create.NewPlayerCreationMenuMessages;
-import dev.bibikvlad.mastermind.menu.main.profile.create.PlayerNameValidationResult;
 import dev.bibikvlad.mastermind.model.player.Player;
 
 import java.util.Optional;
