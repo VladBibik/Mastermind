@@ -32,8 +32,7 @@ public class FirstTimePlayerCreation {
     }
 
     public AppContext createPlayerAndGetContext() {
-        printer.printMessage("Please enter nickname of a new player");
-        printer.printMessage("To cancel type: 'close' or 'exit'");
+        printer.printMessage(creationMessages.getNewPlayerTitle());
 
         while (true) {
             String newPlayerName = parser.parseUserInput();
@@ -51,12 +50,12 @@ public class FirstTimePlayerCreation {
                 Player createdPlayer = serviceContainer.getPlayerService()
                         .savePlayerWithProvidedLocale(newPlayerName, localeType);
 
-                printer.printMessage("Player with name " + newPlayerName + " has been created.\n");
+                printer.printMessage(creationMessages.getPlayerCreatedSuccess(newPlayerName));
 
                 return new AppContext(localizationContext, serviceContainer, printer, parser,
                         createdPlayer);
             } catch (PlayerAlreadyExistException exception) {
-                printer.printMessage("Player with name " + newPlayerName + " already exists.\n");
+                printer.printMessage(creationMessages.getPlayerAlreadyExistsError(newPlayerName));
             }
         }
     }
