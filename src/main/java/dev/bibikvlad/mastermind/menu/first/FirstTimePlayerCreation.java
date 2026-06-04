@@ -54,14 +54,9 @@ public class FirstTimePlayerCreation {
     }
 
     private boolean isPlayerNameValid(String newPlayerName) {
-        PlayerNameValidator validator = new PlayerNameValidator(creationMessages);
-        PlayerNameValidationResult result = validator.validate(newPlayerName);
+        PlayerNameValidator validator = new PlayerNameValidator(printer, creationMessages);
 
-        if (!result.valid()) {
-            printer.printMessage(result.message());
-        }
-
-        return result.valid();
+        return validator.validate(newPlayerName);
     }
 
     private AppContext savePlayerAndBuildContext(String playerName) {
