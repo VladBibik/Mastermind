@@ -49,13 +49,7 @@ public class FirstTimePlayerCreation {
                 continue;
             }
 
-            Player createdPlayer = serviceContainer.getPlayerService()
-                    .savePlayerWithProvidedLocale(selection, localeType);
-
-            printer.printMessage(creationMessages.getPlayerCreatedSuccess(selection));
-
-            return new AppContext(localizationContext, serviceContainer, printer, parser,
-                    createdPlayer);
+            return savePlayerAndBuildContext(selection);
         }
     }
 
@@ -68,5 +62,15 @@ public class FirstTimePlayerCreation {
         }
 
         return result.valid();
+    }
+
+    private AppContext savePlayerAndBuildContext(String playerName) {
+        Player createdPlayer = serviceContainer.getPlayerService()
+                .savePlayerWithProvidedLocale(playerName, localeType);
+
+        printer.printMessage(creationMessages.getPlayerCreatedSuccess(playerName));
+
+        return new AppContext(localizationContext, serviceContainer, printer, parser,
+                createdPlayer);
     }
 }
