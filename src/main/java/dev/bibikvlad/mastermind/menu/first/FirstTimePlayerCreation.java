@@ -39,7 +39,7 @@ public class FirstTimePlayerCreation {
         while (true) {
             String newPlayerName = parser.parseUserInput();
 
-            if (!handleInvalidPlayerName(newPlayerName)) {
+            if (!isPlayerNameValid(newPlayerName)) {
                 continue;
             }
 
@@ -62,7 +62,7 @@ public class FirstTimePlayerCreation {
         }
     }
 
-    private boolean handleInvalidPlayerName(String newPlayerName) {
+    private boolean isPlayerNameValid(String newPlayerName) {
         PlayerNameValidator validator = new PlayerNameValidator(newPlayerCreationMenuMessages);
         PlayerNameValidationResult result = validator.validate(newPlayerName);
 
