@@ -3,7 +3,6 @@ package dev.bibikvlad.mastermind.menu.first;
 import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
-import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.PlayerNameValidator;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
@@ -46,17 +45,14 @@ public class FirstTimePlayerCreation {
                 return null;
             }
 
-            try {
-                Player createdPlayer = serviceContainer.getPlayerService()
-                        .savePlayerWithProvidedLocale(newPlayerName, localeType);
 
-                printer.printMessage(creationMessages.getPlayerCreatedSuccess(newPlayerName));
+            Player createdPlayer = serviceContainer.getPlayerService()
+                    .savePlayerWithProvidedLocale(newPlayerName, localeType);
 
-                return new AppContext(localizationContext, serviceContainer, printer, parser,
-                        createdPlayer);
-            } catch (PlayerAlreadyExistException exception) {
-                printer.printMessage(creationMessages.getPlayerAlreadyExistsError(newPlayerName));
-            }
+            printer.printMessage(creationMessages.getPlayerCreatedSuccess(newPlayerName));
+
+            return new AppContext(localizationContext, serviceContainer, printer, parser,
+                    createdPlayer);
         }
     }
 
