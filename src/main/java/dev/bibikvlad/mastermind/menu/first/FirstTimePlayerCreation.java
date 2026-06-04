@@ -3,6 +3,7 @@ package dev.bibikvlad.mastermind.menu.first;
 import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
+import dev.bibikvlad.mastermind.input.interpreter.PlayerCreationInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.PlayerNameValidator;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
@@ -11,6 +12,8 @@ import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.create.NewPlayerCreationMenuMessages;
 import dev.bibikvlad.mastermind.menu.main.profile.create.PlayerNameValidationResult;
 import dev.bibikvlad.mastermind.model.player.Player;
+
+import java.util.Optional;
 
 public class FirstTimePlayerCreation {
     private final Parser parser;
@@ -34,22 +37,22 @@ public class FirstTimePlayerCreation {
         printer.printMessage(creationMessages.getNewPlayerTitle());
 
         while (true) {
-            String newPlayerName = parser.parseUserInput();
+            Optional<String> optionalString = PlayerCreationInputInterpreter.readSelection(parser);
 
-            if (!isPlayerNameValid(newPlayerName)) {
-                continue;
-            }
-
-            if (newPlayerName.equalsIgnoreCase("exit") ||
-                    newPlayerName.equalsIgnoreCase("close")) {
+            if (optionalString.isEmpty()) {
                 return null;
             }
 
+            String selection = optionalString.get();
+
+            if (!isPlayerNameValid(selection)) {
+                continue;
+            }
 
             Player createdPlayer = serviceContainer.getPlayerService()
-                    .savePlayerWithProvidedLocale(newPlayerName, localeType);
+                    .savePlayerWithProvidedLocale(selection, localeType);
 
-            printer.printMessage(creationMessages.getPlayerCreatedSuccess(newPlayerName));
+            printer.printMessage(creationMessages.getPlayerCreatedSuccess(selection));
 
             return new AppContext(localizationContext, serviceContainer, printer, parser,
                     createdPlayer);
