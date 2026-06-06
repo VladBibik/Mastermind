@@ -4,6 +4,7 @@ import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.input.parser.Parser;
+import dev.bibikvlad.mastermind.input.validation.PlayerNameValidator;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
@@ -34,20 +35,12 @@ public class NewPlayerCreation extends Menu {
 
         String newPlayerName = parser.parseUserInput();
 
-        if (StringEmptyValidator.isNullOrEmpty(newPlayerName)) {
-            printer.printMessage(newPlayerCreationMenuMessages.getPlayerNameEmptyError(newPlayerName));
-
-            return this;
-        }
-
         if (newPlayerName.equalsIgnoreCase("exit") ||
                 newPlayerName.equalsIgnoreCase("close")) {
             return new ProfileMenu(appContext);
         }
 
-        if (newPlayerName.length() > 100) {
-            printer.printMessage(newPlayerCreationMenuMessages.getPlayerNameLengthError(newPlayerName));
-
+        if (isPlayerNameValid(newPlayerName)) {
             return this;
         }
 
@@ -65,5 +58,11 @@ public class NewPlayerCreation extends Menu {
         }
 
         return this;
+    }
+
+    private boolean isPlayerNameValid(String newPlayerName) {
+        PlayerNameValidator validator = new PlayerNameValidator(printer, newPlayerCreationMenuMessages);
+
+        return validator.validate(newPlayerName);
     }
 }
