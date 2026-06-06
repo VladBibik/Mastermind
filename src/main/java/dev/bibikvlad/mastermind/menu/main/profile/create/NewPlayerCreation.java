@@ -40,7 +40,7 @@ public class NewPlayerCreation extends Menu {
             return new ProfileMenu(appContext);
         }
 
-        if (isPlayerNameValid(newPlayerName)) {
+        if (!isPlayerNameValid(newPlayerName)) {
             return this;
         }
 
