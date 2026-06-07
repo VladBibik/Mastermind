@@ -20,6 +20,7 @@ public class FirstTimePlayerCreation {
     private final LocalizationContext localizationContext;
     private final ServiceContainer serviceContainer;
     private final NewPlayerCreationMenuMessages creationMessages;
+    private final PlayerNameValidator validator;
 
     public FirstTimePlayerCreation(Parser parser, Printer printer, LocaleType localeType,
                                    ServiceContainer serviceContainer) {
@@ -29,6 +30,7 @@ public class FirstTimePlayerCreation {
         this.localizationContext = new LocalizationContext(localeType);
         this.serviceContainer = serviceContainer;
         this.creationMessages = localizationContext.getMessages(MessageType.CREATE);
+        this.validator = new PlayerNameValidator(printer, creationMessages);
     }
 
     public AppContext createPlayerAndGetContext() {
@@ -43,7 +45,7 @@ public class FirstTimePlayerCreation {
 
             String playerName = selection.userInput();
 
-            if (!isPlayerNameValid(playerName)) {
+            if (!validator.validateAndPrintErrors(playerName)) {
                 continue;
             }
 
@@ -66,12 +68,6 @@ public class FirstTimePlayerCreation {
         }
 
         return false;
-    }
-
-    private boolean isPlayerNameValid(String newPlayerName) {
-        PlayerNameValidator validator = new PlayerNameValidator(printer, creationMessages);
-
-        return validator.validateAndPrintErrors(newPlayerName);
     }
 
     private AppContext savePlayerAndBuildContext(String playerName) {
