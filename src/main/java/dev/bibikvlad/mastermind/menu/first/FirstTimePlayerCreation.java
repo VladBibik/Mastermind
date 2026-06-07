@@ -4,6 +4,7 @@ import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.PlayerCreationInputInterpreter;
+import dev.bibikvlad.mastermind.input.interpreter.PlayerCreationSelection;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.PlayerNameValidator;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
@@ -11,8 +12,6 @@ import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.create.NewPlayerCreationMenuMessages;
 import dev.bibikvlad.mastermind.model.player.Player;
-
-import java.util.Optional;
 
 public class FirstTimePlayerCreation {
     private final Parser parser;
@@ -36,19 +35,29 @@ public class FirstTimePlayerCreation {
         printer.printMessage(creationMessages.getNewPlayerTitle());
 
         while (true) {
-            Optional<String> optionalString = PlayerCreationInputInterpreter.readSelection(parser);
+            PlayerCreationSelection selection = PlayerCreationInputInterpreter.readSelection(parser);
+            String userName = selection.userInput();
 
-            if (optionalString.isEmpty()) {
-                return null;
+            if (selection.isExit()) {
+                printer.printMessage("Are you sure you want to close a player creation menu?");
+                printer.printMessage("If this menu is closed the data related to locale that you already selected "
+                        + "will be lost, and you'll need to choose language again on the next launch");
+                printer.printMessage("To proceed press 'Enter'");
+                printer.printMessage("If you want to create a player with the name: " + userName
+                        + " print 'Yes'");
+
+                String confirmation = parser.parseUserInput();
+
+                if (!confirmation.equalsIgnoreCase("Yes")) {
+                    return null;
+                }
             }
 
-            String selection = optionalString.get();
-
-            if (!isPlayerNameValid(selection)) {
+            if (!isPlayerNameValid(userName)) {
                 continue;
             }
 
-            return savePlayerAndBuildContext(selection);
+            return savePlayerAndBuildContext(userName);
         }
     }
 
