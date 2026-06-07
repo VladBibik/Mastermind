@@ -4,7 +4,7 @@ import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.PlayerCreationInputInterpreter;
-import dev.bibikvlad.mastermind.input.interpreter.PlayerCreationSelection;
+import dev.bibikvlad.mastermind.input.interpreter.PlayerCreationInput;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.PlayerNameValidator;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
@@ -37,7 +37,7 @@ public class FirstTimePlayerCreation {
         printer.printMessage(creationMessages.getNewPlayerTitle());
 
         while (true) {
-            PlayerCreationSelection selection = PlayerCreationInputInterpreter.readSelection(parser);
+            PlayerCreationInput selection = PlayerCreationInputInterpreter.readSelection(parser);
 
             if (handleExit(selection)) {
                 return null;
@@ -53,7 +53,7 @@ public class FirstTimePlayerCreation {
         }
     }
 
-    private boolean handleExit(PlayerCreationSelection selection) {
+    private boolean handleExit(PlayerCreationInput selection) {
         if (selection.isExit()) {
             printer.printMessage("Are you sure you want to close a player creation menu?");
             printer.printMessage("If this menu is closed the data related to locale that you already selected "
