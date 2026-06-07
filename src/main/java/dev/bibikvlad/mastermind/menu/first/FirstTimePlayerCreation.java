@@ -38,19 +38,8 @@ public class FirstTimePlayerCreation {
             PlayerCreationSelection selection = PlayerCreationInputInterpreter.readSelection(parser);
             String playerName = selection.userInput();
 
-            if (selection.isExit()) {
-                printer.printMessage("Are you sure you want to close a player creation menu?");
-                printer.printMessage("If this menu is closed the data related to locale that you already selected "
-                        + "will be lost, and you'll need to choose language again on the next launch");
-                printer.printMessage("To proceed press 'Enter'");
-                printer.printMessage("If you want to create a player with the name: " + playerName
-                        + " print 'Yes'");
-
-                String confirmation = parser.parseUserInput();
-
-                if (!confirmation.equalsIgnoreCase("Yes")) {
-                    return null;
-                }
+            if (selection.isExit() && handleExit(playerName)) {
+                return null;
             }
 
             if (!isPlayerNameValid(playerName)) {
@@ -59,6 +48,19 @@ public class FirstTimePlayerCreation {
 
             return savePlayerAndBuildContext(playerName);
         }
+    }
+
+    private boolean handleExit(String playerName) {
+        printer.printMessage("Are you sure you want to close a player creation menu?");
+        printer.printMessage("If this menu is closed the data related to locale that you already selected "
+                + "will be lost, and you'll need to choose language again on the next launch");
+        printer.printMessage("To proceed press 'Enter'");
+        printer.printMessage("If you want to create a player with the name: " + playerName
+                + " print 'Yes'");
+
+        String confirmation = parser.parseUserInput();
+
+        return confirmation.equalsIgnoreCase("Yes");
     }
 
     private boolean isPlayerNameValid(String newPlayerName) {
