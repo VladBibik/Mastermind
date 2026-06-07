@@ -3,8 +3,8 @@ package dev.bibikvlad.mastermind.menu.first;
 import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
-import dev.bibikvlad.mastermind.input.interpreter.PlayerCreationInputInterpreter;
 import dev.bibikvlad.mastermind.input.interpreter.PlayerCreationInput;
+import dev.bibikvlad.mastermind.input.interpreter.PlayerCreationInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.PlayerNameValidator;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
@@ -55,12 +55,12 @@ public class FirstTimePlayerCreation {
 
     private boolean handleExit(PlayerCreationInput selection) {
         if (selection.isExit()) {
-            printer.printMessage("Are you sure you want to close a player creation menu?");
-            printer.printMessage("If this menu is closed the data related to locale that you already selected "
-                    + "will be lost, and you'll need to choose language again on the next launch");
-            printer.printMessage("To proceed press 'Enter'");
-            printer.printMessage("If you want to create a player with the name: " + selection.userInput()
-                    + " print 'Yes'");
+            printer.printMessage("""
+                    You entered a reserved command: "exit".
+                    
+                    Press Enter to leave player creation.
+                    Type "yes" to use "exit" as the player's name.
+                    """);
 
             String confirmation = parser.parseUserInput();
 
