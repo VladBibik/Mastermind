@@ -62,6 +62,6 @@ public class NewPlayerCreation extends Menu {
     private boolean isPlayerNameValid(String newPlayerName) {
         PlayerNameValidator validator = new PlayerNameValidator(printer, creationMessages);
 
-        return validator.validate(newPlayerName);
+        return validator.validateAndPrintErrors(newPlayerName);
     }
 }

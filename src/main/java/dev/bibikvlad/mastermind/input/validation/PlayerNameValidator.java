@@ -14,7 +14,7 @@ public class PlayerNameValidator {
         this.messages = messages;
     }
 
-    public boolean validate(String playerName) {
+    public boolean validateAndPrintErrors(String playerName) {
         if (StringEmptyValidator.isNullOrEmpty(playerName)) {
             printer.printMessage(messages.getPlayerNameEmptyError(playerName));
 
