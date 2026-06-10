@@ -6,7 +6,6 @@ public class PlayerCreationInputInterpreter {
     public static PlayerCreationInput readSelection(Parser parser) {
         String userInput = parser.parseUserInput();
 
-        //TODO: Think if we should use trim and toLowerCase here!
         if (GlobalMenuCommands.EXIT.contains(userInput.trim().toLowerCase())) {
             return new PlayerCreationInput(true, userInput);
         } else {
