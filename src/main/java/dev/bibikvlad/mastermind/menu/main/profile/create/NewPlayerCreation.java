@@ -18,6 +18,7 @@ public class NewPlayerCreation extends Menu {
     private final Parser parser;
     private final PlayerService playerService;
     private final NewPlayerCreationMenuMessages creationMessages;
+    private final PlayerNameValidator validator;
 
     public NewPlayerCreation(AppContext appContext) {
         super(appContext);
@@ -26,6 +27,7 @@ public class NewPlayerCreation extends Menu {
         this.parser = appContext.parser();
         this.playerService = appContext.services().getPlayerService();
         this.creationMessages = appContext.localizationContext().getMessages(MessageType.CREATE);
+        this.validator = new PlayerNameValidator(printer, creationMessages);
     }
 
     @Override
