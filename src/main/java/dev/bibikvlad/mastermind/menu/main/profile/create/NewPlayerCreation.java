@@ -3,9 +3,10 @@ package dev.bibikvlad.mastermind.menu.main.profile.create;
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
+import dev.bibikvlad.mastermind.input.interpreter.PlayerCreationInput;
+import dev.bibikvlad.mastermind.input.interpreter.PlayerCreationInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.PlayerNameValidator;
-import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.create.NewPlayerCreationMenuMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
@@ -34,26 +35,20 @@ public class NewPlayerCreation extends Menu {
     public Menu run() {
         printer.printMessage(creationMessages.getNewPlayerTitle());
 
-        String newPlayerName = parser.parseUserInput();
+        PlayerCreationInput selection = PlayerCreationInputInterpreter.readSelection(parser);
 
-        if (newPlayerName.equalsIgnoreCase("exit") ||
-                newPlayerName.equalsIgnoreCase("close")) {
+        if (handleExit(selection)) {
             return new ProfileMenu(appContext);
         }
 
-        if (!isPlayerNameValid(newPlayerName)) {
+        String newPlayerName = selection.userInput();
+
+        if (!validator.validateAndPrintErrors(newPlayerName)) {
             return this;
         }
 
         try {
-            LocaleType localeType = appContext.currentPlayer().getPlayerConfig().locale();
-            Player createdPlayer = playerService.savePlayerWithProvidedLocale(newPlayerName, localeType);
-            AppContext appContext = new AppContext(this.appContext.localizationContext(), this.appContext.services(),
-                    this.appContext.printer(), this.appContext.parser(), createdPlayer);
-
-            printer.printMessage(creationMessages.getPlayerCreatedSuccess(newPlayerName));
-
-            return new ProfileMenu(appContext);
+            return new ProfileMenu(savePlayerAndBuildContext(newPlayerName));
         } catch (PlayerAlreadyExistException exception) {
             printer.printMessage(creationMessages.getPlayerAlreadyExistsError(newPlayerName));
         }
@@ -61,9 +56,25 @@ public class NewPlayerCreation extends Menu {
         return this;
     }
 
-    private boolean isPlayerNameValid(String newPlayerName) {
-        PlayerNameValidator validator = new PlayerNameValidator(printer, creationMessages);
+    private boolean handleExit(PlayerCreationInput selection) {
+        if (selection.isExit()) {
+            printer.printMessage(creationMessages.getReservedCommandInteraction(selection.userInput()));
 
-        return validator.validateAndPrintErrors(newPlayerName);
+            String confirmation = parser.parseUserInput();
+
+            return confirmation.equalsIgnoreCase("Yes");
+        }
+
+        return false;
+    }
+
+    private AppContext savePlayerAndBuildContext(String playerName) {
+        Player createdPlayer = playerService.savePlayerWithProvidedLocale(playerName,
+                appContext.currentPlayer().getPlayerConfig().locale());
+
+        printer.printMessage(creationMessages.getPlayerCreatedSuccess(playerName));
+
+        return new AppContext(this.appContext.localizationContext(), this.appContext.services(),
+                this.appContext.printer(), this.appContext.parser(), createdPlayer);
     }
 }
