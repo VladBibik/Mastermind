@@ -37,7 +37,7 @@ public class NewPlayerCreation extends Menu {
 
         PlayerCreationInput selection = PlayerCreationInputInterpreter.readSelection(parser);
 
-        if (handleExit(selection)) {
+        if (!handleExit(selection)) {
             return new ProfileMenu(appContext);
         }
 

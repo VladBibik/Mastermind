@@ -39,7 +39,7 @@ public class FirstTimePlayerCreation {
         while (true) {
             PlayerCreationInput selection = PlayerCreationInputInterpreter.readSelection(parser);
 
-            if (handleExit(selection)) {
+            if (!handleExit(selection)) {
                 return null;
             }
 
