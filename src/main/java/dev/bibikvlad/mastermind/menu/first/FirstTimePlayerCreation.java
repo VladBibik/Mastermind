@@ -55,12 +55,7 @@ public class FirstTimePlayerCreation {
 
     private boolean handleExit(PlayerCreationInput selection) {
         if (selection.isExit()) {
-            printer.printMessage("""
-                    You entered a reserved command: "exit".
-                    
-                    Press Enter to leave player creation.
-                    Type "yes" to use "exit" as the player's name.
-                    """);
+            printer.printMessage(creationMessages.getReservedCommandInteraction(selection.userInput()));
 
             String confirmation = parser.parseUserInput();
 
