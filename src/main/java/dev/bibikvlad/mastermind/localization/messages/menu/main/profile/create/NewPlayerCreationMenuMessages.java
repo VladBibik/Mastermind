@@ -13,5 +13,5 @@ public interface NewPlayerCreationMenuMessages extends LocalizedMessages {
 
     String getPlayerNameLengthError(String playerName);
 
-    String getReservedCommandInteraction(String command);
+    String getReservedCommandConfirmation(String command);
 }

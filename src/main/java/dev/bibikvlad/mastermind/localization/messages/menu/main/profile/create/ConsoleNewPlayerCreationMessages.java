@@ -36,7 +36,7 @@ public class ConsoleNewPlayerCreationMessages implements NewPlayerCreationMenuMe
     }
 
     @Override
-    public String getReservedCommandInteraction(String command) {
-        return MessageFormat.format(resourceBundle.getString("reserved_command_interaction"), command);
+    public String getReservedCommandConfirmation(String command) {
+        return MessageFormat.format(resourceBundle.getString("reserved_command_confirmation"), command);
     }
 }

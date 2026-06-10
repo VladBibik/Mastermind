@@ -55,7 +55,7 @@ public class FirstTimePlayerCreation {
 
     private boolean handleExit(PlayerCreationInput selection) {
         if (selection.isExit()) {
-            printer.printMessage(creationMessages.getReservedCommandInteraction(selection.userInput()));
+            printer.printMessage(creationMessages.getReservedCommandConfirmation(selection.userInput()));
 
             String confirmation = parser.parseUserInput();
 
