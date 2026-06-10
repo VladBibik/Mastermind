@@ -62,7 +62,7 @@ public class FirstTimePlayerCreation {
             return confirmation.equalsIgnoreCase("Yes");
         }
 
-        return false;
+        return true;
     }
 
     private AppContext savePlayerAndBuildContext(String playerName) {
