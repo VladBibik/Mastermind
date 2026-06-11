@@ -14,6 +14,8 @@ public interface PlayerDAO {
 
     boolean save(Player player);
 
+    long saveAndReturnId(Player player);
+
     boolean update(Player player);
 
     boolean updatePlayerName(long id, String name);
