@@ -34,13 +34,13 @@ public class PlayerSQLRepository implements PlayerRepository {
     }
 
     @Override
-    public boolean save(Player player) {
-        boolean result;
+    public Player save(Player player) {
+        Player createdPlayer;
 
         try {
             transactionManager.begin();
 
-            result = playerDAO.save(player);
+            createdPlayer = playerDAO.save(player);
 
             transactionManager.commit();
         } catch (PersistenceException exception) {
@@ -53,7 +53,7 @@ public class PlayerSQLRepository implements PlayerRepository {
             throw exception;
         }
 
-        return result;
+        return createdPlayer;
     }
 
     @Override

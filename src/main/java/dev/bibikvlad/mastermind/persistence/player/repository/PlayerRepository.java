@@ -12,7 +12,7 @@ public interface PlayerRepository {
 
     Optional<Player> findByName(String name);
 
-    boolean save(Player player);
+    Player save(Player player);
 
     boolean update(Player player);
 
