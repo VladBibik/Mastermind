@@ -93,54 +93,15 @@ public class PlayerJdbcDAO implements PlayerDAO {
 
     @Override
     public boolean save(Player player) {
-        String addPlayerQuery = "INSERT INTO players (player_name) VALUES (?)";
-        String addPlayerConfigQuery = "INSERT INTO player_configurations (player_id, language, logo_border_color,  " +
-                "logo_main_color, logo_accent_color, logo_background_color) VALUES (?, ?, ?, ?, ?, ?)";
-        String addLastPlayerSelectedQuery = "INSERT INTO player_last_selected (player_id) VALUES (?)";
-        int rowsUpdated;
-
-        try (PreparedStatement playerPreparedStatement =
-                     connection.prepareStatement(addPlayerQuery, Statement.RETURN_GENERATED_KEYS);
-             PreparedStatement configPreparedStatement = connection.prepareStatement(addPlayerConfigQuery);
-             PreparedStatement lastSelectedStatement = connection.prepareStatement(addLastPlayerSelectedQuery)) {
-
-
-            playerPreparedStatement.setString(1, player.getPlayerName());
-            playerPreparedStatement.executeUpdate();
-
-            try (ResultSet generatedKeys = playerPreparedStatement.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    long playerId = generatedKeys.getLong(1);
-                    PlayerConfig playerConfig = player.getPlayerConfig();
-                    LogoColorsBundle logoColorsBundle = playerConfig.logoColorsBundle();
-
-                    configPreparedStatement.setLong(1, playerId);
-                    configPreparedStatement.setString(2, playerConfig.locale().name());
-                    configPreparedStatement.setString(3, logoColorsBundle
-                            .logoBorderColor().name());
-                    configPreparedStatement.setString(4, logoColorsBundle
-                            .logoMainColor().name());
-                    configPreparedStatement.setString(5, logoColorsBundle
-                            .logoAccentColor().name());
-                    configPreparedStatement.setString(6, logoColorsBundle
-                            .logoBackgroundColor().name());
-                    rowsUpdated = configPreparedStatement.executeUpdate();
-
-                    lastSelectedStatement.setLong(1, playerId);
-                    lastSelectedStatement.executeUpdate();
-                } else {
-                    throw new PersistenceException("Creating player failed. No ID obtained.");
-                }
-            }
-        } catch (SQLException exception) {
-            throw new PersistenceException("Failed to save a Player: " + player, exception);
-        }
-
-        return rowsUpdated > 0;
+        return insertPlayer(player) > 0;
     }
 
     @Override
     public long saveAndReturnId(Player player) {
+        return insertPlayer(player);
+    }
+
+    private long insertPlayer(Player player) {
         String addPlayerQuery = "INSERT INTO players (player_name) VALUES (?)";
         String addPlayerConfigQuery = "INSERT INTO player_configurations (player_id, language, logo_border_color,  " +
                 "logo_main_color, logo_accent_color, logo_background_color) VALUES (?, ?, ?, ?, ?, ?)";
