@@ -25,7 +25,6 @@ public class PlayerService {
         this.playerLastSelectedRepository = playerLastSelectedRepository;
     }
 
-    //TODO: Think on renaming it. Also, think about return logic. Maybe change optional conditions
     public Player savePlayerWithProvidedLocale(String newPlayerName, LocaleType locale)
             throws PlayerAlreadyExistException {
         if (playerRepository.existsByName(newPlayerName)) {
@@ -33,9 +32,8 @@ public class PlayerService {
         }
 
         Player player = new Player(newPlayerName, getCustomLocaleConfig(locale));
-        playerRepository.save(player);
 
-        return loadLastSelectedPlayer().orElseThrow(IllegalStateException::new);
+        return playerRepository.save(player);
     }
 
     public boolean saveOrUpdateLastSelectedPlayer(long playerId) {
