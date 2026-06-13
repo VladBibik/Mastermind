@@ -67,7 +67,7 @@ public class FirstTimePlayerCreation {
 
     private AppContext savePlayerAndBuildContext(String playerName) {
         Player createdPlayer = serviceContainer.getPlayerService()
-                .savePlayerWithProvidedLocale(playerName, localeType);
+                .createPlayer(playerName, localeType);
 
         printer.printMessage(creationMessages.getPlayerCreatedSuccess(playerName));
 

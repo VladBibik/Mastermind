@@ -69,7 +69,7 @@ public class NewPlayerCreation extends Menu {
     }
 
     private AppContext savePlayerAndBuildContext(String playerName) {
-        Player createdPlayer = playerService.savePlayerWithProvidedLocale(playerName,
+        Player createdPlayer = playerService.createPlayer(playerName,
                 appContext.currentPlayer().getPlayerConfig().locale());
 
         printer.printMessage(creationMessages.getPlayerCreatedSuccess(playerName));
