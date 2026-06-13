@@ -12,7 +12,7 @@ public interface PlayerDAO {
 
     Optional<Player> findByName(String name);
 
-    Optional<Player> save(Player player);
+    Player save(Player player);
 
     boolean update(Player player);
 

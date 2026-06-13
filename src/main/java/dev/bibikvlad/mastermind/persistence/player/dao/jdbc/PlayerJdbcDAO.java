@@ -92,7 +92,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
     }
 
     @Override
-    public Optional<Player> save(Player player) {
+    public Player save(Player player) {
         String addPlayerQuery = "INSERT INTO players (player_name) VALUES (?)";
         String addPlayerConfigQuery = "INSERT INTO player_configurations (player_id, language, logo_border_color,  " +
                 "logo_main_color, logo_accent_color, logo_background_color) VALUES (?, ?, ?, ?, ?, ?)";
@@ -136,7 +136,8 @@ public class PlayerJdbcDAO implements PlayerDAO {
             throw new PersistenceException("Failed to save a Player: " + player, exception);
         }
 
-        return findById(playerId);
+        return findById(playerId).orElseThrow(
+                () -> new PersistenceException("Failed to load recently created player."));
     }
 
     @Override
