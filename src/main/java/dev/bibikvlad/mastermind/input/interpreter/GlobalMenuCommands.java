@@ -26,4 +26,8 @@ public class GlobalMenuCommands {
             "q",
             "0"
     );
+    public static final Set<String> YES = Set.of(
+            "yes",
+            "y"
+    );
 }
