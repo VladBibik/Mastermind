@@ -43,13 +43,13 @@ public class FirstTimePlayerCreation {
                 return null;
             }
 
-            String playerName = selection.userInput();
+            String newPlayerName = selection.userInput();
 
-            if (!validator.validateAndPrintErrors(playerName)) {
+            if (!validator.validateAndPrintErrors(newPlayerName)) {
                 continue;
             }
 
-            return savePlayerAndBuildContext(playerName);
+            return savePlayerAndBuildContext(newPlayerName);
         }
     }
 
