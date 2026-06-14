@@ -3,6 +3,7 @@ package dev.bibikvlad.mastermind.menu.main.profile.create;
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
+import dev.bibikvlad.mastermind.input.interpreter.GlobalMenuCommands;
 import dev.bibikvlad.mastermind.input.interpreter.PlayerCreationInput;
 import dev.bibikvlad.mastermind.input.interpreter.PlayerCreationInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
@@ -61,8 +62,9 @@ public class NewPlayerCreation extends Menu {
             printer.printMessage(creationMessages.getReservedCommandConfirmation(selection.userInput()));
 
             String confirmation = parser.parseUserInput();
+            confirmation = confirmation.trim().toLowerCase();
 
-            return confirmation.equalsIgnoreCase("Yes");
+            return GlobalMenuCommands.YES.contains(confirmation);
         }
 
         return true;
