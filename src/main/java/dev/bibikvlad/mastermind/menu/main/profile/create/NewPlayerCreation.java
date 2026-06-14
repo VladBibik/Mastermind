@@ -41,16 +41,16 @@ public class NewPlayerCreation extends Menu {
             return new ProfileMenu(appContext);
         }
 
-        String newPlayerName = selection.userInput();
+        String playerName = selection.userInput();
 
-        if (!validator.validateAndPrintErrors(newPlayerName)) {
+        if (!validator.validateAndPrintErrors(playerName)) {
             return this;
         }
 
         try {
-            return new ProfileMenu(savePlayerAndBuildContext(newPlayerName));
+            return new ProfileMenu(savePlayerAndBuildContext(playerName));
         } catch (PlayerAlreadyExistException exception) {
-            printer.printMessage(creationMessages.getPlayerAlreadyExistsError(newPlayerName));
+            printer.printMessage(creationMessages.getPlayerAlreadyExistsError(playerName));
         }
 
         return this;
