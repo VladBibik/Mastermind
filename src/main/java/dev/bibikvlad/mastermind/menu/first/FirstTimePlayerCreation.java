@@ -11,6 +11,7 @@ import dev.bibikvlad.mastermind.input.validation.PlayerNameValidator;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
+import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.create.NewPlayerCreationMenuMessages;
 import dev.bibikvlad.mastermind.model.player.Player;
 
@@ -21,6 +22,7 @@ public class FirstTimePlayerCreation {
     private final LocalizationContext localizationContext;
     private final ServiceContainer serviceContainer;
     private final NewPlayerCreationMenuMessages creationMessages;
+    private final InteractionMessages interactionMessages;
     private final PlayerNameValidator validator;
 
     public FirstTimePlayerCreation(Parser parser, Printer printer, LocaleType localeType,
@@ -31,6 +33,7 @@ public class FirstTimePlayerCreation {
         this.localizationContext = new LocalizationContext(localeType);
         this.serviceContainer = serviceContainer;
         this.creationMessages = localizationContext.getMessages(MessageType.CREATE);
+        this.interactionMessages = localizationContext.getMessages(MessageType.INTERACTION);
         this.validator = new PlayerNameValidator(printer, creationMessages);
     }
 
@@ -73,7 +76,15 @@ public class FirstTimePlayerCreation {
 
         printer.printMessage(creationMessages.getPlayerCreatedSuccess(playerName));
 
+        confirmToContinue();
+
         return new AppContext(localizationContext, serviceContainer, printer, parser,
                 createdPlayer);
+    }
+
+    private void confirmToContinue() {
+        printer.printMessage(interactionMessages.getPressEnter());
+
+        parser.parseUserInput();
     }
 }

@@ -9,6 +9,7 @@ import dev.bibikvlad.mastermind.input.interpreter.PlayerCreationInputInterpreter
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.PlayerNameValidator;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
+import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.create.NewPlayerCreationMenuMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.profile.ProfileMenu;
@@ -20,6 +21,7 @@ public class NewPlayerCreation extends Menu {
     private final Parser parser;
     private final PlayerService playerService;
     private final NewPlayerCreationMenuMessages creationMessages;
+    private final InteractionMessages interactionMessages;
     private final PlayerNameValidator validator;
 
     public NewPlayerCreation(AppContext appContext) {
@@ -29,6 +31,7 @@ public class NewPlayerCreation extends Menu {
         this.parser = appContext.parser();
         this.playerService = appContext.services().getPlayerService();
         this.creationMessages = appContext.localizationContext().getMessages(MessageType.CREATE);
+        this.interactionMessages = appContext.localizationContext().getMessages(MessageType.INTERACTION);
         this.validator = new PlayerNameValidator(printer, creationMessages);
     }
 
@@ -76,7 +79,15 @@ public class NewPlayerCreation extends Menu {
 
         printer.printMessage(creationMessages.getPlayerCreatedSuccess(playerName));
 
+        confirmToContinue();
+
         return new AppContext(this.appContext.localizationContext(), this.appContext.services(),
                 this.appContext.printer(), this.appContext.parser(), createdPlayer);
+    }
+
+    private void confirmToContinue() {
+        printer.printMessage(interactionMessages.getPressEnter());
+
+        parser.parseUserInput();
     }
 }
