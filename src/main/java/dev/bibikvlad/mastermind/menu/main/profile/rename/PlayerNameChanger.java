@@ -1,7 +1,9 @@
 package dev.bibikvlad.mastermind.menu.main.profile.rename;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
+import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
+import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.profile.ProfileMenu;
@@ -9,12 +11,16 @@ import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
 public class PlayerNameChanger extends Menu {
+    private final Printer printer;
+    private final Parser parser;
     private final PlayerService playerService;
     private final Player currentPlayer;
 
     public PlayerNameChanger(AppContext appContext) {
         super(appContext);
 
+        this.printer = appContext.printer();
+        this.parser = appContext.parser();
         this.playerService = appContext.services().getPlayerService();
         this.currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
                 () -> new IllegalStateException("No last selected player found!"));
