@@ -28,14 +28,13 @@ public class PlayerNameChanger extends Menu {
 
     @Override
     public Menu run() {
-        System.out.println("Please enter a new Player's name for: " + currentPlayer.getPlayerName());
-        System.out.println();
-        System.out.println("To go back to the previous menu enter 'exit' o 'close'");
+        printer.printMessage("Please enter a new Player's name for: " + currentPlayer.getPlayerName());
+        printer.printMessage("To go back to the previous menu enter 'exit' o 'close'");
 
         String userInput = appContext.parser().parseUserInput();
 
         if (StringEmptyValidator.isNullOrEmpty(userInput)) {
-            System.out.println("Player's name cannot be empty");
+            printer.printMessage("Player's name cannot be empty");
 
             return this;
         }
@@ -49,7 +48,7 @@ public class PlayerNameChanger extends Menu {
 
             return new ProfileMenu(appContext);
         } catch (PlayerAlreadyExistException exception) {
-            System.out.println("Player with name " + userInput + " already exists\n");
+            printer.printMessage("Player with name " + userInput + " already exists\n");
         }
 
         return this;
