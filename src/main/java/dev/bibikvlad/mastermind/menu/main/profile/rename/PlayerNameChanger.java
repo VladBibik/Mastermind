@@ -3,6 +3,7 @@ package dev.bibikvlad.mastermind.menu.main.profile.rename;
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
+import dev.bibikvlad.mastermind.exceptions.PlayerNotFoundException;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.menu.core.Menu;
@@ -45,11 +46,18 @@ public class PlayerNameChanger extends Menu {
         try {
             playerService.updatePlayerName(currentPlayer.getId(), userInput);
 
-            return new ProfileMenu(appContext);
+            return new ProfileMenu(createNewAppContext(userInput));
         } catch (PlayerAlreadyExistException exception) {
             printer.printMessage("Player with name " + userInput + " already exists\n");
         }
 
         return this;
+    }
+
+    private AppContext createNewAppContext(String playerName) {
+        Player player = playerService.loadLastSelectedPlayer().orElseThrow(
+                () -> new PlayerNotFoundException("Could not load player with name " + playerName));
+
+        return new AppContext(appContext.localizationContext(), appContext.services(), printer, parser, player);
     }
 }
