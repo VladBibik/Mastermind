@@ -22,8 +22,7 @@ public class PlayerNameChanger extends Menu {
         this.printer = appContext.printer();
         this.parser = appContext.parser();
         this.playerService = appContext.services().getPlayerService();
-        this.currentPlayer = playerService.loadLastSelectedPlayer().orElseThrow(
-                () -> new IllegalStateException("No last selected player found!"));
+        this.currentPlayer = appContext.currentPlayer();
     }
 
     @Override
