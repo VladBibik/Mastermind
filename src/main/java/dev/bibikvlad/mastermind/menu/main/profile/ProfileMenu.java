@@ -11,7 +11,7 @@ import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.MainMenu;
 import dev.bibikvlad.mastermind.menu.main.profile.create.CreatePlayerMenu;
 import dev.bibikvlad.mastermind.menu.main.profile.delete.DeletePlayerMenu;
-import dev.bibikvlad.mastermind.menu.main.profile.rename.PlayerNameChanger;
+import dev.bibikvlad.mastermind.menu.main.profile.rename.PlayerRenameMenu;
 import dev.bibikvlad.mastermind.menu.main.profile.selection.PlayerSelectionMenu;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
@@ -89,7 +89,7 @@ public class ProfileMenu extends Menu {
     }
 
     private Menu openRenamePlayerMenu() {
-        return new PlayerNameChanger(appContext);
+        return new PlayerRenameMenu(appContext);
     }
 
     private Menu openDeletePlayerMenu() {

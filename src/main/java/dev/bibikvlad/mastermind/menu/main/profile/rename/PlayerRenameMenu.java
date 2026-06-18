@@ -11,13 +11,13 @@ import dev.bibikvlad.mastermind.menu.main.profile.ProfileMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
-public class PlayerNameChanger extends Menu {
+public class PlayerRenameMenu extends Menu {
     private final Printer printer;
     private final Parser parser;
     private final PlayerService playerService;
     private final Player currentPlayer;
 
-    public PlayerNameChanger(AppContext appContext) {
+    public PlayerRenameMenu(AppContext appContext) {
         super(appContext);
 
         this.printer = appContext.printer();
