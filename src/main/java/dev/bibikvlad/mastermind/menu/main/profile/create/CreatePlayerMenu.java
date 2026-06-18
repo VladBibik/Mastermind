@@ -16,7 +16,7 @@ import dev.bibikvlad.mastermind.menu.main.profile.ProfileMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
-public class NewPlayerCreation extends Menu {
+public class CreatePlayerMenu extends Menu {
     private final Printer printer;
     private final Parser parser;
     private final PlayerService playerService;
@@ -24,7 +24,7 @@ public class NewPlayerCreation extends Menu {
     private final InteractionMessages interactionMessages;
     private final PlayerNameValidator validator;
 
-    public NewPlayerCreation(AppContext appContext) {
+    public CreatePlayerMenu(AppContext appContext) {
         super(appContext);
 
         this.printer = appContext.printer();

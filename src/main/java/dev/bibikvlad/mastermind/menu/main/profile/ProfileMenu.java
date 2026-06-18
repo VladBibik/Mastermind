@@ -9,7 +9,7 @@ import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMes
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.ProfileMenuMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.MainMenu;
-import dev.bibikvlad.mastermind.menu.main.profile.create.NewPlayerCreation;
+import dev.bibikvlad.mastermind.menu.main.profile.create.CreatePlayerMenu;
 import dev.bibikvlad.mastermind.menu.main.profile.delete.DeletePlayerMenu;
 import dev.bibikvlad.mastermind.menu.main.profile.rename.PlayerNameChanger;
 import dev.bibikvlad.mastermind.menu.main.profile.selection.PlayerSelectionMenu;
@@ -85,7 +85,7 @@ public class ProfileMenu extends Menu {
     }
 
     private Menu openNewPlayerMenu() {
-        return new NewPlayerCreation(appContext);
+        return new CreatePlayerMenu(appContext);
     }
 
     private Menu openRenamePlayerMenu() {
