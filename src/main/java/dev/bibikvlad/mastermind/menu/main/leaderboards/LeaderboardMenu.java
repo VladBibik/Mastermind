@@ -104,7 +104,7 @@ public class LeaderboardMenu extends Menu {
         tablePrinter.print(
                 optionalLeaderboard.get(),
                 List.of(
-                        new Column<>(leaderboardMessages.getHeaderName(),
+                        new Column<>(AnsiSafeFormatter.isolate(leaderboardMessages.getHeaderName()),
                                 entry -> AnsiSafeFormatter.isolate(entry.playerName())),
                         new Column<>(leaderboardMessages.getHeaderTurns(),
                                 entry -> String.valueOf(entry.numberOfTurns())),
