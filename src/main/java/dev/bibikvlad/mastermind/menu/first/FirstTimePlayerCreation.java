@@ -13,7 +13,11 @@ import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.create.NewPlayerCreationMenuMessages;
+import dev.bibikvlad.mastermind.menu.main.profile.PlayerNameReader;
+import dev.bibikvlad.mastermind.menu.main.profile.ProfileMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
+
+import java.util.Optional;
 
 public class FirstTimePlayerCreation {
     private final Parser parser;
@@ -41,13 +45,15 @@ public class FirstTimePlayerCreation {
         printer.printMessage(creationMessages.getNewPlayerTitle());
 
         while (true) {
-            PlayerNameInput selection = PlayerNameInputInterpreter.readSelection(parser);
+            PlayerNameReader playerNameReader = new PlayerNameReader(parser, printer, creationMessages);
 
-            if (!handleExit(selection)) {
+            Optional<String> optionalPlayerName = playerNameReader.readPlayerName();
+
+            if (optionalPlayerName.isEmpty()) {
                 return null;
             }
 
-            String playerName = selection.userInput();
+            String playerName = optionalPlayerName.get();
 
             if (!validator.validateAndPrintErrors(playerName)) {
                 continue;
