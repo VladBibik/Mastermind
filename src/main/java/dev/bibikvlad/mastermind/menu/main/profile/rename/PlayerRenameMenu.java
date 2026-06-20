@@ -58,10 +58,14 @@ public class PlayerRenameMenu extends Menu {
         try {
             playerService.updatePlayerName(currentPlayer.getId(), playerName);
 
-            printer.printMessage("Rename operation has been successful. New name is " + currentPlayer.getPlayerName());
+            AppContext updatedAppContext = createNewAppContext(playerName);
+
+            printer.printMessage("Rename operation has been successful. New name is "
+                    + updatedAppContext.currentPlayer().getPlayerName());
+
             confirmToContinue();
 
-            return new ProfileMenu(createNewAppContext(playerName));
+            return new ProfileMenu(updatedAppContext);
         } catch (PlayerAlreadyExistException exception) {
             printer.printMessage("Player with name " + playerName + " already exists\n");
         }
