@@ -13,9 +13,12 @@ import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.create.NewPlayerCreationMenuMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
+import dev.bibikvlad.mastermind.menu.main.profile.PlayerNameReader;
 import dev.bibikvlad.mastermind.menu.main.profile.ProfileMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
+
+import java.util.Optional;
 
 public class PlayerRenameMenu extends Menu {
     private final Printer printer;
@@ -43,13 +46,15 @@ public class PlayerRenameMenu extends Menu {
     public Menu run() {
         printer.printMessage("Please enter a new Player's name for: " + currentPlayer.getPlayerName());
 
-        PlayerNameInput selection = PlayerNameInputInterpreter.readSelection(parser);
+        PlayerNameReader playerNameReader = new PlayerNameReader(parser, printer, creationMessages);
 
-        if (!handleExit(selection)) {
+        Optional<String> optionalPlayerName = playerNameReader.readPlayerName();
+
+        if (optionalPlayerName.isEmpty()) {
             return new ProfileMenu(appContext);
         }
 
-        String playerName = selection.userInput();
+        String playerName = optionalPlayerName.get();
 
         if (!validator.validateAndPrintErrors(playerName)) {
             return this;
@@ -71,20 +76,6 @@ public class PlayerRenameMenu extends Menu {
         }
 
         return this;
-    }
-
-    //TODO: The same method is used in 3 different classes. Refactor it to remove duplication!
-    private boolean handleExit(PlayerNameInput selection) {
-        if (selection.isExit()) {
-            printer.printMessage(creationMessages.getReservedCommandConfirmation(selection.userInput()));
-
-            String confirmation = parser.parseUserInput();
-            confirmation = confirmation.trim().toLowerCase();
-
-            return GlobalMenuCommands.YES.contains(confirmation);
-        }
-
-        return true;
     }
 
     private AppContext createNewAppContext(String playerName) {
