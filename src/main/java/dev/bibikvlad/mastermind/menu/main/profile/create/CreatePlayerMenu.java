@@ -4,7 +4,7 @@ import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.input.interpreter.GlobalMenuCommands;
-import dev.bibikvlad.mastermind.input.interpreter.PlayerCreationInput;
+import dev.bibikvlad.mastermind.input.interpreter.PlayerNameInput;
 import dev.bibikvlad.mastermind.input.interpreter.PlayerNameInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.PlayerNameValidator;
@@ -39,7 +39,7 @@ public class CreatePlayerMenu extends Menu {
     public Menu run() {
         printer.printMessage(creationMessages.getNewPlayerTitle());
 
-        PlayerCreationInput selection = PlayerNameInputInterpreter.readSelection(parser);
+        PlayerNameInput selection = PlayerNameInputInterpreter.readSelection(parser);
 
         if (!handleExit(selection)) {
             return new ProfileMenu(appContext);
@@ -60,7 +60,7 @@ public class CreatePlayerMenu extends Menu {
         return this;
     }
 
-    private boolean handleExit(PlayerCreationInput selection) {
+    private boolean handleExit(PlayerNameInput selection) {
         if (selection.isExit()) {
             printer.printMessage(creationMessages.getReservedCommandConfirmation(selection.userInput()));
 

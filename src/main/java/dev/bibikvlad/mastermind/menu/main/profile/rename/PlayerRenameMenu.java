@@ -5,7 +5,7 @@ import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.exceptions.PlayerNotFoundException;
 import dev.bibikvlad.mastermind.input.interpreter.GlobalMenuCommands;
-import dev.bibikvlad.mastermind.input.interpreter.PlayerCreationInput;
+import dev.bibikvlad.mastermind.input.interpreter.PlayerNameInput;
 import dev.bibikvlad.mastermind.input.interpreter.PlayerNameInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.PlayerNameValidator;
@@ -43,7 +43,7 @@ public class PlayerRenameMenu extends Menu {
     public Menu run() {
         printer.printMessage("Please enter a new Player's name for: " + currentPlayer.getPlayerName());
 
-        PlayerCreationInput selection = PlayerNameInputInterpreter.readSelection(parser);
+        PlayerNameInput selection = PlayerNameInputInterpreter.readSelection(parser);
 
         if (!handleExit(selection)) {
             return new ProfileMenu(appContext);
@@ -74,7 +74,7 @@ public class PlayerRenameMenu extends Menu {
     }
 
     //TODO: The same method is used in 3 different classes. Refactor it to remove duplication!
-    private boolean handleExit(PlayerCreationInput selection) {
+    private boolean handleExit(PlayerNameInput selection) {
         if (selection.isExit()) {
             printer.printMessage(creationMessages.getReservedCommandConfirmation(selection.userInput()));
 

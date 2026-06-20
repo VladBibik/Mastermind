@@ -4,7 +4,7 @@ import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.GlobalMenuCommands;
-import dev.bibikvlad.mastermind.input.interpreter.PlayerCreationInput;
+import dev.bibikvlad.mastermind.input.interpreter.PlayerNameInput;
 import dev.bibikvlad.mastermind.input.interpreter.PlayerNameInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.PlayerNameValidator;
@@ -41,7 +41,7 @@ public class FirstTimePlayerCreation {
         printer.printMessage(creationMessages.getNewPlayerTitle());
 
         while (true) {
-            PlayerCreationInput selection = PlayerNameInputInterpreter.readSelection(parser);
+            PlayerNameInput selection = PlayerNameInputInterpreter.readSelection(parser);
 
             if (!handleExit(selection)) {
                 return null;
@@ -57,7 +57,7 @@ public class FirstTimePlayerCreation {
         }
     }
 
-    private boolean handleExit(PlayerCreationInput selection) {
+    private boolean handleExit(PlayerNameInput selection) {
         if (selection.isExit()) {
             printer.printMessage(creationMessages.getReservedCommandConfirmation(selection.userInput()));
 
