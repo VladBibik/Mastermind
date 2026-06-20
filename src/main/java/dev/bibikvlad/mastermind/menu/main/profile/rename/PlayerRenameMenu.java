@@ -6,6 +6,8 @@ import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.exceptions.PlayerNotFoundException;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
+import dev.bibikvlad.mastermind.localization.config.MessageType;
+import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.profile.ProfileMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
@@ -16,6 +18,7 @@ public class PlayerRenameMenu extends Menu {
     private final Parser parser;
     private final PlayerService playerService;
     private final Player currentPlayer;
+    private final InteractionMessages interactionMessages;
 
     public PlayerRenameMenu(AppContext appContext) {
         super(appContext);
@@ -24,6 +27,7 @@ public class PlayerRenameMenu extends Menu {
         this.parser = appContext.parser();
         this.playerService = appContext.services().getPlayerService();
         this.currentPlayer = appContext.currentPlayer();
+        this.interactionMessages = appContext.localizationContext().getMessages(MessageType.INTERACTION);
     }
 
     @Override
