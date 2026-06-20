@@ -4,12 +4,13 @@ import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.exceptions.PlayerNotFoundException;
+import dev.bibikvlad.mastermind.input.interpreter.GlobalMenuCommands;
 import dev.bibikvlad.mastermind.input.interpreter.PlayerCreationInput;
 import dev.bibikvlad.mastermind.input.interpreter.PlayerCreationInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
-import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.create.NewPlayerCreationMenuMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.profile.ProfileMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
@@ -21,6 +22,8 @@ public class PlayerRenameMenu extends Menu {
     private final PlayerService playerService;
     private final Player currentPlayer;
     private final InteractionMessages interactionMessages;
+    //TODO: Temp solution. Take exit handling logic from the creation properties file, and move it to the common one!
+    private final NewPlayerCreationMenuMessages creationMessages;
 
     public PlayerRenameMenu(AppContext appContext) {
         super(appContext);
@@ -30,6 +33,7 @@ public class PlayerRenameMenu extends Menu {
         this.playerService = appContext.services().getPlayerService();
         this.currentPlayer = appContext.currentPlayer();
         this.interactionMessages = appContext.localizationContext().getMessages(MessageType.INTERACTION);
+        this.creationMessages = appContext.localizationContext().getMessages(MessageType.CREATE);
     }
 
     @Override
@@ -40,20 +44,33 @@ public class PlayerRenameMenu extends Menu {
         //TODO: Rename PlayerCreationInputInterpreter since it is used not only by player creation menus!
         PlayerCreationInput selection = PlayerCreationInputInterpreter.readSelection(parser);
 
-        String userInput = selection.userInput();
+        String playerName = selection.userInput();
 
         try {
-            playerService.updatePlayerName(currentPlayer.getId(), userInput);
+            playerService.updatePlayerName(currentPlayer.getId(), playerName);
 
             printer.printMessage("Rename operation has been successful. New name is " + currentPlayer.getPlayerName());
             confirmToContinue();
 
-            return new ProfileMenu(createNewAppContext(userInput));
+            return new ProfileMenu(createNewAppContext(playerName));
         } catch (PlayerAlreadyExistException exception) {
-            printer.printMessage("Player with name " + userInput + " already exists\n");
+            printer.printMessage("Player with name " + playerName + " already exists\n");
         }
 
         return this;
+    }
+
+    private boolean handleExit(PlayerCreationInput selection) {
+        if (selection.isExit()) {
+            printer.printMessage(creationMessages.getReservedCommandConfirmation(selection.userInput()));
+
+            String confirmation = parser.parseUserInput();
+            confirmation = confirmation.trim().toLowerCase();
+
+            return GlobalMenuCommands.YES.contains(confirmation);
+        }
+
+        return true;
     }
 
     private AppContext createNewAppContext(String playerName) {
