@@ -44,6 +44,10 @@ public class PlayerRenameMenu extends Menu {
         //TODO: Rename PlayerCreationInputInterpreter since it is used not only by player creation menus!
         PlayerCreationInput selection = PlayerCreationInputInterpreter.readSelection(parser);
 
+        if (!handleExit(selection)) {
+            return new ProfileMenu(appContext);
+        }
+
         String playerName = selection.userInput();
 
         try {
@@ -60,6 +64,7 @@ public class PlayerRenameMenu extends Menu {
         return this;
     }
 
+    //TODO: The same method is used in 3 different classes. Refactor it to remove duplication!
     private boolean handleExit(PlayerCreationInput selection) {
         if (selection.isExit()) {
             printer.printMessage(creationMessages.getReservedCommandConfirmation(selection.userInput()));
