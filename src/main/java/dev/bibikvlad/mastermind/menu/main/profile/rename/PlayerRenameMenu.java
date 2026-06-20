@@ -50,6 +50,9 @@ public class PlayerRenameMenu extends Menu {
         try {
             playerService.updatePlayerName(currentPlayer.getId(), userInput);
 
+            printer.printMessage("Rename operation has been successful. New name is " + currentPlayer.getPlayerName());
+            confirmToContinue();
+
             return new ProfileMenu(createNewAppContext(userInput));
         } catch (PlayerAlreadyExistException exception) {
             printer.printMessage("Player with name " + userInput + " already exists\n");
@@ -63,5 +66,11 @@ public class PlayerRenameMenu extends Menu {
                 () -> new PlayerNotFoundException("Could not load player with name " + playerName));
 
         return new AppContext(appContext.localizationContext(), appContext.services(), printer, parser, player);
+    }
+
+    private void confirmToContinue() {
+        printer.printMessage(interactionMessages.getPressEnter());
+
+        parser.parseUserInput();
     }
 }
