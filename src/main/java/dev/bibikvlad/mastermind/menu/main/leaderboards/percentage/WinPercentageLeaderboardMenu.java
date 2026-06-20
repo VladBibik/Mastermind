@@ -3,6 +3,8 @@ package dev.bibikvlad.mastermind.menu.main.leaderboards.percentage;
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.AnsiSafeFormatter;
 import dev.bibikvlad.mastermind.app.printer.Printer;
+import dev.bibikvlad.mastermind.app.printer.table.Column;
+import dev.bibikvlad.mastermind.app.printer.table.TablePrinter;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
@@ -10,8 +12,6 @@ import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMes
 import dev.bibikvlad.mastermind.localization.messages.menu.main.leaderboards.LeaderboardMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.leaderboards.LeaderboardMenu;
-import dev.bibikvlad.mastermind.app.printer.table.Column;
-import dev.bibikvlad.mastermind.app.printer.table.TablePrinter;
 import dev.bibikvlad.mastermind.model.leaderboard.WinPercentageLeaderboardEntry;
 import dev.bibikvlad.mastermind.services.LeaderboardService;
 
@@ -79,6 +79,18 @@ public class WinPercentageLeaderboardMenu extends Menu {
         return printWinPercentageLeaderboard(input);
     }
 
+    /*
+    The player name column may contain ANSI color codes.
+
+    TablePrinter calculates column widths using String.length(), so the
+    ANSI reset sequence added by AnsiSafeFormatter contributes to the string
+    length even though it is not visible when rendered. If only the player
+    names are isolated, the first column becomes wider than its header and
+    table alignment breaks.
+
+    To keep width calculations consistent, the corresponding header must
+    also be wrapped with AnsiSafeFormatter.
+     */
     private Menu printWinPercentageLeaderboard(int sampleSize) {
         Optional<List<WinPercentageLeaderboardEntry>> optionalLeaderboard =
                 leaderboardService.getWinPercentageLeaderboard(sampleSize);

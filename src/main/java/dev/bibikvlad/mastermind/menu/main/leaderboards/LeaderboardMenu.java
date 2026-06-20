@@ -208,6 +208,18 @@ public class LeaderboardMenu extends Menu {
         return this;
     }
 
+    /*
+    The player name column may contain ANSI color codes.
+
+    TablePrinter calculates column widths using String.length(), so the
+    ANSI reset sequence added by AnsiSafeFormatter contributes to the string
+    length even though it is not visible when rendered. If only the player
+    names are isolated, the first column becomes wider than its header and
+    table alignment breaks.
+
+    To keep width calculations consistent, the corresponding header must
+    also be wrapped with AnsiSafeFormatter.
+     */
     private String isolateHeaderName() {
         return AnsiSafeFormatter.isolate(leaderboardMessages.getHeaderName());
     }
