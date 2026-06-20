@@ -53,6 +53,10 @@ public class PlayerRenameMenu extends Menu {
 
         String playerName = selection.userInput();
 
+        if (!validator.validateAndPrintErrors(playerName)) {
+            return this;
+        }
+
         try {
             playerService.updatePlayerName(currentPlayer.getId(), playerName);
 
