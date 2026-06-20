@@ -93,7 +93,7 @@ public class WinPercentageLeaderboardMenu extends Menu {
         tablePrinter.print(
                 optionalLeaderboard.get(),
                 List.of(
-                        new Column<>(leaderboardMessages.getHeaderName(),
+                        new Column<>(AnsiSafeFormatter.isolate(leaderboardMessages.getHeaderName()),
                                 entry -> AnsiSafeFormatter.isolate(entry.playerName())),
                         new Column<>(leaderboardMessages.getHeaderPercentage(),
                                 entry -> String.format("%.2f%%", entry.winPercentage())),

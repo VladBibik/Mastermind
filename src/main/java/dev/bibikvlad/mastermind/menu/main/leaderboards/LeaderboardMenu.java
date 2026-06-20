@@ -104,7 +104,7 @@ public class LeaderboardMenu extends Menu {
         tablePrinter.print(
                 optionalLeaderboard.get(),
                 List.of(
-                        new Column<>(AnsiSafeFormatter.isolate(leaderboardMessages.getHeaderName()),
+                        new Column<>(isolateHeaderName(),
                                 entry -> AnsiSafeFormatter.isolate(entry.playerName())),
                         new Column<>(leaderboardMessages.getHeaderTurns(),
                                 entry -> String.valueOf(entry.numberOfTurns())),
@@ -131,7 +131,7 @@ public class LeaderboardMenu extends Menu {
         tablePrinter.print(
                 optionalLeaderboard.get(),
                 List.of(
-                        new Column<>(leaderboardMessages.getHeaderName(),
+                        new Column<>(isolateHeaderName(),
                                 entry -> AnsiSafeFormatter.isolate(entry.playerName())),
                         new Column<>(leaderboardMessages.getHeaderTime(),
                                 entry -> ClockDisplayFormatter.format(entry.gameDuration()))
@@ -156,7 +156,7 @@ public class LeaderboardMenu extends Menu {
         tablePrinter.print(
                 optionalLeaderboard.get(),
                 List.of(
-                        new Column<>(leaderboardMessages.getHeaderName(),
+                        new Column<>(isolateHeaderName(),
                                 entry -> AnsiSafeFormatter.isolate(entry.playerName())),
                         new Column<>(leaderboardMessages.getHeaderTurns(),
                                 entry -> String.valueOf(entry.numberOfTurns()))
@@ -196,7 +196,7 @@ public class LeaderboardMenu extends Menu {
         tablePrinter.print(
                 optionalLeaderboard.get(),
                 List.of(
-                        new Column<>(leaderboardMessages.getHeaderName(),
+                        new Column<>(isolateHeaderName(),
                                 entry -> AnsiSafeFormatter.isolate(entry.playerName())),
                         new Column<>(leaderboardMessages.getHeaderWins(),
                                 entry -> String.valueOf(entry.numberOfWins()))
@@ -206,6 +206,10 @@ public class LeaderboardMenu extends Menu {
         waitForConfirmation();
 
         return this;
+    }
+
+    private String isolateHeaderName() {
+        return AnsiSafeFormatter.isolate(leaderboardMessages.getHeaderName());
     }
 
     private Menu quit() {
