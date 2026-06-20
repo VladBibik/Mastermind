@@ -4,6 +4,8 @@ import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.exceptions.PlayerNotFoundException;
+import dev.bibikvlad.mastermind.input.interpreter.PlayerCreationInput;
+import dev.bibikvlad.mastermind.input.interpreter.PlayerCreationInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
@@ -35,17 +37,10 @@ public class PlayerRenameMenu extends Menu {
         printer.printMessage("Please enter a new Player's name for: " + currentPlayer.getPlayerName());
         printer.printMessage("To go back to the previous menu enter 'exit' o 'close'");
 
-        String userInput = appContext.parser().parseUserInput();
+        //TODO: Rename PlayerCreationInputInterpreter since it is used not only by player creation menus!
+        PlayerCreationInput selection = PlayerCreationInputInterpreter.readSelection(parser);
 
-        if (StringEmptyValidator.isNullOrEmpty(userInput)) {
-            printer.printMessage("Player's name cannot be empty");
-
-            return this;
-        }
-
-        if (userInput.equalsIgnoreCase("exit") || userInput.equalsIgnoreCase("close")) {
-            return new ProfileMenu(appContext);
-        }
+        String userInput = selection.userInput();
 
         try {
             playerService.updatePlayerName(currentPlayer.getId(), userInput);
