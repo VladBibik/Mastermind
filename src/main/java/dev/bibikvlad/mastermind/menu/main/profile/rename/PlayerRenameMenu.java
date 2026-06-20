@@ -42,7 +42,6 @@ public class PlayerRenameMenu extends Menu {
     @Override
     public Menu run() {
         printer.printMessage("Please enter a new Player's name for: " + currentPlayer.getPlayerName());
-        printer.printMessage("To go back to the previous menu enter 'exit' o 'close'");
 
         PlayerCreationInput selection = PlayerNameInputInterpreter.readSelection(parser);
 
