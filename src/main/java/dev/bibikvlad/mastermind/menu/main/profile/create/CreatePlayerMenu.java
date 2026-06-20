@@ -3,9 +3,6 @@ package dev.bibikvlad.mastermind.menu.main.profile.create;
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
-import dev.bibikvlad.mastermind.input.interpreter.GlobalMenuCommands;
-import dev.bibikvlad.mastermind.input.interpreter.PlayerNameInput;
-import dev.bibikvlad.mastermind.input.interpreter.PlayerNameInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.PlayerNameValidator;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
@@ -63,19 +60,6 @@ public class CreatePlayerMenu extends Menu {
         }
 
         return this;
-    }
-
-    private boolean handleExit(PlayerNameInput selection) {
-        if (selection.isExit()) {
-            printer.printMessage(creationMessages.getReservedCommandConfirmation(selection.userInput()));
-
-            String confirmation = parser.parseUserInput();
-            confirmation = confirmation.trim().toLowerCase();
-
-            return GlobalMenuCommands.YES.contains(confirmation);
-        }
-
-        return true;
     }
 
     private AppContext savePlayerAndBuildContext(String playerName) {

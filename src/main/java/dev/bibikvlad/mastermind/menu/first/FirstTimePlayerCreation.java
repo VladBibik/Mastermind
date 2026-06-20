@@ -3,9 +3,6 @@ package dev.bibikvlad.mastermind.menu.first;
 import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
-import dev.bibikvlad.mastermind.input.interpreter.GlobalMenuCommands;
-import dev.bibikvlad.mastermind.input.interpreter.PlayerNameInput;
-import dev.bibikvlad.mastermind.input.interpreter.PlayerNameInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.PlayerNameValidator;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
@@ -14,7 +11,6 @@ import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.create.NewPlayerCreationMenuMessages;
 import dev.bibikvlad.mastermind.menu.main.profile.PlayerNameReader;
-import dev.bibikvlad.mastermind.menu.main.profile.ProfileMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
 
 import java.util.Optional;
@@ -61,19 +57,6 @@ public class FirstTimePlayerCreation {
 
             return savePlayerAndBuildContext(playerName);
         }
-    }
-
-    private boolean handleExit(PlayerNameInput selection) {
-        if (selection.isExit()) {
-            printer.printMessage(creationMessages.getReservedCommandConfirmation(selection.userInput()));
-
-            String confirmation = parser.parseUserInput();
-            confirmation = confirmation.trim().toLowerCase();
-
-            return GlobalMenuCommands.YES.contains(confirmation);
-        }
-
-        return true;
     }
 
     private AppContext savePlayerAndBuildContext(String playerName) {
