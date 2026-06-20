@@ -104,7 +104,7 @@ public class LeaderboardMenu extends Menu {
         tablePrinter.print(
                 optionalLeaderboard.get(),
                 List.of(
-                        new Column<>(isolateHeaderName(),
+                        new Column<>(getAnsiSafePlayerNameHeader(),
                                 entry -> AnsiSafeFormatter.isolate(entry.playerName())),
                         new Column<>(leaderboardMessages.getHeaderTurns(),
                                 entry -> String.valueOf(entry.numberOfTurns())),
@@ -131,7 +131,7 @@ public class LeaderboardMenu extends Menu {
         tablePrinter.print(
                 optionalLeaderboard.get(),
                 List.of(
-                        new Column<>(isolateHeaderName(),
+                        new Column<>(getAnsiSafePlayerNameHeader(),
                                 entry -> AnsiSafeFormatter.isolate(entry.playerName())),
                         new Column<>(leaderboardMessages.getHeaderTime(),
                                 entry -> ClockDisplayFormatter.format(entry.gameDuration()))
@@ -156,7 +156,7 @@ public class LeaderboardMenu extends Menu {
         tablePrinter.print(
                 optionalLeaderboard.get(),
                 List.of(
-                        new Column<>(isolateHeaderName(),
+                        new Column<>(getAnsiSafePlayerNameHeader(),
                                 entry -> AnsiSafeFormatter.isolate(entry.playerName())),
                         new Column<>(leaderboardMessages.getHeaderTurns(),
                                 entry -> String.valueOf(entry.numberOfTurns()))
@@ -196,7 +196,7 @@ public class LeaderboardMenu extends Menu {
         tablePrinter.print(
                 optionalLeaderboard.get(),
                 List.of(
-                        new Column<>(isolateHeaderName(),
+                        new Column<>(getAnsiSafePlayerNameHeader(),
                                 entry -> AnsiSafeFormatter.isolate(entry.playerName())),
                         new Column<>(leaderboardMessages.getHeaderWins(),
                                 entry -> String.valueOf(entry.numberOfWins()))
@@ -220,7 +220,7 @@ public class LeaderboardMenu extends Menu {
     To keep width calculations consistent, the corresponding header must
     also be wrapped with AnsiSafeFormatter.
      */
-    private String isolateHeaderName() {
+    private String getAnsiSafePlayerNameHeader() {
         return AnsiSafeFormatter.isolate(leaderboardMessages.getHeaderName());
     }
 
