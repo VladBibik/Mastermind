@@ -5,7 +5,7 @@ import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.GlobalMenuCommands;
 import dev.bibikvlad.mastermind.input.interpreter.PlayerCreationInput;
-import dev.bibikvlad.mastermind.input.interpreter.PlayerCreationInputInterpreter;
+import dev.bibikvlad.mastermind.input.interpreter.PlayerNameInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.PlayerNameValidator;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
@@ -41,7 +41,7 @@ public class FirstTimePlayerCreation {
         printer.printMessage(creationMessages.getNewPlayerTitle());
 
         while (true) {
-            PlayerCreationInput selection = PlayerCreationInputInterpreter.readSelection(parser);
+            PlayerCreationInput selection = PlayerNameInputInterpreter.readSelection(parser);
 
             if (!handleExit(selection)) {
                 return null;

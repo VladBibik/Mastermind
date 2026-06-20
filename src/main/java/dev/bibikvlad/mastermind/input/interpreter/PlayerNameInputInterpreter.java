@@ -2,7 +2,7 @@ package dev.bibikvlad.mastermind.input.interpreter;
 
 import dev.bibikvlad.mastermind.input.parser.Parser;
 
-public class PlayerCreationInputInterpreter {
+public class PlayerNameInputInterpreter {
     public static PlayerCreationInput readSelection(Parser parser) {
         String userInput = parser.parseUserInput();
 
