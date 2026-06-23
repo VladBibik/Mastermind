@@ -69,7 +69,7 @@ public class PlayerRenameMenu extends Menu {
 
             return new ProfileMenu(updatedAppContext);
         } catch (PlayerAlreadyExistException exception) {
-            printer.printMessage("Player with name " + playerName + " already exists\n");
+            printer.printMessage(nameMessages.getPlayerAlreadyExistsError(playerName));
         }
 
         return this;
