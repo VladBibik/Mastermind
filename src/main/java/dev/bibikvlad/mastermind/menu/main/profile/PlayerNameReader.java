@@ -5,16 +5,16 @@ import dev.bibikvlad.mastermind.input.interpreter.GlobalMenuCommands;
 import dev.bibikvlad.mastermind.input.interpreter.PlayerNameInput;
 import dev.bibikvlad.mastermind.input.interpreter.PlayerNameInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
-import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.create.NewPlayerCreationMenuMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.name.PlayerNameMessages;
 
 import java.util.Optional;
 
 public class PlayerNameReader {
     private final Parser parser;
     private final Printer printer;
-    private final NewPlayerCreationMenuMessages messages;
+    private final PlayerNameMessages messages;
 
-    public PlayerNameReader(Parser parser, Printer printer, NewPlayerCreationMenuMessages messages) {
+    public PlayerNameReader(Parser parser, Printer printer, PlayerNameMessages messages) {
         this.parser = parser;
         this.printer = printer;
         this.messages = messages;

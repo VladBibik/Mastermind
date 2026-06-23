@@ -8,6 +8,7 @@ import dev.bibikvlad.mastermind.input.validation.PlayerNameValidator;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.create.NewPlayerCreationMenuMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.name.PlayerNameMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.profile.PlayerNameReader;
 import dev.bibikvlad.mastermind.menu.main.profile.ProfileMenu;
@@ -21,6 +22,7 @@ public class CreatePlayerMenu extends Menu {
     private final Parser parser;
     private final PlayerService playerService;
     private final NewPlayerCreationMenuMessages creationMessages;
+    private final PlayerNameMessages nameMessages;
     private final InteractionMessages interactionMessages;
     private final PlayerNameValidator validator;
 
@@ -31,15 +33,16 @@ public class CreatePlayerMenu extends Menu {
         this.parser = appContext.parser();
         this.playerService = appContext.services().getPlayerService();
         this.creationMessages = appContext.localizationContext().getMessages(MessageType.CREATE);
+        this.nameMessages = appContext.localizationContext().getMessages(MessageType.PLAYER_NAME);
         this.interactionMessages = appContext.localizationContext().getMessages(MessageType.INTERACTION);
-        this.validator = new PlayerNameValidator(printer, creationMessages);
+        this.validator = new PlayerNameValidator(printer, nameMessages);
     }
 
     @Override
     public Menu run() {
         printer.printMessage(creationMessages.getNewPlayerTitle());
 
-        PlayerNameReader playerNameReader = new PlayerNameReader(parser, printer, creationMessages);
+        PlayerNameReader playerNameReader = new PlayerNameReader(parser, printer, nameMessages);
 
         Optional<String> optionalPlayerName = playerNameReader.readPlayerName();
 
@@ -56,7 +59,7 @@ public class CreatePlayerMenu extends Menu {
         try {
             return new ProfileMenu(savePlayerAndBuildContext(playerName));
         } catch (PlayerAlreadyExistException exception) {
-            printer.printMessage(creationMessages.getPlayerAlreadyExistsError(playerName));
+            printer.printMessage(nameMessages.getPlayerAlreadyExistsError(playerName));
         }
 
         return this;

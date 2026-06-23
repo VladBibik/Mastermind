@@ -10,6 +10,7 @@ import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.create.NewPlayerCreationMenuMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.name.PlayerNameMessages;
 import dev.bibikvlad.mastermind.menu.main.profile.PlayerNameReader;
 import dev.bibikvlad.mastermind.model.player.Player;
 
@@ -22,6 +23,7 @@ public class FirstTimePlayerCreation {
     private final LocalizationContext localizationContext;
     private final ServiceContainer serviceContainer;
     private final NewPlayerCreationMenuMessages creationMessages;
+    private final PlayerNameMessages nameMessages;
     private final InteractionMessages interactionMessages;
     private final PlayerNameValidator validator;
 
@@ -33,15 +35,16 @@ public class FirstTimePlayerCreation {
         this.localizationContext = new LocalizationContext(localeType);
         this.serviceContainer = serviceContainer;
         this.creationMessages = localizationContext.getMessages(MessageType.CREATE);
+        this.nameMessages = localizationContext.getMessages(MessageType.PLAYER_NAME);
         this.interactionMessages = localizationContext.getMessages(MessageType.INTERACTION);
-        this.validator = new PlayerNameValidator(printer, creationMessages);
+        this.validator = new PlayerNameValidator(printer, nameMessages);
     }
 
     public AppContext createPlayerAndGetContext() {
         printer.printMessage(creationMessages.getNewPlayerTitle());
 
         while (true) {
-            PlayerNameReader playerNameReader = new PlayerNameReader(parser, printer, creationMessages);
+            PlayerNameReader playerNameReader = new PlayerNameReader(parser, printer, nameMessages);
 
             Optional<String> optionalPlayerName = playerNameReader.readPlayerName();
 
