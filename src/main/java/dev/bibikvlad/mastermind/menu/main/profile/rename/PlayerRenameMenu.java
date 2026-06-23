@@ -8,7 +8,6 @@ import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.PlayerNameValidator;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
-import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.create.NewPlayerCreationMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.name.PlayerNameMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.profile.PlayerNameReader;
@@ -23,7 +22,6 @@ public class PlayerRenameMenu extends Menu {
     private final Parser parser;
     private final PlayerService playerService;
     private final Player currentPlayer;
-    private final NewPlayerCreationMenuMessages creationMessages;
     private final PlayerNameMessages nameMessages;
     private final InteractionMessages interactionMessages;
     //TODO: Temp solution. Take exit handling logic from the creation properties file, and move it to the common one!
@@ -36,7 +34,6 @@ public class PlayerRenameMenu extends Menu {
         this.parser = appContext.parser();
         this.playerService = appContext.services().getPlayerService();
         this.currentPlayer = appContext.currentPlayer();
-        this.creationMessages = appContext.localizationContext().getMessages(MessageType.CREATE);
         this.nameMessages = appContext.localizationContext().getMessages(MessageType.PLAYER_NAME);
         this.interactionMessages = appContext.localizationContext().getMessages(MessageType.INTERACTION);
         this.validator = new PlayerNameValidator(printer, nameMessages);
