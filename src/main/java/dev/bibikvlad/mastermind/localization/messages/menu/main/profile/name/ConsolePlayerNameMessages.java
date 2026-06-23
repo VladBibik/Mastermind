@@ -16,7 +16,7 @@ public class ConsolePlayerNameMessages implements PlayerNameMessages {
     }
 
     @Override
-    public String getNameEmptyError() {
+    public String getPlayerNameEmptyError() {
         return resourceBundle.getString("player_name_empty_error");
     }
 

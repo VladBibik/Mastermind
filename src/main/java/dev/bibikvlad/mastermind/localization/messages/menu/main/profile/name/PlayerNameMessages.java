@@ -5,7 +5,7 @@ import dev.bibikvlad.mastermind.localization.messages.LocalizedMessages;
 public interface PlayerNameMessages extends LocalizedMessages {
     String getPlayerAlreadyExistsError(String playerName);
 
-    String getNameEmptyError();
+    String getPlayerNameEmptyError();
 
     String getPlayerNameLengthError();
 
