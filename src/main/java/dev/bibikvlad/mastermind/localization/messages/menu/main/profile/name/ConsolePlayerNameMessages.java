@@ -11,7 +11,7 @@ public class ConsolePlayerNameMessages implements PlayerNameMessages {
     }
 
     @Override
-    public String getAlreadyExistsError(String playerName) {
+    public String getPlayerAlreadyExistsError(String playerName) {
         return MessageFormat.format(resourceBundle.getString("player_already_exists_error"), playerName);
     }
 
