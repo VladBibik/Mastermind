@@ -17,12 +17,12 @@ public class ConsolePlayerNameMessages implements PlayerNameMessages {
 
     @Override
     public String getNameEmptyError() {
-        return MessageFormat.format(resourceBundle.getString("player_name_empty_error"));
+        return resourceBundle.getString("player_name_empty_error");
     }
 
     @Override
     public String getPlayerNameLengthError() {
-        return MessageFormat.format(resourceBundle.getString("player_name_length_error"));
+        return resourceBundle.getString("player_name_length_error");
     }
 
     @Override
