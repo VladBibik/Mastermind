@@ -24,7 +24,6 @@ public class PlayerRenameMenu extends Menu {
     private final Player currentPlayer;
     private final PlayerNameMessages nameMessages;
     private final InteractionMessages interactionMessages;
-    //TODO: Temp solution. Take exit handling logic from the creation properties file, and move it to the common one!
     private final PlayerNameValidator validator;
 
     public PlayerRenameMenu(AppContext appContext) {
