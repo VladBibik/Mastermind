@@ -27,7 +27,6 @@ import dev.bibikvlad.mastermind.localization.messages.menu.main.leaderboards.Lea
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.ProfileMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.create.NewPlayerCreationMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.delete.DeletePlayerMenuMessages;
-import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.name.ConsolePlayerNameMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.name.PlayerNameMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.selection.PlayerSelectionMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.SettingsMenuMessages;
