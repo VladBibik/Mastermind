@@ -7,6 +7,7 @@ import dev.bibikvlad.mastermind.exceptions.PlayerNotFoundException;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.PlayerNameValidator;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
+import dev.bibikvlad.mastermind.localization.messages.error.ErrorMessages;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.name.PlayerNameMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
@@ -24,6 +25,7 @@ public class PlayerRenameMenu extends Menu {
     private final Player currentPlayer;
     private final PlayerNameMessages nameMessages;
     private final InteractionMessages interactionMessages;
+    private final ErrorMessages errorMessages;
     private final PlayerNameValidator validator;
 
     public PlayerRenameMenu(AppContext appContext) {
@@ -35,6 +37,7 @@ public class PlayerRenameMenu extends Menu {
         this.currentPlayer = appContext.currentPlayer();
         this.nameMessages = appContext.localizationContext().getMessages(MessageType.PLAYER_NAME);
         this.interactionMessages = appContext.localizationContext().getMessages(MessageType.INTERACTION);
+        this.errorMessages = appContext.localizationContext().getMessages(MessageType.ERROR);
         this.validator = new PlayerNameValidator(printer, nameMessages);
     }
 
@@ -59,7 +62,7 @@ public class PlayerRenameMenu extends Menu {
         try {
             playerService.updatePlayerName(currentPlayer.getId(), playerName);
 
-            AppContext updatedAppContext = createNewAppContext(playerName);
+            AppContext updatedAppContext = createNewAppContext();
 
             printer.printMessage("Rename operation has been successful. New name is "
                     + updatedAppContext.currentPlayer().getPlayerName());
@@ -74,9 +77,9 @@ public class PlayerRenameMenu extends Menu {
         return this;
     }
 
-    private AppContext createNewAppContext(String playerName) {
+    private AppContext createNewAppContext() {
         Player player = playerService.loadLastSelectedPlayer().orElseThrow(
-                () -> new PlayerNotFoundException("Could not load player with name " + playerName));
+                () -> new PlayerNotFoundException(errorMessages.getLastSelectedPlayerNotFound()));
 
         return new AppContext(appContext.localizationContext(), appContext.services(), printer, parser, player);
     }
