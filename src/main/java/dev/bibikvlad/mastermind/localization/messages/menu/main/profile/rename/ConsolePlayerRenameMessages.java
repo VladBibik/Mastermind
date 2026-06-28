@@ -17,6 +17,6 @@ public class ConsolePlayerRenameMessages implements PlayerRenameMenuMessages{
 
     @Override
     public String getPlayerNameRenameSuccess(String playerName) {
-        return resourceBundle.getString("player_name_rename_success");
+        return MessageFormat.format(resourceBundle.getString("player_name_rename_success"), playerName);
     }
 }
