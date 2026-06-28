@@ -10,6 +10,7 @@ import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.error.ErrorMessages;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.name.PlayerNameMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.rename.PlayerRenameMenuMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.profile.PlayerNameReader;
 import dev.bibikvlad.mastermind.menu.main.profile.ProfileMenu;
@@ -23,6 +24,7 @@ public class PlayerRenameMenu extends Menu {
     private final Parser parser;
     private final PlayerService playerService;
     private final Player currentPlayer;
+    private final PlayerRenameMenuMessages renameMessages;
     private final PlayerNameMessages nameMessages;
     private final InteractionMessages interactionMessages;
     private final ErrorMessages errorMessages;
@@ -35,6 +37,7 @@ public class PlayerRenameMenu extends Menu {
         this.parser = appContext.parser();
         this.playerService = appContext.services().getPlayerService();
         this.currentPlayer = appContext.currentPlayer();
+        this.renameMessages = appContext.localizationContext().getMessages(MessageType.RENAME);
         this.nameMessages = appContext.localizationContext().getMessages(MessageType.PLAYER_NAME);
         this.interactionMessages = appContext.localizationContext().getMessages(MessageType.INTERACTION);
         this.errorMessages = appContext.localizationContext().getMessages(MessageType.ERROR);
@@ -43,7 +46,7 @@ public class PlayerRenameMenu extends Menu {
 
     @Override
     public Menu run() {
-        printer.printMessage("Please enter a new Player's name for: " + currentPlayer.getPlayerName());
+        printer.printMessage(renameMessages.getPlayerNameRenameTitle(currentPlayer.getPlayerName()));
 
         PlayerNameReader playerNameReader = new PlayerNameReader(parser, printer, nameMessages);
 
@@ -64,8 +67,8 @@ public class PlayerRenameMenu extends Menu {
 
             AppContext updatedAppContext = createNewAppContext();
 
-            printer.printMessage("Rename operation has been successful. New name is "
-                    + updatedAppContext.currentPlayer().getPlayerName());
+            printer.printMessage(renameMessages.getPlayerNameRenameSuccess(
+                    updatedAppContext.currentPlayer().getPlayerName()));
 
             confirmToContinue();
 
