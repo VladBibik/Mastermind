@@ -11,6 +11,7 @@ import dev.bibikvlad.mastermind.localization.factories.menu.main.profile.Console
 import dev.bibikvlad.mastermind.localization.factories.menu.main.profile.create.ConsoleCreatePlayerMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.profile.delete.ConsoleDeletePlayerMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.profile.name.ConsolePlayerNameMessageFactory;
+import dev.bibikvlad.mastermind.localization.factories.menu.main.profile.rename.ConsoleRenamePlayerMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.profile.selection.ConsolePlayerSelectionMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.ConsoleSettingsMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.language.ConsoleLanguageMessageFactory;
@@ -28,6 +29,7 @@ import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.ProfileM
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.create.NewPlayerCreationMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.delete.DeletePlayerMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.name.PlayerNameMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.rename.PlayerRenameMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.selection.PlayerSelectionMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.SettingsMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.language.LanguageSelectionMessages;
@@ -135,6 +137,11 @@ public class MessageRegistryInitializer {
                 PlayerNameMessages.class,
                 "i18n.menu.main.profile.name.player_name",
                 new ConsolePlayerNameMessageFactory()
+        ));
+        messageFactoryRegistry.register(new LocalizedMessageConfig<>(
+                PlayerRenameMenuMessages.class,
+                "i18n.menu.main.profile.rename.player_rename_menu",
+                new ConsoleRenamePlayerMessageFactory()
         ));
     }
 
