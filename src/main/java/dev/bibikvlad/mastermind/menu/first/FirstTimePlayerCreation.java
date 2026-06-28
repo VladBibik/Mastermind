@@ -25,7 +25,7 @@ public class FirstTimePlayerCreation {
     private final NewPlayerCreationMenuMessages creationMessages;
     private final PlayerNameMessages nameMessages;
     private final InteractionMessages interactionMessages;
-    private final PlayerNameValidator validator;
+    private final PlayerNameValidator playerNameValidator;
 
     public FirstTimePlayerCreation(Parser parser, Printer printer, LocaleType localeType,
                                    ServiceContainer serviceContainer) {
@@ -37,7 +37,7 @@ public class FirstTimePlayerCreation {
         this.creationMessages = localizationContext.getMessages(MessageType.CREATE);
         this.nameMessages = localizationContext.getMessages(MessageType.PLAYER_NAME);
         this.interactionMessages = localizationContext.getMessages(MessageType.INTERACTION);
-        this.validator = new PlayerNameValidator(printer, nameMessages);
+        this.playerNameValidator = new PlayerNameValidator(printer, nameMessages);
     }
 
     public AppContext createPlayerAndGetContext() {
@@ -54,7 +54,7 @@ public class FirstTimePlayerCreation {
 
             String playerName = optionalPlayerName.get();
 
-            if (!validator.validateAndPrintErrors(playerName)) {
+            if (!playerNameValidator.validateAndPrintErrors(playerName)) {
                 continue;
             }
 
