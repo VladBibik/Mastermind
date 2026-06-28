@@ -28,7 +28,7 @@ public class PlayerRenameMenu extends Menu {
     private final PlayerNameMessages nameMessages;
     private final InteractionMessages interactionMessages;
     private final ErrorMessages errorMessages;
-    private final PlayerNameValidator validator;
+    private final PlayerNameValidator playerNameValidator;
 
     public PlayerRenameMenu(AppContext appContext) {
         super(appContext);
@@ -41,7 +41,7 @@ public class PlayerRenameMenu extends Menu {
         this.nameMessages = appContext.localizationContext().getMessages(MessageType.PLAYER_NAME);
         this.interactionMessages = appContext.localizationContext().getMessages(MessageType.INTERACTION);
         this.errorMessages = appContext.localizationContext().getMessages(MessageType.ERROR);
-        this.validator = new PlayerNameValidator(printer, nameMessages);
+        this.playerNameValidator = new PlayerNameValidator(printer, nameMessages);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class PlayerRenameMenu extends Menu {
 
         String playerName = optionalPlayerName.get();
 
-        if (!validator.validateAndPrintErrors(playerName)) {
+        if (!playerNameValidator.validateAndPrintErrors(playerName)) {
             return this;
         }
 
