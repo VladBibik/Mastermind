@@ -2,7 +2,6 @@ package dev.bibikvlad.mastermind.model.player;
 
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
-import dev.bibikvlad.utils.formatters.SQLiteTimestampFormatter;
 
 import java.time.LocalDateTime;
 
@@ -51,25 +50,5 @@ public class Player {
         PlayerConfig playerConfig = getPlayerConfig().withLogoColorsBundle(logoColorsBundle);
 
         return new Player(id, playerName, creationDate, playerConfig);
-    }
-
-    //TODO: Remove it after test phase is done!
-    @Override
-    public String toString() {
-        return "Player: \n"
-                + "Player ID: " + id
-                + ", Player Name = " + playerName
-                + ", Creation Date = " + SQLiteTimestampFormatter.format(creationDate)
-                + "\n    configurations:"
-                + "\n        Selected Language: " + playerConfig.locale().getNativeDisplayName()
-                + "\n        Selected Logo Border Color: " + playerConfig.logoColorsBundle()
-                .logoBorderColor().getDisplayName()
-                + "\n        Selected Logo Main Color: " + playerConfig.logoColorsBundle()
-                .logoMainColor().getDisplayName()
-                + "\n        Selected Logo Accent Color: " + playerConfig.logoColorsBundle()
-                .logoAccentColor().getDisplayName()
-                + "\n        Selected Logo Background Color: " + playerConfig.logoColorsBundle()
-                .logoBackgroundColor().getDisplayName()
-                + "\n";
     }
 }
