@@ -58,7 +58,7 @@ public class CreatePlayerMenu extends Menu {
 
         try {
             return new ProfileMenu(savePlayerAndBuildContext(playerName));
-        } catch (PlayerAlreadyExistException exception) {
+        } catch (PlayerAlreadyExistException _) {
             printer.printMessage(nameMessages.getPlayerAlreadyExistsError(playerName));
         }
 
