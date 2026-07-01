@@ -41,14 +41,14 @@ public class Player {
     }
 
     public Player withLocale(LocaleType localeType) {
-        PlayerConfig playerConfig = getPlayerConfig().withLocale(localeType);
+        PlayerConfig updatedConfig = getPlayerConfig().withLocale(localeType);
 
-        return new Player(id, playerName, creationDate, playerConfig);
+        return new Player(id, playerName, creationDate, updatedConfig);
     }
 
     public Player withLogoColorsBundle(LogoColorsBundle logoColorsBundle) {
-        PlayerConfig playerConfig = getPlayerConfig().withLogoColorsBundle(logoColorsBundle);
+        PlayerConfig updatedConfig = getPlayerConfig().withLogoColorsBundle(logoColorsBundle);
 
-        return new Player(id, playerName, creationDate, playerConfig);
+        return new Player(id, playerName, creationDate, updatedConfig);
     }
 }
