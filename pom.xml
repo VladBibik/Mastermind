@@ -9,6 +9,8 @@
     <version>1.0.0</version>
 
     <build>
+        <finalName>mastermind</finalName>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -22,6 +24,8 @@
                             </mainClass>
                         </transformer>
                     </transformers>
+
+                    <createDependencyReducedPom>false</createDependencyReducedPom>
                 </configuration>
                 <executions>
                     <execution>
