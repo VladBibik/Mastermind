@@ -35,7 +35,7 @@ public class ConsoleGameMessagesEnTest {
     @DisplayName("Returns correct Incorrect Guess Message String")
     void testIncorrectGuessMessage() {
         String result = gameMessages.getIncorrectGuess(10, 5, "rgby", "rbww");
-        String expected = "Turn 6 out of 10.\n" +
+        String expected = "Turn 6 of 10.\n" +
                 "Your guess: rbww            " + ClueGenerator.generate("rgby", "rbww");
 
         assertEquals(result, expected);
@@ -76,7 +76,7 @@ public class ConsoleGameMessagesEnTest {
                 + "\n"
                 + "The order of the response tiles does not necessarily match the colored characters.\n"
                 + "Type 'help', or 'rules' to read these instructions again\n"
-                + "Type 'close', or 'exit' to quit and show solution.\n";
+                + "Type 'close', or 'exit' to quit and show the solution.\n";
 
         assertEquals(result, expected);
     }
