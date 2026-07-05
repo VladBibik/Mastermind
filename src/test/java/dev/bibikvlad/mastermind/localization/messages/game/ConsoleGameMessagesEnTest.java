@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ConsoleGameMessagesEnTest {
-    private final ResourceBundle resourceBundle = ResourceBundle.getBundle("i18n.game_messages",
+    private final ResourceBundle resourceBundle = ResourceBundle.getBundle("i18n.game.game_messages",
             LocaleType.ENGLISH.getLocale());
     private final GameMessages gameMessages = new ConsoleGameMessages(resourceBundle);
 
