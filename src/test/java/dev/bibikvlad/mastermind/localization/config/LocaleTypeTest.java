@@ -3,12 +3,10 @@ package dev.bibikvlad.mastermind.localization.config;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Locale;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class LocaleTypeTest {
+class LocaleTypeTest {
     @Test
     @DisplayName("Returns correct locale type from locale index")
     void fromLocaleIndexTest() {
