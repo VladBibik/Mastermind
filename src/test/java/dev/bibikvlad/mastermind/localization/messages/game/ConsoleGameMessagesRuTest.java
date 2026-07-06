@@ -25,7 +25,7 @@ class ConsoleGameMessagesRuTest {
     @DisplayName("Returns correct Invalid Input Message String")
     void testInvalidInputMessage() {
         String result = gameMessages.getInvalidInput();
-        String expected = "Неверный формат ответа. Ответ должен включать только буквы: "
+        String expected = "Неверный формат ответа. Ответ должен содержать только буквы: "
                 + ConsoleColoredValidSymbols.getSymbols();
 
         assertEquals(result, expected);
