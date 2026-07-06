@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ConsoleGameMessagesRuTest {
     private final ResourceBundle resourceBundle = ResourceBundle
-            .getBundle("i18n.game_messages", LocaleType.RUSSIAN.getLocale());
+            .getBundle("i18n.game.game_messages", LocaleType.RUSSIAN.getLocale());
     private final GameMessages gameMessages = new ConsoleGameMessages(resourceBundle);
 
     @Test
