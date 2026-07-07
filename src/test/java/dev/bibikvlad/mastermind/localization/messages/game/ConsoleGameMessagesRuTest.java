@@ -35,7 +35,7 @@ class ConsoleGameMessagesRuTest {
     @DisplayName("Returns correct Incorrect Guess Message String")
     void testIncorrectGuessMessage() {
         String result = gameMessages.getIncorrectGuess(10, 5, "rgby", "rbww");
-        String expected = "Раунд: 6 из 10.\n" +
+        String expected = "Ход: 6 из 10.\n" +
                 "Ваш ответ: rbww            " + ClueGenerator.generate("rgby", "rbww");
 
         assertEquals(result, expected);
