@@ -55,9 +55,9 @@ class ConsoleGameMessagesRuTest {
     @DisplayName("Returns correct Win Message String")
     void testWinMessage() {
         String result = gameMessages.getWin("rgby");
-        String expected = "Вы Победили! " + Emojis.CELEBRATION_TADA +
+        String expected = "Вы победили! " + Emojis.CELEBRATION_TADA +
                 "\nВы Mastermind!\n" +
-                "Ответом была комбинация: " + InputVisualRepresentation.getVisualRepresentation("rgby");
+                "Решением была комбинация: " + InputVisualRepresentation.getVisualRepresentation("rgby");
 
         assertEquals(result, expected);
     }
