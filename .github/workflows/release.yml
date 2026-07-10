@@ -6,9 +6,19 @@ on:
       - 'v*'
 
 jobs:
-  test-trigger:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Say hello
-        run: echo "Release workflow started!"
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '24'
+          cache: maven
+
+      - name: Build and run tests
+        run: mvn verify
