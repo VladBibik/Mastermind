@@ -6,7 +6,7 @@
 
     <groupId>dev.bibikvlad</groupId>
     <artifactId>mastermind</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.2-test</version>
 
     <build>
         <finalName>mastermind</finalName>
