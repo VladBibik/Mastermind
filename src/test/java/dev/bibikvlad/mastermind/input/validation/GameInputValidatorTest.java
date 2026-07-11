@@ -1,6 +1,5 @@
-package dev.bibikvlad.mastermind.input;
+package dev.bibikvlad.mastermind.input.validation;
 
-import dev.bibikvlad.mastermind.input.validation.GameInputValidator;
 import dev.bibikvlad.mastermind.model.enums.MastermindColors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
