@@ -20,5 +20,33 @@ jobs:
           java-version: '24'
           cache: maven
 
+      - name: Read Maven project version
+        run: |
+          VERSION=$(mvn help:evaluate \
+            -Dexpression=project.version \
+            -q \
+            -DforceStdout)
+
+          echo "PROJECT_VERSION=$VERSION" >> $GITHUB_ENV
+          
+      - name: Read Git tag version
+        run: |
+          TAG="${{ github.ref_name }}"
+          TAG=${TAG#v}
+
+          echo "TAG_VERSION=$TAG" >> $GITHUB_ENV
+
+      - name: Verify versions match
+        run: |
+          echo "Maven version: $PROJECT_VERSION"
+          echo "Git tag:       $TAG_VERSION"
+
+          if [ "$PROJECT_VERSION" != "$TAG_VERSION" ]; then
+            echo "::error::Version mismatch!"
+            echo "::error::pom.xml: $PROJECT_VERSION"
+            echo "::error::Git tag: $TAG_VERSION"
+            exit 1
+          fi
+
       - name: Build and run tests
         run: mvn verify
