@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class GameInputValidatorTest {
+class GameInputValidatorTest {
     private static final int COMBINATION_LENGTH = 4;
 
     @Test
