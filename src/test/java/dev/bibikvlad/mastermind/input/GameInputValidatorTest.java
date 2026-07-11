@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.validators;
+package dev.bibikvlad.mastermind.input;
 
 import dev.bibikvlad.mastermind.input.validation.GameInputValidator;
 import dev.bibikvlad.mastermind.model.enums.MastermindColors;
