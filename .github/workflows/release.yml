@@ -54,7 +54,7 @@ jobs:
           fi
 
       - name: Build and run tests
-        run: mvn verify
+        run: mvn --batch-mode --no-transfer-progress verify
 
       - name: Create GitHub Release
         env:
