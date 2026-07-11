@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -38,6 +41,8 @@ jobs:
 
       - name: Verify versions match
         run: |
+          echo "Comparing project version with Git tag..."
+          
           echo "Maven version: $PROJECT_VERSION"
           echo "Git tag:       $TAG_VERSION"
 
