@@ -25,48 +25,65 @@ class ConsoleGameMessagesEnTest {
     @DisplayName("Returns correct Invalid Input Message String")
     void testInvalidInputMessage() {
         String result = gameMessages.getInvalidInput();
-        String expected = "Invalid guess. Must include only letters: "
-                + ConsoleColoredValidSymbols.getSymbols();
 
-        assertEquals(result, expected);
+        assertEquals(result, getExpectedInvalidInput());
     }
 
     @Test
     @DisplayName("Returns correct Incorrect Guess Message String")
     void testIncorrectGuessMessage() {
         String result = gameMessages.getIncorrectGuess(10, 5, "rgby", "rbww");
-        String expected = "Turn 6 of 10.\n" +
-                "Your guess: rbww            " + ClueGenerator.generate("rgby", "rbww");
 
-        assertEquals(result, expected);
+        assertEquals(result, getExpectedIncorrectGuess());
     }
 
     @Test
     @DisplayName("Returns correct Game Over Message String")
     void testGameOverMessage() {
         String result = gameMessages.getGameOver("rgby");
-        String expected = "Game Over! The solution was: "
-                + InputVisualRepresentation.getVisualRepresentation("rgby");
 
-        assertEquals(result, expected);
+        assertEquals(result, getExpectedGameOver());
     }
 
     @Test
     @DisplayName("Returns correct Win Message String")
     void testWinMessage() {
         String result = gameMessages.getWin("rgby");
-        String expected = "You Won! " + Emojis.CELEBRATION_TADA +
-                "\nYou are the Mastermind!\n" +
-                "Solution was: " + InputVisualRepresentation.getVisualRepresentation("rgby");
 
-        assertEquals(result, expected);
+        assertEquals(result, getExpectedWin());
     }
 
     @Test
     @DisplayName("Returns correct Rules Message String")
     void testRulesMessage() {
         String result = gameMessages.getRules();
-        String expected = "Puzzle contains 4 boxes. Each turn you choose from 6 colors.\n"
+
+        assertEquals(result, getExpectedRules());
+    }
+
+    String getExpectedInvalidInput() {
+        return "Invalid guess. Must include only letters: "
+                + ConsoleColoredValidSymbols.getSymbols();
+    }
+
+    String getExpectedIncorrectGuess() {
+        return "Turn 6 of 10.\n" +
+                "Your guess: rbww            " + ClueGenerator.generate("rgby", "rbww");
+    }
+
+    String getExpectedGameOver() {
+        return "Game Over! The solution was: "
+                + InputVisualRepresentation.getVisualRepresentation("rgby");
+    }
+
+    String getExpectedWin() {
+        return "You Won! " + Emojis.CELEBRATION_TADA +
+                "\nYou are the Mastermind!\n" +
+                "Solution was: " + InputVisualRepresentation.getVisualRepresentation("rgby");
+    }
+
+    String getExpectedRules() {
+        return "Puzzle contains 4 boxes. Each turn you choose from 6 colors.\n"
                 + "Color choices: " + ConsoleColoredValidSymbols.getSymbols() + "\n"
                 + "Example turn: ybgr\n"
                 + "Response:\n"
@@ -77,8 +94,6 @@ class ConsoleGameMessagesEnTest {
                 + "The order of the response tiles does not necessarily match the colored characters.\n"
                 + "Type 'help', or 'rules' to read these instructions again\n"
                 + "Type 'close', or 'exit' to quit and show the solution.\n";
-
-        assertEquals(result, expected);
     }
 
     @Test
