@@ -14,7 +14,7 @@ class ConsoleErrorMessagesEnTest {
     private final ErrorMessages errorMessages = new ConsoleErrorMessages(resourceBundle);
 
     @Test
-    @DisplayName("Returns correct Invalid Input Message String")
+    @DisplayName("Returns correct Stats Not Found Message String")
     void testStatsNotFoundMessage() {
         long playerId = 0;
         String result = errorMessages.getStatsNotFound(playerId);
