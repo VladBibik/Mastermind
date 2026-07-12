@@ -29,6 +29,30 @@ class ConsoleGameMessagesEnTest {
     }
 
     @Test
+    @DisplayName("Returns true if resource 'game_over' exists")
+    void testGameOverResourceExists() {
+        assertTrue(() -> resourceBundle.containsKey("game_over"));
+    }
+
+    @Test
+    @DisplayName("Returns true if resource 'rules' exists")
+    void testRulesResourceExists() {
+        assertTrue(() -> resourceBundle.containsKey("rules"));
+    }
+
+    @Test
+    @DisplayName("Returns true if resource 'win' exists")
+    void testWinResourceExists() {
+        assertTrue(() -> resourceBundle.containsKey("win"));
+    }
+
+    @Test
+    @DisplayName("Returns true if resource 'incorrect_guess' exists")
+    void testIncorrectGuessResourceExists() {
+        assertTrue(() -> resourceBundle.containsKey("incorrect_guess"));
+    }
+
+    @Test
     @DisplayName("Returns correct Invalid Input Message String")
     void testInvalidInputMessage() {
         String result = gameMessages.getInvalidInput();
