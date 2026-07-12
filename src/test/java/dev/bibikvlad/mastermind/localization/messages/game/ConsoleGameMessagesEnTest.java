@@ -61,6 +61,22 @@ class ConsoleGameMessagesEnTest {
         assertEquals(result, getExpectedRules());
     }
 
+    @Test
+    @DisplayName("Returns correct Ascii Logo String")
+    void testAsciiLogoString() {
+        LogoColorsBundle logoColorsBundle = new LogoColorsBundle(
+                ConsoleColor.ORCHID,
+                ConsoleColor.ORANGE,
+                ConsoleColor.BRIGHT_RED,
+                ConsoleColor.BACKGROUND_BLACK
+        );
+
+        String result = gameMessages.getAsciiLogo(logoColorsBundle);
+        String expected = ColoredAsciiLogo.getLogo(logoColorsBundle);
+
+        assertEquals(result, expected);
+    }
+
     String getExpectedInvalidInput() {
         return "Invalid guess. Must include only letters: "
                 + ConsoleColoredValidSymbols.getSymbols();
@@ -94,21 +110,5 @@ class ConsoleGameMessagesEnTest {
                 + "The order of the response tiles does not necessarily match the colored characters.\n"
                 + "Type 'help', or 'rules' to read these instructions again\n"
                 + "Type 'close', or 'exit' to quit and show the solution.\n";
-    }
-
-    @Test
-    @DisplayName("Returns correct Ascii Logo String")
-    void testAsciiLogoString() {
-        LogoColorsBundle logoColorsBundle = new LogoColorsBundle(
-                ConsoleColor.ORCHID,
-                ConsoleColor.ORANGE,
-                ConsoleColor.BRIGHT_RED,
-                ConsoleColor.BACKGROUND_BLACK
-        );
-
-        String result = gameMessages.getAsciiLogo(logoColorsBundle);
-        String expected = ColoredAsciiLogo.getLogo(logoColorsBundle);
-
-        assertEquals(result, expected);
     }
 }
