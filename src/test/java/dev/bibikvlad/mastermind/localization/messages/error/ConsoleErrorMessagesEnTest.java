@@ -22,7 +22,19 @@ class ConsoleErrorMessagesEnTest {
         assertEquals(result, getStatsNotFound());
     }
 
+    @Test
+    @DisplayName("Returns correct Last Selected Player Not Found Message String")
+    void testLastSelectedPlayerNotFoundMessage() {
+        String result = errorMessages.getLastSelectedPlayerNotFound();
+
+        assertEquals(result, getLastSelectedPlayerNotFound());
+    }
+
     String getStatsNotFound() {
         return "❌ No statistics found for player with ID 0.";
+    }
+
+    String getLastSelectedPlayerNotFound() {
+        return "❌ Last selected player could not be found.";
     }
 }
