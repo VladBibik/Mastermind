@@ -15,11 +15,18 @@ import org.junit.jupiter.api.Test;
 import java.util.ResourceBundle;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ConsoleGameMessagesEnTest {
     private final ResourceBundle resourceBundle = ResourceBundle.getBundle("i18n.game.game_messages",
             LocaleType.ENGLISH.getLocale());
     private final GameMessages gameMessages = new ConsoleGameMessages(resourceBundle);
+
+    @Test
+    @DisplayName("Returns true if resource 'invalid_input' exists")
+    void testInvalidInputResourceExists() {
+        assertTrue(() -> resourceBundle.containsKey("invalid_input"));
+    }
 
     @Test
     @DisplayName("Returns correct Invalid Input Message String")
