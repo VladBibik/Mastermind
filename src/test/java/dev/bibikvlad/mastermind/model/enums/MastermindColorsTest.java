@@ -9,10 +9,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class MastermindColorsTest {
+class MastermindColorsTest {
     @Test
     @DisplayName("Correctly returns enum from the index")
-    public void validIndexReturnsCorrectColor() {
+    void validIndexReturnsCorrectColor() {
         assertEquals(MastermindColors.RED, MastermindColors.fromColorIndex(0));
         assertEquals(MastermindColors.GREEN, MastermindColors.fromColorIndex(1));
         assertEquals(MastermindColors.YELLOW, MastermindColors.fromColorIndex(2));
@@ -23,7 +23,7 @@ public class MastermindColorsTest {
 
     @Test
     @DisplayName("Correctly returns enum from the color symbol")
-    public void validColorSymbolReturnsCorrectColor() {
+    void validColorSymbolReturnsCorrectColor() {
         assertEquals(MastermindColors.RED, MastermindColors.fromColorSymbol('r'));
         assertEquals(MastermindColors.GREEN, MastermindColors.fromColorSymbol('g'));
         assertEquals(MastermindColors.YELLOW, MastermindColors.fromColorSymbol('y'));
@@ -41,14 +41,14 @@ public class MastermindColorsTest {
 
     @Test
     @DisplayName("Throws exception on invalid index")
-    public void invalidIndexThrowsException() {
+    void invalidIndexThrowsException() {
         assertThrows(IllegalArgumentException.class, () -> MastermindColors.fromColorIndex(-1));
         assertThrows(IllegalArgumentException.class, () -> MastermindColors.fromColorIndex(6));
     }
 
     @Test
     @DisplayName("Throws exception on invalid character symbol")
-    public void invalidCharacterSymbolThrowsException() {
+    void invalidCharacterSymbolThrowsException() {
         List<Character> validCharacters = List.of('r', 'g', 'y', 'b', 'p', 'w', 'R', 'G', 'Y', 'B', 'P', 'W');
         List<Character> characters = new ArrayList<>();
 
@@ -69,7 +69,7 @@ public class MastermindColorsTest {
 
     @Test
     @DisplayName("Returns correct Color index")
-    public void returnCorrectColorIndex() {
+    void returnCorrectColorIndex() {
         assertEquals(0, MastermindColors.RED.getColorIndex());
         assertEquals(1, MastermindColors.GREEN.getColorIndex());
         assertEquals(2, MastermindColors.YELLOW.getColorIndex());
@@ -80,7 +80,7 @@ public class MastermindColorsTest {
 
     @Test
     @DisplayName("Returns correct Color name")
-    public void returnCorrectColorName() {
+    void returnCorrectColorName() {
         assertEquals("Red", MastermindColors.RED.getColorName());
         assertEquals("Green", MastermindColors.GREEN.getColorName());
         assertEquals("Yellow", MastermindColors.YELLOW.getColorName());
