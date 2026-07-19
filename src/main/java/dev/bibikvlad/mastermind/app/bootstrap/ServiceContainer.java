@@ -45,8 +45,6 @@ public final class ServiceContainer implements AutoCloseable {
     private PlayerStatisticsService playerStatisticsService;
 
     public ServiceContainer() {
-        DatabaseContext.initialize();
-
         this.connection = DatabaseContext.getConnection();
         this.transactionManager = new TransactionManager(connection);
     }
