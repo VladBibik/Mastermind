@@ -4,6 +4,10 @@ import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 
 public class DefaultLogoColorsBundle {
+    private DefaultLogoColorsBundle() {
+        throw new AssertionError("Utility class");
+    }
+
     public static LogoColorsBundle get() {
         return new LogoColorsBundle(
                 ConsoleColor.ORCHID,
