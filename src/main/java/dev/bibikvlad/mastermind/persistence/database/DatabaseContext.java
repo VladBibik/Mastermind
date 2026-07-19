@@ -10,6 +10,10 @@ import java.sql.Statement;
 public class DatabaseContext {
     private static final String DB_URL = "jdbc:sqlite:Mastermind.db";
 
+    private DatabaseContext() {
+        throw new AssertionError("Cannot instantiate DatabaseContext");
+    }
+
     public static Connection getConnection() throws PersistenceException {
         try {
             Connection connection = DriverManager.getConnection(DB_URL);
