@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.app.bootstrap;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
-import dev.bibikvlad.mastermind.persistence.database.DatabaseContext;
+import dev.bibikvlad.mastermind.persistence.database.DatabaseManager;
 import dev.bibikvlad.mastermind.persistence.database.TransactionManager;
 import dev.bibikvlad.mastermind.persistence.game.dao.GamesDAO;
 import dev.bibikvlad.mastermind.persistence.game.dao.jdbc.GameJdbcDAO;
@@ -45,9 +45,9 @@ public final class ServiceContainer implements AutoCloseable {
     private PlayerStatisticsService playerStatisticsService;
 
     public ServiceContainer() {
-        DatabaseContext.initialize();
+        DatabaseManager.initialize();
 
-        this.connection = DatabaseContext.getConnection();
+        this.connection = DatabaseManager.getConnection();
         this.transactionManager = new TransactionManager(connection);
     }
 

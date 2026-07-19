@@ -7,11 +7,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DatabaseContext {
+public class DatabaseManager {
     private static final String DB_URL = "jdbc:sqlite:Mastermind.db";
 
-    private DatabaseContext() {
-        throw new AssertionError("Cannot instantiate DatabaseContext");
+    private DatabaseManager() {
+        throw new AssertionError("Cannot instantiate DatabaseManager");
     }
 
     public static Connection getConnection() throws PersistenceException {
