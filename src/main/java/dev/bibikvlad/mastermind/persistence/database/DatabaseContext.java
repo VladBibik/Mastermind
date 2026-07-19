@@ -10,8 +10,6 @@ import java.sql.Statement;
 public class DatabaseContext {
     private static final String DB_URL = "jdbc:sqlite:Mastermind.db";
 
-    private static boolean initialized = false;
-
     private DatabaseContext() {
         throw new AssertionError("Cannot instantiate DatabaseContext");
     }
@@ -19,19 +17,20 @@ public class DatabaseContext {
     public static Connection getConnection() throws PersistenceException {
         try {
             Connection connection = DriverManager.getConnection(DB_URL);
-
             try (Statement statement = connection.createStatement()) {
                 statement.execute("PRAGMA foreign_keys=ON");
             }
-
-            if (!initialized) {
-                SchemaCreator.create(connection);
-                initialized = true;
-            }
-
             return connection;
         } catch (SQLException exception) {
             throw new PersistenceException("Problem obtaining database connection", exception);
+        }
+    }
+
+    public static void initialize() {
+        try (Connection connection = getConnection()) {
+            SchemaCreator.create(connection);
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to initialize database schema", exception);
         }
     }
 }
