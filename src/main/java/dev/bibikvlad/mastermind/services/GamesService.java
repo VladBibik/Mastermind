@@ -19,14 +19,6 @@ public class GamesService {
         return gamesRepository.save(newGame.playerId(), newGame.gameData());
     }
 
-    public boolean isPlayerPlayed(long playerId) {
-        return gamesRepository.countByPlayerId(playerId) > 0;
-    }
-
-    public boolean isAnyGamesPlayed() {
-        return gamesRepository.count() > 0;
-    }
-
     public int getMaxGamesPlayedByPlayer() {
         return gamesRepository.getMaxGamesPlayedByPlayer();
     }
