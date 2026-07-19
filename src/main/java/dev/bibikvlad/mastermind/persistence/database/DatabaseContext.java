@@ -19,13 +19,14 @@ public class DatabaseContext {
     public static Connection getConnection() throws PersistenceException {
         try {
             Connection connection = DriverManager.getConnection(DB_URL);
-            if (!initialized) {
-                SchemaCreator.create(connection);
-                initialized = true;
-            }
 
             try (Statement statement = connection.createStatement()) {
                 statement.execute("PRAGMA foreign_keys=ON");
+            }
+
+            if (!initialized) {
+                SchemaCreator.create(connection);
+                initialized = true;
             }
 
             return connection;
