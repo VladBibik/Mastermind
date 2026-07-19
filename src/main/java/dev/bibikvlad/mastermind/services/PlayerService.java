@@ -36,16 +36,8 @@ public class PlayerService {
         return playerRepository.save(player);
     }
 
-    public boolean saveOrUpdateLastSelectedPlayer(long playerId) {
-        return playerLastSelectedRepository.saveOrUpdate(playerId);
-    }
-
     public List<Player> getAllPlayers() {
         return playerRepository.findAll();
-    }
-
-    public Optional<Player> getPlayerByName(String playerName) {
-        return playerRepository.findByName(playerName);
     }
 
     public Optional<Player> loadLastSelectedPlayer() {
