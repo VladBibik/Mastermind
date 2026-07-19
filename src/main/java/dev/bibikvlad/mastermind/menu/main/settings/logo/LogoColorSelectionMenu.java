@@ -192,7 +192,7 @@ public class LogoColorSelectionMenu extends Menu {
     }
 
     private void resetToDefault() {
-        logoColorsBundle = DefaultLogoColorsBundle.get();
+        logoColorsBundle = DefaultLogoColorsBundle.INSTANCE;
     }
 
     private Menu saveAndReturnBack() {

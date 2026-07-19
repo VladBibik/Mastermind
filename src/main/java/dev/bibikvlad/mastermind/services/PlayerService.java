@@ -83,7 +83,7 @@ public class PlayerService {
     private PlayerConfig getCustomLocaleConfig(LocaleType localeType) {
         return new PlayerConfig(
                 localeType,
-                DefaultLogoColorsBundle.get()
+                DefaultLogoColorsBundle.INSTANCE
         );
     }
 }
