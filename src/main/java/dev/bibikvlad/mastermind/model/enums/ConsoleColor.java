@@ -120,12 +120,6 @@ public enum ConsoleColor {
                 () -> new IllegalArgumentException("No background color found for index " + index));
     }
 
-    //TODO: Need to think, do we even need this method?
-    public static ConsoleColor getByDisplayName(String displayName) {
-        return Optional.ofNullable(BY_DISPLAY_NAME.get(displayName)).orElseThrow(
-                () -> new IllegalArgumentException("Invalid Display Name: " + displayName));
-    }
-
     public static List<ConsoleColor> getByCategory(Category category) {
         return BY_CATEGORY.get(category);
     }
