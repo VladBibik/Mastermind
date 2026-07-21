@@ -42,7 +42,6 @@ public enum MessageType {
 
     private final Class<? extends LocalizedMessages> messageClass;
 
-
     MessageType(Class<? extends LocalizedMessages> messageClass) {
         this.messageClass = messageClass;
     }
