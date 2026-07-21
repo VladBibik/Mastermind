@@ -62,8 +62,8 @@ public enum ConsoleColor {
     private final String displayName;
     private final Category category;
 
-    private static final Map<Integer, ConsoleColor> BY_ID_FOREGROUND = new HashMap<>();
-    private static final Map<Integer, ConsoleColor> BY_ID_BACKGROUND = new HashMap<>();
+    private static final Map<Integer, ConsoleColor> BY_INDEX_FOREGROUND = new HashMap<>();
+    private static final Map<Integer, ConsoleColor> BY_INDEX_BACKGROUND = new HashMap<>();
     private static final Map<String, ConsoleColor> BY_DISPLAY_NAME = new HashMap<>();
     private static final Map<Category, List<ConsoleColor>> BY_CATEGORY =
             Arrays.stream(values()).collect(Collectors.groupingBy(ConsoleColor::getCategory));
@@ -76,13 +76,13 @@ public enum ConsoleColor {
         for (ConsoleColor consoleColor : Arrays.stream(ConsoleColor.values())
                 .filter(color -> color.getCategory() == Category.FOREGROUND)
                 .collect(Collectors.toSet())) {
-            BY_ID_FOREGROUND.put(consoleColor.getIndex(), consoleColor);
+            BY_INDEX_FOREGROUND.put(consoleColor.getIndex(), consoleColor);
         }
 
         for (ConsoleColor consoleColor : Arrays.stream(ConsoleColor.values())
                 .filter(color -> color.getCategory() == Category.BACKGROUND)
                 .collect(Collectors.toSet())) {
-            BY_ID_BACKGROUND.put(consoleColor.getIndex(), consoleColor);
+            BY_INDEX_BACKGROUND.put(consoleColor.getIndex(), consoleColor);
         }
     }
 
@@ -110,12 +110,12 @@ public enum ConsoleColor {
     }
 
     public static ConsoleColor fromForegroundColorByIndex(Integer index) {
-        return Optional.ofNullable(BY_ID_FOREGROUND.get(index)).orElseThrow(
+        return Optional.ofNullable(BY_INDEX_FOREGROUND.get(index)).orElseThrow(
                 () -> new IllegalArgumentException("No foreground color found for index " + index));
     }
 
     public static ConsoleColor fromBackgroundColorByIndex(Integer index) {
-        return Optional.ofNullable(BY_ID_BACKGROUND.get(index)).orElseThrow(
+        return Optional.ofNullable(BY_INDEX_BACKGROUND.get(index)).orElseThrow(
                 () -> new IllegalArgumentException("No background color found for index " + index));
     }
 
