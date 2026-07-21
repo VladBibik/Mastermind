@@ -32,13 +32,13 @@ public class ColorSelectionMenu {
     public ConsoleColor selectForegroundColor() {
         displayForegroundColors();
 
-        return selectColor(ConsoleColor::getForegroundColorByIndex);
+        return selectColor(ConsoleColor::fromForegroundColorByIndex);
     }
 
     public ConsoleColor selectBackgroundColor() {
         displayBackgroundColors();
 
-        return selectColor(ConsoleColor::getBackgroundColorByIndex);
+        return selectColor(ConsoleColor::fromBackgroundColorByIndex);
     }
 
     private ConsoleColor selectColor(Function<Integer, ConsoleColor> colorSelector) {
