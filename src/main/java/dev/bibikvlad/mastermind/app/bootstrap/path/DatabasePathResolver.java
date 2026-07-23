@@ -2,10 +2,10 @@ package dev.bibikvlad.mastermind.app.bootstrap.path;
 
 import dev.bibikvlad.mastermind.app.bootstrap.MastermindAppLauncher;
 
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class DatabasePathResolver {
     public Path getDatabasePath() {
