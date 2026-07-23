@@ -10,11 +10,12 @@ public class PortableDatabaseLocationProvider implements DatabaseLocationProvide
     @Override
     public Path getDatabasePath() {
         try {
-            Path jarDirectory = Paths.get(MastermindAppLauncher.class
+            Path jarLocation = Paths.get(MastermindAppLauncher.class
                     .getProtectionDomain()
                     .getCodeSource()
                     .getLocation()
                     .toURI());
+            Path jarDirectory = jarLocation.getParent();
 
             return jarDirectory.resolve("mastermind.db");
 
