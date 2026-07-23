@@ -8,6 +8,20 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class DatabasePathResolver {
+    public Path getDatabasePath() {
+        DatabaseDeploymentModeFactory factory = new DatabaseDeploymentModeFactory();
+
+        if (!isNotContainer()) {
+            return factory.getPath(DeploymentMode.CONTAINER);
+        }
+
+        if (isDevelopment()) {
+            return factory.getPath(DeploymentMode.DEVELOPMENT);
+        } else {
+            return factory.getPath(DeploymentMode.PORTABLE);
+        }
+    }
+
     private boolean isNotContainer() {
         return System.getenv("MASTERMIND_RUNTIME").isEmpty();
     }
