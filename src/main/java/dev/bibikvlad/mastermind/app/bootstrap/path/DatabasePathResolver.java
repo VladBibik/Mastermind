@@ -10,16 +10,21 @@ import java.nio.file.Path;
 public class DatabasePathResolver {
     public Path getDatabasePath() {
         DatabaseDeploymentModeFactory factory = new DatabaseDeploymentModeFactory();
+        DatabaseLocationProvider provider;
 
         if (isContainer()) {
-            return factory.getPath(DeploymentMode.CONTAINER);
+            provider = factory.getProvider(DeploymentMode.CONTAINER);
+
+            return provider.getDatabasePath();
         }
 
         if (isDevelopment()) {
-            return factory.getPath(DeploymentMode.DEVELOPMENT);
+            provider = factory.getProvider(DeploymentMode.DEVELOPMENT);
         } else {
-            return factory.getPath(DeploymentMode.PORTABLE);
+            provider = factory.getProvider(DeploymentMode.PORTABLE);
         }
+
+        return provider.getDatabasePath();
     }
 
     private boolean isContainer() {
