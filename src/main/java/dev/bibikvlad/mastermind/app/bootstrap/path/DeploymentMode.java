@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.app.bootstrap.path;
 
 public enum DeploymentMode {
-    DEPLOYMENT,
+    DEVELOPMENT,
     PORTABLE,
     CONTAINER
 }
