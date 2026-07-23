@@ -11,7 +11,7 @@ public class DatabasePathResolver {
     public Path getDatabasePath() {
         DatabaseDeploymentModeFactory factory = new DatabaseDeploymentModeFactory();
 
-        if (!isNotContainer()) {
+        if (isContainer()) {
             return factory.getPath(DeploymentMode.CONTAINER);
         }
 
@@ -22,8 +22,8 @@ public class DatabasePathResolver {
         }
     }
 
-    private boolean isNotContainer() {
-        return System.getenv("MASTERMIND_RUNTIME").isEmpty();
+    private boolean isContainer() {
+        return System.getenv("MASTERMIND_RUNTIME") != null;
     }
 
     private boolean isDevelopment() {
