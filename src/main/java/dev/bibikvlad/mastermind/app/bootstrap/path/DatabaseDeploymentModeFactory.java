@@ -1,18 +1,16 @@
 package dev.bibikvlad.mastermind.app.bootstrap.path;
 
-import java.nio.file.Path;
-
 public class DatabaseDeploymentModeFactory {
-    public Path getPath(DeploymentMode deploymentMode) {
+    public DatabaseLocationProvider getDatabaseLocationProvider(DeploymentMode deploymentMode) {
         switch (deploymentMode) {
             case DEVELOPMENT -> {
-                return new DevelopmentDatabaseLocationProvider().getDatabasePath();
+                return new DevelopmentDatabaseLocationProvider();
             }
             case PORTABLE -> {
-                return new PortableDatabaseLocationProvider().getDatabasePath();
+                return new PortableDatabaseLocationProvider();
             }
             case CONTAINER -> {
-                return new ContainerDatabaseLocationProvider().getDatabasePath();
+                return new ContainerDatabaseLocationProvider();
             }
             default -> throw new IllegalArgumentException("Unknown deployment mode " + deploymentMode);
         }
