@@ -27,9 +27,13 @@ public class DatabasePathResolver {
     }
 
     private boolean isDevelopment() {
-        URL location = MastermindAppLauncher.class.getProtectionDomain().getCodeSource().getLocation();
-        Path path = Paths.get(location.getPath());
+        try {
+            URI location = MastermindAppLauncher.class.getProtectionDomain().getCodeSource().getLocation().toURI();
 
-        return Files.isDirectory(path);
+            return Files.isDirectory(Path.of(location));
+        } catch (URISyntaxException exception) {
+            //TODO: Think about exception handling logic!
+            throw new RuntimeException(exception);
+        }
     }
 }
