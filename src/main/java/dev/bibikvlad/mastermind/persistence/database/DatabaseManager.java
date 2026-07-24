@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.persistence.database;
 
-import dev.bibikvlad.mastermind.app.bootstrap.path.DatabasePathResolver;
+import dev.bibikvlad.mastermind.app.bootstrap.path.DatabaseLocationResolver;
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 
 import java.sql.Connection;
@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseManager {
-    private static final String DATABASE_URL = new DatabasePathResolver().getJdbcUrl();
+    private static final String DATABASE_URL = new DatabaseLocationResolver().getJdbcUrl();
 
     private DatabaseManager() {
         throw new AssertionError("Cannot instantiate DatabaseManager");
