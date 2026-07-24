@@ -1,5 +1,7 @@
 package dev.bibikvlad.mastermind.app.bootstrap.path;
 
+import dev.bibikvlad.mastermind.exceptions.PersistenceException;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,9 +15,8 @@ public class ContainerDatabaseLocationProvider implements DatabaseLocationProvid
             Files.createDirectories(dataDirectory);
 
             return dataDirectory.resolve("mastermind.db");
-            //TODO: Think about exception handling logic!
         } catch (IOException exception) {
-            throw new RuntimeException(exception);
+            throw new PersistenceException("Failed to create database directory '/data'.", exception);
         }
     }
 }
