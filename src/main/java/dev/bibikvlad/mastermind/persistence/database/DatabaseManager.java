@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseManager {
+    //TODO: Maybe we should make DatabasePathResolver static?
     private static final String DATABASE_URL =
             "jdbc:sqlite:" + new DatabasePathResolver().getDatabasePath();
 
