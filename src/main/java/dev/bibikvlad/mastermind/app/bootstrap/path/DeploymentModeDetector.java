@@ -31,7 +31,7 @@ public class DeploymentModeDetector {
 
             return Files.isDirectory(Path.of(location));
         } catch (URISyntaxException exception) {
-            throw new PersistenceException("Failed to determine if a location is directory or not.", exception);
+            throw new PersistenceException("Failed to determine application deployment mode.", exception);
         }
     }
 }
