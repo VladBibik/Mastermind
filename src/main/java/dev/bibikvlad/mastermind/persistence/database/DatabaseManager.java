@@ -9,13 +9,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseManager {
+    private static final String DATABASE_URL =
+            "jdbc:sqlite:" + new DatabasePathResolver().getDatabasePath();
+
     private DatabaseManager() {
         throw new AssertionError("Cannot instantiate DatabaseManager");
     }
 
     public static Connection getConnection() throws PersistenceException {
         try {
-            Connection connection = DriverManager.getConnection(buildDatabasePath());
+            Connection connection = DriverManager.getConnection(DATABASE_URL);
             try (Statement statement = connection.createStatement()) {
                 statement.execute("PRAGMA foreign_keys=ON");
             }
@@ -31,11 +34,5 @@ public class DatabaseManager {
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to initialize database schema", exception);
         }
-    }
-
-    private static String buildDatabasePath() {
-        DatabasePathResolver resolver = new DatabasePathResolver();
-
-        return "jdbc:sqlite:" + resolver.getDatabasePath();
     }
 }
