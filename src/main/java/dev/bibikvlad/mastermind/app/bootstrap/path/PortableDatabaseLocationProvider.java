@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.app.bootstrap.path;
 
 import dev.bibikvlad.mastermind.app.bootstrap.MastermindAppLauncher;
+import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 
 import java.net.URISyntaxException;
 import java.nio.file.Path;
@@ -18,10 +19,8 @@ public class PortableDatabaseLocationProvider implements DatabaseLocationProvide
             Path jarDirectory = jarLocation.getParent();
 
             return jarDirectory.resolve("mastermind.db");
-
-            //TODO: Think about exception handling logic!
         } catch (URISyntaxException exception) {
-            throw new RuntimeException(exception);
+            throw new PersistenceException("Failed to determine portable database location.", exception);
         }
     }
 }
