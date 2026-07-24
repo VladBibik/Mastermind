@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.app.bootstrap.path;
 
 import dev.bibikvlad.mastermind.app.bootstrap.MastermindAppLauncher;
+import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -30,8 +31,7 @@ public class DeploymentModeDetector {
 
             return Files.isDirectory(Path.of(location));
         } catch (URISyntaxException exception) {
-            //TODO: Think about exception handling logic!
-            throw new RuntimeException(exception);
+            throw new PersistenceException("Failed to determine if a location is directory or not.", exception);
         }
     }
 }
