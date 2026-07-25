@@ -16,7 +16,6 @@ import dev.bibikvlad.mastermind.model.player.Player;
 import java.util.Optional;
 
 public class MastermindAppLauncher {
-    //TODO: Fix those annoying Warnings on the launch!
     public static void main(String[] args) {
         Printer printer = new ConsolePrinter();
 
