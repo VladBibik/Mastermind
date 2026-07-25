@@ -22,7 +22,7 @@ public class DeploymentModeDetector {
     }
 
     private boolean isContainer() {
-        return System.getenv("MASTERMIND_RUNTIME") != null;
+        return "true".equalsIgnoreCase(System.getenv("MASTERMIND_RUNTIME"));
     }
 
     private boolean isDevelopment() {
