@@ -2,7 +2,7 @@ package dev.bibikvlad.mastermind.app.bootstrap.path;
 
 public class DatabaseLocationResolver {
     public String getJdbcUrl() {
-        DatabaseDeploymentModeFactory factory = new DatabaseDeploymentModeFactory();
+        DatabaseLocationProviderFactory factory = new DatabaseLocationProviderFactory();
         DeploymentModeDetector detector = new DeploymentModeDetector();
 
         DeploymentMode deploymentMode = detector.detect();

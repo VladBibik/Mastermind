@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.app.bootstrap.path;
 
-public class DatabaseDeploymentModeFactory {
+public class DatabaseLocationProviderFactory {
     public DatabaseLocationProvider getProvider(DeploymentMode deploymentMode) {
         switch (deploymentMode) {
             case DEVELOPMENT -> {
