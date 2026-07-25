@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.app.bootstrap.path;
+package dev.bibikvlad.mastermind.app.bootstrap.path.provider;
 
 import java.nio.file.Path;
 
