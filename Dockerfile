@@ -6,4 +6,4 @@ COPY target/mastermind.jar mastermind.jar
 
 ENV MASTERMIND_RUNTIME=true
 
-ENTRYPOINT ["java", "-jar", "mastermind.jar"]
+ENTRYPOINT ["java", "--enable-native-access=ALL-UNNAMED", "-jar", "mastermind.jar"]
