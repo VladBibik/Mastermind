@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.app.bootstrap.path;
+package dev.bibikvlad.mastermind.app.bootstrap.path.mode;
 
 import dev.bibikvlad.mastermind.app.bootstrap.MastermindAppLauncher;
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;

@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.app.bootstrap.path;
+package dev.bibikvlad.mastermind.app.bootstrap.path.mode;
 
 public enum DeploymentMode {
     DEVELOPMENT,
