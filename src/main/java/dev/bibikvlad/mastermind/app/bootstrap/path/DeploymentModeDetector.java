@@ -16,9 +16,9 @@ public class DeploymentModeDetector {
 
         if (isDevelopment()) {
             return DeploymentMode.DEVELOPMENT;
-        } else {
-            return DeploymentMode.PORTABLE;
         }
+
+        return DeploymentMode.PORTABLE;
     }
 
     private boolean isContainer() {
