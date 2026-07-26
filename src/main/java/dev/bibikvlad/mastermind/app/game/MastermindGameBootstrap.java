@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.app.game;
 
+import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.game.MastermindConsoleGame;
 import dev.bibikvlad.mastermind.game.RandomAnswerGenerator;
@@ -18,19 +19,19 @@ public class MastermindGameBootstrap {
     private final Parser parser;
     private final Printer printer;
 
-    public MastermindGameBootstrap(LocalizationContext localizationContext, LogoColorsBundle logoColorsBundle,
-                                   Parser parser, Printer printer) {
-        this.localizationContext = localizationContext;
-        this.logoColorsBundle = logoColorsBundle;
-        this.parser = parser;
-        this.printer = printer;
+    public MastermindGameBootstrap(AppContext appContext) {
+        this.localizationContext = appContext.localizationContext();
+        this.logoColorsBundle = appContext.currentPlayer().getPlayerConfig().logoColorsBundle();
+        this.parser = appContext.parser();
+        this.printer = appContext.printer();
     }
 
     public GameData launch() {
         GameMessages gameMessages = localizationContext.getMessages(MessageType.GAME);
         GameMessagePrinter gameMessagePrinter = new GameMessagePrinter(printer, gameMessages);
+        LowerCaseParser lowerCaseParser = new LowerCaseParser(parser);
 
-        MastermindConsoleGame game = new MastermindConsoleGame(gameMessagePrinter, new LowerCaseParser(parser),
+        MastermindConsoleGame game = new MastermindConsoleGame(gameMessagePrinter, lowerCaseParser,
                 RandomAnswerGenerator.generate(), logoColorsBundle);
 
         return TimedGameRunner.launch(game);

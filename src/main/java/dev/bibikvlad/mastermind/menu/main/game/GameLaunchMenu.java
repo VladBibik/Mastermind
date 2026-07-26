@@ -9,9 +9,8 @@ import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.game.GameMenuMessages;
-import dev.bibikvlad.mastermind.menu.main.MainMenu;
 import dev.bibikvlad.mastermind.menu.core.Menu;
-import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
+import dev.bibikvlad.mastermind.menu.main.MainMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.GamesService;
 
@@ -29,13 +28,12 @@ public class GameLaunchMenu extends Menu {
         this.gamesService = appContext.services().getGamesService();
         this.currentPlayer = appContext.currentPlayer();
 
-        LogoColorsBundle logoBundle = currentPlayer.getPlayerConfig().logoColorsBundle();
         LocalizationContext localizationContext = appContext.localizationContext();
 
         this.gameMenuMessages = localizationContext.getMessages(MessageType.GAME_MENU);
         this.parser = appContext.parser();
         this.printer = appContext.printer();
-        this.mastermindGameLauncher = new MastermindGameBootstrap(localizationContext, logoBundle, parser, printer);
+        this.mastermindGameLauncher = new MastermindGameBootstrap(appContext);
     }
 
     @Override
