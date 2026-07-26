@@ -1,7 +1,7 @@
 package dev.bibikvlad.utils.formatters;
 
 public class ClockDisplayFormatter {
-    private static final long MAX_DISPLAY_MILLIS = (99 * 60 * 1000) + (99 * 1000) + 999;
+    private static final long MAX_DISPLAY_MILLIS = (long) (99 * 60 * 1000) + (99 * 1000) + 999;
     private static final String MAX_TIME = "99:99:999";
 
     private ClockDisplayFormatter() {
