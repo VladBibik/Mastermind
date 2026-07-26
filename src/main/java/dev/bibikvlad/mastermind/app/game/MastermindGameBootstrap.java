@@ -5,6 +5,7 @@ import dev.bibikvlad.mastermind.game.MastermindConsoleGame;
 import dev.bibikvlad.mastermind.game.RandomAnswerGenerator;
 import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.game.presentation.GameMessagePrinter;
+import dev.bibikvlad.mastermind.input.parser.ConsoleInputParser;
 import dev.bibikvlad.mastermind.input.parser.LowerCaseParser;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
@@ -24,7 +25,7 @@ public class MastermindGameBootstrap {
     public GameData launch() {
         GameMessages gameMessages = localizationContext.getMessages(MessageType.GAME);
         GameMessagePrinter printer = new GameMessagePrinter(new ConsolePrinter(), gameMessages);
-        Parser parser = new LowerCaseParser();
+        Parser parser = new LowerCaseParser(new ConsoleInputParser());
 
         MastermindConsoleGame game = new MastermindConsoleGame(printer, parser,
                 RandomAnswerGenerator.generate(), logoColorsBundle);
