@@ -19,9 +19,3 @@ public class ClockDisplayFormatter {
         return String.format("%02d:%02d:%03d", minutes, seconds, millis);
     }
 }
-
-class Test {
-    public static void main(String[] args) {
-        System.out.println(ClockDisplayFormatter.format(563456));
-    }
-}
