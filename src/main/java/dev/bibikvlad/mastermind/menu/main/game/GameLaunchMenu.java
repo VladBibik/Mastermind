@@ -68,7 +68,7 @@ public class GameLaunchMenu extends Menu {
                 if (selectedNumber != 0) {
                     launchGame();
                 }
-            } catch (NumberFormatException exception) {
+            } catch (NumberFormatException _) {
                 launchGame();
             }
         }
