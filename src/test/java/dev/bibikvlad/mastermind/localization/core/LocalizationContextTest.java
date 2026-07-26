@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //TODO: Add more tests!
-public class LocalizationContextTest {
+class LocalizationContextTest {
     private static GameMessages gameMessages;
 
     @BeforeAll
@@ -24,7 +24,7 @@ public class LocalizationContextTest {
     @Test
     @DisplayName("getGameMessages() returns expected English win message")
     void getGameMessagesReturnsExpectedEnglishWinMessage() {
-        String ANSWER = "RGBW";
+        final String ANSWER = "RGBW";
         assertEquals("You Won! " + Emojis.CELEBRATION_TADA + "\n" +
                         "You are the Mastermind!\n" +
                         "Solution was: " + InputVisualRepresentation.getVisualRepresentation(ANSWER),
