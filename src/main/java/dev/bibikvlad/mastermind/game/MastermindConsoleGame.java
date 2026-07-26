@@ -43,7 +43,7 @@ public class MastermindConsoleGame {
                 return new GameOutcome(gameStateManager.getCurrentTurn(), GameResult.LOSE);
             }
 
-            String userInput = parser.parseUserInput();
+            String userInput = parser.parse();
 
             if (gameCommandHandler.handle(userInput)) {
                 return new GameOutcome(gameStateManager.getCurrentTurn(), GameResult.CANCELED);

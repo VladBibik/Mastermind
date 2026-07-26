@@ -124,6 +124,6 @@ public class WinPercentageLeaderboardMenu extends Menu {
 
         shouldRenderMenu = true;
 
-        parser.parseUserInput();
+        parser.parse();
     }
 }

@@ -121,6 +121,6 @@ public class PlayerSelectionMenu extends Menu {
     private void confirmToContinue(InteractionMessages updatedInteractionMessages) {
         printer.printMessage(updatedInteractionMessages.getPressEnter());
 
-        parser.parseUserInput();
+        parser.parse();
     }
 }

@@ -77,6 +77,6 @@ public class FirstTimePlayerCreation {
     private void confirmToContinue() {
         printer.printMessage(interactionMessages.getPressEnter());
 
-        parser.parseUserInput();
+        parser.parse();
     }
 }

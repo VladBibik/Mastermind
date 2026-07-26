@@ -63,7 +63,7 @@ public class DeletePlayerMenu extends Menu {
     private boolean isDeletionConfirmed(String playerName) {
         printer.printMessage(deletePlayerMenuMessages.getDeleteConfirmation(playerName));
 
-        String userInput = parser.parseUserInput();
+        String userInput = parser.parse();
 
         return userInput.equals(DELETE_CONFIRMATION_KEY);
     }
@@ -116,6 +116,6 @@ public class DeletePlayerMenu extends Menu {
     private void confirmToContinue() {
         printer.printMessage(interactionMessages.getPressEnter());
 
-        parser.parseUserInput();
+        parser.parse();
     }
 }

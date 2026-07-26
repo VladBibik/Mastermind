@@ -233,6 +233,6 @@ public class LeaderboardMenu extends Menu {
 
         shouldRenderMenu = true;
 
-        parser.parseUserInput();
+        parser.parse();
     }
 }

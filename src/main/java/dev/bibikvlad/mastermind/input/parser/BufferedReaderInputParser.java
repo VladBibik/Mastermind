@@ -11,7 +11,7 @@ public class BufferedReaderInputParser implements Parser {
     }
 
     @Override
-    public String parseUserInput() {
+    public String parse() {
         try {
            return bufferedReader.readLine().toLowerCase();
         } catch (IOException exception) {

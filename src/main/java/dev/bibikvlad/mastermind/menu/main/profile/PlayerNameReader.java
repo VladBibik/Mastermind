@@ -26,7 +26,7 @@ public class PlayerNameReader {
         if (input.isExit()) {
             printer.printMessage(messages.getReservedCommandConfirmation(input.userInput()));
 
-            String confirmation = parser.parseUserInput().trim().toLowerCase();
+            String confirmation = parser.parse().trim().toLowerCase();
 
             if (!GlobalMenuCommands.YES.contains(confirmation)) {
                 return Optional.empty();

@@ -8,7 +8,7 @@ public class ConsoleInputParser implements Parser {
     private final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
     @Override
-    public String parseUserInput() {
+    public String parse() {
         try {
             return bufferedReader.readLine();
         } catch (IOException exception) {

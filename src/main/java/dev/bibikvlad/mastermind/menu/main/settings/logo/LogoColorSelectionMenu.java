@@ -114,7 +114,7 @@ public class LogoColorSelectionMenu extends Menu {
         printer.printMessage(ColoredAsciiLogo.getLogo(logoColorsBundle));
         printer.printMessage(interactionMessages.getPressEnter());
 
-        parser.parseUserInput();
+        parser.parse();
 
         shouldRenderMenu = true;
     }
@@ -188,7 +188,7 @@ public class LogoColorSelectionMenu extends Menu {
 
         shouldRenderMenu = true;
 
-        parser.parseUserInput();
+        parser.parse();
     }
 
     private void resetToDefault() {

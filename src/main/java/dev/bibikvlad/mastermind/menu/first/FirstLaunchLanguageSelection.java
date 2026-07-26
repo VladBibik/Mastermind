@@ -34,7 +34,7 @@ public class FirstLaunchLanguageSelection {
                 shouldRenderMenu = false;
             }
 
-            String userInput = parser.parseUserInput();
+            String userInput = parser.parse();
 
             if (StringEmptyValidator.isNullOrEmpty(userInput)) {
                 printer.printMessage(EMPTY_INPUT_ERROR);

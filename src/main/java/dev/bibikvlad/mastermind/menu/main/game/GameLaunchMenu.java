@@ -64,7 +64,7 @@ public class GameLaunchMenu extends Menu {
             printer.printMessage(gameMenuMessages.playAgain());
 
             try {
-                String input = parser.parseUserInput();
+                String input = parser.parse();
                 int selectedNumber = Integer.parseInt(input);
 
                 if (selectedNumber != 0) {

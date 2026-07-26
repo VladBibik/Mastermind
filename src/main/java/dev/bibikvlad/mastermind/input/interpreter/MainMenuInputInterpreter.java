@@ -7,7 +7,7 @@ import java.util.Optional;
 public class MainMenuInputInterpreter {
 
     public static Optional<Integer> readSelection(Parser parser) {
-        String userInput = parser.parseUserInput().trim().toLowerCase();
+        String userInput = parser.parse().trim().toLowerCase();
 
         if (GlobalMenuCommands.EXIT.contains(userInput)) {
             return Optional.empty();

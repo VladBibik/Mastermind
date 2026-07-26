@@ -100,6 +100,6 @@ public class LanguageSelectionMenu extends Menu {
         printer.printMessage(messages.getLanguageChanged(localeType.getNativeDisplayName()));
         printer.printMessage(messages.getBackToSettings());
 
-        parser.parseUserInput();
+        parser.parse();
     }
 }
