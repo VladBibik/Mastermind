@@ -35,7 +35,7 @@ public class GameLaunchMenu extends Menu {
         this.gameMenuMessages = localizationContext.getMessages(MessageType.GAME_MENU);
         this.parser = appContext.parser();
         this.printer = appContext.printer();
-        this.mastermindGameLauncher = new MastermindGameBootstrap(localizationContext, logoBundle, parser);
+        this.mastermindGameLauncher = new MastermindGameBootstrap(localizationContext, logoBundle, parser, printer);
     }
 
     @Override
