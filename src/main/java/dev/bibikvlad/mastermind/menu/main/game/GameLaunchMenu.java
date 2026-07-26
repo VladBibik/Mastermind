@@ -61,14 +61,9 @@ public class GameLaunchMenu extends Menu {
         if (gameResult.equals(GameResult.LOSE) || gameResult.equals(GameResult.WIN)) {
             printer.printMessage(gameMenuMessages.playAgain());
 
-            try {
-                String input = parser.parse();
-                int selectedNumber = Integer.parseInt(input);
+            String input = parser.parse();
 
-                if (selectedNumber != 0) {
-                    launchGame();
-                }
-            } catch (NumberFormatException _) {
+            if ("0".equals(input)) {
                 launchGame();
             }
         }
