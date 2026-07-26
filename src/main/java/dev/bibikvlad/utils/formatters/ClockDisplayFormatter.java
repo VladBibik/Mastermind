@@ -4,6 +4,10 @@ public class ClockDisplayFormatter {
     private static final long MAX_DISPLAY_MILLIS = (99 * 60 * 1000) + (99 * 1000) + 999;
     private static final String MAX_TIME = "99:99:999";
 
+    private ClockDisplayFormatter() {
+        throw new AssertionError("Cannot instantiate ClockDisplayFormatter");
+    }
+
     public static String format(long milliseconds) {
         if (milliseconds >= MAX_DISPLAY_MILLIS) {
             return MAX_TIME;
