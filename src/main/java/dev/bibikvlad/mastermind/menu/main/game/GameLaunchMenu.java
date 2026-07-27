@@ -5,6 +5,7 @@ import dev.bibikvlad.mastermind.app.game.MastermindGameBootstrap;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.game.data.GameResult;
+import dev.bibikvlad.mastermind.input.interpreter.GlobalMenuCommands;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
@@ -63,7 +64,7 @@ public class GameLaunchMenu extends Menu {
 
             String input = parser.parse();
 
-            if ("0".equals(input)) {
+            if (!GlobalMenuCommands.EXIT.contains(input)) {
                 launchGame();
             }
         }
