@@ -38,6 +38,10 @@ import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.logo.co
 import dev.bibikvlad.mastermind.localization.messages.menu.main.stats.StatsMessages;
 
 public class MessageRegistryInitializer {
+    private MessageRegistryInitializer() {
+        throw new AssertionError("Cannot instantiate MessageRegistryInitializer");
+    }
+
     public static MessageFactoryRegistry createAndPopulateRegistry() {
         MessageFactoryRegistry messageFactoryRegistry = new MessageFactoryRegistry();
 
