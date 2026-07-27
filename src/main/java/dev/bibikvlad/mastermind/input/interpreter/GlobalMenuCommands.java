@@ -3,6 +3,10 @@ package dev.bibikvlad.mastermind.input.interpreter;
 import java.util.Set;
 
 public class GlobalMenuCommands {
+    private GlobalMenuCommands() {
+        throw new AssertionError("cannot instantiate GlobalMenuCommands");
+    }
+
     public static final Set<String> PLAY = Set.of(
             "play",
             "",
