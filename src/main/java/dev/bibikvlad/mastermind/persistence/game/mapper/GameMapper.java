@@ -4,7 +4,7 @@ import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.game.data.GameOutcome;
 import dev.bibikvlad.mastermind.game.data.GameResult;
 import dev.bibikvlad.mastermind.model.game.Game;
-import dev.bibikvlad.utils.formatters.SQLiteTimestampParser;
+import dev.bibikvlad.mastermind.persistence.sqlite.SQLiteTimestampParser;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
