@@ -2,7 +2,7 @@ package dev.bibikvlad.mastermind.persistence.player.mapper;
 
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;
-import dev.bibikvlad.utils.formatters.SQLiteTimestampFormatter;
+import dev.bibikvlad.utils.formatters.SQLiteTimestampParser;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +14,7 @@ public class PlayerMapper {
         return new Player(
                 resultSet.getLong("player_id"),
                 resultSet.getString("player_name"),
-                SQLiteTimestampFormatter.parse(resultSet.getString("created_at")),
+                SQLiteTimestampParser.parse(resultSet.getString("created_at")),
                 playerConfig
         );
     }

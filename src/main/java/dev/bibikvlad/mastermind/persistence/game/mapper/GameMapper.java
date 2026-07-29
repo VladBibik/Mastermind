@@ -4,7 +4,7 @@ import dev.bibikvlad.mastermind.game.data.GameData;
 import dev.bibikvlad.mastermind.game.data.GameOutcome;
 import dev.bibikvlad.mastermind.game.data.GameResult;
 import dev.bibikvlad.mastermind.model.game.Game;
-import dev.bibikvlad.utils.formatters.SQLiteTimestampFormatter;
+import dev.bibikvlad.utils.formatters.SQLiteTimestampParser;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,6 +20,6 @@ public class GameMapper {
                                 GameResult.valueOf(resultSet.getString("result"))
                         ),
                         resultSet.getLong("duration_milliseconds")),
-                SQLiteTimestampFormatter.parse(resultSet.getString("started_at")));
+                SQLiteTimestampParser.parse(resultSet.getString("started_at")));
     }
 }
