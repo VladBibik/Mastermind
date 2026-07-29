@@ -2,7 +2,6 @@ package dev.bibikvlad.utils.formatters;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 public class SQLiteTimestampParser {
     private SQLiteTimestampParser() {
@@ -10,7 +9,7 @@ public class SQLiteTimestampParser {
     }
 
     private static final DateTimeFormatter FORMATTER =
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withLocale(Locale.US);
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public static LocalDateTime parse(String date) {
         return LocalDateTime.parse(date, FORMATTER);
