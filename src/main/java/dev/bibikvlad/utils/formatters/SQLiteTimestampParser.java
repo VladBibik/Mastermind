@@ -5,6 +5,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 public class SQLiteTimestampParser {
+    private SQLiteTimestampParser() {
+        throw new AssertionError("Can't instantiate a utility class");
+    }
+
     private static final DateTimeFormatter FORMATTER =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withLocale(Locale.US);
 
