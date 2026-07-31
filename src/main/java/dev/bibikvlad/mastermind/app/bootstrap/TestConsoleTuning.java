@@ -6,6 +6,10 @@ import java.lang.invoke.MethodHandle;
 public class TestConsoleTuning {
     private static final int UTF8_CODE_PAGE = 65001;
 
+    private TestConsoleTuning() {
+        throw new AssertionError("The class TestConsoleTuning cannot be instantiated.");
+    }
+
     public static void tune() {
         if (!System.getProperty("os.name").toLowerCase().startsWith("windows")) {
             return;
