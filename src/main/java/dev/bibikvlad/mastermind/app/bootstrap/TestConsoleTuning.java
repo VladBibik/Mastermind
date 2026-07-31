@@ -38,7 +38,7 @@ public class TestConsoleTuning {
                 throw new IllegalStateException("Failed to set Windows console UTF-8 code page");
             }
         } catch (Throwable throwable) {
-            throw new RuntimeException("Failed to configure Windows console", throwable);
+            throw new IllegalStateException("Failed to configure Windows console", throwable);
         }
     }
 }
