@@ -25,4 +25,17 @@ class ConsoleColorTest {
         assertEquals(ConsoleColor.BACKGROUND_CYAN, ConsoleColor.fromBackgroundColorByIndex(7));
         assertEquals(ConsoleColor.BACKGROUND_WHITE, ConsoleColor.fromBackgroundColorByIndex(8));
     }
+
+    @Test
+    @DisplayName("Correctly returns console codes")
+    void correctlyReturnsConsoleCodes() {
+        assertEquals(ConsoleColor.RED.getCode(), "\u001B[31m");
+        assertEquals(ConsoleColor.BRIGHT_YELLOW.getCode(), "\u001B[93m");
+        assertEquals(ConsoleColor.BRIGHT_WHITE.getCode(), "\u001B[97m");
+        assertEquals(ConsoleColor.SKY_BLUE.getCode(), "\u001B[38;5;111m");
+        assertEquals(ConsoleColor.ORCHID.getCode(), "\u001B[38;5;170m");
+        assertEquals(ConsoleColor.BACKGROUND_GREEN.getCode(), "\u001B[42m");
+        assertEquals(ConsoleColor.BACKGROUND_CYAN.getCode(), "\u001B[46m");
+        assertEquals(ConsoleColor.RESET.getCode(), "\u001B[0m");
+    }
 }
