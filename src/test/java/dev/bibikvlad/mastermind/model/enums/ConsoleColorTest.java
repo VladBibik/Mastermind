@@ -29,13 +29,13 @@ class ConsoleColorTest {
     @Test
     @DisplayName("Correctly returns console codes")
     void correctlyReturnsConsoleCodes() {
-        assertEquals(ConsoleColor.RED.getCode(), "\u001B[31m");
-        assertEquals(ConsoleColor.BRIGHT_YELLOW.getCode(), "\u001B[93m");
-        assertEquals(ConsoleColor.BRIGHT_WHITE.getCode(), "\u001B[97m");
-        assertEquals(ConsoleColor.SKY_BLUE.getCode(), "\u001B[38;5;111m");
-        assertEquals(ConsoleColor.ORCHID.getCode(), "\u001B[38;5;170m");
-        assertEquals(ConsoleColor.BACKGROUND_GREEN.getCode(), "\u001B[42m");
-        assertEquals(ConsoleColor.BACKGROUND_CYAN.getCode(), "\u001B[46m");
-        assertEquals(ConsoleColor.RESET.getCode(), "\u001B[0m");
+        assertEquals("\u001B[31m", ConsoleColor.RED.getCode());
+        assertEquals("\u001B[93m", ConsoleColor.BRIGHT_YELLOW.getCode());
+        assertEquals("\u001B[97m", ConsoleColor.BRIGHT_WHITE.getCode());
+        assertEquals("\u001B[38;5;111m", ConsoleColor.SKY_BLUE.getCode());
+        assertEquals("\u001B[38;5;170m", ConsoleColor.ORCHID.getCode());
+        assertEquals("\u001B[42m", ConsoleColor.BACKGROUND_GREEN.getCode());
+        assertEquals("\u001B[46m", ConsoleColor.BACKGROUND_CYAN.getCode());
+        assertEquals("\u001B[0m", ConsoleColor.RESET.getCode());
     }
 }
