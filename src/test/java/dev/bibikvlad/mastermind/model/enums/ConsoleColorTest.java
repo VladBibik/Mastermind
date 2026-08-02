@@ -46,4 +46,15 @@ class ConsoleColorTest {
         assertEquals(ConsoleColor.Category.BACKGROUND, ConsoleColor.BACKGROUND_BLUE.getCategory());
         assertEquals(ConsoleColor.Category.RESET, ConsoleColor.RESET.getCategory());
     }
+
+    @Test
+    @DisplayName("Correctly returns localization key")
+    void correctlyReturnsLocalizationKey() {
+        assertEquals("blue", ConsoleColor.BLUE.getLocalizationKey());
+        assertEquals("bright_red", ConsoleColor.BRIGHT_RED.getLocalizationKey());
+        assertEquals("orange", ConsoleColor.ORANGE.getLocalizationKey());
+        assertEquals("extended_cyan", ConsoleColor.EXTENDED_CYAN.getLocalizationKey());
+        assertEquals("magenta", ConsoleColor.MAGENTA.getLocalizationKey());
+        assertEquals("background_blue", ConsoleColor.BACKGROUND_BLUE.getLocalizationKey());
+    }
 }
