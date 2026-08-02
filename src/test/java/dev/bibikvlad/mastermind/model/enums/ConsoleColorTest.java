@@ -15,4 +15,14 @@ class ConsoleColorTest {
         assertEquals(ConsoleColor.VIOLET, ConsoleColor.fromForegroundColorByIndex(34));
         assertEquals(ConsoleColor.LIGHT_GREY, ConsoleColor.fromForegroundColorByIndex(38));
     }
+
+    @Test
+    @DisplayName("Correctly returns background console color from the index")
+    void validIndexReturnsCorrectBackgroundColor() {
+        assertEquals(ConsoleColor.BACKGROUND_BLACK, ConsoleColor.fromBackgroundColorByIndex(1));
+        assertEquals(ConsoleColor.BACKGROUND_GREEN, ConsoleColor.fromBackgroundColorByIndex(3));
+        assertEquals(ConsoleColor.BACKGROUND_BLUE, ConsoleColor.fromBackgroundColorByIndex(5));
+        assertEquals(ConsoleColor.BACKGROUND_CYAN, ConsoleColor.fromBackgroundColorByIndex(7));
+        assertEquals(ConsoleColor.BACKGROUND_WHITE, ConsoleColor.fromBackgroundColorByIndex(8));
+    }
 }
