@@ -30,4 +30,14 @@ class LocalizationContextTest {
                         "Solution was: " + InputVisualRepresentation.getVisualRepresentation(ANSWER),
                 gameMessages.getWin(ANSWER));
     }
+
+    @Test
+    @DisplayName("getMessages() that takes Class<T> messageType as a parameter returns the same messages " +
+            "as the getMessages() method that takes MessageType enum as a parameter.")
+    void getMessagesReturnsSameMessages() {
+        LocalizationContext localizationContext = new LocalizationContext(LocaleType.ENGLISH);
+        GameMessages localizedMessages = localizationContext.getMessages(GameMessages.class);
+
+        assertEquals(localizedMessages.getInvalidInput(), gameMessages.getInvalidInput());
+    }
 }
