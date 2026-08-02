@@ -38,4 +38,12 @@ class ConsoleColorTest {
         assertEquals("\u001B[46m", ConsoleColor.BACKGROUND_CYAN.getCode());
         assertEquals("\u001B[0m", ConsoleColor.RESET.getCode());
     }
+
+    @Test
+    @DisplayName("Correctly returns console color category")
+    void correctlyReturnsConsoleColorCategory() {
+        assertEquals(ConsoleColor.Category.FOREGROUND, ConsoleColor.RED.getCategory());
+        assertEquals(ConsoleColor.Category.BACKGROUND, ConsoleColor.BACKGROUND_BLUE.getCategory());
+        assertEquals(ConsoleColor.Category.RESET, ConsoleColor.RESET.getCategory());
+    }
 }
