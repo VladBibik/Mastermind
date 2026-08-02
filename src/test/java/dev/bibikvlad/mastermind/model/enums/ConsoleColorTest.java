@@ -40,6 +40,19 @@ class ConsoleColorTest {
     }
 
     @Test
+    @DisplayName("Correctly return display name")
+    void correctlyReturnsDisplayName() {
+        assertEquals("Yellow", ConsoleColor.YELLOW.getDisplayName());
+        assertEquals("Bright Blue", ConsoleColor.BRIGHT_BLUE.getDisplayName());
+        assertEquals("Bright White", ConsoleColor.BRIGHT_WHITE.getDisplayName());
+        assertEquals("Sky Blue", ConsoleColor.SKY_BLUE.getDisplayName());
+        assertEquals("Lime", ConsoleColor.LIME.getDisplayName());
+        assertEquals("Pink", ConsoleColor.PINK.getDisplayName());
+        assertEquals("Extended Purple", ConsoleColor.EXTENDED_PURPLE.getDisplayName());
+        assertEquals("Background Blue", ConsoleColor.BACKGROUND_BLUE.getDisplayName());
+    }
+
+    @Test
     @DisplayName("Correctly returns console color category")
     void correctlyReturnsConsoleColorCategory() {
         assertEquals(ConsoleColor.Category.FOREGROUND, ConsoleColor.RED.getCategory());
