@@ -28,7 +28,7 @@ class ConsoleColorTest {
 
     @Test
     @DisplayName("Correctly returns console codes")
-    void correctlyReturnsConsoleCodes() {
+    void returnsExpectedAnsiEscapeCodes() {
         assertEquals("\u001B[31m", ConsoleColor.RED.getCode());
         assertEquals("\u001B[93m", ConsoleColor.BRIGHT_YELLOW.getCode());
         assertEquals("\u001B[97m", ConsoleColor.BRIGHT_WHITE.getCode());
