@@ -52,7 +52,7 @@ class ConsoleColorTest {
 
     @Test
     @DisplayName("Correctly return display name")
-    void correctlyReturnsDisplayName() {
+    void returnsExpectedDisplayName() {
         assertEquals("Yellow", ConsoleColor.YELLOW.getDisplayName());
         assertEquals("Bright Blue", ConsoleColor.BRIGHT_BLUE.getDisplayName());
         assertEquals("Bright White", ConsoleColor.BRIGHT_WHITE.getDisplayName());
