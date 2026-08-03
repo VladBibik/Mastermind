@@ -81,4 +81,11 @@ class ConsoleColorTest {
         assertEquals("magenta", ConsoleColor.MAGENTA.getLocalizationKey());
         assertEquals("background_blue", ConsoleColor.BACKGROUND_BLUE.getLocalizationKey());
     }
+
+    @Test
+    @DisplayName("Category collection has the correct size")
+    void categoryCollectionHasCorrectSize() {
+        assertEquals(39, ConsoleColor.getForegroundColors().size());
+        assertEquals(8, ConsoleColor.getBackgroundColors().size());
+    }
 }
