@@ -88,4 +88,11 @@ class ConsoleColorTest {
         assertEquals(39, ConsoleColor.getForegroundColors().size());
         assertEquals(8, ConsoleColor.getBackgroundColors().size());
     }
+
+    @Test
+    @DisplayName("getByCategory returns the same collection as getFore/BackgroundColors")
+    void getByCategoryReturnsTheSameCollection() {
+        assertEquals(ConsoleColor.getForegroundColors(), ConsoleColor.getByCategory(ConsoleColor.Category.FOREGROUND));
+        assertEquals(ConsoleColor.getBackgroundColors(), ConsoleColor.getByCategory(ConsoleColor.Category.BACKGROUND));
+    }
 }
