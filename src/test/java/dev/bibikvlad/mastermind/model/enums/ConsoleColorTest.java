@@ -73,7 +73,7 @@ class ConsoleColorTest {
 
     @Test
     @DisplayName("Correctly returns localization key")
-    void correctlyReturnsLocalizationKey() {
+    void returnsExpectedLocalizationKey() {
         assertEquals("blue", ConsoleColor.BLUE.getLocalizationKey());
         assertEquals("bright_red", ConsoleColor.BRIGHT_RED.getLocalizationKey());
         assertEquals("orange", ConsoleColor.ORANGE.getLocalizationKey());
