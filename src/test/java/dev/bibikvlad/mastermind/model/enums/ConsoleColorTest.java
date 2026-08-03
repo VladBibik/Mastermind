@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ConsoleColorTest {
     @Test
@@ -24,6 +25,16 @@ class ConsoleColorTest {
         assertEquals(ConsoleColor.BACKGROUND_BLUE, ConsoleColor.fromBackgroundColorByIndex(5));
         assertEquals(ConsoleColor.BACKGROUND_CYAN, ConsoleColor.fromBackgroundColorByIndex(7));
         assertEquals(ConsoleColor.BACKGROUND_WHITE, ConsoleColor.fromBackgroundColorByIndex(8));
+    }
+
+    @Test
+    @DisplayName("Throws IllegalArgument exception on invalid indices")
+    void invalidIndexThrowsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> ConsoleColor.fromForegroundColorByIndex(-1));
+        assertThrows(IllegalArgumentException.class, () -> ConsoleColor.fromForegroundColorByIndex(0));
+        assertThrows(IllegalArgumentException.class, () -> ConsoleColor.fromForegroundColorByIndex(77));
+        assertThrows(IllegalArgumentException.class, () -> ConsoleColor.fromForegroundColorByIndex(-100));
+        assertThrows(IllegalArgumentException.class, () -> ConsoleColor.fromForegroundColorByIndex(999));
     }
 
     @Test
