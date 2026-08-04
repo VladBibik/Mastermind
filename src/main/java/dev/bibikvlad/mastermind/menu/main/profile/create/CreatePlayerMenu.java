@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.menu.main.profile.create;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
+import dev.bibikvlad.mastermind.app.printer.AnsiSafeFormatter;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.input.parser.Parser;
@@ -59,7 +60,7 @@ public class CreatePlayerMenu extends Menu {
         try {
             return new ProfileMenu(savePlayerAndBuildContext(playerName));
         } catch (PlayerAlreadyExistException _) {
-            printer.printMessage(nameMessages.getPlayerAlreadyExistsError(playerName));
+            printer.printMessage(nameMessages.getPlayerAlreadyExistsError(AnsiSafeFormatter.isolate(playerName)));
         }
 
         return this;
@@ -69,7 +70,7 @@ public class CreatePlayerMenu extends Menu {
         Player createdPlayer = playerService.createPlayer(playerName,
                 appContext.currentPlayer().getPlayerConfig().locale());
 
-        printer.printMessage(creationMessages.getPlayerCreatedSuccess(playerName));
+        printer.printMessage(creationMessages.getPlayerCreatedSuccess(AnsiSafeFormatter.isolate(playerName)));
 
         confirmToContinue();
 
