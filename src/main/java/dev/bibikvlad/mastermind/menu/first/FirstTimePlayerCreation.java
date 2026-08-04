@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.menu.first;
 
 import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
 import dev.bibikvlad.mastermind.app.context.AppContext;
+import dev.bibikvlad.mastermind.app.printer.AnsiSafeFormatter;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.PlayerNameValidator;
@@ -66,7 +67,7 @@ public class FirstTimePlayerCreation {
         Player createdPlayer = serviceContainer.getPlayerService()
                 .createPlayer(playerName, localeType);
 
-        printer.printMessage(creationMessages.getPlayerCreatedSuccess(playerName));
+        printer.printMessage(creationMessages.getPlayerCreatedSuccess(AnsiSafeFormatter.isolate(playerName)));
 
         confirmToContinue();
 
