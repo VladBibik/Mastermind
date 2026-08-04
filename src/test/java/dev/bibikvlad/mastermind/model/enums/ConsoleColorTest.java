@@ -28,8 +28,8 @@ class ConsoleColorTest {
     }
 
     @Test
-    @DisplayName("Throws IllegalArgument exception on invalid indices")
-    void invalidIndexThrowsIllegalArgumentException() {
+    @DisplayName("Throws IllegalArgument exception on invalid foreground indices")
+    void invalidForegroundIndexThrowsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> ConsoleColor.fromForegroundColorByIndex(-1));
         assertThrows(IllegalArgumentException.class, () -> ConsoleColor.fromForegroundColorByIndex(0));
         assertThrows(IllegalArgumentException.class, () -> ConsoleColor.fromForegroundColorByIndex(77));
