@@ -75,7 +75,7 @@ class ConsoleColorTest {
 
     @Test
     @DisplayName("Correctly returns console color category")
-    void correctlyReturnsConsoleColorCategory() {
+    void returnsExpectedCategory() {
         assertEquals(ConsoleColor.Category.FOREGROUND, ConsoleColor.RED.getCategory());
         assertEquals(ConsoleColor.Category.BACKGROUND, ConsoleColor.BACKGROUND_BLUE.getCategory());
         assertEquals(ConsoleColor.Category.RESET, ConsoleColor.RESET.getCategory());
