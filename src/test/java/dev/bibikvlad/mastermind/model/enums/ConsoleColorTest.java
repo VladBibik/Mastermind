@@ -105,4 +105,15 @@ class ConsoleColorTest {
         assertEquals(ConsoleColor.getForegroundColors(), ConsoleColor.getByCategory(ConsoleColor.Category.FOREGROUND));
         assertEquals(ConsoleColor.getBackgroundColors(), ConsoleColor.getByCategory(ConsoleColor.Category.BACKGROUND));
     }
+
+    @Test
+    @DisplayName("Localization key matches enum name when converted to the lower case")
+    void localizationKeyMatchesEnumName() {
+        for (ConsoleColor color : ConsoleColor.values()) {
+            assertEquals(
+                    color.name().toLowerCase(),
+                    color.getLocalizationKey()
+            );
+        }
+    }
 }
