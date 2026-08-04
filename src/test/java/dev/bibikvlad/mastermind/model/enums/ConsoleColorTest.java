@@ -38,6 +38,16 @@ class ConsoleColorTest {
     }
 
     @Test
+    @DisplayName("Throws IllegalArgument exception on invalid background indices")
+    void invalidBackgroundIndexThrowsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> ConsoleColor.fromBackgroundColorByIndex(-1));
+        assertThrows(IllegalArgumentException.class, () -> ConsoleColor.fromBackgroundColorByIndex(0));
+        assertThrows(IllegalArgumentException.class, () -> ConsoleColor.fromBackgroundColorByIndex(-10));
+        assertThrows(IllegalArgumentException.class, () -> ConsoleColor.fromBackgroundColorByIndex(10));
+        assertThrows(IllegalArgumentException.class, () -> ConsoleColor.fromBackgroundColorByIndex(777));
+    }
+
+    @Test
     @DisplayName("Correctly returns console codes")
     void returnsExpectedAnsiEscapeCodes() {
         assertEquals("\u001B[31m", ConsoleColor.RED.getCode());
