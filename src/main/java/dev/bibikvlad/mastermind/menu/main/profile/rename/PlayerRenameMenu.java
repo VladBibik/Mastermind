@@ -1,6 +1,7 @@
 package dev.bibikvlad.mastermind.menu.main.profile.rename;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
+import dev.bibikvlad.mastermind.app.printer.AnsiSafeFormatter;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
 import dev.bibikvlad.mastermind.exceptions.PlayerNotFoundException;
@@ -46,7 +47,8 @@ public class PlayerRenameMenu extends Menu {
 
     @Override
     public Menu run() {
-        printer.printMessage(renameMessages.getPlayerNameRenameTitle(currentPlayer.getPlayerName()));
+        printer.printMessage(renameMessages.getPlayerNameRenameTitle(
+                AnsiSafeFormatter.isolate(currentPlayer.getPlayerName())));
 
         PlayerNameReader playerNameReader = new PlayerNameReader(parser, printer, nameMessages);
 
@@ -68,13 +70,14 @@ public class PlayerRenameMenu extends Menu {
             AppContext updatedAppContext = createNewAppContext();
 
             printer.printMessage(renameMessages.getPlayerNameRenameSuccess(
-                    updatedAppContext.currentPlayer().getPlayerName()));
+                    AnsiSafeFormatter.isolate(
+                            updatedAppContext.currentPlayer().getPlayerName())));
 
             confirmToContinue();
 
             return new ProfileMenu(updatedAppContext);
         } catch (PlayerAlreadyExistException _) {
-            printer.printMessage(nameMessages.getPlayerAlreadyExistsError(playerName));
+            printer.printMessage(nameMessages.getPlayerAlreadyExistsError(AnsiSafeFormatter.isolate(playerName)));
         }
 
         return this;
