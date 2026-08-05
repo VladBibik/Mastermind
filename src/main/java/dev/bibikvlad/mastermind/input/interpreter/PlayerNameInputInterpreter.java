@@ -3,6 +3,10 @@ package dev.bibikvlad.mastermind.input.interpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 
 public class PlayerNameInputInterpreter {
+    private PlayerNameInputInterpreter() {
+        throw new AssertionError("PlayerNameInputInterpreter cannot be instantiated.");
+    }
+
     public static PlayerNameInput readSelection(Parser parser) {
         String userInput = parser.parse();
 
