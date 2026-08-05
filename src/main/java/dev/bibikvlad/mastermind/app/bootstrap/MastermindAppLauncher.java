@@ -19,6 +19,8 @@ public class MastermindAppLauncher {
     public static void main(String[] args) {
         Printer printer = new ConsolePrinter();
 
+        TestConsoleTuning.tune();
+
         try {
             run(printer);
         } catch (PersistenceException exception) {
