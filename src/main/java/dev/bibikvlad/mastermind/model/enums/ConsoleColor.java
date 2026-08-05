@@ -69,21 +69,16 @@ public enum ConsoleColor {
             Arrays.stream(values()).collect(Collectors.groupingBy(ConsoleColor::getCategory));
 
     static {
-        for (ConsoleColor consoleColor : ConsoleColor.values()) {
-            BY_DISPLAY_NAME.put(consoleColor.getDisplayName(), consoleColor);
-        }
+        Arrays.stream(ConsoleColor.values())
+                .forEach(enumEntry -> BY_DISPLAY_NAME.put(enumEntry.displayName, enumEntry));
 
-        for (ConsoleColor consoleColor : Arrays.stream(ConsoleColor.values())
-                .filter(color -> color.getCategory() == Category.FOREGROUND)
-                .collect(Collectors.toSet())) {
-            BY_INDEX_FOREGROUND.put(consoleColor.getIndex(), consoleColor);
-        }
+        Arrays.stream(ConsoleColor.values())
+                .filter(color -> color.category == Category.FOREGROUND)
+                .forEach(enumEntry -> BY_INDEX_FOREGROUND.put(enumEntry.index, enumEntry));
 
-        for (ConsoleColor consoleColor : Arrays.stream(ConsoleColor.values())
-                .filter(color -> color.getCategory() == Category.BACKGROUND)
-                .collect(Collectors.toSet())) {
-            BY_INDEX_BACKGROUND.put(consoleColor.getIndex(), consoleColor);
-        }
+        Arrays.stream(ConsoleColor.values())
+                .filter(color -> color.category == Category.BACKGROUND)
+                .forEach(enumEntry -> BY_INDEX_BACKGROUND.put(enumEntry.index, enumEntry));
     }
 
     ConsoleColor(int id, String code, String displayName, Category category) {
