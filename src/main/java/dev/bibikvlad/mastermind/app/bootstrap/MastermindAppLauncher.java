@@ -20,7 +20,7 @@ public class MastermindAppLauncher {
     public static void main(String[] args) {
         Printer printer = new ConsolePrinter();
 
-        WindowsConsoleConfigurator.tune();
+        WindowsConsoleConfigurator.configureUtf8();
 
         try {
             run(printer);

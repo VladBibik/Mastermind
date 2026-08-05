@@ -10,7 +10,7 @@ public class WindowsConsoleConfigurator {
         throw new AssertionError("The class WindowsConsoleConfigurator cannot be instantiated.");
     }
 
-    public static void tune() {
+    public static void configureUtf8() {
         if (!System.getProperty("os.name").toLowerCase().startsWith("windows")) {
             return;
         }
