@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.app.bootstrap;
+package dev.bibikvlad.platform.windows;
 
 import java.lang.foreign.*;
 import java.lang.invoke.MethodHandle;

@@ -12,6 +12,7 @@ import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.core.MenuRunner;
 import dev.bibikvlad.mastermind.menu.main.MainMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
+import dev.bibikvlad.platform.windows.WindowsConsoleConfigurator;
 
 import java.util.Optional;
 
