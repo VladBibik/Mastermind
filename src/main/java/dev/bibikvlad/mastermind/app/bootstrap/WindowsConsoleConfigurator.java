@@ -3,11 +3,11 @@ package dev.bibikvlad.mastermind.app.bootstrap;
 import java.lang.foreign.*;
 import java.lang.invoke.MethodHandle;
 
-public class TestConsoleTuning {
+public class WindowsConsoleConfigurator {
     private static final int UTF8_CODE_PAGE = 65001;
 
-    private TestConsoleTuning() {
-        throw new AssertionError("The class TestConsoleTuning cannot be instantiated.");
+    private WindowsConsoleConfigurator() {
+        throw new AssertionError("The class WindowsConsoleConfigurator cannot be instantiated.");
     }
 
     public static void tune() {
