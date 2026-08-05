@@ -1,5 +1,7 @@
 package dev.bibikvlad.mastermind.app.printer;
 
+import java.io.FileDescriptor;
+import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 
@@ -8,7 +10,7 @@ public class ConsolePrinter implements Printer {
 
     public ConsolePrinter() {
         this.out = new PrintStream(
-                System.out,
+                new FileOutputStream(FileDescriptor.out),
                 true,
                 StandardCharsets.UTF_8
         );
