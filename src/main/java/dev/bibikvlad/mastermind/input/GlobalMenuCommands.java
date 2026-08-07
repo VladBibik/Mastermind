@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.input.interpreter;
+package dev.bibikvlad.mastermind.input;
 
 import java.util.Set;
 

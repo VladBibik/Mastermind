@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.input.interpreter;
 
+import dev.bibikvlad.mastermind.input.GlobalMenuCommands;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 
 import java.util.Optional;

@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.menu.main.profile;
 
 import dev.bibikvlad.mastermind.app.printer.Printer;
-import dev.bibikvlad.mastermind.input.interpreter.GlobalMenuCommands;
+import dev.bibikvlad.mastermind.input.GlobalMenuCommands;
 import dev.bibikvlad.mastermind.input.interpreter.PlayerNameInput;
 import dev.bibikvlad.mastermind.input.interpreter.PlayerNameInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
