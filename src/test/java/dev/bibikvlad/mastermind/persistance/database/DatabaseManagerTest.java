@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.persistance.database;
 
+import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.persistence.database.DatabaseManager;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -37,5 +38,24 @@ class DatabaseManagerTest {
             assertNotNull(connection);
             assertFalse(connection.isClosed());
         }
+    }
+
+    @Test
+    @DisplayName("Wraps SQLException in PersistenceException")
+    void wrapsSqlException() {
+        DatabaseManager databaseManager =
+                new DatabaseManager("jdbc:sqlite:/invalid/path/database.db");
+
+        PersistenceException exception = assertThrows(
+                PersistenceException.class,
+                databaseManager::getConnection
+        );
+
+        assertEquals(
+                "Problem obtaining database connection",
+                exception.getMessage()
+        );
+
+        assertInstanceOf(SQLException.class, exception.getCause());
     }
 }
