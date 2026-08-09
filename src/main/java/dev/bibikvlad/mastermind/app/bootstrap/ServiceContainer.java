@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.app.bootstrap;
 
+import dev.bibikvlad.mastermind.app.bootstrap.path.DatabaseJdbcUrlResolver;
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.persistence.database.DatabaseManager;
 import dev.bibikvlad.mastermind.persistence.database.TransactionManager;
@@ -45,9 +46,11 @@ public final class ServiceContainer implements AutoCloseable {
     private PlayerStatisticsService playerStatisticsService;
 
     public ServiceContainer() {
-        DatabaseManager.initialize();
+        String databaseUrl = new DatabaseJdbcUrlResolver().getJdbcUrl();
+        DatabaseManager databaseManager = new DatabaseManager(databaseUrl);
+        databaseManager.initialize();
 
-        this.connection = DatabaseManager.getConnection();
+        this.connection = databaseManager.getConnection();
         this.transactionManager = new TransactionManager(connection);
     }
 
