@@ -9,24 +9,24 @@ class GlobalMenuCommandsTest {
     @Test
     @DisplayName("Returns correct size of PLAY command set")
     void returnsCorrectSizeOfPLAYCommandSet() {
-        int playCommandCollectionExpectedSize = 11;
+        int expectedSize = 11;
 
-        assertEquals(playCommandCollectionExpectedSize, GlobalMenuCommands.PLAY.size());
+        assertEquals(expectedSize, GlobalMenuCommands.PLAY.size());
     }
 
     @Test
     @DisplayName("Returns correct size of EXIT command set")
     void returnsCorrectSizeOfEXITCommandSet() {
-        int exitCommandCollectionExpectedSize = 8;
+        int expectedSize = 8;
 
-        assertEquals(exitCommandCollectionExpectedSize, GlobalMenuCommands.EXIT.size());
+        assertEquals(expectedSize, GlobalMenuCommands.EXIT.size());
     }
 
     @Test
     @DisplayName("Returns correct size of YES command set")
     void returnsCorrectSizeOfYESCommandSet() {
-        int yesCommandCollectionExpectedSize = 2;
+        int expectedSize = 2;
 
-        assertEquals(yesCommandCollectionExpectedSize, GlobalMenuCommands.YES.size());
+        assertEquals(expectedSize, GlobalMenuCommands.YES.size());
     }
 }
