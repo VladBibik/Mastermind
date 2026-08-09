@@ -21,4 +21,12 @@ class GlobalMenuCommandsTest {
 
         assertEquals(exitCommandCollectionExpectedSize, GlobalMenuCommands.EXIT.size());
     }
+
+    @Test
+    @DisplayName("Returns correct size of YES command set")
+    void returnsCorrectSizeOfYESCommandSet() {
+        int yesCommandCollectionExpectedSize = 2;
+
+        assertEquals(yesCommandCollectionExpectedSize, GlobalMenuCommands.YES.size());
+    }
 }
