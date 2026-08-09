@@ -9,8 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class DatabaseManagerTest {
     @Test
@@ -25,6 +24,18 @@ class DatabaseManagerTest {
 
             assertTrue(resultSet.next());
             assertEquals(1, resultSet.getInt(1));
+        }
+    }
+
+    @Test
+    @DisplayName("Returns an open database connection")
+    void returnsOpenDatabaseConnection() throws SQLException {
+        DatabaseManager databaseManager =
+                new DatabaseManager("jdbc:sqlite::memory:");
+
+        try (Connection connection = databaseManager.getConnection()) {
+            assertNotNull(connection);
+            assertFalse(connection.isClosed());
         }
     }
 }
