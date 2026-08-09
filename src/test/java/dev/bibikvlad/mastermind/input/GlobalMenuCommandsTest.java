@@ -13,4 +13,12 @@ class GlobalMenuCommandsTest {
 
         assertEquals(playCommandCollectionExpectedSize, GlobalMenuCommands.PLAY.size());
     }
+
+    @Test
+    @DisplayName("Returns correct size of EXIT command set")
+    void returnsCorrectSizeOfEXITCommandSet() {
+        int exitCommandCollectionExpectedSize = 8;
+
+        assertEquals(exitCommandCollectionExpectedSize, GlobalMenuCommands.EXIT.size());
+    }
 }
