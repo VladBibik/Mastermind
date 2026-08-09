@@ -1,6 +1,5 @@
 package dev.bibikvlad.mastermind.persistence.database;
 
-import dev.bibikvlad.mastermind.app.bootstrap.path.DatabaseJdbcUrlResolver;
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 
 import java.sql.Connection;
@@ -9,15 +8,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseManager {
-    private static final String DATABASE_URL = new DatabaseJdbcUrlResolver().getJdbcUrl();
+    private final String databaseUrl;
 
-    private DatabaseManager() {
-        throw new AssertionError("Cannot instantiate DatabaseManager");
+    public DatabaseManager(String databaseUrl) {
+        this.databaseUrl = databaseUrl;
     }
 
-    public static Connection getConnection() throws PersistenceException {
+    public Connection getConnection() throws PersistenceException {
         try {
-            Connection connection = DriverManager.getConnection(DATABASE_URL);
+            Connection connection = DriverManager.getConnection(databaseUrl);
             try (Statement statement = connection.createStatement()) {
                 statement.execute("PRAGMA foreign_keys=ON");
             }
@@ -27,7 +26,7 @@ public class DatabaseManager {
         }
     }
 
-    public static void initialize() {
+    public void initialize() {
         try (Connection connection = getConnection()) {
             SchemaCreator.create(connection);
         } catch (SQLException exception) {
