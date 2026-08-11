@@ -13,19 +13,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TimeToStringFormatterTest {
     private static TimeFormattingMessages messages;
-    private static Time time;
 
     @BeforeAll
     static void init() {
         messages = new ConsoleTimeFormattingMessages(
                 ResourceBundle.getBundle("i18n.common.time_formatting"));
-        time = new Time(12, 34, 25, 377);
     }
 
     @Test
     @DisplayName("Returns correctly formatted time")
     void testTimeFormattingAccuracy() {
         String expectedTime = "12h 34min 25sec 377ms";
+        Time time = new Time(12, 34, 25, 377);
 
         assertEquals(expectedTime, TimeToStringFormatter.format(time, messages));
     }
