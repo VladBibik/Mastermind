@@ -29,4 +29,13 @@ class TimeToStringFormatterTest {
 
         assertEquals(expectedTime, TimeToStringFormatter.format(time, messages));
     }
+
+    @Test
+    @DisplayName("Omits zero-valued leading time units")
+    void testZeroLeadingUnits() {
+        String expectedTime = "34min 25sec 377ms";
+        Time time = new Time(0, 34, 25, 377);
+
+        assertEquals(expectedTime, TimeToStringFormatter.format(time, messages));
+    }
 }
