@@ -37,4 +37,13 @@ class TimeToStringFormatterTest {
 
         assertEquals(expectedTime, TimeToStringFormatter.format(time, messages));
     }
+
+    @Test
+    @DisplayName("Returns only milliseconds for all zero values")
+    void testAllZeroValues() {
+        String expectedTime = "0ms";
+        Time time = new Time(0, 0, 0, 0);
+
+        assertEquals(expectedTime, TimeToStringFormatter.format(time, messages));
+    }
 }
