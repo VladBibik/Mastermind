@@ -1,13 +1,15 @@
 package dev.bibikvlad.mastermind.values;
 
 public class TimeValidator {
-    public boolean validate(long hour, long minutes, long second, long millisecond) {
+    public void validate(long hour, long minutes, long second, long millisecond) {
         if (hour < 0) {
-            return false;
+            throw new IllegalArgumentException("Invalid hour value");
         } else if (minutes < 0 || minutes > 59) {
-            return false;
+            throw new IllegalArgumentException("Invalid minutes value");
         } else if (second < 0 || second > 59) {
-            return false;
-        } else return millisecond >= 0 && millisecond <= 999;
+            throw new IllegalArgumentException("Invalid seconds value");
+        } else if (millisecond < 0 || millisecond > 999) {
+            throw new IllegalArgumentException("Invalid milliseconds value");
+        }
     }
 }
