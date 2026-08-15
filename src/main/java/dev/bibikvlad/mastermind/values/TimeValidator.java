@@ -1,7 +1,11 @@
 package dev.bibikvlad.mastermind.values;
 
 public class TimeValidator {
-    public void validate(long hour, long minutes, long second, long millisecond) {
+    private TimeValidator() {
+        throw new AssertionError("Cannot instantiate a utility class");
+    }
+
+    public static void validate(long hour, long minutes, long second, long millisecond) {
         if (hour < 0) {
             throw new IllegalArgumentException("Invalid hour value");
         } else if (minutes < 0 || minutes > 59) {
