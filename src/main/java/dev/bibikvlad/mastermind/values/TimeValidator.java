@@ -7,19 +7,19 @@ public class TimeValidator {
 
     public static void validate(long hour, long minutes, long second, long millisecond) {
         if (hour < 0) {
-            throw new IllegalArgumentException("Hour cannot be negative");
+            throw new IllegalArgumentException("Hour cannot be negative, got: " + hour);
         }
 
         if (minutes < 0 || minutes > 59) {
-            throw new IllegalArgumentException("Minutes must be between 0 and 59");
+            throw new IllegalArgumentException("Minutes must be between 0 and 59, got: " + minutes);
         }
 
         if (second < 0 || second > 59) {
-            throw new IllegalArgumentException("Seconds must be between 0 and 59");
+            throw new IllegalArgumentException("Seconds must be between 0 and 59, got: " + second);
         }
 
         if (millisecond < 0 || millisecond > 999) {
-            throw new IllegalArgumentException("Milliseconds must be between 0 and 999");
+            throw new IllegalArgumentException("Milliseconds must be between 0 and 999,  got: " + millisecond);
         }
     }
 }
