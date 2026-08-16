@@ -56,6 +56,12 @@ jobs:
       - name: Build and run tests
         run: mvn --batch-mode --no-transfer-progress verify
 
+      - name: Upload JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: mastermind-jar
+          path: target/mastermind.jar
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
