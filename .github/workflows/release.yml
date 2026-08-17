@@ -142,7 +142,7 @@ jobs:
           --strip-debug `
           --no-man-pages `
           --no-header-files `
-          --compress=2 `
+          --compress=2
 
       - name: Create release with jpackage
         shell: pwsh
