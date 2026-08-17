@@ -50,7 +50,6 @@ public class LogoColorSelectionMenu extends Menu {
         if (shouldRenderMenu) {
             displayMenu();
 
-            shouldRenderMenu = false;
         }
 
         Optional<Integer> selection = IntegerInputInterpreter.readSelection(appContext.parser());
@@ -105,6 +104,8 @@ public class LogoColorSelectionMenu extends Menu {
             default -> {
                 printer.printMessage(interactionMessages.getInvalidInput());
 
+                shouldRenderMenu = false;
+
                 return this;
             }
         }
@@ -112,11 +113,8 @@ public class LogoColorSelectionMenu extends Menu {
 
     private void printCurrentLogo() {
         printer.printMessage(ColoredAsciiLogo.getLogo(logoColorsBundle));
-        printer.printMessage(interactionMessages.getPressEnter());
 
-        parser.parse();
-
-        shouldRenderMenu = true;
+        waitForUserConfirmation();
     }
 
     private void changeBorderColor() {
