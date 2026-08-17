@@ -123,21 +123,20 @@ jobs:
         shell: pwsh
         run: mvn dependency:copy-dependencies -DincludeScope=runtime -DoutputDirectory=target/dependencies
 
-      - name: Get dependencies using jdeps
+      - name: Determine modules and create runtime
         shell: pwsh
         run: |
-          jdeps `
-            --print-module-deps `
-            --ignore-missing-deps `
-            --multi-release 24 `
-            --class-path "target/dependencies/*" `
-            target/mastermind.jar
+          $modules = jdeps `
+          --print-module-deps `
+          --ignore-missing-deps `
+          --multi-release 24 `
+          --class-path "target/dependencies/*" `
+          target/mastermind.jar
 
-      - name: Create minimal required env using jlink
-        shell: pwsh
-        run: |
+          Write-Host "Required Java modules: $modules"
+      
           jlink `
-          --add-modules java.base,java.sql `
+          --add-modules $modules `
           --output target/mastermind-runtime `
           --strip-debug `
           --no-man-pages `
