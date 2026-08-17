@@ -127,9 +127,17 @@ jobs:
             --ignore-missing-deps `
             --multi-release 24 `
             target/mastermind.jar
-          
 
       - name: Resolve dependencies using Maven
         shell: pwsh
         run: mvn dependency:copy-dependencies -DincludeScope=runtime -DoutputDirectory=target/dependencies
 
+      - name: Get dependencies using jdeps
+        shell: pwsh
+        run: |
+          jdeps `
+            --print-module-deps `
+            --ignore-missing-deps `
+            --multi-release 24 `
+            --class-path "target/dependencies/*" `
+            target/mastermind.jar
