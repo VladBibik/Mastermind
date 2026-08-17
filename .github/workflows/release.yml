@@ -119,7 +119,7 @@ jobs:
           distribution: temurin
           java-version: '24'
 
-      - name: Resolve dependencies using Maven
+      - name: Copy runtime dependencies
         shell: pwsh
         run: mvn dependency:copy-dependencies -DincludeScope=runtime -DoutputDirectory=target/dependencies
 
