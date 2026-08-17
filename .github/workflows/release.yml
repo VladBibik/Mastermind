@@ -174,3 +174,9 @@ jobs:
           Compress-Archive `
             -Path release/Mastermind `
             -DestinationPath "Mastermind-$version-windows-x64.zip"
+
+      - name: Upload Windows package
+        uses: actions/upload-artifact@v5
+        with:
+          name: mastermind-windows
+          path: Mastermind-*-windows-x64.zip
