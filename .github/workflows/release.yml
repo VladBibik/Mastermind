@@ -141,3 +141,14 @@ jobs:
             --multi-release 24 `
             --class-path "target/dependencies/*" `
             target/mastermind.jar
+
+      - name: Create minimal required env using jlink
+        shell: pwsh
+        run: |
+          jlink `
+          --add-modules java.base,java.sql `
+          --output target/mastermind-runtime `
+          --strip-debug `
+          --no-man-pages `
+          --no-header-files `
+          --compress=2 `
