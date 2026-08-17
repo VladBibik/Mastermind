@@ -169,6 +169,8 @@ jobs:
       - name: Create Windows ZIP
         shell: pwsh
         run: |
+          $version = "${{ github.ref_name }}".TrimStart("v")
+          
           Compress-Archive `
             -Path release/Mastermind `
-            -DestinationPath "Mastermind-${{ github.ref_name }}-windows-x64.zip"
+            -DestinationPath "Mastermind-$version-windows-x64.zip"
