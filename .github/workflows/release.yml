@@ -128,3 +128,8 @@ jobs:
             --multi-release 24 `
             target/mastermind.jar
           
+
+      - name: Resolve dependencies using Maven
+        shell: pwsh
+        run: mvn dependency:copy-dependencies -DincludeScope=runtime -DoutputDirectory=target/dependencies
+
