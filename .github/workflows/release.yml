@@ -152,6 +152,8 @@ jobs:
       - name: Create release with jpackage
         shell: pwsh
         run: |
+          New-Item -ItemType Directory -Path release
+          
           jpackage `
             --name Mastermind `
             --input target/jpackage-input `
