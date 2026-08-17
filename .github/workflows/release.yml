@@ -180,3 +180,30 @@ jobs:
         with:
           name: mastermind-windows
           path: Mastermind-*-windows-x64.zip
+
+  release:
+    needs: [build, windows]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download JAR
+        uses: actions/download-artifact@v5
+        with:
+          name: mastermind-jar
+          path: release
+
+      - name: Download Windows package
+        uses: actions/download-artifact@v5
+        with:
+          name: mastermind-windows
+          path: release
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ github.ref_name }}" \
+            release/mastermind.jar \
+            release/Mastermind-*-windows-x64.zip \
+            --title "${{ github.ref_name }}" \
+            --generate-notes
