@@ -152,3 +152,18 @@ jobs:
           --no-man-pages `
           --no-header-files `
           --compress=2 `
+
+      - name: Create release with jpackage
+        shell: pwsh
+        run: |
+          jpackage `
+            --name Mastermind `
+            --input target/jpackage-input `
+            --main-jar mastermind.jar `
+            --main-class dev.bibikvlad.mastermind.app.bootstrap.MastermindAppLauncher `
+            --type app-image `
+            --win-console `
+            --dest release `
+            --icon assets/mastermind.ico `
+            --runtime-image target/mastermind-runtime `
+            --java-options "--enable-native-access=ALL-UNNAMED"
