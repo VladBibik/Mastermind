@@ -144,6 +144,12 @@ jobs:
           --no-header-files `
           --compress=2
 
+      - name: Prepare jpackage input
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path target/jpackage-input
+          Copy-Item target/mastermind.jar target/jpackage-input/mastermind.jar
+
       - name: Create release with jpackage
         shell: pwsh
         run: |
