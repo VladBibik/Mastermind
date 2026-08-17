@@ -118,3 +118,13 @@ jobs:
         with:
           distribution: temurin
           java-version: '24'
+
+      - name: Determine required Java modules
+        shell: pwsh
+        run: |
+          jdeps `
+            --print-module-deps `
+            --ignore-missing-deps `
+            --multi-release 24 `
+            target/mastermind.jar
+          
