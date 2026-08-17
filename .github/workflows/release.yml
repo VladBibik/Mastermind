@@ -165,3 +165,10 @@ jobs:
             --icon assets/mastermind.ico `
             --runtime-image target/mastermind-runtime `
             --java-options "--enable-native-access=ALL-UNNAMED"
+
+      - name: Create Windows ZIP
+        shell: pwsh
+        run: |
+          Compress-Archive `
+            -Path release/Mastermind `
+            -DestinationPath "Mastermind-${{ github.ref_name }}-windows-x64.zip"
