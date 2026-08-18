@@ -4,6 +4,10 @@ import dev.bibikvlad.mastermind.localization.messages.common.TimeFormattingMessa
 import dev.bibikvlad.mastermind.values.Time;
 
 public class TimeToStringFormatter {
+    private TimeToStringFormatter() {
+        throw new AssertionError("Cannot create instance of TimeToStringFormatter");
+    }
+
     public static String format(Time time, TimeFormattingMessages messages) {
         StringBuilder stringBuilder = new StringBuilder();
 
