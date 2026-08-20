@@ -24,6 +24,7 @@ public class MastermindAppLauncher {
 
         SoutTest soutTest = new SoutTest();
         soutTest.test();
+        soutTest.testClueSymbols();
 
         Printer printer = new ConsolePrinter();
 
@@ -41,6 +42,7 @@ public class MastermindAppLauncher {
 
         RussianCharactersTest ruTest = new RussianCharactersTest();
         ruTest.test();
+        soutTest.testClueSymbols(printer);
 
         try {
             run(printer);
