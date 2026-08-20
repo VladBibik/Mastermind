@@ -183,6 +183,11 @@ public class WindowsConsoleConfigurator {
                 } else {
                     System.out.println("Could not verify console mode.");
                 }
+
+                System.out.printf(
+                        "Console output mode BEFORE: 0x%08X%n",
+                        originalMode
+                );
             }
 
             System.out.println("=================================");
