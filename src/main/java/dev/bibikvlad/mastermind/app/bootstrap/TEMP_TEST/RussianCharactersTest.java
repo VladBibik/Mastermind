@@ -4,11 +4,19 @@ import dev.bibikvlad.mastermind.input.parser.ConsoleInputParser;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 
 public class RussianCharactersTest {
+
     public void test() {
         System.out.println("=== INPUT TEST ===");
-        System.out.print("Enter Russian text: ");
 
         Parser parser = new ConsoleInputParser();
+
+        testInput(parser, "Enter Russian text:");
+        testInput(parser, "Enter English text:");
+    }
+
+    private void testInput(Parser parser, String message) {
+        System.out.println(message);
+
         String input = parser.parse();
 
         System.out.println("Received: [" + input + "]");
@@ -23,5 +31,7 @@ public class RussianCharactersTest {
         input.codePoints().forEach(codePoint ->
                 System.out.printf("U+%04X%n", codePoint)
         );
+
+        System.out.println();
     }
 }
