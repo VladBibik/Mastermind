@@ -21,13 +21,9 @@ import java.util.Optional;
 public class MastermindAppLauncher {
     public static void main(String[] args) {
         WindowsConsoleConfigurator.enableUtf8();
-        RussianCharactersTest ruTest = new RussianCharactersTest();
-        ruTest.test();
 
         SoutTest soutTest = new SoutTest();
-
         soutTest.test();
-        soutTest.testClueSymbols();
 
         Printer printer = new ConsolePrinter();
 
@@ -43,14 +39,13 @@ public class MastermindAppLauncher {
 
         System.out.println();
 
-        soutTest.testClueSymbols();
+        RussianCharactersTest ruTest = new RussianCharactersTest();
         ruTest.test();
 
         try {
             run(printer);
         } catch (PersistenceException exception) {
             FatalPersistenceErrorHandler handler = new FatalPersistenceErrorHandler(printer);
-
             handler.handle(exception);
         }
     }
