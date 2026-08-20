@@ -1,5 +1,7 @@
 package dev.bibikvlad.mastermind.app.bootstrap.TEMP_TEST;
 
+import dev.bibikvlad.mastermind.app.printer.Printer;
+
 public class SoutTest {
     public void test() {
         printSystemConsoleDiagnostics();
@@ -86,6 +88,28 @@ public class SoutTest {
                     symbol,
                     symbol.length(),
                     symbol.codePointCount(0, symbol.length()),
+                    symbol.codePointAt(0)
+            );
+        }
+    }
+
+    public void testClueSymbols(Printer printer) {
+        String[] symbols = {
+                "○",
+                "◍",
+                "●",
+                "⬤",
+                "◉",
+                "😀",
+                "🎉"
+        };
+
+        for (String symbol : symbols) {
+            printer.printMessage(
+                    "%s | UTF-16 length=%d | code points=%d | U+%04X%n" +
+                    symbol +
+                    symbol.length() +
+                    symbol.codePointCount(0, symbol.length()) +
                     symbol.codePointAt(0)
             );
         }
