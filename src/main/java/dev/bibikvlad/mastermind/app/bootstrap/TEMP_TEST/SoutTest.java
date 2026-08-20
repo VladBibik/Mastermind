@@ -106,11 +106,13 @@ public class SoutTest {
 
         for (String symbol : symbols) {
             printer.printMessage(
-                    "%s | UTF-16 length=%d | code points=%d | U+%04X%n" +
-                    symbol +
-                    symbol.length() +
-                    symbol.codePointCount(0, symbol.length()) +
-                    symbol.codePointAt(0)
+                    String.format(
+                            "%s | UTF-16 length=%d | code points=%d | U+%04X",
+                            symbol,
+                            symbol.length(),
+                            symbol.codePointCount(0, symbol.length()),
+                            symbol.codePointAt(0)
+                    )
             );
         }
     }
