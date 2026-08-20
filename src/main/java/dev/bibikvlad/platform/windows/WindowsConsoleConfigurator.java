@@ -183,11 +183,36 @@ public class WindowsConsoleConfigurator {
                 } else {
                     System.out.println("Could not verify console mode.");
                 }
+            }
 
-                System.out.printf(
-                        "Console output mode BEFORE: 0x%08X%n",
-                        originalMode
-                );
+            MemorySegment inputHandle =
+                    (MemorySegment) getStdHandle.invokeExact(STD_INPUT_HANDLE);
+
+            System.out.println("STD_INPUT_HANDLE: " + inputHandle);
+
+            if (inputHandle.equals(MemorySegment.NULL)) {
+                System.out.println("GetStdHandle(STD_INPUT_HANDLE): FAILED");
+            } else {
+                try (Arena inputModeArena = Arena.ofConfined()) {
+                    MemorySegment inputMode =
+                            inputModeArena.allocate(ValueLayout.JAVA_INT);
+
+                    int inputModeResult = (int) getConsoleMode.invokeExact(
+                            inputHandle,
+                            inputMode
+                    );
+
+                    if (inputModeResult == 0) {
+                        System.out.println("GetConsoleMode(INPUT): FAILED");
+                    } else {
+                        int modeValue = inputMode.get(ValueLayout.JAVA_INT, 0);
+
+                        System.out.printf(
+                                "Console input mode: 0x%08X%n",
+                                modeValue
+                        );
+                    }
+                }
             }
 
             System.out.println("=================================");
