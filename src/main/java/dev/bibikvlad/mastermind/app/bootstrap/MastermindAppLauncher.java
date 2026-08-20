@@ -1,5 +1,7 @@
 package dev.bibikvlad.mastermind.app.bootstrap;
 
+import dev.bibikvlad.mastermind.app.bootstrap.TEMP_TEST.RussianCharactersTest;
+import dev.bibikvlad.mastermind.app.bootstrap.TEMP_TEST.SoutTest;
 import dev.bibikvlad.mastermind.app.bootstrap.errors.FatalPersistenceErrorHandler;
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.ConsolePrinter;
@@ -19,8 +21,30 @@ import java.util.Optional;
 public class MastermindAppLauncher {
     public static void main(String[] args) {
         WindowsConsoleConfigurator.enableUtf8();
+        RussianCharactersTest ruTest = new RussianCharactersTest();
+        ruTest.test();
+
+        SoutTest soutTest = new SoutTest();
+
+        soutTest.test();
+        soutTest.testClueSymbols();
 
         Printer printer = new ConsolePrinter();
+
+        System.out.println("=== System.out ===");
+        System.out.println("Русский ○ ◍ ● ⬤ ◉ 😀 🎉");
+        System.out.println("\u001B[91mSYSTEM.OUT RED\u001B[0m");
+
+        System.out.println();
+
+        System.out.println("=== ConsolePrinter ===");
+        printer.printMessage("Русский ○ ◍ ● ⬤ ◉ 😀 🎉");
+        printer.printMessage("\u001B[91mCONSOLE PRINTER RED\u001B[0m");
+
+        System.out.println();
+
+        soutTest.testClueSymbols();
+        ruTest.test();
 
         try {
             run(printer);
