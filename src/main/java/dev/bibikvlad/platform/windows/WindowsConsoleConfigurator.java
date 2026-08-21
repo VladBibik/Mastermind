@@ -6,7 +6,6 @@ import java.lang.invoke.MethodHandle;
 public class WindowsConsoleConfigurator {
     private static final int UTF8_CODE_PAGE = 65001;
 
-    private static final int STD_INPUT_HANDLE = -10;
     private static final int STD_OUTPUT_HANDLE = -11;
 
     private static final int ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x0004;
@@ -182,36 +181,6 @@ public class WindowsConsoleConfigurator {
                     System.out.println("VT processing actually enabled: " + vtEnabled);
                 } else {
                     System.out.println("Could not verify console mode.");
-                }
-            }
-
-            MemorySegment inputHandle =
-                    (MemorySegment) getStdHandle.invokeExact(STD_INPUT_HANDLE);
-
-            System.out.println("STD_INPUT_HANDLE: " + inputHandle);
-
-            if (inputHandle.equals(MemorySegment.NULL)) {
-                System.out.println("GetStdHandle(STD_INPUT_HANDLE): FAILED");
-            } else {
-                try (Arena inputModeArena = Arena.ofConfined()) {
-                    MemorySegment inputMode =
-                            inputModeArena.allocate(ValueLayout.JAVA_INT);
-
-                    int inputModeResult = (int) getConsoleMode.invokeExact(
-                            inputHandle,
-                            inputMode
-                    );
-
-                    if (inputModeResult == 0) {
-                        System.out.println("GetConsoleMode(INPUT): FAILED");
-                    } else {
-                        int modeValue = inputMode.get(ValueLayout.JAVA_INT, 0);
-
-                        System.out.printf(
-                                "Console input mode: 0x%08X%n",
-                                modeValue
-                        );
-                    }
                 }
             }
 
