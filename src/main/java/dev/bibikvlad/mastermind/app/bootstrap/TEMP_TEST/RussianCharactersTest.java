@@ -2,13 +2,14 @@ package dev.bibikvlad.mastermind.app.bootstrap.TEMP_TEST;
 
 import dev.bibikvlad.mastermind.input.parser.ConsoleInputParser;
 import dev.bibikvlad.mastermind.input.parser.Parser;
+import dev.bibikvlad.mastermind.input.parser.WindowsConsoleDiagnosticParser;
 
 public class RussianCharactersTest {
 
     public void test() {
         System.out.println("=== INPUT TEST ===");
 
-        Parser parser = new ConsoleInputParser();
+        Parser parser = new WindowsConsoleDiagnosticParser();
 
         testInput(parser, "Enter Russian text:");
         testInput(parser, "Enter English text:");
