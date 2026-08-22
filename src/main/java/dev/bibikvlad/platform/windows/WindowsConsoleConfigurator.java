@@ -9,7 +9,6 @@ public class WindowsConsoleConfigurator {
 
     private static final int STD_OUTPUT_HANDLE = -11;
 
-    private static final int ENABLE_PROCESSED_OUTPUT = 0x0001;
     private static final int ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x0004;
 
     private WindowsConsoleConfigurator() {
@@ -90,7 +89,7 @@ public class WindowsConsoleConfigurator {
 
                 int originalMode = mode.get(ValueLayout.JAVA_INT, 0);
 
-                int newMode = originalMode | ENABLE_PROCESSED_OUTPUT | ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+                int newMode = originalMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING;
 
                 result = (int) setConsoleMode.invokeExact(outputHandle, newMode);
 
