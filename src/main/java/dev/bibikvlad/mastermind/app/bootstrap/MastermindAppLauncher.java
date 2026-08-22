@@ -6,7 +6,7 @@ import dev.bibikvlad.mastermind.app.printer.ConsolePrinter;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.input.parser.Parser;
-import dev.bibikvlad.mastermind.input.parser.WindowsConsoleDiagnosticParser;
+import dev.bibikvlad.mastermind.input.parser.WindowsConsoleInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.core.MenuRunner;
@@ -35,7 +35,7 @@ public class MastermindAppLauncher {
             //TODO: TEMP CHANGE FOR TESTING PURPOSES!
             //TODO: UNCOMMENT AND DELETE NEW PARSER!
             //Parser parser = new ConsoleInputParser();
-            Parser parser = new WindowsConsoleDiagnosticParser();
+            Parser parser = new WindowsConsoleInputParser();
 
             runStartupFlow(serviceContainer, printer, parser);
         }
