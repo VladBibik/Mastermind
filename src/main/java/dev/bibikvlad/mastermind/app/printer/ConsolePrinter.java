@@ -9,11 +9,7 @@ public class ConsolePrinter implements Printer {
     private final PrintStream out;
 
     public ConsolePrinter() {
-        this.out = new PrintStream(
-                new FileOutputStream(FileDescriptor.out),
-                true,
-                StandardCharsets.UTF_8
-        );
+        this.out = new PrintStream(new FileOutputStream(FileDescriptor.out), true, StandardCharsets.UTF_8);
     }
 
     public void printMessage(String message) {
