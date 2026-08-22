@@ -18,7 +18,7 @@ public class WindowsConsoleConfigurator {
         );
     }
 
-    public static void enableUtf8() {
+    public static void configure() {
         if (!System.getProperty("os.name")
                 .toLowerCase()
                 .startsWith("windows")) {

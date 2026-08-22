@@ -18,7 +18,7 @@ import java.util.Optional;
 
 public class MastermindAppLauncher {
     public static void main(String[] args) {
-        WindowsConsoleConfigurator.enableUtf8();
+        WindowsConsoleConfigurator.configure();
 
         Printer printer = new ConsolePrinter();
 
