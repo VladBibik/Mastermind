@@ -19,9 +19,7 @@ public class WindowsConsoleConfigurator {
     }
 
     public static void configure() {
-        if (!System.getProperty("os.name")
-                .toLowerCase()
-                .startsWith("windows")) {
+        if (!System.getProperty("os.name").toLowerCase().startsWith("windows")) {
             return;
         }
 
