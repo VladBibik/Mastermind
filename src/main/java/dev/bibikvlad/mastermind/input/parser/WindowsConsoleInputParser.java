@@ -1,11 +1,6 @@
 package dev.bibikvlad.mastermind.input.parser;
 
-import java.lang.foreign.Arena;
-import java.lang.foreign.FunctionDescriptor;
-import java.lang.foreign.Linker;
-import java.lang.foreign.MemorySegment;
-import java.lang.foreign.SymbolLookup;
-import java.lang.foreign.ValueLayout;
+import java.lang.foreign.*;
 import java.lang.invoke.MethodHandle;
 import java.nio.charset.StandardCharsets;
 
@@ -16,12 +11,9 @@ public class WindowsConsoleInputParser implements Parser {
 
     private final MethodHandle readConsoleW;
     private final MemorySegment inputHandle;
-    private final Arena arena;
 
     public WindowsConsoleInputParser() {
-        try {
-            arena = Arena.ofShared();
-
+        try (Arena arena = Arena.ofShared()) {
             Linker linker = Linker.nativeLinker();
             SymbolLookup kernel32 =
                     SymbolLookup.libraryLookup("Kernel32", arena);
@@ -50,27 +42,20 @@ public class WindowsConsoleInputParser implements Parser {
                     getStdHandle.invokeExact(STD_INPUT_HANDLE);
 
             if (inputHandle.equals(MemorySegment.NULL)) {
-                throw new IllegalStateException(
-                        "GetStdHandle(STD_INPUT_HANDLE) failed"
-                );
+                throw new IllegalStateException("GetStdHandle(STD_INPUT_HANDLE) failed");
             }
 
         } catch (Throwable throwable) {
-            throw new IllegalStateException(
-                    "Failed to initialize Windows console input",
-                    throwable
-            );
+            throw new IllegalStateException("Failed to initialize Windows console input", throwable);
         }
     }
 
     @Override
     public String parse() {
         try (Arena arena = Arena.ofConfined()) {
-            MemorySegment buffer =
-                    arena.allocate(BUFFER_SIZE * ValueLayout.JAVA_CHAR.byteSize());
+            MemorySegment buffer = arena.allocate(BUFFER_SIZE * ValueLayout.JAVA_CHAR.byteSize());
 
-            MemorySegment charsRead =
-                    arena.allocate(ValueLayout.JAVA_INT);
+            MemorySegment charsRead = arena.allocate(ValueLayout.JAVA_INT);
 
             int result = (int) readConsoleW.invokeExact(
                     inputHandle,
@@ -87,7 +72,7 @@ public class WindowsConsoleInputParser implements Parser {
             int count = charsRead.get(ValueLayout.JAVA_INT, 0);
 
             byte[] bytes = buffer
-                    .reinterpret((long) count * ValueLayout.JAVA_CHAR.byteSize())
+                    .reinterpret(count * ValueLayout.JAVA_CHAR.byteSize())
                     .toArray(ValueLayout.JAVA_BYTE);
 
             return new String(bytes, StandardCharsets.UTF_16LE)
@@ -96,10 +81,7 @@ public class WindowsConsoleInputParser implements Parser {
                     .replace("\r", "");
 
         } catch (Throwable throwable) {
-            throw new IllegalStateException(
-                    "Could not read Windows console input",
-                    throwable
-            );
+            throw new IllegalStateException("Could not read Windows console input", throwable);
         }
     }
 }
