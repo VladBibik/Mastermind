@@ -27,22 +27,6 @@ public class WindowsConsoleConfigurator {
             SymbolLookup kernel32 =
                     SymbolLookup.libraryLookup("Kernel32", arena);
 
-            MethodHandle setConsoleCP = linker.downcallHandle(
-                    kernel32.find("SetConsoleCP").orElseThrow(),
-                    FunctionDescriptor.of(
-                            ValueLayout.JAVA_INT,
-                            ValueLayout.JAVA_INT
-                    )
-            );
-
-            MethodHandle setConsoleOutputCP = linker.downcallHandle(
-                    kernel32.find("SetConsoleOutputCP").orElseThrow(),
-                    FunctionDescriptor.of(
-                            ValueLayout.JAVA_INT,
-                            ValueLayout.JAVA_INT
-                    )
-            );
-
             MethodHandle getStdHandle = linker.downcallHandle(
                     kernel32.find("GetStdHandle").orElseThrow(),
                     FunctionDescriptor.of(
@@ -69,9 +53,6 @@ public class WindowsConsoleConfigurator {
                     )
             );
 
-            setCodePage(setConsoleCP, "SetConsoleCP");
-            setCodePage(setConsoleOutputCP, "SetConsoleOutputCP");
-
             MemorySegment outputHandle = (MemorySegment) getStdHandle.invokeExact(STD_OUTPUT_HANDLE);
 
             if (outputHandle.equals(MemorySegment.NULL)) {
@@ -88,6 +69,25 @@ public class WindowsConsoleConfigurator {
                 }
 
                 int originalMode = mode.get(ValueLayout.JAVA_INT, 0);
+
+                MethodHandle setConsoleCP = linker.downcallHandle(
+                        kernel32.find("SetConsoleCP").orElseThrow(),
+                        FunctionDescriptor.of(
+                                ValueLayout.JAVA_INT,
+                                ValueLayout.JAVA_INT
+                        )
+                );
+
+                MethodHandle setConsoleOutputCP = linker.downcallHandle(
+                        kernel32.find("SetConsoleOutputCP").orElseThrow(),
+                        FunctionDescriptor.of(
+                                ValueLayout.JAVA_INT,
+                                ValueLayout.JAVA_INT
+                        )
+                );
+
+                setCodePage(setConsoleCP, "SetConsoleCP");
+                setCodePage(setConsoleOutputCP, "SetConsoleOutputCP");
 
                 int newMode = originalMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING;
 
