@@ -17,9 +17,9 @@ public class WindowsConsoleConfigurator {
         );
     }
 
-    public static void configure() {
+    public static boolean configure() {
         if (!System.getProperty("os.name").toLowerCase().startsWith("windows")) {
-            return;
+            return false;
         }
 
         try (Arena arena = Arena.ofConfined()) {
@@ -84,7 +84,7 @@ public class WindowsConsoleConfigurator {
                 int result = (int) getConsoleMode.invokeExact(outputHandle, mode);
 
                 if (result == 0) {
-                    throw new IllegalStateException("GetConsoleMode failed");
+                    return false;
                 }
 
                 int originalMode = mode.get(ValueLayout.JAVA_INT, 0);
@@ -101,6 +101,8 @@ public class WindowsConsoleConfigurator {
         } catch (Throwable throwable) {
             throw new IllegalStateException("Failed to configure Windows console", throwable);
         }
+
+        return true;
     }
 
     private static void setCodePage(MethodHandle methodHandle, String methodName) throws Throwable {
