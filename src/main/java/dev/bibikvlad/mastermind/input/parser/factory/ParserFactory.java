@@ -9,8 +9,8 @@ public class ParserFactory {
         throw new AssertionError("The class ParserFactory cannot be instantiated.");
     }
 
-    public static Parser create(boolean isWindows) {
-        if (isWindows) {
+    public static Parser create(boolean windowsConsoleAvailable) {
+        if (windowsConsoleAvailable) {
             return new WindowsConsoleInputParser();
         }
 
