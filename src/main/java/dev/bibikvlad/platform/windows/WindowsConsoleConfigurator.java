@@ -17,7 +17,7 @@ public class WindowsConsoleConfigurator {
         );
     }
 
-    public static boolean configure() {
+    public static boolean tryConfigure() {
         if (!System.getProperty("os.name").toLowerCase().startsWith("windows")) {
             return false;
         }
@@ -99,7 +99,7 @@ public class WindowsConsoleConfigurator {
             }
 
         } catch (Throwable throwable) {
-            throw new IllegalStateException("Failed to configure Windows console", throwable);
+            throw new IllegalStateException("Failed to tryConfigure Windows console", throwable);
         }
 
         return true;
