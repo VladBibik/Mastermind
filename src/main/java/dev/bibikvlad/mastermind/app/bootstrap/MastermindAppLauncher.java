@@ -18,10 +18,10 @@ import java.util.Optional;
 
 public class MastermindAppLauncher {
     public static void main(String[] args) {
-        boolean windowsConsoleAvailable = WindowsConsoleConfigurator.configure();
+        boolean nativeConsoleAvailable = WindowsConsoleConfigurator.configure();
 
         Printer printer = new ConsolePrinter();
-        Parser parser = ParserFactory.create(windowsConsoleAvailable);
+        Parser parser = ParserFactory.create(nativeConsoleAvailable);
 
         try {
             run(printer, parser);
