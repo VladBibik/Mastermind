@@ -5,6 +5,7 @@ import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.ConsolePrinter;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
+import dev.bibikvlad.mastermind.input.parser.ConsoleInputParser;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.parser.WindowsConsoleInputParser;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
@@ -18,24 +19,27 @@ import java.util.Optional;
 
 public class MastermindAppLauncher {
     public static void main(String[] args) {
-        WindowsConsoleConfigurator.configure();
+        boolean isWindows = WindowsConsoleConfigurator.configure();
 
         Printer printer = new ConsolePrinter();
 
         try {
-            run(printer);
+            run(printer, isWindows);
         } catch (PersistenceException exception) {
             FatalPersistenceErrorHandler handler = new FatalPersistenceErrorHandler(printer);
             handler.handle(exception);
         }
     }
 
-    private static void run(Printer printer) throws PersistenceException {
+    private static void run(Printer printer, boolean isWindows) throws PersistenceException {
         try (ServiceContainer serviceContainer = new ServiceContainer()) {
-            //TODO: TEMP CHANGE FOR TESTING PURPOSES!
-            //TODO: UNCOMMENT AND DELETE NEW PARSER!
-            //Parser parser = new ConsoleInputParser();
-            Parser parser = new WindowsConsoleInputParser();
+            Parser parser;
+
+            if (isWindows) {
+                parser = new WindowsConsoleInputParser();
+            } else {
+                parser = new ConsoleInputParser();
+            }
 
             runStartupFlow(serviceContainer, printer, parser);
         }
