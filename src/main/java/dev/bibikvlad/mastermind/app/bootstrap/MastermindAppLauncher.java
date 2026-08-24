@@ -18,7 +18,7 @@ import java.util.Optional;
 
 public class MastermindAppLauncher {
     public static void main(String[] args) {
-        boolean nativeConsoleAvailable = WindowsConsoleConfigurator.tryConfigure();
+        boolean nativeConsoleAvailable = WindowsConsoleConfigurator.configureIfAvailable();
 
         Printer printer = new ConsolePrinter();
         Parser parser = ParserFactory.create(nativeConsoleAvailable);
