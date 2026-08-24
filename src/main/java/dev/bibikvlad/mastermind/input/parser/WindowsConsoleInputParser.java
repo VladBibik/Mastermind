@@ -5,17 +5,15 @@ import java.lang.invoke.MethodHandle;
 import java.nio.charset.StandardCharsets;
 
 public class WindowsConsoleInputParser implements Parser {
-
     private static final int STD_INPUT_HANDLE = -10;
     private static final int BUFFER_SIZE = 1024;
 
     private final MethodHandle readConsoleW;
     private final MemorySegment inputHandle;
-    private final Arena arena;
 
     public WindowsConsoleInputParser() {
         try {
-            arena = Arena.ofShared();
+            Arena arena = Arena.ofShared();
             Linker linker = Linker.nativeLinker();
             SymbolLookup kernel32 =
                     SymbolLookup.libraryLookup("Kernel32", arena);
@@ -54,10 +52,10 @@ public class WindowsConsoleInputParser implements Parser {
 
     @Override
     public String parse() {
-        try {
-            MemorySegment buffer = arena.allocate(BUFFER_SIZE * ValueLayout.JAVA_CHAR.byteSize());
+        try (Arena readArena = Arena.ofConfined()) {
+            MemorySegment buffer = readArena.allocate(BUFFER_SIZE * ValueLayout.JAVA_CHAR.byteSize());
 
-            MemorySegment charsRead = arena.allocate(ValueLayout.JAVA_INT);
+            MemorySegment charsRead = readArena.allocate(ValueLayout.JAVA_INT);
 
             int result = (int) readConsoleW.invokeExact(
                     inputHandle,
@@ -73,8 +71,7 @@ public class WindowsConsoleInputParser implements Parser {
 
             int count = charsRead.get(ValueLayout.JAVA_INT, 0);
 
-            byte[] bytes = buffer
-                    .reinterpret(count * ValueLayout.JAVA_CHAR.byteSize())
+            byte[] bytes = buffer.reinterpret(count * ValueLayout.JAVA_CHAR.byteSize())
                     .toArray(ValueLayout.JAVA_BYTE);
 
             return new String(bytes, StandardCharsets.UTF_16LE)
