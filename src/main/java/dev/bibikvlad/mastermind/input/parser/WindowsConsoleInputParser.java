@@ -11,9 +11,11 @@ public class WindowsConsoleInputParser implements Parser {
 
     private final MethodHandle readConsoleW;
     private final MemorySegment inputHandle;
+    private final Arena arena;
 
     public WindowsConsoleInputParser() {
-        try (Arena arena = Arena.ofShared()) {
+        try {
+            arena = Arena.ofShared();
             Linker linker = Linker.nativeLinker();
             SymbolLookup kernel32 =
                     SymbolLookup.libraryLookup("Kernel32", arena);
@@ -52,7 +54,7 @@ public class WindowsConsoleInputParser implements Parser {
 
     @Override
     public String parse() {
-        try (Arena arena = Arena.ofConfined()) {
+        try {
             MemorySegment buffer = arena.allocate(BUFFER_SIZE * ValueLayout.JAVA_CHAR.byteSize());
 
             MemorySegment charsRead = arena.allocate(ValueLayout.JAVA_INT);
