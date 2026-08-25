@@ -72,6 +72,10 @@ public class PlayerService {
         return playerRepository.count() > 1;
     }
 
+    public boolean isInCompatibilityMode(LocalizationType localizationType) {
+        return LocalizationType.COMPATIBILITY.equals(localizationType);
+    }
+
     private PlayerConfig getCustomLocaleConfig(LocalizationType localizationType) {
         return new PlayerConfig(
                 localizationType,
