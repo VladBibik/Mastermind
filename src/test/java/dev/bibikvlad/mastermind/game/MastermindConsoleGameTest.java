@@ -1,7 +1,6 @@
 package dev.bibikvlad.mastermind.game;
 
 import dev.bibikvlad.mastermind.app.printer.PrintStreamPrinter;
-import dev.bibikvlad.mastermind.game.presentation.GameMessagePrinter;
 import dev.bibikvlad.mastermind.input.parser.BufferedReaderInputParser;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.config.LocalizationType;
@@ -20,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 //TODO: Add tags for different parts of the tests. Like "Game"/"Menu" or think about better categorization
-public class MastermindConsoleGameTest {
+class MastermindConsoleGameTest {
     private ByteArrayOutputStream outputStream;
     private PrintStream printStream;
     private GameMessages gameMessages;
@@ -42,7 +41,7 @@ public class MastermindConsoleGameTest {
 
     @Test
     @DisplayName("Invalid input test")
-    public void invalidInputTest() {
+    void invalidInputTest() {
         String output = runGameAndGetOutputStreamString("rrrr", "abcd\nclose\n");
 
         assertTrue(output.contains(gameMessages.getInvalidInput()));
@@ -50,7 +49,7 @@ public class MastermindConsoleGameTest {
 
     @Test
     @DisplayName("Correct answer on the first attempt")
-    public void firstAttemptCorrectAnswerTest() {
+    void firstAttemptCorrectAnswerTest() {
         String answer = "yypw";
         String output = runGameAndGetOutputStreamString(answer, "yypw");
 
@@ -59,7 +58,7 @@ public class MastermindConsoleGameTest {
 
     @Test
     @DisplayName("10 incorrect attempts in a row")
-    public void tenIncorrectAttemptsInARowTest() {
+    void tenIncorrectAttemptsInARowTest() {
         String answer = "yypw";
         String output = runGameAndGetOutputStreamString(answer, "rrrr\n".repeat(10));
 
@@ -68,7 +67,7 @@ public class MastermindConsoleGameTest {
 
     @Test
     @DisplayName("Correct answer after several incorrect attempts")
-    public void correctAnswerAfterSeveralIncorrectAttemptsTest() {
+    void correctAnswerAfterSeveralIncorrectAttemptsTest() {
         String answer = "bgpw";
         String output = runGameAndGetOutputStreamString(answer, "yypw\nrrbb\npwbg\nbgpw");
 
@@ -77,7 +76,7 @@ public class MastermindConsoleGameTest {
 
     @Test
     @DisplayName("Close on first attempt")
-    public void firstAttemptCloseTest() {
+    void firstAttemptCloseTest() {
         assertDoesNotThrow(
                 () -> runGameAndGetOutputStreamString("yrgw", "close"));
     }
