@@ -1,23 +1,26 @@
 package dev.bibikvlad.mastermind.game;
 
-import dev.bibikvlad.mastermind.game.presentation.GameMessagePrinter;
+import dev.bibikvlad.mastermind.app.printer.Printer;
+import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 
 public class GuessEvaluator {
     private final String correctAnswer;
-    private final GameMessagePrinter printer;
+    private final Printer printer;
+    private final GameMessages gameMessages;
 
-    public GuessEvaluator(String correctAnswer, GameMessagePrinter printer) {
-        this.correctAnswer = correctAnswer;
+    public GuessEvaluator(Printer printer, GameMessages gameMessages, String correctAnswer) {
         this.printer = printer;
+        this.gameMessages = gameMessages;
+        this.correctAnswer = correctAnswer;
     }
 
     public boolean evaluate(String userInput, int turn, int maxTurns) {
         if (userInput.equals(correctAnswer)) {
-            printer.printWinMessage(correctAnswer);
+            printer.printMessage(gameMessages.getWin(correctAnswer));
 
             return true;
         } else {
-            printer.printIncorrectGuessMessage(maxTurns, turn, correctAnswer, userInput);
+            printer.printMessage(gameMessages.getIncorrectGuess(maxTurns, turn, correctAnswer, userInput));
 
             return false;
         }
