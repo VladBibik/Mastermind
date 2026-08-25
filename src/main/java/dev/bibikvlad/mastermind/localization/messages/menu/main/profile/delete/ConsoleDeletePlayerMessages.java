@@ -1,14 +1,9 @@
 package dev.bibikvlad.mastermind.localization.messages.menu.main.profile.delete;
 
-import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
-
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 public class ConsoleDeletePlayerMessages implements DeletePlayerMenuMessages {
-    private static final String RED_CONSOLE_CODE = ConsoleColor.RED.getCode();
-    private static final String CONSOLE_RESET_CODE = ConsoleColor.RESET.getCode();
-
     private final ResourceBundle resourceBundle;
 
     public ConsoleDeletePlayerMessages(ResourceBundle resourceBundle) {
@@ -17,8 +12,7 @@ public class ConsoleDeletePlayerMessages implements DeletePlayerMenuMessages {
 
     @Override
     public String getFirstWarning(String playerName) {
-        String coloredWarningTitle = RED_CONSOLE_CODE + resourceBundle.getString("first_warning_title")
-                + CONSOLE_RESET_CODE;
+        String coloredWarningTitle = resourceBundle.getString("first_warning_title");
 
         return coloredWarningTitle + "\n"
                 + MessageFormat.format(resourceBundle.getString("first_warning"), playerName);
@@ -26,8 +20,7 @@ public class ConsoleDeletePlayerMessages implements DeletePlayerMenuMessages {
 
     @Override
     public String getDeleteConfirmation(String playerName) {
-        String coloredWarningTitle = RED_CONSOLE_CODE + resourceBundle.getString("delete_confirmation_title")
-                + CONSOLE_RESET_CODE;
+        String coloredWarningTitle = resourceBundle.getString("delete_confirmation_title");
 
         return coloredWarningTitle + "\n"
                 + MessageFormat.format(resourceBundle.getString("delete_confirmation"), playerName);
