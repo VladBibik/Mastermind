@@ -6,7 +6,7 @@ import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.utils.strings.ConsoleColoredValidSymbols;
-import dev.bibikvlad.utils.strings.clue.GameCluesConstants;
+import dev.bibikvlad.utils.strings.ConsoleSymbols;
 import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -102,9 +102,9 @@ class ConsoleGameMessagesRuTest {
                 + "Варианты цветов: " + ConsoleColoredValidSymbols.getSymbols() + "\n"
                 + "Пример хода: ybgr\n"
                 + "Подсказка:\n"
-                + GameCluesConstants.CIRCLE_SHADED + "   Правильный цвет в правильном положении\n"
-                + GameCluesConstants.CIRCLE_EMPTY + "   Правильный цвет в неправильном положении\n"
-                + GameCluesConstants.UNDERSCORE + "   Неправильный цвет\n"
+                + ConsoleSymbols.CIRCLE_SHADED + "   Правильный цвет в правильном положении\n"
+                + ConsoleSymbols.CIRCLE_EMPTY + "   Правильный цвет в неправильном положении\n"
+                + ConsoleSymbols.UNDERSCORE + "   Неправильный цвет\n"
                 + "\n"
                 + "Порядок символов в подсказке не обязательно совпадает с позицией цвета.\n"
                 + "Введите 'help', или 'rules', чтобы снова увидеть правила.\n"

@@ -15,7 +15,7 @@ import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 import dev.bibikvlad.utils.DefaultLogoColorsBundle;
-import dev.bibikvlad.utils.strings.clue.GameCluesConstants;
+import dev.bibikvlad.utils.strings.ConsoleSymbols;
 import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
 
 import java.util.Optional;
@@ -174,7 +174,7 @@ public class LogoColorSelectionMenu extends Menu {
     }
 
     private String getForegroundPreview(ConsoleColor color) {
-        return color.getCode() + GameCluesConstants.CIRCLE_SOLID + ConsoleColor.RESET.getCode();
+        return color.getCode() + ConsoleSymbols.CIRCLE_SOLID + ConsoleColor.RESET.getCode();
     }
 
     private String getBackgroundPreview(ConsoleColor color) {

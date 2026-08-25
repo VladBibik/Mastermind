@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.clues;
 
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
-import dev.bibikvlad.utils.strings.clue.GameCluesConstants;
+import dev.bibikvlad.utils.strings.ConsoleSymbols;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ public class InputVisualRepresentationTest {
     @DisplayName("Testing visual representation for the single character")
     void testVisualRepresentationForSingleCharacter() {
         String expected = ConsoleColor.BRIGHT_RED.getCode()
-                + GameCluesConstants.CIRCLE_SOLID
+                + ConsoleSymbols.CIRCLE_SOLID
                 + ConsoleColor.RESET.getCode();
         String actual = InputVisualRepresentation.getVisualRepresentation("R");
 
@@ -22,9 +22,9 @@ public class InputVisualRepresentationTest {
     @Test
     @DisplayName("Testing visual representation for multiple characters")
     void testVisualRepresentationForMultipleCharacters() {
-        String expected = ConsoleColor.BRIGHT_RED.getCode() + GameCluesConstants.CIRCLE_SOLID
-                + ConsoleColor.BRIGHT_GREEN.getCode() + GameCluesConstants.CIRCLE_SOLID
-                + ConsoleColor.BRIGHT_BLUE.getCode() + GameCluesConstants.CIRCLE_SOLID
+        String expected = ConsoleColor.BRIGHT_RED.getCode() + ConsoleSymbols.CIRCLE_SOLID
+                + ConsoleColor.BRIGHT_GREEN.getCode() + ConsoleSymbols.CIRCLE_SOLID
+                + ConsoleColor.BRIGHT_BLUE.getCode() + ConsoleSymbols.CIRCLE_SOLID
                 + ConsoleColor.RESET.getCode();
 
         String actual = InputVisualRepresentation.getVisualRepresentation("rgb");

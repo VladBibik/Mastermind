@@ -3,7 +3,7 @@ package dev.bibikvlad.mastermind.localization.messages.game;
 import dev.bibikvlad.mastermind.clues.ClueGenerator;
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.utils.strings.ConsoleColoredValidSymbols;
-import dev.bibikvlad.utils.strings.clue.GameCluesConstants;
+import dev.bibikvlad.utils.strings.ConsoleSymbols;
 
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
@@ -43,7 +43,7 @@ public class ConsoleGameMessages implements GameMessages {
     @Override
     public String getRules() {
         return MessageFormat.format(resourceBundle.getString("rules"),
-                ConsoleColoredValidSymbols.getSymbols(), String.valueOf(GameCluesConstants.CIRCLE_SHADED),
-                String.valueOf(GameCluesConstants.CIRCLE_EMPTY), String.valueOf(GameCluesConstants.UNDERSCORE));
+                ConsoleColoredValidSymbols.getSymbols(), String.valueOf(ConsoleSymbols.CIRCLE_SHADED),
+                String.valueOf(ConsoleSymbols.CIRCLE_EMPTY), String.valueOf(ConsoleSymbols.UNDERSCORE));
     }
 }

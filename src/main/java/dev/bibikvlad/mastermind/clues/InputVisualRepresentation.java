@@ -2,7 +2,7 @@ package dev.bibikvlad.mastermind.clues;
 
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.utils.formatters.ConsoleColorFormatter;
-import dev.bibikvlad.utils.strings.clue.GameCluesConstants;
+import dev.bibikvlad.utils.strings.ConsoleSymbols;
 
 public class InputVisualRepresentation {
     public static String getVisualRepresentation(String input) {
@@ -11,7 +11,7 @@ public class InputVisualRepresentation {
         for (int i = 0; i < input.length(); i++) {
             visualRepresentation
                     .append(ConsoleColorFormatter.getColorCode(input.charAt(i)))
-                    .append(GameCluesConstants.CIRCLE_SOLID);
+                    .append(ConsoleSymbols.CIRCLE_SOLID);
         }
 
         visualRepresentation.append(ConsoleColor.RESET.getCode());

@@ -9,7 +9,7 @@ import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMes
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.logo.LogoColorSelectionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.logo.color.ColorMessages;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
-import dev.bibikvlad.utils.strings.clue.GameCluesConstants;
+import dev.bibikvlad.utils.strings.ConsoleSymbols;
 
 import java.util.Optional;
 import java.util.function.Function;
@@ -68,7 +68,7 @@ public class ColorSelectionMenu {
                 color.getIndex(),
                 colorMessages.getColor(color.getLocalizationKey()),
                 color.getCode(),
-                GameCluesConstants.CIRCLE_SOLID,
+                ConsoleSymbols.CIRCLE_SOLID,
                 ConsoleColor.RESET.getCode());
     }
 

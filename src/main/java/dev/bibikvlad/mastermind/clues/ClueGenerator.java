@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.clues;
 
 import dev.bibikvlad.utils.CluePriorityComparator;
-import dev.bibikvlad.utils.strings.clue.GameCluesConstants;
+import dev.bibikvlad.utils.strings.ConsoleSymbols;
 
 import java.util.stream.Collectors;
 
@@ -17,7 +17,7 @@ public class ClueGenerator {
                 answerUsed[i] = true;
                 guessUsed[i] = true;
 
-                clueChars[i] = GameCluesConstants.CIRCLE_SHADED;
+                clueChars[i] = ConsoleSymbols.CIRCLE_SHADED;
             }
         }
 
@@ -31,7 +31,7 @@ public class ClueGenerator {
                     answerUsed[j] = true;
                     guessUsed[i] = true;
 
-                    clueChars[i] = GameCluesConstants.CIRCLE_EMPTY;
+                    clueChars[i] = ConsoleSymbols.CIRCLE_EMPTY;
                     break;
                 }
             }
@@ -40,7 +40,7 @@ public class ClueGenerator {
         // Step 3: Fill the rest with underscores (_)
         for (int i = 0; i < answer.length(); i++) {
             if (clueChars[i] == 0)
-                clueChars[i] = GameCluesConstants.UNDERSCORE;
+                clueChars[i] = ConsoleSymbols.UNDERSCORE;
         }
 
         return sortAndBuildClue(clueChars);

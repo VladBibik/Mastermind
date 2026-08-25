@@ -6,7 +6,7 @@ import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.utils.strings.ConsoleColoredValidSymbols;
-import dev.bibikvlad.utils.strings.clue.GameCluesConstants;
+import dev.bibikvlad.utils.strings.ConsoleSymbols;
 import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -102,9 +102,9 @@ class ConsoleGameMessagesEnTest {
                 + "Color choices: " + ConsoleColoredValidSymbols.getSymbols() + "\n"
                 + "Example turn: ybgr\n"
                 + "Response:\n"
-                + GameCluesConstants.CIRCLE_SHADED + "   correct color in correct position\n"
-                + GameCluesConstants.CIRCLE_EMPTY + "   correct color in incorrect position\n"
-                + GameCluesConstants.UNDERSCORE + "   incorrect color\n"
+                + ConsoleSymbols.CIRCLE_SHADED + "   correct color in correct position\n"
+                + ConsoleSymbols.CIRCLE_EMPTY + "   correct color in incorrect position\n"
+                + ConsoleSymbols.UNDERSCORE + "   incorrect color\n"
                 + "\n"
                 + "The order of the response tiles does not necessarily match the colored characters.\n"
                 + "Type 'help', or 'rules' to read these instructions again\n"
