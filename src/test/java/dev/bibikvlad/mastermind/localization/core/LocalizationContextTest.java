@@ -4,7 +4,6 @@ import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
-import dev.bibikvlad.utils.strings.Emojis;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,7 +23,7 @@ class LocalizationContextTest {
     @DisplayName("getGameMessages() returns expected English win message")
     void getGameMessagesReturnsExpectedEnglishWinMessage() {
         final String ANSWER = "RGBW";
-        assertEquals("You Won! " + Emojis.CELEBRATION_TADA + "\n" +
+        assertEquals("You Won! " + "\n" +
                         "You are the Mastermind!\n" +
                         "Solution was: " + InputVisualRepresentation.getVisualRepresentation(ANSWER),
                 gameMessages.getWin(ANSWER));

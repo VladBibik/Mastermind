@@ -4,7 +4,6 @@ import dev.bibikvlad.mastermind.clues.ClueGenerator;
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.utils.strings.ConsoleColoredValidSymbols;
-import dev.bibikvlad.utils.strings.Emojis;
 import dev.bibikvlad.utils.strings.GameCluesConstants;
 import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
 
@@ -39,7 +38,7 @@ public class ConsoleGameMessages implements GameMessages {
 
     @Override
     public String getWin(String answer) {
-        return MessageFormat.format(resourceBundle.getString("win"), Emojis.CELEBRATION_TADA,
+        return MessageFormat.format(resourceBundle.getString("win"),
                 InputVisualRepresentation.getVisualRepresentation(answer));
     }
 

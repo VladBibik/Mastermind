@@ -6,7 +6,6 @@ import dev.bibikvlad.mastermind.localization.config.LocaleType;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.utils.strings.ConsoleColoredValidSymbols;
-import dev.bibikvlad.utils.strings.Emojis;
 import dev.bibikvlad.utils.strings.GameCluesConstants;
 import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
 import org.junit.jupiter.api.DisplayName;
@@ -93,7 +92,7 @@ class ConsoleGameMessagesEnTest {
     }
 
     String getExpectedWin() {
-        return "You Won! " + Emojis.CELEBRATION_TADA +
+        return "You Won! " +
                 "\nYou are the Mastermind!\n" +
                 "Solution was: " + InputVisualRepresentation.getVisualRepresentation("rgby");
     }
