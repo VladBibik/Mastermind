@@ -2,10 +2,8 @@ package dev.bibikvlad.mastermind.localization.messages.game;
 
 import dev.bibikvlad.mastermind.clues.ClueGenerator;
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
-import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.utils.strings.ConsoleColoredValidSymbols;
 import dev.bibikvlad.utils.strings.clue.GameCluesConstants;
-import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
 
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
@@ -47,11 +45,5 @@ public class ConsoleGameMessages implements GameMessages {
         return MessageFormat.format(resourceBundle.getString("rules"),
                 ConsoleColoredValidSymbols.getSymbols(), String.valueOf(GameCluesConstants.CIRCLE_SHADED),
                 String.valueOf(GameCluesConstants.CIRCLE_EMPTY), String.valueOf(GameCluesConstants.UNDERSCORE));
-    }
-
-    //TODO: Move out AsciiLogo and delete methods!
-    @Override
-    public String getAsciiLogo(LogoColorsBundle logoColorsBundle) {
-        return ColoredAsciiLogo.getLogo(logoColorsBundle);
     }
 }
