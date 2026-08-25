@@ -34,4 +34,8 @@ public class GlobalMenuCommands {
             "yes",
             "y"
     );
+    public static final Set<String> HELP = Set.of(
+            "help",
+            "rules"
+    );
 }
