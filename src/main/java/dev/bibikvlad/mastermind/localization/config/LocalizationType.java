@@ -15,18 +15,21 @@ import java.util.ResourceBundle;
  * using the {@code _en__compat} suffix.
  */
 public enum LocalizationType {
-    ENGLISH(Locale.ENGLISH),
-    RUSSIAN(Locale.of("ru")),
+    ENGLISH(Locale.ENGLISH, "English"),
+    RUSSIAN(Locale.of("ru"), "Русский"),
     COMPATIBILITY(new Locale.Builder()
             .setLanguage("en")
             .setVariant("compat")
-            .build()
+            .build(),
+            "Compatible English"
     );
 
     private final Locale locale;
+    private final String nativeDisplayName;
 
-    LocalizationType(Locale locale) {
+    LocalizationType(Locale locale, String nativeDisplayName) {
         this.locale = locale;
+        this.nativeDisplayName = nativeDisplayName;
     }
 
     public Locale getLocale() {
@@ -34,9 +37,7 @@ public enum LocalizationType {
     }
 
     public String getNativeDisplayName() {
-        String displayName = locale.getDisplayLanguage(locale);
-
-        return displayName.substring(0, 1).toUpperCase(locale) + displayName.substring(1);
+        return nativeDisplayName;
     }
 
     public static LocalizationType fromIndex(int index) {
