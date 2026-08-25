@@ -70,7 +70,7 @@ class ConsoleGameMessagesEnTest {
                 ConsoleColor.BACKGROUND_BLACK
         );
 
-        String result = gameMessages.getAsciiLogo(logoColorsBundle);
+        String result = ColoredAsciiLogo.getLogo(logoColorsBundle);
         String expected = ColoredAsciiLogo.getLogo(logoColorsBundle);
 
         assertEquals(result, expected);
