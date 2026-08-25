@@ -2,7 +2,7 @@ package dev.bibikvlad.mastermind.clues;
 
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.utils.formatters.ConsoleColorFormatter;
-import dev.bibikvlad.utils.strings.GameCluesConstants;
+import dev.bibikvlad.utils.strings.clue.GameCluesConstants;
 
 public class InputVisualRepresentation {
     public static String getVisualRepresentation(String input) {

@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.clues;
 
 import dev.bibikvlad.utils.CluePriorityComparator;
-import dev.bibikvlad.utils.strings.GameCluesConstants;
+import dev.bibikvlad.utils.strings.clue.GameCluesConstants;
 
 import java.util.stream.Collectors;
 

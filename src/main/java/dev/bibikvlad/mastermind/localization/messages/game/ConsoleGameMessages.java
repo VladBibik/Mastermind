@@ -4,7 +4,7 @@ import dev.bibikvlad.mastermind.clues.ClueGenerator;
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.utils.strings.ConsoleColoredValidSymbols;
-import dev.bibikvlad.utils.strings.GameCluesConstants;
+import dev.bibikvlad.utils.strings.clue.GameCluesConstants;
 import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
 
 import java.text.MessageFormat;

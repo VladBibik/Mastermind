@@ -15,7 +15,7 @@ import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 import dev.bibikvlad.utils.DefaultLogoColorsBundle;
-import dev.bibikvlad.utils.strings.GameCluesConstants;
+import dev.bibikvlad.utils.strings.clue.GameCluesConstants;
 import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
 
 import java.util.Optional;
