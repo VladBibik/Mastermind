@@ -10,6 +10,7 @@ import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
+import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -88,8 +89,9 @@ class MastermindConsoleGameTest {
 
         Parser parser = new BufferedReaderInputParser(bufferedReader);
         Printer printer = new PrintStreamPrinter(printStream);
+        String logo = ColoredAsciiLogo.getLogo(logoColorsBundle);
 
-        MastermindConsoleGame game = new MastermindConsoleGame(printer, parser, gameMessages, answer, logoColorsBundle);
+        MastermindConsoleGame game = new MastermindConsoleGame(printer, parser, gameMessages, answer, logo);
         game.play();
 
         return outputStream.toString();
