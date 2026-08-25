@@ -92,7 +92,7 @@ class ConsoleGameMessagesEnTest {
     }
 
     String getExpectedWin() {
-        return "You Won! " +
+        return "You Won! \uD83C\uDF89" +
                 "\nYou are the Mastermind!\n" +
                 "Solution was: " + InputVisualRepresentation.getVisualRepresentation("rgby");
     }

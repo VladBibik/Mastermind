@@ -92,7 +92,7 @@ class ConsoleGameMessagesRuTest {
     }
 
     String getExpectedWin() {
-        return "Вы победили! " +
+        return "Вы победили! \uD83C\uDF89" +
                 "\nВы Mastermind!\n" +
                 "Решением была комбинация: " + InputVisualRepresentation.getVisualRepresentation("rgby");
     }

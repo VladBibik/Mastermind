@@ -23,7 +23,7 @@ class LocalizationContextTest {
     @DisplayName("getGameMessages() returns expected English win message")
     void getGameMessagesReturnsExpectedEnglishWinMessage() {
         final String ANSWER = "RGBW";
-        assertEquals("You Won! " + "\n" +
+        assertEquals("You Won! \uD83C\uDF89" + "\n" +
                         "You are the Mastermind!\n" +
                         "Solution was: " + InputVisualRepresentation.getVisualRepresentation(ANSWER),
                 gameMessages.getWin(ANSWER));
