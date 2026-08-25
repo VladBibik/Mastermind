@@ -1,36 +1,40 @@
 package dev.bibikvlad.mastermind.game;
 
+import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.game.data.GameOutcome;
 import dev.bibikvlad.mastermind.game.data.GameResult;
 import dev.bibikvlad.mastermind.input.parser.Parser;
-import dev.bibikvlad.mastermind.game.presentation.GameMessagePrinter;
-import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.input.validation.GameInputValidator;
+import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
+import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 
 public class MastermindConsoleGame {
     private static final int MAX_TURNS = 10;
 
-    private final String answer;
-    private final GameMessagePrinter printer;
+    private final Printer printer;
     private final Parser parser;
+    private final GameMessages gameMessages;
+    private final String answer;
     private final LogoColorsBundle logoColorsBundle;
 
     private final GameStateManager gameStateManager;
     private final GameCommandHandler gameCommandHandler;
     private final GuessEvaluator guessEvaluator;
 
-    public MastermindConsoleGame(GameMessagePrinter printer,
-                                 Parser inputParser,
+    public MastermindConsoleGame(Printer printer,
+                                 Parser parser,
+                                 GameMessages gameMessages,
                                  String answer,
                                  LogoColorsBundle logoColorsBundle) {
         this.printer = printer;
-        this.parser = inputParser;
+        this.parser = parser;
+        this.gameMessages = gameMessages;
         this.answer = answer;
         this.logoColorsBundle = logoColorsBundle;
 
         gameStateManager = new GameStateManager(MAX_TURNS);
-        gameCommandHandler = new GameCommandHandler(printer);
-        guessEvaluator = new GuessEvaluator(answer, printer);
+        gameCommandHandler = new GameCommandHandler(printer, gameMessages);
+        guessEvaluator = new GuessEvaluator(printer, gameMessages, answer);
     }
 
     public GameOutcome play() {
@@ -38,7 +42,7 @@ public class MastermindConsoleGame {
 
         while (true) {
             if (gameStateManager.isOver()) {
-                printer.printGameOverMessage(answer);
+                printer.printMessage(gameMessages.getGameOver(answer));
 
                 return new GameOutcome(gameStateManager.getCurrentTurn(), GameResult.LOSE);
             }
@@ -57,13 +61,13 @@ public class MastermindConsoleGame {
                     return new GameOutcome(gameStateManager.getCurrentTurn(), GameResult.WIN);
                 }
             } else {
-                printer.printInvalidInputMessage();
+                printer.printMessage(gameMessages.getInvalidInput());
             }
         }
     }
 
     private void printLogoAndRules() {
-        printer.printAsciiLogo(logoColorsBundle);
-        printer.printRulesMessage();
+        printer.printMessage(gameMessages.getAsciiLogo(logoColorsBundle));
+        printer.printMessage(gameMessages.getRules());
     }
 }
