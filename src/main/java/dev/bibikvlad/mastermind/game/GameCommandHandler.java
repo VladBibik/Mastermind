@@ -1,27 +1,31 @@
 package dev.bibikvlad.mastermind.game;
 
-import dev.bibikvlad.mastermind.game.presentation.GameMessagePrinter;
+import dev.bibikvlad.mastermind.app.printer.Printer;
+import dev.bibikvlad.mastermind.input.GlobalMenuCommands;
+import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 
 public class GameCommandHandler {
-    private final GameMessagePrinter printer;
+    private final Printer printer;
+    private final GameMessages gameMessages;
 
-    public GameCommandHandler(GameMessagePrinter printer) {
+    public GameCommandHandler(Printer printer, GameMessages gameMessages) {
         this.printer = printer;
+        this.gameMessages = gameMessages;
     }
 
     public boolean handle(String input) {
-        switch (input.toLowerCase()) {
-            case "close", "exit" -> {
-                return true;
-            }
-            case "help", "rules" -> {
-                printer.printRulesMessage();
+        input = input.toLowerCase();
 
-                return false;
-            }
-            default -> {
-                return false;
-            }
+        if (GlobalMenuCommands.EXIT.contains(input)) {
+            return true;
         }
+
+        if (GlobalMenuCommands.HELP.contains(input)) {
+            printer.printMessage(gameMessages.getRules());
+
+            return false;
+        }
+
+        return false;
     }
 }
