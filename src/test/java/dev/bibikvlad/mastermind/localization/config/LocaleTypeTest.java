@@ -12,6 +12,7 @@ class LocaleTypeTest {
     void fromLocaleIndexTest() {
         assertEquals(LocalizationType.ENGLISH, LocalizationType.fromIndex(1));
         assertEquals(LocalizationType.RUSSIAN, LocalizationType.fromIndex(2));
+        assertEquals(LocalizationType.COMPATIBILITY, LocalizationType.fromIndex(3));
     }
 
     @Test
