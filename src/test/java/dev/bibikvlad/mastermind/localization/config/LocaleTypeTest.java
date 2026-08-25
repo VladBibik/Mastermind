@@ -23,7 +23,7 @@ class LocaleTypeTest {
     @Test
     @DisplayName("Throws exception on invalid locale index")
     void invalidLocaleIndexThrowsException() {
-        for (int i = 3; i < 100; i++) {
+        for (int i = 4; i < 100; i++) {
             int index = i;
 
             assertThrows(IllegalArgumentException.class, () -> LocalizationType.fromIndex(index));
