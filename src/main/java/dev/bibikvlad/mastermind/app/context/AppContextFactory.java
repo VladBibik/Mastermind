@@ -1,14 +1,14 @@
 package dev.bibikvlad.mastermind.app.context;
 
-import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.model.player.Player;
 
 public class AppContextFactory {
-    public static AppContext withLocale(AppContext appContext, LocaleType localeType) {
-        Player updatedPlayer = appContext.currentPlayer().withLocale(localeType);
-        LocalizationContext newLocalizationContext = new LocalizationContext(localeType);
+    public static AppContext withLocale(AppContext appContext, LocalizationType localizationType) {
+        Player updatedPlayer = appContext.currentPlayer().withLocale(localizationType);
+        LocalizationContext newLocalizationContext = new LocalizationContext(localizationType);
 
         return new AppContext(newLocalizationContext, appContext.services(),
                 appContext.printer(), appContext.parser(), updatedPlayer);

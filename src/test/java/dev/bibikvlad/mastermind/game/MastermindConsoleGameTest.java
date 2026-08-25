@@ -4,7 +4,7 @@ import dev.bibikvlad.mastermind.app.printer.PrintStreamPrinter;
 import dev.bibikvlad.mastermind.game.presentation.GameMessagePrinter;
 import dev.bibikvlad.mastermind.input.parser.BufferedReaderInputParser;
 import dev.bibikvlad.mastermind.input.parser.Parser;
-import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
@@ -30,7 +30,7 @@ public class MastermindConsoleGameTest {
     void setUp() {
         outputStream = new ByteArrayOutputStream();
         printStream = new PrintStream(outputStream);
-        gameMessages = new LocalizationContext(LocaleType.ENGLISH).getMessages(MessageType.GAME);
+        gameMessages = new LocalizationContext(LocalizationType.ENGLISH).getMessages(MessageType.GAME);
 
         logoColorsBundle = new LogoColorsBundle(
                 ConsoleColor.ORCHID,

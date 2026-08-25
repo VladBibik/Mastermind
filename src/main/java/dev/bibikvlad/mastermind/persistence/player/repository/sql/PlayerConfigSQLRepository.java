@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.persistence.player.repository.sql;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
-import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;
 import dev.bibikvlad.mastermind.persistence.player.dao.PlayerConfigDAO;
@@ -48,7 +48,7 @@ public class PlayerConfigSQLRepository implements PlayerConfigRepository {
     }
 
     @Override
-    public boolean updateLocale(long playerId, LocaleType locale) {
+    public boolean updateLocale(long playerId, LocalizationType locale) {
         boolean result;
 
         try {

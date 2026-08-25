@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.persistence.player.dao.jdbc;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
-import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.persistence.player.mapper.PlayerConfigMapper;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;
@@ -72,7 +72,7 @@ public class PlayerConfigJdbcDAO implements PlayerConfigDAO {
     }
 
     @Override
-    public boolean updateLocale(long playerId, LocaleType locale) {
+    public boolean updateLocale(long playerId, LocalizationType locale) {
         String localeUpdateQuery = """
                 UPDATE player_configurations
                 SET language = ?

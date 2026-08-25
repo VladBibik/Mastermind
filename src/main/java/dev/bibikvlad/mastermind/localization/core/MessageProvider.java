@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.localization.core;
 
-import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.localization.messages.LocalizedMessages;
 
 import java.util.HashMap;
@@ -8,12 +8,12 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 public class MessageProvider {
-    private final LocaleType localeType;
+    private final LocalizationType localizationType;
     private final MessageFactoryRegistry messageFactoryRegistry;
     private final Map<Class<? extends LocalizedMessages>, LocalizedMessages> cache = new HashMap<>();
 
-    public MessageProvider(LocaleType localeType, MessageFactoryRegistry messageFactoryRegistry) {
-        this.localeType = localeType;
+    public MessageProvider(LocalizationType localizationType, MessageFactoryRegistry messageFactoryRegistry) {
+        this.localizationType = localizationType;
         this.messageFactoryRegistry = messageFactoryRegistry;
     }
 
@@ -26,7 +26,7 @@ public class MessageProvider {
                     messageFactoryRegistry.getLocalizedMessageConfig(messageType);
 
             ResourceBundle resourceBundle =
-                    ResourceBundle.getBundle(localizedMessageConfig.getBundleName(), localeType.getLocale());
+                    ResourceBundle.getBundle(localizedMessageConfig.getBundleName(), localizationType.getLocale());
 
             T messages = localizedMessageConfig.getMessageFactory().create(resourceBundle);
             cache.put(messageType, messages);

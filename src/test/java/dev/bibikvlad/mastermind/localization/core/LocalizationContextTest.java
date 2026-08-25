@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.localization.core;
 
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
-import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import org.junit.jupiter.api.BeforeAll;
@@ -15,7 +15,7 @@ class LocalizationContextTest {
 
     @BeforeAll
     static void setUp() {
-        LocalizationContext localizationContext = new LocalizationContext(LocaleType.ENGLISH);
+        LocalizationContext localizationContext = new LocalizationContext(LocalizationType.ENGLISH);
         gameMessages = localizationContext.getMessages(MessageType.GAME);
     }
 
@@ -33,7 +33,7 @@ class LocalizationContextTest {
     @DisplayName("getMessages() that takes Class<T> messageType as a parameter returns the same messages " +
             "as the getMessages() method that takes MessageType enum as a parameter.")
     void getMessagesReturnsSameMessages() {
-        LocalizationContext localizationContext = new LocalizationContext(LocaleType.ENGLISH);
+        LocalizationContext localizationContext = new LocalizationContext(LocalizationType.ENGLISH);
         GameMessages localizedMessages = localizationContext.getMessages(GameMessages.class);
 
         assertEquals(localizedMessages.getInvalidInput(), gameMessages.getInvalidInput());

@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.model.player;
 
-import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 
 import java.time.LocalDateTime;
@@ -40,8 +40,8 @@ public class Player {
         return playerConfig;
     }
 
-    public Player withLocale(LocaleType localeType) {
-        PlayerConfig updatedConfig = getPlayerConfig().withLocale(localeType);
+    public Player withLocale(LocalizationType localizationType) {
+        PlayerConfig updatedConfig = getPlayerConfig().withLocale(localizationType);
 
         return new Player(id, playerName, creationDate, updatedConfig);
     }

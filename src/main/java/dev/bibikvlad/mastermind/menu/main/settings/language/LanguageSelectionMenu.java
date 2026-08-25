@@ -5,7 +5,7 @@ import dev.bibikvlad.mastermind.app.context.AppContextFactory;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
-import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.language.LanguageSelectionMessages;
@@ -52,7 +52,7 @@ public class LanguageSelectionMenu extends Menu {
     private void printMenuOptions() {
         printer.printMessage(languageSelectionMessages.getMenuOptions());
 
-        LocaleType[] locales = LocaleType.values();
+        LocalizationType[] locales = LocalizationType.values();
 
         for (int i = 0; i < locales.length; i++) {
             String languageOption = (i + 1) + ". " + locales[i].getNativeDisplayName();
@@ -63,7 +63,7 @@ public class LanguageSelectionMenu extends Menu {
 
     private Menu selectLocaleByIndex(int userInputIndex) {
         try {
-            return checkLanguageSelection(LocaleType.fromIndex(userInputIndex));
+            return checkLanguageSelection(LocalizationType.fromIndex(userInputIndex));
         } catch (IllegalArgumentException exception) {
             printer.printMessage(interactionMessages.getInvalidInput());
 
@@ -71,33 +71,33 @@ public class LanguageSelectionMenu extends Menu {
         }
     }
 
-    private Menu checkLanguageSelection(LocaleType localeType) {
-        if (localeType.equals(appContext.currentPlayer().getPlayerConfig().locale())) {
+    private Menu checkLanguageSelection(LocalizationType localizationType) {
+        if (localizationType.equals(appContext.currentPlayer().getPlayerConfig().locale())) {
             printer.printMessage(languageSelectionMessages.getAlreadySelected());
 
             return this;
         } else {
-            return applyLanguageChange(localeType);
+            return applyLanguageChange(localizationType);
         }
     }
 
-    private Menu applyLanguageChange(LocaleType localeType) {
-        AppContext newAppContext = AppContextFactory.withLocale(this.appContext, localeType);
+    private Menu applyLanguageChange(LocalizationType localizationType) {
+        AppContext newAppContext = AppContextFactory.withLocale(this.appContext, localizationType);
 
-        updatePlayerLocale(localeType);
-        printLanguageChangeConfirmation(newAppContext, localeType);
+        updatePlayerLocale(localizationType);
+        printLanguageChangeConfirmation(newAppContext, localizationType);
 
         return new SettingsMenu(newAppContext);
     }
 
-    private void updatePlayerLocale(LocaleType localeType) {
-        playerService.updatePlayerLocale(appContext.currentPlayer().getId(), localeType);
+    private void updatePlayerLocale(LocalizationType localizationType) {
+        playerService.updatePlayerLocale(appContext.currentPlayer().getId(), localizationType);
     }
 
-    private void printLanguageChangeConfirmation(AppContext newAppContext, LocaleType localeType) {
+    private void printLanguageChangeConfirmation(AppContext newAppContext, LocalizationType localizationType) {
         LanguageSelectionMessages messages = newAppContext.localizationContext().getMessages(MessageType.LANGUAGE_MENU);
 
-        printer.printMessage(messages.getLanguageChanged(localeType.getNativeDisplayName()));
+        printer.printMessage(messages.getLanguageChanged(localizationType.getNativeDisplayName()));
         printer.printMessage(messages.getBackToSettings());
 
         parser.parse();

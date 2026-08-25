@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.localization.messages.error;
 
-import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ConsoleErrorMessagesRuTest {
     private final ResourceBundle resourceBundle = ResourceBundle.getBundle("i18n.error.error_messages",
-            LocaleType.RUSSIAN.getLocale());
+            LocalizationType.RUSSIAN.getLocale());
     private final ErrorMessages errorMessages = new ConsoleErrorMessages(resourceBundle);
 
     @Test

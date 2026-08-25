@@ -3,7 +3,7 @@ package dev.bibikvlad.mastermind.app.bootstrap;
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.parser.Parser;
-import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.menu.core.ExitMenu;
 import dev.bibikvlad.mastermind.menu.main.MainMenu;
 import dev.bibikvlad.mastermind.menu.core.Menu;
@@ -32,15 +32,15 @@ public class FirstLaunchFlow {
         startMenu(appContext);
     }
 
-    private LocaleType selectLanguage() {
+    private LocalizationType selectLanguage() {
         FirstLaunchLanguageSelection firstLaunchLanguageSelection = new FirstLaunchLanguageSelection(printer, parser);
 
         return firstLaunchLanguageSelection.selectLanguage();
     }
 
-    private AppContext createPlayerAndContext(LocaleType localeType) {
+    private AppContext createPlayerAndContext(LocalizationType localizationType) {
         FirstTimePlayerCreation firstTimePlayerCreation =
-                new FirstTimePlayerCreation(parser, printer, localeType, serviceContainer);
+                new FirstTimePlayerCreation(parser, printer, localizationType, serviceContainer);
 
         return firstTimePlayerCreation.createPlayerAndGetContext();
     }

@@ -3,7 +3,7 @@ package dev.bibikvlad.mastermind.menu.first;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
-import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 
 public class FirstLaunchLanguageSelection {
     private static final String EMPTY_INPUT_ERROR =
@@ -26,7 +26,7 @@ public class FirstLaunchLanguageSelection {
         this.parser = parser;
     }
 
-    public LocaleType selectLanguage() {
+    public LocalizationType selectLanguage() {
         while (true) {
             if (shouldRenderMenu) {
                 printMenuOptions();
@@ -42,7 +42,7 @@ public class FirstLaunchLanguageSelection {
                 continue;
             }
 
-            LocaleType selectedLocale = parseLocaleSelection(userInput);
+            LocalizationType selectedLocale = parseLocaleSelection(userInput);
 
             if (selectedLocale != null) {
                 return selectedLocale;
@@ -55,7 +55,7 @@ public class FirstLaunchLanguageSelection {
     private void printMenuOptions() {
         printer.printMessage(MENU_OPTIONS);
 
-        LocaleType[] locales = LocaleType.values();
+        LocalizationType[] locales = LocalizationType.values();
 
         for (int i = 0; i < locales.length; i++) {
             String languageOption = (i + 1) + ". " + locales[i].getNativeDisplayName();
@@ -64,7 +64,7 @@ public class FirstLaunchLanguageSelection {
         }
     }
 
-    private LocaleType parseLocaleSelection(String userInput) {
+    private LocalizationType parseLocaleSelection(String userInput) {
         int userInputIndex;
 
         try {
@@ -76,9 +76,9 @@ public class FirstLaunchLanguageSelection {
         }
     }
 
-    private LocaleType selectLocaleByIndex(int userInputIndex) {
+    private LocalizationType selectLocaleByIndex(int userInputIndex) {
         try {
-            return LocaleType.fromIndex(userInputIndex);
+            return LocalizationType.fromIndex(userInputIndex);
         } catch (IllegalArgumentException exception) {
             return null;
         }

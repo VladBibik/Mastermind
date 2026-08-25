@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.persistence.player.dao;
 
-import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;
 
@@ -11,7 +11,7 @@ public interface PlayerConfigDAO {
 
     boolean update(long playerId, PlayerConfig playerConfig);
 
-    boolean updateLocale(long playerId, LocaleType locale);
+    boolean updateLocale(long playerId, LocalizationType locale);
 
     boolean updateLogoColors(long playerId, LogoColorsBundle logoColorsBundle);
 }

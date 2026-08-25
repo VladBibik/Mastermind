@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.services;
 
 import dev.bibikvlad.mastermind.exceptions.PlayerAlreadyExistException;
-import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.model.player.PlayerConfig;
@@ -25,7 +25,7 @@ public class PlayerService {
         this.playerLastSelectedRepository = playerLastSelectedRepository;
     }
 
-    public Player createPlayer(String newPlayerName, LocaleType locale)
+    public Player createPlayer(String newPlayerName, LocalizationType locale)
             throws PlayerAlreadyExistException {
         if (playerRepository.existsByName(newPlayerName)) {
             throw new PlayerAlreadyExistException("Player with name " + newPlayerName + " already exists");
@@ -52,7 +52,7 @@ public class PlayerService {
         playerRepository.updatePlayerName(playerId, newPlayerName);
     }
 
-    public void updatePlayerLocale(long playerId, LocaleType locale) {
+    public void updatePlayerLocale(long playerId, LocalizationType locale) {
         playerConfigRepository.updateLocale(playerId, locale);
     }
 
@@ -72,9 +72,9 @@ public class PlayerService {
         return playerRepository.count() > 1;
     }
 
-    private PlayerConfig getCustomLocaleConfig(LocaleType localeType) {
+    private PlayerConfig getCustomLocaleConfig(LocalizationType localizationType) {
         return new PlayerConfig(
-                localeType,
+                localizationType,
                 DefaultLogoColorsBundle.INSTANCE
         );
     }

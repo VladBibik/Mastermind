@@ -10,14 +10,14 @@ class LocaleTypeTest {
     @Test
     @DisplayName("Returns correct locale type from locale index")
     void fromLocaleIndexTest() {
-        assertEquals(LocaleType.ENGLISH, LocaleType.fromIndex(1));
-        assertEquals(LocaleType.RUSSIAN, LocaleType.fromIndex(2));
+        assertEquals(LocalizationType.ENGLISH, LocalizationType.fromIndex(1));
+        assertEquals(LocalizationType.RUSSIAN, LocalizationType.fromIndex(2));
     }
 
     @Test
     @DisplayName("Throws exception on negative locale index")
     void negativeLocaleIndexThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> LocaleType.fromIndex(-1));
+        assertThrows(IllegalArgumentException.class, () -> LocalizationType.fromIndex(-1));
     }
 
     @Test
@@ -26,7 +26,7 @@ class LocaleTypeTest {
         for (int i = 3; i < 100; i++) {
             int index = i;
 
-            assertThrows(IllegalArgumentException.class, () -> LocaleType.fromIndex(index));
+            assertThrows(IllegalArgumentException.class, () -> LocalizationType.fromIndex(index));
         }
     }
 }

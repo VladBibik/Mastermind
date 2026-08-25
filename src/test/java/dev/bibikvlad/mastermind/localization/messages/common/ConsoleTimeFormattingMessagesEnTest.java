@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.localization.messages.common;
 
-import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ConsoleTimeFormattingMessagesEnTest {
     private final ResourceBundle resourceBundle = ResourceBundle.getBundle("i18n.common.time_formatting",
-            LocaleType.ENGLISH.getLocale());
+            LocalizationType.ENGLISH.getLocale());
     private final TimeFormattingMessages timeFormattingMessages = new ConsoleTimeFormattingMessages(resourceBundle);
 
     @Test

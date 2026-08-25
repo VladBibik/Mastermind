@@ -6,7 +6,7 @@ import dev.bibikvlad.mastermind.app.printer.AnsiSafeFormatter;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.input.validation.PlayerNameValidator;
-import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
@@ -20,7 +20,7 @@ import java.util.Optional;
 public class FirstTimePlayerCreation {
     private final Parser parser;
     private final Printer printer;
-    private final LocaleType localeType;
+    private final LocalizationType localizationType;
     private final LocalizationContext localizationContext;
     private final ServiceContainer serviceContainer;
     private final NewPlayerCreationMenuMessages creationMessages;
@@ -28,12 +28,12 @@ public class FirstTimePlayerCreation {
     private final InteractionMessages interactionMessages;
     private final PlayerNameValidator playerNameValidator;
 
-    public FirstTimePlayerCreation(Parser parser, Printer printer, LocaleType localeType,
+    public FirstTimePlayerCreation(Parser parser, Printer printer, LocalizationType localizationType,
                                    ServiceContainer serviceContainer) {
         this.parser = parser;
         this.printer = printer;
-        this.localeType = localeType;
-        this.localizationContext = new LocalizationContext(localeType);
+        this.localizationType = localizationType;
+        this.localizationContext = new LocalizationContext(localizationType);
         this.serviceContainer = serviceContainer;
         this.creationMessages = localizationContext.getMessages(MessageType.CREATE);
         this.nameMessages = localizationContext.getMessages(MessageType.PLAYER_NAME);
@@ -65,7 +65,7 @@ public class FirstTimePlayerCreation {
 
     private AppContext savePlayerAndBuildContext(String playerName) {
         Player createdPlayer = serviceContainer.getPlayerService()
-                .createPlayer(playerName, localeType);
+                .createPlayer(playerName, localizationType);
 
         printer.printMessage(creationMessages.getPlayerCreatedSuccess(AnsiSafeFormatter.isolate(playerName)));
 

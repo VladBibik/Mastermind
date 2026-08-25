@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.localization.core;
 
-import dev.bibikvlad.mastermind.localization.config.LocaleType;
+import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.localization.messages.game.ConsoleGameMessages;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import org.junit.jupiter.api.DisplayName;
@@ -14,7 +14,7 @@ public class MessageProviderTest {
     @DisplayName("Returns a message instance when the type is registered")
     public void shouldReturnCorrectMessageTypeWhenRegistered() {
         MessageProvider messageProvider =
-                new MessageProvider(LocaleType.ENGLISH, MessageRegistryInitializer.createAndPopulateRegistry());
+                new MessageProvider(LocalizationType.ENGLISH, MessageRegistryInitializer.createAndPopulateRegistry());
         GameMessages providedMessages =
                 messageProvider.getMessages(GameMessages.class);
 
@@ -25,7 +25,7 @@ public class MessageProviderTest {
     @DisplayName("Throws exception when requesting unregistered message type")
     public void shouldThrowIllegalStateExceptionWhenTypeIsNotRegistered() {
         MessageProvider messageProvider =
-                new MessageProvider(LocaleType.ENGLISH, MessageRegistryInitializer.createAndPopulateRegistry());
+                new MessageProvider(LocalizationType.ENGLISH, MessageRegistryInitializer.createAndPopulateRegistry());
 
         assertThrows(IllegalStateException.class,
                 () -> messageProvider.getMessages(ConsoleGameMessages.class));
@@ -35,7 +35,7 @@ public class MessageProviderTest {
     @DisplayName("Throws NullPointerException when resource bundle name is null")
     public void shouldThrowNullPointerExceptionWhenMessageTypeIsNull() {
         MessageProvider messageProvider =
-                new MessageProvider(LocaleType.ENGLISH, MessageRegistryInitializer.createAndPopulateRegistry());
+                new MessageProvider(LocalizationType.ENGLISH, MessageRegistryInitializer.createAndPopulateRegistry());
 
         assertThrows(NullPointerException.class,
                 () -> messageProvider.getMessages(null));

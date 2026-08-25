@@ -2,13 +2,13 @@ package dev.bibikvlad.mastermind.localization.config;
 
 import java.util.Locale;
 
-public enum LocaleType {
+public enum LocalizationType {
     ENGLISH(Locale.ENGLISH),
     RUSSIAN(Locale.of("ru"));
 
     private final Locale locale;
 
-    LocaleType(Locale locale) {
+    LocalizationType(Locale locale) {
         this.locale = locale;
     }
 
@@ -22,7 +22,7 @@ public enum LocaleType {
         return displayName.substring(0, 1).toUpperCase(locale) + displayName.substring(1);
     }
 
-    public static LocaleType fromIndex(int index) {
+    public static LocalizationType fromIndex(int index) {
         if (index <= 0 || index > values().length) {
             throw new IllegalArgumentException("Invalid locale index: " + index);
         }
