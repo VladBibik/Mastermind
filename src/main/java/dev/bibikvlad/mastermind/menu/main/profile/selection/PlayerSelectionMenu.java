@@ -104,7 +104,7 @@ public class PlayerSelectionMenu extends Menu {
     }
 
     private AppContext createUpdatedAppContext(Player player) {
-        return new AppContext(new LocalizationContext(player.getPlayerConfig().locale()),
+        return new AppContext(new LocalizationContext(player.getPlayerConfig().localizationType()),
                 this.appContext.services(), this.printer, this.parser, player);
     }
 

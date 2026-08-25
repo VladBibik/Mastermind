@@ -76,7 +76,7 @@ public class StatsMenu extends Menu {
     }
 
     private List<StatRow> buildStatRows(PlayerStatistics stats) {
-        Locale currentLocale = currentPlayer.getPlayerConfig().locale().getLocale();
+        Locale currentLocale = currentPlayer.getPlayerConfig().localizationType().getLocale();
 
         return List.of(
                 new StatRow(statsMessages.getGamesPlayed(), String.valueOf(stats.gameCount())),

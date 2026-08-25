@@ -48,7 +48,7 @@ public class MastermindAppLauncher {
     private static void startMainMenuFor(Player player, ServiceContainer serviceContainer, Printer printer,
                                          Parser parser) {
         LocalizationContext localizationContext = new LocalizationContext(
-                player.getPlayerConfig().locale());
+                player.getPlayerConfig().localizationType());
         AppContext appContext = new AppContext(localizationContext, serviceContainer, printer, parser,
                 player);
 

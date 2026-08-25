@@ -68,7 +68,7 @@ public class CreatePlayerMenu extends Menu {
 
     private AppContext savePlayerAndBuildContext(String playerName) {
         Player createdPlayer = playerService.createPlayer(playerName,
-                appContext.currentPlayer().getPlayerConfig().locale());
+                appContext.currentPlayer().getPlayerConfig().localizationType());
 
         printer.printMessage(creationMessages.getPlayerCreatedSuccess(AnsiSafeFormatter.isolate(playerName)));
 

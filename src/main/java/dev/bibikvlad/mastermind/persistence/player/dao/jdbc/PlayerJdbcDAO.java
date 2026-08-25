@@ -115,7 +115,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
                     LogoColorsBundle logoColorsBundle = playerConfig.logoColorsBundle();
 
                     configPreparedStatement.setLong(1, playerId);
-                    configPreparedStatement.setString(2, playerConfig.locale().name());
+                    configPreparedStatement.setString(2, playerConfig.localizationType().name());
                     configPreparedStatement.setString(3, logoColorsBundle
                             .logoBorderColor().name());
                     configPreparedStatement.setString(4, logoColorsBundle
@@ -165,7 +165,7 @@ public class PlayerJdbcDAO implements PlayerDAO {
             PlayerConfig playerConfig = player.getPlayerConfig();
             LogoColorsBundle logoColorsBundle = playerConfig.logoColorsBundle();
 
-            configPreparedStatement.setString(1, playerConfig.locale().name());
+            configPreparedStatement.setString(1, playerConfig.localizationType().name());
             configPreparedStatement.setString(2, logoColorsBundle.logoBorderColor().name());
             configPreparedStatement.setString(3, logoColorsBundle.logoMainColor().name());
             configPreparedStatement.setString(4, logoColorsBundle.logoAccentColor().name());
