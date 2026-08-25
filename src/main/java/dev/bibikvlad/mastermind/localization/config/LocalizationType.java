@@ -3,23 +3,17 @@ package dev.bibikvlad.mastermind.localization.config;
 import java.util.Locale;
 
 public enum LocalizationType {
-    ENGLISH(Locale.ENGLISH, "en"),
-    RUSSIAN(Locale.of("ru"), "ru");
+    ENGLISH(Locale.ENGLISH),
+    RUSSIAN(Locale.of("ru"));
 
     private final Locale locale;
-    private final String shortName;
 
-    LocalizationType(Locale locale, String shortName) {
+    LocalizationType(Locale locale) {
         this.locale = locale;
-        this.shortName = shortName;
     }
 
     public Locale getLocale() {
         return locale;
-    }
-
-    public String getShortName() {
-        return shortName;
     }
 
     public String getNativeDisplayName() {
