@@ -1,6 +1,9 @@
 package dev.bibikvlad.mastermind.app.game;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
+import dev.bibikvlad.mastermind.app.game.mode.CompatibilityModeMessages;
+import dev.bibikvlad.mastermind.app.game.mode.DefaultModeMessages;
+import dev.bibikvlad.mastermind.app.game.mode.GameModeDependentMessages;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.game.MastermindConsoleGame;
 import dev.bibikvlad.mastermind.game.RandomAnswerGenerator;
@@ -14,8 +17,6 @@ import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
-import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
-import dev.bibikvlad.utils.strings.logos.DefaultAsciiLogo;
 
 public class MastermindGameBootstrap {
     private final LocalizationContext localizationContext;
@@ -37,20 +38,20 @@ public class MastermindGameBootstrap {
         Parser lowerCaseParser = new LowerCaseParser(parser);
 
         MastermindConsoleGame game = new MastermindConsoleGame(printer, lowerCaseParser, gameMessages,
-                RandomAnswerGenerator.generate(), getLogo());
+                RandomAnswerGenerator.generate(), getGameModeDependentMessages());
 
         return TimedGameRunner.launch(game);
     }
 
-    private String getLogo() {
+    private GameModeDependentMessages getGameModeDependentMessages() {
         LocalizationType localizationType = currentPlayer.getPlayerConfig().localizationType();
 
         if (playerService.isInCompatibilityMode(localizationType)) {
-            return DefaultAsciiLogo.getLogo();
+            return new CompatibilityModeMessages();
         }
 
         LogoColorsBundle logoColorsBundle = currentPlayer.getPlayerConfig().logoColorsBundle();
 
-        return ColoredAsciiLogo.getLogo(logoColorsBundle);
+        return new DefaultModeMessages(logoColorsBundle);
     }
 }
