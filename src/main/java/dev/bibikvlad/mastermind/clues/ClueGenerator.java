@@ -1,12 +1,12 @@
 package dev.bibikvlad.mastermind.clues;
 
-import dev.bibikvlad.utils.CluePriorityComparator;
-import dev.bibikvlad.utils.strings.ConsoleSymbols;
+import dev.bibikvlad.utils.strings.clue.Clue;
+import dev.bibikvlad.utils.strings.clue.ClueSymbols;
 
 import java.util.stream.Collectors;
 
 public class ClueGenerator {
-    public static String generate(String answer, String guess) {
+    public static String generate(ClueSymbols clueSymbols, String answer, String guess) {
         char[] clueChars = new char[answer.length()];
         boolean[] answerUsed = new boolean[answer.length()];
         boolean[] guessUsed = new boolean[answer.length()];
@@ -17,7 +17,7 @@ public class ClueGenerator {
                 answerUsed[i] = true;
                 guessUsed[i] = true;
 
-                clueChars[i] = ConsoleSymbols.CIRCLE_SHADED;
+                clueChars[i] = clueSymbols.getSymbol(Clue.EXACT);
             }
         }
 
@@ -31,7 +31,7 @@ public class ClueGenerator {
                     answerUsed[j] = true;
                     guessUsed[i] = true;
 
-                    clueChars[i] = ConsoleSymbols.CIRCLE_EMPTY;
+                    clueChars[i] = clueSymbols.getSymbol(Clue.PARTIAL);
                     break;
                 }
             }
@@ -40,7 +40,7 @@ public class ClueGenerator {
         // Step 3: Fill the rest with underscores (_)
         for (int i = 0; i < answer.length(); i++) {
             if (clueChars[i] == 0)
-                clueChars[i] = ConsoleSymbols.UNDERSCORE;
+                clueChars[i] = clueSymbols.getSymbol(Clue.NONE);
         }
 
         return sortAndBuildClue(clueChars);
@@ -49,7 +49,7 @@ public class ClueGenerator {
     private static String sortAndBuildClue(char[] clueArray) {
         return new String(clueArray).chars()
                 .mapToObj(c -> (char) c)
-                .sorted(CluePriorityComparator.BY_PRIORITY)
+                .sorted()
                 .map(String::valueOf)
                 .collect(Collectors.joining());
     }
