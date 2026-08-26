@@ -34,7 +34,7 @@ public class MastermindConsoleGame {
 
         gameStateManager = new GameStateManager(MAX_TURNS);
         gameCommandHandler = new GameCommandHandler(printer, gameMessages, gameModeDependentMessages);
-        guessEvaluator = new GuessEvaluator(printer, gameMessages, gameModeDependentMessages.getClueSymbols(), answer);
+        guessEvaluator = new GuessEvaluator(printer, gameMessages, gameModeDependentMessages, answer);
     }
 
     public GameOutcome play() {
@@ -42,7 +42,10 @@ public class MastermindConsoleGame {
 
         while (true) {
             if (gameStateManager.isOver()) {
-                printer.printMessage(gameMessages.getGameOver(answer));
+                printer.printMessage(
+                        gameMessages.getGameOver(
+                                gameModeDependentMessages.getVisualRepresentation(answer))
+                );
 
                 return new GameOutcome(gameStateManager.getCurrentTurn(), GameResult.LOSE);
             }
