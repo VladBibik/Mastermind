@@ -1,9 +1,8 @@
 package dev.bibikvlad.mastermind.localization.messages.game;
 
 import dev.bibikvlad.mastermind.clues.ClueGenerator;
-import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
-import dev.bibikvlad.utils.strings.ConsoleColoredValidSymbols;
-import dev.bibikvlad.utils.strings.ConsoleSymbols;
+import dev.bibikvlad.utils.strings.clue.Clue;
+import dev.bibikvlad.utils.strings.clue.ClueSymbols;
 
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
@@ -16,34 +15,33 @@ public class ConsoleGameMessages implements GameMessages {
     }
 
     @Override
-    public String getInvalidInput() {
+    public String getInvalidInput(String validSymbols) {
         return MessageFormat.format(resourceBundle.getString("invalid_input"),
-                ConsoleColoredValidSymbols.getSymbols());
+                validSymbols);
     }
 
     @Override
-    public String getIncorrectGuess(int maxTurns, int currentTurn, String answer, String userInput) {
+    public String getIncorrectGuess(ClueSymbols clueSymbols, int maxTurns, int currentTurn,
+                                    String answer, String userInput) {
         return MessageFormat.format(resourceBundle.getString("incorrect_guess"),
                 String.valueOf(currentTurn + 1), String.valueOf(maxTurns), userInput,
-                ClueGenerator.generate(answer, userInput));
+                ClueGenerator.generate(clueSymbols, answer, userInput));
     }
 
     @Override
-    public String getGameOver(String answer) {
-        return MessageFormat.format(resourceBundle.getString("game_over"),
-                InputVisualRepresentation.getVisualRepresentation(answer));
+    public String getGameOver(String visualRepresentation) {
+        return MessageFormat.format(resourceBundle.getString("game_over"), visualRepresentation);
     }
 
     @Override
-    public String getWin(String answer) {
-        return MessageFormat.format(resourceBundle.getString("win"),
-                InputVisualRepresentation.getVisualRepresentation(answer));
+    public String getWin(String visualRepresentation) {
+        return MessageFormat.format(resourceBundle.getString("win"), visualRepresentation);
     }
 
     @Override
-    public String getRules() {
+    public String getRules(ClueSymbols clueSymbols, String validSymbols) {
         return MessageFormat.format(resourceBundle.getString("rules"),
-                ConsoleColoredValidSymbols.getSymbols(), String.valueOf(ConsoleSymbols.CIRCLE_SHADED),
-                String.valueOf(ConsoleSymbols.CIRCLE_EMPTY), String.valueOf(ConsoleSymbols.UNDERSCORE));
+                validSymbols, clueSymbols.getSymbol(Clue.EXACT),
+                clueSymbols.getSymbol(Clue.PARTIAL), clueSymbols.getSymbol(Clue.NONE));
     }
 }
