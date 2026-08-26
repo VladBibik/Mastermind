@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.game;
 
+import dev.bibikvlad.mastermind.app.game.mode.GameModeDependentMessages;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.GlobalMenuCommands;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
@@ -7,10 +8,13 @@ import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 public class GameCommandHandler {
     private final Printer printer;
     private final GameMessages gameMessages;
+    private final GameModeDependentMessages gameModeDependentMessages;
 
-    public GameCommandHandler(Printer printer, GameMessages gameMessages) {
+    public GameCommandHandler(Printer printer, GameMessages gameMessages,
+                              GameModeDependentMessages gameModeDependentMessages) {
         this.printer = printer;
         this.gameMessages = gameMessages;
+        this.gameModeDependentMessages = gameModeDependentMessages;
     }
 
     public boolean handle(String input) {
@@ -21,7 +25,8 @@ public class GameCommandHandler {
         }
 
         if (GlobalMenuCommands.HELP.contains(input)) {
-            printer.printMessage(gameMessages.getRules());
+            printer.printMessage(gameMessages.getRules(gameModeDependentMessages.getClueSymbols(),
+                    gameModeDependentMessages.validSymbols()));
 
             return false;
         }
