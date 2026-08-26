@@ -27,19 +27,20 @@ class MastermindConsoleGameTest {
     private PrintStream printStream;
     private GameMessages gameMessages;
     private LogoColorsBundle logoColorsBundle;
+    private GameModeDependentMessages gameModeDependentMessages;
 
     @BeforeEach
     void setUp() {
         outputStream = new ByteArrayOutputStream();
         printStream = new PrintStream(outputStream);
         gameMessages = new LocalizationContext(LocalizationType.ENGLISH).getMessages(MessageType.GAME);
-
         logoColorsBundle = new LogoColorsBundle(
                 ConsoleColor.ORCHID,
                 ConsoleColor.ORANGE,
                 ConsoleColor.BRIGHT_RED,
                 ConsoleColor.BACKGROUND_BLACK
         );
+        gameModeDependentMessages = new DefaultModeMessages(logoColorsBundle);
     }
 
     @Test
@@ -47,7 +48,7 @@ class MastermindConsoleGameTest {
     void invalidInputTest() {
         String output = runGameAndGetOutputStreamString("rrrr", "abcd\nclose\n");
 
-        assertTrue(output.contains(gameMessages.getInvalidInput()));
+        assertTrue(output.contains(gameMessages.getInvalidInput(gameModeDependentMessages.validSymbols())));
     }
 
     @Test
