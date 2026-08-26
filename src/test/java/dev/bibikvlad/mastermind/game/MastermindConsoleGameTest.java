@@ -1,5 +1,7 @@
 package dev.bibikvlad.mastermind.game;
 
+import dev.bibikvlad.mastermind.app.game.mode.DefaultModeMessages;
+import dev.bibikvlad.mastermind.app.game.mode.GameModeDependentMessages;
 import dev.bibikvlad.mastermind.app.printer.PrintStreamPrinter;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.parser.BufferedReaderInputParser;
@@ -10,7 +12,6 @@ import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
-import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -89,9 +90,10 @@ class MastermindConsoleGameTest {
 
         Parser parser = new BufferedReaderInputParser(bufferedReader);
         Printer printer = new PrintStreamPrinter(printStream);
-        String logo = ColoredAsciiLogo.getLogo(logoColorsBundle);
+        GameModeDependentMessages modeDependentMessages = new DefaultModeMessages(logoColorsBundle);
 
-        MastermindConsoleGame game = new MastermindConsoleGame(printer, parser, gameMessages, answer, logo);
+        MastermindConsoleGame game = new MastermindConsoleGame(printer, parser, gameMessages, answer,
+                modeDependentMessages);
         game.play();
 
         return outputStream.toString();
