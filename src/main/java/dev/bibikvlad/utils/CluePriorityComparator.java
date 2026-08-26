@@ -1,21 +1,18 @@
 package dev.bibikvlad.utils;
 
+import dev.bibikvlad.utils.strings.clue.Clue;
+
 import java.util.Comparator;
 
-import static dev.bibikvlad.utils.strings.ConsoleSymbols.CIRCLE_EMPTY;
-import static dev.bibikvlad.utils.strings.ConsoleSymbols.CIRCLE_SHADED;
-import static dev.bibikvlad.utils.strings.ConsoleSymbols.UNDERSCORE;
-
 public class CluePriorityComparator {
-    public static final Comparator<Character> BY_PRIORITY =
+    public static final Comparator<Clue> BY_PRIORITY =
             Comparator.comparingInt(CluePriorityComparator::getCluePriority);
 
-    private static int getCluePriority(char clue) {
+    private static int getCluePriority(Clue clue) {
         return switch (clue) {
-            case CIRCLE_SHADED -> 0;
-            case CIRCLE_EMPTY -> 1;
-            case UNDERSCORE -> 2;
-            default -> throw new IllegalArgumentException("Unexpected clue character: " + clue);
+            case EXACT -> 0;
+            case PARTIAL -> 1;
+            case NONE -> 2;
         };
     }
 }
