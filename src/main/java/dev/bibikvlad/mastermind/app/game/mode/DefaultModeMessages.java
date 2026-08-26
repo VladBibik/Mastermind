@@ -1,0 +1,36 @@
+package dev.bibikvlad.mastermind.app.game.mode;
+
+import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
+import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
+import dev.bibikvlad.utils.strings.ConsoleColoredValidSymbols;
+import dev.bibikvlad.utils.strings.clue.ClueSymbols;
+import dev.bibikvlad.utils.strings.clue.DefaultClueSymbols;
+import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
+
+public class DefaultModeMessages implements GameModeDependentMessages {
+    private final LogoColorsBundle logoColorsBundle;
+
+    public DefaultModeMessages(LogoColorsBundle logoColorsBundle) {
+        this.logoColorsBundle = logoColorsBundle;
+    }
+
+    @Override
+    public String getLogo() {
+        return ColoredAsciiLogo.getLogo(logoColorsBundle);
+    }
+
+    @Override
+    public String getVisualRepresentation(String answer) {
+        return InputVisualRepresentation.getVisualRepresentation(answer);
+    }
+
+    @Override
+    public ClueSymbols getClueSymbols() {
+        return new DefaultClueSymbols();
+    }
+
+    @Override
+    public String validSymbols() {
+        return ConsoleColoredValidSymbols.getSymbols();
+    }
+}
