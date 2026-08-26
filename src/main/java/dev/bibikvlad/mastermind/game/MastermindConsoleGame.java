@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.game;
 
+import dev.bibikvlad.mastermind.app.game.mode.GameModeDependentMessages;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.game.data.GameOutcome;
 import dev.bibikvlad.mastermind.game.data.GameResult;
@@ -14,7 +15,7 @@ public class MastermindConsoleGame {
     private final Parser parser;
     private final GameMessages gameMessages;
     private final String answer;
-    private final String logo;
+    private final GameModeDependentMessages gameModeDependentMessages;
 
     private final GameStateManager gameStateManager;
     private final GameCommandHandler gameCommandHandler;
@@ -24,16 +25,16 @@ public class MastermindConsoleGame {
                                  Parser parser,
                                  GameMessages gameMessages,
                                  String answer,
-                                 String logo) {
+                                 GameModeDependentMessages gameModeDependentMessages) {
         this.printer = printer;
         this.parser = parser;
         this.gameMessages = gameMessages;
         this.answer = answer;
-        this.logo = logo;
+        this.gameModeDependentMessages = gameModeDependentMessages;
 
         gameStateManager = new GameStateManager(MAX_TURNS);
-        gameCommandHandler = new GameCommandHandler(printer, gameMessages);
-        guessEvaluator = new GuessEvaluator(printer, gameMessages, answer);
+        gameCommandHandler = new GameCommandHandler(printer, gameMessages, gameModeDependentMessages);
+        guessEvaluator = new GuessEvaluator(printer, gameMessages, gameModeDependentMessages.getClueSymbols(), answer);
     }
 
     public GameOutcome play() {
@@ -60,13 +61,14 @@ public class MastermindConsoleGame {
                     return new GameOutcome(gameStateManager.getCurrentTurn(), GameResult.WIN);
                 }
             } else {
-                printer.printMessage(gameMessages.getInvalidInput());
+                printer.printMessage(gameMessages.getInvalidInput(gameModeDependentMessages.validSymbols()));
             }
         }
     }
 
     private void printLogoAndRules() {
-        printer.printMessage(logo);
-        printer.printMessage(gameMessages.getRules());
+        printer.printMessage(gameModeDependentMessages.getLogo());
+        printer.printMessage(gameMessages.getRules(gameModeDependentMessages.getClueSymbols(),
+                gameModeDependentMessages.validSymbols()));
     }
 }
