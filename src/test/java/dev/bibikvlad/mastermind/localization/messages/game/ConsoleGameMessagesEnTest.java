@@ -1,13 +1,17 @@
 package dev.bibikvlad.mastermind.localization.messages.game;
 
+import dev.bibikvlad.mastermind.app.game.mode.DefaultModeMessages;
+import dev.bibikvlad.mastermind.app.game.mode.GameModeDependentMessages;
 import dev.bibikvlad.mastermind.clues.ClueGenerator;
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.utils.strings.ConsoleColoredValidSymbols;
-import dev.bibikvlad.utils.strings.ConsoleSymbols;
+import dev.bibikvlad.utils.strings.clue.Clue;
+import dev.bibikvlad.utils.strings.clue.ClueSymbols;
 import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,14 +20,29 @@ import java.util.ResourceBundle;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ConsoleGameMessagesEnTest {
-    private final ResourceBundle resourceBundle = ResourceBundle.getBundle("i18n.game.game_messages",
-            LocalizationType.ENGLISH.getLocale());
-    private final GameMessages gameMessages = new ConsoleGameMessages(resourceBundle);
+    private ResourceBundle resourceBundle;
+    private GameMessages gameMessages;
+    private LogoColorsBundle logoColorsBundle;
+    private GameModeDependentMessages gameModeDependentMessages;
+
+    @BeforeEach
+    void setUp() {
+        resourceBundle = ResourceBundle.getBundle("i18n.game.game_messages",
+                LocalizationType.ENGLISH.getLocale());
+        gameMessages = new ConsoleGameMessages(resourceBundle);
+        logoColorsBundle = new LogoColorsBundle(
+                ConsoleColor.ORCHID,
+                ConsoleColor.ORANGE,
+                ConsoleColor.BRIGHT_RED,
+                ConsoleColor.BACKGROUND_BLACK
+        );
+        gameModeDependentMessages = new DefaultModeMessages(logoColorsBundle);
+    }
 
     @Test
     @DisplayName("Returns correct Invalid Input Message String")
     void testInvalidInputMessage() {
-        String result = gameMessages.getInvalidInput();
+        String result = gameMessages.getInvalidInput(gameModeDependentMessages.validSymbols());
 
         assertEquals(result, getExpectedInvalidInput());
     }
@@ -31,7 +50,8 @@ class ConsoleGameMessagesEnTest {
     @Test
     @DisplayName("Returns correct Incorrect Guess Message String")
     void testIncorrectGuessMessage() {
-        String result = gameMessages.getIncorrectGuess(10, 5, "rgby", "rbww");
+        String result = gameMessages.getIncorrectGuess(gameModeDependentMessages.getClueSymbols(),
+                10, 5, "rgby", "rbww");
 
         assertEquals(result, getExpectedIncorrectGuess());
     }
@@ -55,7 +75,8 @@ class ConsoleGameMessagesEnTest {
     @Test
     @DisplayName("Returns correct Rules Message String")
     void testRulesMessage() {
-        String result = gameMessages.getRules();
+        String result = gameMessages.getRules(gameModeDependentMessages.getClueSymbols(),
+                gameModeDependentMessages.validSymbols());
 
         assertEquals(result, getExpectedRules());
     }
@@ -63,17 +84,9 @@ class ConsoleGameMessagesEnTest {
     @Test
     @DisplayName("Returns correct Ascii Logo String")
     void testAsciiLogoString() {
-        LogoColorsBundle logoColorsBundle = new LogoColorsBundle(
-                ConsoleColor.ORCHID,
-                ConsoleColor.ORANGE,
-                ConsoleColor.BRIGHT_RED,
-                ConsoleColor.BACKGROUND_BLACK
-        );
-
-        String result = ColoredAsciiLogo.getLogo(logoColorsBundle);
         String expected = ColoredAsciiLogo.getLogo(logoColorsBundle);
 
-        assertEquals(result, expected);
+        assertEquals(gameModeDependentMessages.getLogo(), expected);
     }
 
     String getExpectedInvalidInput() {
@@ -83,7 +96,8 @@ class ConsoleGameMessagesEnTest {
 
     String getExpectedIncorrectGuess() {
         return "Turn 6 of 10.\n" +
-                "Your guess: rbww            " + ClueGenerator.generate("rgby", "rbww");
+                "Your guess: rbww            " + ClueGenerator.generate(gameModeDependentMessages.getClueSymbols(),
+                "rgby", "rbww");
     }
 
     String getExpectedGameOver() {
@@ -98,13 +112,15 @@ class ConsoleGameMessagesEnTest {
     }
 
     String getExpectedRules() {
+        ClueSymbols clueSymbols = gameModeDependentMessages.getClueSymbols();
+
         return "Puzzle contains 4 boxes. Each turn you choose from 6 colors.\n"
                 + "Color choices: " + ConsoleColoredValidSymbols.getSymbols() + "\n"
                 + "Example turn: ybgr\n"
                 + "Response:\n"
-                + ConsoleSymbols.CIRCLE_SHADED + "   correct color in correct position\n"
-                + ConsoleSymbols.CIRCLE_EMPTY + "   correct color in incorrect position\n"
-                + ConsoleSymbols.UNDERSCORE + "   incorrect color\n"
+                + clueSymbols.getSymbol(Clue.EXACT) + "   correct color in correct position\n"
+                + clueSymbols.getSymbol(Clue.PARTIAL) + "   correct color in incorrect position\n"
+                + clueSymbols.getSymbol(Clue.NONE) + "   incorrect color\n"
                 + "\n"
                 + "The order of the response tiles does not necessarily match the colored characters.\n"
                 + "Type 'help', or 'rules' to read these instructions again\n"
