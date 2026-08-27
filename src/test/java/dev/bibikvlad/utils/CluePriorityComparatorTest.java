@@ -1,33 +1,29 @@
 package dev.bibikvlad.utils;
 
+import dev.bibikvlad.utils.strings.clue.Clue;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CluePriorityComparatorTest {
-    @Test
-    @DisplayName("Throws illegal argument exception")
-    void throwIllegalArgumentException() {
-        Comparator<Character> cluePriorityComparator = CluePriorityComparator.BY_PRIORITY;
-
-        List<Character> clueInputs = Arrays.asList('a', 'b');
-
-        assertThrows(IllegalArgumentException.class, () -> clueInputs.stream().sorted(cluePriorityComparator).toList());
-    }
-
+class CluePriorityComparatorTest {
     @Test
     @DisplayName("Sorted array demonstrates correct priority of the elements")
     void sortedArrayDemonstratesCorrectPriority() {
-        Comparator<Character> cluePriorityComparator = CluePriorityComparator.BY_PRIORITY;
+        Comparator<Clue> cluePriorityComparator = CluePriorityComparator.BY_PRIORITY;
 
-        List<Character> expectedSorted = List.of('◍', '○', '_', '_');
-        List<Character> unsortedInput = List.of('_', '_', '◍', '○');
+        //◍○__
+        List<Clue> expectedSorted = List.of(Clue.EXACT, Clue.PARTIAL, Clue.NONE, Clue.NONE);
+        //__◍○
+        List<Clue> unsortedInput = List.of(Clue.NONE, Clue.NONE, Clue.EXACT, Clue.PARTIAL);
 
-        assertEquals(expectedSorted, unsortedInput.stream().sorted(cluePriorityComparator).toList());
+        assertEquals(expectedSorted, unsortedInput
+                .stream()
+                .sorted(cluePriorityComparator)
+                .toList()
+        );
     }
 }
