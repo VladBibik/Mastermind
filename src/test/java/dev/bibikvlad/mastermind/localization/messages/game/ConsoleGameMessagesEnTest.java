@@ -11,7 +11,6 @@ import dev.bibikvlad.utils.strings.ConsoleColoredValidSymbols;
 import dev.bibikvlad.utils.strings.clue.Clue;
 import dev.bibikvlad.utils.strings.clue.ClueSymbols;
 import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,24 +19,16 @@ import java.util.ResourceBundle;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ConsoleGameMessagesEnTest {
-    private ResourceBundle resourceBundle;
-    private GameMessages gameMessages;
-    private LogoColorsBundle logoColorsBundle;
-    private GameModeDependentMessages gameModeDependentMessages;
-
-    @BeforeEach
-    void setUp() {
-        resourceBundle = ResourceBundle.getBundle("i18n.game.game_messages",
-                LocalizationType.ENGLISH.getLocale());
-        gameMessages = new ConsoleGameMessages(resourceBundle);
-        logoColorsBundle = new LogoColorsBundle(
-                ConsoleColor.ORCHID,
-                ConsoleColor.ORANGE,
-                ConsoleColor.BRIGHT_RED,
-                ConsoleColor.BACKGROUND_BLACK
-        );
-        gameModeDependentMessages = new DefaultModeMessages(logoColorsBundle);
-    }
+    private final ResourceBundle resourceBundle = ResourceBundle.getBundle("i18n.game.game_messages",
+            LocalizationType.ENGLISH.getLocale());
+    private final GameMessages gameMessages = new ConsoleGameMessages(resourceBundle);
+    private final LogoColorsBundle logoColorsBundle = new LogoColorsBundle(
+            ConsoleColor.ORCHID,
+            ConsoleColor.ORANGE,
+            ConsoleColor.BRIGHT_RED,
+            ConsoleColor.BACKGROUND_BLACK
+    );
+    private final GameModeDependentMessages gameModeDependentMessages = new DefaultModeMessages(logoColorsBundle);
 
     @Test
     @DisplayName("Returns correct Invalid Input Message String")
