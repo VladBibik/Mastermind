@@ -49,7 +49,7 @@ class ConsoleGameMessagesEnTest {
     @Test
     @DisplayName("Returns correct Game Over Message String")
     void testGameOverMessage() {
-        String result = gameMessages.getGameOver("rgby");
+        String result = gameMessages.getGameOver(gameModeDependentMessages.getVisualRepresentation("rgby"));
 
         assertEquals(result, getExpectedGameOver());
     }
@@ -57,7 +57,7 @@ class ConsoleGameMessagesEnTest {
     @Test
     @DisplayName("Returns correct Win Message String")
     void testWinMessage() {
-        String result = gameMessages.getWin("rgby");
+        String result = gameMessages.getWin(gameModeDependentMessages.getVisualRepresentation("rgby"));
 
         assertEquals(result, getExpectedWin());
     }
