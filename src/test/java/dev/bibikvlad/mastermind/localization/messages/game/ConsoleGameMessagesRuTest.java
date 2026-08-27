@@ -9,6 +9,7 @@ import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.utils.strings.ConsoleColoredValidSymbols;
 import dev.bibikvlad.utils.strings.clue.Clue;
 import dev.bibikvlad.utils.strings.clue.ClueSymbols;
+import dev.bibikvlad.utils.strings.clue.DefaultClueSymbols;
 import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -40,8 +41,14 @@ class ConsoleGameMessagesRuTest {
     @Test
     @DisplayName("Returns correct Incorrect Guess Message String")
     void testIncorrectGuessMessage() {
-        String result = gameMessages.getIncorrectGuess(gamePresentation.getClueSymbols(),
-                10, 5, "rgby", "rbww");
+        int maxTurns = 10;
+        int currentTurn = 5;
+        String answer = "rgby";
+        String guess = "rbww";
+        ClueSymbols clueSymbols = new DefaultClueSymbols();
+        String generatedClue = ClueGenerator.generate(clueSymbols, answer, guess);
+
+        String result = gameMessages.getIncorrectGuess(maxTurns, currentTurn, answer, guess, generatedClue);
 
         assertEquals(result, getExpectedIncorrectGuess());
     }
