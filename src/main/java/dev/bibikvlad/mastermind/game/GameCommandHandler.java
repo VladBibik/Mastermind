@@ -1,20 +1,13 @@
 package dev.bibikvlad.mastermind.game;
 
-import dev.bibikvlad.mastermind.app.game.mode.GamePresentation;
-import dev.bibikvlad.mastermind.app.printer.Printer;
+import dev.bibikvlad.mastermind.game.output.GameOutput;
 import dev.bibikvlad.mastermind.input.GlobalMenuCommands;
-import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 
 public class GameCommandHandler {
-    private final Printer printer;
-    private final GameMessages gameMessages;
-    private final GamePresentation gamePresentation;
+    private final GameOutput gameOutput;
 
-    public GameCommandHandler(Printer printer, GameMessages gameMessages,
-                              GamePresentation gamePresentation) {
-        this.printer = printer;
-        this.gameMessages = gameMessages;
-        this.gamePresentation = gamePresentation;
+    public GameCommandHandler(GameOutput gameOutput) {
+        this.gameOutput = gameOutput;
     }
 
     public boolean handle(String input) {
@@ -25,8 +18,7 @@ public class GameCommandHandler {
         }
 
         if (GlobalMenuCommands.HELP.contains(input)) {
-            printer.printMessage(gameMessages.getRules(gamePresentation.getClueSymbols(),
-                    gamePresentation.getValidSymbols()));
+            gameOutput.printRules();
 
             return false;
         }
