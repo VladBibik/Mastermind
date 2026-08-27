@@ -6,6 +6,8 @@ import dev.bibikvlad.utils.strings.clue.CompatibilityClueSymbols;
 import dev.bibikvlad.utils.strings.logos.DefaultAsciiLogo;
 
 public class CompatibilityGamePresentation implements GamePresentation {
+    private final ClueSymbols clueSymbols = new CompatibilityClueSymbols();
+
     @Override
     public String getLogo() {
         return DefaultAsciiLogo.getLogo();
@@ -18,7 +20,7 @@ public class CompatibilityGamePresentation implements GamePresentation {
 
     @Override
     public ClueSymbols getClueSymbols() {
-        return new CompatibilityClueSymbols();
+        return clueSymbols;
     }
 
     @Override

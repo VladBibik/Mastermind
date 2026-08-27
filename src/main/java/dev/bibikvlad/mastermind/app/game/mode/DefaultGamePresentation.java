@@ -8,6 +8,7 @@ import dev.bibikvlad.utils.strings.clue.DefaultClueSymbols;
 import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
 
 public class DefaultGamePresentation implements GamePresentation {
+    private final ClueSymbols clueSymbols = new DefaultClueSymbols();
     private final LogoColorsBundle logoColorsBundle;
 
     public DefaultGamePresentation(LogoColorsBundle logoColorsBundle) {
@@ -26,7 +27,7 @@ public class DefaultGamePresentation implements GamePresentation {
 
     @Override
     public ClueSymbols getClueSymbols() {
-        return new DefaultClueSymbols();
+        return clueSymbols;
     }
 
     @Override
