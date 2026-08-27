@@ -8,6 +8,7 @@ import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.game.MastermindConsoleGame;
 import dev.bibikvlad.mastermind.game.RandomAnswerGenerator;
 import dev.bibikvlad.mastermind.game.data.GameData;
+import dev.bibikvlad.mastermind.game.output.GameOutput;
 import dev.bibikvlad.mastermind.input.parser.LowerCaseParser;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.config.LocalizationType;
@@ -38,12 +39,12 @@ public class MastermindGameBootstrap {
         Parser lowerCaseParser = new LowerCaseParser(parser);
 
         MastermindConsoleGame game = new MastermindConsoleGame(printer, lowerCaseParser, gameMessages,
-                RandomAnswerGenerator.generate(), getGameModeDependentMessages());
+                RandomAnswerGenerator.generate(), getGamePresentation());
 
         return TimedGameRunner.launch(game);
     }
 
-    private GamePresentation getGameModeDependentMessages() {
+    private GamePresentation getGamePresentation() {
         LocalizationType localizationType = currentPlayer.getPlayerConfig().localizationType();
 
         if (playerService.isInCompatibilityMode(localizationType)) {
