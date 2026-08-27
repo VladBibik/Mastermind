@@ -1,24 +1,30 @@
 package dev.bibikvlad.mastermind.localization.core;
 
-import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
+import dev.bibikvlad.mastermind.app.game.mode.DefaultModeMessages;
+import dev.bibikvlad.mastermind.app.game.mode.GameModeDependentMessages;
 import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
+import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
+import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
 import dev.bibikvlad.utils.strings.ConsoleColoredValidSymbols;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//TODO: private static or BeforeAll? Do research!
 class LocalizationContextTest {
-    private static GameMessages gameMessages;
-
-    @BeforeAll
-    static void setUp() {
-        LocalizationContext localizationContext = new LocalizationContext(LocalizationType.ENGLISH);
-        gameMessages = localizationContext.getMessages(MessageType.GAME);
-    }
+    private static final LocalizationContext localizationContext = new LocalizationContext(LocalizationType.ENGLISH);
+    private static final GameMessages gameMessages = localizationContext.getMessages(MessageType.GAME);
+    private static final GameModeDependentMessages gameModeDependentMessages = new DefaultModeMessages(
+            new LogoColorsBundle(
+                    ConsoleColor.PINK,
+                    ConsoleColor.CYAN,
+                    ConsoleColor.DARK_GREEN,
+                    ConsoleColor.BACKGROUND_BLACK
+            )
+    );
 
     @Test
     @DisplayName("getGameMessages() returns expected English win message")
@@ -26,8 +32,8 @@ class LocalizationContextTest {
         final String ANSWER = "RGBW";
         assertEquals("You Won! \uD83C\uDF89" + "\n" +
                         "You are the Mastermind!\n" +
-                        "Solution was: " + InputVisualRepresentation.getVisualRepresentation(ANSWER),
-                gameMessages.getWin(ANSWER));
+                        "Solution was: " + gameModeDependentMessages.getVisualRepresentation(ANSWER),
+                gameMessages.getWin(gameModeDependentMessages.getVisualRepresentation(ANSWER)));
     }
 
     @Test
