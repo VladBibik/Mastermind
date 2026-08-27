@@ -6,8 +6,7 @@ import dev.bibikvlad.utils.strings.clue.ClueSymbols;
 public interface GameMessages extends LocalizedMessages {
     String getInvalidInput(String validSymbols);
 
-    String getIncorrectGuess(ClueSymbols clueSymbols, int maxTurns, int currentTurn,
-                             String answer, String userInput);
+    String getIncorrectGuess(int maxTurns, int currentTurn, String answer, String userInput, String generatedClue);
 
     String getGameOver(String answer);
 

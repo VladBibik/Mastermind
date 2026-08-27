@@ -1,6 +1,5 @@
 package dev.bibikvlad.mastermind.localization.messages.game;
 
-import dev.bibikvlad.mastermind.clues.ClueGenerator;
 import dev.bibikvlad.utils.strings.clue.Clue;
 import dev.bibikvlad.utils.strings.clue.ClueSymbols;
 
@@ -21,11 +20,11 @@ public class ConsoleGameMessages implements GameMessages {
     }
 
     @Override
-    public String getIncorrectGuess(ClueSymbols clueSymbols, int maxTurns, int currentTurn,
-                                    String answer, String userInput) {
+    public String getIncorrectGuess(int maxTurns, int currentTurn,
+                                    String answer, String userInput, String generatedClue) {
         return MessageFormat.format(resourceBundle.getString("incorrect_guess"),
                 String.valueOf(currentTurn + 1), String.valueOf(maxTurns), userInput,
-                ClueGenerator.generate(clueSymbols, answer, userInput));
+                generatedClue);
     }
 
     @Override
