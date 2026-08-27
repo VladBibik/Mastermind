@@ -9,5 +9,5 @@ public interface GamePresentation {
 
     ClueSymbols getClueSymbols();
 
-    String validSymbols();
+    String getValidSymbols();
 }

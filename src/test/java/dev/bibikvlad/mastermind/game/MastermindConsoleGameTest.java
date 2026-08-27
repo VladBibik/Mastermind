@@ -48,7 +48,7 @@ class MastermindConsoleGameTest {
     void invalidInputTest() {
         String output = runGameAndGetOutputStreamString("rrrr", "abcd\nclose\n");
 
-        assertTrue(output.contains(gameMessages.getInvalidInput(gamePresentation.validSymbols())));
+        assertTrue(output.contains(gameMessages.getInvalidInput(gamePresentation.getValidSymbols())));
     }
 
     @Test

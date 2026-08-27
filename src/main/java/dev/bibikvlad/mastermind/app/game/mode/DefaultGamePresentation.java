@@ -30,7 +30,7 @@ public class DefaultGamePresentation implements GamePresentation {
     }
 
     @Override
-    public String validSymbols() {
+    public String getValidSymbols() {
         return ConsoleColoredValidSymbols.getSymbols();
     }
 }

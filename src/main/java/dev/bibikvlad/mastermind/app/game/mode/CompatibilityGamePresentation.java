@@ -22,7 +22,7 @@ public class CompatibilityGamePresentation implements GamePresentation {
     }
 
     @Override
-    public String validSymbols() {
+    public String getValidSymbols() {
         return ConsoleCompatibleValidSymbols.getSymbols();
     }
 }

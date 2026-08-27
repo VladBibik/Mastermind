@@ -32,7 +32,7 @@ class ConsoleGameMessagesEnTest {
     @Test
     @DisplayName("Returns correct Invalid Input Message String")
     void testInvalidInputMessage() {
-        String result = gameMessages.getInvalidInput(gamePresentation.validSymbols());
+        String result = gameMessages.getInvalidInput(gamePresentation.getValidSymbols());
 
         assertEquals(result, getExpectedInvalidInput());
     }
@@ -66,7 +66,7 @@ class ConsoleGameMessagesEnTest {
     @DisplayName("Returns correct Rules Message String")
     void testRulesMessage() {
         String result = gameMessages.getRules(gamePresentation.getClueSymbols(),
-                gamePresentation.validSymbols());
+                gamePresentation.getValidSymbols());
 
         assertEquals(result, getExpectedRules());
     }

@@ -64,7 +64,7 @@ public class MastermindConsoleGame {
                     return new GameOutcome(gameStateManager.getCurrentTurn(), GameResult.WIN);
                 }
             } else {
-                printer.printMessage(gameMessages.getInvalidInput(gamePresentation.validSymbols()));
+                printer.printMessage(gameMessages.getInvalidInput(gamePresentation.getValidSymbols()));
             }
         }
     }
@@ -72,6 +72,6 @@ public class MastermindConsoleGame {
     private void printLogoAndRules() {
         printer.printMessage(gamePresentation.getLogo());
         printer.printMessage(gameMessages.getRules(gamePresentation.getClueSymbols(),
-                gamePresentation.validSymbols()));
+                gamePresentation.getValidSymbols()));
     }
 }

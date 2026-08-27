@@ -26,7 +26,7 @@ public class GameCommandHandler {
 
         if (GlobalMenuCommands.HELP.contains(input)) {
             printer.printMessage(gameMessages.getRules(gamePresentation.getClueSymbols(),
-                    gamePresentation.validSymbols()));
+                    gamePresentation.getValidSymbols()));
 
             return false;
         }
