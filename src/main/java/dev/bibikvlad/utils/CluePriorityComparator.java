@@ -5,6 +5,11 @@ import dev.bibikvlad.utils.strings.clue.Clue;
 import java.util.Comparator;
 
 public class CluePriorityComparator {
+
+    private CluePriorityComparator() {
+        throw new AssertionError("CluePriorityComparator cannot be instantiated.");
+    }
+
     public static final Comparator<Clue> BY_PRIORITY =
             Comparator.comparingInt(CluePriorityComparator::getCluePriority);
 
