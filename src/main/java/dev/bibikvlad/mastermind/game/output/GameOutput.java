@@ -16,6 +16,10 @@ public class GameOutput {
         this.gamePresentation = gamePresentation;
     }
 
+    public void printLogo() {
+        printer.printMessage(gamePresentation.getLogo());
+    }
+
     public void printInvalidInput() {
         printer.printMessage(
                 gameMessages.getInvalidInput(
