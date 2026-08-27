@@ -3,7 +3,6 @@ package dev.bibikvlad.mastermind.localization.messages.game;
 import dev.bibikvlad.mastermind.app.game.mode.DefaultModeMessages;
 import dev.bibikvlad.mastermind.app.game.mode.GameModeDependentMessages;
 import dev.bibikvlad.mastermind.clues.ClueGenerator;
-import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
@@ -93,13 +92,13 @@ class ConsoleGameMessagesEnTest {
 
     String getExpectedGameOver() {
         return "Game Over! The solution was: "
-                + InputVisualRepresentation.getVisualRepresentation("rgby");
+                + gameModeDependentMessages.getVisualRepresentation("rgby");
     }
 
     String getExpectedWin() {
         return "You Won! \uD83C\uDF89" +
                 "\nYou are the Mastermind!\n" +
-                "Solution was: " + InputVisualRepresentation.getVisualRepresentation("rgby");
+                "Solution was: " + gameModeDependentMessages.getVisualRepresentation("rgby");
     }
 
     String getExpectedRules() {
