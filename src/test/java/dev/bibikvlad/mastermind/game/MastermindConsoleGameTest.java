@@ -4,6 +4,7 @@ import dev.bibikvlad.mastermind.app.game.mode.DefaultGamePresentation;
 import dev.bibikvlad.mastermind.app.game.mode.GamePresentation;
 import dev.bibikvlad.mastermind.app.printer.PrintStreamPrinter;
 import dev.bibikvlad.mastermind.app.printer.Printer;
+import dev.bibikvlad.mastermind.game.output.GameOutput;
 import dev.bibikvlad.mastermind.input.parser.BufferedReaderInputParser;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.config.LocalizationType;
@@ -104,9 +105,9 @@ class MastermindConsoleGameTest {
         Parser parser = new BufferedReaderInputParser(bufferedReader);
         Printer printer = new PrintStreamPrinter(printStream);
         GamePresentation modeDependentMessages = new DefaultGamePresentation(logoColorsBundle);
+        GameOutput gameOutput = new GameOutput(printer, gameMessages, modeDependentMessages);
 
-        MastermindConsoleGame game = new MastermindConsoleGame(printer, parser, gameMessages, answer,
-                modeDependentMessages);
+        MastermindConsoleGame game = new MastermindConsoleGame(gameOutput, parser, answer);
         game.play();
 
         return outputStream.toString();
