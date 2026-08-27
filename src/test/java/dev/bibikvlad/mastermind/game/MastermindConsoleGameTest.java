@@ -57,7 +57,11 @@ class MastermindConsoleGameTest {
         String answer = "yypw";
         String output = runGameAndGetOutputStreamString(answer, "yypw");
 
-        assertTrue(output.contains(gameMessages.getWin(answer)));
+        assertTrue(output.contains(
+                        gameMessages.getWin(
+                                gameModeDependentMessages.getVisualRepresentation(answer))
+                )
+        );
     }
 
     @Test
@@ -66,7 +70,11 @@ class MastermindConsoleGameTest {
         String answer = "yypw";
         String output = runGameAndGetOutputStreamString(answer, "rrrr\n".repeat(10));
 
-        assertTrue(output.contains(gameMessages.getGameOver(answer)));
+        assertTrue(output.contains(
+                        gameMessages.getGameOver(
+                                gameModeDependentMessages.getVisualRepresentation(answer))
+                )
+        );
     }
 
     @Test
@@ -75,7 +83,11 @@ class MastermindConsoleGameTest {
         String answer = "bgpw";
         String output = runGameAndGetOutputStreamString(answer, "yypw\nrrbb\npwbg\nbgpw");
 
-        assertTrue(output.contains(gameMessages.getWin(answer)));
+        assertTrue(output.contains(
+                        gameMessages.getWin(
+                                gameModeDependentMessages.getVisualRepresentation(answer))
+                )
+        );
     }
 
     @Test
