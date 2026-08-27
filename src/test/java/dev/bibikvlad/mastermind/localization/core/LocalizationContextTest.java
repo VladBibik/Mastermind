@@ -4,6 +4,7 @@ import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
+import dev.bibikvlad.utils.strings.ConsoleColoredValidSymbols;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,7 +36,8 @@ class LocalizationContextTest {
     void getMessagesReturnsSameMessages() {
         LocalizationContext localizationContext = new LocalizationContext(LocalizationType.ENGLISH);
         GameMessages localizedMessages = localizationContext.getMessages(GameMessages.class);
+        String validSymbols = ConsoleColoredValidSymbols.getSymbols();
 
-        assertEquals(localizedMessages.getInvalidInput(), gameMessages.getInvalidInput());
+        assertEquals(localizedMessages.getInvalidInput(validSymbols), gameMessages.getInvalidInput(validSymbols));
     }
 }
