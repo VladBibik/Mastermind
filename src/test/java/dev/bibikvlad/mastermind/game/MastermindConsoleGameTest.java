@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.game;
 
-import dev.bibikvlad.mastermind.app.game.mode.DefaultModeMessages;
-import dev.bibikvlad.mastermind.app.game.mode.GameModeDependentMessages;
+import dev.bibikvlad.mastermind.app.game.mode.DefaultGamePresentation;
+import dev.bibikvlad.mastermind.app.game.mode.GamePresentation;
 import dev.bibikvlad.mastermind.app.printer.PrintStreamPrinter;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.parser.BufferedReaderInputParser;
@@ -27,7 +27,7 @@ class MastermindConsoleGameTest {
     private PrintStream printStream;
     private GameMessages gameMessages;
     private LogoColorsBundle logoColorsBundle;
-    private GameModeDependentMessages gameModeDependentMessages;
+    private GamePresentation gamePresentation;
 
     @BeforeEach
     void setUp() {
@@ -40,7 +40,7 @@ class MastermindConsoleGameTest {
                 ConsoleColor.BRIGHT_RED,
                 ConsoleColor.BACKGROUND_BLACK
         );
-        gameModeDependentMessages = new DefaultModeMessages(logoColorsBundle);
+        gamePresentation = new DefaultGamePresentation(logoColorsBundle);
     }
 
     @Test
@@ -48,7 +48,7 @@ class MastermindConsoleGameTest {
     void invalidInputTest() {
         String output = runGameAndGetOutputStreamString("rrrr", "abcd\nclose\n");
 
-        assertTrue(output.contains(gameMessages.getInvalidInput(gameModeDependentMessages.validSymbols())));
+        assertTrue(output.contains(gameMessages.getInvalidInput(gamePresentation.validSymbols())));
     }
 
     @Test
@@ -59,7 +59,7 @@ class MastermindConsoleGameTest {
 
         assertTrue(output.contains(
                         gameMessages.getWin(
-                                gameModeDependentMessages.getVisualRepresentation(answer))
+                                gamePresentation.getVisualRepresentation(answer))
                 )
         );
     }
@@ -72,7 +72,7 @@ class MastermindConsoleGameTest {
 
         assertTrue(output.contains(
                         gameMessages.getGameOver(
-                                gameModeDependentMessages.getVisualRepresentation(answer))
+                                gamePresentation.getVisualRepresentation(answer))
                 )
         );
     }
@@ -85,7 +85,7 @@ class MastermindConsoleGameTest {
 
         assertTrue(output.contains(
                         gameMessages.getWin(
-                                gameModeDependentMessages.getVisualRepresentation(answer))
+                                gamePresentation.getVisualRepresentation(answer))
                 )
         );
     }
@@ -103,7 +103,7 @@ class MastermindConsoleGameTest {
 
         Parser parser = new BufferedReaderInputParser(bufferedReader);
         Printer printer = new PrintStreamPrinter(printStream);
-        GameModeDependentMessages modeDependentMessages = new DefaultModeMessages(logoColorsBundle);
+        GamePresentation modeDependentMessages = new DefaultGamePresentation(logoColorsBundle);
 
         MastermindConsoleGame game = new MastermindConsoleGame(printer, parser, gameMessages, answer,
                 modeDependentMessages);

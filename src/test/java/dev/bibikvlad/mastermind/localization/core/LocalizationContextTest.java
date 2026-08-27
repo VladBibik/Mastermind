@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.localization.core;
 
-import dev.bibikvlad.mastermind.app.game.mode.DefaultModeMessages;
-import dev.bibikvlad.mastermind.app.game.mode.GameModeDependentMessages;
+import dev.bibikvlad.mastermind.app.game.mode.DefaultGamePresentation;
+import dev.bibikvlad.mastermind.app.game.mode.GamePresentation;
 import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class LocalizationContextTest {
     private static final LocalizationContext localizationContext = new LocalizationContext(LocalizationType.ENGLISH);
     private static final GameMessages gameMessages = localizationContext.getMessages(MessageType.GAME);
-    private static final GameModeDependentMessages gameModeDependentMessages = new DefaultModeMessages(
+    private static final GamePresentation GAME_PRESENTATION = new DefaultGamePresentation(
             new LogoColorsBundle(
                     ConsoleColor.PINK,
                     ConsoleColor.CYAN,
@@ -32,8 +32,8 @@ class LocalizationContextTest {
         final String ANSWER = "RGBW";
         assertEquals("You Won! \uD83C\uDF89" + "\n" +
                         "You are the Mastermind!\n" +
-                        "Solution was: " + gameModeDependentMessages.getVisualRepresentation(ANSWER),
-                gameMessages.getWin(gameModeDependentMessages.getVisualRepresentation(ANSWER)));
+                        "Solution was: " + GAME_PRESENTATION.getVisualRepresentation(ANSWER),
+                gameMessages.getWin(GAME_PRESENTATION.getVisualRepresentation(ANSWER)));
     }
 
     @Test

@@ -2,7 +2,7 @@ package dev.bibikvlad.mastermind.app.game.mode;
 
 import dev.bibikvlad.utils.strings.clue.ClueSymbols;
 
-public interface GameModeDependentMessages {
+public interface GamePresentation {
     String getLogo();
 
     String getVisualRepresentation(String answer);

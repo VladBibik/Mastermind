@@ -7,10 +7,10 @@ import dev.bibikvlad.utils.strings.clue.ClueSymbols;
 import dev.bibikvlad.utils.strings.clue.DefaultClueSymbols;
 import dev.bibikvlad.utils.strings.logos.ColoredAsciiLogo;
 
-public class DefaultModeMessages implements GameModeDependentMessages {
+public class DefaultGamePresentation implements GamePresentation {
     private final LogoColorsBundle logoColorsBundle;
 
-    public DefaultModeMessages(LogoColorsBundle logoColorsBundle) {
+    public DefaultGamePresentation(LogoColorsBundle logoColorsBundle) {
         this.logoColorsBundle = logoColorsBundle;
     }
 

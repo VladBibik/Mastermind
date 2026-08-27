@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.game;
 
-import dev.bibikvlad.mastermind.app.game.mode.GameModeDependentMessages;
+import dev.bibikvlad.mastermind.app.game.mode.GamePresentation;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.game.data.GameOutcome;
 import dev.bibikvlad.mastermind.game.data.GameResult;
@@ -15,7 +15,7 @@ public class MastermindConsoleGame {
     private final Parser parser;
     private final GameMessages gameMessages;
     private final String answer;
-    private final GameModeDependentMessages gameModeDependentMessages;
+    private final GamePresentation gamePresentation;
 
     private final GameStateManager gameStateManager;
     private final GameCommandHandler gameCommandHandler;
@@ -25,16 +25,16 @@ public class MastermindConsoleGame {
                                  Parser parser,
                                  GameMessages gameMessages,
                                  String answer,
-                                 GameModeDependentMessages gameModeDependentMessages) {
+                                 GamePresentation gamePresentation) {
         this.printer = printer;
         this.parser = parser;
         this.gameMessages = gameMessages;
         this.answer = answer;
-        this.gameModeDependentMessages = gameModeDependentMessages;
+        this.gamePresentation = gamePresentation;
 
         gameStateManager = new GameStateManager(MAX_TURNS);
-        gameCommandHandler = new GameCommandHandler(printer, gameMessages, gameModeDependentMessages);
-        guessEvaluator = new GuessEvaluator(printer, gameMessages, gameModeDependentMessages, answer);
+        gameCommandHandler = new GameCommandHandler(printer, gameMessages, gamePresentation);
+        guessEvaluator = new GuessEvaluator(printer, gameMessages, gamePresentation, answer);
     }
 
     public GameOutcome play() {
@@ -44,7 +44,7 @@ public class MastermindConsoleGame {
             if (gameStateManager.isOver()) {
                 printer.printMessage(
                         gameMessages.getGameOver(
-                                gameModeDependentMessages.getVisualRepresentation(answer))
+                                gamePresentation.getVisualRepresentation(answer))
                 );
 
                 return new GameOutcome(gameStateManager.getCurrentTurn(), GameResult.LOSE);
@@ -64,14 +64,14 @@ public class MastermindConsoleGame {
                     return new GameOutcome(gameStateManager.getCurrentTurn(), GameResult.WIN);
                 }
             } else {
-                printer.printMessage(gameMessages.getInvalidInput(gameModeDependentMessages.validSymbols()));
+                printer.printMessage(gameMessages.getInvalidInput(gamePresentation.validSymbols()));
             }
         }
     }
 
     private void printLogoAndRules() {
-        printer.printMessage(gameModeDependentMessages.getLogo());
-        printer.printMessage(gameMessages.getRules(gameModeDependentMessages.getClueSymbols(),
-                gameModeDependentMessages.validSymbols()));
+        printer.printMessage(gamePresentation.getLogo());
+        printer.printMessage(gameMessages.getRules(gamePresentation.getClueSymbols(),
+                gamePresentation.validSymbols()));
     }
 }

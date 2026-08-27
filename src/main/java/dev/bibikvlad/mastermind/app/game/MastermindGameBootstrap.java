@@ -1,9 +1,9 @@
 package dev.bibikvlad.mastermind.app.game;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
-import dev.bibikvlad.mastermind.app.game.mode.CompatibilityModeMessages;
-import dev.bibikvlad.mastermind.app.game.mode.DefaultModeMessages;
-import dev.bibikvlad.mastermind.app.game.mode.GameModeDependentMessages;
+import dev.bibikvlad.mastermind.app.game.mode.CompatibilityGamePresentation;
+import dev.bibikvlad.mastermind.app.game.mode.DefaultGamePresentation;
+import dev.bibikvlad.mastermind.app.game.mode.GamePresentation;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.game.MastermindConsoleGame;
 import dev.bibikvlad.mastermind.game.RandomAnswerGenerator;
@@ -43,15 +43,15 @@ public class MastermindGameBootstrap {
         return TimedGameRunner.launch(game);
     }
 
-    private GameModeDependentMessages getGameModeDependentMessages() {
+    private GamePresentation getGameModeDependentMessages() {
         LocalizationType localizationType = currentPlayer.getPlayerConfig().localizationType();
 
         if (playerService.isInCompatibilityMode(localizationType)) {
-            return new CompatibilityModeMessages();
+            return new CompatibilityGamePresentation();
         }
 
         LogoColorsBundle logoColorsBundle = currentPlayer.getPlayerConfig().logoColorsBundle();
 
-        return new DefaultModeMessages(logoColorsBundle);
+        return new DefaultGamePresentation(logoColorsBundle);
     }
 }

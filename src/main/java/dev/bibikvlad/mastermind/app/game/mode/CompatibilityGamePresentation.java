@@ -5,7 +5,7 @@ import dev.bibikvlad.utils.strings.clue.ClueSymbols;
 import dev.bibikvlad.utils.strings.clue.CompatibilityClueSymbols;
 import dev.bibikvlad.utils.strings.logos.DefaultAsciiLogo;
 
-public class CompatibilityModeMessages implements GameModeDependentMessages {
+public class CompatibilityGamePresentation implements GamePresentation {
     @Override
     public String getLogo() {
         return DefaultAsciiLogo.getLogo();

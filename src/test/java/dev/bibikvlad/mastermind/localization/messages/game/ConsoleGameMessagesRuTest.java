@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.localization.messages.game;
 
-import dev.bibikvlad.mastermind.app.game.mode.DefaultModeMessages;
-import dev.bibikvlad.mastermind.app.game.mode.GameModeDependentMessages;
+import dev.bibikvlad.mastermind.app.game.mode.DefaultGamePresentation;
+import dev.bibikvlad.mastermind.app.game.mode.GamePresentation;
 import dev.bibikvlad.mastermind.clues.ClueGenerator;
 import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
@@ -27,12 +27,12 @@ class ConsoleGameMessagesRuTest {
             ConsoleColor.BRIGHT_RED,
             ConsoleColor.BACKGROUND_BLACK
     );
-    private final GameModeDependentMessages gameModeDependentMessages = new DefaultModeMessages(logoColorsBundle);
+    private final GamePresentation gamePresentation = new DefaultGamePresentation(logoColorsBundle);
 
     @Test
     @DisplayName("Returns correct Invalid Input Message String")
     void testInvalidInputMessage() {
-        String result = gameMessages.getInvalidInput(gameModeDependentMessages.validSymbols());
+        String result = gameMessages.getInvalidInput(gamePresentation.validSymbols());
 
         assertEquals(result, getExpectedInvalidInput());
     }
@@ -40,7 +40,7 @@ class ConsoleGameMessagesRuTest {
     @Test
     @DisplayName("Returns correct Incorrect Guess Message String")
     void testIncorrectGuessMessage() {
-        String result = gameMessages.getIncorrectGuess(gameModeDependentMessages.getClueSymbols(),
+        String result = gameMessages.getIncorrectGuess(gamePresentation.getClueSymbols(),
                 10, 5, "rgby", "rbww");
 
         assertEquals(result, getExpectedIncorrectGuess());
@@ -49,7 +49,7 @@ class ConsoleGameMessagesRuTest {
     @Test
     @DisplayName("Returns correct Game Over Message String")
     void testGameOverMessage() {
-        String result = gameMessages.getGameOver(gameModeDependentMessages.getVisualRepresentation("rgby"));
+        String result = gameMessages.getGameOver(gamePresentation.getVisualRepresentation("rgby"));
 
         assertEquals(result, getExpectedGameOver());
     }
@@ -57,7 +57,7 @@ class ConsoleGameMessagesRuTest {
     @Test
     @DisplayName("Returns correct Win Message String")
     void testWinMessage() {
-        String result = gameMessages.getWin(gameModeDependentMessages.getVisualRepresentation("rgby"));
+        String result = gameMessages.getWin(gamePresentation.getVisualRepresentation("rgby"));
 
         assertEquals(result, getExpectedWin());
     }
@@ -65,8 +65,8 @@ class ConsoleGameMessagesRuTest {
     @Test
     @DisplayName("Returns correct Rules Message String")
     void testRulesMessage() {
-        String result = gameMessages.getRules(gameModeDependentMessages.getClueSymbols(),
-                gameModeDependentMessages.validSymbols());
+        String result = gameMessages.getRules(gamePresentation.getClueSymbols(),
+                gamePresentation.validSymbols());
 
         assertEquals(result, getExpectedRules());
     }
@@ -87,23 +87,23 @@ class ConsoleGameMessagesRuTest {
 
     String getExpectedIncorrectGuess() {
         return "Ход: 6 из 10.\n" +
-                "Ваш ответ: rbww            " + ClueGenerator.generate(gameModeDependentMessages.getClueSymbols(),
+                "Ваш ответ: rbww            " + ClueGenerator.generate(gamePresentation.getClueSymbols(),
                 "rgby", "rbww");
     }
 
     String getExpectedGameOver() {
         return "Game Over! Ответом была комбинация: "
-                + gameModeDependentMessages.getVisualRepresentation("rgby");
+                + gamePresentation.getVisualRepresentation("rgby");
     }
 
     String getExpectedWin() {
         return "Вы победили! \uD83C\uDF89" +
                 "\nВы Mastermind!\n" +
-                "Решением была комбинация: " + gameModeDependentMessages.getVisualRepresentation("rgby");
+                "Решением была комбинация: " + gamePresentation.getVisualRepresentation("rgby");
     }
 
     String getExpectedRules() {
-        ClueSymbols clueSymbols = gameModeDependentMessages.getClueSymbols();
+        ClueSymbols clueSymbols = gamePresentation.getClueSymbols();
 
         return "Пазл состоит из 4 ячеек. Каждый ход Вы выбираете из 6 цветов.\n"
                 + "Варианты цветов: " + ConsoleColoredValidSymbols.getSymbols() + "\n"
