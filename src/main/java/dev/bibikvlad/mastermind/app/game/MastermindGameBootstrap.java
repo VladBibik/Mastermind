@@ -37,9 +37,11 @@ public class MastermindGameBootstrap {
     public GameData launch() {
         GameMessages gameMessages = localizationContext.getMessages(MessageType.GAME);
         Parser lowerCaseParser = new LowerCaseParser(parser);
+        GameOutput gameOutput = new GameOutput(printer, gameMessages, getGamePresentation());
 
-        MastermindConsoleGame game = new MastermindConsoleGame(printer, lowerCaseParser, gameMessages,
-                RandomAnswerGenerator.generate(), getGamePresentation());
+        MastermindConsoleGame game = new MastermindConsoleGame(gameOutput, lowerCaseParser,
+                RandomAnswerGenerator.generate()
+        );
 
         return TimedGameRunner.launch(game);
     }
