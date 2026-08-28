@@ -11,7 +11,7 @@ public class GuessEvaluator {
         this.correctAnswer = correctAnswer;
     }
 
-    public boolean evaluate(String userInput, int turn, int maxTurns) {
+    public boolean evaluateGuess(String userInput, int turn, int maxTurns) {
         if (userInput.equals(correctAnswer)) {
             gameOutput.printWin(correctAnswer);
 

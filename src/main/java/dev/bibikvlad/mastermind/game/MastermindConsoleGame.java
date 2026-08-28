@@ -44,7 +44,7 @@ public class MastermindConsoleGame {
             }
 
             if (GameInputValidator.isInputValid(userInput)) {
-                boolean won = guessEvaluator.evaluate(userInput, gameStateManager.getCurrentTurn(), MAX_TURNS);
+                boolean won = guessEvaluator.evaluateGuess(userInput, gameStateManager.getCurrentTurn(), MAX_TURNS);
                 gameStateManager.nextTurn();
 
                 if (won) {
