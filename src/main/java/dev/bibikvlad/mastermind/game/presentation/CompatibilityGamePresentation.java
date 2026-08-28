@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.game.mode;
+package dev.bibikvlad.mastermind.game.presentation;
 
 import dev.bibikvlad.utils.strings.ConsoleCompatibleValidSymbols;
 import dev.bibikvlad.utils.strings.clue.ClueSymbols;

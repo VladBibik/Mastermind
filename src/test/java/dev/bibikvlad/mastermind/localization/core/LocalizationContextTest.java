@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.localization.core;
 
-import dev.bibikvlad.mastermind.game.mode.DefaultGamePresentation;
-import dev.bibikvlad.mastermind.game.mode.GamePresentation;
+import dev.bibikvlad.mastermind.game.presentation.DefaultGamePresentation;
+import dev.bibikvlad.mastermind.game.presentation.GamePresentation;
 import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;

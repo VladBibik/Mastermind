@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.game;
 
-import dev.bibikvlad.mastermind.game.mode.DefaultGamePresentation;
-import dev.bibikvlad.mastermind.game.mode.GamePresentation;
+import dev.bibikvlad.mastermind.game.presentation.DefaultGamePresentation;
+import dev.bibikvlad.mastermind.game.presentation.GamePresentation;
 import dev.bibikvlad.mastermind.app.printer.PrintStreamPrinter;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.game.output.GameOutput;

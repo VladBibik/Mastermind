@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.game.mode;
+package dev.bibikvlad.mastermind.game.presentation;
 
 import dev.bibikvlad.mastermind.clues.InputVisualRepresentation;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;

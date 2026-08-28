@@ -1,7 +1,7 @@
 package dev.bibikvlad.mastermind.localization.messages.game;
 
-import dev.bibikvlad.mastermind.game.mode.DefaultGamePresentation;
-import dev.bibikvlad.mastermind.game.mode.GamePresentation;
+import dev.bibikvlad.mastermind.game.presentation.DefaultGamePresentation;
+import dev.bibikvlad.mastermind.game.presentation.GamePresentation;
 import dev.bibikvlad.mastermind.clues.ClueGenerator;
 import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
