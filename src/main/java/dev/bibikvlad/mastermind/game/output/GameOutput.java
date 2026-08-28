@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.game.output;
 
-import dev.bibikvlad.mastermind.app.game.mode.GamePresentation;
+import dev.bibikvlad.mastermind.game.mode.GamePresentation;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.clues.ClueGenerator;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;

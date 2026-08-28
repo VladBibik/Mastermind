@@ -1,9 +1,9 @@
 package dev.bibikvlad.mastermind.app.game;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
-import dev.bibikvlad.mastermind.app.game.mode.CompatibilityGamePresentation;
-import dev.bibikvlad.mastermind.app.game.mode.DefaultGamePresentation;
-import dev.bibikvlad.mastermind.app.game.mode.GamePresentation;
+import dev.bibikvlad.mastermind.game.mode.CompatibilityGamePresentation;
+import dev.bibikvlad.mastermind.game.mode.DefaultGamePresentation;
+import dev.bibikvlad.mastermind.game.mode.GamePresentation;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.game.MastermindConsoleGame;
 import dev.bibikvlad.mastermind.game.RandomAnswerGenerator;
