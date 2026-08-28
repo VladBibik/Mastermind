@@ -1,4 +1,4 @@
-package dev.bibikvlad.utils.strings;
+package dev.bibikvlad.utils.strings.valid;
 
 public class ConsoleCompatibleValidSymbols {
     public static String getSymbols() {

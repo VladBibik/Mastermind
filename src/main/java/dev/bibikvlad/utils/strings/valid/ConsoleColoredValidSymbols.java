@@ -1,4 +1,4 @@
-package dev.bibikvlad.utils.strings;
+package dev.bibikvlad.utils.strings.valid;
 
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 

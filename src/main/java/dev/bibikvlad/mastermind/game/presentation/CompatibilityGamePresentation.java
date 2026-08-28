@@ -1,6 +1,6 @@
 package dev.bibikvlad.mastermind.game.presentation;
 
-import dev.bibikvlad.utils.strings.ConsoleCompatibleValidSymbols;
+import dev.bibikvlad.utils.strings.valid.ConsoleCompatibleValidSymbols;
 import dev.bibikvlad.utils.strings.clue.ClueSymbols;
 import dev.bibikvlad.utils.strings.clue.CompatibilityClueSymbols;
 import dev.bibikvlad.utils.strings.logos.DefaultAsciiLogo;

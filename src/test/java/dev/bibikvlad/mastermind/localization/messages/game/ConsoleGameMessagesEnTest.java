@@ -6,7 +6,7 @@ import dev.bibikvlad.mastermind.clues.ClueGenerator;
 import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import dev.bibikvlad.mastermind.model.logo.LogoColorsBundle;
-import dev.bibikvlad.utils.strings.ConsoleColoredValidSymbols;
+import dev.bibikvlad.utils.strings.valid.ConsoleColoredValidSymbols;
 import dev.bibikvlad.utils.strings.clue.Clue;
 import dev.bibikvlad.utils.strings.clue.ClueSymbols;
 import dev.bibikvlad.utils.strings.clue.DefaultClueSymbols;
