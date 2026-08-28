@@ -9,6 +9,10 @@ public class RandomAnswerGenerator {
     private static final int NUMBER_OF_COLORS = 6;
     private static final Random random = new Random();
 
+    private RandomAnswerGenerator() {
+        throw new AssertionError("Cannot instantiate RandomAnswerGenerator");
+    }
+
     public static String generate() {
         return answerGeneratorLoop();
     }
