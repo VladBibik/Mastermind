@@ -69,7 +69,7 @@ public class PlayerService {
     }
 
     public boolean turnCompatibilityOn(long playerId) {
-        playerConfigRepository.updateLocale()
+        return playerConfigRepository.updateLocalization(playerId, LocalizationType.COMPATIBILITY);
     }
 
     public boolean isMultiplePlayersRegistered() {
