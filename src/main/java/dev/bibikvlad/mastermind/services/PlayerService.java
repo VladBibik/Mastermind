@@ -53,7 +53,7 @@ public class PlayerService {
     }
 
     public void updatePlayerLocale(long playerId, LocalizationType locale) {
-        playerConfigRepository.updateLocale(playerId, locale);
+        playerConfigRepository.updateLocalization(playerId, locale);
     }
 
     public void updateLogoColors(long playerId, LogoColorsBundle logoColorsBundle) {
@@ -66,6 +66,10 @@ public class PlayerService {
 
     public void deletePlayer(long playerId) {
         playerRepository.deleteById(playerId);
+    }
+
+    public boolean turnCompatibilityOn(long playerId) {
+        playerConfigRepository.updateLocale()
     }
 
     public boolean isMultiplePlayersRegistered() {

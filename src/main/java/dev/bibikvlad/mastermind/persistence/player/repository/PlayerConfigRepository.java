@@ -11,7 +11,7 @@ public interface PlayerConfigRepository {
 
     boolean update(long playerId, PlayerConfig playerConfig);
 
-    boolean updateLocale(long playerId, LocalizationType locale);
+    boolean updateLocalization(long playerId, LocalizationType localizationType);
 
     boolean updateLogoColors(long playerId, LogoColorsBundle logoColorsBundle);
 }

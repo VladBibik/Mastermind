@@ -48,13 +48,13 @@ public class PlayerConfigSQLRepository implements PlayerConfigRepository {
     }
 
     @Override
-    public boolean updateLocale(long playerId, LocalizationType locale) {
+    public boolean updateLocalization(long playerId, LocalizationType localizationType) {
         boolean result;
 
         try {
             transactionManager.begin();
 
-            result = playerConfigDAO.updateLocale(playerId, locale);
+            result = playerConfigDAO.updateLocale(playerId, localizationType);
 
             transactionManager.commit();
         } catch (PersistenceException exception) {
