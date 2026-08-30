@@ -68,12 +68,20 @@ public class PlayerService {
         playerRepository.deleteById(playerId);
     }
 
-    public boolean turnCompatibilityOn(long playerId) {
-        return playerConfigRepository.updateLocalization(playerId, LocalizationType.COMPATIBILITY);
+    public LocalizationType turnCompatibilityOn(long playerId) {
+        LocalizationType compatibilityLocalization = LocalizationType.COMPATIBILITY;
+
+        playerConfigRepository.updateLocalization(playerId, compatibilityLocalization);
+
+        return compatibilityLocalization;
     }
 
-    public boolean turnCompatibilityOff(long playerId) {
-        return playerConfigRepository.updateLocalization(playerId, LocalizationType.ENGLISH);
+    public LocalizationType turnCompatibilityOff(long playerId) {
+        LocalizationType englishLocalization = LocalizationType.ENGLISH;
+
+        playerConfigRepository.updateLocalization(playerId, englishLocalization);
+
+        return englishLocalization;
     }
 
     public boolean isMultiplePlayersRegistered() {
