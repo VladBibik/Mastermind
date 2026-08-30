@@ -3,6 +3,7 @@ package dev.bibikvlad.mastermind.menu.main.settings;
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
+import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.SettingsMenuMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
@@ -76,6 +77,15 @@ public class SettingsMenu extends Menu {
     }
 
     private Menu changeLogoColor() {
+        LocalizationType localizationType = currentPlayer.getPlayerConfig().localizationType();
+        boolean isCompatibilityMode = playerService.isInCompatibilityMode(localizationType );
+
+        if (isCompatibilityMode) {
+            printer.printMessage(settingsMenuMessages.getLogoColorsUnavailable());
+
+            return this;
+        }
+
         return new LogoColorSelectionMenu(appContext);
     }
 
