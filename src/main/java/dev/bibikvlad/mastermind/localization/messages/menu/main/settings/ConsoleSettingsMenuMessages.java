@@ -13,4 +13,9 @@ public class ConsoleSettingsMenuMessages implements SettingsMenuMessages {
     public String getMenuOptions() {
         return resourceBundle.getString("menu_options");
     }
+
+    @Override
+    public String getLogoColorsUnavailable() {
+        return resourceBundle.getString("logo_colors_unavailable");
+    }
 }
