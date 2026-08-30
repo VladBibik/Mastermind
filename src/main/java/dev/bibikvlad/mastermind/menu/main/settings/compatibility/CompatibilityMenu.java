@@ -37,16 +37,14 @@ public class CompatibilityMenu extends Menu {
 
     private AppContext turnCompatibilityOn() {
         long playerId = currentPlayer.getId();
-        playerService.turnCompatibilityOn(playerId);
 
-        return buildNewAppContext(LocalizationType.COMPATIBILITY);
+        return buildNewAppContext(playerService.turnCompatibilityOn(playerId));
     }
 
     private AppContext turnCompatibilityOff() {
         long playerId = currentPlayer.getId();
-        playerService.turnCompatibilityOff(playerId);
 
-        return buildNewAppContext(LocalizationType.ENGLISH);
+        return buildNewAppContext(playerService.turnCompatibilityOff(playerId));
     }
 
     private boolean isInCompatibilityMode() {
