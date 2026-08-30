@@ -8,6 +8,7 @@ import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMes
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.SettingsMenuMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.MainMenu;
+import dev.bibikvlad.mastermind.menu.main.settings.compatibility.CompatibilityMenu;
 import dev.bibikvlad.mastermind.menu.main.settings.language.LanguageSelectionMenu;
 import dev.bibikvlad.mastermind.menu.main.settings.logo.LogoColorSelectionMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
@@ -61,6 +62,9 @@ public class SettingsMenu extends Menu {
             case 2 -> {
                 return changeLogoColor();
             }
+            case 3 -> {
+                return compatibilityMode();
+            }
             case 0 -> {
                 return exit();
             }
@@ -84,6 +88,10 @@ public class SettingsMenu extends Menu {
         }
 
         return new LogoColorSelectionMenu(appContext);
+    }
+
+    private Menu compatibilityMode() {
+        return new CompatibilityMenu(appContext);
     }
 
     private Menu exit() {
