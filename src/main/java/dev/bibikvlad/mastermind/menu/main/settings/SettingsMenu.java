@@ -77,10 +77,7 @@ public class SettingsMenu extends Menu {
     }
 
     private Menu changeLogoColor() {
-        LocalizationType localizationType = currentPlayer.getPlayerConfig().localizationType();
-        boolean isCompatibilityMode = playerService.isInCompatibilityMode(localizationType );
-
-        if (isCompatibilityMode) {
+        if (isInCompatibilityMode()) {
             printer.printMessage(settingsMenuMessages.getLogoColorsUnavailable());
 
             return this;
@@ -91,5 +88,11 @@ public class SettingsMenu extends Menu {
 
     private Menu exit() {
         return new MainMenu(appContext);
+    }
+
+    private boolean isInCompatibilityMode() {
+        LocalizationType localizationType = currentPlayer.getPlayerConfig().localizationType();
+
+        return playerService.isInCompatibilityMode(localizationType);
     }
 }
