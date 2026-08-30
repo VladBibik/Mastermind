@@ -2,7 +2,6 @@ package dev.bibikvlad.mastermind.menu.main.settings.compatibility;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
-import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.settings.SettingsMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
@@ -29,5 +28,10 @@ public class CompatibilityMenu extends Menu {
     private void turnCompatibilityOn() {
         long playerId = currentPlayer.getId();
         playerService.turnCompatibilityOn(playerId);
+    }
+
+    private void turnCompatibilityOff() {
+        long playerId = currentPlayer.getId();
+        playerService.turnCompatibilityOff(playerId);
     }
 }
