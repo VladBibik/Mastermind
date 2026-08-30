@@ -24,23 +24,29 @@ public class CompatibilityMenu extends Menu {
 
     @Override
     public Menu run() {
+        AppContext updatedAppContext;
+
         if (isInCompatibilityMode()) {
-            turnCompatibilityOff();
+            updatedAppContext = turnCompatibilityOff();
         } else {
-            turnCompatibilityOn();
+            updatedAppContext = turnCompatibilityOn();
         }
 
-        return new SettingsMenu(appContext);
+        return new SettingsMenu(updatedAppContext);
     }
 
-    private void turnCompatibilityOn() {
+    private AppContext turnCompatibilityOn() {
         long playerId = currentPlayer.getId();
         playerService.turnCompatibilityOn(playerId);
+
+        return buildNewAppContext(LocalizationType.COMPATIBILITY);
     }
 
-    private void turnCompatibilityOff() {
+    private AppContext turnCompatibilityOff() {
         long playerId = currentPlayer.getId();
         playerService.turnCompatibilityOff(playerId);
+
+        return buildNewAppContext(LocalizationType.ENGLISH);
     }
 
     private boolean isInCompatibilityMode() {
