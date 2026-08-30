@@ -14,6 +14,7 @@ import dev.bibikvlad.mastermind.localization.factories.menu.main.profile.name.Co
 import dev.bibikvlad.mastermind.localization.factories.menu.main.profile.rename.ConsoleRenamePlayerMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.profile.selection.ConsolePlayerSelectionMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.ConsoleSettingsMessageFactory;
+import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.compatibility.ConsoleCompatibilityMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.language.ConsoleLanguageMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.logo.ConsoleColorMessageFactory;
 import dev.bibikvlad.mastermind.localization.factories.menu.main.settings.logo.ConsoleLogoMessageFactory;
@@ -32,6 +33,7 @@ import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.name.Pla
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.rename.PlayerRenameMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.profile.selection.PlayerSelectionMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.SettingsMenuMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.compatibility.CompatibilityMenuMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.language.LanguageSelectionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.logo.LogoColorSelectionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.logo.color.ColorMessages;
@@ -169,6 +171,11 @@ public class MessageRegistryInitializer {
                 ColorMessages.class,
                 "i18n.menu.main.settings.logo.color.logo_colors",
                 new ConsoleColorMessageFactory()
+        ));
+        messageFactoryRegistry.register(new LocalizedMessageConfig<>(
+                CompatibilityMenuMessages.class,
+                "i18n.menu.main.settings.compatibility.compatibility_menu",
+                new ConsoleCompatibilityMessageFactory()
         ));
     }
 
