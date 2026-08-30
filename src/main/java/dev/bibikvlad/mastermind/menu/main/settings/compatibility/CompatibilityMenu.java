@@ -3,7 +3,9 @@ package dev.bibikvlad.mastermind.menu.main.settings.compatibility;
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.localization.config.LocalizationType;
+import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.compatibility.CompatibilityMenuMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.settings.SettingsMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
@@ -13,6 +15,7 @@ public class CompatibilityMenu extends Menu {
     private final Printer printer;
     private final Player currentPlayer;
     private final PlayerService playerService;
+    private final CompatibilityMenuMessages messages;
 
     public CompatibilityMenu(AppContext appContext) {
         super(appContext);
@@ -20,6 +23,7 @@ public class CompatibilityMenu extends Menu {
         this.printer = appContext.printer();
         this.currentPlayer = appContext.currentPlayer();
         this.playerService = appContext.services().getPlayerService();
+        this.messages = appContext.localizationContext().getMessages(MessageType.COMPATIBILITY);
     }
 
     @Override
