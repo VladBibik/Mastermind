@@ -40,7 +40,7 @@ public class Player {
         return playerConfig;
     }
 
-    public Player withLocale(LocalizationType localizationType) {
+    public Player withLocalizationType(LocalizationType localizationType) {
         PlayerConfig updatedConfig = getPlayerConfig().withLocalization(localizationType);
 
         return new Player(id, playerName, creationDate, updatedConfig);

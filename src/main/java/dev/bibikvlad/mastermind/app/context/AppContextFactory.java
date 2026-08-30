@@ -7,7 +7,7 @@ import dev.bibikvlad.mastermind.model.player.Player;
 
 public class AppContextFactory {
     public static AppContext withLocale(AppContext appContext, LocalizationType localizationType) {
-        Player updatedPlayer = appContext.currentPlayer().withLocale(localizationType);
+        Player updatedPlayer = appContext.currentPlayer().withLocalizationType(localizationType);
         LocalizationContext newLocalizationContext = new LocalizationContext(localizationType);
 
         return new AppContext(newLocalizationContext, appContext.services(),
