@@ -23,6 +23,12 @@ public class CompatibilityMenu extends Menu {
 
     @Override
     public Menu run() {
+        if (isInCompatibilityMode()) {
+            turnCompatibilityOff();
+        } else {
+            turnCompatibilityOn();
+        }
+
         return new SettingsMenu(appContext);
     }
 
