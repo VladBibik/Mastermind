@@ -72,6 +72,10 @@ public class PlayerService {
         return playerConfigRepository.updateLocalization(playerId, LocalizationType.COMPATIBILITY);
     }
 
+    public boolean turnCompatibilityOff(long playerId) {
+        return playerConfigRepository.updateLocalization(playerId, LocalizationType.ENGLISH);
+    }
+
     public boolean isMultiplePlayersRegistered() {
         return playerRepository.count() > 1;
     }
