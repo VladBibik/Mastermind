@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.menu.main.settings.compatibility;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
+import dev.bibikvlad.mastermind.input.interpreter.ProceedInterpreter;
 import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
@@ -28,27 +29,26 @@ public class CompatibilityMenu extends Menu {
 
     @Override
     public Menu run() {
-        AppContext updatedAppContext;
+        printer.printMessage(messages.getCompatibilityWarning());
 
-        if (isInCompatibilityMode()) {
-            updatedAppContext = turnCompatibilityOff();
-        } else {
-            updatedAppContext = turnCompatibilityOn();
+        if (ProceedInterpreter.shouldProceed(appContext.parser())) {
+            return toggleCompatibilityMode();
         }
 
-        return new SettingsMenu(updatedAppContext);
+        return new SettingsMenu(appContext);
     }
 
-    private AppContext turnCompatibilityOn() {
+    private Menu toggleCompatibilityMode() {
         long playerId = currentPlayer.getId();
+        LocalizationType localizationType;
 
-        return buildNewAppContext(playerService.turnCompatibilityOn(playerId));
-    }
+        if (isInCompatibilityMode()) {
+            localizationType = playerService.turnCompatibilityOff(playerId);
+        } else {
+            localizationType = playerService.turnCompatibilityOn(playerId);
+        }
 
-    private AppContext turnCompatibilityOff() {
-        long playerId = currentPlayer.getId();
-
-        return buildNewAppContext(playerService.turnCompatibilityOff(playerId));
+        return new SettingsMenu(buildNewAppContext(localizationType));
     }
 
     private boolean isInCompatibilityMode() {
