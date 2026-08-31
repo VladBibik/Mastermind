@@ -48,7 +48,7 @@ public class CompatibilityMenu extends Menu {
             localizationType = playerService.turnCompatibilityOn(playerId);
         }
 
-        return new SettingsMenu(buildNewAppContext(localizationType));
+        return new SettingsMenu(buildUpdatedAppContext(localizationType));
     }
 
     private boolean isInCompatibilityMode() {
@@ -57,7 +57,7 @@ public class CompatibilityMenu extends Menu {
         return playerService.isInCompatibilityMode(localizationType);
     }
 
-    private AppContext buildNewAppContext(LocalizationType localizationType) {
+    private AppContext buildUpdatedAppContext(LocalizationType localizationType) {
         Player updatedPlayer = currentPlayer.withLocalizationType(localizationType);
         LocalizationContext updatedLocalizationContext = new LocalizationContext(localizationType);
 
