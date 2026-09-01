@@ -75,14 +75,18 @@ public class FirstLaunchLanguageSelection {
             LocalizationType selectedLocalizationType = LocalizationType.fromIndex(userInputIndex);
 
             if (selectedLocalizationType == LocalizationType.COMPATIBILITY) {
-                printer.printMessage(messages.getCompatibleEnglishExplanation());
-
-                parser.parse();
+                printCompatibilityExplanation();
             }
 
             return selectedLocalizationType;
         } catch (IllegalArgumentException _) {
             return null;
         }
+    }
+
+    private void printCompatibilityExplanation() {
+        printer.printMessage(messages.getCompatibleEnglishExplanation());
+
+        parser.parse();
     }
 }
