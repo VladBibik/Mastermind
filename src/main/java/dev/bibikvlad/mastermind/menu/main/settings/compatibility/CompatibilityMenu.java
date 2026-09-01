@@ -1,11 +1,11 @@
 package dev.bibikvlad.mastermind.menu.main.settings.compatibility;
 
 import dev.bibikvlad.mastermind.app.context.AppContext;
+import dev.bibikvlad.mastermind.app.context.AppContextFactory;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.ProceedInterpreter;
 import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
-import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.compatibility.CompatibilityMenuMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.settings.SettingsMenu;
@@ -58,10 +58,6 @@ public class CompatibilityMenu extends Menu {
     }
 
     private AppContext buildUpdatedAppContext(LocalizationType localizationType) {
-        Player updatedPlayer = currentPlayer.withLocalizationType(localizationType);
-        LocalizationContext updatedLocalizationContext = new LocalizationContext(localizationType);
-
-        return new AppContext(updatedLocalizationContext, appContext.services(), printer,
-                appContext.parser(), updatedPlayer);
+        return AppContextFactory.withLocale(appContext, localizationType);
     }
 }
