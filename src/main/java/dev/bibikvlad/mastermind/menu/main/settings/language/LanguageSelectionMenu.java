@@ -11,6 +11,7 @@ import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMes
 import dev.bibikvlad.mastermind.localization.messages.menu.main.settings.language.LanguageSelectionMessages;
 import dev.bibikvlad.mastermind.menu.core.Menu;
 import dev.bibikvlad.mastermind.menu.main.settings.SettingsMenu;
+import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.PlayerService;
 
 import java.util.Optional;
@@ -19,6 +20,7 @@ public class LanguageSelectionMenu extends Menu {
     private final PlayerService playerService;
     private final Printer printer;
     private final Parser parser;
+    private final Player currentPlayer;
     private final InteractionMessages interactionMessages;
     private final LanguageSelectionMessages languageSelectionMessages;
 
@@ -30,6 +32,7 @@ public class LanguageSelectionMenu extends Menu {
         this.playerService = appContext.services().getPlayerService();
         this.printer = appContext.printer();
         this.parser = appContext.parser();
+        this.currentPlayer = appContext.currentPlayer();
         this.interactionMessages = appContext.localizationContext().getMessages(MessageType.INTERACTION);
         this.languageSelectionMessages = appContext.localizationContext().getMessages(MessageType.LANGUAGE_MENU);
     }
@@ -74,7 +77,7 @@ public class LanguageSelectionMenu extends Menu {
     }
 
     private Menu checkLanguageSelection(LocalizationType localizationType) {
-        if (localizationType.equals(appContext.currentPlayer().getPlayerConfig().localizationType())) {
+        if (localizationType.equals(currentPlayer.getPlayerConfig().localizationType())) {
             printer.printMessage(languageSelectionMessages.getAlreadySelected());
 
             return this;
@@ -93,7 +96,7 @@ public class LanguageSelectionMenu extends Menu {
     }
 
     private void updatePlayerLocale(LocalizationType localizationType) {
-        playerService.updatePlayerLocale(appContext.currentPlayer().getId(), localizationType);
+        playerService.updatePlayerLocale(currentPlayer.getId(), localizationType);
     }
 
     private void printLanguageChangeConfirmation(AppContext newAppContext, LocalizationType localizationType) {
@@ -106,7 +109,7 @@ public class LanguageSelectionMenu extends Menu {
     }
 
     private void checkForCompatibilityMode() {
-        LocalizationType localizationType = appContext.currentPlayer().getPlayerConfig().localizationType();
+        LocalizationType localizationType = currentPlayer.getPlayerConfig().localizationType();
 
         if (playerService.isInCompatibilityMode(localizationType)) {
             printer.printMessage("TEMP MESSAGE");
