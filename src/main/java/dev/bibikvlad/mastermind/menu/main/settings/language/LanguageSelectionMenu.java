@@ -126,7 +126,7 @@ public class LanguageSelectionMenu extends Menu {
 
         printer.printMessage(languageSelectionMessages.getCompatibilitySelected());
 
-        return waitForConfirmation();
+        return confirmProceed();
     }
 
     private boolean confirmCompatibilityModeSelection(LocalizationType localizationType) {
@@ -136,10 +136,10 @@ public class LanguageSelectionMenu extends Menu {
 
         printer.printMessage(languageSelectionMessages.getCompatibilityWarning());
 
-        return waitForConfirmation();
+        return confirmProceed();
     }
 
-    private boolean waitForConfirmation() {
+    private boolean confirmProceed() {
         return ProceedInterpreter.shouldProceed(parser);
     }
 }
