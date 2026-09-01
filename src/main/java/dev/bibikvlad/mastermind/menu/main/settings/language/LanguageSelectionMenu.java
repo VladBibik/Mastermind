@@ -118,8 +118,7 @@ public class LanguageSelectionMenu extends Menu {
         if (playerService.isInCompatibilityMode(localizationType)) {
             printer.printMessage("TEMP MESSAGE");
 
-            printer.printMessage(interactionMessages.getPressEnter());
-            parser.parse();
+            waitForUserConfirmation();
         }
     }
 
