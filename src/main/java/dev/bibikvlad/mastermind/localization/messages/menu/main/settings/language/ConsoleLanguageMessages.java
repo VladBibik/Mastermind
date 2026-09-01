@@ -29,4 +29,14 @@ public class ConsoleLanguageMessages implements LanguageSelectionMessages {
     public String getBackToSettings() {
         return resourceBundle.getString("redirect_to_settings");
     }
+
+    @Override
+    public String getCompatibilityWarning() {
+        return resourceBundle.getString("compatibility_warning");
+    }
+
+    @Override
+    public String getCompatibilitySelected() {
+        return resourceBundle.getString("compatibility_selected");
+    }
 }
