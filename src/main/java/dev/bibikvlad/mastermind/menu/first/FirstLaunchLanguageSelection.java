@@ -71,17 +71,19 @@ public class FirstLaunchLanguageSelection {
     }
 
     private LocalizationType selectLocalizationType(int userInputIndex) {
+        LocalizationType selectedLocalizationType;
+
         try {
-            LocalizationType selectedLocalizationType = LocalizationType.fromIndex(userInputIndex);
-
-            if (selectedLocalizationType == LocalizationType.COMPATIBILITY) {
-                printCompatibilityExplanation();
-            }
-
-            return selectedLocalizationType;
+            selectedLocalizationType = LocalizationType.fromIndex(userInputIndex);
         } catch (IllegalArgumentException _) {
             return null;
         }
+
+        if (selectedLocalizationType == LocalizationType.COMPATIBILITY) {
+            printCompatibilityExplanation();
+        }
+
+        return selectedLocalizationType;
     }
 
     private void printCompatibilityExplanation() {
