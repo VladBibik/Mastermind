@@ -4,6 +4,7 @@ import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.context.AppContextFactory;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.interpreter.IntegerInputInterpreter;
+import dev.bibikvlad.mastermind.input.interpreter.ProceedInterpreter;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
@@ -40,7 +41,9 @@ public class LanguageSelectionMenu extends Menu {
     @Override
     public Menu run() {
         if (shouldRenderMenu) {
-            warnIfCurrentlyInCompatibilityMode();
+            if (!confirmCurrentCompatibilityMode()) {
+                return new SettingsMenu(appContext);
+            }
 
             printMenuOptions();
 
@@ -84,7 +87,9 @@ public class LanguageSelectionMenu extends Menu {
 
             return this;
         } else {
-            warnIfCompatibilityModeSelected(localizationType);
+            if (!confirmCompatibilityModeSelection(localizationType)) {
+                return new SettingsMenu(appContext);
+            }
 
             return applyLanguageChange(localizationType);
         }
@@ -112,27 +117,29 @@ public class LanguageSelectionMenu extends Menu {
         parser.parse();
     }
 
-    private void warnIfCurrentlyInCompatibilityMode() {
+    private boolean confirmCurrentCompatibilityMode() {
         LocalizationType localizationType = currentPlayer.getPlayerConfig().localizationType();
 
-        if (playerService.isInCompatibilityMode(localizationType)) {
-            printer.printMessage(languageSelectionMessages.getCompatibilitySelected());
-
-            waitForUserConfirmation();
+        if (!playerService.isInCompatibilityMode(localizationType)) {
+            return true;
         }
+
+        printer.printMessage(languageSelectionMessages.getCompatibilitySelected());
+
+        return waitForConfirmation();
     }
 
-    private void warnIfCompatibilityModeSelected(LocalizationType localizationType) {
-        if (playerService.isInCompatibilityMode(localizationType)) {
-            printer.printMessage(languageSelectionMessages.getCompatibilityWarning());
-
-            waitForUserConfirmation();
+    private boolean confirmCompatibilityModeSelection(LocalizationType localizationType) {
+        if (!playerService.isInCompatibilityMode(localizationType)) {
+            return true;
         }
+
+        printer.printMessage(languageSelectionMessages.getCompatibilityWarning());
+
+        return waitForConfirmation();
     }
 
-    private void waitForUserConfirmation() {
-        printer.printMessage(interactionMessages.getPressEnter());
-
-        parser.parse();
+    private boolean waitForConfirmation() {
+        return ProceedInterpreter.shouldProceed(parser);
     }
 }
