@@ -40,7 +40,7 @@ public class LanguageSelectionMenu extends Menu {
     @Override
     public Menu run() {
         if (shouldRenderMenu) {
-            checkForCompatibilityMode();
+            warnIfCurrentlyInCompatibilityMode();
 
             printMenuOptions();
 
@@ -84,7 +84,7 @@ public class LanguageSelectionMenu extends Menu {
 
             return this;
         } else {
-            compatibilityModeSelected(localizationType);
+            warnIfCompatibilityModeSelected(localizationType);
 
             return applyLanguageChange(localizationType);
         }
@@ -112,7 +112,7 @@ public class LanguageSelectionMenu extends Menu {
         parser.parse();
     }
 
-    private void checkForCompatibilityMode() {
+    private void warnIfCurrentlyInCompatibilityMode() {
         LocalizationType localizationType = currentPlayer.getPlayerConfig().localizationType();
 
         if (playerService.isInCompatibilityMode(localizationType)) {
@@ -122,7 +122,7 @@ public class LanguageSelectionMenu extends Menu {
         }
     }
 
-    private void compatibilityModeSelected(LocalizationType localizationType) {
+    private void warnIfCompatibilityModeSelected(LocalizationType localizationType) {
         if (localizationType.equals(LocalizationType.COMPATIBILITY)) {
             printer.printMessage("TEMP MESSAGE");
 
