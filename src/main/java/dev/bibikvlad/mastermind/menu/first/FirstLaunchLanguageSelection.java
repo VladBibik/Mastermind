@@ -71,7 +71,7 @@ public class FirstLaunchLanguageSelection {
             userInputIndex = Integer.parseInt(userInput);
 
             return selectLocaleByIndex(userInputIndex);
-        } catch (NumberFormatException exception) {
+        } catch (NumberFormatException _) {
             return null;
         }
     }
@@ -79,7 +79,7 @@ public class FirstLaunchLanguageSelection {
     private LocalizationType selectLocaleByIndex(int userInputIndex) {
         try {
             return LocalizationType.fromIndex(userInputIndex);
-        } catch (IllegalArgumentException exception) {
+        } catch (IllegalArgumentException _) {
             return null;
         }
     }
