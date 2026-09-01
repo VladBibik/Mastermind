@@ -6,24 +6,16 @@ import dev.bibikvlad.mastermind.input.validation.StringEmptyValidator;
 import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 
 public class FirstLaunchLanguageSelection {
-    private static final String EMPTY_INPUT_ERROR =
-            "❌ Input cannot be empty. Please enter a number corresponding to the menu option";
-    private static final String INVALID_INPUT_ERROR =
-            "❌ Invalid input. Please enter a number corresponding to the menu option";
-    private static final String MENU_OPTIONS = """
-            
-            Please select a language.
-            Enter the number corresponding to your choice.
-            """;
-
     private final Printer printer;
     private final Parser parser;
+    private final FirstLaunchLanguageSelectionMessages messages;
 
     private boolean shouldRenderMenu = true;
 
     public FirstLaunchLanguageSelection(Printer printer, Parser parser) {
         this.printer = printer;
         this.parser = parser;
+        this.messages = new FirstLaunchLanguageSelectionMessages();
     }
 
     public LocalizationType selectLanguage() {
@@ -37,7 +29,7 @@ public class FirstLaunchLanguageSelection {
             String userInput = parser.parse();
 
             if (StringEmptyValidator.isNullOrEmpty(userInput)) {
-                printer.printMessage(EMPTY_INPUT_ERROR);
+                printer.printMessage(messages.getEmptyInputMessage());
 
                 continue;
             }
@@ -48,12 +40,12 @@ public class FirstLaunchLanguageSelection {
                 return selectedLocale;
             }
 
-            printer.printMessage(INVALID_INPUT_ERROR);
+            printer.printMessage(messages.getInvalidInputMessage());
         }
     }
 
     private void printMenuOptions() {
-        printer.printMessage(MENU_OPTIONS);
+        printer.printMessage(messages.getMenuOptions());
 
         LocalizationType[] locales = LocalizationType.values();
 
