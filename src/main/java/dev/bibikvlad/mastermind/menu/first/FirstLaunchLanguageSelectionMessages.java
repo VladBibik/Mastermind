@@ -12,16 +12,15 @@ public class FirstLaunchLanguageSelectionMessages {
     public String getMenuOptions() {
         return """
                 Please select a language.
-                Enter the number corresponding to your choice.
-                """;
+                Enter the number corresponding to your choice.""";
     }
 
     public String getTerminalTestString() {
         return """
+                
                 ⬤◍○✅❌🎉[91m⬤[92m⬤[93m⬤[94m⬤[95m⬤[97m⬤[0m
                 If you see any issues with the symbols or colors above,
-                we recommend choosing Compatible English.
-                """;
+                we recommend choosing Compatible English.""";
     }
 
     String getCompatibleEnglishExplanation() {
@@ -37,7 +36,6 @@ public class FirstLaunchLanguageSelectionMessages {
                 or:
                 Settings > Language > select any language other than Compatibility.
 
-                Press 'Enter' to continue...
-                """;
+                Press 'Enter' to continue...""";
     }
 }
