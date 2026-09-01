@@ -77,11 +77,15 @@ public class LanguageSelectionMenu extends Menu {
     }
 
     private Menu checkLanguageSelection(LocalizationType localizationType) {
-        if (localizationType.equals(currentPlayer.getPlayerConfig().localizationType())) {
+        LocalizationType currentLocalizationType = currentPlayer.getPlayerConfig().localizationType();
+
+        if (localizationType.equals(currentLocalizationType)) {
             printer.printMessage(languageSelectionMessages.getAlreadySelected());
 
             return this;
         } else {
+            compatibilityModeSelected(localizationType);
+
             return applyLanguageChange(localizationType);
         }
     }
@@ -117,5 +121,19 @@ public class LanguageSelectionMenu extends Menu {
             printer.printMessage(interactionMessages.getPressEnter());
             parser.parse();
         }
+    }
+
+    private void compatibilityModeSelected(LocalizationType localizationType) {
+        if (localizationType.equals(LocalizationType.COMPATIBILITY)) {
+            printer.printMessage("TEMP MESSAGE");
+
+            waitForUserConfirmation();
+        }
+    }
+
+    private void waitForUserConfirmation() {
+        printer.printMessage(interactionMessages.getPressEnter());
+
+        parser.parse();
     }
 }
