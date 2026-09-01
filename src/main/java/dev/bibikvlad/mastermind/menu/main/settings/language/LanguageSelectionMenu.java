@@ -123,7 +123,7 @@ public class LanguageSelectionMenu extends Menu {
     }
 
     private void warnIfCompatibilityModeSelected(LocalizationType localizationType) {
-        if (localizationType.equals(LocalizationType.COMPATIBILITY)) {
+        if (playerService.isInCompatibilityMode(localizationType)) {
             printer.printMessage("TEMP MESSAGE");
 
             waitForUserConfirmation();
