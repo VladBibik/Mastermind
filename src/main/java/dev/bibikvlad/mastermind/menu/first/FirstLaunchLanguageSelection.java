@@ -23,6 +23,8 @@ public class FirstLaunchLanguageSelection {
             if (shouldRenderMenu) {
                 printMenuOptions();
 
+                printer.printMessage(messages.getTerminalTestString());
+
                 shouldRenderMenu = false;
             }
 
