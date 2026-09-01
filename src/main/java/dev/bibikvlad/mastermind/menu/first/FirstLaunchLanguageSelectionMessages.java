@@ -23,7 +23,7 @@ public class FirstLaunchLanguageSelectionMessages {
                 we recommend choosing Compatible English.""";
     }
 
-    String getCompatibleEnglishExplanation() {
+    public String getCompatibleEnglishExplanation() {
         return """
                 You've selected Compatibility Mode.
                 
