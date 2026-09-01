@@ -18,7 +18,7 @@ public class FirstLaunchLanguageSelectionMessages {
     public String getTerminalTestString() {
         return """
                 
-                ⬤◍○✅❌🎉[91m⬤[92m⬤[93m⬤[94m⬤[95m⬤[97m⬤[0m
+                ⬤◍○✅❌🎉\u001B[91m⬤\u001B[92m⬤\u001B[93m⬤\u001B[94m⬤\u001B[95m⬤\u001B[97m⬤\u001B[0m
                 If you see any issues with the symbols or colors above,
                 we recommend choosing Compatible English.""";
     }
