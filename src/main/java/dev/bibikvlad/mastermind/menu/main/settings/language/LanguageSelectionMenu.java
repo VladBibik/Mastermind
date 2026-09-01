@@ -37,6 +37,8 @@ public class LanguageSelectionMenu extends Menu {
     @Override
     public Menu run() {
         if (shouldRenderMenu) {
+            checkForCompatibilityMode();
+
             printMenuOptions();
 
             shouldRenderMenu = false;
@@ -101,5 +103,16 @@ public class LanguageSelectionMenu extends Menu {
         printer.printMessage(messages.getBackToSettings());
 
         parser.parse();
+    }
+
+    private void checkForCompatibilityMode() {
+        LocalizationType localizationType = appContext.currentPlayer().getPlayerConfig().localizationType();
+
+        if (playerService.isInCompatibilityMode(localizationType)) {
+            printer.printMessage("TEMP MESSAGE");
+
+            printer.printMessage(interactionMessages.getPressEnter());
+            parser.parse();
+        }
     }
 }
