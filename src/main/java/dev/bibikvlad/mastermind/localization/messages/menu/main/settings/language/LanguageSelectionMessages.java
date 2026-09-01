@@ -10,4 +10,8 @@ public interface LanguageSelectionMessages extends LocalizedMessages {
     String getLanguageChanged(String languageName);
 
     String getBackToSettings();
+
+    String getCompatibilityWarning();
+
+    String getCompatibilitySelected();
 }

@@ -116,7 +116,7 @@ public class LanguageSelectionMenu extends Menu {
         LocalizationType localizationType = currentPlayer.getPlayerConfig().localizationType();
 
         if (playerService.isInCompatibilityMode(localizationType)) {
-            printer.printMessage("TEMP MESSAGE");
+            printer.printMessage(languageSelectionMessages.getCompatibilitySelected());
 
             waitForUserConfirmation();
         }
@@ -124,7 +124,7 @@ public class LanguageSelectionMenu extends Menu {
 
     private void warnIfCompatibilityModeSelected(LocalizationType localizationType) {
         if (playerService.isInCompatibilityMode(localizationType)) {
-            printer.printMessage("TEMP MESSAGE");
+            printer.printMessage(languageSelectionMessages.getCompatibilityWarning());
 
             waitForUserConfirmation();
         }
