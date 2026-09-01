@@ -72,7 +72,15 @@ public class FirstLaunchLanguageSelection {
 
     private LocalizationType selectLocalizationType(int userInputIndex) {
         try {
-            return LocalizationType.fromIndex(userInputIndex);
+            LocalizationType selectedLocalizationType = LocalizationType.fromIndex(userInputIndex);
+
+            if (selectedLocalizationType == LocalizationType.COMPATIBILITY) {
+                printer.printMessage(messages.getCompatibleEnglishExplanation());
+
+                parser.parse();
+            }
+
+            return selectedLocalizationType;
         } catch (IllegalArgumentException _) {
             return null;
         }
