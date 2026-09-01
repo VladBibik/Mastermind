@@ -69,7 +69,7 @@ public class LanguageSelectionMenu extends Menu {
     private Menu selectLocaleByIndex(int userInputIndex) {
         try {
             return checkLanguageSelection(LocalizationType.fromIndex(userInputIndex));
-        } catch (IllegalArgumentException exception) {
+        } catch (IllegalArgumentException _) {
             printer.printMessage(interactionMessages.getInvalidInput());
 
             return this;
