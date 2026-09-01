@@ -36,7 +36,7 @@ public class FirstLaunchLanguageSelection {
                 continue;
             }
 
-            LocalizationType selectedLocale = parseLocaleSelection(userInput);
+            LocalizationType selectedLocale = parseLocalizationTypeSelection(userInput);
 
             if (selectedLocale != null) {
                 return selectedLocale;
@@ -58,19 +58,19 @@ public class FirstLaunchLanguageSelection {
         }
     }
 
-    private LocalizationType parseLocaleSelection(String userInput) {
+    private LocalizationType parseLocalizationTypeSelection(String userInput) {
         int userInputIndex;
 
         try {
             userInputIndex = Integer.parseInt(userInput);
 
-            return selectLocaleByIndex(userInputIndex);
+            return selectLocalizationType(userInputIndex);
         } catch (NumberFormatException _) {
             return null;
         }
     }
 
-    private LocalizationType selectLocaleByIndex(int userInputIndex) {
+    private LocalizationType selectLocalizationType(int userInputIndex) {
         try {
             return LocalizationType.fromIndex(userInputIndex);
         } catch (IllegalArgumentException _) {
