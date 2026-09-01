@@ -86,13 +86,13 @@ public class LanguageSelectionMenu extends Menu {
             printer.printMessage(languageSelectionMessages.getAlreadySelected());
 
             return this;
-        } else {
-            if (!confirmCompatibilityModeSelection(localizationType)) {
-                return new SettingsMenu(appContext);
-            }
-
-            return applyLanguageChange(localizationType);
         }
+
+        if (!confirmCompatibilityModeSelection(localizationType)) {
+            return new SettingsMenu(appContext);
+        }
+
+        return applyLanguageChange(localizationType);
     }
 
     private Menu applyLanguageChange(LocalizationType localizationType) {
