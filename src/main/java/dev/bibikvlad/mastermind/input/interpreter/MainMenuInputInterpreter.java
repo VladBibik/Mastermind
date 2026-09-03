@@ -6,6 +6,10 @@ import dev.bibikvlad.mastermind.input.parser.Parser;
 import java.util.Optional;
 
 public class MainMenuInputInterpreter {
+    private MainMenuInputInterpreter() {
+        throw new AssertionError("MainMenuInputInterpreter cannot be instantiated");
+    }
+
 
     public static Optional<Integer> readSelection(Parser parser) {
         String userInput = parser.parse().trim().toLowerCase();
