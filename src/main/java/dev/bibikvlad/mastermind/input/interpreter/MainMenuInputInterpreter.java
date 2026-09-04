@@ -24,7 +24,7 @@ public class MainMenuInputInterpreter {
 
         try {
             return Optional.of(Integer.parseInt(userInput));
-        } catch (NumberFormatException exception) {
+        } catch (NumberFormatException _) {
             return Optional.of(-1);
         }
     }
