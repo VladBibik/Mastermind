@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-public class PlayerNameValidatorTest {
+class PlayerNameValidatorTest {
     private final PlayerNameMessages messages = new ConsolePlayerNameMessages(
             ResourceBundle.getBundle("i18n.menu.main.profile.name.player_name"));
     private final Printer printer = new ConsolePrinter();
