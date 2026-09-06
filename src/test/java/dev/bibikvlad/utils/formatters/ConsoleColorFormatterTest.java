@@ -7,16 +7,16 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class ConsoleColorFormatterTest {
+class ConsoleColorFormatterTest {
     @Test
     @DisplayName("Throws exception on invalid symbol")
-    public void throwsExceptionOnInvalidSymbol() {
+    void throwsExceptionOnInvalidSymbol() {
         assertThrows(IllegalArgumentException.class, () -> ConsoleColorFormatter.getColorCode('?'));
     }
 
     @Test
     @DisplayName("Test all symbols return correct console code")
-    public void allSymbolsReturnCorrectConsoleCode() {
+    void allSymbolsReturnCorrectConsoleCode() {
         String allSymbols = "rgybpwRGYBPW";
 
         for (char c : allSymbols.toCharArray()) {
