@@ -26,4 +26,12 @@ class PlayerNameValidatorTest {
 
         assertFalse(playerNameValidator.validateAndPrintErrors(playerName.toString()));
     }
+
+    @Test
+    @DisplayName("Name that consists only of blank spaces returns false")
+    void nameThatConsistsOnlyOfBlankSpacesReturnsFalse() {
+        String playerName = "                                       ";
+
+        assertFalse(playerNameValidator.validateAndPrintErrors(playerName));
+    }
 }
