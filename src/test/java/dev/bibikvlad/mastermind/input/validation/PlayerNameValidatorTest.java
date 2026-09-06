@@ -18,8 +18,8 @@ class PlayerNameValidatorTest {
     private final PlayerNameValidator playerNameValidator = new PlayerNameValidator(printer, messages);
 
     @Test
-    @DisplayName("Name with length more than 100 returns fals")
-    void nameWithLengthMoreThan100ReturnsFals() {
+    @DisplayName("Name with length more than 100 returns false")
+    void nameWithLengthMoreThan100ReturnsFalse() {
         StringBuilder playerName = new StringBuilder("12345678910");
 
         playerName.append(String.valueOf(playerName).repeat(11));
