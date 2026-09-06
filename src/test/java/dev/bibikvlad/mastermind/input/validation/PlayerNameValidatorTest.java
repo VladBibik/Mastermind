@@ -32,4 +32,10 @@ class PlayerNameValidatorTest {
 
         assertFalse(playerNameValidator.validateAndPrintErrors(playerName));
     }
+
+    @Test
+    @DisplayName("Null name returns false")
+    void nullNameReturnsFalse() {
+        assertFalse(playerNameValidator.validateAndPrintErrors(null));
+    }
 }
