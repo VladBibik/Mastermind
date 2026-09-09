@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ResourceBundle;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PlayerNameValidatorTest {
     private final PlayerNameMessages messages = new ConsolePlayerNameMessages(
@@ -41,5 +42,11 @@ class PlayerNameValidatorTest {
     @DisplayName("Null name returns false")
     void nullNameReturnsFalse() {
         assertFalse(playerNameValidator.validateAndPrintErrors(null));
+    }
+
+    @Test
+    @DisplayName("Non-empty string is not considered empty")
+    void nonEmptyStringIsNotConsideredEmpty() {
+        assertTrue(playerNameValidator.validateAndPrintErrors("TestName"));
     }
 }
