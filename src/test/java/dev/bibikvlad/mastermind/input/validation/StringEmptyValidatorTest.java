@@ -11,4 +11,10 @@ class StringEmptyValidatorTest {
     void whitespaceOnlyStringIsConsideredEmpty() {
         assertTrue(StringEmptyValidator.isNullOrEmpty("   \t\n"));
     }
+
+    @Test
+    @DisplayName("Null name returns false")
+    void nullNameReturnsFalse() {
+        assertTrue(StringEmptyValidator.isNullOrEmpty(null));
+    }
 }
