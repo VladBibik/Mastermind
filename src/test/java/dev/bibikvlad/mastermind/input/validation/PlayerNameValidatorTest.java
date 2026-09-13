@@ -53,6 +53,6 @@ class PlayerNameValidatorTest {
     @Test
     @DisplayName("String with surrounding whitespace is not considered empty")
     void stringWithSurroundingWhitespaceIsNotConsideredEmpty() {
-        assertFalse(StringEmptyValidator.isNullOrEmpty("  TestName  "));
+        assertTrue(playerNameValidator.validateAndPrintErrors("  TestName  "));
     }
 }
