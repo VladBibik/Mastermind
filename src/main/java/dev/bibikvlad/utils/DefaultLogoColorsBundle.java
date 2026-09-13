@@ -12,6 +12,6 @@ public class DefaultLogoColorsBundle {
     );
 
     private DefaultLogoColorsBundle() {
-        throw new AssertionError("Utility class");
+        throw new AssertionError("Cannot instantiate DefaultLogoColorsBundle");
     }
 }
