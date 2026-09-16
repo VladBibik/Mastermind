@@ -6,6 +6,10 @@ import java.util.Map;
 import java.util.Optional;
 
 public class ConsoleColorFormatter {
+    private ConsoleColorFormatter() {
+        throw new AssertionError("Cannot instantiate ConsoleColorFormatter");
+    }
+
     private static final Map<Character, String> COLOR_CODE_MAP = Map.of(
             'r', ConsoleColor.BRIGHT_RED.getCode(),
             'g', ConsoleColor.BRIGHT_GREEN.getCode(),
