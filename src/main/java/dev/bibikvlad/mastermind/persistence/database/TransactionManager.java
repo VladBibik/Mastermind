@@ -44,10 +44,7 @@ public class TransactionManager {
         try {
             connection.setAutoCommit(true);
         } catch (SQLException exception) {
-            throw new PersistenceException(
-                    "Failed to restore auto-commit after transaction",
-                    exception
-            );
+            throw new PersistenceException("Failed to restore auto-commit after transaction", exception);
         }
     }
 }
