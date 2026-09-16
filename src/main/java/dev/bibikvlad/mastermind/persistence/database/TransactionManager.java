@@ -25,13 +25,9 @@ public class TransactionManager {
             connection.commit();
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to commit transaction", exception);
-        } finally {
-            try {
-                connection.setAutoCommit(true);
-            } catch (SQLException exception) {
-                throw new PersistenceException("Failed to restore auto-commit after transaction", exception);
-            }
         }
+
+        setAutoCommit();
     }
 
     public void rollback() {
@@ -39,12 +35,19 @@ public class TransactionManager {
             connection.rollback();
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to rollback transaction", exception);
-        } finally {
-            try {
-                connection.setAutoCommit(true);
-            } catch (SQLException exception) {
-                throw new PersistenceException("Failed to restore auto-commit after transaction", exception);
-            }
+        }
+
+        setAutoCommit();
+    }
+
+    private void setAutoCommit() {
+        try {
+            connection.setAutoCommit(true);
+        } catch (SQLException exception) {
+            throw new PersistenceException(
+                    "Failed to restore auto-commit after transaction",
+                    exception
+            );
         }
     }
 }
