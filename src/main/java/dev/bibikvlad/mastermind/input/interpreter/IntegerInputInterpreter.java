@@ -6,6 +6,10 @@ import dev.bibikvlad.mastermind.input.parser.Parser;
 import java.util.Optional;
 
 public class IntegerInputInterpreter {
+    private IntegerInputInterpreter() {
+        throw new AssertionError("Cannot instantiate IntegerInputInterpreter");
+    }
+
     public static Optional<Integer> readSelection(Parser parser) {
         String userInput = parser.parse().trim().toLowerCase();
 
