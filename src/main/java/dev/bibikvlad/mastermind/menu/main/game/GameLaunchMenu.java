@@ -57,7 +57,7 @@ public class GameLaunchMenu extends Menu {
     }
 
     private void playAgain(GameData gameData) {
-        GameResult gameResult = gameData.getGameOutcome().getResult();
+        GameResult gameResult = gameData.gameOutcome().result();
 
         if (gameResult.equals(GameResult.LOSE) || gameResult.equals(GameResult.WIN)) {
             printer.printMessage(gameMenuMessages.playAgain());

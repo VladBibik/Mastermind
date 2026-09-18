@@ -75,9 +75,9 @@ public class GameJdbcDAO implements GamesDAO {
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(saveQuery)) {
             preparedStatement.setLong(1, playerId);
-            preparedStatement.setLong(2, gameData.getGameDuration());
-            preparedStatement.setString(3, gameData.getGameOutcome().getResult().name());
-            preparedStatement.setInt(4, gameData.getGameOutcome().getTurnsPlayed());
+            preparedStatement.setLong(2, gameData.gameDuration());
+            preparedStatement.setString(3, gameData.gameOutcome().result().name());
+            preparedStatement.setInt(4, gameData.gameOutcome().turnsPlayed());
 
             rowsAffected = preparedStatement.executeUpdate();
 
