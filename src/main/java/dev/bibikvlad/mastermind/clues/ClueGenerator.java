@@ -8,6 +8,10 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class ClueGenerator {
+    private ClueGenerator() {
+        throw new AssertionError("Cannot instantiate clue generator class");
+    }
+
     public static String generate(ClueSymbols clueSymbols, String answer, String guess) {
         Clue[] clues = new Clue[answer.length()];
         boolean[] answerUsed = new boolean[answer.length()];
