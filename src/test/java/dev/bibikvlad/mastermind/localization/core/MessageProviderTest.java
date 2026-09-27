@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class MessageProviderTest {
+class MessageProviderTest {
     @Test
     @DisplayName("Returns a message instance when the type is registered")
-    public void shouldReturnCorrectMessageTypeWhenRegistered() {
+    void shouldReturnCorrectMessageTypeWhenRegistered() {
         MessageProvider messageProvider =
                 new MessageProvider(LocalizationType.ENGLISH, MessageRegistryInitializer.createAndPopulateRegistry());
         GameMessages providedMessages =
@@ -23,7 +23,7 @@ public class MessageProviderTest {
 
     @Test
     @DisplayName("Throws exception when requesting unregistered message type")
-    public void shouldThrowIllegalStateExceptionWhenTypeIsNotRegistered() {
+    void shouldThrowIllegalStateExceptionWhenTypeIsNotRegistered() {
         MessageProvider messageProvider =
                 new MessageProvider(LocalizationType.ENGLISH, MessageRegistryInitializer.createAndPopulateRegistry());
 
@@ -33,7 +33,7 @@ public class MessageProviderTest {
 
     @Test
     @DisplayName("Throws NullPointerException when resource bundle name is null")
-    public void shouldThrowNullPointerExceptionWhenMessageTypeIsNull() {
+    void shouldThrowNullPointerExceptionWhenMessageTypeIsNull() {
         MessageProvider messageProvider =
                 new MessageProvider(LocalizationType.ENGLISH, MessageRegistryInitializer.createAndPopulateRegistry());
 
