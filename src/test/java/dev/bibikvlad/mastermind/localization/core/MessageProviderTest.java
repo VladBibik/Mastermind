@@ -3,6 +3,7 @@ package dev.bibikvlad.mastermind.localization.core;
 import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.localization.messages.game.ConsoleGameMessages;
 import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
+import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -52,5 +53,20 @@ class MessageProviderTest {
         GameMessages second = messageProvider.getMessages(GameMessages.class);
 
         assertSame(first, second);
+    }
+
+    @Test
+    @DisplayName("Caches message instances independently by type")
+    void shouldCacheMessagesIndependentlyByType() {
+        MessageProvider messageProvider = new MessageProvider(
+                LocalizationType.ENGLISH,
+                MessageRegistryInitializer.createAndPopulateRegistry()
+        );
+
+        GameMessages gameMessages = messageProvider.getMessages(GameMessages.class);
+
+        MainMenuMessages otherMessages = messageProvider.getMessages(MainMenuMessages.class);
+
+        assertNotSame(gameMessages, otherMessages);
     }
 }
