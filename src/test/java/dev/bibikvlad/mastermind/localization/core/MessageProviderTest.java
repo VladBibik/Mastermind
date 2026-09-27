@@ -6,8 +6,7 @@ import dev.bibikvlad.mastermind.localization.messages.game.GameMessages;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class MessageProviderTest {
     @Test
@@ -39,5 +38,19 @@ class MessageProviderTest {
 
         assertThrows(NullPointerException.class,
                 () -> messageProvider.getMessages(null));
+    }
+
+    @Test
+    @DisplayName("Returns the same message instance on repeated requests")
+    void shouldReturnCachedMessageInstance() {
+        MessageProvider messageProvider = new MessageProvider(
+                LocalizationType.ENGLISH,
+                MessageRegistryInitializer.createAndPopulateRegistry()
+        );
+
+        GameMessages first = messageProvider.getMessages(GameMessages.class);
+        GameMessages second = messageProvider.getMessages(GameMessages.class);
+
+        assertSame(first, second);
     }
 }
