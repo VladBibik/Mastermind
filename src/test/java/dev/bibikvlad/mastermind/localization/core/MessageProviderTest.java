@@ -64,9 +64,30 @@ class MessageProviderTest {
         );
 
         GameMessages gameMessages = messageProvider.getMessages(GameMessages.class);
-
         MainMenuMessages otherMessages = messageProvider.getMessages(MainMenuMessages.class);
 
         assertNotSame(gameMessages, otherMessages);
+    }
+
+    @Test
+    @DisplayName("Uses the resource bundle for the requested localization")
+    void shouldUseRequestedLocalization() {
+        MessageProvider englishProvider = new MessageProvider(
+                        LocalizationType.ENGLISH,
+                        MessageRegistryInitializer.createAndPopulateRegistry()
+        );
+
+        MessageProvider russianProvider = new MessageProvider(
+                        LocalizationType.RUSSIAN,
+                        MessageRegistryInitializer.createAndPopulateRegistry()
+        );
+
+        MainMenuMessages englishMessages = englishProvider.getMessages(MainMenuMessages.class);
+        MainMenuMessages russianMessages = russianProvider.getMessages(MainMenuMessages.class);
+
+        assertNotEquals(
+                englishMessages.getMenuOptions(),
+                russianMessages.getMenuOptions()
+        );
     }
 }
