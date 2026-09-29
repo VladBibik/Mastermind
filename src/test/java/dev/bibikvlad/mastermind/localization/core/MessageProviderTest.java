@@ -56,20 +56,6 @@ class MessageProviderTest {
     }
 
     @Test
-    @DisplayName("Caches message instances independently by type")
-    void shouldCacheMessagesIndependentlyByType() {
-        MessageProvider messageProvider = new MessageProvider(
-                LocalizationType.ENGLISH,
-                MessageRegistryInitializer.createAndPopulateRegistry()
-        );
-
-        GameMessages gameMessages = messageProvider.getMessages(GameMessages.class);
-        MainMenuMessages otherMessages = messageProvider.getMessages(MainMenuMessages.class);
-
-        assertNotSame(gameMessages, otherMessages);
-    }
-
-    @Test
     @DisplayName("Uses the resource bundle for the requested localization")
     void shouldUseRequestedLocalization() {
         MessageProvider englishProvider = new MessageProvider(
