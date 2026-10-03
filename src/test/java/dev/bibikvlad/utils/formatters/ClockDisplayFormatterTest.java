@@ -18,8 +18,8 @@ class ClockDisplayFormatterTest {
     @Test
     @DisplayName("Value that overflows max available space formatter returns a string filled with 9s")
     void valueThatOverflowsMaxAvailableSpaceFormatterReturnsAStringFilledWith9s() {
-        String clockFormattedString = ClockDisplayFormatter.format(133767);
-        String expected = "02:13:767";
+        String clockFormattedString = ClockDisplayFormatter.format(4815162342L);
+        String expected = "99:99:999";
 
         assertEquals(expected, clockFormattedString);
     }
