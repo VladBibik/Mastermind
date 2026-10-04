@@ -60,4 +60,10 @@ class ClockDisplayFormatterTest {
     void formatsMaximumDisplayValue() {
         assertEquals("99:99:999", ClockDisplayFormatter.format(6_039_999));
     }
+
+    @Test
+    @DisplayName("Returns maximum display value when input exceeds display range")
+    void returnsMaximumDisplayValueWhenInputExceedsDisplayRange() {
+        assertEquals("99:99:999", ClockDisplayFormatter.format(6_040_000));
+    }
 }
