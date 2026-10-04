@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ClockDisplayFormatterTest {
     @Test
-    @DisplayName("A correct input return clock-like formatted String")
-    void correctInputReturnClockFormattedString() {
+    @DisplayName("Formats a valid input as a clock-like string")
+    void formatsValidInputAsClockLikeString() {
         String clockFormattedString = ClockDisplayFormatter.format(133767);
         String expected = "02:13:767";
 
@@ -17,8 +17,8 @@ class ClockDisplayFormatterTest {
     }
 
     @Test
-    @DisplayName("Value that overflows max available space formatter returns a string filled with 9s")
-    void valueThatOverflowsMaxAvailableSpaceFormatterReturnsAStringFilledWith9s() {
+    @DisplayName("Returns maximum display value when input exceeds available space")
+    void returnsMaximumDisplayValueWhenInputExceedsAvailableSpace() {
         String clockFormattedString = ClockDisplayFormatter.format(4815162342L);
         String expected = "99:99:999";
 
@@ -26,8 +26,8 @@ class ClockDisplayFormatterTest {
     }
 
     @Test
-    @DisplayName("Throws IllegalArgumentException if the parameter is negative")
-    void throwsIllegalArgumentExceptionIfTheParameterIsNegative() {
+    @DisplayName("Throws IllegalArgumentException for negative input")
+    void throwsIllegalArgumentExceptionForNegativeInput() {
         assertThrows(IllegalArgumentException.class, () -> ClockDisplayFormatter.format(-133767L));
     }
 }
