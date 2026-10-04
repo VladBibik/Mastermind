@@ -54,4 +54,10 @@ class ClockDisplayFormatterTest {
     void convertsSecondsToMinutesCorrectly() {
         assertEquals("01:00:000", ClockDisplayFormatter.format(60_000));
     }
+
+    @Test
+    @DisplayName("Formats maximum display value")
+    void formatsMaximumDisplayValue() {
+        assertEquals("99:99:999", ClockDisplayFormatter.format(6_039_999));
+    }
 }
