@@ -42,4 +42,10 @@ class ClockDisplayFormatterTest {
     void formatsMillisecondsCorrectly() {
         assertEquals("00:00:999", ClockDisplayFormatter.format(999));
     }
+
+    @Test
+    @DisplayName("Converts milliseconds to seconds correctly")
+    void convertsMillisecondsToSecondsCorrectly() {
+        assertEquals("00:01:000", ClockDisplayFormatter.format(1000));
+    }
 }
