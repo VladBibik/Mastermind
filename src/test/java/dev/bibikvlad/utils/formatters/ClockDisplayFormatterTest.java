@@ -48,4 +48,10 @@ class ClockDisplayFormatterTest {
     void convertsMillisecondsToSecondsCorrectly() {
         assertEquals("00:01:000", ClockDisplayFormatter.format(1000));
     }
+
+    @Test
+    @DisplayName("Converts seconds to minutes correctly")
+    void convertsSecondsToMinutesCorrectly() {
+        assertEquals("01:00:000", ClockDisplayFormatter.format(60_000));
+    }
 }
