@@ -9,6 +9,10 @@ public class ClockDisplayFormatter {
     }
 
     public static String format(long milliseconds) {
+        if (milliseconds < 0) {
+            throw new IllegalArgumentException("Cannot format negative number " + milliseconds);
+        }
+
         if (milliseconds >= MAX_DISPLAY_MILLIS) {
             return MAX_TIME;
         }
