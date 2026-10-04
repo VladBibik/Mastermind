@@ -30,4 +30,10 @@ class ClockDisplayFormatterTest {
     void throwsIllegalArgumentExceptionForNegativeInput() {
         assertThrows(IllegalArgumentException.class, () -> ClockDisplayFormatter.format(-133767L));
     }
+
+    @Test
+    @DisplayName("Formats zero as zero time")
+    void formatsZeroAsZeroTime() {
+        assertEquals("00:00:000", ClockDisplayFormatter.format(0));
+    }
 }
