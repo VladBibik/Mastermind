@@ -3,6 +3,10 @@ package dev.bibikvlad.utils.strings.valid;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 
 public class ConsoleColoredValidSymbols {
+    private ConsoleColoredValidSymbols() {
+        throw new AssertionError("Cannot instantiate ConsoleColoredValidSymbols");
+    }
+
     public static String getSymbols() {
         return ConsoleColor.BRIGHT_RED.getCode() + "r "
                 + ConsoleColor.BRIGHT_GREEN.getCode() + "g "
