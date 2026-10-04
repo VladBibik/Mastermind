@@ -36,4 +36,10 @@ class ClockDisplayFormatterTest {
     void formatsZeroAsZeroTime() {
         assertEquals("00:00:000", ClockDisplayFormatter.format(0));
     }
+
+    @Test
+    @DisplayName("Formats milliseconds correctly")
+    void formatsMillisecondsCorrectly() {
+        assertEquals("00:00:999", ClockDisplayFormatter.format(999));
+    }
 }
