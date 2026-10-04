@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ClockDisplayFormatterTest {
     @Test
@@ -22,5 +23,11 @@ class ClockDisplayFormatterTest {
         String expected = "99:99:999";
 
         assertEquals(expected, clockFormattedString);
+    }
+
+    @Test
+    @DisplayName("Throws IllegalArgumentException if the parameter is negative")
+    void throwsIllegalArgumentExceptionIfTheParameterIsNegative() {
+        assertThrows(IllegalArgumentException.class, () -> ClockDisplayFormatter.format(-133767L));
     }
 }
