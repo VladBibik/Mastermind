@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ConsoleColoredValidSymbolsTest {
     @Test
-    @DisplayName("Returns a correct string of valid symbols")
-    void returnsValidSymbols() {
+    @DisplayName("Returns colored valid symbols")
+    void returnsColoredValidSymbols() {
         assertEquals(
                 ConsoleColor.BRIGHT_RED.getCode() + "r "
                         + ConsoleColor.BRIGHT_GREEN.getCode() + "g "
