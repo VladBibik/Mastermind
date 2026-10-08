@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ConsoleCompatibleValidSymbolsTest {
     @Test
     @DisplayName("Returns correct compatible valid symbols")
-    void returnsCorrectCompatibleValidSymbols() {
+    void returnsCorrectCompatibleSymbols() {
         String expected = "r g y b p w";
 
         assertEquals(expected, ConsoleCompatibleValidSymbols.getSymbols());
