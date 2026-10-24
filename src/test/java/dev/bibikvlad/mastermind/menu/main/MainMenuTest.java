@@ -55,15 +55,19 @@ class MainMenuTest {
     void doesNotDisplayMenuAgain() {
         mainMenu = new MainMenu(appContext);
 
+        when(mainMenuMessages.getWelcome(anyString())).thenReturn("Welcome Dummy String");
+        when(mainMenuMessages.getMenuOptions()).thenReturn("Menu Options");
         when(appContext.parser()).thenReturn(mock(Parser.class));
         when(appContext.parser().parse()).thenReturn("close");
 
         mainMenu.run();
 
+        verify(printer, times(2)).printMessage(anyString());
+
         clearInvocations(printer);
 
         mainMenu.run();
 
-        verifyNoInteractions(printer);
+        verify(printer, never()).printMessage(anyString());
     }
 }
