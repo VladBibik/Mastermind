@@ -62,8 +62,7 @@ class MainMenuTest {
     void doesNotDisplayMenuAgain() {
         mainMenu = new MainMenu(appContext);
 
-        when(mainMenuMessages.getWelcome(anyString())).thenReturn("Welcome Dummy String");
-        when(mainMenuMessages.getMenuOptions()).thenReturn("Menu Options");
+        setUpDisplayMenuMessages();
         when(appContext.parser().parse()).thenReturn("close");
 
         mainMenu.run();
@@ -82,12 +81,16 @@ class MainMenuTest {
     void launchesGame() {
         mainMenu = new MainMenu(appContext);
 
+        setUpDisplayMenuMessages();
         when(appContext.services()).thenReturn(mock(ServiceContainer.class));
         when(appContext.services().getGamesService()).thenReturn(mock(GamesService.class));
-        when(mainMenuMessages.getWelcome(anyString())).thenReturn("Welcome Dummy String");
-        when(mainMenuMessages.getMenuOptions()).thenReturn("Menu Options");
         when(appContext.parser().parse()).thenReturn("1");
 
         assertEquals(GameLaunchMenu.class, mainMenu.run().getClass());
+    }
+
+    private void setUpDisplayMenuMessages() {
+        when(mainMenuMessages.getWelcome(anyString())).thenReturn("Welcome Dummy String");
+        when(mainMenuMessages.getMenuOptions()).thenReturn("Menu Options");
     }
 }
