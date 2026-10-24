@@ -56,7 +56,7 @@ class MainMenuTest {
         mainMenu = new MainMenu(appContext);
 
         when(appContext.parser()).thenReturn(mock(Parser.class));
-        when(appContext.parser().parse()).thenReturn("Dummy");
+        when(appContext.parser().parse()).thenReturn("close");
 
         mainMenu.run();
 
