@@ -38,13 +38,16 @@ class MainMenuTest {
     @Mock
     private Printer printer;
 
+    @Mock
+    private Parser parser;
+
     private MainMenu mainMenu;
 
     @BeforeEach
     void setUp() {
         when(appContext.currentPlayer()).thenReturn(currentPlayer);
         when(appContext.printer()).thenReturn(printer);
-        when(appContext.parser()).thenReturn(mock(Parser.class));
+        when(appContext.parser()).thenReturn(mock(parser));
         when(appContext.localizationContext()).thenReturn(localizationContext);
         when(appContext.localizationContext().getMessages(MessageType.INTERACTION)).thenReturn(interactionMessages);
         when(appContext.localizationContext().getMessages(MessageType.MAIN_MENU)).thenReturn(mainMenuMessages);
@@ -57,7 +60,6 @@ class MainMenuTest {
 
         when(mainMenuMessages.getWelcome(anyString())).thenReturn("Welcome Dummy String");
         when(mainMenuMessages.getMenuOptions()).thenReturn("Menu Options");
-        when(appContext.parser()).thenReturn(mock(Parser.class));
         when(appContext.parser().parse()).thenReturn("close");
 
         mainMenu.run();
