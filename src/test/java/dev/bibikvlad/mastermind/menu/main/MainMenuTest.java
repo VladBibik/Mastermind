@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.menu.main;
 
+import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
 import dev.bibikvlad.mastermind.app.context.AppContext;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.parser.Parser;
@@ -9,6 +10,7 @@ import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMes
 import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;
 import dev.bibikvlad.mastermind.menu.main.game.GameLaunchMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
+import dev.bibikvlad.mastermind.services.GamesService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,10 +34,10 @@ class MainMenuTest {
     private LocalizationContext localizationContext;
 
     @Mock
-    InteractionMessages interactionMessages;
+    private InteractionMessages interactionMessages;
 
     @Mock
-    MainMenuMessages mainMenuMessages;
+    private MainMenuMessages mainMenuMessages;
 
     @Mock
     private Printer printer;
@@ -73,5 +75,19 @@ class MainMenuTest {
         mainMenu.run();
 
         verify(printer, never()).printMessage(anyString());
+    }
+
+    @Test
+    @DisplayName("Launches the game")
+    void launchesGame() {
+        mainMenu = new MainMenu(appContext);
+
+        when(appContext.services()).thenReturn(mock(ServiceContainer.class));
+        when(appContext.services().getGamesService()).thenReturn(mock(GamesService.class));
+        when(mainMenuMessages.getWelcome(anyString())).thenReturn("Welcome Dummy String");
+        when(mainMenuMessages.getMenuOptions()).thenReturn("Menu Options");
+        when(appContext.parser().parse()).thenReturn("1");
+
+        assertEquals(GameLaunchMenu.class, mainMenu.run().getClass());
     }
 }
