@@ -53,8 +53,8 @@ class MainMenuTest {
         when(appContext.printer()).thenReturn(printer);
         when(appContext.parser()).thenReturn(parser);
         when(appContext.localizationContext()).thenReturn(localizationContext);
-        when(appContext.localizationContext().getMessages(MessageType.INTERACTION)).thenReturn(interactionMessages);
-        when(appContext.localizationContext().getMessages(MessageType.MAIN_MENU)).thenReturn(mainMenuMessages);
+        when(localizationContext.getMessages(MessageType.INTERACTION)).thenReturn(interactionMessages);
+        when(localizationContext.getMessages(MessageType.MAIN_MENU)).thenReturn(mainMenuMessages);
     }
 
     @Test
