@@ -9,8 +9,10 @@ import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;
 import dev.bibikvlad.mastermind.menu.main.game.GameLaunchMenu;
+import dev.bibikvlad.mastermind.menu.main.leaderboards.LeaderboardMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.GamesService;
+import dev.bibikvlad.mastermind.services.LeaderboardService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -87,7 +89,20 @@ class MainMenuTest {
         when(appContext.services().getGamesService()).thenReturn(mock(GamesService.class));
         when(appContext.parser().parse()).thenReturn("1");
 
-        assertInstanceOf(GameLaunchMenu.class, mainMenu.run().getClass());
+        assertInstanceOf(GameLaunchMenu.class, mainMenu.run());
+    }
+
+    @Test
+    @DisplayName("Launches leaderboard menu")
+    void launchesLeaderboardMenu() {
+        mainMenu = new MainMenu(appContext);
+
+        stubDisplayMenuMessages();
+        when(appContext.services()).thenReturn(mock(ServiceContainer.class));
+        when(appContext.services().getLeaderboardService()).thenReturn(mock(LeaderboardService.class));
+        when(appContext.parser().parse()).thenReturn("2");
+
+        assertInstanceOf(LeaderboardMenu.class, mainMenu.run());
     }
 
     private void stubDisplayMenuMessages() {
