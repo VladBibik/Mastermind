@@ -19,6 +19,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.when;
 
@@ -86,7 +87,7 @@ class MainMenuTest {
         when(appContext.services().getGamesService()).thenReturn(mock(GamesService.class));
         when(appContext.parser().parse()).thenReturn("1");
 
-        assertEquals(GameLaunchMenu.class, mainMenu.run().getClass());
+        assertInstanceOf(GameLaunchMenu.class, mainMenu.run().getClass());
     }
 
     private void stubDisplayMenuMessages() {
