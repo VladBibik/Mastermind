@@ -62,7 +62,7 @@ class MainMenuTest {
     void doesNotDisplayMenuAgain() {
         mainMenu = new MainMenu(appContext);
 
-        setUpDisplayMenuMessages();
+        stubDisplayMenuMessages();
         when(appContext.parser().parse()).thenReturn("close");
 
         mainMenu.run();
@@ -81,7 +81,7 @@ class MainMenuTest {
     void launchesGame() {
         mainMenu = new MainMenu(appContext);
 
-        setUpDisplayMenuMessages();
+        stubDisplayMenuMessages();
         when(appContext.services()).thenReturn(mock(ServiceContainer.class));
         when(appContext.services().getGamesService()).thenReturn(mock(GamesService.class));
         when(appContext.parser().parse()).thenReturn("1");
@@ -89,7 +89,7 @@ class MainMenuTest {
         assertEquals(GameLaunchMenu.class, mainMenu.run().getClass());
     }
 
-    private void setUpDisplayMenuMessages() {
+    private void stubDisplayMenuMessages() {
         when(mainMenuMessages.getWelcome(anyString())).thenReturn("Welcome Dummy String");
         when(mainMenuMessages.getMenuOptions()).thenReturn("Menu Options");
     }
