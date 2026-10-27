@@ -85,16 +85,16 @@ public class MainMenu extends Menu {
         return new GameLaunchMenu(appContext);
     }
 
-    private Menu profileMenu() {
-        return new ProfileMenu(appContext);
+    private Menu leaderboards() {
+        return new LeaderboardMenu(appContext);
     }
 
     private Menu stats() {
         return new StatsMenu(appContext);
     }
 
-    private Menu leaderboards() {
-        return new LeaderboardMenu(appContext);
+    private Menu profileMenu() {
+        return new ProfileMenu(appContext);
     }
 
     private Menu settings() {
