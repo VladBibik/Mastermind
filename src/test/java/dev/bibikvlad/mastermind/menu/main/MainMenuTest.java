@@ -11,6 +11,7 @@ import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages
 import dev.bibikvlad.mastermind.menu.main.game.GameLaunchMenu;
 import dev.bibikvlad.mastermind.menu.main.leaderboards.LeaderboardMenu;
 import dev.bibikvlad.mastermind.menu.main.profile.ProfileMenu;
+import dev.bibikvlad.mastermind.menu.main.settings.SettingsMenu;
 import dev.bibikvlad.mastermind.menu.main.stats.StatsMenu;
 import dev.bibikvlad.mastermind.model.player.Player;
 import dev.bibikvlad.mastermind.services.GamesService;
@@ -127,6 +128,18 @@ class MainMenuTest {
         when(appContext.parser().parse()).thenReturn("4");
 
         assertInstanceOf(ProfileMenu.class, mainMenu.run());
+    }
+
+    @Test
+    @DisplayName("Launches settings menu")
+    void launchesSettingsMenu() {
+        mainMenu = new MainMenu(appContext);
+
+        stubDisplayMenuMessages();
+        when(appContext.services()).thenReturn(mock(ServiceContainer.class));
+        when(appContext.parser().parse()).thenReturn("5");
+
+        assertInstanceOf(SettingsMenu.class, mainMenu.run());
     }
 
     private void stubDisplayMenuMessages() {
