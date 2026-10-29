@@ -8,6 +8,7 @@ import dev.bibikvlad.mastermind.localization.config.MessageType;
 import dev.bibikvlad.mastermind.localization.core.LocalizationContext;
 import dev.bibikvlad.mastermind.localization.messages.interaction.InteractionMessages;
 import dev.bibikvlad.mastermind.localization.messages.menu.main.MainMenuMessages;
+import dev.bibikvlad.mastermind.menu.core.ExitMenu;
 import dev.bibikvlad.mastermind.menu.main.game.GameLaunchMenu;
 import dev.bibikvlad.mastermind.menu.main.leaderboards.LeaderboardMenu;
 import dev.bibikvlad.mastermind.menu.main.profile.ProfileMenu;
@@ -140,6 +141,17 @@ class MainMenuTest {
         when(appContext.parser().parse()).thenReturn("5");
 
         assertInstanceOf(SettingsMenu.class, mainMenu.run());
+    }
+
+    @Test
+    @DisplayName("0 input launches ExitMenu subsequently leading to the program shut down")
+    void zeroValueReturnsExitMenu() {
+        mainMenu = new MainMenu(appContext);
+
+        stubDisplayMenuMessages();
+        when(appContext.parser().parse()).thenReturn("0");
+
+        assertInstanceOf(ExitMenu.class, mainMenu.run());
     }
 
     private void stubDisplayMenuMessages() {
