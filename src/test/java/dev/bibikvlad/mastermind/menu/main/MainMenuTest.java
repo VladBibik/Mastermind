@@ -55,6 +55,7 @@ class MainMenuTest {
     @BeforeEach
     void setUp() {
         when(appContext.currentPlayer()).thenReturn(currentPlayer);
+        when(currentPlayer.getPlayerName()).thenReturn("TestPlayer");
         when(appContext.printer()).thenReturn(printer);
         when(appContext.parser()).thenReturn(parser);
         when(appContext.localizationContext()).thenReturn(localizationContext);
