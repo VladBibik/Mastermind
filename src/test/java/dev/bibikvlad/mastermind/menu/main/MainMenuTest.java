@@ -60,6 +60,10 @@ class MainMenuTest {
         when(appContext.printer()).thenReturn(printer);
         when(appContext.parser()).thenReturn(parser);
 
+        lenient().when(appContext.services()).thenReturn(mock(ServiceContainer.class));
+        lenient().when(appContext.services().getGamesService()).thenReturn(mock(GamesService.class));
+        lenient().when(appContext.services().getLeaderboardService()).thenReturn(mock(LeaderboardService.class));
+
         when(appContext.localizationContext()).thenReturn(localizationContext);
         when(localizationContext.getMessages(MessageType.INTERACTION)).thenReturn(interactionMessages);
 
@@ -91,8 +95,6 @@ class MainMenuTest {
     void launchesGame() {
         mainMenu = new MainMenu(appContext);
 
-        when(appContext.services()).thenReturn(mock(ServiceContainer.class));
-        when(appContext.services().getGamesService()).thenReturn(mock(GamesService.class));
         when(appContext.parser().parse()).thenReturn("1");
 
         assertInstanceOf(GameLaunchMenu.class, mainMenu.run());
@@ -103,8 +105,6 @@ class MainMenuTest {
     void launchesLeaderboardMenu() {
         mainMenu = new MainMenu(appContext);
 
-        when(appContext.services()).thenReturn(mock(ServiceContainer.class));
-        when(appContext.services().getLeaderboardService()).thenReturn(mock(LeaderboardService.class));
         when(appContext.parser().parse()).thenReturn("2");
 
         assertInstanceOf(LeaderboardMenu.class, mainMenu.run());
@@ -115,7 +115,6 @@ class MainMenuTest {
     void launchesStatsMenu() {
         mainMenu = new MainMenu(appContext);
 
-        when(appContext.services()).thenReturn(mock(ServiceContainer.class));
         when(appContext.parser().parse()).thenReturn("3");
 
         assertInstanceOf(StatsMenu.class, mainMenu.run());
@@ -126,7 +125,6 @@ class MainMenuTest {
     void launchesProfileMenu() {
         mainMenu = new MainMenu(appContext);
 
-        when(appContext.services()).thenReturn(mock(ServiceContainer.class));
         when(appContext.parser().parse()).thenReturn("4");
 
         assertInstanceOf(ProfileMenu.class, mainMenu.run());
@@ -137,7 +135,6 @@ class MainMenuTest {
     void launchesSettingsMenu() {
         mainMenu = new MainMenu(appContext);
 
-        when(appContext.services()).thenReturn(mock(ServiceContainer.class));
         when(appContext.parser().parse()).thenReturn("5");
 
         assertInstanceOf(SettingsMenu.class, mainMenu.run());
