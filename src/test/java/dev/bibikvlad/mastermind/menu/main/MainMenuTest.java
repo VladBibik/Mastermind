@@ -2,6 +2,7 @@ package dev.bibikvlad.mastermind.menu.main;
 
 import dev.bibikvlad.mastermind.app.bootstrap.ServiceContainer;
 import dev.bibikvlad.mastermind.app.context.AppContext;
+import dev.bibikvlad.mastermind.app.printer.AnsiSafeFormatter;
 import dev.bibikvlad.mastermind.app.printer.Printer;
 import dev.bibikvlad.mastermind.input.parser.Parser;
 import dev.bibikvlad.mastermind.localization.config.MessageType;
@@ -86,6 +87,21 @@ class MainMenuTest {
         assertSame(mainMenu, mainMenu.run());
 
         verify(interactionMessages, times(1)).getInvalidInput();
+    }
+
+    @Test
+    @DisplayName("Displays current player's name on welcome message")
+    void displaysCurrentPlayerNameOnWelcomeMessage() {
+        String currentPlayerName = currentPlayer.getPlayerName();
+        String welcomeMessage = "Welcome: " + currentPlayerName;
+
+        when(parser.parse()).thenReturn("close");
+        when(mainMenuMessages.getWelcome(anyString())).thenReturn(welcomeMessage);
+
+        mainMenu.run();
+
+        verify(mainMenuMessages, times(1))
+                .getWelcome(AnsiSafeFormatter.isolate(currentPlayerName));
     }
 
     @Test
