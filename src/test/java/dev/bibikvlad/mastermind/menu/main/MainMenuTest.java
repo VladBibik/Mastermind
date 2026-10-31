@@ -25,6 +25,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -72,6 +73,19 @@ class MainMenuTest {
         when(mainMenuMessages.getMenuOptions()).thenReturn("Menu Options");
 
         mainMenu = new MainMenu(appContext);
+    }
+
+    @Test
+    @DisplayName("Returns MainMenu on invalid input")
+    void returnsMainMenuOnInvalidInput() {
+        String invalidMessage = "Invalid Input";
+
+        when(interactionMessages.getInvalidInput()).thenReturn(invalidMessage);
+        when(parser.parse()).thenReturn("invalid input");
+
+        assertSame(mainMenu, mainMenu.run());
+
+        verify(interactionMessages, times(1)).getInvalidInput();
     }
 
     @Test
