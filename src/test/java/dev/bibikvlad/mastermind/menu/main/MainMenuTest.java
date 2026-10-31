@@ -41,6 +41,9 @@ class MainMenuTest {
     private LocalizationContext localizationContext;
 
     @Mock
+    private ServiceContainer serviceContainer;
+
+    @Mock
     private InteractionMessages interactionMessages;
 
     @Mock
@@ -62,7 +65,7 @@ class MainMenuTest {
         when(appContext.printer()).thenReturn(printer);
         when(appContext.parser()).thenReturn(parser);
 
-        lenient().when(appContext.services()).thenReturn(mock(ServiceContainer.class));
+        when(appContext.services()).thenReturn(serviceContainer);
         lenient().when(appContext.services().getGamesService()).thenReturn(mock(GamesService.class));
         lenient().when(appContext.services().getLeaderboardService()).thenReturn(mock(LeaderboardService.class));
 
