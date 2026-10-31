@@ -70,13 +70,13 @@ class MainMenuTest {
         when(localizationContext.getMessages(MessageType.MAIN_MENU)).thenReturn(mainMenuMessages);
         when(mainMenuMessages.getWelcome(anyString())).thenReturn("Welcome Dummy String");
         when(mainMenuMessages.getMenuOptions()).thenReturn("Menu Options");
+
+        mainMenu = new MainMenu(appContext);
     }
 
     @Test
     @DisplayName("Displays menu only once")
     void displaysMenuOnlyOnce() {
-        mainMenu = new MainMenu(appContext);
-
         when(appContext.parser().parse()).thenReturn("close");
 
         mainMenu.run();
@@ -93,8 +93,6 @@ class MainMenuTest {
     @Test
     @DisplayName("Launches the game")
     void launchesGame() {
-        mainMenu = new MainMenu(appContext);
-
         when(appContext.parser().parse()).thenReturn("1");
 
         assertInstanceOf(GameLaunchMenu.class, mainMenu.run());
@@ -103,8 +101,6 @@ class MainMenuTest {
     @Test
     @DisplayName("Launches leaderboard menu")
     void launchesLeaderboardMenu() {
-        mainMenu = new MainMenu(appContext);
-
         when(appContext.parser().parse()).thenReturn("2");
 
         assertInstanceOf(LeaderboardMenu.class, mainMenu.run());
@@ -113,8 +109,6 @@ class MainMenuTest {
     @Test
     @DisplayName("Launches stats menu")
     void launchesStatsMenu() {
-        mainMenu = new MainMenu(appContext);
-
         when(appContext.parser().parse()).thenReturn("3");
 
         assertInstanceOf(StatsMenu.class, mainMenu.run());
@@ -123,8 +117,6 @@ class MainMenuTest {
     @Test
     @DisplayName("Launches profile menu")
     void launchesProfileMenu() {
-        mainMenu = new MainMenu(appContext);
-
         when(appContext.parser().parse()).thenReturn("4");
 
         assertInstanceOf(ProfileMenu.class, mainMenu.run());
@@ -133,8 +125,6 @@ class MainMenuTest {
     @Test
     @DisplayName("Launches settings menu")
     void launchesSettingsMenu() {
-        mainMenu = new MainMenu(appContext);
-
         when(appContext.parser().parse()).thenReturn("5");
 
         assertInstanceOf(SettingsMenu.class, mainMenu.run());
@@ -143,8 +133,6 @@ class MainMenuTest {
     @Test
     @DisplayName("0 input launches ExitMenu subsequently leading to the program shut down")
     void zeroValueReturnsExitMenu() {
-        mainMenu = new MainMenu(appContext);
-
         when(appContext.parser().parse()).thenReturn("0");
 
         assertInstanceOf(ExitMenu.class, mainMenu.run());
