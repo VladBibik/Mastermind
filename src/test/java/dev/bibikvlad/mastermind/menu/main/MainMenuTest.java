@@ -73,8 +73,8 @@ class MainMenuTest {
     }
 
     @Test
-    @DisplayName("Does not display the menu again")
-    void doesNotDisplayMenuAgain() {
+    @DisplayName("Displays menu only once")
+    void displaysMenuOnlyOnce() {
         mainMenu = new MainMenu(appContext);
 
         when(appContext.parser().parse()).thenReturn("close");
