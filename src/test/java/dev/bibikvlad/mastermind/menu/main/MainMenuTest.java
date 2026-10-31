@@ -105,6 +105,20 @@ class MainMenuTest {
     }
 
     @Test
+    @DisplayName("Doesn't display menu on the second invalid input")
+    void doesNotDisplayMenuOnInvalidInput() {
+        when(parser.parse()).thenReturn("invalid input one");
+
+        mainMenu.run();
+
+        when(parser.parse()).thenReturn("invalid input two");
+
+        mainMenu.run();
+
+        verify(mainMenuMessages, times(1)).getMenuOptions();
+    }
+
+    @Test
     @DisplayName("Displays menu only once")
     void displaysMenuOnlyOnce() {
         when(appContext.parser().parse()).thenReturn("close");
