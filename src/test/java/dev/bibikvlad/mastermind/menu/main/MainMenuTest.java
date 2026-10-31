@@ -56,11 +56,16 @@ class MainMenuTest {
     void setUp() {
         when(appContext.currentPlayer()).thenReturn(currentPlayer);
         when(currentPlayer.getPlayerName()).thenReturn("TestPlayer");
+
         when(appContext.printer()).thenReturn(printer);
         when(appContext.parser()).thenReturn(parser);
+
         when(appContext.localizationContext()).thenReturn(localizationContext);
         when(localizationContext.getMessages(MessageType.INTERACTION)).thenReturn(interactionMessages);
+
         when(localizationContext.getMessages(MessageType.MAIN_MENU)).thenReturn(mainMenuMessages);
+        when(mainMenuMessages.getWelcome(anyString())).thenReturn("Welcome Dummy String");
+        when(mainMenuMessages.getMenuOptions()).thenReturn("Menu Options");
     }
 
     @Test
@@ -68,7 +73,6 @@ class MainMenuTest {
     void doesNotDisplayMenuAgain() {
         mainMenu = new MainMenu(appContext);
 
-        stubDisplayMenuMessages();
         when(appContext.parser().parse()).thenReturn("close");
 
         mainMenu.run();
@@ -87,7 +91,6 @@ class MainMenuTest {
     void launchesGame() {
         mainMenu = new MainMenu(appContext);
 
-        stubDisplayMenuMessages();
         when(appContext.services()).thenReturn(mock(ServiceContainer.class));
         when(appContext.services().getGamesService()).thenReturn(mock(GamesService.class));
         when(appContext.parser().parse()).thenReturn("1");
@@ -100,7 +103,6 @@ class MainMenuTest {
     void launchesLeaderboardMenu() {
         mainMenu = new MainMenu(appContext);
 
-        stubDisplayMenuMessages();
         when(appContext.services()).thenReturn(mock(ServiceContainer.class));
         when(appContext.services().getLeaderboardService()).thenReturn(mock(LeaderboardService.class));
         when(appContext.parser().parse()).thenReturn("2");
@@ -113,7 +115,6 @@ class MainMenuTest {
     void launchesStatsMenu() {
         mainMenu = new MainMenu(appContext);
 
-        stubDisplayMenuMessages();
         when(appContext.services()).thenReturn(mock(ServiceContainer.class));
         when(appContext.parser().parse()).thenReturn("3");
 
@@ -125,7 +126,6 @@ class MainMenuTest {
     void launchesProfileMenu() {
         mainMenu = new MainMenu(appContext);
 
-        stubDisplayMenuMessages();
         when(appContext.services()).thenReturn(mock(ServiceContainer.class));
         when(appContext.parser().parse()).thenReturn("4");
 
@@ -137,7 +137,6 @@ class MainMenuTest {
     void launchesSettingsMenu() {
         mainMenu = new MainMenu(appContext);
 
-        stubDisplayMenuMessages();
         when(appContext.services()).thenReturn(mock(ServiceContainer.class));
         when(appContext.parser().parse()).thenReturn("5");
 
@@ -149,14 +148,8 @@ class MainMenuTest {
     void zeroValueReturnsExitMenu() {
         mainMenu = new MainMenu(appContext);
 
-        stubDisplayMenuMessages();
         when(appContext.parser().parse()).thenReturn("0");
 
         assertInstanceOf(ExitMenu.class, mainMenu.run());
-    }
-
-    private void stubDisplayMenuMessages() {
-        when(mainMenuMessages.getWelcome(anyString())).thenReturn("Welcome Dummy String");
-        when(mainMenuMessages.getMenuOptions()).thenReturn("Menu Options");
     }
 }
