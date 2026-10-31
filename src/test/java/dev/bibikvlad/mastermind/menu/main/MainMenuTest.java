@@ -65,10 +65,6 @@ class MainMenuTest {
         when(appContext.printer()).thenReturn(printer);
         when(appContext.parser()).thenReturn(parser);
 
-        when(appContext.services()).thenReturn(serviceContainer);
-        lenient().when(appContext.services().getGamesService()).thenReturn(mock(GamesService.class));
-        lenient().when(appContext.services().getLeaderboardService()).thenReturn(mock(LeaderboardService.class));
-
         when(appContext.localizationContext()).thenReturn(localizationContext);
         when(localizationContext.getMessages(MessageType.INTERACTION)).thenReturn(interactionMessages);
 
@@ -142,6 +138,9 @@ class MainMenuTest {
     void launchesGame() {
         when(appContext.parser().parse()).thenReturn("1");
 
+        when(appContext.services()).thenReturn(serviceContainer);
+        when(appContext.services().getGamesService()).thenReturn(mock(GamesService.class));
+
         assertInstanceOf(GameLaunchMenu.class, mainMenu.run());
     }
 
@@ -149,6 +148,9 @@ class MainMenuTest {
     @DisplayName("Launches leaderboard menu")
     void launchesLeaderboardMenu() {
         when(appContext.parser().parse()).thenReturn("2");
+
+        when(appContext.services()).thenReturn(serviceContainer);
+        when(appContext.services().getLeaderboardService()).thenReturn(mock(LeaderboardService.class));
 
         assertInstanceOf(LeaderboardMenu.class, mainMenu.run());
     }
@@ -158,6 +160,8 @@ class MainMenuTest {
     void launchesStatsMenu() {
         when(appContext.parser().parse()).thenReturn("3");
 
+        when(appContext.services()).thenReturn(serviceContainer);
+
         assertInstanceOf(StatsMenu.class, mainMenu.run());
     }
 
@@ -166,6 +170,8 @@ class MainMenuTest {
     void launchesProfileMenu() {
         when(appContext.parser().parse()).thenReturn("4");
 
+        when(appContext.services()).thenReturn(serviceContainer);
+
         assertInstanceOf(ProfileMenu.class, mainMenu.run());
     }
 
@@ -173,6 +179,8 @@ class MainMenuTest {
     @DisplayName("Launches settings menu")
     void launchesSettingsMenu() {
         when(appContext.parser().parse()).thenReturn("5");
+
+        when(appContext.services()).thenReturn(serviceContainer);
 
         assertInstanceOf(SettingsMenu.class, mainMenu.run());
     }
