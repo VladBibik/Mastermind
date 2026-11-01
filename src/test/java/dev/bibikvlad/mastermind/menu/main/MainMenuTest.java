@@ -86,6 +86,7 @@ class MainMenuTest {
         assertSame(mainMenu, mainMenu.run());
 
         verify(interactionMessages, times(1)).getInvalidInput();
+        verify(printer).printMessage(invalidMessage);
     }
 
     @Test
