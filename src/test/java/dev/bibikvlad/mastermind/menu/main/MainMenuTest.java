@@ -107,10 +107,10 @@ class MainMenuTest {
         when(parser.parse()).thenReturn("first", "second");
 
         mainMenu.run();
-
         mainMenu.run();
 
-        verify(mainMenuMessages, times(1)).getMenuOptions();
+        verify(mainMenuMessages).getWelcome(anyString());
+        verify(mainMenuMessages).getMenuOptions();
     }
 
     @Test
