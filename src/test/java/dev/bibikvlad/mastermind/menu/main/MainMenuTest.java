@@ -92,10 +92,8 @@ class MainMenuTest {
     @DisplayName("Displays current player's name on welcome message")
     void displaysCurrentPlayerNameOnWelcomeMessage() {
         String currentPlayerName = currentPlayer.getPlayerName();
-        String welcomeMessage = "Welcome: " + currentPlayerName;
 
         when(parser.parse()).thenReturn("close");
-        when(mainMenuMessages.getWelcome(anyString())).thenReturn(welcomeMessage);
 
         mainMenu.run();
 
