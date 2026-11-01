@@ -104,11 +104,9 @@ class MainMenuTest {
     @Test
     @DisplayName("Doesn't display menu on the second invalid input")
     void doesNotDisplayMenuOnInvalidInput() {
-        when(parser.parse()).thenReturn("invalid input one");
+        when(parser.parse()).thenReturn("first", "second");
 
         mainMenu.run();
-
-        when(parser.parse()).thenReturn("invalid input two");
 
         mainMenu.run();
 
