@@ -90,7 +90,7 @@ class MainMenuTest {
     }
 
     @Test
-    @DisplayName("Passes formatted player name to weclome message")
+    @DisplayName("Passes formatted player name to welcome message")
     void passesFormattedPlayerNameToWelcomeMessage() {
         String currentPlayerName = currentPlayer.getPlayerName();
 
