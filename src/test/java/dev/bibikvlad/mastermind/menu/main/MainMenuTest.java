@@ -90,8 +90,8 @@ class MainMenuTest {
     }
 
     @Test
-    @DisplayName("Displays current player's name on welcome message")
-    void displaysCurrentPlayerNameOnWelcomeMessage() {
+    @DisplayName("Passes formatted player name to weclome message")
+    void passesFormattedPlayerNameToWelcomeMessage() {
         String currentPlayerName = currentPlayer.getPlayerName();
 
         when(parser.parse()).thenReturn("close");
@@ -103,8 +103,8 @@ class MainMenuTest {
     }
 
     @Test
-    @DisplayName("Doesn't display menu on the second invalid input")
-    void doesNotDisplayMenuOnInvalidInput() {
+    @DisplayName("Doesn't redisplay menu after invalid input")
+    void doesNotRedisplayMenuAfterInvalidInput() {
         when(parser.parse()).thenReturn("first", "second");
 
         mainMenu.run();
@@ -131,8 +131,8 @@ class MainMenuTest {
     }
 
     @Test
-    @DisplayName("Launches the game")
-    void launchesGame() {
+    @DisplayName("Returns game launch menu")
+    void returnsGameLaunchMenu() {
         when(appContext.parser().parse()).thenReturn("1");
 
         when(appContext.services()).thenReturn(serviceContainer);
@@ -142,8 +142,8 @@ class MainMenuTest {
     }
 
     @Test
-    @DisplayName("Launches leaderboard menu")
-    void launchesLeaderboardMenu() {
+    @DisplayName("Returns leaderboard menu")
+    void returnsLeaderboardMenu() {
         when(appContext.parser().parse()).thenReturn("2");
 
         when(appContext.services()).thenReturn(serviceContainer);
@@ -153,8 +153,8 @@ class MainMenuTest {
     }
 
     @Test
-    @DisplayName("Launches stats menu")
-    void launchesStatsMenu() {
+    @DisplayName("Returns stats menu")
+    void returnsStatsMenu() {
         when(appContext.parser().parse()).thenReturn("3");
 
         when(appContext.services()).thenReturn(serviceContainer);
@@ -163,8 +163,8 @@ class MainMenuTest {
     }
 
     @Test
-    @DisplayName("Launches profile menu")
-    void launchesProfileMenu() {
+    @DisplayName("Returns profile menu")
+    void returnsProfileMenu() {
         when(appContext.parser().parse()).thenReturn("4");
 
         when(appContext.services()).thenReturn(serviceContainer);
@@ -173,8 +173,8 @@ class MainMenuTest {
     }
 
     @Test
-    @DisplayName("Launches settings menu")
-    void launchesSettingsMenu() {
+    @DisplayName("Returns settings menu")
+    void returnsSettingsMenu() {
         when(appContext.parser().parse()).thenReturn("5");
 
         when(appContext.services()).thenReturn(serviceContainer);
@@ -183,8 +183,8 @@ class MainMenuTest {
     }
 
     @Test
-    @DisplayName("0 input launches ExitMenu subsequently leading to the program shut down")
-    void zeroValueReturnsExitMenu() {
+    @DisplayName("Returns Exit menu when zero is selected")
+    void returnsExitMenuWhenZeroIsSelected() {
         when(appContext.parser().parse()).thenReturn("0");
 
         assertInstanceOf(ExitMenu.class, mainMenu.run());
