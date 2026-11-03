@@ -105,7 +105,7 @@ class MainMenuTest {
     @Test
     @DisplayName("Doesn't redisplay menu after invalid input")
     void doesNotRedisplayMenuAfterInvalidInput() {
-        when(parser.parse()).thenReturn("first", "second");
+        when(parser.parse()).thenReturn("invalid input", "another invalid input");
 
         mainMenu.run();
         mainMenu.run();
