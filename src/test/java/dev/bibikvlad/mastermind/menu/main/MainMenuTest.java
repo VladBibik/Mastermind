@@ -185,7 +185,7 @@ class MainMenuTest {
     @Test
     @DisplayName("Returns Exit menu when '0' is selected")
     void returnsExitMenuWhenZeroIsSelected() {
-        when(appContext.parser().parse()).thenReturn("close");
+        when(appContext.parser().parse()).thenReturn("0");
 
         assertInstanceOf(ExitMenu.class, mainMenu.run());
     }
