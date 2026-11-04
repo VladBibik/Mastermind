@@ -22,6 +22,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -188,5 +190,27 @@ class MainMenuTest {
         when(appContext.parser().parse()).thenReturn("0");
 
         assertInstanceOf(ExitMenu.class, mainMenu.run());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "invalid input",
+            "abc",
+            "-1",
+            "999",
+            "1.5",
+            "hello123"
+    })
+    @DisplayName("Returns MainMenu on invalid input")
+    void returnsMainMenuOnInvalidInput(String invalidInput) {
+        String invalidMessage = "Invalid Input";
+
+        when(interactionMessages.getInvalidInput()).thenReturn(invalidMessage);
+        when(parser.parse()).thenReturn(invalidInput);
+
+        assertSame(mainMenu, mainMenu.run());
+
+        verify(interactionMessages, times(1)).getInvalidInput();
+        verify(printer).printMessage(invalidMessage);
     }
 }
