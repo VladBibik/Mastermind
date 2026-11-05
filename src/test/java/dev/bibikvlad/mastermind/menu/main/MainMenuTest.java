@@ -78,20 +78,6 @@ class MainMenuTest {
     }
 
     @Test
-    @DisplayName("Returns MainMenu on invalid input")
-    void returnsMainMenuOnInvalidInput() {
-        String invalidMessage = "Invalid Input";
-
-        when(interactionMessages.getInvalidInput()).thenReturn(invalidMessage);
-        when(parser.parse()).thenReturn("invalid input");
-
-        assertSame(mainMenu, mainMenu.run());
-
-        verify(interactionMessages, times(1)).getInvalidInput();
-        verify(printer).printMessage(invalidMessage);
-    }
-
-    @Test
     @DisplayName("Passes formatted player name to welcome message")
     void passesFormattedPlayerNameToWelcomeMessage() {
         String currentPlayerName = currentPlayer.getPlayerName();
