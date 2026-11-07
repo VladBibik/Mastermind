@@ -98,8 +98,10 @@ class MainMenuTest {
         mainMenu.run();
         mainMenu.run();
 
-        verify(mainMenuMessages).getWelcome(anyString());
-        verify(mainMenuMessages).getMenuOptions();
+        verify(mainMenuMessages, times(1)).getWelcome(anyString());
+        verify(mainMenuMessages, times(1)).getMenuOptions();
+
+        verify(printer, times(4)).printMessage(anyString());
     }
 
     @Test
