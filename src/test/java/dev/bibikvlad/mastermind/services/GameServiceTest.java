@@ -31,7 +31,7 @@ class GamesServiceTest {
 
     @Test
     @DisplayName("Saves game data provided by NewGame object")
-    void savesDataProvidedByParameter() {
+    void savesGameDataProvidedByNewGame() {
         NewGame newGame = new NewGame(
                 1L,
                 new GameData(
