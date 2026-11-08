@@ -30,7 +30,7 @@ class GamesServiceTest {
     }
 
     @Test
-    @DisplayName("Saves data provided by NewGame object")
+    @DisplayName("Saves game data provided by NewGame object")
     void savesDataProvidedByParameter() {
         NewGame newGame = new NewGame(
                 1L,
@@ -44,5 +44,18 @@ class GamesServiceTest {
         assertTrue(gamesService.save(newGame));
 
         verify(gamesRepository).save(newGame.playerId(), newGame.gameData());
+    }
+
+    @Test
+    @DisplayName("Saves game data provided by GameData and playerId params")
+    void savesDataProvidedByTwoParameters() {
+        long playerId = 7L;
+        GameData gameData = new GameData(new GameOutcome(10, GameResult.WIN), 1337);
+
+        when(gamesRepository.save(playerId, gameData)).thenReturn(true);
+
+        assertTrue(gamesService.save(playerId, gameData));
+
+        verify(gamesRepository).save(playerId, gameData);
     }
 }
