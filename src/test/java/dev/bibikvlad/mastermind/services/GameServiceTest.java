@@ -94,10 +94,10 @@ class GamesServiceTest {
     @DisplayName("Returns max number of games played by a player")
     void returnsMaxGamesPlayedByPlayer() {
         int maxGames = 777;
-        when(gamesRepository.getMaxGamesPlayedByPlayer()).thenReturn(maxGames);
+        when(gamesRepository.getMaxGamesPlayedByAnyPlayer()).thenReturn(maxGames);
 
         assertEquals(maxGames, gamesService.getMaxGamesPlayedByPlayer());
 
-        verify(gamesRepository).getMaxGamesPlayedByPlayer();
+        verify(gamesRepository).getMaxGamesPlayedByAnyPlayer();
     }
 }

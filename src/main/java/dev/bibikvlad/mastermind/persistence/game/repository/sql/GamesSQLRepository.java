@@ -62,7 +62,7 @@ public class GamesSQLRepository implements GamesRepository {
     }
 
     @Override
-    public int getMaxGamesPlayedByPlayer() {
+    public int getMaxGamesPlayedByAnyPlayer() {
         return gamesDAO.getMaxGamesPlayedByPlayer();
     }
 }

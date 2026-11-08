@@ -20,6 +20,6 @@ public class GamesService {
     }
 
     public int getMaxGamesPlayedByPlayer() {
-        return gamesRepository.getMaxGamesPlayedByPlayer();
+        return gamesRepository.getMaxGamesPlayedByAnyPlayer();
     }
 }
