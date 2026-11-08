@@ -171,7 +171,7 @@ public class LeaderboardMenu extends Menu {
     private Menu handleWinPercentageSelection() {
         final int minGamesForPercentage = 10;
 
-        int maxGamesPlayedByPlayer = gamesService.getMaxGamesPlayedByPlayer();
+        int maxGamesPlayedByPlayer = gamesService.getMaxGamesPlayedByAnyPlayer();
 
         if (maxGamesPlayedByPlayer >= minGamesForPercentage) {
             return new WinPercentageLeaderboardMenu(appContext, maxGamesPlayedByPlayer);

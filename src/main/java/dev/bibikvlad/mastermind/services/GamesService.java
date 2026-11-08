@@ -19,7 +19,7 @@ public class GamesService {
         return gamesRepository.save(newGame.playerId(), newGame.gameData());
     }
 
-    public int getMaxGamesPlayedByPlayer() {
+    public int getMaxGamesPlayedByAnyPlayer() {
         return gamesRepository.getMaxGamesPlayedByAnyPlayer();
     }
 }

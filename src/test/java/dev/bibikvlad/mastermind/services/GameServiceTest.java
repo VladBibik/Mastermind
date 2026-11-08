@@ -96,7 +96,7 @@ class GamesServiceTest {
         int maxGames = 777;
         when(gamesRepository.getMaxGamesPlayedByAnyPlayer()).thenReturn(maxGames);
 
-        assertEquals(maxGames, gamesService.getMaxGamesPlayedByPlayer());
+        assertEquals(maxGames, gamesService.getMaxGamesPlayedByAnyPlayer());
 
         verify(gamesRepository).getMaxGamesPlayedByAnyPlayer();
     }
