@@ -52,13 +52,29 @@ class GamesServiceTest {
 
     @Test
     @DisplayName("Saves game data provided by GameData and playerId params")
-    void savesDataProvidedByTwoParameters() {
+    void savesGameDataProvidedByPlayerIdAndGameData() {
         long playerId = 7L;
         GameData gameData = new GameData(new GameOutcome(10, GameResult.WIN), 1337);
 
         when(gamesRepository.save(playerId, gameData)).thenReturn(true);
 
         assertTrue(gamesService.save(playerId, gameData));
+
+        verify(gamesRepository).save(playerId, gameData);
+    }
+
+    @Test
+    @DisplayName("Returns false when repository fails to save game data")
+    void returnsFalseWhenRepositoryFailsToSaveGameData() {
+        long playerId = 7L;
+        GameData gameData = new GameData(
+                new GameOutcome(10, GameResult.WIN),
+                1337
+        );
+
+        when(gamesRepository.save(playerId, gameData)).thenReturn(false);
+
+        assertFalse(gamesService.save(playerId, gameData));
 
         verify(gamesRepository).save(playerId, gameData);
     }
