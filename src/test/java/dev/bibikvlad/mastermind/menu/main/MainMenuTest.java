@@ -94,6 +94,7 @@ class MainMenuTest {
     @DisplayName("Doesn't redisplay menu after invalid input")
     void doesNotRedisplayMenuAfterInvalidInput() {
         when(parser.parse()).thenReturn("invalid input", "another invalid input");
+        when(interactionMessages.getInvalidInput()).thenReturn("invalid input message");
 
         mainMenu.run();
         mainMenu.run();
@@ -101,7 +102,7 @@ class MainMenuTest {
         verify(mainMenuMessages, times(1)).getWelcome(anyString());
         verify(mainMenuMessages, times(1)).getMenuOptions();
 
-        verify(printer, times(2)).printMessage(anyString());
+        verify(printer, times(4)).printMessage(anyString());
     }
 
     @Test
