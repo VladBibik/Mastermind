@@ -12,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyByte;
@@ -57,5 +58,16 @@ class GamesServiceTest {
         assertTrue(gamesService.save(playerId, gameData));
 
         verify(gamesRepository).save(playerId, gameData);
+    }
+
+    @Test
+    @DisplayName("Returns max number of games played by a player")
+    void returnsMaxGamesPlayedByPlayer() {
+        int maxGames = 777;
+        when(gamesRepository.getMaxGamesPlayedByPlayer()).thenReturn(maxGames);
+
+        assertEquals(maxGames, gamesService.getMaxGamesPlayedByPlayer());
+
+        verify(gamesRepository).getMaxGamesPlayedByPlayer();
     }
 }
