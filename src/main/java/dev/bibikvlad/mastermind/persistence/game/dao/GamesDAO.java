@@ -16,5 +16,5 @@ public interface GamesDAO {
 
     int countByPlayerId(long playerId);
 
-    int getMaxGamesPlayedByPlayer();
+    int getMaxGamesPlayedByAnyPlayer();
 }
