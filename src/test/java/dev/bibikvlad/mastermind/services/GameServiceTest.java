@@ -12,10 +12,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class GamesServiceTest {
@@ -44,6 +42,12 @@ class GamesServiceTest {
         assertTrue(gamesService.save(newGame));
 
         verify(gamesRepository).save(newGame.playerId(), newGame.gameData());
+
+        when(gamesRepository.save(newGame.playerId(), newGame.gameData())).thenReturn(false);
+
+        assertFalse(gamesService.save(newGame));
+
+        verify(gamesRepository, times(2)).save(newGame.playerId(), newGame.gameData());
     }
 
     @Test
