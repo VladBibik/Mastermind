@@ -1,12 +1,19 @@
 package dev.bibikvlad.mastermind.persistance.game;
 
+import dev.bibikvlad.mastermind.model.game.Game;
 import dev.bibikvlad.mastermind.persistence.game.dao.jdbc.GameJdbcDAO;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GameJdbcDAOTest {
     private Connection connection;
@@ -28,5 +35,16 @@ public class GameJdbcDAOTest {
                     )
                     """);
         }
+
+        gameJdbcDAO = new GameJdbcDAO(connection);
+    }
+
+    @Test
+    @DisplayName("Should return an empty list when no games exist")
+    void findAllNoGamesReturnsEmptyList() {
+        List<Game> games = gameJdbcDAO.findAll();
+
+        assertNotNull(games);
+        assertTrue(games.isEmpty());
     }
 }
