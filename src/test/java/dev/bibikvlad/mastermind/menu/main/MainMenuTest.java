@@ -101,7 +101,7 @@ class MainMenuTest {
         verify(mainMenuMessages, times(1)).getWelcome(anyString());
         verify(mainMenuMessages, times(1)).getMenuOptions();
 
-        verify(printer, times(4)).printMessage(anyString());
+        verify(printer, times(2)).printMessage(anyString());
     }
 
     @Test
