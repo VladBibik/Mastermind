@@ -42,12 +42,23 @@ class GamesServiceTest {
         assertTrue(gamesService.save(newGame));
 
         verify(gamesRepository).save(newGame.playerId(), newGame.gameData());
+    }
+
+    @Test
+    @DisplayName("Fails to save game data provided by NewGame object")
+    void returnsFalseWhenRepositoryFailsToSaveNewGame() {
+        NewGame newGame = new NewGame(
+                1L,
+                new GameData(
+                        new GameOutcome(10, GameResult.WIN),
+                        1337)
+        );
 
         when(gamesRepository.save(newGame.playerId(), newGame.gameData())).thenReturn(false);
 
         assertFalse(gamesService.save(newGame));
 
-        verify(gamesRepository, times(2)).save(newGame.playerId(), newGame.gameData());
+        verify(gamesRepository).save(newGame.playerId(), newGame.gameData());
     }
 
     @Test
