@@ -1,15 +1,16 @@
 package dev.bibikvlad.mastermind.persistance.game;
 
+import dev.bibikvlad.mastermind.exceptions.PersistenceException;
+import dev.bibikvlad.mastermind.game.data.GameData;
+import dev.bibikvlad.mastermind.game.data.GameOutcome;
+import dev.bibikvlad.mastermind.game.data.GameResult;
 import dev.bibikvlad.mastermind.model.game.Game;
 import dev.bibikvlad.mastermind.persistence.game.dao.jdbc.GameJdbcDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -46,5 +47,25 @@ public class GameJdbcDAOTest {
 
         assertNotNull(games);
         assertTrue(games.isEmpty());
+    }
+
+    void insert(long playerId) {
+        GameData dummyGameData = new GameData(new GameOutcome(7, GameResult.WIN), 7777L);
+
+        String saveQuery = """
+                INSERT INTO games (player_id, duration_milliseconds, result, number_of_turns)
+                VALUES(?, ?, ?, ?)
+                """;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(saveQuery)) {
+            preparedStatement.setLong(1, playerId);
+            preparedStatement.setLong(2, dummyGameData.gameDuration());
+            preparedStatement.setString(3, dummyGameData.gameOutcome().result().name());
+            preparedStatement.setInt(4, dummyGameData.gameOutcome().turnsPlayed());
+
+        } catch (SQLException exception) {
+            throw new PersistenceException("Failed to save a a game’s data for a player with ID: " + playerId,
+                    exception);
+        }
     }
 }
