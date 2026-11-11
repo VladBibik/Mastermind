@@ -13,8 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.*;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GameJdbcDAOTest {
     private Connection connection;
@@ -50,12 +49,17 @@ public class GameJdbcDAOTest {
     }
 
     @Test
-    @DisplayName("Should return an empty list when no games exist")
-    void findAll_NoGames_ReturnsEmptyList() {
-        List<Game> games = gameJdbcDAO.findAll();
+    @DisplayName("Should return the correct number of games")
+    void countMultipleGamesReturnsCorrectCount() {
+        insert(1L);
+        insert(2L);
+        insert(3L);
+        insert(4L);
 
-        assertNotNull(games);
-        assertTrue(games.isEmpty());
+        int count = gameJdbcDAO.count();
+        int expected = 4;
+
+        assertEquals(expected, count);
     }
 
     void insert(long playerId) {
