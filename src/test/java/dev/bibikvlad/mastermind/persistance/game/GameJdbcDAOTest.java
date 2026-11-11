@@ -49,6 +49,15 @@ public class GameJdbcDAOTest {
         assertTrue(games.isEmpty());
     }
 
+    @Test
+    @DisplayName("Should return an empty list when no games exist")
+    void findAll_NoGames_ReturnsEmptyList() {
+        List<Game> games = gameJdbcDAO.findAll();
+
+        assertNotNull(games);
+        assertTrue(games.isEmpty());
+    }
+
     void insert(long playerId) {
         GameData dummyGameData = new GameData(new GameOutcome(7, GameResult.WIN), 7777L);
 
