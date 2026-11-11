@@ -62,6 +62,20 @@ public class GameJdbcDAOTest {
         assertEquals(expected, count);
     }
 
+    @Test
+    @DisplayName("Should return the correct number of games by playerId")
+    void countMultipleGamesByPlayerIdReturnsCorrectCount() {
+        insert(1L);
+        insert(1L);
+        insert(1L);
+        insert(1L);
+
+        int count = gameJdbcDAO.countByPlayerId(1L);
+        int expected = 4;
+
+        assertEquals(expected, count);
+    }
+
     void insert(long playerId) {
         GameData dummyGameData = new GameData(new GameOutcome(7, GameResult.WIN), 7777L);
 
