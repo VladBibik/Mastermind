@@ -76,6 +76,22 @@ public class GameJdbcDAOTest {
         assertEquals(expected, count);
     }
 
+    @Test
+    @DisplayName("Should save game data entry to the database")
+    void savePersistsGameDataIntoDatabase() {
+        long playerId = 1L;
+        GameData gameData = new GameData(new GameOutcome(7, GameResult.WIN), 7777L);
+
+        boolean saved = gameJdbcDAO.save(playerId, gameData);
+
+        assertTrue(saved);
+
+        int count = gameJdbcDAO.count();
+        int expected = 1;
+
+        assertEquals(expected, count);
+    }
+
     void insert(long playerId) {
         GameData dummyGameData = new GameData(new GameOutcome(7, GameResult.WIN), 7777L);
 
