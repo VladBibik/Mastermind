@@ -76,6 +76,7 @@ public class GameJdbcDAOTest {
             preparedStatement.setString(3, dummyGameData.gameOutcome().result().name());
             preparedStatement.setInt(4, dummyGameData.gameOutcome().turnsPlayed());
 
+            preparedStatement.execute();
         } catch (SQLException exception) {
             throw new PersistenceException("Failed to save a a game’s data for a player with ID: " + playerId,
                     exception);
