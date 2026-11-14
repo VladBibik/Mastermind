@@ -106,6 +106,24 @@ public class GameJdbcDAOTest {
         assertEquals(expected, gameJdbcDAO.countByPlayerId(playerId));
     }
 
+    @Test
+    @DisplayName("Return max games played by any player")
+    void returnsMaxGamesPlayerByAnyPlayer() {
+        long playerOneId = 1L;
+        long playerTwoId = 2L;
+
+        insert(playerOneId);
+        insert(playerOneId);
+        insert(playerOneId);
+
+        insert(playerTwoId);
+        insert(playerTwoId);
+
+        int expected = 3;
+
+        assertEquals(expected, gameJdbcDAO.getMaxGamesPlayedByAnyPlayer());
+    }
+
     void insert(long playerId) {
         GameData dummyGameData = new GameData(new GameOutcome(7, GameResult.WIN), 7777L);
 
