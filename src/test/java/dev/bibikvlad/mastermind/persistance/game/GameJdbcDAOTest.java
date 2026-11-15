@@ -7,6 +7,7 @@ import dev.bibikvlad.mastermind.game.data.GameResult;
 import dev.bibikvlad.mastermind.model.game.Game;
 import dev.bibikvlad.mastermind.persistence.database.SchemaCreator;
 import dev.bibikvlad.mastermind.persistence.game.dao.jdbc.GameJdbcDAO;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,13 +25,16 @@ public class GameJdbcDAOTest {
     void setUp() throws SQLException {
         connection = DriverManager.getConnection("jdbc:sqlite::memory:");
 
-        try (Statement statement = connection.createStatement()) {
-            statement.execute("PRAGMA foreign_keys = ON");
-        }
-
         SchemaCreator.create(connection);
 
         gameJdbcDAO = new GameJdbcDAO(connection);
+    }
+
+    @AfterEach
+    void tearDown() throws SQLException {
+        if (connection != null && !connection.isClosed()) {
+            connection.close();
+        }
     }
 
     @Test
