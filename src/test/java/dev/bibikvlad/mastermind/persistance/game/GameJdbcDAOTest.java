@@ -38,6 +38,18 @@ public class GameJdbcDAOTest {
     }
 
     @Test
+    @DisplayName("Should return all games")
+    void findAllMultipleGamesReturnsAllGames() {
+        insertGame(1L);
+        insertGame(2L);
+        insertGame(3L);
+
+        List<Game> games = gameJdbcDAO.findAll();
+
+        assertEquals(3, games.size());
+    }
+
+    @Test
     @DisplayName("Should return an empty list when no games exist")
     void findAllNoGamesReturnsEmptyList() {
         List<Game> games = gameJdbcDAO.findAll();
