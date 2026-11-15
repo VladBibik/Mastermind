@@ -21,8 +21,9 @@ public class SchemaCreator {
                     CHECK (length(player_name) <= 100)
                 );""";
 
-        Statement statement = connection.createStatement();
-        statement.executeUpdate(createPlayersTableQuery);
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate(createPlayersTableQuery);
+        }
     }
 
     private static void createPlayerConfigurationTable(Connection connection) throws SQLException {
@@ -37,9 +38,9 @@ public class SchemaCreator {
                     FOREIGN KEY (player_id) REFERENCES players(player_id) ON DELETE CASCADE
                 );""";
 
-        Statement statement = connection.createStatement();
-
-        statement.executeUpdate(createPlayerConfigTableQuery);
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate(createPlayerConfigTableQuery);
+        }
     }
 
     private static void createPlayerLastSelectedTable(Connection connection) throws SQLException {
@@ -50,9 +51,9 @@ public class SchemaCreator {
                     FOREIGN KEY (player_id) REFERENCES players(player_id) ON DELETE CASCADE
                 );""";
 
-        Statement statement = connection.createStatement();
-
-        statement.executeUpdate(createPlayerLastSelectedTableQuery);
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate(createPlayerLastSelectedTableQuery);
+        }
     }
 
     private static void createGamesTable(Connection connection) throws SQLException {
@@ -67,8 +68,8 @@ public class SchemaCreator {
                     FOREIGN KEY (player_id) REFERENCES players(player_id) ON DELETE CASCADE
                 );""";
 
-        Statement statement = connection.createStatement();
-
-        statement.executeUpdate(createGamesTableQuery);
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate(createGamesTableQuery);
+        }
     }
 }
