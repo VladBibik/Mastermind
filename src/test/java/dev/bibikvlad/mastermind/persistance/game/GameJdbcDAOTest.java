@@ -49,10 +49,10 @@ public class GameJdbcDAOTest {
     @Test
     @DisplayName("Should return the correct number of games")
     void countMultipleGamesReturnsCorrectCount() {
-        insert(1L);
-        insert(2L);
-        insert(3L);
-        insert(4L);
+        insertGame(1L);
+        insertGame(2L);
+        insertGame(3L);
+        insertGame(4L);
 
         int count = gameJdbcDAO.count();
         int expected = 4;
@@ -63,10 +63,10 @@ public class GameJdbcDAOTest {
     @Test
     @DisplayName("Should return the correct number of games by playerId")
     void countMultipleGamesByPlayerIdReturnsCorrectCount() {
-        insert(1L);
-        insert(1L);
-        insert(1L);
-        insert(1L);
+        insertGame(1L);
+        insertGame(1L);
+        insertGame(1L);
+        insertGame(1L);
 
         int count = gameJdbcDAO.countByPlayerId(1L);
         int expected = 4;
@@ -95,9 +95,9 @@ public class GameJdbcDAOTest {
     void returnsCorrectNumberOfGamesPlayedByPlayer() {
         long playerId = 1L;
 
-        insert(playerId);
-        insert(playerId);
-        insert(playerId);
+        insertGame(playerId);
+        insertGame(playerId);
+        insertGame(playerId);
 
         int expected = 3;
 
@@ -110,19 +110,19 @@ public class GameJdbcDAOTest {
         long playerOneId = 1L;
         long playerTwoId = 2L;
 
-        insert(playerOneId);
-        insert(playerOneId);
-        insert(playerOneId);
+        insertGame(playerOneId);
+        insertGame(playerOneId);
+        insertGame(playerOneId);
 
-        insert(playerTwoId);
-        insert(playerTwoId);
+        insertGame(playerTwoId);
+        insertGame(playerTwoId);
 
         int expected = 3;
 
         assertEquals(expected, gameJdbcDAO.getMaxGamesPlayedByAnyPlayer());
     }
 
-    void insert(long playerId) {
+    void insertGame(long playerId) {
         GameData dummyGameData = new GameData(new GameOutcome(7, GameResult.WIN), 7777L);
 
         String saveQuery = """
