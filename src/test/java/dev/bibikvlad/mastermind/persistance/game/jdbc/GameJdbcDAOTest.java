@@ -1,4 +1,4 @@
-package dev.bibikvlad.mastermind.persistance.game;
+package dev.bibikvlad.mastermind.persistance.game.jdbc;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
 import dev.bibikvlad.mastermind.game.data.GameData;
