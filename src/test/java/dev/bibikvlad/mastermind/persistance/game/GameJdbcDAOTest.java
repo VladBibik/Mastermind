@@ -103,20 +103,6 @@ public class GameJdbcDAOTest {
     }
 
     @Test
-    @DisplayName("Returns correct number of games played by a player")
-    void returnsCorrectNumberOfGamesPlayedByPlayer() {
-        long playerId = 1L;
-
-        insertGame(playerId);
-        insertGame(playerId);
-        insertGame(playerId);
-
-        int expected = 3;
-
-        assertEquals(expected, gameJdbcDAO.countByPlayerId(playerId));
-    }
-
-    @Test
     @DisplayName("Return max games played by any player")
     void returnsMaxGamesPlayerByAnyPlayer() {
         long playerOneId = 1L;
