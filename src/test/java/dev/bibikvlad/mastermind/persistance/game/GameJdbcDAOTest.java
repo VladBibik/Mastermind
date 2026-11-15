@@ -73,17 +73,17 @@ public class GameJdbcDAOTest {
     }
 
     @Test
-    @DisplayName("Should return the correct number of games by playerId")
-    void countMultipleGamesByPlayerIdReturnsCorrectCount() {
-        insertGame(1L);
+    @DisplayName("Should count only games belonging to the specified player")
+    void countByPlayerIdMultiplePlayersReturnsCorrectCount() {
         insertGame(1L);
         insertGame(1L);
         insertGame(1L);
 
-        int count = gameJdbcDAO.countByPlayerId(1L);
-        int expected = 4;
+        insertGame(2L);
+        insertGame(2L);
 
-        assertEquals(expected, count);
+        assertEquals(3, gameJdbcDAO.countByPlayerId(1L));
+        assertEquals(2, gameJdbcDAO.countByPlayerId(2L));
     }
 
     @Test
