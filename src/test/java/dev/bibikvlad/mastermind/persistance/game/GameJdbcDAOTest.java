@@ -24,6 +24,10 @@ public class GameJdbcDAOTest {
     void setUp() throws SQLException {
         connection = DriverManager.getConnection("jdbc:sqlite::memory:");
 
+        try (Statement statement = connection.createStatement()) {
+            statement.execute("PRAGMA foreign_keys = ON");
+        }
+
         SchemaCreator.create(connection);
 
         gameJdbcDAO = new GameJdbcDAO(connection);
