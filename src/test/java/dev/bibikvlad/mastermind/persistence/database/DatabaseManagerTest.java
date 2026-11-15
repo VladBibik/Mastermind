@@ -1,7 +1,6 @@
-package dev.bibikvlad.mastermind.persistance.database;
+package dev.bibikvlad.mastermind.persistence.database;
 
 import dev.bibikvlad.mastermind.exceptions.PersistenceException;
-import dev.bibikvlad.mastermind.persistence.database.DatabaseManager;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
