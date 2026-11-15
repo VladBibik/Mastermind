@@ -129,6 +129,12 @@ public class GameJdbcDAOTest {
         assertEquals(expected, gameJdbcDAO.getMaxGamesPlayedByAnyPlayer());
     }
 
+    @Test
+    @DisplayName("Should return zero when no games exist")
+    void getMaxGamesPlayedByAnyPlayerNoGamesReturnsZero() {
+        assertEquals(0, gameJdbcDAO.getMaxGamesPlayedByAnyPlayer());
+    }
+
     void insertGame(long playerId) {
         GameData dummyGameData = new GameData(new GameOutcome(7, GameResult.WIN), 7777L);
 
