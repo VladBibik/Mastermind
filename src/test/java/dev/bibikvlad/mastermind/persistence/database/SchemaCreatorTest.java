@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.persistence.database;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.sql.Connection;
@@ -14,5 +15,12 @@ public class SchemaCreatorTest {
         connection = DriverManager.getConnection("jdbc:sqlite::memory:");
 
         SchemaCreator.create(connection);
+    }
+
+    @AfterEach
+    void tearDown() throws SQLException {
+        if (connection != null && !connection.isClosed()) {
+            connection.close();
+        }
     }
 }
