@@ -10,7 +10,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SchemaCreatorTest {
     private Connection connection;
@@ -30,21 +30,34 @@ public class SchemaCreatorTest {
     }
 
     @Test
-    @DisplayName("Inserts data into the 'players' table")
-    void insertsDataIntoPlayersTable() throws SQLException {
-        String newPlayerQuery = """
-                INSERT INTO players (player_name)
-                VALUES(?)
-                """;
+    @DisplayName("Creates the 'players' table")
+    void createsPlayersTable() throws SQLException {
         String playerName = "TEST_PLAYER";
-        int rowsAffected;
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(newPlayerQuery)) {
-            preparedStatement.setString(1, playerName);
+        String insertQuery = """
+            INSERT INTO players (player_name)
+            VALUES (?)
+            """;
 
-            rowsAffected = preparedStatement.executeUpdate();
+        String selectQuery = """
+            SELECT player_name
+            FROM players
+            WHERE player_name = ?
+            """;
+
+        try (PreparedStatement statement = connection.prepareStatement(insertQuery)) {
+            statement.setString(1, playerName);
+            statement.executeUpdate();
         }
 
-        assertEquals(1, rowsAffected);
+        try (PreparedStatement statement = connection.prepareStatement(selectQuery)) {
+            statement.setString(1, playerName);
+
+            try (var resultSet = statement.executeQuery()) {
+                assertTrue(resultSet.next());
+                assertEquals(playerName, resultSet.getString("player_name"));
+                assertFalse(resultSet.next());
+            }
+        }
     }
 }
