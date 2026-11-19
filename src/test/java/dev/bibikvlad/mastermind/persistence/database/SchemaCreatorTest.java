@@ -5,10 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,6 +15,10 @@ public class SchemaCreatorTest {
     @BeforeEach
     void setUp() throws SQLException {
         connection = DriverManager.getConnection("jdbc:sqlite::memory:");
+
+        try (Statement statement = connection.createStatement()) {
+            statement.execute("PRAGMA foreign_keys = ON");
+        }
 
         SchemaCreator.create(connection);
     }
