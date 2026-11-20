@@ -61,4 +61,22 @@ public class SchemaCreatorTest {
             }
         }
     }
+
+    @Test
+    @DisplayName("Rejects duplicate player names")
+    void rejectsDuplicatePlayerNames() throws SQLException {
+        String query = """
+            INSERT INTO players (player_name)
+            VALUES (?)
+            """;
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, "TEST_PLAYER");
+            statement.executeUpdate();
+
+            statement.setString(1, "TEST_PLAYER");
+
+            assertThrows(SQLException.class, statement::executeUpdate);
+        }
+    }
 }
