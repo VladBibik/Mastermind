@@ -188,4 +188,60 @@ public class SchemaCreatorTest {
             assertThrows(SQLException.class, statement::executeUpdate);
         }
     }
+
+    @Test
+    @DisplayName("Deletes 'player_configurations' entry on cascade delete")
+    void deletesConfigsOnCascade() throws SQLException {
+        String playerName = "TEST_PLAYER";
+
+        String insertPlayerQuery = """
+                INSERT INTO players (player_name)
+                VALUES (?)
+                """;
+
+        String deletePlayerQuery = """
+                DELETE
+                FROM players
+                WHERE player_name = ?
+                """;
+
+        String insertPlayerConfigQuery = """
+                INSERT INTO player_configurations (player_id, language, logo_border_color, logo_main_color,
+                logo_accent_color, logo_background_color)
+                VALUES (?, ?, ?, ?, ?, ?)
+                """;
+
+        String selectPlayerConfigQuery = """
+                SELECT *
+                FROM player_configurations
+                """;
+
+        try (PreparedStatement statement = connection.prepareStatement(insertPlayerQuery)) {
+            statement.setString(1, playerName);
+            statement.executeUpdate();
+        }
+
+        try (PreparedStatement statement = connection.prepareStatement(insertPlayerConfigQuery)) {
+            statement.setLong(1, 1L);
+            statement.setString(2, LocalizationType.ENGLISH.getNativeDisplayName());
+            statement.setString(3, ConsoleColor.ORANGE.getDisplayName());
+            statement.setString(4, ConsoleColor.ORANGE.getDisplayName());
+            statement.setString(5, ConsoleColor.ORANGE.getDisplayName());
+            statement.setString(6, ConsoleColor.BACKGROUND_BLACK.getDisplayName());
+
+            statement.executeUpdate();
+        }
+
+        try (PreparedStatement statement = connection.prepareStatement(deletePlayerQuery)) {
+            statement.setString(1, playerName);
+
+            statement.executeUpdate();
+        }
+
+        try (PreparedStatement statement = connection.prepareStatement(selectPlayerConfigQuery)) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                assertFalse(resultSet.next());
+            }
+        }
+    }
 }
