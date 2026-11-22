@@ -56,7 +56,7 @@ public class SchemaCreatorTest {
         try (PreparedStatement statement = connection.prepareStatement(selectQuery)) {
             statement.setString(1, playerName);
 
-            try (var resultSet = statement.executeQuery()) {
+            try (ResultSet resultSet = statement.executeQuery()) {
                 assertTrue(resultSet.next());
                 assertEquals(playerName, resultSet.getString("player_name"));
                 assertFalse(resultSet.next());
