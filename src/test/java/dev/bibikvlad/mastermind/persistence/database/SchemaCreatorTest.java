@@ -125,6 +125,45 @@ public class SchemaCreatorTest {
     }
 
     @Test
+    @DisplayName("Creates the 'player_last_selected' table")
+    void createsPlayerLastSelected() throws SQLException {
+        String playerName = "TEST_PLAYER";
+
+        String insertPlayerQuery = """
+                INSERT INTO players (player_name)
+                VALUES (?)
+                """;
+
+        String insertPlayerLastSelectedQuery = """
+                INSERT INTO player_last_selected (player_id)
+                VALUES (?)
+                """;
+
+        String selectPlayerLastSelected = """
+                SELECT *
+                FROM player_last_selected
+                """;
+
+        try (PreparedStatement statement = connection.prepareStatement(insertPlayerQuery)) {
+            statement.setString(1, playerName);
+            statement.executeUpdate();
+        }
+
+        try (PreparedStatement statement = connection.prepareStatement(insertPlayerLastSelectedQuery)) {
+            statement.setLong(1, 1L);
+            statement.executeUpdate();
+        }
+
+        try (PreparedStatement statement = connection.prepareStatement(selectPlayerLastSelected)) {
+            ResultSet resultSet = statement.executeQuery();
+
+            assertTrue(resultSet.next());
+            assertEquals(1L, resultSet.getLong("player_id"));
+            assertFalse(resultSet.next());
+        }
+    }
+
+    @Test
     @DisplayName("Rejects duplicate player names")
     void rejectsDuplicatePlayerNames() throws SQLException {
         String query = """
