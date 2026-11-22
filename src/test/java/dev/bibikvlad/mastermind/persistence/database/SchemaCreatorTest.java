@@ -1,5 +1,6 @@
 package dev.bibikvlad.mastermind.persistence.database;
 
+import dev.bibikvlad.mastermind.game.data.GameResult;
 import dev.bibikvlad.mastermind.localization.config.LocalizationType;
 import dev.bibikvlad.mastermind.model.enums.ConsoleColor;
 import org.junit.jupiter.api.AfterEach;
@@ -159,6 +160,53 @@ public class SchemaCreatorTest {
 
             assertTrue(resultSet.next());
             assertEquals(1L, resultSet.getLong("player_id"));
+            assertFalse(resultSet.next());
+        }
+    }
+
+    @Test
+    @DisplayName("Creates the 'games' table")
+    void createsGamesTable() throws SQLException {
+        String playerName = "TEST_PLAYER";
+
+        String insertPlayerQuery = """
+                INSERT INTO players (player_name)
+                VALUES (?)
+                """;
+
+        String insertGames = """
+                INSERT INTO games (player_id, duration_milliseconds, result, number_of_turns)
+                VALUES (?, ?, ?, ?)
+                """;
+
+        String selectGames = """
+                SELECT *
+                FROM games
+                """;
+
+        try (PreparedStatement statement = connection.prepareStatement(insertPlayerQuery)) {
+            statement.setString(1, playerName);
+            statement.executeUpdate();
+        }
+
+        try (PreparedStatement statement = connection.prepareStatement(insertGames)) {
+            statement.setLong(1, 1L);
+            statement.setLong(2, 777_777_777L);
+            statement.setString(3, GameResult.WIN.name());
+            statement.setInt(4, 7);
+
+            statement.executeUpdate();
+        }
+
+        try (PreparedStatement statement = connection.prepareStatement(selectGames)) {
+            ResultSet resultSet = statement.executeQuery();
+
+            assertTrue(resultSet.next());
+            assertEquals(1L, resultSet.getLong("player_id"));
+            assertEquals(777_777_777L, resultSet.getLong("duration_milliseconds"));
+            assertEquals(GameResult.WIN.name(), resultSet.getString("result"));
+            assertEquals(7, resultSet.getLong("number_of_turns"));
+
             assertFalse(resultSet.next());
         }
     }
