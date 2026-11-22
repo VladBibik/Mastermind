@@ -79,4 +79,19 @@ public class SchemaCreatorTest {
             assertThrows(SQLException.class, statement::executeUpdate);
         }
     }
+
+    @Test
+    @DisplayName("Rejects null player names")
+    void rejectsNullPlayerNames() throws SQLException {
+        String query = """
+            INSERT INTO players (player_name)
+            VALUES (?)
+            """;
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, null);
+
+            assertThrows(SQLException.class, statement::executeUpdate);
+        }
+    }
 }
