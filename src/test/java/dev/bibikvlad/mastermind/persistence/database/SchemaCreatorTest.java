@@ -267,4 +267,52 @@ public class SchemaCreatorTest {
             }
         }
     }
+
+    @Test
+    @DisplayName("Deletes 'player_last_selected' entry on cascade delete")
+    void deletesPlayerLastSelectedOnCascade() throws SQLException {
+        String playerName = "TEST_PLAYER";
+
+        String insertPlayerQuery = """
+                INSERT INTO players (player_name)
+                VALUES (?)
+                """;
+
+        String deletePlayerQuery = """
+                DELETE
+                FROM players
+                WHERE player_name = ?
+                """;
+
+        String insertPlayerLastSelected = """
+                INSERT INTO player_last_selected (player_id)
+                VALUES (?)
+                """;
+
+        String selectPlayerLastSelected = """
+                SELECT *
+                FROM player_last_selected
+                """;
+
+        try (PreparedStatement statement = connection.prepareStatement(insertPlayerQuery)) {
+            statement.setString(1, playerName);
+            statement.executeUpdate();
+        }
+
+        try (PreparedStatement statement = connection.prepareStatement(insertPlayerLastSelected)) {
+            statement.setLong(1, 1L);
+            statement.executeUpdate();
+        }
+
+        try (PreparedStatement statement = connection.prepareStatement(deletePlayerQuery)) {
+            statement.setString(1, playerName);
+            statement.executeUpdate();
+        }
+
+        try (PreparedStatement statement = connection.prepareStatement(selectPlayerLastSelected)) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                assertFalse(resultSet.next());
+            }
+        }
+    }
 }
