@@ -74,12 +74,6 @@ public class SchemaCreatorTest {
                 VALUES (?)
                 """;
 
-        String selectPlayerQuery = """
-                SELECT player_id
-                FROM players
-                WHERE player_name = ?
-                """;
-
         String insertPlayerConfigQuery = """
                 INSERT INTO player_configurations (player_id, language, logo_border_color, logo_main_color,
                 logo_accent_color, logo_background_color)
@@ -92,21 +86,11 @@ public class SchemaCreatorTest {
                 WHERE player_id = ?
                 """;
 
-        long playerId;
+        long playerId = 1L;
 
         try (PreparedStatement statement = connection.prepareStatement(insertPlayerQuery)) {
             statement.setString(1, playerName);
             statement.executeUpdate();
-        }
-
-        try (PreparedStatement statement = connection.prepareStatement(selectPlayerQuery)) {
-            statement.setString(1, playerName);
-
-            try (ResultSet resultSet = statement.executeQuery()) {
-                resultSet.next();
-
-                playerId = resultSet.getLong("player_id");
-            }
         }
 
         try (PreparedStatement statement = connection.prepareStatement(insertPlayerConfigQuery)) {
