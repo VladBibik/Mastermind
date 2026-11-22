@@ -102,7 +102,7 @@ public class SchemaCreatorTest {
         try (PreparedStatement statement = connection.prepareStatement(selectPlayerQuery)) {
             statement.setString(1, playerName);
 
-            try (var resultSet = statement.executeQuery()) {
+            try (ResultSet resultSet = statement.executeQuery()) {
                 resultSet.next();
 
                 playerId = resultSet.getLong("player_id");
