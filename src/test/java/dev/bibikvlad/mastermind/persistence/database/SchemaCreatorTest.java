@@ -363,4 +363,56 @@ public class SchemaCreatorTest {
             }
         }
     }
+
+    @Test
+    @DisplayName("Deletes 'games' entry on cascade delete")
+    void deletesGamesOnCascade() throws SQLException {
+        String playerName = "TEST_PLAYER";
+
+        String insertPlayerQuery = """
+                INSERT INTO players (player_name)
+                VALUES (?)
+                """;
+
+        String deletePlayerQuery = """
+                DELETE
+                FROM players
+                WHERE player_name = ?
+                """;
+
+        String insertGamesQuery = """
+                INSERT INTO games (player_id, duration_milliseconds, result, number_of_turns)
+                VALUES (?, ?, ?, ?)
+                """;
+
+        String selectGamesQuery = """
+                SELECT *
+                FROM player_last_selected
+                """;
+
+        try (PreparedStatement statement = connection.prepareStatement(insertPlayerQuery)) {
+            statement.setString(1, playerName);
+            statement.executeUpdate();
+        }
+
+        try (PreparedStatement statement = connection.prepareStatement(insertGamesQuery)) {
+            statement.setLong(1, 1L);
+            statement.setLong(2, 777_777_777L);
+            statement.setString(3, GameResult.WIN.name());
+            statement.setInt(4, 7);
+
+            statement.executeUpdate();
+        }
+
+        try (PreparedStatement statement = connection.prepareStatement(deletePlayerQuery)) {
+            statement.setString(1, playerName);
+            statement.executeUpdate();
+        }
+
+        try (PreparedStatement statement = connection.prepareStatement(selectGamesQuery)) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                assertFalse(resultSet.next());
+            }
+        }
+    }
 }
