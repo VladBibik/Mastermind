@@ -415,4 +415,34 @@ public class SchemaCreatorTest {
             }
         }
     }
+
+    @Test
+    @DisplayName("Rejects unspecified entry for 'result'")
+    void rejectsUnspecifiedEntryForResult() throws SQLException {
+        String playerName = "TEST_PLAYER";
+
+        String insertPlayerQuery = """
+                INSERT INTO players (player_name)
+                VALUES (?)
+                """;
+
+        String insertGamesQuery = """
+                INSERT INTO games (player_id, duration_milliseconds, result, number_of_turns)
+                VALUES (?, ?, ?, ?)
+                """;
+
+        try (PreparedStatement statement = connection.prepareStatement(insertPlayerQuery)) {
+            statement.setString(1, playerName);
+            statement.executeUpdate();
+        }
+
+        try (PreparedStatement statement = connection.prepareStatement(insertGamesQuery)) {
+            statement.setLong(1, 1L);
+            statement.setLong(2, 777_777_777L);
+            statement.setString(3, "UNSPECIFIED_STRING");
+            statement.setInt(4, 7);
+
+            assertThrows(SQLException.class, statement::executeUpdate);
+        }
+    }
 }
