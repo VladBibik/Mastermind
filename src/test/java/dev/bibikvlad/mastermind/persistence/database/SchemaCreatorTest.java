@@ -67,7 +67,7 @@ public class SchemaCreatorTest {
 
     @Test
     @DisplayName("Creates the 'player_configurations' table")
-    void createsPlayersConfigurationTable() throws SQLException {
+    void createsPlayerConfigurationsTable() throws SQLException {
         String playerName = "TEST_PLAYER";
 
         String insertPlayerQuery = """
@@ -127,7 +127,7 @@ public class SchemaCreatorTest {
 
     @Test
     @DisplayName("Creates the 'player_last_selected' table")
-    void createsPlayerLastSelected() throws SQLException {
+    void createsPlayerLastSelectedTable() throws SQLException {
         String playerName = "TEST_PLAYER";
 
         String insertPlayerQuery = """
@@ -246,7 +246,7 @@ public class SchemaCreatorTest {
 
     @Test
     @DisplayName("Rejects player names that contains more than 100 symbols")
-    void rejectsPlayerNamesMoreThanHundredSymbolsLong() throws SQLException {
+    void rejectsPlayerNamesLongerThan100Characters() throws SQLException {
         String query = """
                 INSERT INTO players (player_name)
                 VALUES (?)
@@ -262,7 +262,7 @@ public class SchemaCreatorTest {
 
     @Test
     @DisplayName("Deletes 'player_configurations' entry on cascade delete")
-    void deletesConfigsOnCascade() throws SQLException {
+    void deletesPlayerConfigurationsOnCascadeDelete() throws SQLException {
         String playerName = "TEST_PLAYER";
 
         String insertPlayerQuery = """
@@ -318,7 +318,7 @@ public class SchemaCreatorTest {
 
     @Test
     @DisplayName("Deletes 'player_last_selected' entry on cascade delete")
-    void deletesPlayerLastSelectedOnCascade() throws SQLException {
+    void deletesPlayerLastSelectedOnCascadeDelete() throws SQLException {
         String playerName = "TEST_PLAYER";
 
         String insertPlayerQuery = """
@@ -366,7 +366,7 @@ public class SchemaCreatorTest {
 
     @Test
     @DisplayName("Deletes 'games' entry on cascade delete")
-    void deletesGamesOnCascade() throws SQLException {
+    void deletesGamesOnCascadeDelete() throws SQLException {
         String playerName = "TEST_PLAYER";
 
         String insertPlayerQuery = """
@@ -418,7 +418,7 @@ public class SchemaCreatorTest {
 
     @Test
     @DisplayName("Rejects unspecified entry for 'result'")
-    void rejectsUnspecifiedEntryForResult() throws SQLException {
+    void rejectsInvalidGameResult() throws SQLException {
         String playerName = "TEST_PLAYER";
 
         String insertPlayerQuery = """
