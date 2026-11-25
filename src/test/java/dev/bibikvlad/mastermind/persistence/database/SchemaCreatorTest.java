@@ -445,4 +445,31 @@ public class SchemaCreatorTest {
             assertThrows(SQLException.class, statement::executeUpdate);
         }
     }
+
+    private long insertPlayer(String playerName) throws SQLException {
+        String sql = """
+            INSERT INTO players (player_name)
+            VALUES (?)
+            """;
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, playerName);
+            statement.executeUpdate();
+        }
+
+        String selectSql = """
+            SELECT player_id
+            FROM players
+            WHERE player_name = ?
+            """;
+
+        try (PreparedStatement statement = connection.prepareStatement(selectSql)) {
+            statement.setString(1, playerName);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                assertTrue(resultSet.next());
+                return resultSet.getLong("player_id");
+            }
+        }
+    }
 }
