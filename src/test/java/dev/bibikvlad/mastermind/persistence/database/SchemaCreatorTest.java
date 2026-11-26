@@ -13,10 +13,13 @@ import java.sql.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SchemaCreatorTest {
+    private String playerName;
     private Connection connection;
 
     @BeforeEach
     void setUp() throws SQLException {
+        playerName = "TEST_PLAYER";
+
         connection = DriverManager.getConnection("jdbc:sqlite::memory:");
 
         try (Statement statement = connection.createStatement()) {
@@ -435,8 +438,6 @@ public class SchemaCreatorTest {
     }
 
     private long insertPlayer() throws SQLException {
-        String playerName = "TEST_PLAYER";
-
         String sql = """
             INSERT INTO players (player_name)
             VALUES (?)
@@ -460,6 +461,19 @@ public class SchemaCreatorTest {
                 assertTrue(resultSet.next());
                 return resultSet.getLong("player_id");
             }
+        }
+    }
+
+    private void deletePlayer() throws SQLException {
+        String deletePlayerQuery = """
+                DELETE
+                FROM players
+                WHERE player_name = ?
+                """;
+
+        try (PreparedStatement statement = connection.prepareStatement(deletePlayerQuery)) {
+            statement.setString(1, playerName);
+            statement.executeUpdate();
         }
     }
 }
