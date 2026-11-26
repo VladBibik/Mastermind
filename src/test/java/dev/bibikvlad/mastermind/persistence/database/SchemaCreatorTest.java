@@ -71,13 +71,6 @@ public class SchemaCreatorTest {
     @Test
     @DisplayName("Creates the 'player_configurations' table")
     void createsPlayerConfigurationsTable() throws SQLException {
-        String playerName = "TEST_PLAYER";
-
-        String insertPlayerQuery = """
-                INSERT INTO players (player_name)
-                VALUES (?)
-                """;
-
         String insertPlayerConfigQuery = """
                 INSERT INTO player_configurations (player_id, language, logo_border_color, logo_main_color,
                 logo_accent_color, logo_background_color)
@@ -90,12 +83,7 @@ public class SchemaCreatorTest {
                 WHERE player_id = ?
                 """;
 
-        long playerId = 1L;
-
-        try (PreparedStatement statement = connection.prepareStatement(insertPlayerQuery)) {
-            statement.setString(1, playerName);
-            statement.executeUpdate();
-        }
+        long playerId = insertPlayer();
 
         try (PreparedStatement statement = connection.prepareStatement(insertPlayerConfigQuery)) {
             statement.setLong(1, playerId);
@@ -131,13 +119,6 @@ public class SchemaCreatorTest {
     @Test
     @DisplayName("Creates the 'player_last_selected' table")
     void createsPlayerLastSelectedTable() throws SQLException {
-        String playerName = "TEST_PLAYER";
-
-        String insertPlayerQuery = """
-                INSERT INTO players (player_name)
-                VALUES (?)
-                """;
-
         String insertPlayerLastSelectedQuery = """
                 INSERT INTO player_last_selected (player_id)
                 VALUES (?)
@@ -148,13 +129,8 @@ public class SchemaCreatorTest {
                 FROM player_last_selected
                 """;
 
-        try (PreparedStatement statement = connection.prepareStatement(insertPlayerQuery)) {
-            statement.setString(1, playerName);
-            statement.executeUpdate();
-        }
-
         try (PreparedStatement statement = connection.prepareStatement(insertPlayerLastSelectedQuery)) {
-            statement.setLong(1, 1L);
+            statement.setLong(1, insertPlayer());
             statement.executeUpdate();
         }
 
@@ -170,13 +146,6 @@ public class SchemaCreatorTest {
     @Test
     @DisplayName("Creates the 'games' table")
     void createsGamesTable() throws SQLException {
-        String playerName = "TEST_PLAYER";
-
-        String insertPlayerQuery = """
-                INSERT INTO players (player_name)
-                VALUES (?)
-                """;
-
         String insertGames = """
                 INSERT INTO games (player_id, duration_milliseconds, result, number_of_turns)
                 VALUES (?, ?, ?, ?)
@@ -187,13 +156,8 @@ public class SchemaCreatorTest {
                 FROM games
                 """;
 
-        try (PreparedStatement statement = connection.prepareStatement(insertPlayerQuery)) {
-            statement.setString(1, playerName);
-            statement.executeUpdate();
-        }
-
         try (PreparedStatement statement = connection.prepareStatement(insertGames)) {
-            statement.setLong(1, 1L);
+            statement.setLong(1, insertPlayer());
             statement.setLong(2, 777_777_777L);
             statement.setString(3, GameResult.WIN.name());
             statement.setInt(4, 7);
@@ -266,19 +230,6 @@ public class SchemaCreatorTest {
     @Test
     @DisplayName("Deletes 'player_configurations' entry on cascade delete")
     void deletesPlayerConfigurationsOnCascadeDelete() throws SQLException {
-        String playerName = "TEST_PLAYER";
-
-        String insertPlayerQuery = """
-                INSERT INTO players (player_name)
-                VALUES (?)
-                """;
-
-        String deletePlayerQuery = """
-                DELETE
-                FROM players
-                WHERE player_name = ?
-                """;
-
         String insertPlayerConfigQuery = """
                 INSERT INTO player_configurations (player_id, language, logo_border_color, logo_main_color,
                 logo_accent_color, logo_background_color)
@@ -290,13 +241,8 @@ public class SchemaCreatorTest {
                 FROM player_configurations
                 """;
 
-        try (PreparedStatement statement = connection.prepareStatement(insertPlayerQuery)) {
-            statement.setString(1, playerName);
-            statement.executeUpdate();
-        }
-
         try (PreparedStatement statement = connection.prepareStatement(insertPlayerConfigQuery)) {
-            statement.setLong(1, 1L);
+            statement.setLong(1, insertPlayer());
             statement.setString(2, LocalizationType.ENGLISH.getNativeDisplayName());
             statement.setString(3, ConsoleColor.ORANGE.getDisplayName());
             statement.setString(4, ConsoleColor.ORANGE.getDisplayName());
@@ -306,11 +252,7 @@ public class SchemaCreatorTest {
             statement.executeUpdate();
         }
 
-        try (PreparedStatement statement = connection.prepareStatement(deletePlayerQuery)) {
-            statement.setString(1, playerName);
-
-            statement.executeUpdate();
-        }
+        deletePlayer();
 
         try (PreparedStatement statement = connection.prepareStatement(selectPlayerConfigQuery)) {
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -322,19 +264,6 @@ public class SchemaCreatorTest {
     @Test
     @DisplayName("Deletes 'player_last_selected' entry on cascade delete")
     void deletesPlayerLastSelectedOnCascadeDelete() throws SQLException {
-        String playerName = "TEST_PLAYER";
-
-        String insertPlayerQuery = """
-                INSERT INTO players (player_name)
-                VALUES (?)
-                """;
-
-        String deletePlayerQuery = """
-                DELETE
-                FROM players
-                WHERE player_name = ?
-                """;
-
         String insertPlayerLastSelected = """
                 INSERT INTO player_last_selected (player_id)
                 VALUES (?)
@@ -345,20 +274,12 @@ public class SchemaCreatorTest {
                 FROM player_last_selected
                 """;
 
-        try (PreparedStatement statement = connection.prepareStatement(insertPlayerQuery)) {
-            statement.setString(1, playerName);
-            statement.executeUpdate();
-        }
-
         try (PreparedStatement statement = connection.prepareStatement(insertPlayerLastSelected)) {
-            statement.setLong(1, 1L);
+            statement.setLong(1, insertPlayer());
             statement.executeUpdate();
         }
 
-        try (PreparedStatement statement = connection.prepareStatement(deletePlayerQuery)) {
-            statement.setString(1, playerName);
-            statement.executeUpdate();
-        }
+        deletePlayer();
 
         try (PreparedStatement statement = connection.prepareStatement(selectPlayerLastSelected)) {
             try (ResultSet resultSet = statement.executeQuery()) {
