@@ -135,11 +135,11 @@ public class SchemaCreatorTest {
         }
 
         try (PreparedStatement statement = connection.prepareStatement(selectPlayerLastSelected)) {
-            ResultSet resultSet = statement.executeQuery();
-
-            assertTrue(resultSet.next());
-            assertEquals(playerId, resultSet.getLong("player_id"));
-            assertFalse(resultSet.next());
+            try (ResultSet resultSet = statement.executeQuery()) {
+                assertTrue(resultSet.next());
+                assertEquals(playerId, resultSet.getLong("player_id"));
+                assertFalse(resultSet.next());
+            }
         }
     }
 
@@ -168,15 +168,15 @@ public class SchemaCreatorTest {
         }
 
         try (PreparedStatement statement = connection.prepareStatement(selectGames)) {
-            ResultSet resultSet = statement.executeQuery();
+            try (ResultSet resultSet = statement.executeQuery()) {
+                assertTrue(resultSet.next());
+                assertEquals(playerId, resultSet.getLong("player_id"));
+                assertEquals(777_777_777L, resultSet.getLong("duration_milliseconds"));
+                assertEquals(GameResult.WIN.name(), resultSet.getString("result"));
+                assertEquals(7, resultSet.getLong("number_of_turns"));
 
-            assertTrue(resultSet.next());
-            assertEquals(playerId, resultSet.getLong("player_id"));
-            assertEquals(777_777_777L, resultSet.getLong("duration_milliseconds"));
-            assertEquals(GameResult.WIN.name(), resultSet.getString("result"));
-            assertEquals(7, resultSet.getLong("number_of_turns"));
-
-            assertFalse(resultSet.next());
+                assertFalse(resultSet.next());
+            }
         }
     }
 
@@ -341,9 +341,9 @@ public class SchemaCreatorTest {
 
     private long insertPlayer() throws SQLException {
         String sql = """
-            INSERT INTO players (player_name)
-            VALUES (?)
-            """;
+                INSERT INTO players (player_name)
+                VALUES (?)
+                """;
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, playerName);
@@ -351,10 +351,10 @@ public class SchemaCreatorTest {
         }
 
         String selectSql = """
-            SELECT player_id
-            FROM players
-            WHERE player_name = ?
-            """;
+                SELECT player_id
+                FROM players
+                WHERE player_name = ?
+                """;
 
         try (PreparedStatement statement = connection.prepareStatement(selectSql)) {
             statement.setString(1, playerName);
