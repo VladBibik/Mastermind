@@ -65,9 +65,9 @@ public class SchemaCreator {
                 CREATE TABLE IF NOT EXISTS games (
                     game_id INTEGER PRIMARY KEY AUTOINCREMENT,
                     player_id INTEGER NOT NULL,
-                    duration_milliseconds INTEGER NOT NULL,
+                    duration_milliseconds INTEGER NOT NULL CHECK (duration_milliseconds >= 0),
                     result TEXT NOT NULL CHECK (result IN('WIN', 'LOSE', 'CANCELED')),
-                    number_of_turns INTEGER NOT NULL,
+                    number_of_turns INTEGER NOT NULL CHECK (number_of_turns >= 0),
                     started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     FOREIGN KEY (player_id) REFERENCES players(player_id) ON DELETE CASCADE
                 );""";
