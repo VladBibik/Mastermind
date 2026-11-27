@@ -283,6 +283,24 @@ public class SchemaCreatorTest {
     }
 
     @Test
+    @DisplayName("Rejects negative game duration")
+    void rejectsNegativeGameDuration() throws SQLException {
+        String insertPlayerConfigQuery = """
+                INSERT INTO games (player_id, duration_milliseconds, result, number_of_turns)
+                VALUES (?, ?, ?, ?)
+                """;
+
+        try (PreparedStatement statement = connection.prepareStatement(insertPlayerConfigQuery)) {
+            statement.setLong(1, insertPlayer());
+            statement.setLong(1, -777_777_777L);
+            statement.setString(1, GameResult.LOSE.name());
+            statement.setInt(1, 7);
+
+            assertThrows(SQLException.class, statement::executeUpdate);
+        }
+    }
+
+    @Test
     @DisplayName("Deletes 'player_configurations' entry on cascade delete")
     void deletesPlayerConfigurationsOnCascadeDelete() throws SQLException {
         String insertPlayerConfigQuery = """
