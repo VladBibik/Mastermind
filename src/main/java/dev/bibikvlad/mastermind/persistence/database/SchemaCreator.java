@@ -5,6 +5,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class SchemaCreator {
+    private SchemaCreator() {
+        throw new AssertionError("Can't instantiate SchemaCreator");
+    }
+
     public static void create(Connection connection) throws SQLException {
         createPlayersTable(connection);
         createPlayerConfigurationTable(connection);
