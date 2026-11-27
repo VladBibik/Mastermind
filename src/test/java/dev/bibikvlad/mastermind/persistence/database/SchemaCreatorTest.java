@@ -265,6 +265,24 @@ public class SchemaCreatorTest {
     }
 
     @Test
+    @DisplayName("Rejects nonexistent player IDs in games")
+    void rejectsNonexistentPlayerIdsInGames() throws SQLException {
+        String insertPlayerConfigQuery = """
+                INSERT INTO games (player_id, duration_milliseconds, result, number_of_turns)
+                VALUES (?, ?, ?, ?)
+                """;
+
+        try (PreparedStatement statement = connection.prepareStatement(insertPlayerConfigQuery)) {
+            statement.setLong(1, 1L);
+            statement.setLong(1, 777_777_777L);
+            statement.setString(1, GameResult.LOSE.name());
+            statement.setInt(1, 7);
+
+            assertThrows(SQLException.class, statement::executeUpdate);
+        }
+    }
+
+    @Test
     @DisplayName("Deletes 'player_configurations' entry on cascade delete")
     void deletesPlayerConfigurationsOnCascadeDelete() throws SQLException {
         String insertPlayerConfigQuery = """
