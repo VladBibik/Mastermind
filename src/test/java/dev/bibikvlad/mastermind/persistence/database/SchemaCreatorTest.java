@@ -152,7 +152,7 @@ public class SchemaCreatorTest {
                 """;
 
         String selectGames = """
-                SELECT *
+                SELECT game_id, player_id, duration_milliseconds, result, number_of_turns, started_at
                 FROM games
                 """;
 
