@@ -39,8 +39,6 @@ public class SchemaCreatorTest {
     @Test
     @DisplayName("Creates the 'players' table")
     void createsPlayersTable() throws SQLException {
-        String playerName = "TEST_PLAYER";
-
         String insertQuery = """
                 INSERT INTO players (player_name)
                 VALUES (?)
