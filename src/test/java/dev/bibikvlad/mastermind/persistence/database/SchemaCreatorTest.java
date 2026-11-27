@@ -238,7 +238,7 @@ public class SchemaCreatorTest {
                 """;
 
         try (PreparedStatement statement = connection.prepareStatement(insertPlayerConfigQuery)) {
-            statement.setLong(1, -777);
+            statement.setLong(1, 1L);
             statement.setString(2, LocalizationType.ENGLISH.getNativeDisplayName());
             statement.setString(3, ConsoleColor.ORANGE.getDisplayName());
             statement.setString(4, ConsoleColor.ORANGE.getDisplayName());
@@ -258,7 +258,7 @@ public class SchemaCreatorTest {
                 """;
 
         try (PreparedStatement statement = connection.prepareStatement(insertPlayerConfigQuery)) {
-            statement.setLong(1, -777);
+            statement.setLong(1, 1L);
 
             assertThrows(SQLException.class, statement::executeUpdate);
         }
