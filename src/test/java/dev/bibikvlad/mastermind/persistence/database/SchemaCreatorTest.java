@@ -127,8 +127,10 @@ public class SchemaCreatorTest {
                 FROM player_last_selected
                 """;
 
+        long playerId = insertPlayer();
+
         try (PreparedStatement statement = connection.prepareStatement(insertPlayerLastSelectedQuery)) {
-            statement.setLong(1, insertPlayer());
+            statement.setLong(1, playerId);
             statement.executeUpdate();
         }
 
@@ -136,7 +138,7 @@ public class SchemaCreatorTest {
             ResultSet resultSet = statement.executeQuery();
 
             assertTrue(resultSet.next());
-            assertEquals(1L, resultSet.getLong("player_id"));
+            assertEquals(playerId, resultSet.getLong("player_id"));
             assertFalse(resultSet.next());
         }
     }
@@ -154,8 +156,10 @@ public class SchemaCreatorTest {
                 FROM games
                 """;
 
+        long playerId = insertPlayer();
+
         try (PreparedStatement statement = connection.prepareStatement(insertGames)) {
-            statement.setLong(1, insertPlayer());
+            statement.setLong(1, playerId);
             statement.setLong(2, 777_777_777L);
             statement.setString(3, GameResult.WIN.name());
             statement.setInt(4, 7);
@@ -167,7 +171,7 @@ public class SchemaCreatorTest {
             ResultSet resultSet = statement.executeQuery();
 
             assertTrue(resultSet.next());
-            assertEquals(1L, resultSet.getLong("player_id"));
+            assertEquals(playerId, resultSet.getLong("player_id"));
             assertEquals(777_777_777L, resultSet.getLong("duration_milliseconds"));
             assertEquals(GameResult.WIN.name(), resultSet.getString("result"));
             assertEquals(7, resultSet.getLong("number_of_turns"));
