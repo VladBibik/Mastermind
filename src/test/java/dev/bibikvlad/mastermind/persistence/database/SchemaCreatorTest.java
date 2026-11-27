@@ -76,7 +76,7 @@ public class SchemaCreatorTest {
                 """;
 
         String selectPlayerConfigQuery = """
-                SELECT *
+                SELECT player_id, language, logo_border_color, logo_main_color, logo_accent_color, logo_background_color
                 FROM player_configurations
                 WHERE player_id = ?
                 """;
@@ -123,7 +123,7 @@ public class SchemaCreatorTest {
                 """;
 
         String selectPlayerLastSelected = """
-                SELECT *
+                SELECT player_id, last_selected_at
                 FROM player_last_selected
                 """;
 
@@ -239,7 +239,7 @@ public class SchemaCreatorTest {
                 """;
 
         String selectPlayerConfigQuery = """
-                SELECT *
+                SELECT player_id, language, logo_border_color, logo_main_color, logo_accent_color, logo_background_color
                 FROM player_configurations
                 """;
 
@@ -272,7 +272,7 @@ public class SchemaCreatorTest {
                 """;
 
         String selectPlayerLastSelected = """
-                SELECT *
+                SELECT player_id, last_selected_at
                 FROM player_last_selected
                 """;
 
@@ -299,8 +299,8 @@ public class SchemaCreatorTest {
                 """;
 
         String selectGamesQuery = """
-                SELECT *
-                FROM player_last_selected
+                SELECT game_id, player_id, duration_milliseconds, result, number_of_turns, started_at
+                FROM games
                 """;
 
         try (PreparedStatement statement = connection.prepareStatement(insertGamesQuery)) {
