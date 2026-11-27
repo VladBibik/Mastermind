@@ -229,6 +229,27 @@ public class SchemaCreatorTest {
     }
 
     @Test
+    @DisplayName("Rejects nonexistent player IDs in configurations")
+    void rejectsNonexistentPlayerIdsInConfigurations() throws SQLException {
+        String insertPlayerConfigQuery = """
+                INSERT INTO player_configurations (player_id, language, logo_border_color, logo_main_color,
+                logo_accent_color, logo_background_color)
+                VALUES (?, ?, ?, ?, ?, ?)
+                """;
+
+        try (PreparedStatement statement = connection.prepareStatement(insertPlayerConfigQuery)) {
+            statement.setLong(1, -777);
+            statement.setString(2, LocalizationType.ENGLISH.getNativeDisplayName());
+            statement.setString(3, ConsoleColor.ORANGE.getDisplayName());
+            statement.setString(4, ConsoleColor.ORANGE.getDisplayName());
+            statement.setString(5, ConsoleColor.ORANGE.getDisplayName());
+            statement.setString(6, ConsoleColor.BACKGROUND_BLACK.getDisplayName());
+
+            assertThrows(SQLException.class, statement::executeUpdate);
+        }
+    }
+
+    @Test
     @DisplayName("Deletes 'player_configurations' entry on cascade delete")
     void deletesPlayerConfigurationsOnCascadeDelete() throws SQLException {
         String insertPlayerConfigQuery = """
