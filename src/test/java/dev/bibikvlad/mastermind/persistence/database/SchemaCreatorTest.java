@@ -222,8 +222,7 @@ public class SchemaCreatorTest {
                 """;
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, "REALLY_LOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO" +
-                    "OOOOOOOOOOOOOOOOOOOOOONG_PLAYER_NAME");
+            statement.setString(1, "A".repeat(101));
 
             assertThrows(SQLException.class, statement::executeUpdate);
         }
