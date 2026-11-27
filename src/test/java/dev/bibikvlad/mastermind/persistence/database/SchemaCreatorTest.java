@@ -250,6 +250,21 @@ public class SchemaCreatorTest {
     }
 
     @Test
+    @DisplayName("Rejects nonexistent player IDs in player last selected")
+    void rejectsNonexistentPlayerIdsInPlayerLastSelected() throws SQLException {
+        String insertPlayerConfigQuery = """
+                INSERT INTO player_last_selected (player_id)
+                VALUES (?)
+                """;
+
+        try (PreparedStatement statement = connection.prepareStatement(insertPlayerConfigQuery)) {
+            statement.setLong(1, -777);
+
+            assertThrows(SQLException.class, statement::executeUpdate);
+        }
+    }
+
+    @Test
     @DisplayName("Deletes 'player_configurations' entry on cascade delete")
     void deletesPlayerConfigurationsOnCascadeDelete() throws SQLException {
         String insertPlayerConfigQuery = """
